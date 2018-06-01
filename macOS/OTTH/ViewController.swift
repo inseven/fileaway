@@ -31,12 +31,10 @@ class ViewController: NSViewController {
 
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var dateTextField: NSTextField!
-    @IBOutlet weak var fileTextField: NSTextField!
     @IBOutlet weak var pdfView: PDFView!
     
     var documentURL: URL? {
         didSet {
-            fileTextField.stringValue = (documentURL?.absoluteString)!
             pdfView.document = PDFDocument(url: documentURL!)
         }
     }
