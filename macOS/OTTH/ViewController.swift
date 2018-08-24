@@ -25,13 +25,13 @@ struct Task {
     let destination: Destination
 }
 
-class ViewController: NSViewController {
+class ViewController: NSViewController, DragDelegate {
 
     static let DefaultIdentifier = "Cell"
 
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var dateTextField: NSTextField!
-    @IBOutlet weak var pdfView: PDFView!
+    @IBOutlet weak var pdfView: DraggablePDFView!
     
     var documentURL: URL? {
         didSet {
@@ -43,11 +43,16 @@ class ViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        pdfView.dragDelegate = self
         do {
             tasks = try loadConfiguration()
         } catch {
             print("\(error)")
         }
+    }
+
+    func didDrop(url: URL) {
+        self.documentURL = url
     }
 
     func loadConfiguration() throws -> [Task] {
