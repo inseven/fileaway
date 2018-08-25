@@ -32,6 +32,7 @@ class ViewController: NSViewController, DragDelegate {
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var dateTextField: NSTextField!
     @IBOutlet weak var pdfView: DraggablePDFView!
+    @IBOutlet weak var actionButton: NSButton!
     
     var documentURL: URL? {
         didSet {
@@ -49,6 +50,7 @@ class ViewController: NSViewController, DragDelegate {
         } catch {
             print("\(error)")
         }
+        updateState()
     }
 
     func didDrop(url: URL) {
@@ -65,6 +67,12 @@ class ViewController: NSViewController, DragDelegate {
                 return task0.name < task1.name
         }
         return tasks
+    }
+
+    func updateState() {
+        let isRowSelected = tableView.selectedRow > -1
+        let isDateSet = !dateTextField.stringValue.isEmpty
+        actionButton.isEnabled = isRowSelected && isDateSet
     }
 
     override var representedObject: Any? {
@@ -117,6 +125,18 @@ extension ViewController: NSTableViewDelegate {
 
         cell.textField?.stringValue = tasks[row].name
         return cell
+    }
+
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        updateState()
+    }
+
+}
+
+extension ViewController: NSControlTextEditingDelegate {
+
+    override func controlTextDidChange(_ obj: Notification) {
+        updateState()
     }
 
 }

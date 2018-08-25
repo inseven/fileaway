@@ -809,10 +809,14 @@ DQ
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <outlet property="delegate" destination="XfG-lQ-9wD" id="qLe-QJ-d3Y"/>
+                                </connections>
                             </textField>
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="actionButton" destination="ixD-mI-1fr" id="WkV-Hs-epg"/>
                         <outlet property="dateTextField" destination="1Kp-o5-QfZ" id="MCW-7I-0Gr"/>
                         <outlet property="pdfView" destination="Pf2-q5-wnL" id="K7z-Br-z3w"/>
                         <outlet property="tableView" destination="FoH-Dw-VlU" id="V0B-DN-frX"/>
