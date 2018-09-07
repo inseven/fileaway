@@ -821,6 +821,9 @@ DQ
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </tokenFieldCell>
+                                <connections>
+                                    <outlet property="delegate" destination="XfG-lQ-9wD" id="yPG-9W-Tyi"/>
+                                </connections>
                             </tokenField>
                         </subviews>
                     </view>

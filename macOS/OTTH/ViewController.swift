@@ -77,9 +77,8 @@ class ViewController: NSViewController, DragDelegate {
 
         if isRowSelected {
             let task = tasks[tableView.selectedRow]
-            nameTokenField.stringValue = task.destination.name
+            nameTokenField.objectValue = ["Date", task.destination.name]
         }
-
     }
 
     override var representedObject: Any? {
@@ -144,6 +143,20 @@ extension ViewController: NSControlTextEditingDelegate {
 
     override func controlTextDidChange(_ obj: Notification) {
         updateState()
+    }
+
+}
+
+extension ViewController: NSTokenFieldDelegate {
+
+    func tokenField(_ tokenField: NSTokenField, styleForRepresentedObject representedObject: Any) -> NSTokenField.TokenStyle {
+        guard let stringObject = representedObject as? String else {
+            return .none
+        }
+        if stringObject == "Date" {
+            return .squared
+        }
+        return .none
     }
 
 }
