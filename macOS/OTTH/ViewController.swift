@@ -33,7 +33,8 @@ class ViewController: NSViewController, DragDelegate {
     @IBOutlet weak var dateTextField: NSTextField!
     @IBOutlet weak var pdfView: DraggablePDFView!
     @IBOutlet weak var actionButton: NSButton!
-    
+    @IBOutlet weak var nameTokenField: NSTokenField!
+
     var documentURL: URL? {
         didSet {
             pdfView.document = PDFDocument(url: documentURL!)
@@ -73,6 +74,12 @@ class ViewController: NSViewController, DragDelegate {
         let isRowSelected = tableView.selectedRow > -1
         let isDateSet = !dateTextField.stringValue.isEmpty
         actionButton.isEnabled = isRowSelected && isDateSet
+
+        if isRowSelected {
+            let task = tasks[tableView.selectedRow]
+            nameTokenField.stringValue = task.destination.name
+        }
+
     }
 
     override var representedObject: Any? {
