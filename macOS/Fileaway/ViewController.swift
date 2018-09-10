@@ -15,21 +15,26 @@ struct Configuration: Codable {
     enum CodingKeys: String, CodingKey {
         case destination = "Destination"
     }
-    let destination: Destination
+    let destination: [Component]
 }
 
-struct Destination: Codable {
+enum ComponentType: String, Codable {
+    case string = "String"
+    case placeholder = "Placeholder"
+}
+
+struct Component: Codable {
     enum CodingKeys: String, CodingKey {
-        case path = "Path"
-        case name = "Name"
+        case type = "Type"
+        case value = "Value"
     }
-    let path: String
-    let name: String
+    let type: ComponentType
+    let value: String
 }
 
 struct Task {
     let name: String
-    let destination: Destination
+    let configuration: Configuration
 }
 
 class ViewController: NSViewController, DragDelegate {
@@ -68,9 +73,9 @@ class ViewController: NSViewController, DragDelegate {
     func loadConfiguration() throws -> [Task] {
         let data = try Data.init(contentsOf: URL(fileURLWithPath: DestinationsPath))
         let decoder = JSONDecoder()
-        let destinations = try decoder.decode([String: Configuration].self, from: data)
-        let tasks = destinations.map { (name, configuration) -> Task in
-            return Task(name: name, destination: configuration.destination)
+        let configurations = try decoder.decode([String: Configuration].self, from: data)
+        let tasks = configurations.map { (name, configuration) -> Task in
+            return Task(name: name, configuration: configuration)
             }.sorted { (task0, task1) -> Bool in
                 return task0.name < task1.name
         }
@@ -84,7 +89,7 @@ class ViewController: NSViewController, DragDelegate {
 
         if isRowSelected {
             let task = tasks[tableView.selectedRow]
-            nameTokenField.objectValue = ["Date", task.destination.name]
+            nameTokenField.objectValue = task.configuration.destination.map({ $0.value })
         }
     }
 
@@ -102,9 +107,17 @@ class ViewController: NSViewController, DragDelegate {
 
         let task = tasks[tableView.selectedRow]
         let date = dateTextField.stringValue
-        let name = "\(date) \(task.destination.name)"
+
+        let destination = task.configuration.destination.reduce("") { (result, component) -> String in
+            switch component.type {
+            case .string:
+                return result.appending(component.value)
+            case .placeholder:
+                return result.appending(date)
+            }
+        }
+
         let homeDirectory = FileManager.default.homeDirectoryForCurrentUser
-        let destination = task.destination.path.appending(name)
         let destinationURL = homeDirectory.appendingPathComponent(destination).appendingPathExtension("pdf")
         print("\(destinationURL)")
 
