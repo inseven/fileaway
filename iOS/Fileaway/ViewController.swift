@@ -13,26 +13,39 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        presentDocumentPickerIfNeeded()
+    }
+
+    func presentDocumentPickerIfNeeded() {
+        if let _ = try? StorageManager.rootUrl() {
+            return
+        }
+        let alert = UIAlertController(title: "Document access",
+                                      message: "Press OK to continue and select the folder in which you wish to store your documents.",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction) in
+            self.presentDocumentPicker()
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+
+    func presentDocumentPicker() {
+        let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeFolder as String], in: .open)
+        documentPicker.allowsMultipleSelection = true  // required to allow folder selection
+        documentPicker.delegate = self
+        self.present(documentPicker, animated: true, completion: nil)
     }
 
     @IBAction func safeFileTapped(_ sender: Any) {
-
-        guard let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            print("Failed to get Documents directory")
+        guard let rootUrl = try? StorageManager.rootUrl() else {
+            print("Unable to save file")
             return
         }
-
-        createFile(at: directory.appendingPathComponent("example.txt"))
-
-
-        let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeFolder as String], in: .open)
-        documentPicker.allowsMultipleSelection = true  // We require multiple selection to let the user select a folder.
-        documentPicker.delegate = self
-        self.present(documentPicker, animated: true) {
-            print("Did Present")
-        }
-
+        createFile(at: rootUrl.appendingPathComponent("Accommodation").appendingPathComponent("hello.txt"))
     }
 
     func createFile(at fileURL: URL) {
@@ -54,34 +67,16 @@ extension ViewController: UIDocumentPickerDelegate {
             return
         }
 
-        guard let directoryURL = urls.first else {
+        guard let directoryUrl = urls.first else {
             print("Unable to get directory URL")
             return
         }
 
-        print(directoryURL)
-
-        guard directoryURL.startAccessingSecurityScopedResource() else {
-            print("Unable to access security scoped resource.")
-            return
+        do {
+            try StorageManager.setRootUrl(directoryUrl)
+        } catch let error {
+            print(error)
         }
-
-        let fileManager = FileManager.default
-
-        guard fileManager.isReadableFile(atPath: directoryURL.path) else {
-            print("Unable to read directory at path")
-            return
-        }
-
-        guard let contents = try? fileManager.contentsOfDirectory(atPath: directoryURL.path) else {
-            print("Unable to list directory")
-            return
-        }
-
-        print(contents)
-
-        createFile(at: directoryURL.appendingPathComponent("cheese.txt"))
-
     }
 
 }
