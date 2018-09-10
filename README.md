@@ -7,8 +7,10 @@ The configuration file should be located in `~/Library/Mobile Documents/iCloud~i
 ```json
 {
     "Apple Developer Program Invoice": {
-        "Path": "Documents/InSeven Limited/Receipts",
-        "Name": "Apple Distribution International Apple Developer Program Invoice"
+        "Destination": {
+            "Path": "Documents/InSeven Limited/Receipts",
+            "Name": "Apple Distribution International Apple Developer Program Invoice"
+        }
     },
     ...
 }

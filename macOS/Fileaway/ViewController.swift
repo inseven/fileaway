@@ -11,6 +11,13 @@ import Quartz
 
 let DestinationsPath = "/Users/jbmorley/Library/Mobile Documents/iCloud~is~workflow~my~workflows/Documents/destinations.json"
 
+struct Configuration: Codable {
+    enum CodingKeys: String, CodingKey {
+        case destination = "Destination"
+    }
+    let destination: Destination
+}
+
 struct Destination: Codable {
     enum CodingKeys: String, CodingKey {
         case path = "Path"
@@ -61,9 +68,9 @@ class ViewController: NSViewController, DragDelegate {
     func loadConfiguration() throws -> [Task] {
         let data = try Data.init(contentsOf: URL(fileURLWithPath: DestinationsPath))
         let decoder = JSONDecoder()
-        let destinations = try decoder.decode([String: Destination].self, from: data)
-        let tasks = destinations.map { (name, destination) -> Task in
-            return Task(name: name, destination: destination)
+        let destinations = try decoder.decode([String: Configuration].self, from: data)
+        let tasks = destinations.map { (name, configuration) -> Task in
+            return Task(name: name, destination: configuration.destination)
             }.sorted { (task0, task1) -> Bool in
                 return task0.name < task1.name
         }
