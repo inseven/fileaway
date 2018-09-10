@@ -1,7 +1,5 @@
 # Fileaway
 
-Once Through The Hands
-
 ## Configuration
 
 The configuration file should be located in `~/Library/Mobile Documents/iCloud~is~workflow~my~workflows/Documents` and follow the format:
