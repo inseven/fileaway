@@ -118,7 +118,8 @@ class ViewController: NSViewController, DragDelegate {
         }
 
         let homeDirectory = FileManager.default.homeDirectoryForCurrentUser
-        let destinationURL = homeDirectory.appendingPathComponent(destination).appendingPathExtension("pdf")
+        let documentsDirectory = homeDirectory.appendingPathComponent("Documents")
+        let destinationURL = documentsDirectory.appendingPathComponent(destination).appendingPathExtension("pdf")
         print("\(destinationURL)")
 
         let fileManager = FileManager.default

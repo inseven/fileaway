@@ -8,7 +8,7 @@ The configuration file should be located in `~/Library/Mobile Documents/iCloud~i
 {
     "Apple Developer Program Invoice": {
         "Destination": [
-            {"Type": "String", "Value": "Documents/InSeven Limited/Receipts/"},
+            {"Type": "String", "Value": "InSeven Limited/Receipts/"},
             {"Type": "Placeholder", "Value": "Date"},
             {"Type": "String", "Value": " Apple Distribution International Apple Developer Program Invoice"}
         ]
