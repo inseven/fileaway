@@ -104,7 +104,8 @@ class ViewController: NSViewController, DragDelegate {
         let date = dateTextField.stringValue
         let name = "\(date) \(task.destination.name)"
         let homeDirectory = FileManager.default.homeDirectoryForCurrentUser
-        let destinationURL = homeDirectory.appendingPathComponent(task.destination.path).appendingPathComponent(name).appendingPathExtension("pdf")
+        let destination = task.destination.path.appending(name)
+        let destinationURL = homeDirectory.appendingPathComponent(destination).appendingPathExtension("pdf")
         print("\(destinationURL)")
 
         let fileManager = FileManager.default
