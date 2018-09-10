@@ -40,7 +40,7 @@ class ViewController: UIViewController {
         self.present(documentPicker, animated: true, completion: nil)
     }
 
-    @IBAction func safeFileTapped(_ sender: Any) {
+    @IBAction func saveFileTapped(_ sender: Any) {
         guard let rootUrl = try? StorageManager.rootUrl() else {
             print("Unable to save file")
             return
