@@ -1,4 +1,5 @@
-# OTTH
+# Fileaway
+
 Once Through The Hands
 
 ## Configuration
