@@ -1,15 +1,15 @@
 //
-//  OTTHTests.swift
-//  OTTHTests
+//  FileawayTests.swift
+//  FileawayTests
 //
 //  Created by Jason Barrie Morley on 01/06/2018.
 //  Copyright © 2018 InSeven Limited. All rights reserved.
 //
 
 import XCTest
-@testable import OTTH
+@testable import Fileaway
 
-class OTTHTests: XCTestCase {
+class FileawayTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

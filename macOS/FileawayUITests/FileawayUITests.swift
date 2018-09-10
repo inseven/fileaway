@@ -1,6 +1,6 @@
 //
-//  OTTHUITests.swift
-//  OTTHUITests
+//  FileawayUITests.swift
+//  FileawayUITests
 //
 //  Created by Jason Barrie Morley on 01/06/2018.
 //  Copyright © 2018 InSeven Limited. All rights reserved.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class OTTHUITests: XCTestCase {
+class FileawayUITests: XCTestCase {
         
     override func setUp() {
         super.setUp()
