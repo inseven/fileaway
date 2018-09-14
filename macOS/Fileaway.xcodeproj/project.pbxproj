@@ -10,6 +10,7 @@
 		D800D5CF214C467A00A6121B /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D800D5CE214C467A00A6121B /* Configuration.swift */; };
 		D800D5D3214C6D2F00A6121B /* VariableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D800D5D2214C6D2F00A6121B /* VariableView.swift */; };
 		D8467D4D21306A7A00DA8E73 /* DraggablePDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8467D4C21306A7A00DA8E73 /* DraggablePDFView.swift */; };
+		D84DBD85214C746000A2F5E1 /* VariableProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84DBD84214C746000A2F5E1 /* VariableProvider.swift */; };
 		D8666A3220C12EB000B739CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8666A3120C12EB000B739CC /* AppDelegate.swift */; };
 		D8666A3420C12EB000B739CC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8666A3320C12EB000B739CC /* ViewController.swift */; };
 		D8666A3620C12EB000B739CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8666A3520C12EB000B739CC /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 		D800D5CE214C467A00A6121B /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		D800D5D2214C6D2F00A6121B /* VariableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableView.swift; sourceTree = "<group>"; };
 		D8467D4C21306A7A00DA8E73 /* DraggablePDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggablePDFView.swift; sourceTree = "<group>"; };
+		D84DBD84214C746000A2F5E1 /* VariableProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableProvider.swift; sourceTree = "<group>"; };
 		D8666A2E20C12EB000B739CC /* Fileaway.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fileaway.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8666A3120C12EB000B739CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8666A3320C12EB000B739CC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				D800D5D2214C6D2F00A6121B /* VariableView.swift */,
+				D84DBD84214C746000A2F5E1 /* VariableProvider.swift */,
 				D8666A3120C12EB000B739CC /* AppDelegate.swift */,
 				D8666A3320C12EB000B739CC /* ViewController.swift */,
 				D8666A3520C12EB000B739CC /* Assets.xcassets */,
@@ -275,6 +278,7 @@
 				D800D5D3214C6D2F00A6121B /* VariableView.swift in Sources */,
 				D8666A3220C12EB000B739CC /* AppDelegate.swift in Sources */,
 				D800D5CF214C467A00A6121B /* Configuration.swift in Sources */,
+				D84DBD85214C746000A2F5E1 /* VariableProvider.swift in Sources */,
 				D8467D4D21306A7A00DA8E73 /* DraggablePDFView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

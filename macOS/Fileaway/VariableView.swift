@@ -8,16 +8,6 @@
 
 import Cocoa
 
-protocol VariableProviderDelegate {
-    func variableProviderDidUpdate(variableProvider: VariableProvider)
-}
-
-protocol VariableProvider {
-    func variable(forKey key: String) -> String?
-    var isComplete: Bool { get }
-    var delegate: VariableProviderDelegate? { get set }
-}
-
 class VariableView: NSView, VariableProvider {
 
     var textFields: [String: NSTextField]
