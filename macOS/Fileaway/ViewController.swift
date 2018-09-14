@@ -33,7 +33,7 @@ class ViewController: NSViewController, DragDelegate {
         super.viewDidLoad()
         pdfView.dragDelegate = self
         do {
-            tasks = try loadConfiguration()
+            tasks = try Task.load(DestinationsPath)
         } catch {
             print("\(error)")
         }
@@ -42,18 +42,6 @@ class ViewController: NSViewController, DragDelegate {
 
     func didDrop(url: URL) {
         self.documentURL = url
-    }
-
-    func loadConfiguration() throws -> [Task] {
-        let data = try Data.init(contentsOf: URL(fileURLWithPath: DestinationsPath))
-        let decoder = JSONDecoder()
-        let configurations = try decoder.decode([String: Configuration].self, from: data)
-        let tasks = configurations.map { (name, configuration) -> Task in
-            return Task(name: name, configuration: configuration)
-            }.sorted { (task0, task1) -> Bool in
-                return task0.name < task1.name
-        }
-        return tasks
     }
 
     func updateState() {
