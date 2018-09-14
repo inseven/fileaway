@@ -70,12 +70,6 @@ class ViewController: NSViewController, DragDelegate {
         actionButton.isEnabled = isRowSelected && isComplete
     }
 
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
-
     @IBAction func moveClicked(_ sender: Any) {
 
         guard let sourceURL: URL = documentURL else {
