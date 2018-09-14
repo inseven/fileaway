@@ -28,6 +28,26 @@ class ViewController: NSViewController, DragDelegate {
     }
     
     var tasks: [Task] = []
+    var variablesView: VariablesView?
+    var task: Task? {
+        didSet {
+            // Remove the existing variable view.
+            if let variablesView = self.variablesView {
+                variablesView.removeFromSuperview()
+                self.variablesView = nil
+            }
+            // Add a new one if a task has been selected.
+            guard let task = task else {
+                return
+            }
+            nameTokenField.objectValue = task.configuration.destination.map({ $0.value })
+            let variablesView = VariablesView(variables: task.configuration.variables)
+            variablesView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+            variablesView.delegate = self
+            view.addSubview(variablesView)
+            self.variablesView = variablesView
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,13 +66,8 @@ class ViewController: NSViewController, DragDelegate {
 
     func updateState() {
         let isRowSelected = tableView.selectedRow > -1
-        let isDateSet = !dateTextField.stringValue.isEmpty
-        actionButton.isEnabled = isRowSelected && isDateSet
-
-        if isRowSelected {
-            let task = tasks[tableView.selectedRow]
-            nameTokenField.objectValue = task.configuration.destination.map({ $0.value })
-        }
+        let isComplete = variablesView?.isComplete ?? false
+        actionButton.isEnabled = isRowSelected && isComplete
     }
 
     override var representedObject: Any? {
@@ -68,14 +83,15 @@ class ViewController: NSViewController, DragDelegate {
         }
 
         let task = tasks[tableView.selectedRow]
-        let date = dateTextField.stringValue
-
         let destination = task.configuration.destination.reduce("") { (result, component) -> String in
             switch component.type {
             case .text:
                 return result.appending(component.value)
             case .variable:
-                return result.appending(date)
+                guard let value = variablesView?.variable(forKey: component.value) else {
+                    return result
+                }
+                return result.appending(value)
             }
         }
 
@@ -93,7 +109,7 @@ class ViewController: NSViewController, DragDelegate {
 
         self.view.window?.close()
     }
-    
+
 }
 
 extension ViewController: NSTableViewDataSource {
@@ -118,6 +134,7 @@ extension ViewController: NSTableViewDelegate {
     }
 
     func tableViewSelectionDidChange(_ notification: Notification) {
+        task = tasks[tableView.selectedRow]
         updateState()
     }
 
@@ -145,3 +162,9 @@ extension ViewController: NSTokenFieldDelegate {
 
 }
 
+extension ViewController: VariableProviderDelegate {
+
+    func variableProviderDidUpdate(variableProvider: VariableProvider) {
+        updateState()
+    }
+}
