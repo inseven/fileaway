@@ -11,32 +11,6 @@ import Quartz
 
 let DestinationsPath = "/Users/jbmorley/Library/Mobile Documents/iCloud~is~workflow~my~workflows/Documents/destinations.json"
 
-struct Configuration: Codable {
-    enum CodingKeys: String, CodingKey {
-        case destination = "Destination"
-    }
-    let destination: [Component]
-}
-
-enum ComponentType: String, Codable {
-    case string = "String"
-    case placeholder = "Placeholder"
-}
-
-struct Component: Codable {
-    enum CodingKeys: String, CodingKey {
-        case type = "Type"
-        case value = "Value"
-    }
-    let type: ComponentType
-    let value: String
-}
-
-struct Task {
-    let name: String
-    let configuration: Configuration
-}
-
 class ViewController: NSViewController, DragDelegate {
 
     static let DefaultIdentifier = "Cell"
@@ -110,9 +84,9 @@ class ViewController: NSViewController, DragDelegate {
 
         let destination = task.configuration.destination.reduce("") { (result, component) -> String in
             switch component.type {
-            case .string:
+            case .text:
                 return result.appending(component.value)
-            case .placeholder:
+            case .variable:
                 return result.appending(date)
             }
         }
