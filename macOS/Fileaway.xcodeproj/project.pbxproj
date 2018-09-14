@@ -81,6 +81,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D84DBD86214C74A300A2F5E1 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				D800D5CE214C467A00A6121B /* Configuration.swift */,
+				D84DBD84214C746000A2F5E1 /* VariableProvider.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		D8666A2520C12EB000B739CC = {
 			isa = PBXGroup;
 			children = (
@@ -104,8 +113,8 @@
 		D8666A3020C12EB000B739CC /* Fileaway */ = {
 			isa = PBXGroup;
 			children = (
+				D84DBD86214C74A300A2F5E1 /* Common */,
 				D800D5D2214C6D2F00A6121B /* VariableView.swift */,
-				D84DBD84214C746000A2F5E1 /* VariableProvider.swift */,
 				D8666A3120C12EB000B739CC /* AppDelegate.swift */,
 				D8666A3320C12EB000B739CC /* ViewController.swift */,
 				D8666A3520C12EB000B739CC /* Assets.xcassets */,
@@ -113,7 +122,6 @@
 				D8666A3A20C12EB000B739CC /* Info.plist */,
 				D8666A3B20C12EB000B739CC /* Fileaway.entitlements */,
 				D8467D4C21306A7A00DA8E73 /* DraggablePDFView.swift */,
-				D800D5CE214C467A00A6121B /* Configuration.swift */,
 			);
 			path = Fileaway;
 			sourceTree = "<group>";
