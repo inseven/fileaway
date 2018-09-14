@@ -1,5 +1,5 @@
 //
-//  VariablesView.swift
+//  VariableView.swift
 //  Fileaway
 //
 //  Created by Jason Barrie Morley on 14/09/2018.
@@ -18,7 +18,7 @@ protocol VariableProvider {
     var delegate: VariableProviderDelegate? { get set }
 }
 
-class VariablesView: NSView, VariableProvider {
+class VariableView: NSView, VariableProvider {
 
     var textFields: [String: NSTextField]
     var delegate: VariableProviderDelegate?
@@ -77,7 +77,7 @@ class VariablesView: NSView, VariableProvider {
 
 }
 
-extension VariablesView: NSControlTextEditingDelegate, NSTextFieldDelegate {
+extension VariableView: NSControlTextEditingDelegate, NSTextFieldDelegate {
 
     override func controlTextDidChange(_ obj: Notification) {
         self.delegate?.variableProviderDidUpdate(variableProvider: self)

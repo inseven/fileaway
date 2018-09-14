@@ -28,24 +28,24 @@ class ViewController: NSViewController, DragDelegate {
     }
     
     var tasks: [Task] = []
-    var variablesView: VariablesView?
+    var variableView: VariableView?
     var task: Task? {
         didSet {
             // Remove the existing variable view.
-            if let variablesView = self.variablesView {
-                variablesView.removeFromSuperview()
-                self.variablesView = nil
+            if let variableView = self.variableView {
+                variableView.removeFromSuperview()
+                self.variableView = nil
             }
             // Add a new one if a task has been selected.
             guard let task = task else {
                 return
             }
             nameTokenField.objectValue = task.configuration.destination.map({ $0.value })
-            let variablesView = VariablesView(variables: task.configuration.variables)
+            let variablesView = VariableView(variables: task.configuration.variables)
             variablesView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
             variablesView.delegate = self
             view.addSubview(variablesView)
-            self.variablesView = variablesView
+            self.variableView = variablesView
         }
     }
 
@@ -66,7 +66,7 @@ class ViewController: NSViewController, DragDelegate {
 
     func updateState() {
         let isRowSelected = tableView.selectedRow > -1
-        let isComplete = variablesView?.isComplete ?? false
+        let isComplete = variableView?.isComplete ?? false
         actionButton.isEnabled = isRowSelected && isComplete
     }
 
@@ -88,7 +88,7 @@ class ViewController: NSViewController, DragDelegate {
             case .text:
                 return result.appending(component.value)
             case .variable:
-                guard let value = variablesView?.variable(forKey: component.value) else {
+                guard let value = variableView?.variable(forKey: component.value) else {
                     return result
                 }
                 return result.appending(value)
