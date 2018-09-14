@@ -8,6 +8,8 @@
 
 import Cocoa
 
+let StandardSpacing: CGFloat = 8.0
+
 class VariableView: NSView, VariableProvider {
 
     var textFields: [String: NSTextField]
@@ -34,10 +36,11 @@ class VariableView: NSView, VariableProvider {
             let labelTextField = NSTextField(frame: CGRect(x: 0, y: 0, width: 50, height: 20))
             labelTextField.translatesAutoresizingMaskIntoConstraints = false
             labelTextField.isEditable = false
-            labelTextField.stringValue = variable.name
+            labelTextField.stringValue = variable.name.appending(":")
             labelTextField.isBordered = false
             labelTextField.drawsBackground = false
             labelTextField.isSelectable = false
+            labelTextField.alignment = .right
 
             let valueTextField = NSTextField(frame: CGRect(x: 50, y: 0, width: 50, height: 20))
             valueTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -46,14 +49,14 @@ class VariableView: NSView, VariableProvider {
             addSubview(labelTextField)
             addSubview(valueTextField)
 
-            labelTextField.topAnchor.constraint(equalTo: currentTopAnchor).isActive = true
-            valueTextField.topAnchor.constraint(equalTo: currentTopAnchor).isActive = true
+            labelTextField.topAnchor.constraint(equalTo: currentTopAnchor, constant: StandardSpacing).isActive = true
+            valueTextField.topAnchor.constraint(equalTo: currentTopAnchor, constant: StandardSpacing).isActive = true
             if let previousLabelTextField = previousLabelTextField {
                 labelTextField.widthAnchor.constraint(equalTo: previousLabelTextField.widthAnchor).isActive = true
             }
 
             labelTextField.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-            valueTextField.leadingAnchor.constraint(equalTo: labelTextField.trailingAnchor).isActive = true
+            valueTextField.leadingAnchor.constraint(equalTo: labelTextField.trailingAnchor, constant: StandardSpacing).isActive = true
             valueTextField.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
 
             textFields[variable.name] = valueTextField
