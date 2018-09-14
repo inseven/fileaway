@@ -36,6 +36,7 @@ class VariableView: NSView, VariableProvider {
         super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
 
         var currentTopAnchor = topAnchor
+        var previousValueTextField: NSTextField? = nil
 
         for variable in variables {
 
@@ -63,6 +64,13 @@ class VariableView: NSView, VariableProvider {
             textFields[variable.name] = valueTextField
 
             currentTopAnchor = labelTextField.bottomAnchor
+
+            // Fix up the responder chain.
+            if let previousValueTextField = previousValueTextField {
+                previousValueTextField.nextKeyView = valueTextField
+            }
+            previousValueTextField = valueTextField
+            
         }
     }
 
