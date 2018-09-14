@@ -36,6 +36,7 @@ class VariableView: NSView, VariableProvider {
         super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
 
         var currentTopAnchor = topAnchor
+        var previousLabelTextField: NSTextField? = nil
         var previousValueTextField: NSTextField? = nil
 
         for variable in variables {
@@ -45,6 +46,8 @@ class VariableView: NSView, VariableProvider {
             labelTextField.isEditable = false
             labelTextField.stringValue = variable.name
             labelTextField.isBordered = false
+            labelTextField.drawsBackground = false
+            labelTextField.isSelectable = false
 
             let valueTextField = NSTextField(frame: CGRect(x: 50, y: 0, width: 50, height: 20))
             valueTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -55,9 +58,11 @@ class VariableView: NSView, VariableProvider {
 
             labelTextField.topAnchor.constraint(equalTo: currentTopAnchor).isActive = true
             valueTextField.topAnchor.constraint(equalTo: currentTopAnchor).isActive = true
+            if let previousLabelTextField = previousLabelTextField {
+                labelTextField.widthAnchor.constraint(equalTo: previousLabelTextField.widthAnchor).isActive = true
+            }
 
             labelTextField.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-            labelTextField.widthAnchor.constraint(equalToConstant: 50).isActive = true
             valueTextField.leadingAnchor.constraint(equalTo: labelTextField.trailingAnchor).isActive = true
             valueTextField.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
 
@@ -69,6 +74,8 @@ class VariableView: NSView, VariableProvider {
             if let previousValueTextField = previousValueTextField {
                 previousValueTextField.nextKeyView = valueTextField
             }
+
+            previousLabelTextField = labelTextField
             previousValueTextField = valueTextField
             
         }
