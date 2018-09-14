@@ -41,7 +41,7 @@ class ViewController: NSViewController, DragDelegate {
             guard let task = task else {
                 return
             }
-            nameTokenField.objectValue = task.configuration.destination.map({ $0.value })
+            nameTokenField.objectValue = task.configuration.destination
             let variablesView = VariableView(variables: task.configuration.variables)
             variablesView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
             variablesView.delegate = self
@@ -147,13 +147,22 @@ extension ViewController: NSControlTextEditingDelegate {
 extension ViewController: NSTokenFieldDelegate {
 
     func tokenField(_ tokenField: NSTokenField, styleForRepresentedObject representedObject: Any) -> NSTokenField.TokenStyle {
-        guard let stringObject = representedObject as? String else {
+        guard let component = representedObject as? Component else {
             return .none
         }
-        if stringObject == "Date" {
+        switch component.type {
+        case .text:
+            return .none
+        case .variable:
             return .squared
         }
-        return .none
+    }
+
+    func tokenField(_ tokenField: NSTokenField, displayStringForRepresentedObject representedObject: Any) -> String? {
+        guard let component = representedObject as? Component else {
+            return ""
+        }
+        return component.value
     }
 
 }
