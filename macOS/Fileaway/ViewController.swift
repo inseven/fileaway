@@ -20,6 +20,7 @@ class ViewController: NSViewController, DragDelegate {
     @IBOutlet weak var pdfView: DraggablePDFView!
     @IBOutlet weak var actionButton: NSButton!
     @IBOutlet weak var nameTokenField: NSTokenField!
+    @IBOutlet weak var containerView: NSView!
 
     var documentURL: URL? {
         didSet {
@@ -44,7 +45,8 @@ class ViewController: NSViewController, DragDelegate {
             let variablesView = VariableView(variables: task.configuration.variables)
             variablesView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
             variablesView.delegate = self
-            view.addSubview(variablesView)
+            variablesView.frame = containerView.bounds
+            containerView.addSubview(variablesView)
             self.variableView = variablesView
         }
     }
