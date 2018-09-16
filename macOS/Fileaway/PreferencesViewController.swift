@@ -34,7 +34,7 @@ class PreferencesViewController: NSViewController {
         // Do view setup here.
     }
 
-    @IBAction func okClicked(_ sender: Any) {
+    @IBAction func doneClicked(_ sender: Any) {
         self.dismiss(self)
     }
 
