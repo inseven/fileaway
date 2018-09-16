@@ -11,6 +11,14 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
+    public let manager = Manager()
+
+    static public var shared: AppDelegate {
+        get {
+            return NSApplication.shared.delegate as! AppDelegate
+        }
+    }
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
     }
 

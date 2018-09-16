@@ -9,8 +9,6 @@
 import Cocoa
 import Quartz
 
-let DestinationsPath = "/Users/jbmorley/Library/Mobile Documents/iCloud~is~workflow~my~workflows/Documents/destinations.json"
-
 class ViewController: NSViewController, DragDelegate {
 
     static let DefaultIdentifier = "Cell"
@@ -21,15 +19,18 @@ class ViewController: NSViewController, DragDelegate {
     @IBOutlet weak var actionButton: NSButton!
     @IBOutlet weak var nameTokenField: NSTokenField!
     @IBOutlet weak var containerView: NSView!
+    @IBOutlet weak var targetTextField: NSTextField!
+
+    var manager: Manager!
 
     var documentURL: URL? {
         didSet {
             pdfView.document = PDFDocument(url: documentURL!)
         }
     }
-    
-    var tasks: [Task] = []
+
     var variableView: VariableView?
+
     var task: Task? {
         didSet {
             // Remove the existing variable view.
@@ -37,10 +38,11 @@ class ViewController: NSViewController, DragDelegate {
                 variableView.removeFromSuperview()
                 self.variableView = nil
             }
-            // Add a new one if a task has been selected.
+            // Guard against an empty selection.
             guard let task = task else {
                 return
             }
+            // Add a new one if a task has been selected.
             nameTokenField.objectValue = task.configuration.destination
             let variablesView = VariableView(variables: task.configuration.variables)
             variablesView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
@@ -53,12 +55,8 @@ class ViewController: NSViewController, DragDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        manager = AppDelegate.shared.manager
         pdfView.dragDelegate = self
-        do {
-            tasks = try Task.load(DestinationsPath)
-        } catch {
-            print("\(error)")
-        }
         updateState()
     }
 
@@ -70,30 +68,23 @@ class ViewController: NSViewController, DragDelegate {
         let isRowSelected = tableView.selectedRow > -1
         let isComplete = variableView?.isComplete ?? false
         actionButton.isEnabled = isRowSelected && isComplete
+        guard let variableView = variableView else {
+            return
+        }
+        targetTextField.stringValue = DestinationURL(manager.task(forIndex: tableView.selectedRow), variableProvider: variableView).path
     }
 
     @IBAction func moveClicked(_ sender: Any) {
 
-        guard let sourceURL: URL = documentURL else {
-            return
+        guard
+            let sourceURL: URL = documentURL,
+            let variableView = variableView else {
+                return
         }
 
-        let task = tasks[tableView.selectedRow]
-        let destination = task.configuration.destination.reduce("") { (result, component) -> String in
-            switch component.type {
-            case .text:
-                return result.appending(component.value)
-            case .variable:
-                guard let value = variableView?.variable(forKey: component.value) else {
-                    return result
-                }
-                return result.appending(value)
-            }
-        }
+        let task = manager.task(forIndex: tableView.selectedRow)
+        let destinationURL = DestinationURL(task, variableProvider: variableView)
 
-        let homeDirectory = FileManager.default.homeDirectoryForCurrentUser
-        let documentsDirectory = homeDirectory.appendingPathComponent("Documents")
-        let destinationURL = documentsDirectory.appendingPathComponent(destination).appendingPathExtension("pdf")
         print("\(destinationURL)")
 
         let fileManager = FileManager.default
@@ -101,36 +92,49 @@ class ViewController: NSViewController, DragDelegate {
             try fileManager.moveItem(at: sourceURL, to: destinationURL)
         } catch {
             print("\(error)")
+            return
         }
 
         self.view.window?.close()
     }
 
-}
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
 
-extension ViewController: NSTableViewDataSource {
+        guard let identifier = segue.identifier else {
+            return
+        }
 
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        return tasks.count
+        switch (identifier) {
+        case .preferences:
+            guard let preferencesViewController = segue.destinationController as? PreferencesViewController else {
+                return
+            }
+            preferencesViewController.manager = manager
+            return
+        default:
+            return
+        }
     }
 
 }
 
-extension ViewController: NSTableViewDelegate {
+extension ViewController: NSTableViewDelegate, NSTableViewDataSource {
+
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return manager.count
+    }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-
         let identifier: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier(rawValue: ViewController.DefaultIdentifier)
         guard let cell = tableView.makeView(withIdentifier: identifier, owner: nil) as? NSTableCellView else {
             return nil
         }
-
-        cell.textField?.stringValue = tasks[row].name
+        cell.textField?.stringValue = manager.task(forIndex: row).name
         return cell
     }
 
     func tableViewSelectionDidChange(_ notification: Notification) {
-        task = tasks[tableView.selectedRow]
+        task = manager.task(forIndex: tableView.selectedRow)
         updateState()
     }
 
@@ -172,4 +176,5 @@ extension ViewController: VariableProviderDelegate {
     func variableProviderDidUpdate(variableProvider: VariableProvider) {
         updateState()
     }
+
 }

@@ -35,16 +35,22 @@ struct Variable: Codable {
 struct Task {
     let name: String
     let configuration: Configuration
+}
 
-    static func load(_ path: String) throws -> [Task] {
-        let data = try Data.init(contentsOf: URL(fileURLWithPath: path))
-        let decoder = JSONDecoder()
-        let configurations = try decoder.decode([String: Configuration].self, from: data)
-        let tasks = configurations.map { (name, configuration) -> Task in
-            return Task(name: name, configuration: configuration)
-            }.sorted { (task0, task1) -> Bool in
-                return task0.name < task1.name
+func DestinationURL(_ task: Task, variableProvider: VariableProvider) -> URL {
+    let destination = task.configuration.destination.reduce("") { (result, component) -> String in
+        switch component.type {
+        case .text:
+            return result.appending(component.value)
+        case .variable:
+            guard let value = variableProvider.variable(forKey: component.value) else {
+                return result
+            }
+            return result.appending(value)
         }
-        return tasks
     }
+    let homeDirectory = FileManager.default.homeDirectoryForCurrentUser
+    let documentsDirectory = homeDirectory.appendingPathComponent("Documents")
+    let destinationURL = documentsDirectory.appendingPathComponent(destination).appendingPathExtension("pdf")
+    return destinationURL
 }
