@@ -13,13 +13,13 @@ class ViewController: NSViewController, DragDelegate {
 
     static let DefaultIdentifier = "Cell"
 
-    @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var dateTextField: NSTextField!
     @IBOutlet weak var pdfView: DraggablePDFView!
     @IBOutlet weak var actionButton: NSButton!
     @IBOutlet weak var nameTokenField: NSTokenField!
     @IBOutlet weak var containerView: NSView!
     @IBOutlet weak var targetTextField: NSTextField!
+    @IBOutlet weak var popUpButton: NSPopUpButton!
 
     var manager: Manager!
 
@@ -56,6 +56,8 @@ class ViewController: NSViewController, DragDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         manager = AppDelegate.shared.manager
+        popUpButton.removeAllItems()
+        popUpButton.addItems(withTitles: manager.tasks.map({ $0.name }))
         pdfView.dragDelegate = self
         updateState()
     }
@@ -65,26 +67,36 @@ class ViewController: NSViewController, DragDelegate {
     }
 
     func updateState() {
-        let isRowSelected = tableView.selectedRow > -1
+
+        // Update the button selection state.
+        let isTaskSelected = task != nil
         let isComplete = variableView?.isComplete ?? false
-        actionButton.isEnabled = isRowSelected && isComplete
-        guard let variableView = variableView else {
+        actionButton.isEnabled = isTaskSelected && isComplete
+
+        // Update the detail destination string.
+        guard let variableView = variableView, let task = task else {
+                return
+        }
+        targetTextField.stringValue = DestinationURL(task, variableProvider: variableView).path
+    }
+
+    @IBAction func popUpButtonAction(_ sender: Any) {
+        guard let manager = manager else {
             return
         }
-        targetTextField.stringValue = DestinationURL(manager.task(forIndex: tableView.selectedRow), variableProvider: variableView).path
+        task = manager.task(forIndex: popUpButton.indexOfSelectedItem)
     }
 
     @IBAction func moveClicked(_ sender: Any) {
 
         guard
             let sourceURL: URL = documentURL,
-            let variableView = variableView else {
+            let variableView = variableView,
+            let task = task else {
                 return
         }
 
-        let task = manager.task(forIndex: tableView.selectedRow)
         let destinationURL = DestinationURL(task, variableProvider: variableView)
-
         print("\(destinationURL)")
 
         let fileManager = FileManager.default
@@ -114,28 +126,6 @@ class ViewController: NSViewController, DragDelegate {
         default:
             return
         }
-    }
-
-}
-
-extension ViewController: NSTableViewDelegate, NSTableViewDataSource {
-
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        return manager.count
-    }
-
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let identifier: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier(rawValue: ViewController.DefaultIdentifier)
-        guard let cell = tableView.makeView(withIdentifier: identifier, owner: nil) as? NSTableCellView else {
-            return nil
-        }
-        cell.textField?.stringValue = manager.task(forIndex: row).name
-        return cell
-    }
-
-    func tableViewSelectionDidChange(_ notification: Notification) {
-        task = manager.task(forIndex: tableView.selectedRow)
-        updateState()
     }
 
 }
