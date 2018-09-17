@@ -31,7 +31,7 @@ class PreferencesViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
+        manager = AppDelegate.shared.manager
     }
 
     @IBAction func doneClicked(_ sender: Any) {

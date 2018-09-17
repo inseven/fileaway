@@ -110,24 +110,6 @@ class ViewController: NSViewController, DragDelegate {
         self.view.window?.close()
     }
 
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-
-        guard let identifier = segue.identifier else {
-            return
-        }
-
-        switch (identifier) {
-        case .preferences:
-            guard let preferencesViewController = segue.destinationController as? PreferencesViewController else {
-                return
-            }
-            preferencesViewController.manager = manager
-            return
-        default:
-            return
-        }
-    }
-
 }
 
 extension ViewController: NSControlTextEditingDelegate {
