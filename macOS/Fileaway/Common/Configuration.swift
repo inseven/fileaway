@@ -25,6 +25,7 @@ struct Component: Codable {
 
 enum VariableType: String, Codable {
     case string = "string"
+    case date = "date"
 }
 
 struct Variable: Codable {

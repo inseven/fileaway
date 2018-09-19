@@ -26,6 +26,7 @@ class ViewController: NSViewController, DragDelegate {
     var documentURL: URL? {
         didSet {
             pdfView.document = PDFDocument(url: documentURL!)
+            updateState()
         }
     }
 
@@ -50,6 +51,8 @@ class ViewController: NSViewController, DragDelegate {
             variablesView.frame = containerView.bounds
             containerView.addSubview(variablesView)
             self.variableView = variablesView
+
+            updateState()
         }
     }
 
@@ -71,10 +74,12 @@ class ViewController: NSViewController, DragDelegate {
         // Update the button selection state.
         let isTaskSelected = task != nil
         let isComplete = variableView?.isComplete ?? false
-        actionButton.isEnabled = isTaskSelected && isComplete
+        let isFile = pdfView.document != nil
+        actionButton.isEnabled = isTaskSelected && isComplete && isFile
 
         // Update the detail destination string.
         guard let variableView = variableView, let task = task else {
+            targetTextField.stringValue = ""
                 return
         }
         targetTextField.stringValue = DestinationURL(task, variableProvider: variableView).path
