@@ -25,6 +25,11 @@ extension NSTextField: VariableControl {
 extension NSDatePicker: VariableControl {
 
     func componentValue() -> String {
+        if datePickerElements == .yearMonthDatePickerElementFlag {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "YYYY-MM"
+            return dateFormatter.string(from: dateValue)
+        }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd"
         return dateFormatter.string(from: dateValue)
@@ -75,6 +80,12 @@ class VariableView: NSView, VariableProvider {
         return datePicker
     }
 
+    func yearMonthControl() -> NSDatePicker {
+        let datePicker = dateControl()
+        datePicker.datePickerElements = .yearMonthDatePickerElementFlag
+        return datePicker
+    }
+
     @objc func didChange(_ sender: Any) {
         updateDelegate()
     }
@@ -98,6 +109,9 @@ class VariableView: NSView, VariableProvider {
                 break
             case .string:
                 valueControl = textControl()
+                break
+            case .yearMonth:
+                valueControl = yearMonthControl()
                 break
             }
             guard let control = valueControl else {

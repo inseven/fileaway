@@ -16,6 +16,20 @@ The configuration file should be located in `~/Library/Mobile Documents/iCloud~i
             {"type": "text", "value": " Apple Distribution International Apple Developer Program Invoice"}
         ]
     },
+    "test all": {
+        "variables": [
+            {"name": "AYearMonth", "type": "year-month"},
+            {"name": "ADate", "type": "date"},
+            {"name": "AString", "type": "string"}
+            ],
+        "destination": [
+            {"type": "text", "value": "all tests/"},
+            {"type": "variable", "value": "AYearMonth"},
+            {"type": "variable", "value": "ADate"},
+            {"type": "variable", "value": "AString"},
+            {"type": "text", "value": "testing all"}
+        ]
+    },
     ...
 }
 ```
