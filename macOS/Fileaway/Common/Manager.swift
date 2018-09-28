@@ -28,8 +28,8 @@ class Manager {
     }
 
     static func load(_ path: String) throws -> [Task] {
-		let destination = NSString(string: path).expandingTildeInPath
-		let data = try Data(contentsOf: URL(fileURLWithPath: destination))
+        let destination = NSString(string: path).expandingTildeInPath
+        let data = try Data(contentsOf: URL(fileURLWithPath: destination))
         let decoder = JSONDecoder()
         let configurations = try decoder.decode([String: Configuration].self, from: data)
         let tasks = configurations.map { (name, configuration) -> Task in
