@@ -10,7 +10,7 @@ import Foundation
 
 class Manager {
 
-    let destinationsPath = "/Users/jbmorley/Library/Mobile Documents/iCloud~is~workflow~my~workflows/Documents/destinations.json"
+    let destinationsPath = "~/Library/Mobile Documents/iCloud~is~workflow~my~workflows/Documents/destinations.json"
     var tasks: [Task] = []
 
     public init() {
@@ -28,7 +28,8 @@ class Manager {
     }
 
     static func load(_ path: String) throws -> [Task] {
-        let data = try Data.init(contentsOf: URL(fileURLWithPath: path))
+        let destination = NSString(string: path).expandingTildeInPath
+        let data = try Data(contentsOf: URL(fileURLWithPath: destination))
         let decoder = JSONDecoder()
         let configurations = try decoder.decode([String: Configuration].self, from: data)
         let tasks = configurations.map { (name, configuration) -> Task in
