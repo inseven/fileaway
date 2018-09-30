@@ -2,7 +2,7 @@
 
 ## Configuration
 
-The configuration file should be located in `~/Library/Mobile Documents/iCloud~is~workflow~my~workflows/Documents` and follow the format:
+The configuration file should be located in `~/.fileaway/destinations.json` and follow the format:
 
 ```json
 {

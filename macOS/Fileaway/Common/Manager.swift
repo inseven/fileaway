@@ -10,7 +10,7 @@ import Foundation
 
 class Manager {
 
-    let destinationsPath = "~/Library/Mobile Documents/iCloud~is~workflow~my~workflows/Documents/destinations.json"
+    let destinationsPath = "~/.fileaway/destinations.json"
     var tasks: [Task] = []
 
     public init() {
