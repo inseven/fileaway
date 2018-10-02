@@ -69,20 +69,16 @@ class VariableView: NSView, VariableProvider {
         return textField
     }
 
-    func dateControl() -> NSDatePicker {
+    func dateControl(hasDay: Bool) -> NSDatePicker {
         let datePicker = NSDatePicker(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         datePicker.datePickerStyle = .textFieldAndStepperDatePickerStyle
-        datePicker.datePickerElements = .yearMonthDayDatePickerElementFlag
+        datePicker.datePickerElements = hasDay
+            ? .yearMonthDayDatePickerElementFlag
+            : .yearMonthDatePickerElementFlag
         datePicker.dateValue = Date()
         datePicker.target = self
         datePicker.action = #selector(VariableView.didChange(_:))
-        return datePicker
-    }
-
-    func yearMonthControl() -> NSDatePicker {
-        let datePicker = dateControl()
-        datePicker.datePickerElements = .yearMonthDatePickerElementFlag
         return datePicker
     }
 
@@ -104,14 +100,11 @@ class VariableView: NSView, VariableProvider {
             let labelTextField = VariableView.label(name: variable.name)
             var valueControl: (NSControl & VariableControl)?
             switch variable.type {
-            case .date:
-                valueControl = dateControl()
-                break
             case .string:
                 valueControl = textControl()
                 break
-            case .yearMonth:
-                valueControl = yearMonthControl()
+            case .date(let hasDay):
+                valueControl = dateControl(hasDay: hasDay)
                 break
             }
             guard let control = valueControl else {

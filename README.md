@@ -18,7 +18,7 @@ The configuration file should be located in `~/Library/Mobile Documents/iCloud~i
     },
     "test all": {
         "variables": [
-            {"name": "AYearMonth", "type": "year-month"},
+            {"name": "AYearMonth", "type": "date", "dateParams": {"hasDay": false}},
             {"name": "ADate", "type": "date"},
             {"name": "AString", "type": "string"}
             ],
