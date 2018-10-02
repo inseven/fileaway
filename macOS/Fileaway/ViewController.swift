@@ -108,6 +108,8 @@ class ViewController: NSViewController, DragDelegate {
         do {
             try fileManager.moveItem(at: sourceURL, to: destinationURL)
         } catch {
+            let alert = NSAlert(error: error)
+            alert.runModal()
             print("\(error)")
             return
         }
