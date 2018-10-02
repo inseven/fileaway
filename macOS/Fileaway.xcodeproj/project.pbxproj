@@ -108,6 +108,7 @@
 				D8666A2F20C12EB000B739CC /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		D8666A2F20C12EB000B739CC /* Products */ = {
 			isa = PBXGroup;
