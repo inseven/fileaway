@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AFA9C93F21634872000A37D2 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA9C93E21634872000A37D2 /* MainWindowController.swift */; };
 		D800D5CF214C467A00A6121B /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D800D5CE214C467A00A6121B /* Configuration.swift */; };
 		D800D5D3214C6D2F00A6121B /* VariableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D800D5D2214C6D2F00A6121B /* VariableView.swift */; };
 		D8467D4D21306A7A00DA8E73 /* DraggablePDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8467D4C21306A7A00DA8E73 /* DraggablePDFView.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AFA9C93E21634872000A37D2 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		D800D5CE214C467A00A6121B /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		D800D5D2214C6D2F00A6121B /* VariableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableView.swift; sourceTree = "<group>"; };
 		D8467D4C21306A7A00DA8E73 /* DraggablePDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggablePDFView.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				D8666A3B20C12EB000B739CC /* Fileaway.entitlements */,
 				D8467D4C21306A7A00DA8E73 /* DraggablePDFView.swift */,
 				D86644E5214DF41D00429289 /* PreferencesViewController.swift */,
+				AFA9C93E21634872000A37D2 /* MainWindowController.swift */,
 			);
 			path = Fileaway;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				D84DBD85214C746000A2F5E1 /* VariableProvider.swift in Sources */,
 				D86644E6214DF41D00429289 /* PreferencesViewController.swift in Sources */,
 				D8467D4D21306A7A00DA8E73 /* DraggablePDFView.swift in Sources */,
+				AFA9C93F21634872000A37D2 /* MainWindowController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
