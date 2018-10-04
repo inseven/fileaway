@@ -2,7 +2,7 @@
 
 ## Configuration
 
-The configuration file should be located in `~/Library/Mobile Documents/iCloud~is~workflow~my~workflows/Documents` and follow the format:
+The configuration file should be located in `~/.fileaway/destinations.json` and follow the format:
 
 ```json
 {
@@ -14,6 +14,20 @@ The configuration file should be located in `~/Library/Mobile Documents/iCloud~i
             {"type": "text", "value": "InSeven Limited/Receipts/"},
             {"type": "variable", "value": "Date"},
             {"type": "text", "value": " Apple Distribution International Apple Developer Program Invoice"}
+        ]
+    },
+    "test all": {
+        "variables": [
+            {"name": "AYearMonth", "type": "date", "dateParams": {"hasDay": false}},
+            {"name": "ADate", "type": "date"},
+            {"name": "AString", "type": "string"}
+            ],
+        "destination": [
+            {"type": "text", "value": "all tests/"},
+            {"type": "variable", "value": "AYearMonth"},
+            {"type": "variable", "value": "ADate"},
+            {"type": "variable", "value": "AString"},
+            {"type": "text", "value": "testing all"}
         ]
     },
     ...

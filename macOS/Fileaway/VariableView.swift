@@ -25,6 +25,11 @@ extension NSTextField: VariableControl {
 extension NSDatePicker: VariableControl {
 
     func componentValue() -> String {
+        if datePickerElements == .yearMonthDatePickerElementFlag {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "YYYY-MM"
+            return dateFormatter.string(from: dateValue)
+        }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd"
         return dateFormatter.string(from: dateValue)
@@ -64,11 +69,13 @@ class VariableView: NSView, VariableProvider {
         return textField
     }
 
-    func dateControl() -> NSDatePicker {
+    func dateControl(hasDay: Bool) -> NSDatePicker {
         let datePicker = NSDatePicker(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         datePicker.datePickerStyle = .textFieldAndStepperDatePickerStyle
-        datePicker.datePickerElements = .yearMonthDayDatePickerElementFlag
+        datePicker.datePickerElements = hasDay
+            ? .yearMonthDayDatePickerElementFlag
+            : .yearMonthDatePickerElementFlag
         datePicker.dateValue = Date()
         datePicker.target = self
         datePicker.action = #selector(VariableView.didChange(_:))
@@ -93,11 +100,11 @@ class VariableView: NSView, VariableProvider {
             let labelTextField = VariableView.label(name: variable.name)
             var valueControl: (NSControl & VariableControl)?
             switch variable.type {
-            case .date:
-                valueControl = dateControl()
-                break
             case .string:
                 valueControl = textControl()
+                break
+            case .date(let hasDay):
+                valueControl = dateControl(hasDay: hasDay)
                 break
             }
             guard let control = valueControl else {

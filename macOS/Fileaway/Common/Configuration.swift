@@ -23,14 +23,65 @@ struct Component: Codable {
     let value: String
 }
 
-enum VariableType: String, Codable {
-    case string = "string"
-    case date = "date"
+enum VariableType {
+    case string
+    case date(hasDay: Bool)
 }
 
-struct Variable: Codable {
+struct Variable {
     let name: String
     let type: VariableType
+}
+
+extension Variable: Codable {
+    enum CodingKeys: String, CodingKey {
+        case name
+        case type
+        case dateParams
+    }
+
+    enum RawType: String, Codable {
+        case string
+        case date
+    }
+
+    struct DateParams: Codable {
+        let hasDay: Bool
+
+        init(hasDay: Bool = true) {
+            self.hasDay = hasDay
+        }
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+
+        try container.encode(name, forKey: .name)
+
+        switch type {
+        case .string:
+            try container.encode(RawType.string, forKey: .type)
+        case .date(let hasDay):
+            try container.encode(RawType.date, forKey: .type)
+            try container.encode(DateParams(hasDay: hasDay), forKey: .dateParams)
+        }
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        let name = try container.decode(String.self, forKey: .name)
+        let type = try container.decode(RawType.self, forKey: .type)
+
+        switch type {
+        case .string:
+            self = Variable(name: name, type: .string)
+        case .date:
+            let dateParams = try container.decodeIfPresent(DateParams.self, forKey: .dateParams)
+                ?? DateParams()
+            self = Variable(name: name, type: .date(hasDay: dateParams.hasDay))
+        }
+    }
 }
 
 struct Task {

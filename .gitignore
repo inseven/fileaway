@@ -1,2 +1,6 @@
-**.xcuserdatad
+# macOS
+.DS_Store
 
+# Xcode
+xcuserdata/
+**.xcuserdatad
