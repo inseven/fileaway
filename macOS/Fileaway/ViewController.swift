@@ -106,6 +106,7 @@ class ViewController: NSViewController, DragDelegate {
 
         let fileManager = FileManager.default
         do {
+            try fileManager.createDirectory(at: destinationURL.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: [:])
             try fileManager.moveItem(at: sourceURL, to: destinationURL)
         } catch {
             print("\(error)")
