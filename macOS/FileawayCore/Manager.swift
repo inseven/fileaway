@@ -52,8 +52,7 @@ public class Manager {
                 return result.appending(value)
             }
         }
-        let destinationURL = rootUrl.appendingPathComponent(destination).appendingPathExtension("pdf")
-        return destinationURL
+        return rootUrl.appendingPathComponent(destination).appendingPathExtension("pdf")
     }
 
 }
