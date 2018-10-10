@@ -88,21 +88,3 @@ public struct Task {
     public let name: String
     public let configuration: Configuration
 }
-
-public func DestinationURL(_ task: Task, variableProvider: VariableProvider) -> URL {
-    let destination = task.configuration.destination.reduce("") { (result, component) -> String in
-        switch component.type {
-        case .text:
-            return result.appending(component.value)
-        case .variable:
-            guard let value = variableProvider.variable(forKey: component.value) else {
-                return result
-            }
-            return result.appending(value)
-        }
-    }
-    let homeDirectory = FileManager.default.homeDirectoryForCurrentUser
-    let documentsDirectory = homeDirectory.appendingPathComponent("Documents")
-    let destinationURL = documentsDirectory.appendingPathComponent(destination).appendingPathExtension("pdf")
-    return destinationURL
-}
