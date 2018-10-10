@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import FileawayCore
 
 extension NSStoryboardSegue.Identifier {
 
@@ -46,7 +47,7 @@ extension PreferencesViewController: NSTableViewDataSource, NSTableViewDelegate 
         guard let manager = manager else {
             return 0
         }
-        return manager.count
+        return manager.tasks.count
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -57,7 +58,7 @@ extension PreferencesViewController: NSTableViewDataSource, NSTableViewDelegate 
         guard let cell = tableView.makeView(withIdentifier: identifier, owner: nil) as? NSTableCellView else {
             return nil
         }
-        cell.textField?.stringValue = manager.task(forIndex: row).name
+        cell.textField?.stringValue = manager.tasks[row].name
         return cell
     }
 
@@ -66,7 +67,7 @@ extension PreferencesViewController: NSTableViewDataSource, NSTableViewDelegate 
             task = nil
             return
         }
-        task = manager.task(forIndex: tableView.selectedRow)
+        task = manager.tasks[tableView.selectedRow]
     }
 
 }

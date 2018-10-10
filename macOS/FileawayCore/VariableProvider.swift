@@ -8,11 +8,11 @@
 
 import Foundation
 
-protocol VariableProviderDelegate {
+public protocol VariableProviderDelegate {
     func variableProviderDidUpdate(variableProvider: VariableProvider)
 }
 
-protocol VariableProvider {
+public protocol VariableProvider {
     func variable(forKey key: String) -> String?
     var isComplete: Bool { get }
     var delegate: VariableProviderDelegate? { get set }

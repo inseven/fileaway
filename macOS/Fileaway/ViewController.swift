@@ -8,6 +8,7 @@
 
 import Cocoa
 import Quartz
+import FileawayCore
 
 class ViewController: NSViewController, DragDelegate {
 
@@ -89,7 +90,7 @@ class ViewController: NSViewController, DragDelegate {
         guard let manager = manager else {
             return
         }
-        task = manager.task(forIndex: popUpButton.indexOfSelectedItem)
+        task = manager.tasks[popUpButton.indexOfSelectedItem]
     }
 
     @IBAction func moveClicked(_ sender: Any) {

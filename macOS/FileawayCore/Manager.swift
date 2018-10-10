@@ -8,22 +8,16 @@
 
 import Foundation
 
-class Manager {
+public class Manager {
 
     let destinationsPath = "~/.fileaway/destinations.json"
-    var tasks: [Task] = []
+    public var tasks: [Task] = []
 
     public init() {
         do {
             tasks = try Manager.load(destinationsPath)
         } catch {
             print("\(error)")
-        }
-    }
-
-    var count: Int {
-        get {
-            return tasks.count
         }
     }
 
@@ -38,10 +32,6 @@ class Manager {
                 return task0.name < task1.name
         }
         return tasks
-    }
-
-    func task(forIndex index: Int) -> Task {
-        return tasks[index]
     }
 
 }

@@ -8,29 +8,29 @@
 
 import Cocoa
 
-struct Configuration: Codable {
-    let variables: [Variable]
-    let destination: [Component]
+public struct Configuration: Codable {
+    public let variables: [Variable]
+    public let destination: [Component]
 }
 
-enum ComponentType: String, Codable {
+public enum ComponentType: String, Codable {
     case text = "text"
     case variable = "variable"
 }
 
-struct Component: Codable {
-    let type: ComponentType
-    let value: String
+public struct Component: Codable {
+    public let type: ComponentType
+    public let value: String
 }
 
-enum VariableType {
+public enum VariableType {
     case string
     case date(hasDay: Bool)
 }
 
-struct Variable {
-    let name: String
-    let type: VariableType
+public struct Variable {
+    public let name: String
+    public let type: VariableType
 }
 
 extension Variable: Codable {
@@ -53,7 +53,7 @@ extension Variable: Codable {
         }
     }
 
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
         try container.encode(name, forKey: .name)
@@ -67,7 +67,7 @@ extension Variable: Codable {
         }
     }
 
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         let name = try container.decode(String.self, forKey: .name)
@@ -84,12 +84,12 @@ extension Variable: Codable {
     }
 }
 
-struct Task {
-    let name: String
-    let configuration: Configuration
+public struct Task {
+    public let name: String
+    public let configuration: Configuration
 }
 
-func DestinationURL(_ task: Task, variableProvider: VariableProvider) -> URL {
+public func DestinationURL(_ task: Task, variableProvider: VariableProvider) -> URL {
     let destination = task.configuration.destination.reduce("") { (result, component) -> String in
         switch component.type {
         case .text:

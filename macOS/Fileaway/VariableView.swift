@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import FileawayCore
 
 let StandardSpacing: CGFloat = 8.0
 

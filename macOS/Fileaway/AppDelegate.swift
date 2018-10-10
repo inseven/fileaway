@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import FileawayCore
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
