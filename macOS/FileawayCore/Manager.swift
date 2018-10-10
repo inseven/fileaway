@@ -40,7 +40,7 @@ public class Manager {
         return tasks
     }
 
-    public func destinationURL(_ task: Task, variableProvider: VariableProvider) -> URL {
+    public func destinationUrl(_ task: Task, variableProvider: VariableProvider) -> URL {
         let destination = task.configuration.destination.reduce("") { (result, component) -> String in
             switch component.type {
             case .text:

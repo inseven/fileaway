@@ -83,7 +83,7 @@ class ViewController: NSViewController, DragDelegate {
             targetTextField.stringValue = ""
                 return
         }
-        targetTextField.stringValue = manager.destinationURL(task, variableProvider: variableView).path
+        targetTextField.stringValue = manager.destinationUrl(task, variableProvider: variableView).path
     }
 
     @IBAction func popUpButtonAction(_ sender: Any) {
@@ -102,7 +102,7 @@ class ViewController: NSViewController, DragDelegate {
                 return
         }
 
-        let destinationURL = manager.destinationURL(task, variableProvider: variableView)
+        let destinationURL = manager.destinationUrl(task, variableProvider: variableView)
         print("\(destinationURL)")
 
         let fileManager = FileManager.default
