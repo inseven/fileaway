@@ -21,6 +21,12 @@ public class Manager {
         }
     }
 
+    public var rootUrl: URL {
+        let homeDirectory = FileManager.default.homeDirectoryForCurrentUser
+        let documentsDirectory = homeDirectory.appendingPathComponent("Documents")
+        return documentsDirectory
+    }
+
     static func load(_ path: String) throws -> [Task] {
         let destination = NSString(string: path).expandingTildeInPath
         let data = try Data(contentsOf: URL(fileURLWithPath: destination))
@@ -46,9 +52,7 @@ public class Manager {
                 return result.appending(value)
             }
         }
-        let homeDirectory = FileManager.default.homeDirectoryForCurrentUser
-        let documentsDirectory = homeDirectory.appendingPathComponent("Documents")
-        let destinationURL = documentsDirectory.appendingPathComponent(destination).appendingPathExtension("pdf")
+        let destinationURL = rootUrl.appendingPathComponent(destination).appendingPathExtension("pdf")
         return destinationURL
     }
 
