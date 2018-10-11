@@ -61,6 +61,7 @@ class PickerViewController: UITableViewController {
 
             let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.previewCell.rawValue, for: indexPath)
             cell.textLabel?.text = documentUrl?.relativeString
+            cell.textLabel?.backgroundColor = UIColor.clear
             return cell
 
         } else if (indexPath.section == 1) {
@@ -78,6 +79,13 @@ class PickerViewController: UITableViewController {
 
         // TODO: This is inelegant; is there a better approach?
         return tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.textCell.rawValue, for: indexPath)
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (indexPath.section == 0) {
+            return 240.0
+        }
+        return UITableViewAutomaticDimension
     }
 
 }
