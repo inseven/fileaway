@@ -6,7 +6,7 @@
 //  Copyright © 2018 InSeven Limited. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for FileawayCore.
 FOUNDATION_EXPORT double FileawayCoreVersionNumber;

@@ -17,6 +17,7 @@
 		D8666A3920C12EB000B739CC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8666A3720C12EB000B739CC /* Main.storyboard */; };
 		D8666A4520C12EB100B739CC /* FileawayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8666A4420C12EB100B739CC /* FileawayTests.swift */; };
 		D8666A5020C12EB100B739CC /* FileawayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8666A4F20C12EB100B739CC /* FileawayUITests.swift */; };
+		D8B6F477216F0B2F00808CBE /* FileawayCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D8D14DBF216E3E2F00D6E1DF /* FileawayCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +34,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = D8666A2D20C12EB000B739CC;
 			remoteInfo = Fileaway;
+		};
+		D8B6F472216F09D800808CBE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D8D14D4D216E3B9F00D6E1DF /* FileawayCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D8D14DC7216F015F00D6E1DF;
+			remoteInfo = "FileawayCore iOS";
+		};
+		D8B6F474216F09D800808CBE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D8D14D4D216E3B9F00D6E1DF /* FileawayCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D8D14DCF216F015F00D6E1DF;
+			remoteInfo = "FileawayCore iOSTests";
 		};
 		D8D14DBA216E3E2F00D6E1DF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -64,6 +79,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				D8B6F477216F0B2F00808CBE /* FileawayCore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -178,8 +194,10 @@
 		D8D14D4E216E3B9F00D6E1DF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D8D14DBF216E3E2F00D6E1DF /* FileawayCore_macOS.framework */,
+				D8D14DBF216E3E2F00D6E1DF /* FileawayCore.framework */,
 				D8D14DC1216E3E2F00D6E1DF /* FileawayCore macOSTests.xctest */,
+				D8B6F473216F09D800808CBE /* FileawayCore.framework */,
+				D8B6F475216F09D800808CBE /* FileawayCore iOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -300,10 +318,24 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		D8D14DBF216E3E2F00D6E1DF /* FileawayCore_macOS.framework */ = {
+		D8B6F473216F09D800808CBE /* FileawayCore.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = FileawayCore_macOS.framework;
+			path = FileawayCore.framework;
+			remoteRef = D8B6F472216F09D800808CBE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D8B6F475216F09D800808CBE /* FileawayCore iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "FileawayCore iOSTests.xctest";
+			remoteRef = D8B6F474216F09D800808CBE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D8D14DBF216E3E2F00D6E1DF /* FileawayCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FileawayCore.framework;
 			remoteRef = D8D14DBE216E3E2F00D6E1DF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -516,7 +548,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = S4WXAUZQEV;
 				INFOPLIST_FILE = "$(SRCROOT)/Fileaway/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.fileaway;
@@ -531,7 +563,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = S4WXAUZQEV;
 				INFOPLIST_FILE = "$(SRCROOT)/Fileaway/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.fileaway;

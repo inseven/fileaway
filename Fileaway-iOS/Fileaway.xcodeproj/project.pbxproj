@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D89941012145E6AE00097F3D /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89941002145E6AE00097F3D /* StorageManager.swift */; };
+		D8BCA523216F069B002A624D /* FileawayCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8BCA51D216F0682002A624D /* FileawayCore.framework */; };
 		D8CCB8062143672700AC445F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCB8052143672700AC445F /* AppDelegate.swift */; };
 		D8CCB8082143672700AC445F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCB8072143672700AC445F /* ViewController.swift */; };
 		D8CCB80B2143672700AC445F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8CCB8092143672700AC445F /* Main.storyboard */; };
@@ -18,6 +19,41 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D8BCA518216F0682002A624D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D8BCA511216F0682002A624D /* FileawayCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D8D14DA0216E3E0E00D6E1DF;
+			remoteInfo = "FileawayCore macOS";
+		};
+		D8BCA51A216F0682002A624D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D8BCA511216F0682002A624D /* FileawayCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D8D14DA8216E3E0E00D6E1DF;
+			remoteInfo = "FileawayCore macOSTests";
+		};
+		D8BCA51C216F0682002A624D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D8BCA511216F0682002A624D /* FileawayCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D8D14DC7216F015F00D6E1DF;
+			remoteInfo = "FileawayCore iOS";
+		};
+		D8BCA51E216F0682002A624D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D8BCA511216F0682002A624D /* FileawayCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D8D14DCF216F015F00D6E1DF;
+			remoteInfo = "FileawayCore iOSTests";
+		};
+		D8BCA520216F068F002A624D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D8BCA511216F0682002A624D /* FileawayCore.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D8D14DC6216F015F00D6E1DF;
+			remoteInfo = "FileawayCore iOS";
+		};
 		D8CCB8172143672700AC445F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D8CCB7FA2143672700AC445F /* Project object */;
@@ -36,6 +72,7 @@
 
 /* Begin PBXFileReference section */
 		D89941002145E6AE00097F3D /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		D8BCA511216F0682002A624D /* FileawayCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FileawayCore.xcodeproj; path = ../FileawayCore/FileawayCore.xcodeproj; sourceTree = "<group>"; };
 		D8CCB8022143672700AC445F /* Fileaway.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fileaway.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8CCB8052143672700AC445F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8CCB8072143672700AC445F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8BCA523216F069B002A624D /* FileawayCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,13 +114,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D8BCA512216F0682002A624D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D8BCA519216F0682002A624D /* FileawayCore.framework */,
+				D8BCA51B216F0682002A624D /* FileawayCore macOSTests.xctest */,
+				D8BCA51D216F0682002A624D /* FileawayCore.framework */,
+				D8BCA51F216F0682002A624D /* FileawayCore iOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D8BCA522216F069B002A624D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D8CCB7F92143672700AC445F = {
 			isa = PBXGroup;
 			children = (
+				D8BCA511216F0682002A624D /* FileawayCore.xcodeproj */,
 				D8CCB8042143672700AC445F /* Fileaway */,
 				D8CCB8192143672700AC445F /* FileawayTests */,
 				D8CCB8242143672700AC445F /* FileawayUITests */,
 				D8CCB8032143672700AC445F /* Products */,
+				D8BCA522216F069B002A624D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -142,6 +200,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D8BCA521216F068F002A624D /* PBXTargetDependency */,
 			);
 			name = Fileaway;
 			productName = Fileaway;
@@ -191,7 +250,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "InSeven Limited";
 				TargetAttributes = {
 					D8CCB8012143672700AC445F = {
@@ -221,6 +280,12 @@
 			mainGroup = D8CCB7F92143672700AC445F;
 			productRefGroup = D8CCB8032143672700AC445F /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D8BCA512216F0682002A624D /* Products */;
+					ProjectRef = D8BCA511216F0682002A624D /* FileawayCore.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D8CCB8012143672700AC445F /* Fileaway */,
@@ -229,6 +294,37 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		D8BCA519216F0682002A624D /* FileawayCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FileawayCore.framework;
+			remoteRef = D8BCA518216F0682002A624D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D8BCA51B216F0682002A624D /* FileawayCore macOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "FileawayCore macOSTests.xctest";
+			remoteRef = D8BCA51A216F0682002A624D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D8BCA51D216F0682002A624D /* FileawayCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FileawayCore.framework;
+			remoteRef = D8BCA51C216F0682002A624D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D8BCA51F216F0682002A624D /* FileawayCore iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "FileawayCore iOSTests.xctest";
+			remoteRef = D8BCA51E216F0682002A624D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		D8CCB8002143672700AC445F /* Resources */ = {
@@ -287,6 +383,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D8BCA521216F068F002A624D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "FileawayCore iOS";
+			targetProxy = D8BCA520216F068F002A624D /* PBXContainerItemProxy */;
+		};
 		D8CCB8182143672700AC445F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D8CCB8012143672700AC445F /* Fileaway */;
@@ -333,6 +434,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -340,6 +442,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -367,7 +470,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -390,6 +493,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -397,6 +501,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -418,7 +523,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
