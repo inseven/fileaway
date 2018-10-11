@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import FileawayCore
 
 class PickerViewController: UITableViewController {
+
+    var manager: Manager!
 
     override func viewDidLoad() {
         super.viewDidLoad()
