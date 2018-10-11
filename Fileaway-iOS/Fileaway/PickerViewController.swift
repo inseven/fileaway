@@ -11,7 +11,8 @@ import FileawayCore
 
 class PickerViewController: UITableViewController {
 
-    var manager: Manager!
+    public var manager: Manager!
+    var documentUrl: URL!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +44,7 @@ class PickerViewController: UITableViewController {
         case 1:
             return 1
         case 2:
-            return 0
+            return manager.tasks.count
         default:
             return 0
         }
@@ -51,6 +52,11 @@ class PickerViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+
+        if (indexPath.section == 2) {
+            cell.textLabel?.text = manager.tasks[indexPath.row].name
+        }
+
         return cell
     }
 

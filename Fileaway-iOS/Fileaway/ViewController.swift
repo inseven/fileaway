@@ -39,6 +39,24 @@ class ViewController: UIViewController {
         self.present(documentPicker, animated: true, completion: nil)
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "Picker") {
+            guard let navigationViewController = segue.destination as? UINavigationController else {
+                print("Unexpected view controller")
+                return
+            }
+            guard let pickerViewController = navigationViewController.topViewController as? PickerViewController else {
+                print("Unexpected view controller")
+                return
+            }
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                print("Unable to get app delegate")
+                return
+            }
+            pickerViewController.manager = appDelegate.manager
+        }
+    }
+
     @IBAction func setDestinationTapped(_ sender: Any) {
         presentDocumentPickerIfNeeded()
     }
