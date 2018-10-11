@@ -60,6 +60,8 @@ class PickerViewController: UITableViewController {
         if (indexPath.section == 0) {
 
             let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.previewCell.rawValue, for: indexPath)
+            let previewCell = cell as! PreviewTableViewCell
+            previewCell.documentUrl = documentUrl
             cell.textLabel?.text = documentUrl?.relativeString
             cell.textLabel?.backgroundColor = UIColor.clear
             return cell
