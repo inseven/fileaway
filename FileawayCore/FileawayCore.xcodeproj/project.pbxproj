@@ -47,13 +47,11 @@
 		D8D14D57216E3BAE00D6E1DF /* VariableProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableProvider.swift; sourceTree = "<group>"; };
 		D8D14D58216E3BAE00D6E1DF /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		D8D14DA0216E3E0E00D6E1DF /* FileawayCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FileawayCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8D14DA2216E3E0E00D6E1DF /* FileawayCore_macOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileawayCore_macOS.h; sourceTree = "<group>"; };
 		D8D14DA3216E3E0E00D6E1DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8D14DA8216E3E0E00D6E1DF /* FileawayCore macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FileawayCore macOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8D14DAD216E3E0E00D6E1DF /* FileawayCore_macOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileawayCore_macOSTests.swift; sourceTree = "<group>"; };
 		D8D14DAF216E3E0E00D6E1DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8D14DC7216F015F00D6E1DF /* FileawayCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FileawayCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8D14DC9216F015F00D6E1DF /* FileawayCore_iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileawayCore_iOS.h; sourceTree = "<group>"; };
 		D8D14DCA216F015F00D6E1DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8D14DCF216F015F00D6E1DF /* FileawayCore iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FileawayCore iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8D14DD4216F015F00D6E1DF /* FileawayCore_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileawayCore_iOSTests.swift; sourceTree = "<group>"; };
@@ -142,7 +140,6 @@
 		D8D14DA1216E3E0E00D6E1DF /* FileawayCore macOS */ = {
 			isa = PBXGroup;
 			children = (
-				D8D14DA2216E3E0E00D6E1DF /* FileawayCore_macOS.h */,
 				D8D14DA3216E3E0E00D6E1DF /* Info.plist */,
 			);
 			path = "FileawayCore macOS";
@@ -160,7 +157,6 @@
 		D8D14DC8216F015F00D6E1DF /* FileawayCore iOS */ = {
 			isa = PBXGroup;
 			children = (
-				D8D14DC9216F015F00D6E1DF /* FileawayCore_iOS.h */,
 				D8D14DCA216F015F00D6E1DF /* Info.plist */,
 			);
 			path = "FileawayCore iOS";
