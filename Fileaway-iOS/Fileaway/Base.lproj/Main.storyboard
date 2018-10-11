@@ -31,6 +31,13 @@
                                     <action selector="setDestinationTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ix9-7S-0S8"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nxr-Kh-fjx">
+                                <rect key="frame" x="145.5" y="192" width="84" height="30"/>
+                                <state key="normal" title="Show Picker"/>
+                                <connections>
+                                    <segue destination="l9g-2e-tzY" kind="presentation" identifier="Picker" id="Xko-DK-Fi3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -38,12 +45,65 @@
                             <constraint firstItem="xBz-HM-rjQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Aie-OI-Skj"/>
                             <constraint firstItem="xBz-HM-rjQ" firstAttribute="top" secondItem="DQH-gN-tWd" secondAttribute="bottom" constant="16" id="Cap-Ax-xMd"/>
                             <constraint firstItem="DQH-gN-tWd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GOI-2s-hbT"/>
+                            <constraint firstItem="nxr-Kh-fjx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Yqf-SG-glQ"/>
+                            <constraint firstItem="nxr-Kh-fjx" firstAttribute="top" secondItem="xBz-HM-rjQ" secondAttribute="bottom" constant="16" id="us6-to-Vde"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--Fileaway-->
+        <scene sceneID="NZq-go-Zdw">
+            <objects>
+                <tableViewController id="e0M-sV-gNd" customClass="PickerViewController" customModule="Fileaway" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="WrE-Ri-TEh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="Jdq-6o-HfR">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jdq-6o-HfR" id="1tB-hG-mJQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="e0M-sV-gNd" id="0bK-P4-OhA"/>
+                            <outlet property="delegate" destination="e0M-sV-gNd" id="LHY-Ek-8Wd"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Fileaway" id="5wv-rl-D4S">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="kF4-42-GHQ">
+                            <connections>
+                                <action selector="cancelTapped:" destination="e0M-sV-gNd" id="9Vg-w6-wDF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Aar-Ou-dNl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2558" y="27"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3Th-ND-xe8">
+            <objects>
+                <navigationController id="l9g-2e-tzY" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PoD-3Z-kLh">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="e0M-sV-gNd" kind="relationship" relationship="rootViewController" id="KPw-0k-k8z"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mM3-EE-QAJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1606" y="27"/>
         </scene>
     </scenes>
 </document>
