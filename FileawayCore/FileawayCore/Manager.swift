@@ -22,9 +22,7 @@ public class Manager {
     }
 
     public var rootUrl: URL {
-        let homeDirectory = FileManager.default.homeDirectoryForCurrentUser
-        let documentsDirectory = homeDirectory.appendingPathComponent("Documents")
-        return documentsDirectory
+        return URL(fileURLWithPath: NSString(string: "~/Documents").expandingTildeInPath)
     }
 
     static func load(_ path: String) throws -> [Task] {

@@ -6,7 +6,7 @@
 //  Copyright © 2018 InSeven Limited. All rights reserved.
 //
 
-import Cocoa
+import Foundation
 
 public struct Configuration: Codable {
     public let variables: [Variable]

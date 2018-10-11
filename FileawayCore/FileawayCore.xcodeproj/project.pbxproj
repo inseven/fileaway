@@ -1,0 +1,755 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D8D14DA9216E3E0E00D6E1DF /* FileawayCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8D14DA0216E3E0E00D6E1DF /* FileawayCore.framework */; };
+		D8D14DAE216E3E0E00D6E1DF /* FileawayCore_macOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D14DAD216E3E0E00D6E1DF /* FileawayCore_macOSTests.swift */; };
+		D8D14DB0216E3E0E00D6E1DF /* FileawayCore_macOS.h in Headers */ = {isa = PBXBuildFile; fileRef = D8D14DA2216E3E0E00D6E1DF /* FileawayCore_macOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8D14DB7216E3E1400D6E1DF /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D14D56216E3BAE00D6E1DF /* Configuration.swift */; };
+		D8D14DB8216E3E1400D6E1DF /* VariableProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D14D57216E3BAE00D6E1DF /* VariableProvider.swift */; };
+		D8D14DB9216E3E1400D6E1DF /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D14D58216E3BAE00D6E1DF /* Manager.swift */; };
+		D8D14DD0216F015F00D6E1DF /* FileawayCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8D14DC7216F015F00D6E1DF /* FileawayCore.framework */; };
+		D8D14DD5216F015F00D6E1DF /* FileawayCore_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D14DD4216F015F00D6E1DF /* FileawayCore_iOSTests.swift */; };
+		D8D14DD7216F015F00D6E1DF /* FileawayCore_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = D8D14DC9216F015F00D6E1DF /* FileawayCore_iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D8D14DAA216E3E0E00D6E1DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D81F7C3C216E3AA80070AAA0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D8D14D9F216E3E0E00D6E1DF;
+			remoteInfo = "FileawayCore macOS";
+		};
+		D8D14DD1216F015F00D6E1DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D81F7C3C216E3AA80070AAA0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D8D14DC6216F015F00D6E1DF;
+			remoteInfo = "FileawayCore iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D81F7C48216E3AA80070AAA0 /* FileawayCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileawayCore.h; sourceTree = "<group>"; };
+		D81F7C49216E3AA80070AAA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D81F7C53216E3AA90070AAA0 /* FileawayCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileawayCoreTests.swift; sourceTree = "<group>"; };
+		D81F7C55216E3AA90070AAA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D8D14D56216E3BAE00D6E1DF /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		D8D14D57216E3BAE00D6E1DF /* VariableProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableProvider.swift; sourceTree = "<group>"; };
+		D8D14D58216E3BAE00D6E1DF /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
+		D8D14DA0216E3E0E00D6E1DF /* FileawayCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FileawayCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8D14DA2216E3E0E00D6E1DF /* FileawayCore_macOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileawayCore_macOS.h; sourceTree = "<group>"; };
+		D8D14DA3216E3E0E00D6E1DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D8D14DA8216E3E0E00D6E1DF /* FileawayCore macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FileawayCore macOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8D14DAD216E3E0E00D6E1DF /* FileawayCore_macOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileawayCore_macOSTests.swift; sourceTree = "<group>"; };
+		D8D14DAF216E3E0E00D6E1DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D8D14DC7216F015F00D6E1DF /* FileawayCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FileawayCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8D14DC9216F015F00D6E1DF /* FileawayCore_iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileawayCore_iOS.h; sourceTree = "<group>"; };
+		D8D14DCA216F015F00D6E1DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D8D14DCF216F015F00D6E1DF /* FileawayCore iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FileawayCore iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8D14DD4216F015F00D6E1DF /* FileawayCore_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileawayCore_iOSTests.swift; sourceTree = "<group>"; };
+		D8D14DD6216F015F00D6E1DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D8D14D9D216E3E0E00D6E1DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8D14DA5216E3E0E00D6E1DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8D14DA9216E3E0E00D6E1DF /* FileawayCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8D14DC4216F015F00D6E1DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8D14DCC216F015F00D6E1DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8D14DD0216F015F00D6E1DF /* FileawayCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D81F7C3B216E3AA80070AAA0 = {
+			isa = PBXGroup;
+			children = (
+				D81F7C47216E3AA80070AAA0 /* FileawayCore */,
+				D81F7C52216E3AA90070AAA0 /* FileawayCoreTests */,
+				D8D14DA1216E3E0E00D6E1DF /* FileawayCore macOS */,
+				D8D14DAC216E3E0E00D6E1DF /* FileawayCore macOSTests */,
+				D8D14DC8216F015F00D6E1DF /* FileawayCore iOS */,
+				D8D14DD3216F015F00D6E1DF /* FileawayCore iOSTests */,
+				D81F7C46216E3AA80070AAA0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D81F7C46216E3AA80070AAA0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D8D14DA0216E3E0E00D6E1DF /* FileawayCore.framework */,
+				D8D14DA8216E3E0E00D6E1DF /* FileawayCore macOSTests.xctest */,
+				D8D14DC7216F015F00D6E1DF /* FileawayCore.framework */,
+				D8D14DCF216F015F00D6E1DF /* FileawayCore iOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D81F7C47216E3AA80070AAA0 /* FileawayCore */ = {
+			isa = PBXGroup;
+			children = (
+				D8D14D56216E3BAE00D6E1DF /* Configuration.swift */,
+				D8D14D57216E3BAE00D6E1DF /* VariableProvider.swift */,
+				D8D14D58216E3BAE00D6E1DF /* Manager.swift */,
+				D81F7C48216E3AA80070AAA0 /* FileawayCore.h */,
+				D81F7C49216E3AA80070AAA0 /* Info.plist */,
+			);
+			path = FileawayCore;
+			sourceTree = "<group>";
+		};
+		D81F7C52216E3AA90070AAA0 /* FileawayCoreTests */ = {
+			isa = PBXGroup;
+			children = (
+				D81F7C53216E3AA90070AAA0 /* FileawayCoreTests.swift */,
+				D81F7C55216E3AA90070AAA0 /* Info.plist */,
+			);
+			path = FileawayCoreTests;
+			sourceTree = "<group>";
+		};
+		D8D14DA1216E3E0E00D6E1DF /* FileawayCore macOS */ = {
+			isa = PBXGroup;
+			children = (
+				D8D14DA2216E3E0E00D6E1DF /* FileawayCore_macOS.h */,
+				D8D14DA3216E3E0E00D6E1DF /* Info.plist */,
+			);
+			path = "FileawayCore macOS";
+			sourceTree = "<group>";
+		};
+		D8D14DAC216E3E0E00D6E1DF /* FileawayCore macOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				D8D14DAD216E3E0E00D6E1DF /* FileawayCore_macOSTests.swift */,
+				D8D14DAF216E3E0E00D6E1DF /* Info.plist */,
+			);
+			path = "FileawayCore macOSTests";
+			sourceTree = "<group>";
+		};
+		D8D14DC8216F015F00D6E1DF /* FileawayCore iOS */ = {
+			isa = PBXGroup;
+			children = (
+				D8D14DC9216F015F00D6E1DF /* FileawayCore_iOS.h */,
+				D8D14DCA216F015F00D6E1DF /* Info.plist */,
+			);
+			path = "FileawayCore iOS";
+			sourceTree = "<group>";
+		};
+		D8D14DD3216F015F00D6E1DF /* FileawayCore iOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				D8D14DD4216F015F00D6E1DF /* FileawayCore_iOSTests.swift */,
+				D8D14DD6216F015F00D6E1DF /* Info.plist */,
+			);
+			path = "FileawayCore iOSTests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D8D14D9B216E3E0E00D6E1DF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8D14DB0216E3E0E00D6E1DF /* FileawayCore_macOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8D14DC2216F015F00D6E1DF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8D14DD7216F015F00D6E1DF /* FileawayCore_iOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D8D14D9F216E3E0E00D6E1DF /* FileawayCore macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D8D14DB1216E3E0E00D6E1DF /* Build configuration list for PBXNativeTarget "FileawayCore macOS" */;
+			buildPhases = (
+				D8D14D9B216E3E0E00D6E1DF /* Headers */,
+				D8D14D9C216E3E0E00D6E1DF /* Sources */,
+				D8D14D9D216E3E0E00D6E1DF /* Frameworks */,
+				D8D14D9E216E3E0E00D6E1DF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "FileawayCore macOS";
+			productName = "FileawayCore macOS";
+			productReference = D8D14DA0216E3E0E00D6E1DF /* FileawayCore.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D8D14DA7216E3E0E00D6E1DF /* FileawayCore macOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D8D14DB4216E3E0E00D6E1DF /* Build configuration list for PBXNativeTarget "FileawayCore macOSTests" */;
+			buildPhases = (
+				D8D14DA4216E3E0E00D6E1DF /* Sources */,
+				D8D14DA5216E3E0E00D6E1DF /* Frameworks */,
+				D8D14DA6216E3E0E00D6E1DF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D8D14DAB216E3E0E00D6E1DF /* PBXTargetDependency */,
+			);
+			name = "FileawayCore macOSTests";
+			productName = "FileawayCore macOSTests";
+			productReference = D8D14DA8216E3E0E00D6E1DF /* FileawayCore macOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D8D14DC6216F015F00D6E1DF /* FileawayCore iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D8D14DD8216F015F00D6E1DF /* Build configuration list for PBXNativeTarget "FileawayCore iOS" */;
+			buildPhases = (
+				D8D14DC2216F015F00D6E1DF /* Headers */,
+				D8D14DC3216F015F00D6E1DF /* Sources */,
+				D8D14DC4216F015F00D6E1DF /* Frameworks */,
+				D8D14DC5216F015F00D6E1DF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "FileawayCore iOS";
+			productName = "FileawayCore iOS";
+			productReference = D8D14DC7216F015F00D6E1DF /* FileawayCore.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D8D14DCE216F015F00D6E1DF /* FileawayCore iOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D8D14DDB216F015F00D6E1DF /* Build configuration list for PBXNativeTarget "FileawayCore iOSTests" */;
+			buildPhases = (
+				D8D14DCB216F015F00D6E1DF /* Sources */,
+				D8D14DCC216F015F00D6E1DF /* Frameworks */,
+				D8D14DCD216F015F00D6E1DF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D8D14DD2216F015F00D6E1DF /* PBXTargetDependency */,
+			);
+			name = "FileawayCore iOSTests";
+			productName = "FileawayCore iOSTests";
+			productReference = D8D14DCF216F015F00D6E1DF /* FileawayCore iOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D81F7C3C216E3AA80070AAA0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1000;
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = "InSeven Limited";
+				TargetAttributes = {
+					D8D14D9F216E3E0E00D6E1DF = {
+						CreatedOnToolsVersion = 10.0;
+					};
+					D8D14DA7216E3E0E00D6E1DF = {
+						CreatedOnToolsVersion = 10.0;
+					};
+					D8D14DC6216F015F00D6E1DF = {
+						CreatedOnToolsVersion = 10.0;
+					};
+					D8D14DCE216F015F00D6E1DF = {
+						CreatedOnToolsVersion = 10.0;
+					};
+				};
+			};
+			buildConfigurationList = D81F7C3F216E3AA80070AAA0 /* Build configuration list for PBXProject "FileawayCore" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D81F7C3B216E3AA80070AAA0;
+			productRefGroup = D81F7C46216E3AA80070AAA0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D8D14D9F216E3E0E00D6E1DF /* FileawayCore macOS */,
+				D8D14DA7216E3E0E00D6E1DF /* FileawayCore macOSTests */,
+				D8D14DC6216F015F00D6E1DF /* FileawayCore iOS */,
+				D8D14DCE216F015F00D6E1DF /* FileawayCore iOSTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D8D14D9E216E3E0E00D6E1DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8D14DA6216E3E0E00D6E1DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8D14DC5216F015F00D6E1DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8D14DCD216F015F00D6E1DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D8D14D9C216E3E0E00D6E1DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8D14DB8216E3E1400D6E1DF /* VariableProvider.swift in Sources */,
+				D8D14DB9216E3E1400D6E1DF /* Manager.swift in Sources */,
+				D8D14DB7216E3E1400D6E1DF /* Configuration.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8D14DA4216E3E0E00D6E1DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8D14DAE216E3E0E00D6E1DF /* FileawayCore_macOSTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8D14DC3216F015F00D6E1DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8D14DCB216F015F00D6E1DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8D14DD5216F015F00D6E1DF /* FileawayCore_iOSTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D8D14DAB216E3E0E00D6E1DF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D8D14D9F216E3E0E00D6E1DF /* FileawayCore macOS */;
+			targetProxy = D8D14DAA216E3E0E00D6E1DF /* PBXContainerItemProxy */;
+		};
+		D8D14DD2216F015F00D6E1DF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D8D14DC6216F015F00D6E1DF /* FileawayCore iOS */;
+			targetProxy = D8D14DD1216F015F00D6E1DF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		D81F7C57216E3AA90070AAA0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D81F7C58216E3AA90070AAA0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		D8D14DB2216E3E0E00D6E1DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = S4WXAUZQEV;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "FileawayCore macOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.FileawayCore-macOS";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = FileawayCore;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		D8D14DB3216E3E0E00D6E1DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = S4WXAUZQEV;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "FileawayCore macOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.FileawayCore-macOS";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_NAME = FileawayCore;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
+		D8D14DB5216E3E0E00D6E1DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = S4WXAUZQEV;
+				INFOPLIST_FILE = "FileawayCore macOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.FileawayCore-macOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		D8D14DB6216E3E0E00D6E1DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = S4WXAUZQEV;
+				INFOPLIST_FILE = "FileawayCore macOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.FileawayCore-macOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
+		D8D14DD9216F015F00D6E1DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = S4WXAUZQEV;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "FileawayCore iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.FileawayCore-iOS";
+				PRODUCT_NAME = FileawayCore;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D8D14DDA216F015F00D6E1DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = S4WXAUZQEV;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "FileawayCore iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.FileawayCore-iOS";
+				PRODUCT_NAME = FileawayCore;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D8D14DDC216F015F00D6E1DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S4WXAUZQEV;
+				INFOPLIST_FILE = "FileawayCore iOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.FileawayCore-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D8D14DDD216F015F00D6E1DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S4WXAUZQEV;
+				INFOPLIST_FILE = "FileawayCore iOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.FileawayCore-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D81F7C3F216E3AA80070AAA0 /* Build configuration list for PBXProject "FileawayCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D81F7C57216E3AA90070AAA0 /* Debug */,
+				D81F7C58216E3AA90070AAA0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D8D14DB1216E3E0E00D6E1DF /* Build configuration list for PBXNativeTarget "FileawayCore macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8D14DB2216E3E0E00D6E1DF /* Debug */,
+				D8D14DB3216E3E0E00D6E1DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D8D14DB4216E3E0E00D6E1DF /* Build configuration list for PBXNativeTarget "FileawayCore macOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8D14DB5216E3E0E00D6E1DF /* Debug */,
+				D8D14DB6216E3E0E00D6E1DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D8D14DD8216F015F00D6E1DF /* Build configuration list for PBXNativeTarget "FileawayCore iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8D14DD9216F015F00D6E1DF /* Debug */,
+				D8D14DDA216F015F00D6E1DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D8D14DDB216F015F00D6E1DF /* Build configuration list for PBXNativeTarget "FileawayCore iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8D14DDC216F015F00D6E1DF /* Debug */,
+				D8D14DDD216F015F00D6E1DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D81F7C3C216E3AA80070AAA0 /* Project object */;
+}
