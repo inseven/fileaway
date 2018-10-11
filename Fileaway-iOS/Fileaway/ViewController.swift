@@ -53,7 +53,9 @@ class ViewController: UIViewController {
                 print("Unable to get app delegate")
                 return
             }
+
             pickerViewController.manager = appDelegate.manager
+            pickerViewController.documentUrl = Bundle.main.url(forResource: "example", withExtension: "pdf")!
         }
     }
 
