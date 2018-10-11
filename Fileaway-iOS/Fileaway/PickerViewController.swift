@@ -9,6 +9,11 @@
 import UIKit
 import FileawayCore
 
+enum ReuseIdentifier: String {
+    case textCell = "TextCell"
+    case previewCell = "PreviewCell"
+}
+
 class PickerViewController: UITableViewController {
 
     public var manager: Manager!
@@ -51,17 +56,28 @@ class PickerViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
         if (indexPath.section == 0) {
+
+            let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.previewCell.rawValue, for: indexPath)
             cell.textLabel?.text = documentUrl?.relativeString
+            return cell
+
         } else if (indexPath.section == 1) {
+
+            let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.textCell.rawValue, for: indexPath)
             cell.textLabel?.text = nil
+            return cell
+
         } else if (indexPath.section == 2) {
+
+            let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.textCell.rawValue, for: indexPath)
             cell.textLabel?.text = manager.tasks[indexPath.row].name
+            return cell
         }
 
-        return cell
+        // TODO: This is inelegant; is there a better approach?
+        return tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.textCell.rawValue, for: indexPath)
     }
 
 }
