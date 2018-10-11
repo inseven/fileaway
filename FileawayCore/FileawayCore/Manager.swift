@@ -10,12 +10,29 @@ import Foundation
 
 public class Manager {
 
-    let destinationsPath = "~/.fileaway/destinations.json"
     public var tasks: [Task] = []
+
+    /**
+     * Return the URL of the preferred configuration file.
+     *
+     * This will select the user's local configuration where available, falling back to the
+     * destinations.json file in the bundle otherwise.
+     */
+    func configurationUrl() -> URL {
+
+        // Use the user's copy of the destinations file if it exists.
+        let path = NSString(string: "~/.fileaway/destinations.json").expandingTildeInPath
+        if FileManager().fileExists(atPath: path) {
+            return URL(fileURLWithPath: path)
+        }
+
+        // Otherwise, fall back on the bundle copy.
+        return Bundle.main.url(forResource: "destinations", withExtension: "json")!
+    }
 
     public init() {
         do {
-            tasks = try Manager.load(destinationsPath)
+            tasks = try Manager.load(self.configurationUrl())
         } catch {
             print("\(error)")
         }
@@ -25,9 +42,8 @@ public class Manager {
         return URL(fileURLWithPath: NSString(string: "~/Documents").expandingTildeInPath)
     }
 
-    static func load(_ path: String) throws -> [Task] {
-        let destination = NSString(string: path).expandingTildeInPath
-        let data = try Data(contentsOf: URL(fileURLWithPath: destination))
+    static func load(_ url: URL) throws -> [Task] {
+        let data = try Data(contentsOf: url)
         let decoder = JSONDecoder()
         let configurations = try decoder.decode([String: Configuration].self, from: data)
         let tasks = configurations.map { (name, configuration) -> Task in
