@@ -17,7 +17,6 @@ class ViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        presentDocumentPickerIfNeeded()
     }
 
     func presentDocumentPickerIfNeeded() {
@@ -38,6 +37,10 @@ class ViewController: UIViewController {
         documentPicker.allowsMultipleSelection = true  // required to allow folder selection
         documentPicker.delegate = self
         self.present(documentPicker, animated: true, completion: nil)
+    }
+
+    @IBAction func setDestinationTapped(_ sender: Any) {
+        presentDocumentPickerIfNeeded()
     }
 
     @IBAction func saveFileTapped(_ sender: Any) {
