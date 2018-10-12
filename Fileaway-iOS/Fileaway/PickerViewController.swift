@@ -82,9 +82,18 @@ class PickerViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PickerViewController.dismissKeyboard))
+        gestureRecognizer.cancelsTouchesInView = false
+        view.addGestureRecognizer(gestureRecognizer)
+    }
+
+    @objc func dismissKeyboard(gestureRecognizer: UITapGestureRecognizer) {
+        view.endEditing(false)
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         selectedIndex = selectedIndex + 1 - 1
     }
 
