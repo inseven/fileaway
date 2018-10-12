@@ -8,6 +8,7 @@
 
 import UIKit
 import FileawayCore
+import QuickLook
 
 enum ReuseIdentifier: String {
     case textCell = "TextCell"
@@ -62,8 +63,6 @@ class PickerViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.previewCell.rawValue, for: indexPath)
             let previewCell = cell as! PreviewTableViewCell
             previewCell.documentUrl = documentUrl
-            cell.textLabel?.text = documentUrl?.relativeString
-            cell.textLabel?.backgroundColor = UIColor.clear
             return cell
 
         } else if (indexPath.section == 1) {
@@ -88,6 +87,26 @@ class PickerViewController: UITableViewController {
             return 240.0
         }
         return UITableViewAutomaticDimension
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath.section == 0) {
+            let previewController = QLPreviewController()
+            previewController.dataSource = self
+            navigationController?.pushViewController(previewController, animated: true)
+        }
+    }
+
+}
+
+extension PickerViewController: QLPreviewControllerDataSource {
+
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        return 1
+    }
+
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        return (documentUrl as QLPreviewItem?)!
     }
 
 }

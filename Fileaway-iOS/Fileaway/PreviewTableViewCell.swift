@@ -18,25 +18,23 @@ class PreviewTableViewCell: UITableViewCell {
                 return
             }
             pdfView.document = PDFDocument(url: documentUrl)
+            pdfView.scaleFactor = pdfView.scaleFactorForSizeToFit
         }
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
         pdfView = PDFView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+        pdfView.displayMode = .singlePage
+        pdfView.autoScales = true
+        pdfView.pageShadowsEnabled = true
+        pdfView.isUserInteractionEnabled = false
         self.contentView.addSubview(pdfView)
         pdfView.translatesAutoresizingMaskIntoConstraints = false
-        pdfView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        pdfView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        pdfView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        pdfView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        pdfView.backgroundColor = UIColor.red
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        pdfView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        pdfView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        pdfView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        pdfView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
 
 }
