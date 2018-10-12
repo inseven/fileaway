@@ -63,22 +63,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextCell" id="Jdq-6o-HfR">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TextCell" id="Jdq-6o-HfR" customClass="TextTableViewCell" customModule="Fileaway" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jdq-6o-HfR" id="1tB-hG-mJQ">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1rv-x4-swn">
-                                            <rect key="frame" x="262" y="6" width="97" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1rv-x4-swn">
+                                            <rect key="frame" x="16" y="13.5" width="343" height="17"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="1rv-x4-swn" firstAttribute="leading" secondItem="1tB-hG-mJQ" secondAttribute="leading" constant="16" id="827-Th-AJQ"/>
+                                        <constraint firstItem="1rv-x4-swn" firstAttribute="centerX" secondItem="1tB-hG-mJQ" secondAttribute="centerX" id="SzY-eE-hS7"/>
+                                        <constraint firstItem="1rv-x4-swn" firstAttribute="centerY" secondItem="1tB-hG-mJQ" secondAttribute="centerY" id="ZfR-H4-fO0"/>
+                                        <constraint firstAttribute="trailing" secondItem="1rv-x4-swn" secondAttribute="trailing" constant="16" id="o5h-Zu-iwu"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="textField" destination="1rv-x4-swn" id="hPj-8e-bSf"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PreviewCell" id="zG2-aI-PAO" customClass="PreviewTableViewCell" customModule="Fileaway" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="375" height="44"/>
@@ -100,7 +108,7 @@
                                     <segue destination="trB-M8-Xna" kind="show" identifier="Type" id="air-KX-xEz"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DatePickerCell" id="Xne-6M-9eM">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="DateCell" id="Xne-6M-9eM" customClass="DateTableViewCell" customModule="Fileaway" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="160" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xne-6M-9eM" id="cwz-W3-zwB">
@@ -121,6 +129,9 @@
                                         <constraint firstAttribute="trailing" secondItem="cww-uO-rxj" secondAttribute="trailing" id="zWJ-Wq-KxC"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="datePicker" destination="cww-uO-rxj" id="hd0-eU-Ijy"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -134,11 +145,12 @@
                                 <action selector="cancelTapped:" destination="e0M-sV-gNd" id="9Vg-w6-wDF"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="k7z-mB-Bee"/>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aar-Ou-dNl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2558" y="27"/>
+            <point key="canvasLocation" x="2557.5999999999999" y="26.53673163418291"/>
         </scene>
         <!--Document Type-->
         <scene sceneID="4Az-It-MfQ">

@@ -14,24 +14,35 @@ enum ReuseIdentifier: String {
     case textCell = "TextCell"
     case previewCell = "PreviewCell"
     case typeCell = "TypeCell"
-    case datePickerCell = "DatePickerCell"
+    case dateCell = "DateCell"
 }
 
 class EditableSection: VariableProvider {
 
+    let tableView: UITableView
     let task: Task
     var delegate: VariableProviderDelegate?
+    var values: [String: Any] = [:]
 
     var isComplete: Bool {
         return true
     }
 
-    init(task: Task) {
+    init(tableView: UITableView, task: Task) {
+        self.tableView = tableView
         self.task = task
     }
 
     func variable(forKey key: String) -> String? {
-        return "Cheese"
+        let value = values[key]
+        if let stringValue = value as? String {
+            return stringValue
+        } else if let dateValue = value as? Date {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "YYYY-MM-dd"
+            return dateFormatter.string(from: dateValue)
+        }
+        return nil
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -39,13 +50,23 @@ class EditableSection: VariableProvider {
         switch (variable.type) {
         case .string:
             let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.textCell.rawValue, for: indexPath)
-            cell.textLabel?.text = task.configuration.variables[indexPath.row].name
-            return cell
+            guard let textCell = cell as? TextTableViewCell else {
+                return cell
+            }
+            textCell.variable = task.configuration.variables[indexPath.row]
+            textCell.textField.text = values[variable.name] as? String
+            textCell.delegate = self
+            return textCell
         case .date(hasDay: true), .date(hasDay: false):
-            let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.datePickerCell.rawValue, for: indexPath)
-            return cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.dateCell.rawValue, for: indexPath)
+            guard let dateCell = cell as? DateTableViewCell else {
+                return cell
+            }
+            dateCell.variable = task.configuration.variables[indexPath.row]
+            dateCell.datePicker.date = (values[variable.name] as? Date) ?? Date()
+            dateCell.delegate = self
+            return dateCell
         }
-
 
     }
 
@@ -53,6 +74,29 @@ class EditableSection: VariableProvider {
         return task.configuration.variables.count
     }
 
+}
+
+extension EditableSection: TextTableViewCellDelegate {
+
+    func textTableViewCellDidChange(_ textTableViewCell: TextTableViewCell) {
+        guard let variable = textTableViewCell.variable else {
+            print("No variable set on the text table view cell")
+            return
+        }
+        values[variable.name] = textTableViewCell.textField.text
+    }
+
+}
+
+extension EditableSection: DateTableViewCellDelegate {
+
+    func dateTableViewCellDidChange(_ dateTableViewCell: DateTableViewCell) {
+        guard let variable = dateTableViewCell.variable else {
+            print("No variable set on the date table view cell")
+            return
+        }
+        values[variable.name] = dateTableViewCell.datePicker.date
+    }
 }
 
 class PickerViewController: UITableViewController {
@@ -70,7 +114,7 @@ class PickerViewController: UITableViewController {
                 editableSection = nil
                 return
             }
-            editableSection = EditableSection(task: task)
+            editableSection = EditableSection(tableView: tableView, task: task)
             tableView.reloadSections([1], with: .none)
         }
     }
