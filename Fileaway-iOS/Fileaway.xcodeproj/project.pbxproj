@@ -10,6 +10,7 @@
 		D88F3D43216F847D00BFE0F9 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88F3D42216F847D00BFE0F9 /* PickerViewController.swift */; };
 		D88F3D48216F8BEB00BFE0F9 /* example.pdf in Resources */ = {isa = PBXBuildFile; fileRef = D88F3D47216F8BEB00BFE0F9 /* example.pdf */; };
 		D88F3D4A216F961700BFE0F9 /* PreviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88F3D49216F961700BFE0F9 /* PreviewTableViewCell.swift */; };
+		D88F3D4C217048B400BFE0F9 /* TypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88F3D4B217048B400BFE0F9 /* TypeViewController.swift */; };
 		D890DD41216F179000922453 /* destinations.json in Resources */ = {isa = PBXBuildFile; fileRef = D890DD40216F179000922453 /* destinations.json */; };
 		D89941012145E6AE00097F3D /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89941002145E6AE00097F3D /* StorageManager.swift */; };
 		D8BCA523216F069B002A624D /* FileawayCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8BCA51D216F0682002A624D /* FileawayCore.framework */; };
@@ -78,6 +79,7 @@
 		D88F3D42216F847D00BFE0F9 /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		D88F3D47216F8BEB00BFE0F9 /* example.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = example.pdf; sourceTree = "<group>"; };
 		D88F3D49216F961700BFE0F9 /* PreviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewTableViewCell.swift; sourceTree = "<group>"; };
+		D88F3D4B217048B400BFE0F9 /* TypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeViewController.swift; sourceTree = "<group>"; };
 		D890DD40216F179000922453 /* destinations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = destinations.json; sourceTree = "<group>"; };
 		D89941002145E6AE00097F3D /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		D8BCA511216F0682002A624D /* FileawayCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FileawayCore.xcodeproj; path = ../FileawayCore/FileawayCore.xcodeproj; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				D89941002145E6AE00097F3D /* StorageManager.swift */,
 				D88F3D42216F847D00BFE0F9 /* PickerViewController.swift */,
 				D88F3D49216F961700BFE0F9 /* PreviewTableViewCell.swift */,
+				D88F3D4B217048B400BFE0F9 /* TypeViewController.swift */,
 			);
 			path = Fileaway;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D88F3D4C217048B400BFE0F9 /* TypeViewController.swift in Sources */,
 				D89941012145E6AE00097F3D /* StorageManager.swift in Sources */,
 				D8CCB8082143672700AC445F /* ViewController.swift in Sources */,
 				D88F3D43216F847D00BFE0F9 /* PickerViewController.swift in Sources */,

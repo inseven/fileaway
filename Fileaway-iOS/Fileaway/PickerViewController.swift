@@ -13,15 +13,28 @@ import QuickLook
 enum ReuseIdentifier: String {
     case textCell = "TextCell"
     case previewCell = "PreviewCell"
+    case typeCell = "TypeCell"
 }
 
 class PickerViewController: UITableViewController {
 
     public var manager: Manager!
     var documentUrl: URL?
+    var selectedIndex: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "Type") {
+            guard let typeViewController = segue.destination as? TypeViewController else {
+                return
+            }
+            typeViewController.tasks = manager.tasks
+            typeViewController.selectedIndex = selectedIndex
+            typeViewController.delegate = self
+        }
     }
 
     @IBAction func cancelTapped(_ sender: Any) {
@@ -60,6 +73,8 @@ class PickerViewController: UITableViewController {
 
         if (indexPath.section == 0) {
 
+            // Preview
+
             let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.previewCell.rawValue, for: indexPath)
             let previewCell = cell as! PreviewTableViewCell
             previewCell.documentUrl = documentUrl
@@ -67,14 +82,20 @@ class PickerViewController: UITableViewController {
 
         } else if (indexPath.section == 1) {
 
-            let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.textCell.rawValue, for: indexPath)
-            cell.textLabel?.text = nil
+            // Document type picker
+
+            let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.typeCell.rawValue, for: indexPath)
+            cell.textLabel?.text = manager.tasks[selectedIndex].name
+            cell.accessoryType = .disclosureIndicator
             return cell
 
         } else if (indexPath.section == 2) {
 
+            // Options
+
             let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.textCell.rawValue, for: indexPath)
             cell.textLabel?.text = manager.tasks[indexPath.row].name
+            cell.accessoryType = .none
             return cell
         }
 
@@ -107,6 +128,16 @@ extension PickerViewController: QLPreviewControllerDataSource {
 
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
         return (documentUrl as QLPreviewItem?)!
+    }
+
+}
+
+extension PickerViewController: TypeViewControllerDelegate {
+
+    func typeViewController(_ typeViewController: TypeViewController, didSelectIndex index: Int) {
+        self.navigationController?.popViewController(animated: true)
+        selectedIndex = index
+        tableView.reloadSections([1, 2], with: .fade)
     }
 
 }
