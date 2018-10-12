@@ -16,14 +16,66 @@ enum ReuseIdentifier: String {
     case typeCell = "TypeCell"
 }
 
+class EditableSection: VariableProvider {
+
+    let task: Task
+    var delegate: VariableProviderDelegate?
+
+    var isComplete: Bool {
+        return true
+    }
+
+    init(task: Task) {
+        self.task = task
+    }
+
+    func variable(forKey key: String) -> String? {
+        return "Cheese"
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.textCell.rawValue, for: indexPath)
+        cell.textLabel?.text = task.configuration.variables[indexPath.row].name
+        return cell
+    }
+
+    var count: Int {
+        return task.configuration.variables.count
+    }
+
+}
+
 class PickerViewController: UITableViewController {
 
     public var manager: Manager!
     var documentUrl: URL?
-    var selectedIndex: Int = 0
+    var editableSection: EditableSection? {
+        didSet {
+            tableView.reloadSections([2], with: .none)
+        }
+    }
+    var task: Task? {
+        didSet {
+            guard let task = task else {
+                editableSection = nil
+                return
+            }
+            editableSection = EditableSection(task: task)
+            tableView.reloadSections([1], with: .none)
+        }
+    }
+    var selectedIndex: Int = 0 {
+        didSet {
+            task = manager.tasks[selectedIndex]
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        selectedIndex = selectedIndex + 1 - 1
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -63,7 +115,10 @@ class PickerViewController: UITableViewController {
         case 1:
             return 1
         case 2:
-            return manager.tasks.count
+            guard let editableSection = editableSection else {
+                return 0;
+            }
+            return editableSection.count
         default:
             return 0
         }
@@ -86,17 +141,14 @@ class PickerViewController: UITableViewController {
 
             let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.typeCell.rawValue, for: indexPath)
             cell.textLabel?.text = manager.tasks[selectedIndex].name
-            cell.accessoryType = .disclosureIndicator
             return cell
 
         } else if (indexPath.section == 2) {
 
             // Options
 
-            let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.textCell.rawValue, for: indexPath)
-            cell.textLabel?.text = manager.tasks[indexPath.row].name
-            cell.accessoryType = .none
-            return cell
+            return editableSection!.tableView(tableView, cellForRowAt:indexPath)
+
         }
 
         // TODO: This is inelegant; is there a better approach?
@@ -137,7 +189,6 @@ extension PickerViewController: TypeViewControllerDelegate {
     func typeViewController(_ typeViewController: TypeViewController, didSelectIndex index: Int) {
         self.navigationController?.popViewController(animated: true)
         selectedIndex = index
-        tableView.reloadSections([1, 2], with: .fade)
     }
 
 }
