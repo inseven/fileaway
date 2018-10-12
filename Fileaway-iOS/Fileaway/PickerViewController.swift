@@ -14,6 +14,7 @@ enum ReuseIdentifier: String {
     case textCell = "TextCell"
     case previewCell = "PreviewCell"
     case typeCell = "TypeCell"
+    case datePickerCell = "DatePickerCell"
 }
 
 class EditableSection: VariableProvider {
@@ -34,9 +35,18 @@ class EditableSection: VariableProvider {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.textCell.rawValue, for: indexPath)
-        cell.textLabel?.text = task.configuration.variables[indexPath.row].name
-        return cell
+        let variable = task.configuration.variables[indexPath.row]
+        switch (variable.type) {
+        case .string:
+            let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.textCell.rawValue, for: indexPath)
+            cell.textLabel?.text = task.configuration.variables[indexPath.row].name
+            return cell
+        case .date(hasDay: true), .date(hasDay: false):
+            let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.datePickerCell.rawValue, for: indexPath)
+            return cell
+        }
+
+
     }
 
     var count: Int {

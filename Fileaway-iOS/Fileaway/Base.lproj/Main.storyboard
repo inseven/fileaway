@@ -91,6 +91,28 @@
                                     <segue destination="trB-M8-Xna" kind="show" identifier="Type" id="air-KX-xEz"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DatePickerCell" id="Xne-6M-9eM">
+                                <rect key="frame" x="0.0" y="160" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xne-6M-9eM" id="cwz-W3-zwB">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="cww-uO-rxj">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <date key="date" timeIntervalSinceReferenceDate="561011939.98393404">
+                                                <!--2018-10-12 04:38:59 +0000-->
+                                            </date>
+                                        </datePicker>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="cww-uO-rxj" firstAttribute="top" secondItem="cwz-W3-zwB" secondAttribute="top" id="N74-ES-t13"/>
+                                        <constraint firstItem="cww-uO-rxj" firstAttribute="leading" secondItem="cwz-W3-zwB" secondAttribute="leading" id="ecw-sT-glT"/>
+                                        <constraint firstAttribute="bottom" secondItem="cww-uO-rxj" secondAttribute="bottom" id="uSf-J3-rqI"/>
+                                        <constraint firstAttribute="trailing" secondItem="cww-uO-rxj" secondAttribute="trailing" id="zWJ-Wq-KxC"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="e0M-sV-gNd" id="0bK-P4-OhA"/>
