@@ -21,14 +21,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
-        if let rootUrl = try? StorageManager.rootUrl() {
-            do {
-                try FileManager.default.copyItem(at: url, to: rootUrl.appendingPathComponent("Adobe").appendingPathComponent("Example.pdf"))
-            } catch let error {
-                print(error)
-            }
+        guard let rootViewController = window?.rootViewController else {
+            print("Unable to get the root view controller")
+            return false
         }
+        guard let storyboard = rootViewController.storyboard else {
+            print("Unable to get the storyboard")
+            return false
+        }
+        guard let pickerViewController = storyboard.instantiateViewController(withIdentifier: "PickerViewController") as? PickerViewController else {
+            print("Unable to instantiate the picker view controller")
+            return false
+        }
+        // TODO: Double check that this is a PDF!
+        pickerViewController.manager = manager
+        pickerViewController.documentUrl = url
+        let navigationController = UINavigationController(rootViewController: pickerViewController)
+        navigationController.modalPresentationStyle = .formSheet
+        rootViewController.present(navigationController, animated: true, completion: nil)
         return true
+
+//        // Example code showing how the move operation can be performed once a root has been set.
+//        if let rootUrl = try? StorageManager.rootUrl() {
+//            do {
+//                try FileManager.default.copyItem(at: url, to: rootUrl.appendingPathComponent("Adobe").appendingPathComponent("Example.pdf"))
+//            } catch let error {
+//                print(error)
+//            }
+//        }
+//        return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
