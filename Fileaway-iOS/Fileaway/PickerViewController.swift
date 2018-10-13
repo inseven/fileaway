@@ -102,7 +102,11 @@ extension EditableSection: DateTableViewCellDelegate {
 class PickerViewController: UITableViewController {
 
     public var manager: Manager!
-    var documentUrl: URL?
+    var documentUrl: URL? {
+        didSet {
+            tableView.reloadSections([0], with: .fade)
+        }
+    }
     var editableSection: EditableSection? {
         didSet {
             tableView.reloadSections([2], with: .none)

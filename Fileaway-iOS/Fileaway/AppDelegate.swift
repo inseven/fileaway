@@ -35,6 +35,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         // TODO: Double check that this is a PDF!
         pickerViewController.manager = manager
+        do {
+            try url.prepareForSecureAccess()
+        } catch {
+            print("Unable to prepare for secure access")
+            return false
+        }
         pickerViewController.documentUrl = url
         let navigationController = UINavigationController(rootViewController: pickerViewController)
         navigationController.modalPresentationStyle = .formSheet
