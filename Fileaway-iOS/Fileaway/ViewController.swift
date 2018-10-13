@@ -11,12 +11,19 @@ import MobileCoreServices
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var destinationLabel: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
+    func updateDestinationLabel() {
+        destinationLabel.text = try? StorageManager.rootUrl().absoluteString
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        updateDestinationLabel()
     }
 
     func presentDocumentPickerIfNeeded() {
@@ -97,6 +104,7 @@ extension ViewController: UIDocumentPickerDelegate {
 
         do {
             try StorageManager.setRootUrl(directoryUrl)
+            destinationLabel.text = try? StorageManager.rootUrl().absoluteString
         } catch let error {
             print(error)
         }

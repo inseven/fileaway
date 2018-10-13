@@ -54,7 +54,7 @@ public class Manager {
         return tasks
     }
 
-    public func destinationUrl(_ task: Task, variableProvider: VariableProvider) -> URL {
+    public func destinationUrl(_ task: Task, variableProvider: VariableProvider, rootUrl: URL?) -> URL {
         let destination = task.configuration.destination.reduce("") { (result, component) -> String in
             switch component.type {
             case .text:
@@ -66,7 +66,8 @@ public class Manager {
                 return result.appending(value)
             }
         }
-        return rootUrl.appendingPathComponent(destination).appendingPathExtension("pdf")
+        let actualRootUrl = rootUrl ?? self.rootUrl
+        return actualRootUrl.appendingPathComponent(destination).appendingPathExtension("pdf")
     }
 
 }

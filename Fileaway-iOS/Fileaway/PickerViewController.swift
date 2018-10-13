@@ -136,6 +136,22 @@ class PickerViewController: UITableViewController {
         view.addGestureRecognizer(gestureRecognizer)
     }
 
+    @IBAction func saveTapped(_ sender: Any) {
+        // TODO: There are way too many !s in this method.
+        let rootUrl = try! StorageManager.rootUrl()
+        let destinationUrl = manager.destinationUrl(task!, variableProvider: editableSection!, rootUrl: rootUrl)
+        do {
+            try FileManager.default.copyItem(at: documentUrl!, to: destinationUrl)
+            try FileManager.default.removeItem(at: documentUrl!)
+            self.navigationController?.dismiss(animated: true, completion: nil)
+        } catch let error {
+            let alertController = UIAlertController(title: "Errror", message: error.localizedDescription, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alertController, animated: true, completion: nil)
+            print(error)
+        }
+    }
+
     @objc func dismissKeyboard(gestureRecognizer: UITapGestureRecognizer) {
         view.endEditing(false)
     }
