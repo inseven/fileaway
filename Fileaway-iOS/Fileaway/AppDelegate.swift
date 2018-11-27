@@ -26,11 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return false
         }
         guard let storyboard = rootViewController.storyboard else {
-            print("Unable to get the storyboard")
+            rootViewController.present("Unable to get the storyboard")
             return false
         }
         guard let pickerViewController = storyboard.instantiateViewController(withIdentifier: "PickerViewController") as? PickerViewController else {
-            print("Unable to instantiate the picker view controller")
+            rootViewController.present("Unable to instantiate the picker view controller")
             return false
         }
         // TODO: Double check that this is a PDF!
@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         do {
             try url.prepareForSecureAccess()
         } catch {
-            print("Unable to prepare for secure access")
+			rootViewController.present(error: error, title: "Unable to prepare for secure access")
             return false
         }
         pickerViewController.documentUrl = url
