@@ -30,6 +30,10 @@ class ViewController: UIViewController {
         if let _ = try? StorageManager.rootUrl() {
             return
         }
+		presentDocumentPickerPrompt()
+	}
+
+	func presentDocumentPickerPrompt() {
         let alert = UIAlertController(title: "Document access",
                                       message: "Press OK to continue and select the folder in which you wish to store your documents.",
                                       preferredStyle: .alert)
@@ -66,8 +70,10 @@ class ViewController: UIViewController {
         }
     }
 
+	// MARK: -
+
     @IBAction func setDestinationTapped(_ sender: Any) {
-        presentDocumentPickerIfNeeded()
+        presentDocumentPickerPrompt()
     }
 
     @IBAction func saveFileTapped(_ sender: Any) {
