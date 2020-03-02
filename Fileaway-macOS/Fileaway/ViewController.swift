@@ -27,11 +27,37 @@ class ViewController: NSViewController, DragDelegate {
     var documentURL: URL? {
         didSet {
             pdfView.document = PDFDocument(url: documentURL!)
+            let attributes = try! FileManager.default.attributesOfItem(atPath: documentURL!.path)
+            date = attributes[FileAttributeKey.creationDate]! as? Date
             updateState()
         }
     }
 
-    var variableView: VariableView?
+    var date: Date? {
+        didSet {
+            guard let date = date else {
+                return
+            }
+            if let variableView = self.variableView {
+                variableView.setDate(date: date)
+            }
+        }
+    }
+
+    var rootURL: URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
+
+    var variableView: VariableView? {
+        didSet {
+            guard let variableView = variableView, let date = date else {
+                return
+            }
+            variableView.setDate(date: date)
+        }
+    }
 
     var task: Task? {
         didSet {
@@ -83,7 +109,7 @@ class ViewController: NSViewController, DragDelegate {
             targetTextField.stringValue = ""
                 return
         }
-        targetTextField.stringValue = manager.destinationUrl(task, variableProvider: variableView).path
+        targetTextField.stringValue = manager.destinationUrl(task, variableProvider: variableView, rootUrl: self.rootURL).path
     }
 
     @IBAction func popUpButtonAction(_ sender: Any) {
@@ -102,7 +128,7 @@ class ViewController: NSViewController, DragDelegate {
                 return
         }
 
-        let destinationURL = manager.destinationUrl(task, variableProvider: variableView)
+        let destinationURL = manager.destinationUrl(task, variableProvider: variableView, rootUrl: self.rootURL)
         print("\(destinationURL)")
 
         let fileManager = FileManager.default

@@ -155,6 +155,14 @@ class VariableView: NSView, VariableProvider {
         self.delegate?.variableProviderDidUpdate(variableProvider: self)
     }
 
+    func setDate(date: Date) {
+        for (_, control) in self.textFields {
+            if let datePicker = control as? NSDatePicker {
+                datePicker.dateValue = date
+            }
+        }
+    }
+
 }
 
 extension VariableView: NSControlTextEditingDelegate, NSTextFieldDelegate {
