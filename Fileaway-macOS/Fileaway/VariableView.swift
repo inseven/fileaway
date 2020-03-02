@@ -28,11 +28,11 @@ extension NSDatePicker: VariableControl {
     func componentValue() -> String {
         if datePickerElements == .yearMonthDatePickerElementFlag {
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "YYYY-MM"
+            dateFormatter.dateFormat = "yyyy-MM"
             return dateFormatter.string(from: dateValue)
         }
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.string(from: dateValue)
     }
 
