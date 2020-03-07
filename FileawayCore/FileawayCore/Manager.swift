@@ -19,15 +19,7 @@ public class Manager {
      * destinations.json file in the bundle otherwise.
      */
     func configurationUrl() -> URL {
-
-        // Use the user's copy of the destinations file if it exists.
-        let path = NSString(string: "~/.fileaway/destinations.json").expandingTildeInPath
-        if FileManager().fileExists(atPath: path) {
-            return URL(fileURLWithPath: path)
-        }
-
-        // Otherwise, fall back on the bundle copy.
-        return Bundle.main.url(forResource: "destinations", withExtension: "json")!
+        return rootUrl.appendingPathComponent("fileaway.json")
     }
 
     public init() {
