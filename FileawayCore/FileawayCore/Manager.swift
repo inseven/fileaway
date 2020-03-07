@@ -22,9 +22,9 @@ public class Manager {
         return rootUrl.appendingPathComponent("fileaway.json")
     }
 
-    public init() {
+    public init(configurationUrl: URL) {
         do {
-            tasks = try Manager.load(self.configurationUrl())
+            tasks = try Manager.load(configurationUrl)
         } catch {
             print("\(error)")
         }

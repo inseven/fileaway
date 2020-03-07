@@ -13,10 +13,12 @@ import FileawayCore
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var manager: Manager!
+    var manager: Manager?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        manager = Manager()
+        if let configurationUrl = try? StorageManager.configurationUrl() {
+            manager = Manager(configurationUrl: configurationUrl)
+        }
         return true
     }
 

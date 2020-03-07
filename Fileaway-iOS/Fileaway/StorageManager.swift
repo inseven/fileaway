@@ -36,6 +36,10 @@ class StorageManager {
         return documentUrl()?.appendingPathComponent("Root")
     }
 
+    static func configurationUrl() throws -> URL {
+        return try rootUrl().appendingPathComponent("fileaway.json")
+    }
+
     static func setRootUrl(_ url: URL) throws {
         try url.prepareForSecureAccess()
         let bookmarkData = try url.bookmarkData(options: .suitableForBookmarkFile, includingResourceValuesForKeys: nil, relativeTo: nil)

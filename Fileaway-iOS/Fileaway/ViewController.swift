@@ -76,6 +76,7 @@ class ViewController: UIViewController {
         presentDocumentPickerPrompt()
     }
 
+    // TODO: Delete this.
     @IBAction func saveFileTapped(_ sender: Any) {
 		do {
 			let rootUrl = try StorageManager.rootUrl()
