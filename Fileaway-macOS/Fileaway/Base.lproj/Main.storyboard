@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
-        <plugIn identifier="com.apple.pdfkit.ibplugin" version="14313.18"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097"/>
+        <plugIn identifier="com.apple.pdfkit.ibplugin" version="16097"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -625,7 +625,7 @@
                                         <menuItem title="Show Sidebar" keyEquivalent="s" id="kIP-vf-haE">
                                             <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                             <connections>
-                                                <action selector="toggleSourceList:" target="Ady-hI-5gd" id="iwa-gc-5KM"/>
+                                                <action selector="toggleSidebar:" target="Ady-hI-5gd" id="iwa-gc-5KM"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
@@ -677,11 +677,11 @@
                         </items>
                     </menu>
                     <connections>
-                        <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
+                        <outlet property="delegate" destination="la7-AB-0sQ" id="oxp-CW-eP9"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Fileaway"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
+                <customObject id="la7-AB-0sQ" customClass="AppDelegate" customModule="File_Actions" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
@@ -689,8 +689,8 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" customClass="MainWindowController" customModule="Fileaway" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Fileaway" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                <windowController id="B8D-0N-5wS" customClass="MainWindowController" customModule="File_Actions" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="File Actions" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <rect key="contentRect" x="196" y="240" width="416" height="224"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
@@ -709,13 +709,13 @@
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController identifier="MainWindow" id="XfG-lQ-9wD" customClass="ViewController" customModule="Fileaway" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController identifier="MainWindow" id="XfG-lQ-9wD" customClass="ViewController" customModule="File_Actions" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="648" height="479"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ixD-mI-1fr">
-                                <rect key="frame" x="561" y="22" width="73" height="32"/>
+                                <rect key="frame" x="561" y="21" width="73" height="32"/>
                                 <buttonCell key="cell" type="push" title="Move" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iWf-KE-59z">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -727,15 +727,15 @@ DQ
                                     <action selector="moveClicked:" target="XfG-lQ-9wD" id="fzl-7M-muB"/>
                                 </connections>
                             </button>
-                            <pdfView autoresizesSubviews="NO" wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pf2-q5-wnL" customClass="DraggablePDFView" customModule="Fileaway" customModuleProvider="target">
-                                <rect key="frame" x="20" y="59" width="400" height="400"/>
+                            <pdfView autoresizesSubviews="NO" wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pf2-q5-wnL" customClass="DraggablePDFView" customModule="File_Actions" customModuleProvider="target">
+                                <rect key="frame" x="20" y="57" width="400" height="402"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="R8b-ZZ-1hx"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="400" id="g5b-jw-kez"/>
                                 </constraints>
                             </pdfView>
                             <tokenField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IkR-72-ux6">
-                                <rect key="frame" x="20" y="29" width="400" height="22"/>
+                                <rect key="frame" x="20" y="28" width="400" height="21"/>
                                 <tokenFieldCell key="cell" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" drawsBackground="YES" allowsEditingTextAttributes="YES" id="31v-y4-grs">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -746,13 +746,13 @@ DQ
                                 </connections>
                             </tokenField>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="eCK-p5-YnO">
-                                <rect key="frame" x="428" y="59" width="200" height="371"/>
+                                <rect key="frame" x="428" y="57" width="200" height="373"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="JR8-XE-dEf"/>
                                 </constraints>
                             </customView>
                             <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yur-4c-Ukx">
-                                <rect key="frame" x="18" y="4" width="612" height="17"/>
+                                <rect key="frame" x="18" y="4" width="612" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="n8F-RI-wC7">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -763,7 +763,7 @@ DQ
                                 <rect key="frame" x="426" y="435" width="205" height="25"/>
                                 <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Dsh-jq-N0d" id="Owt-fa-5tX">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="menu"/>
+                                    <font key="font" metaFont="system"/>
                                     <menu key="menu" id="2f1-YM-iHO">
                                         <items>
                                             <menuItem title="Item 1" state="on" id="Dsh-jq-N0d"/>
@@ -815,7 +815,7 @@ DQ
         <!--Preferences View Controller-->
         <scene sceneID="sAP-hq-ZUC">
             <objects>
-                <viewController id="FX1-o1-cf6" customClass="PreferencesViewController" customModule="Fileaway" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="FX1-o1-cf6" customClass="PreferencesViewController" customModule="File_Actions" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="OQe-zm-9zP">
                         <rect key="frame" x="0.0" y="0.0" width="652" height="428"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -842,20 +842,19 @@ DQ
                                             <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="no2-Qy-d0Y">
                                                 <rect key="frame" x="0.0" y="0.0" width="307" height="359"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <clipView key="contentView" ambiguous="YES" id="oZM-W4-Lxv">
+                                                <clipView key="contentView" id="oZM-W4-Lxv">
                                                     <rect key="frame" x="1" y="1" width="305" height="357"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="ooX-J2-Xnd">
                                                             <rect key="frame" x="0.0" y="0.0" width="305" height="357"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <size key="intercellSpacing" width="3" height="2"/>
                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                             <tableColumns>
                                                                 <tableColumn width="302" minWidth="40" maxWidth="1000" id="s4h-uX-CzK">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                                        <font key="font" metaFont="smallSystem"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -912,7 +911,7 @@ DQ
                                             <scrollView fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Os2-kz-RQw">
                                                 <rect key="frame" x="0.0" y="0.0" width="304" height="359"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <clipView key="contentView" ambiguous="YES" id="Ryf-cP-l7I">
+                                                <clipView key="contentView" id="Ryf-cP-l7I">
                                                     <rect key="frame" x="1" y="1" width="302" height="357"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>

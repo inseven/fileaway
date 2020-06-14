@@ -19,11 +19,12 @@ public class Manager {
      * destinations.json file in the bundle otherwise.
      */
     func configurationUrl() -> URL {
-        return rootUrl.appendingPathComponent("fileaway.json")
+        return rootUrl.appendingPathComponent(".file-actions.json")
     }
 
     public init(configurationUrl: URL) {
         do {
+            print("Loading configuration at '\(configurationUrl.absoluteString)'...")
             tasks = try Manager.load(configurationUrl)
         } catch {
             print("\(error)")

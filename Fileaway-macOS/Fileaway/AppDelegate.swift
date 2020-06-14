@@ -12,7 +12,7 @@ import FileawayCore
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    public let manager = Manager()
+    public var manager: Manager!
 
     static public var shared: AppDelegate {
         get {
@@ -20,7 +20,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
+    override init() {
+        super.init()
+        let rootUrl = URL(fileURLWithPath: NSString(string: "~/Documents").expandingTildeInPath)
+        let configurationUrl = rootUrl.appendingPathComponent(".file-actions.json")
+        manager = Manager(configurationUrl: configurationUrl)
+    }
+
+    func applicationDidFinishLaunching(_ notification: Notification) {
     }
 
     func application(_ application: NSApplication, open urls: [URL]) {

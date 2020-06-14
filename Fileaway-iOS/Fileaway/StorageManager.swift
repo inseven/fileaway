@@ -37,7 +37,7 @@ class StorageManager {
     }
 
     static func configurationUrl() throws -> URL {
-        return try rootUrl().appendingPathComponent("fileaway.json")
+        return try rootUrl().appendingPathComponent(".file-actions.json")
     }
 
     static func setRootUrl(_ url: URL) throws {

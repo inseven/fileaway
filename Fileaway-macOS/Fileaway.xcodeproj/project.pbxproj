@@ -91,7 +91,7 @@
 		D800D5D2214C6D2F00A6121B /* VariableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableView.swift; sourceTree = "<group>"; };
 		D8467D4C21306A7A00DA8E73 /* DraggablePDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggablePDFView.swift; sourceTree = "<group>"; };
 		D86644E5214DF41D00429289 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
-		D8666A2E20C12EB000B739CC /* Fileaway.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fileaway.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8666A2E20C12EB000B739CC /* File Actions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "File Actions.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8666A3120C12EB000B739CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8666A3320C12EB000B739CC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D8666A3520C12EB000B739CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -149,7 +149,7 @@
 		D8666A2F20C12EB000B739CC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D8666A2E20C12EB000B739CC /* Fileaway.app */,
+				D8666A2E20C12EB000B739CC /* File Actions.app */,
 				D8666A4020C12EB000B739CC /* FileawayTests.xctest */,
 				D8666A4B20C12EB100B739CC /* FileawayUITests.xctest */,
 			);
@@ -205,9 +205,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D8666A2D20C12EB000B739CC /* Fileaway */ = {
+		D8666A2D20C12EB000B739CC /* File Actions */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D8666A5420C12EB100B739CC /* Build configuration list for PBXNativeTarget "Fileaway" */;
+			buildConfigurationList = D8666A5420C12EB100B739CC /* Build configuration list for PBXNativeTarget "File Actions" */;
 			buildPhases = (
 				D8666A2A20C12EB000B739CC /* Sources */,
 				D8666A2B20C12EB000B739CC /* Frameworks */,
@@ -219,9 +219,9 @@
 			dependencies = (
 				D8D14DBB216E3E2F00D6E1DF /* PBXTargetDependency */,
 			);
-			name = Fileaway;
+			name = "File Actions";
 			productName = Fileaway;
-			productReference = D8666A2E20C12EB000B739CC /* Fileaway.app */;
+			productReference = D8666A2E20C12EB000B739CC /* File Actions.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D8666A3F20C12EB000B739CC /* FileawayTests */ = {
@@ -310,7 +310,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				D8666A2D20C12EB000B739CC /* Fileaway */,
+				D8666A2D20C12EB000B739CC /* File Actions */,
 				D8666A3F20C12EB000B739CC /* FileawayTests */,
 				D8666A4A20C12EB100B739CC /* FileawayUITests */,
 			);
@@ -409,12 +409,12 @@
 /* Begin PBXTargetDependency section */
 		D8666A4220C12EB000B739CC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D8666A2D20C12EB000B739CC /* Fileaway */;
+			target = D8666A2D20C12EB000B739CC /* File Actions */;
 			targetProxy = D8666A4120C12EB000B739CC /* PBXContainerItemProxy */;
 		};
 		D8666A4D20C12EB100B739CC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D8666A2D20C12EB000B739CC /* Fileaway */;
+			target = D8666A2D20C12EB000B739CC /* File Actions */;
 			targetProxy = D8666A4C20C12EB100B739CC /* PBXContainerItemProxy */;
 		};
 		D8D14DBB216E3E2F00D6E1DF /* PBXTargetDependency */ = {
@@ -548,11 +548,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = CAG2W9M777;
 				INFOPLIST_FILE = "$(SRCROOT)/Fileaway/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.fileaway;
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.file-away";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 			};
@@ -564,11 +564,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = CAG2W9M777;
 				INFOPLIST_FILE = "$(SRCROOT)/Fileaway/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.fileaway;
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.file-away";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 			};
@@ -648,7 +648,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D8666A5420C12EB100B739CC /* Build configuration list for PBXNativeTarget "Fileaway" */ = {
+		D8666A5420C12EB100B739CC /* Build configuration list for PBXNativeTarget "File Actions" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D8666A5520C12EB100B739CC /* Debug */,
