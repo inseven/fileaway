@@ -24,6 +24,8 @@
 		D8CCB8102143672700AC445F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8CCB80E2143672700AC445F /* LaunchScreen.storyboard */; };
 		D8CCB81B2143672700AC445F /* FileawayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCB81A2143672700AC445F /* FileawayTests.swift */; };
 		D8CCB8262143672700AC445F /* FileawayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCB8252143672700AC445F /* FileawayUITests.swift */; };
+		D8CCD293246EDC6A007EF2BB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCD292246EDC6A007EF2BB /* SettingsView.swift */; };
+		D8CCD298246EDE6E007EF2BB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCD297246EDE6E007EF2BB /* SettingsViewController.swift */; };
 		EEFF05A221AD1E5A0014C89B /* UIViewController+Alerting.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFF05A121AD1E5A0014C89B /* UIViewController+Alerting.swift */; };
 /* End PBXBuildFile section */
 
@@ -109,7 +111,7 @@
 		D88F3D53217070A400BFE0F9 /* DateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
 		D89941002145E6AE00097F3D /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		D8BCA511216F0682002A624D /* FileawayCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FileawayCore.xcodeproj; path = ../FileawayCore/FileawayCore.xcodeproj; sourceTree = "<group>"; };
-		D8CCB8022143672700AC445F /* Fileaway.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fileaway.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8CCB8022143672700AC445F /* File Actions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "File Actions.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8CCB8052143672700AC445F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8CCB8072143672700AC445F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D8CCB80A2143672700AC445F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -122,6 +124,8 @@
 		D8CCB8212143672700AC445F /* FileawayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileawayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8CCB8252143672700AC445F /* FileawayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileawayUITests.swift; sourceTree = "<group>"; };
 		D8CCB8272143672700AC445F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D8CCD292246EDC6A007EF2BB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		D8CCD297246EDE6E007EF2BB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		EEFF05A121AD1E5A0014C89B /* UIViewController+Alerting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alerting.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -194,7 +198,7 @@
 		D8CCB8032143672700AC445F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D8CCB8022143672700AC445F /* Fileaway.app */,
+				D8CCB8022143672700AC445F /* File Actions.app */,
 				D8CCB8162143672700AC445F /* FileawayTests.xctest */,
 				D8CCB8212143672700AC445F /* FileawayUITests.xctest */,
 			);
@@ -217,6 +221,8 @@
 				D88F3D4B217048B400BFE0F9 /* TypeViewController.swift */,
 				D88F3D4E2170689200BFE0F9 /* TextTableViewCell.swift */,
 				D88F3D53217070A400BFE0F9 /* DateTableViewCell.swift */,
+				D8CCD292246EDC6A007EF2BB /* SettingsView.swift */,
+				D8CCD297246EDE6E007EF2BB /* SettingsViewController.swift */,
 			);
 			path = Fileaway;
 			sourceTree = "<group>";
@@ -259,7 +265,7 @@
 			);
 			name = Fileaway;
 			productName = Fileaway;
-			productReference = D8CCB8022143672700AC445F /* Fileaway.app */;
+			productReference = D8CCB8022143672700AC445F /* File Actions.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D8CCB8152143672700AC445F /* FileawayTests */ = {
@@ -416,9 +422,11 @@
 			files = (
 				D88F3D4C217048B400BFE0F9 /* TypeViewController.swift in Sources */,
 				D88F3D4F2170689200BFE0F9 /* TextTableViewCell.swift in Sources */,
+				D8CCD298246EDE6E007EF2BB /* SettingsViewController.swift in Sources */,
 				D89941012145E6AE00097F3D /* StorageManager.swift in Sources */,
 				D88F3D54217070A400BFE0F9 /* DateTableViewCell.swift in Sources */,
 				EEFF05A221AD1E5A0014C89B /* UIViewController+Alerting.swift in Sources */,
+				D8CCD293246EDC6A007EF2BB /* SettingsView.swift in Sources */,
 				D8CCB8082143672700AC445F /* ViewController.swift in Sources */,
 				D88F3D43216F847D00BFE0F9 /* PickerViewController.swift in Sources */,
 				D88F3D4A216F961700BFE0F9 /* PreviewTableViewCell.swift in Sources */,
@@ -604,11 +612,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
 				INFOPLIST_FILE = Fileaway/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.Fileaway;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.file-actions";
+				PRODUCT_NAME = "File Actions";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -620,11 +629,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
 				INFOPLIST_FILE = Fileaway/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.Fileaway;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.file-actions";
+				PRODUCT_NAME = "File Actions";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
