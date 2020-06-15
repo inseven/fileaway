@@ -9,10 +9,31 @@
 import UIKit
 import SwiftUI
 
+import FileawayCore
+
+protocol SettingsViewControllerDelegate: AnyObject {
+    func settingsViewControllerDidFinish(_ controller: SettingsViewController)
+}
+
 class SettingsViewController: UIHostingController<SettingsView> {
+
+    weak var delegate: SettingsViewControllerDelegate?
+    var manager: Manager?
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder, rootView: SettingsView(name: "Cheese"))
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneTapped))
+    }
+
+    @objc func doneTapped() {
+        guard let delegate = self.delegate else {
+            return
+        }
+        delegate.settingsViewControllerDidFinish(self)
     }
 
 }

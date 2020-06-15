@@ -15,6 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var manager: Manager?
 
+    static var shared: AppDelegate {
+        UIApplication.shared.delegate as! AppDelegate
+    }
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         if let configurationUrl = try? StorageManager.configurationUrl() {
             manager = Manager(configurationUrl: configurationUrl)

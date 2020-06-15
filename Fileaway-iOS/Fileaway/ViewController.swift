@@ -9,12 +9,17 @@
 import UIKit
 import MobileCoreServices
 
+import FileawayCore
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var destinationLabel: UILabel!
 
+    private var manager: Manager!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        let manager = AppDelegate.shared.manager
     }
 
     func updateDestinationLabel() {
@@ -51,12 +56,13 @@ class ViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "Picker") {
-            guard let navigationViewController = segue.destination as? UINavigationController else {
+        if segue.identifier == "Picker" {
+
+            guard let navigationController = segue.destination as? UINavigationController else {
                 present("Unexpected view controller")
                 return
             }
-            guard let pickerViewController = navigationViewController.topViewController as? PickerViewController else {
+            guard let pickerViewController = navigationController.topViewController as? PickerViewController else {
                 present("Unexpected view controller")
                 return
             }
@@ -67,6 +73,19 @@ class ViewController: UIViewController {
 
             pickerViewController.manager = appDelegate.manager
             pickerViewController.documentUrl = Bundle.main.url(forResource: "example", withExtension: "pdf")!
+
+        } else if segue.identifier == "Settings" {
+
+            guard
+                let navigationController = segue.destination as? UINavigationController,
+                let settingsViewController = navigationController.topViewController as? SettingsViewController else {
+                    present("Unexpected view controller")
+                    return
+            }
+
+            settingsViewController.manager = manager
+            settingsViewController.delegate = self
+
         }
     }
 
@@ -116,6 +135,14 @@ extension ViewController: UIDocumentPickerDelegate {
         } catch {
 			present(error: error)
         }
+    }
+
+}
+
+extension ViewController: SettingsViewControllerDelegate {
+
+    func settingsViewControllerDidFinish(_ controller: SettingsViewController) {
+        controller.dismiss(animated: true, completion: nil)
     }
 
 }

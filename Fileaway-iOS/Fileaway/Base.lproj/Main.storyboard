@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7PS-VC-HMO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7PS-VC-HMO">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -23,10 +23,10 @@
             </objects>
             <point key="canvasLocation" x="-204" y="132"/>
         </scene>
-        <!--Fileaway-->
+        <!--File Actions-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Fileaway" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="File_Actions" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -82,10 +82,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Fileaway" id="8QH-l0-do5">
+                    <navigationItem key="navigationItem" title="File Actions" id="8QH-l0-do5">
                         <barButtonItem key="leftBarButtonItem" title="Settings" id="2XF-0S-H05">
                             <connections>
-                                <segue destination="eub-1D-qKH" kind="presentation" id="5wN-ug-qmc"/>
+                                <segue destination="eub-1D-qKH" kind="presentation" identifier="Settings" id="5wN-ug-qmc"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -116,7 +116,7 @@
         <!--Settings-->
         <scene sceneID="Sf1-MJ-XAE">
             <objects>
-                <hostingController id="vpw-pk-8rB" customClass="SettingsViewController" customModule="Fileaway" customModuleProvider="target" sceneMemberID="viewController">
+                <hostingController id="vpw-pk-8rB" customClass="SettingsViewController" customModule="File_Actions" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="Settings" id="b7a-bd-UtB"/>
                 </hostingController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EQe-Tl-b6t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -126,13 +126,13 @@
         <!--Fileaway-->
         <scene sceneID="NZq-go-Zdw">
             <objects>
-                <tableViewController storyboardIdentifier="PickerViewController" id="e0M-sV-gNd" customClass="PickerViewController" customModule="Fileaway" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="PickerViewController" id="e0M-sV-gNd" customClass="PickerViewController" customModule="File_Actions" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="WrE-Ri-TEh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TextCell" id="Jdq-6o-HfR" customClass="TextTableViewCell" customModule="Fileaway" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TextCell" id="Jdq-6o-HfR" customClass="TextTableViewCell" customModule="File_Actions" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jdq-6o-HfR" id="1tB-hG-mJQ">
@@ -156,7 +156,7 @@
                                     <outlet property="textField" destination="1rv-x4-swn" id="hPj-8e-bSf"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PreviewCell" id="zG2-aI-PAO" customClass="PreviewTableViewCell" customModule="Fileaway" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PreviewCell" id="zG2-aI-PAO" customClass="PreviewTableViewCell" customModule="File_Actions" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="71.5" width="375" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zG2-aI-PAO" id="Y2U-fa-cr8">
@@ -176,7 +176,7 @@
                                     <segue destination="trB-M8-Xna" kind="show" identifier="Type" id="air-KX-xEz"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="DateCell" id="Xne-6M-9eM" customClass="DateTableViewCell" customModule="Fileaway" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="DateCell" id="Xne-6M-9eM" customClass="DateTableViewCell" customModule="File_Actions" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="158.5" width="375" height="216.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xne-6M-9eM" id="cwz-W3-zwB">
@@ -224,7 +224,7 @@
         <!--Document Type-->
         <scene sceneID="4Az-It-MfQ">
             <objects>
-                <tableViewController title="Document Type" id="trB-M8-Xna" customClass="TypeViewController" customModule="Fileaway" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Document Type" id="trB-M8-Xna" customClass="TypeViewController" customModule="File_Actions" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="wVA-UI-pnK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
