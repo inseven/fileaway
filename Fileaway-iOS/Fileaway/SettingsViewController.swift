@@ -21,7 +21,7 @@ class SettingsViewController: UIHostingController<SettingsView> {
     var manager: Manager?
 
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder, rootView: SettingsView(name: "Cheese"))
+        super.init(coder: aDecoder, rootView: SettingsView(tasks: AppDelegate.shared.manager!.tasks))
     }
 
     override func viewDidLoad() {
