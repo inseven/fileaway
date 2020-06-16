@@ -24,7 +24,7 @@
 		D8CCB80B2143672700AC445F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8CCB8092143672700AC445F /* Main.storyboard */; };
 		D8CCB80D2143672700AC445F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8CCB80C2143672700AC445F /* Assets.xcassets */; };
 		D8CCB8102143672700AC445F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8CCB80E2143672700AC445F /* LaunchScreen.storyboard */; };
-		D8CCB81B2143672700AC445F /* FileawayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCB81A2143672700AC445F /* FileawayTests.swift */; };
+		D8CCB81B2143672700AC445F /* FileActionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCB81A2143672700AC445F /* FileActionsTests.swift */; };
 		D8CCB8262143672700AC445F /* FileawayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCB8252143672700AC445F /* FileawayUITests.swift */; };
 		D8CCD293246EDC6A007EF2BB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCD292246EDC6A007EF2BB /* SettingsView.swift */; };
 		D8CCD298246EDE6E007EF2BB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCD297246EDE6E007EF2BB /* SettingsViewController.swift */; };
@@ -123,7 +123,7 @@
 		D8CCB80F2143672700AC445F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D8CCB8112143672700AC445F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8CCB8162143672700AC445F /* FileActionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileActionsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8CCB81A2143672700AC445F /* FileawayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileawayTests.swift; sourceTree = "<group>"; };
+		D8CCB81A2143672700AC445F /* FileActionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileActionsTests.swift; sourceTree = "<group>"; };
 		D8CCB81C2143672700AC445F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8CCB8212143672700AC445F /* FileActionsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileActionsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8CCB8252143672700AC445F /* FileawayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileawayUITests.swift; sourceTree = "<group>"; };
@@ -236,7 +236,7 @@
 		D8CCB8192143672700AC445F /* FileActionsTests */ = {
 			isa = PBXGroup;
 			children = (
-				D8CCB81A2143672700AC445F /* FileawayTests.swift */,
+				D8CCB81A2143672700AC445F /* FileActionsTests.swift */,
 				D8CCB81C2143672700AC445F /* Info.plist */,
 			);
 			path = FileActionsTests;
@@ -446,7 +446,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8CCB81B2143672700AC445F /* FileawayTests.swift in Sources */,
+				D8CCB81B2143672700AC445F /* FileActionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
