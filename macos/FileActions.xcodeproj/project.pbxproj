@@ -138,7 +138,7 @@
 			children = (
 				D8D14D4D216E3B9F00D6E1DF /* FileawayCore.xcodeproj */,
 				EEB5F5B72154BCA4005E72C9 /* README.md */,
-				D8666A3020C12EB000B739CC /* Fileaway */,
+				D8666A3020C12EB000B739CC /* FileActions */,
 				D8666A4320C12EB000B739CC /* FileawayTests */,
 				D8666A4E20C12EB100B739CC /* FileawayUITests */,
 				D8666A2F20C12EB000B739CC /* Products */,
@@ -156,7 +156,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D8666A3020C12EB000B739CC /* Fileaway */ = {
+		D8666A3020C12EB000B739CC /* FileActions */ = {
 			isa = PBXGroup;
 			children = (
 				D800D5D2214C6D2F00A6121B /* VariableView.swift */,
@@ -170,7 +170,7 @@
 				D86644E5214DF41D00429289 /* PreferencesViewController.swift */,
 				AFA9C93E21634872000A37D2 /* MainWindowController.swift */,
 			);
-			path = Fileaway;
+			path = FileActions;
 			sourceTree = "<group>";
 		};
 		D8666A4320C12EB000B739CC /* FileawayTests */ = {
@@ -550,7 +550,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = CAG2W9M777;
-				INFOPLIST_FILE = "$(SRCROOT)/Fileaway/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/FileActions/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.file-away";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -566,7 +566,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = CAG2W9M777;
-				INFOPLIST_FILE = "$(SRCROOT)/Fileaway/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/FileActions/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.file-away";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -586,7 +586,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.FileawayTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/File Actions.app/Contents/MacOS/FileActions";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/File Actions.app/Contents/MacOS/File Actions";
 			};
 			name = Debug;
 		};
@@ -602,7 +602,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.FileawayTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/File Actions.app/Contents/MacOS/FileActions";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/File Actions.app/Contents/MacOS/File Actions";
 			};
 			name = Release;
 		};
