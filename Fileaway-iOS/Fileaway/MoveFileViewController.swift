@@ -25,6 +25,12 @@ class MoveFileViewController: UINavigationController {
 
     override func viewDidLoad() {
         documentBrowser.delegate = self
+        self.documentBrowser.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped))
+        self.documentBrowser.navigationItem.title = "Select File"
+    }
+
+    @objc func cancelTapped() {
+        self.dismiss(animated: true, completion: nil)
     }
 
 }

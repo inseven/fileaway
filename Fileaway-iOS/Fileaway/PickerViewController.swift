@@ -130,6 +130,7 @@ class PickerViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Move File"
 
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PickerViewController.dismissKeyboard))
         gestureRecognizer.cancelsTouchesInView = false
