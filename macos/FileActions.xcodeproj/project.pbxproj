@@ -139,7 +139,7 @@
 				D8D14D4D216E3B9F00D6E1DF /* FileawayCore.xcodeproj */,
 				EEB5F5B72154BCA4005E72C9 /* README.md */,
 				D8666A3020C12EB000B739CC /* FileActions */,
-				D8666A4320C12EB000B739CC /* FileawayTests */,
+				D8666A4320C12EB000B739CC /* FileActionsTests */,
 				D8666A4E20C12EB100B739CC /* FileawayUITests */,
 				D8666A2F20C12EB000B739CC /* Products */,
 			);
@@ -173,13 +173,13 @@
 			path = FileActions;
 			sourceTree = "<group>";
 		};
-		D8666A4320C12EB000B739CC /* FileawayTests */ = {
+		D8666A4320C12EB000B739CC /* FileActionsTests */ = {
 			isa = PBXGroup;
 			children = (
 				D8666A4420C12EB100B739CC /* FileawayTests.swift */,
 				D8666A4620C12EB100B739CC /* Info.plist */,
 			);
-			path = FileawayTests;
+			path = FileActionsTests;
 			sourceTree = "<group>";
 		};
 		D8666A4E20C12EB100B739CC /* FileawayUITests */ = {
@@ -581,7 +581,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = FileawayTests/Info.plist;
+				INFOPLIST_FILE = FileActionsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.FileawayTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -597,7 +597,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = FileawayTests/Info.plist;
+				INFOPLIST_FILE = FileActionsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.FileawayTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
