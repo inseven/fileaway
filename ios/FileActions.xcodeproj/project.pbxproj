@@ -212,23 +212,23 @@
 		D8CCB8042143672700AC445F /* FileActions */ = {
 			isa = PBXGroup;
 			children = (
-				D8CCB8052143672700AC445F /* AppDelegate.swift */,
-				D8CCB8072143672700AC445F /* ViewController.swift */,
-				EEFF05A121AD1E5A0014C89B /* UIViewController+Alerting.swift */,
-				D8CCB8092143672700AC445F /* Main.storyboard */,
-				D8CCB80C2143672700AC445F /* Assets.xcassets */,
-				D8CCB80E2143672700AC445F /* LaunchScreen.storyboard */,
 				D8CCB8112143672700AC445F /* Info.plist */,
-				D89941002145E6AE00097F3D /* StorageManager.swift */,
+				D89265832498AC3A00297825 /* ActionsViewController.swift */,
+				D8CCB8052143672700AC445F /* AppDelegate.swift */,
+				D88F3D53217070A400BFE0F9 /* DateTableViewCell.swift */,
+				D89265882498C58C00297825 /* MoveFileViewController.swift */,
 				D88F3D42216F847D00BFE0F9 /* PickerViewController.swift */,
 				D88F3D49216F961700BFE0F9 /* PreviewTableViewCell.swift */,
-				D88F3D4B217048B400BFE0F9 /* TypeViewController.swift */,
-				D88F3D4E2170689200BFE0F9 /* TextTableViewCell.swift */,
-				D88F3D53217070A400BFE0F9 /* DateTableViewCell.swift */,
 				D8CCD292246EDC6A007EF2BB /* SettingsView.swift */,
 				D8CCD297246EDE6E007EF2BB /* SettingsViewController.swift */,
-				D89265832498AC3A00297825 /* ActionsViewController.swift */,
-				D89265882498C58C00297825 /* MoveFileViewController.swift */,
+				D89941002145E6AE00097F3D /* StorageManager.swift */,
+				D88F3D4E2170689200BFE0F9 /* TextTableViewCell.swift */,
+				D88F3D4B217048B400BFE0F9 /* TypeViewController.swift */,
+				EEFF05A121AD1E5A0014C89B /* UIViewController+Alerting.swift */,
+				D8CCB8072143672700AC445F /* ViewController.swift */,
+				D8CCB80C2143672700AC445F /* Assets.xcassets */,
+				D8CCB80E2143672700AC445F /* LaunchScreen.storyboard */,
+				D8CCB8092143672700AC445F /* Main.storyboard */,
 			);
 			path = FileActions;
 			sourceTree = "<group>";
