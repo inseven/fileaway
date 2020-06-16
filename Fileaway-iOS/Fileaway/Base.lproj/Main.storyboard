@@ -16,93 +16,19 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="HoS-St-ahM"/>
+                        <segue destination="Egt-mh-cmc" kind="relationship" relationship="rootViewController" id="S0X-rF-0XF"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GyV-k1-Ogr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-204" y="132"/>
-        </scene>
-        <!--File Actions-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="File_Actions" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AwP-UA-cvv">
-                                <rect key="frame" x="0.0" y="22" width="375" height="623"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" horizontalHuggingPriority="255" verticalHuggingPriority="255" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vlr-44-82D">
-                                        <rect key="frame" x="91.5" y="192.5" width="192" height="175.5"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Info" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdl-s5-B8G">
-                                                <rect key="frame" x="0.0" y="155" width="192" height="20.5"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xBz-HM-rjQ">
-                                                <rect key="frame" x="0.0" y="49" width="192" height="33"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <state key="normal" title="Save File"/>
-                                                <connections>
-                                                    <action selector="saveFileTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7zq-mV-Wrg"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nxr-Kh-fjx">
-                                                <rect key="frame" x="0.0" y="98" width="192" height="33"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <state key="normal" title="Show Picker"/>
-                                                <connections>
-                                                    <segue destination="l9g-2e-tzY" kind="presentation" identifier="Picker" modalPresentationStyle="pageSheet" id="Xko-DK-Fi3"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DQH-gN-tWd">
-                                                <rect key="frame" x="0.0" y="0.0" width="192" height="33"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <state key="normal" title="Set Destination Directory"/>
-                                                <connections>
-                                                    <action selector="setDestinationTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ix9-7S-0S8"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="File Actions" id="8QH-l0-do5">
-                        <barButtonItem key="leftBarButtonItem" title="Settings" id="2XF-0S-H05">
-                            <connections>
-                                <segue destination="eub-1D-qKH" kind="presentation" identifier="Settings" id="5wN-ug-qmc"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="destinationLabel" destination="bdl-s5-B8G" id="2su-ac-fbN"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="656.79999999999995" y="131.78410794602701"/>
+            <point key="canvasLocation" x="-146" y="132"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="SG1-aR-XdN">
             <objects>
-                <navigationController id="eub-1D-qKH" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Settings" id="eub-1D-qKH" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LZB-1C-cLx">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -128,7 +54,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="PickerViewController" id="e0M-sV-gNd" customClass="PickerViewController" customModule="File_Actions" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="WrE-Ri-TEh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
@@ -219,7 +145,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aar-Ou-dNl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2548" y="132"/>
+            <point key="canvasLocation" x="1606" y="132"/>
         </scene>
         <!--Document Type-->
         <scene sceneID="4Az-It-MfQ">
@@ -248,23 +174,23 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="did-WC-LQT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3503" y="132"/>
+            <point key="canvasLocation" x="2559" y="132"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="3Th-ND-xe8">
+        <!--Actions View Controller-->
+        <scene sceneID="OUK-X1-07e">
             <objects>
-                <navigationController id="l9g-2e-tzY" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PoD-3Z-kLh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="e0M-sV-gNd" kind="relationship" relationship="rootViewController" id="KPw-0k-k8z"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mM3-EE-QAJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="Egt-mh-cmc" customClass="ActionsViewController" customModule="File_Actions" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oPq-Ia-Be4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="vxS-by-v7a"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="4JU-46-fwn"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="02V-zu-TN1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1606" y="132"/>
+            <point key="canvasLocation" x="750" y="132"/>
         </scene>
     </scenes>
 </document>

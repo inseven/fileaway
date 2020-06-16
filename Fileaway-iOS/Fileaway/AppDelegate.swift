@@ -9,6 +9,10 @@
 import UIKit
 import FileawayCore
 
+extension UIApplication {
+
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -24,6 +28,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             manager = Manager(configurationUrl: configurationUrl)
         }
         return true
+    }
+
+    func instantiateViewController(identifier: StoryboardIdentifier) -> UIViewController? {
+        guard
+            let rootViewController = window?.rootViewController,
+            let storyboard = rootViewController.storyboard else {
+                return nil
+        }
+        return storyboard.instantiateViewController(withIdentifier: identifier.rawValue)
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {

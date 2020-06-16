@@ -15,6 +15,7 @@
 		D88F3D4C217048B400BFE0F9 /* TypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88F3D4B217048B400BFE0F9 /* TypeViewController.swift */; };
 		D88F3D4F2170689200BFE0F9 /* TextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88F3D4E2170689200BFE0F9 /* TextTableViewCell.swift */; };
 		D88F3D54217070A400BFE0F9 /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88F3D53217070A400BFE0F9 /* DateTableViewCell.swift */; };
+		D89265842498AC3A00297825 /* ActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89265832498AC3A00297825 /* ActionsViewController.swift */; };
 		D89941012145E6AE00097F3D /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89941002145E6AE00097F3D /* StorageManager.swift */; };
 		D8BCA523216F069B002A624D /* FileawayCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8BCA51D216F0682002A624D /* FileawayCore.framework */; };
 		D8CCB8062143672700AC445F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCB8052143672700AC445F /* AppDelegate.swift */; };
@@ -109,6 +110,7 @@
 		D88F3D4B217048B400BFE0F9 /* TypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeViewController.swift; sourceTree = "<group>"; };
 		D88F3D4E2170689200BFE0F9 /* TextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTableViewCell.swift; sourceTree = "<group>"; };
 		D88F3D53217070A400BFE0F9 /* DateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
+		D89265832498AC3A00297825 /* ActionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsViewController.swift; sourceTree = "<group>"; };
 		D89941002145E6AE00097F3D /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		D8BCA511216F0682002A624D /* FileawayCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FileawayCore.xcodeproj; path = ../FileawayCore/FileawayCore.xcodeproj; sourceTree = "<group>"; };
 		D8CCB8022143672700AC445F /* File Actions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "File Actions.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -223,6 +225,7 @@
 				D88F3D53217070A400BFE0F9 /* DateTableViewCell.swift */,
 				D8CCD292246EDC6A007EF2BB /* SettingsView.swift */,
 				D8CCD297246EDE6E007EF2BB /* SettingsViewController.swift */,
+				D89265832498AC3A00297825 /* ActionsViewController.swift */,
 			);
 			path = Fileaway;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 				D89941012145E6AE00097F3D /* StorageManager.swift in Sources */,
 				D88F3D54217070A400BFE0F9 /* DateTableViewCell.swift in Sources */,
 				EEFF05A221AD1E5A0014C89B /* UIViewController+Alerting.swift in Sources */,
+				D89265842498AC3A00297825 /* ActionsViewController.swift in Sources */,
 				D8CCD293246EDC6A007EF2BB /* SettingsView.swift in Sources */,
 				D8CCB8082143672700AC445F /* ViewController.swift in Sources */,
 				D88F3D43216F847D00BFE0F9 /* PickerViewController.swift in Sources */,

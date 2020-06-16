@@ -30,26 +30,8 @@ class ViewController: UIViewController {
         updateDestinationLabel()
     }
 
-    func presentDocumentPickerIfNeeded() {
-        if let _ = try? StorageManager.rootUrl() {
-            return
-        }
-		presentDocumentPickerPrompt()
-	}
-
-	func presentDocumentPickerPrompt() {
-        let alert = UIAlertController(title: "Document access",
-                                      message: "Press OK to continue and select the folder in which you wish to store your documents.",
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction) in
-            self.presentDocumentPicker()
-        }))
-        present(alert, animated: true, completion: nil)
-    }
-
     func presentDocumentPicker() {
         let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeFolder as String], in: .open)
-        documentPicker.allowsMultipleSelection = true  // required to allow folder selection
         documentPicker.delegate = self
         self.present(documentPicker, animated: true, completion: nil)
     }
@@ -91,7 +73,7 @@ class ViewController: UIViewController {
 	// MARK: -
 
     @IBAction func setDestinationTapped(_ sender: Any) {
-        presentDocumentPickerPrompt()
+        presentDocumentPicker()
     }
 
     // TODO: Delete this.
