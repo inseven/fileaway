@@ -1,6 +1,6 @@
 //
 //  MainWindowController.swift
-//  Fileaway
+//  File Actions
 //
 //  Created by Pavlos Vinieratos on 02/10/2018.
 //  Copyright © 2018 InSeven Limited. All rights reserved.
