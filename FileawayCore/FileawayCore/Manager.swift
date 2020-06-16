@@ -19,7 +19,7 @@ public class Manager {
      * destinations.json file in the bundle otherwise.
      */
     func configurationUrl() -> URL {
-        return rootUrl.appendingPathComponent(".file-actions.json")
+        return rootUrl.appendingPathComponent("file-actions.json")
     }
 
     public init(configurationUrl: URL) {
