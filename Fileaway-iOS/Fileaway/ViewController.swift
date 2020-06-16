@@ -19,7 +19,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let manager = AppDelegate.shared.manager
     }
 
     func updateDestinationLabel() {

@@ -21,6 +21,11 @@ public enum ComponentType: String, Codable {
 public struct Component: Codable {
     public let type: ComponentType
     public let value: String
+
+    public init(type: ComponentType, value: String) {
+        self.type = type
+        self.value = value
+    }
 }
 
 public enum VariableType {
@@ -31,6 +36,11 @@ public enum VariableType {
 public struct Variable {
     public let name: String
     public let type: VariableType
+
+    public init(name: String, type: VariableType) {
+        self.name = name
+        self.type = type
+    }
 }
 
 extension Variable: Codable {

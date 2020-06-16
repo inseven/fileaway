@@ -19,9 +19,11 @@ class SettingsViewController: UIHostingController<SettingsView> {
 
     weak var delegate: SettingsViewControllerDelegate?
     var manager: Manager?
+    var tasks: [TaskState]
 
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder, rootView: SettingsView(tasks: AppDelegate.shared.manager!.tasks))
+        tasks = AppDelegate.shared.manager!.tasks.map { TaskState(task: $0) }
+        super.init(coder: aDecoder, rootView: SettingsView(tasks: tasks))
     }
 
     override func viewDidLoad() {
