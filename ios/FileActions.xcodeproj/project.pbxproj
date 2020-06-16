@@ -190,7 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				D8BCA511216F0682002A624D /* FileawayCore.xcodeproj */,
-				D8CCB8042143672700AC445F /* Fileaway */,
+				D8CCB8042143672700AC445F /* FileActions */,
 				D8CCB8192143672700AC445F /* FileawayTests */,
 				D8CCB8242143672700AC445F /* FileawayUITests */,
 				D890DD3D216F16C300922453 /* Resources */,
@@ -209,7 +209,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D8CCB8042143672700AC445F /* Fileaway */ = {
+		D8CCB8042143672700AC445F /* FileActions */ = {
 			isa = PBXGroup;
 			children = (
 				D8CCB8052143672700AC445F /* AppDelegate.swift */,
@@ -230,7 +230,7 @@
 				D89265832498AC3A00297825 /* ActionsViewController.swift */,
 				D89265882498C58C00297825 /* MoveFileViewController.swift */,
 			);
-			path = Fileaway;
+			path = FileActions;
 			sourceTree = "<group>";
 		};
 		D8CCB8192143672700AC445F /* FileawayTests */ = {
@@ -622,7 +622,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
-				INFOPLIST_FILE = Fileaway/Info.plist;
+				INFOPLIST_FILE = FileActions/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.file-actions";
 				PRODUCT_NAME = "File Actions";
@@ -639,7 +639,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
-				INFOPLIST_FILE = Fileaway/Info.plist;
+				INFOPLIST_FILE = FileActions/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.file-actions";
 				PRODUCT_NAME = "File Actions";
