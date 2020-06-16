@@ -192,7 +192,7 @@
 				D8BCA511216F0682002A624D /* FileawayCore.xcodeproj */,
 				D8CCB8042143672700AC445F /* FileActions */,
 				D8CCB8192143672700AC445F /* FileActionsTests */,
-				D8CCB8242143672700AC445F /* FileawayUITests */,
+				D8CCB8242143672700AC445F /* FileActionsUITests */,
 				D890DD3D216F16C300922453 /* Resources */,
 				D8CCB8032143672700AC445F /* Products */,
 				D8BCA522216F069B002A624D /* Frameworks */,
@@ -242,13 +242,13 @@
 			path = FileActionsTests;
 			sourceTree = "<group>";
 		};
-		D8CCB8242143672700AC445F /* FileawayUITests */ = {
+		D8CCB8242143672700AC445F /* FileActionsUITests */ = {
 			isa = PBXGroup;
 			children = (
 				D8CCB8252143672700AC445F /* FileawayUITests.swift */,
 				D8CCB8272143672700AC445F /* Info.plist */,
 			);
-			path = FileawayUITests;
+			path = FileActionsUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -688,9 +688,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
-				INFOPLIST_FILE = FileawayUITests/Info.plist;
+				INFOPLIST_FILE = FileActionsUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.FileawayUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.FileActionsUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -704,9 +704,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
-				INFOPLIST_FILE = FileawayUITests/Info.plist;
+				INFOPLIST_FILE = FileActionsUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.FileawayUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.FileActionsUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
