@@ -51,7 +51,7 @@ struct ActionsView: View {
         VStack {
             List {
                 Section(footer: Text(settings.destination != nil ? "Files will be moved to '\(settings.destination!)'." : "No destination set.")) {
-                    ActionView(text: "Move file...", imageName: "doc") {
+                    ActionView(text: "Move file...", imageName: "folder") {
                         guard let delegate = self.delegate else {
                             return
                         }
@@ -59,7 +59,7 @@ struct ActionsView: View {
                     }
                 }
                 Section(header: Text("Debug".uppercased())) {
-                    ActionView(text: "Move example file...", imageName: "doc") {
+                    ActionView(text: "Move example file...", imageName: "folder") {
                         guard let delegate = self.delegate else {
                             return
                         }
@@ -133,7 +133,8 @@ extension ActionsViewController: ActionsViewDelegate {
     }
 
     func moveFileTapped() {
-
+        let viewController = MoveFileViewController()
+        self.present(viewController, animated: true, completion: nil)
     }
 
     func moveExampleFileTapped() {
