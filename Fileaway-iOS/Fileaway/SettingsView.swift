@@ -119,7 +119,7 @@ struct TaskView: View {
                         Text("New variable...")
                     }
                 }
-                Section(header: Text("Path")) {
+                Section(header: Text("Destination")) {
                     ForEach(task.destination, id: \.value) { component in
                         ComponentItem(component: component, value: component.value)
                     }
@@ -160,6 +160,7 @@ struct TasksView: View {
         }) {
             Text("Add")
         })
+        .navigationBarTitle("Tasks")
     }
 
 }
