@@ -1,6 +1,6 @@
 //
 //  MoveFileViewController.swift
-//  Fileaway
+//  File Actions
 //
 //  Created by Jason Barrie Morley on 16/06/2020.
 //  Copyright © 2020 InSeven Limited. All rights reserved.

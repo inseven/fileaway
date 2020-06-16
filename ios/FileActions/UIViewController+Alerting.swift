@@ -1,6 +1,6 @@
 //
 //  UIViewController+Convenience.swift
-//  Fileaway
+//  File Actions
 //
 //  Created by Jason Morley on 11/26/18.
 //  Copyright © 2018 InSeven Limited. All rights reserved.

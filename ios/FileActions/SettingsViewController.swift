@@ -1,6 +1,6 @@
 //
 //  SettingsViewController.swift
-//  Fileaway
+//  File Actions
 //
 //  Created by Jason Barrie Morley on 15/05/2020.
 //  Copyright © 2020 InSeven Limited. All rights reserved.
