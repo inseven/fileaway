@@ -254,9 +254,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D8CCB8012143672700AC445F /* Fileaway */ = {
+		D8CCB8012143672700AC445F /* File Actions */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D8CCB82A2143672700AC445F /* Build configuration list for PBXNativeTarget "Fileaway" */;
+			buildConfigurationList = D8CCB82A2143672700AC445F /* Build configuration list for PBXNativeTarget "File Actions" */;
 			buildPhases = (
 				D8CCB7FE2143672700AC445F /* Sources */,
 				D8CCB7FF2143672700AC445F /* Frameworks */,
@@ -269,7 +269,7 @@
 				D8BCA521216F068F002A624D /* PBXTargetDependency */,
 				D807B6942170E677004CECC3 /* PBXTargetDependency */,
 			);
-			name = Fileaway;
+			name = "File Actions";
 			productName = Fileaway;
 			productReference = D8CCB8022143672700AC445F /* File Actions.app */;
 			productType = "com.apple.product-type.application";
@@ -355,7 +355,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				D8CCB8012143672700AC445F /* Fileaway */,
+				D8CCB8012143672700AC445F /* File Actions */,
 				D8CCB8152143672700AC445F /* FileawayTests */,
 				D8CCB8202143672700AC445F /* FileawayUITests */,
 			);
@@ -473,12 +473,12 @@
 		};
 		D8CCB8182143672700AC445F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D8CCB8012143672700AC445F /* Fileaway */;
+			target = D8CCB8012143672700AC445F /* File Actions */;
 			targetProxy = D8CCB8172143672700AC445F /* PBXContainerItemProxy */;
 		};
 		D8CCB8232143672700AC445F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D8CCB8012143672700AC445F /* Fileaway */;
+			target = D8CCB8012143672700AC445F /* File Actions */;
 			targetProxy = D8CCB8222143672700AC445F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -661,7 +661,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fileaway.app/Fileaway";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/File Actions.app/File Actions";
 			};
 			name = Debug;
 		};
@@ -678,7 +678,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fileaway.app/Fileaway";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/File Actions.app/File Actions";
 			};
 			name = Release;
 		};
@@ -694,7 +694,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Fileaway;
+				TEST_TARGET_NAME = "File Actions";
 			};
 			name = Debug;
 		};
@@ -710,7 +710,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Fileaway;
+				TEST_TARGET_NAME = "File Actions";
 			};
 			name = Release;
 		};
@@ -726,7 +726,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D8CCB82A2143672700AC445F /* Build configuration list for PBXNativeTarget "Fileaway" */ = {
+		D8CCB82A2143672700AC445F /* Build configuration list for PBXNativeTarget "File Actions" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D8CCB82B2143672700AC445F /* Debug */,

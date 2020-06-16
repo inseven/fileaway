@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Fileaway
+@testable import File_Actions
 
 class FileawayTests: XCTestCase {
     

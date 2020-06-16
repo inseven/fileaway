@@ -195,7 +195,7 @@
         <!--Navigation Controller-->
         <scene sceneID="lsm-Vh-Tf3">
             <objects>
-                <navigationController id="841-zt-VvW" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="PickerNavigationController" id="841-zt-VvW" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="D7T-Dc-wrz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

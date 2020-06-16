@@ -118,6 +118,7 @@ class ActionsViewController: UIHostingController<ActionsView> {
 enum StoryboardIdentifier: String {
     case settings = "Settings"
     case picker = "PickerViewController"
+    case pickerNavigationController = "PickerNavigationController"
 }
 
 extension ActionsViewController: ActionsViewDelegate {
