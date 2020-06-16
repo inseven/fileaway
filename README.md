@@ -1,8 +1,8 @@
-# Fileaway
+# File Actions
 
 ## Configuration
 
-The configuration file should be located in `~/.fileaway/destinations.json` and follow the format:
+The configuration file should be located in `file-actions.json` in the root directory, and follow the format:
 
 ```json
 {
