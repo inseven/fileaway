@@ -49,7 +49,7 @@
             </objects>
             <point key="canvasLocation" x="1606" y="867"/>
         </scene>
-        <!--Fileaway-->
+        <!--Move File-->
         <scene sceneID="NZq-go-Zdw">
             <objects>
                 <tableViewController storyboardIdentifier="PickerViewController" id="e0M-sV-gNd" customClass="PickerViewController" customModule="File_Actions" customModuleProvider="target" sceneMemberID="viewController">
@@ -130,13 +130,13 @@
                             <outlet property="delegate" destination="e0M-sV-gNd" id="LHY-Ek-8Wd"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Fileaway" id="5wv-rl-D4S">
+                    <navigationItem key="navigationItem" title="Move File" id="5wv-rl-D4S">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="kF4-42-GHQ">
                             <connections>
                                 <action selector="cancelTapped:" destination="e0M-sV-gNd" id="9Vg-w6-wDF"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="k7z-mB-Bee">
+                        <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="k7z-mB-Bee">
                             <connections>
                                 <action selector="saveTapped:" destination="e0M-sV-gNd" id="hBy-cR-lNh"/>
                             </connections>
@@ -145,14 +145,14 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aar-Ou-dNl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1606" y="132"/>
+            <point key="canvasLocation" x="1764" y="-565"/>
         </scene>
         <!--Document Type-->
         <scene sceneID="4Az-It-MfQ">
             <objects>
                 <tableViewController title="Document Type" id="trB-M8-Xna" customClass="TypeViewController" customModule="File_Actions" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="wVA-UI-pnK">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
@@ -174,7 +174,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="did-WC-LQT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2559" y="132"/>
+            <point key="canvasLocation" x="2703" y="-565"/>
         </scene>
         <!--Actions View Controller-->
         <scene sceneID="OUK-X1-07e">
@@ -191,6 +191,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="02V-zu-TN1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="750" y="132"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="lsm-Vh-Tf3">
+            <objects>
+                <navigationController id="841-zt-VvW" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="D7T-Dc-wrz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="e0M-sV-gNd" kind="relationship" relationship="rootViewController" id="ZKD-by-KyV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NrA-bO-qMY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="849" y="-565"/>
         </scene>
     </scenes>
 </document>
