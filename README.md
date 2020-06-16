@@ -33,7 +33,3 @@ The configuration file should be located in `file-actions.json` in the root dire
     ...
 }
 ```
-
-# iOS
-
-The iOS Xcode Project has a copy files stage which copies the local configuration file from the Mac to the iOS bundle. If you change the local configuration, you will need to rebuild.
