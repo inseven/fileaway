@@ -122,10 +122,10 @@
 		D8CCB80C2143672700AC445F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D8CCB80F2143672700AC445F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D8CCB8112143672700AC445F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D8CCB8162143672700AC445F /* FileawayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileawayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8CCB8162143672700AC445F /* FileActionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileActionsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8CCB81A2143672700AC445F /* FileawayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileawayTests.swift; sourceTree = "<group>"; };
 		D8CCB81C2143672700AC445F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D8CCB8212143672700AC445F /* FileawayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileawayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8CCB8212143672700AC445F /* FileActionsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileActionsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8CCB8252143672700AC445F /* FileawayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileawayUITests.swift; sourceTree = "<group>"; };
 		D8CCB8272143672700AC445F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8CCD292246EDC6A007EF2BB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -203,8 +203,8 @@
 			isa = PBXGroup;
 			children = (
 				D8CCB8022143672700AC445F /* File Actions.app */,
-				D8CCB8162143672700AC445F /* FileawayTests.xctest */,
-				D8CCB8212143672700AC445F /* FileawayUITests.xctest */,
+				D8CCB8162143672700AC445F /* FileActionsTests.xctest */,
+				D8CCB8212143672700AC445F /* FileActionsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -274,9 +274,9 @@
 			productReference = D8CCB8022143672700AC445F /* File Actions.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D8CCB8152143672700AC445F /* FileawayTests */ = {
+		D8CCB8152143672700AC445F /* FileActionsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D8CCB82D2143672700AC445F /* Build configuration list for PBXNativeTarget "FileawayTests" */;
+			buildConfigurationList = D8CCB82D2143672700AC445F /* Build configuration list for PBXNativeTarget "FileActionsTests" */;
 			buildPhases = (
 				D8CCB8122143672700AC445F /* Sources */,
 				D8CCB8132143672700AC445F /* Frameworks */,
@@ -287,14 +287,14 @@
 			dependencies = (
 				D8CCB8182143672700AC445F /* PBXTargetDependency */,
 			);
-			name = FileawayTests;
+			name = FileActionsTests;
 			productName = FileawayTests;
-			productReference = D8CCB8162143672700AC445F /* FileawayTests.xctest */;
+			productReference = D8CCB8162143672700AC445F /* FileActionsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		D8CCB8202143672700AC445F /* FileawayUITests */ = {
+		D8CCB8202143672700AC445F /* FileActionsUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D8CCB8302143672700AC445F /* Build configuration list for PBXNativeTarget "FileawayUITests" */;
+			buildConfigurationList = D8CCB8302143672700AC445F /* Build configuration list for PBXNativeTarget "FileActionsUITests" */;
 			buildPhases = (
 				D8CCB81D2143672700AC445F /* Sources */,
 				D8CCB81E2143672700AC445F /* Frameworks */,
@@ -305,9 +305,9 @@
 			dependencies = (
 				D8CCB8232143672700AC445F /* PBXTargetDependency */,
 			);
-			name = FileawayUITests;
+			name = FileActionsUITests;
 			productName = FileawayUITests;
-			productReference = D8CCB8212143672700AC445F /* FileawayUITests.xctest */;
+			productReference = D8CCB8212143672700AC445F /* FileActionsUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -336,7 +336,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D8CCB7FD2143672700AC445F /* Build configuration list for PBXProject "Fileaway" */;
+			buildConfigurationList = D8CCB7FD2143672700AC445F /* Build configuration list for PBXProject "FileActions" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -356,8 +356,8 @@
 			projectRoot = "";
 			targets = (
 				D8CCB8012143672700AC445F /* File Actions */,
-				D8CCB8152143672700AC445F /* FileawayTests */,
-				D8CCB8202143672700AC445F /* FileawayUITests */,
+				D8CCB8152143672700AC445F /* FileActionsTests */,
+				D8CCB8202143672700AC445F /* FileActionsUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -620,7 +620,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
 				INFOPLIST_FILE = Fileaway/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -637,7 +637,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
 				INFOPLIST_FILE = Fileaway/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -717,7 +717,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D8CCB7FD2143672700AC445F /* Build configuration list for PBXProject "Fileaway" */ = {
+		D8CCB7FD2143672700AC445F /* Build configuration list for PBXProject "FileActions" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D8CCB8282143672700AC445F /* Debug */,
@@ -735,7 +735,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D8CCB82D2143672700AC445F /* Build configuration list for PBXNativeTarget "FileawayTests" */ = {
+		D8CCB82D2143672700AC445F /* Build configuration list for PBXNativeTarget "FileActionsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D8CCB82E2143672700AC445F /* Debug */,
@@ -744,7 +744,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D8CCB8302143672700AC445F /* Build configuration list for PBXNativeTarget "FileawayUITests" */ = {
+		D8CCB8302143672700AC445F /* Build configuration list for PBXNativeTarget "FileActionsUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D8CCB8312143672700AC445F /* Debug */,

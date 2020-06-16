@@ -17,7 +17,7 @@
                BlueprintIdentifier = "D8CCB8012143672700AC445F"
                BuildableName = "File Actions.app"
                BlueprintName = "File Actions"
-               ReferencedContainer = "container:Fileaway.xcodeproj">
+               ReferencedContainer = "container:FileActions.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D8CCB8152143672700AC445F"
-               BuildableName = "FileawayTests.xctest"
-               BlueprintName = "FileawayTests"
-               ReferencedContainer = "container:Fileaway.xcodeproj">
+               BuildableName = "FileActionsTests.xctest"
+               BlueprintName = "FileActionsTests"
+               ReferencedContainer = "container:FileActions.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D8CCB8202143672700AC445F"
-               BuildableName = "FileawayUITests.xctest"
-               BlueprintName = "FileawayUITests"
-               ReferencedContainer = "container:Fileaway.xcodeproj">
+               BuildableName = "FileActionsUITests.xctest"
+               BlueprintName = "FileActionsUITests"
+               ReferencedContainer = "container:FileActions.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -67,7 +67,7 @@
             BlueprintIdentifier = "D8CCB8012143672700AC445F"
             BuildableName = "File Actions.app"
             BlueprintName = "File Actions"
-            ReferencedContainer = "container:Fileaway.xcodeproj">
+            ReferencedContainer = "container:FileActions.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -84,7 +84,7 @@
             BlueprintIdentifier = "D8CCB8012143672700AC445F"
             BuildableName = "File Actions.app"
             BlueprintName = "File Actions"
-            ReferencedContainer = "container:Fileaway.xcodeproj">
+            ReferencedContainer = "container:FileActions.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
