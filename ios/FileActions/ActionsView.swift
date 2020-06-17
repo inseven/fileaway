@@ -15,12 +15,18 @@ protocol ActionsViewDelegate: NSObject {
     func reversePages(url: URL, completion: @escaping (Error?) -> Void)
 }
 
+enum ActionSheet {
+    case none
+    case settings
+    case reversePages
+}
+
 struct ActionsView: View {
 
     weak var delegate: ActionsViewDelegate?
     @ObservedObject var settings: Settings
-    @State private var displayReversePages = false
-    @State private var displaySettings = false
+    @State private var showSheet = false
+    @State private var activeSheet: ActionSheet = .none
 
     var body: some View {
         VStack {
@@ -35,27 +41,32 @@ struct ActionsView: View {
                 }
                 Section {
                     ActionView(text: "Reverse pages...", imageName: "doc.on.doc") {
-                        self.displayReversePages = true
+                        self.activeSheet = .reversePages
+                        self.showSheet = true
                     }
                 }
             }.listStyle(GroupedListStyle())
         }
-        .sheet(isPresented: $displayReversePages) {
-            ReversePages { url, completion in
-                guard let delegate = self.delegate else {
-                    return
+        .sheet(isPresented: $showSheet) {
+            if self.activeSheet == .settings {
+                NavigationView {
+                    SettingsView(settings: self.settings, tasks: self.settings.tasks)
                 }
-                delegate.reversePages(url: url, completion: completion)
-            }
-        }
-        .sheet(isPresented: $displaySettings) {
-            NavigationView {
-                SettingsView(settings: self.settings, tasks: self.settings.tasks)
+            } else if self.activeSheet == .reversePages {
+                ReversePages { url, completion in
+                    guard let delegate = self.delegate else {
+                        return
+                    }
+                    delegate.reversePages(url: url, completion: completion)
+                }
+            } else {
+                Text("None")
             }
         }
         .navigationBarTitle("File Actions")
         .navigationBarItems(leading: Button(action: {
-            self.displaySettings = true
+            self.activeSheet = .settings
+            self.showSheet = true
         }, label: {
             Text("Settings")
         }))
