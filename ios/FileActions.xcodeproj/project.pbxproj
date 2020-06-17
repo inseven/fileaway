@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D843199F249A85680014CFE9 /* FilePickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D843199E249A85680014CFE9 /* FilePickerSheet.swift */; };
+		D84319A1249AB1EE0014CFE9 /* PDFDocument+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84319A0249AB1EE0014CFE9 /* PDFDocument+Utilities.swift */; };
 		D88F3D43216F847D00BFE0F9 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88F3D42216F847D00BFE0F9 /* PickerViewController.swift */; };
 		D88F3D48216F8BEB00BFE0F9 /* example.pdf in Resources */ = {isa = PBXBuildFile; fileRef = D88F3D47216F8BEB00BFE0F9 /* example.pdf */; };
 		D88F3D4A216F961700BFE0F9 /* PreviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88F3D49216F961700BFE0F9 /* PreviewTableViewCell.swift */; };
@@ -19,7 +21,6 @@
 		D8B76B3824999EEE005EC4A1 /* FileActionsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8B76B3724999EEE005EC4A1 /* FileActionsCore.framework */; };
 		D8B76B3924999EF5005EC4A1 /* FileActionsCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D8B76B3724999EEE005EC4A1 /* FileActionsCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D8CCB8062143672700AC445F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCB8052143672700AC445F /* AppDelegate.swift */; };
-		D8CCB8082143672700AC445F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCB8072143672700AC445F /* ViewController.swift */; };
 		D8CCB80B2143672700AC445F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8CCB8092143672700AC445F /* Main.storyboard */; };
 		D8CCB80D2143672700AC445F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8CCB80C2143672700AC445F /* Assets.xcassets */; };
 		D8CCB8102143672700AC445F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8CCB80E2143672700AC445F /* LaunchScreen.storyboard */; };
@@ -62,6 +63,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D843199E249A85680014CFE9 /* FilePickerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePickerSheet.swift; sourceTree = "<group>"; };
+		D84319A0249AB1EE0014CFE9 /* PDFDocument+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PDFDocument+Utilities.swift"; sourceTree = "<group>"; };
 		D88F3D42216F847D00BFE0F9 /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		D88F3D47216F8BEB00BFE0F9 /* example.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = example.pdf; sourceTree = "<group>"; };
 		D88F3D49216F961700BFE0F9 /* PreviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewTableViewCell.swift; sourceTree = "<group>"; };
@@ -74,7 +77,6 @@
 		D8B76B3724999EEE005EC4A1 /* FileActionsCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FileActionsCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8CCB8022143672700AC445F /* File Actions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "File Actions.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8CCB8052143672700AC445F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D8CCB8072143672700AC445F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D8CCB80A2143672700AC445F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D8CCB80C2143672700AC445F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D8CCB80F2143672700AC445F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				D89265832498AC3A00297825 /* ActionsViewController.swift */,
 				D8CCB8052143672700AC445F /* AppDelegate.swift */,
 				D88F3D53217070A400BFE0F9 /* DateTableViewCell.swift */,
+				D843199E249A85680014CFE9 /* FilePickerSheet.swift */,
 				D89265882498C58C00297825 /* MoveFileViewController.swift */,
 				D88F3D42216F847D00BFE0F9 /* PickerViewController.swift */,
 				D88F3D49216F961700BFE0F9 /* PreviewTableViewCell.swift */,
@@ -170,10 +173,10 @@
 				D88F3D4E2170689200BFE0F9 /* TextTableViewCell.swift */,
 				D88F3D4B217048B400BFE0F9 /* TypeViewController.swift */,
 				EEFF05A121AD1E5A0014C89B /* UIViewController+Alerting.swift */,
-				D8CCB8072143672700AC445F /* ViewController.swift */,
 				D8CCB80C2143672700AC445F /* Assets.xcassets */,
 				D8CCB80E2143672700AC445F /* LaunchScreen.storyboard */,
 				D8CCB8092143672700AC445F /* Main.storyboard */,
+				D84319A0249AB1EE0014CFE9 /* PDFDocument+Utilities.swift */,
 			);
 			path = FileActions;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D843199F249A85680014CFE9 /* FilePickerSheet.swift in Sources */,
 				D88F3D4C217048B400BFE0F9 /* TypeViewController.swift in Sources */,
 				D88F3D4F2170689200BFE0F9 /* TextTableViewCell.swift in Sources */,
 				D8CCD298246EDE6E007EF2BB /* SettingsViewController.swift in Sources */,
@@ -340,10 +344,10 @@
 				EEFF05A221AD1E5A0014C89B /* UIViewController+Alerting.swift in Sources */,
 				D89265842498AC3A00297825 /* ActionsViewController.swift in Sources */,
 				D8CCD293246EDC6A007EF2BB /* SettingsView.swift in Sources */,
-				D8CCB8082143672700AC445F /* ViewController.swift in Sources */,
 				D88F3D43216F847D00BFE0F9 /* PickerViewController.swift in Sources */,
 				D88F3D4A216F961700BFE0F9 /* PreviewTableViewCell.swift in Sources */,
 				D8CCB8062143672700AC445F /* AppDelegate.swift in Sources */,
+				D84319A1249AB1EE0014CFE9 /* PDFDocument+Utilities.swift in Sources */,
 				D89265892498C58C00297825 /* MoveFileViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

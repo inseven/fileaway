@@ -7,6 +7,7 @@
 //
 
 import MobileCoreServices
+import PDFKit
 import SwiftUI
 import UIKit
 
@@ -16,12 +17,17 @@ class Settings: ObservableObject {
 
 }
 
+enum FilePickerError: Error {
+    case failed
+}
+
 protocol ActionsViewDelegate: NSObject {
 
     func settingsTapped()
     func moveFileTapped()
     func moveExampleFileTapped()
     func setDestinationTapped()
+    func reversePages(url: URL, completion: @escaping (Error?) -> Void)
 
 }
 
@@ -42,10 +48,94 @@ struct ActionView: View {
     }
 }
 
+struct FilePicker: View {
+
+    @State private var showingFilePicker = false
+    let placeholder: String
+    let documentTypes: [String]
+    @Binding var url: URL?
+
+    var body: some View {
+        Button(action: {
+            self.showingFilePicker = true
+        }) {
+            if url == nil {
+                Text(placeholder)
+            } else {
+                Text(url!.lastPathComponent)
+            }
+        }
+        .sheet(isPresented: $showingFilePicker) {
+            FilePickerSheet(documentTypes: self.documentTypes, url: self.$url)
+        }
+    }
+
+}
+
+struct ActivityIndicator: UIViewRepresentable {
+
+    @Binding var isAnimating: Bool
+    let style: UIActivityIndicatorView.Style
+
+    func makeUIView(context: UIViewRepresentableContext<ActivityIndicator>) -> UIActivityIndicatorView {
+        return UIActivityIndicatorView(activityIndicatorStyle: style)
+    }
+
+    func updateUIView(_ uiView: UIActivityIndicatorView, context: UIViewRepresentableContext<ActivityIndicator>) {
+        isAnimating ? uiView.startAnimating() : uiView.stopAnimating()
+    }
+}
+
+struct ReversePages: View {
+
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @State private var url: URL?
+    @State private var isProcessing = false
+    @State private var error: Error?
+    var action: (URL, @escaping (Error?) -> Void) -> Void
+
+    var body: some View {
+        NavigationView {
+            VStack {
+                Form {
+                    Section(footer: Text(self.error != nil ? String(describing: error!) : "").foregroundColor(.red)) {
+                        FilePicker(placeholder: "Select file...", documentTypes: [kUTTypePDF as String], url: $url).lineLimit(1)
+                    }
+                }
+            }
+            .navigationBarItems(leading: Button(action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }, label: {
+                Text("Cancel")
+            }), trailing: Button(action: {
+                self.error = nil
+                self.isProcessing = true
+                self.action(self.url!) { error in
+                    self.isProcessing = false
+                    self.error = error
+                    if error == nil {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
+                }
+            }, label: {
+                if isProcessing {
+                    ActivityIndicator(isAnimating: $isProcessing, style: .medium)
+                } else {
+                    Text("Save").disabled(self.url == nil)
+                }
+            }))
+            .navigationBarTitle("Reverse Pages", displayMode: .inline)
+        }
+        .disabled(isProcessing)
+    }
+
+}
+
 struct ActionsView: View {
 
     weak var delegate: ActionsViewDelegate?
     @ObservedObject var settings: Settings
+    @State private var displayModal = false
 
     var body: some View {
         VStack {
@@ -56,6 +146,9 @@ struct ActionsView: View {
                             return
                         }
                         delegate.moveFileTapped()
+                    }
+                    ActionView(text: "Reverse pages...", imageName: "doc.on.doc") {
+                        self.displayModal = true
                     }
                 }
                 Section(header: Text("Debug".uppercased())) {
@@ -73,16 +166,25 @@ struct ActionsView: View {
                     }
                 }
             }.listStyle(GroupedListStyle())
-        }.navigationBarTitle("File Actions")
-            .navigationBarItems(leading: Button(action: {
-                print("Settings tapped")
+        }
+        .sheet(isPresented: $displayModal) {
+            ReversePages { url, completion in
                 guard let delegate = self.delegate else {
                     return
                 }
-                delegate.settingsTapped()
-            }, label: {
-                Text("Settings")
-            }))
+                delegate.reversePages(url: url, completion: completion)
+            }
+        }
+        .navigationBarTitle("File Actions")
+        .navigationBarItems(leading: Button(action: {
+            print("Settings tapped")
+            guard let delegate = self.delegate else {
+                return
+            }
+            delegate.settingsTapped()
+        }, label: {
+            Text("Settings")
+        }))
     }
 
 }
@@ -113,7 +215,6 @@ class ActionsViewController: UIHostingController<ActionsView> {
     }
 
 }
-
 
 enum StoryboardIdentifier: String {
     case settings = "Settings"
@@ -157,6 +258,16 @@ extension ActionsViewController: ActionsViewDelegate {
         let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeFolder as String], in: .open)
         documentPicker.delegate = self
         self.present(documentPicker, animated: true, completion: nil)
+    }
+
+    func reversePages(url: URL, completion: @escaping (Error?) -> Void) {
+        PDFDocument.reverse(url: url) { result in
+            if case .failure(let error) = result {
+                completion(error)
+            } else {
+                completion(nil)
+            }
+        }
     }
 
 }
