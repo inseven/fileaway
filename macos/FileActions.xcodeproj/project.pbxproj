@@ -104,7 +104,7 @@
 		D8666A4B20C12EB100B739CC /* FileActionsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileActionsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8666A4F20C12EB100B739CC /* FileActionsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileActionsUITests.swift; sourceTree = "<group>"; };
 		D8666A5120C12EB100B739CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D8D14D4D216E3B9F00D6E1DF /* FileawayCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FileawayCore.xcodeproj; path = ../FileawayCore/FileawayCore.xcodeproj; sourceTree = "<group>"; };
+		D8D14D4D216E3B9F00D6E1DF /* FileawayCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FileawayCore.xcodeproj; path = ../core/FileawayCore.xcodeproj; sourceTree = "<group>"; };
 		EEB5F5B72154BCA4005E72C9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
