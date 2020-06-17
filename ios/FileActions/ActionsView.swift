@@ -12,7 +12,6 @@ import SwiftUI
 
 protocol ActionsViewDelegate: NSObject {
     func moveFileTapped()
-    func reversePages(url: URL, completion: @escaping (Error?) -> Void)
 }
 
 enum ActionSheet {
@@ -53,12 +52,7 @@ struct ActionsView: View {
                     SettingsView(settings: self.settings, tasks: self.settings.tasks)
                 }
             } else if self.activeSheet == .reversePages {
-                ReversePages { url, completion in
-                    guard let delegate = self.delegate else {
-                        return
-                    }
-                    delegate.reversePages(url: url, completion: completion)
-                }
+                ReversePages(task: ReverseTask())
             } else {
                 Text("None")
             }

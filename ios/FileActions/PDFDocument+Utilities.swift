@@ -6,6 +6,7 @@
 //  Copyright © 2020 InSeven Limited. All rights reserved.
 //
 
+import Combine
 import Foundation
 import PDFKit
 
@@ -13,27 +14,43 @@ enum PDFDocumentUtilitiesError: Error {
     case failure
 }
 
+class ReverseTask {
+
+    private var task: AnyCancellable?
+
+    func reverse(url: URL, completion: @escaping (Result<Bool, Error>) -> Void) {
+        self.task = PDFDocument.reverse(url: url)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { result in
+                if case .failure(let error) = result {
+                    completion(.failure(error))
+                }
+            }) { document in
+                completion(.success(true))
+        }
+    }
+
+}
+
 extension PDFDocument {
 
-    public static func reverse(url: URL, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let queueCompletion: (Result<Bool, Error>) -> Void = { result in
-            DispatchQueue.main.async {
-                completion(result)
+    static func open(url: URL) -> Future<PDFDocument, Error> {
+        return Future() { promise in
+            DispatchQueue.global(qos: .userInteractive).async {
+                guard let document = PDFDocument(url: url) else {
+                    promise(.failure(PDFDocumentUtilitiesError.failure))
+                    return
+                }
+                promise(.success(document))
             }
         }
-        DispatchQueue.global(qos: .userInteractive).async {
-            guard let document = PDFDocument(url: url) else {
-                queueCompletion(.failure(PDFDocumentUtilitiesError.failure))
-                return
-            }
-            let reversed = document.reverse()
-            let success = reversed.write(to: url)
-            if success {
-                queueCompletion(.success(true))
-            } else {
-                queueCompletion(.failure(PDFDocumentUtilitiesError.failure))
-            }
-        }
+    }
+
+    static func reverse(url: URL) -> AnyPublisher<Bool, Error> {
+        return self.open(url: url)
+            .map { $0.reverse() }
+            .map { $0.write(to: url) }
+            .eraseToAnyPublisher()
     }
 
     func reverse() -> PDFDocument {

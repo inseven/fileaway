@@ -15,7 +15,7 @@ struct ReversePages: View {
     @State private var url: URL?
     @State private var isProcessing = false
     @State private var error: Error?
-    var action: (URL, @escaping (Error?) -> Void) -> Void
+    var task: ReverseTask
 
     var body: some View {
         NavigationView {
@@ -33,11 +33,14 @@ struct ReversePages: View {
             }), trailing: Button(action: {
                 self.error = nil
                 self.isProcessing = true
-                self.action(self.url!) { error in
+                self.task.reverse(url: self.url!) { result in
                     self.isProcessing = false
-                    self.error = error
-                    if error == nil {
+                    switch result {
+                    case .success:
+                        self.error = nil
                         self.presentationMode.wrappedValue.dismiss()
+                    case .failure(let error):
+                        self.error = error
                     }
                 }
             }, label: {

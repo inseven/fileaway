@@ -30,14 +30,4 @@ extension ActionsViewController: ActionsViewDelegate {
         self.present(viewController, animated: true, completion: nil)
     }
 
-    func reversePages(url: URL, completion: @escaping (Error?) -> Void) {
-        PDFDocument.reverse(url: url) { result in
-            if case .failure(let error) = result {
-                completion(error)
-            } else {
-                completion(nil)
-            }
-        }
-    }
-
 }
