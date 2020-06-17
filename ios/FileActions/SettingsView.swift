@@ -6,6 +6,7 @@
 //  Copyright © 2020 InSeven Limited. All rights reserved.
 //
 
+import MobileCoreServices
 import SwiftUI
 
 import FileActionsCore
@@ -34,18 +35,11 @@ struct VariableView: View {
     var body: some View {
         VStack {
             Text(variable.name)
-        }.navigationBarTitle(variable.name)
+        }
+        .navigationBarTitle(variable.name)
     }
 
 }
-
-//extension Component: Identifiable {
-//
-//    public var id: Int {
-//        UnsafePointer(self)
-//    }
-//
-//}
 
 class TaskState: ObservableObject {
 
@@ -77,7 +71,7 @@ struct ComponentItem: View {
                 TextField("Name", text: $value)
             } else {
                 Text(component.value)
-                    .foregroundColor(.secondary)
+                .foregroundColor(.secondary)
             }
         }
     }
@@ -167,11 +161,15 @@ struct TasksView: View {
 
 struct SettingsView: View {
 
+    @ObservedObject var settings: Settings
     @State var tasks: [TaskState]
 
     var body: some View {
         VStack {
             Form {
+                Section(header: Text("Destination".uppercased()), footer: Destination(url: $settings.destination)) {
+                    FilePicker(placeholder: "Select...", documentTypes: [kUTTypeFolder as String], url: $settings.destination).lineLimit(1)
+                }
                 Section() {
                     NavigationLink(destination: TasksView(tasks: tasks)) {
                         Text("Tasks")
@@ -181,10 +179,4 @@ struct SettingsView: View {
         }
     }
 
-}
-
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView(tasks: [])
-    }
 }

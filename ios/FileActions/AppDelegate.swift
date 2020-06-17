@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var manager: Manager?
+    public var settings = Settings()
 
     static var shared: AppDelegate {
         UIApplication.shared.delegate as! AppDelegate
