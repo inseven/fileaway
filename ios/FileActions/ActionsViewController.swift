@@ -25,7 +25,6 @@ protocol ActionsViewDelegate: NSObject {
 
     func settingsTapped()
     func moveFileTapped()
-    func moveExampleFileTapped()
     func setDestinationTapped()
     func reversePages(url: URL, completion: @escaping (Error?) -> Void)
 
@@ -152,12 +151,6 @@ struct ActionsView: View {
                     }
                 }
                 Section(header: Text("Debug".uppercased())) {
-                    ActionView(text: "Move example file...", imageName: "folder") {
-                        guard let delegate = self.delegate else {
-                            return
-                        }
-                        delegate.moveExampleFileTapped()
-                    }
                     ActionView(text: "Set destination...", imageName: "folder") {
                         guard let delegate = self.delegate else {
                             return
@@ -237,21 +230,6 @@ extension ActionsViewController: ActionsViewDelegate {
     func moveFileTapped() {
         let viewController = MoveFileViewController()
         self.present(viewController, animated: true, completion: nil)
-    }
-
-    func moveExampleFileTapped() {
-        guard let pickerViewController = AppDelegate.shared.instantiateViewController(identifier: .picker) as? PickerViewController else {
-            return
-        }
-        pickerViewController.manager = AppDelegate.shared.manager
-        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let exampleUrl = Bundle.main.url(forResource: "example", withExtension: "pdf")!
-        let documentUrl = documentsDirectory.appendingPathComponent("example.url")
-        try? FileManager.default.copyItem(at: exampleUrl, to: documentUrl)
-        pickerViewController.documentUrl = documentUrl
-        let navigationController = UINavigationController(rootViewController: pickerViewController)
-        navigationController.modalPresentationStyle = .formSheet
-        self.present(navigationController, animated: true, completion: nil)
     }
 
     func setDestinationTapped() {

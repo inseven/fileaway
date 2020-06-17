@@ -10,7 +10,6 @@
 		D843199F249A85680014CFE9 /* FilePickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D843199E249A85680014CFE9 /* FilePickerSheet.swift */; };
 		D84319A1249AB1EE0014CFE9 /* PDFDocument+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84319A0249AB1EE0014CFE9 /* PDFDocument+Utilities.swift */; };
 		D88F3D43216F847D00BFE0F9 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88F3D42216F847D00BFE0F9 /* PickerViewController.swift */; };
-		D88F3D48216F8BEB00BFE0F9 /* example.pdf in Resources */ = {isa = PBXBuildFile; fileRef = D88F3D47216F8BEB00BFE0F9 /* example.pdf */; };
 		D88F3D4A216F961700BFE0F9 /* PreviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88F3D49216F961700BFE0F9 /* PreviewTableViewCell.swift */; };
 		D88F3D4C217048B400BFE0F9 /* TypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88F3D4B217048B400BFE0F9 /* TypeViewController.swift */; };
 		D88F3D4F2170689200BFE0F9 /* TextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88F3D4E2170689200BFE0F9 /* TextTableViewCell.swift */; };
@@ -66,7 +65,6 @@
 		D843199E249A85680014CFE9 /* FilePickerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePickerSheet.swift; sourceTree = "<group>"; };
 		D84319A0249AB1EE0014CFE9 /* PDFDocument+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PDFDocument+Utilities.swift"; sourceTree = "<group>"; };
 		D88F3D42216F847D00BFE0F9 /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
-		D88F3D47216F8BEB00BFE0F9 /* example.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = example.pdf; sourceTree = "<group>"; };
 		D88F3D49216F961700BFE0F9 /* PreviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewTableViewCell.swift; sourceTree = "<group>"; };
 		D88F3D4B217048B400BFE0F9 /* TypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeViewController.swift; sourceTree = "<group>"; };
 		D88F3D4E2170689200BFE0F9 /* TextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTableViewCell.swift; sourceTree = "<group>"; };
@@ -121,7 +119,6 @@
 		D890DD3D216F16C300922453 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D88F3D47216F8BEB00BFE0F9 /* example.pdf */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -309,7 +306,6 @@
 			files = (
 				D8CCB8102143672700AC445F /* LaunchScreen.storyboard in Resources */,
 				D8CCB80D2143672700AC445F /* Assets.xcassets in Resources */,
-				D88F3D48216F8BEB00BFE0F9 /* example.pdf in Resources */,
 				D8CCB80B2143672700AC445F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
