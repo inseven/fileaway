@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import FileawayCore
+
+import FileActionsCore
 
 extension UIApplication {
 

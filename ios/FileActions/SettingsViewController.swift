@@ -9,7 +9,7 @@
 import UIKit
 import SwiftUI
 
-import FileawayCore
+import FileActionsCore
 
 protocol SettingsViewControllerDelegate: AnyObject {
     func settingsViewControllerDidFinish(_ controller: SettingsViewController)

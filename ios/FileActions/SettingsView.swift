@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-import FileawayCore
+import FileActionsCore
 
 extension VariableType: CustomStringConvertible {
 

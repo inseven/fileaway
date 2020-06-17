@@ -9,7 +9,7 @@
 import UIKit
 import MobileCoreServices
 
-import FileawayCore
+import FileActionsCore
 
 class ViewController: UIViewController {
 

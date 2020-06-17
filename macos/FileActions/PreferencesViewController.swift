@@ -7,7 +7,8 @@
 //
 
 import Cocoa
-import FileawayCore
+
+import FileActionsCore
 
 extension NSStoryboardSegue.Identifier {
 

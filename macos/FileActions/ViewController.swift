@@ -8,7 +8,8 @@
 
 import Cocoa
 import Quartz
-import FileawayCore
+
+import FileActionsCore
 
 class ViewController: NSViewController, DragDelegate {
 

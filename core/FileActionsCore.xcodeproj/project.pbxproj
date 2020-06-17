@@ -10,14 +10,14 @@
 		D8BCA524216F08DF002A624D /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D14D56216E3BAE00D6E1DF /* Configuration.swift */; };
 		D8BCA525216F08DF002A624D /* VariableProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D14D57216E3BAE00D6E1DF /* VariableProvider.swift */; };
 		D8BCA526216F08DF002A624D /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D14D58216E3BAE00D6E1DF /* Manager.swift */; };
-		D8BCA527216F08E3002A624D /* FileawayCore.h in Headers */ = {isa = PBXBuildFile; fileRef = D81F7C48216E3AA80070AAA0 /* FileawayCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D8BCA528216F08E6002A624D /* FileawayCore.h in Headers */ = {isa = PBXBuildFile; fileRef = D81F7C48216E3AA80070AAA0 /* FileawayCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D8D14DA9216E3E0E00D6E1DF /* FileawayCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8D14DA0216E3E0E00D6E1DF /* FileawayCore.framework */; };
+		D8BCA527216F08E3002A624D /* FileActionsCore.h in Headers */ = {isa = PBXBuildFile; fileRef = D81F7C48216E3AA80070AAA0 /* FileActionsCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8BCA528216F08E6002A624D /* FileActionsCore.h in Headers */ = {isa = PBXBuildFile; fileRef = D81F7C48216E3AA80070AAA0 /* FileActionsCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8D14DA9216E3E0E00D6E1DF /* FileActionsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8D14DA0216E3E0E00D6E1DF /* FileActionsCore.framework */; };
 		D8D14DAE216E3E0E00D6E1DF /* FileawayCore_macOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D14DAD216E3E0E00D6E1DF /* FileawayCore_macOSTests.swift */; };
 		D8D14DB7216E3E1400D6E1DF /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D14D56216E3BAE00D6E1DF /* Configuration.swift */; };
 		D8D14DB8216E3E1400D6E1DF /* VariableProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D14D57216E3BAE00D6E1DF /* VariableProvider.swift */; };
 		D8D14DB9216E3E1400D6E1DF /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D14D58216E3BAE00D6E1DF /* Manager.swift */; };
-		D8D14DD0216F015F00D6E1DF /* FileawayCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8D14DC7216F015F00D6E1DF /* FileawayCore.framework */; };
+		D8D14DD0216F015F00D6E1DF /* FileActionsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8D14DC7216F015F00D6E1DF /* FileActionsCore.framework */; };
 		D8D14DD5216F015F00D6E1DF /* FileawayCore_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D14DD4216F015F00D6E1DF /* FileawayCore_iOSTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,21 +39,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D81F7C48216E3AA80070AAA0 /* FileawayCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileawayCore.h; sourceTree = "<group>"; };
+		D81F7C48216E3AA80070AAA0 /* FileActionsCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileActionsCore.h; sourceTree = "<group>"; };
 		D81F7C49216E3AA80070AAA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D81F7C53216E3AA90070AAA0 /* FileawayCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileawayCoreTests.swift; sourceTree = "<group>"; };
 		D81F7C55216E3AA90070AAA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8D14D56216E3BAE00D6E1DF /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		D8D14D57216E3BAE00D6E1DF /* VariableProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableProvider.swift; sourceTree = "<group>"; };
 		D8D14D58216E3BAE00D6E1DF /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
-		D8D14DA0216E3E0E00D6E1DF /* FileawayCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FileawayCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8D14DA0216E3E0E00D6E1DF /* FileActionsCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FileActionsCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8D14DA3216E3E0E00D6E1DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D8D14DA8216E3E0E00D6E1DF /* FileawayCore macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FileawayCore macOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8D14DA8216E3E0E00D6E1DF /* FileActionsCore macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FileActionsCore macOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8D14DAD216E3E0E00D6E1DF /* FileawayCore_macOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileawayCore_macOSTests.swift; sourceTree = "<group>"; };
 		D8D14DAF216E3E0E00D6E1DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D8D14DC7216F015F00D6E1DF /* FileawayCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FileawayCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8D14DC7216F015F00D6E1DF /* FileActionsCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FileActionsCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8D14DCA216F015F00D6E1DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D8D14DCF216F015F00D6E1DF /* FileawayCore iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FileawayCore iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8D14DCF216F015F00D6E1DF /* FileActionsCore iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FileActionsCore iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8D14DD4216F015F00D6E1DF /* FileawayCore_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileawayCore_iOSTests.swift; sourceTree = "<group>"; };
 		D8D14DD6216F015F00D6E1DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,7 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8D14DA9216E3E0E00D6E1DF /* FileawayCore.framework in Frameworks */,
+				D8D14DA9216E3E0E00D6E1DF /* FileActionsCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,7 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8D14DD0216F015F00D6E1DF /* FileawayCore.framework in Frameworks */,
+				D8D14DD0216F015F00D6E1DF /* FileActionsCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,10 +108,10 @@
 		D81F7C46216E3AA80070AAA0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D8D14DA0216E3E0E00D6E1DF /* FileawayCore.framework */,
-				D8D14DA8216E3E0E00D6E1DF /* FileawayCore macOSTests.xctest */,
-				D8D14DC7216F015F00D6E1DF /* FileawayCore.framework */,
-				D8D14DCF216F015F00D6E1DF /* FileawayCore iOSTests.xctest */,
+				D8D14DA0216E3E0E00D6E1DF /* FileActionsCore.framework */,
+				D8D14DA8216E3E0E00D6E1DF /* FileActionsCore macOSTests.xctest */,
+				D8D14DC7216F015F00D6E1DF /* FileActionsCore.framework */,
+				D8D14DCF216F015F00D6E1DF /* FileActionsCore iOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -122,7 +122,7 @@
 				D8D14D56216E3BAE00D6E1DF /* Configuration.swift */,
 				D8D14D57216E3BAE00D6E1DF /* VariableProvider.swift */,
 				D8D14D58216E3BAE00D6E1DF /* Manager.swift */,
-				D81F7C48216E3AA80070AAA0 /* FileawayCore.h */,
+				D81F7C48216E3AA80070AAA0 /* FileActionsCore.h */,
 				D81F7C49216E3AA80070AAA0 /* Info.plist */,
 			);
 			path = FileawayCore;
@@ -178,7 +178,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8BCA528216F08E6002A624D /* FileawayCore.h in Headers */,
+				D8BCA528216F08E6002A624D /* FileActionsCore.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,16 +186,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8BCA527216F08E3002A624D /* FileawayCore.h in Headers */,
+				D8BCA527216F08E3002A624D /* FileActionsCore.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D8D14D9F216E3E0E00D6E1DF /* FileawayCore macOS */ = {
+		D8D14D9F216E3E0E00D6E1DF /* FileActionsCore macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D8D14DB1216E3E0E00D6E1DF /* Build configuration list for PBXNativeTarget "FileawayCore macOS" */;
+			buildConfigurationList = D8D14DB1216E3E0E00D6E1DF /* Build configuration list for PBXNativeTarget "FileActionsCore macOS" */;
 			buildPhases = (
 				D8D14D9B216E3E0E00D6E1DF /* Headers */,
 				D8D14D9C216E3E0E00D6E1DF /* Sources */,
@@ -206,14 +206,14 @@
 			);
 			dependencies = (
 			);
-			name = "FileawayCore macOS";
+			name = "FileActionsCore macOS";
 			productName = "FileawayCore macOS";
-			productReference = D8D14DA0216E3E0E00D6E1DF /* FileawayCore.framework */;
+			productReference = D8D14DA0216E3E0E00D6E1DF /* FileActionsCore.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D8D14DA7216E3E0E00D6E1DF /* FileawayCore macOSTests */ = {
+		D8D14DA7216E3E0E00D6E1DF /* FileActionsCore macOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D8D14DB4216E3E0E00D6E1DF /* Build configuration list for PBXNativeTarget "FileawayCore macOSTests" */;
+			buildConfigurationList = D8D14DB4216E3E0E00D6E1DF /* Build configuration list for PBXNativeTarget "FileActionsCore macOSTests" */;
 			buildPhases = (
 				D8D14DA4216E3E0E00D6E1DF /* Sources */,
 				D8D14DA5216E3E0E00D6E1DF /* Frameworks */,
@@ -224,14 +224,14 @@
 			dependencies = (
 				D8D14DAB216E3E0E00D6E1DF /* PBXTargetDependency */,
 			);
-			name = "FileawayCore macOSTests";
+			name = "FileActionsCore macOSTests";
 			productName = "FileawayCore macOSTests";
-			productReference = D8D14DA8216E3E0E00D6E1DF /* FileawayCore macOSTests.xctest */;
+			productReference = D8D14DA8216E3E0E00D6E1DF /* FileActionsCore macOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		D8D14DC6216F015F00D6E1DF /* FileawayCore iOS */ = {
+		D8D14DC6216F015F00D6E1DF /* FileActionsCore iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D8D14DD8216F015F00D6E1DF /* Build configuration list for PBXNativeTarget "FileawayCore iOS" */;
+			buildConfigurationList = D8D14DD8216F015F00D6E1DF /* Build configuration list for PBXNativeTarget "FileActionsCore iOS" */;
 			buildPhases = (
 				D8D14DC2216F015F00D6E1DF /* Headers */,
 				D8D14DC3216F015F00D6E1DF /* Sources */,
@@ -242,14 +242,14 @@
 			);
 			dependencies = (
 			);
-			name = "FileawayCore iOS";
+			name = "FileActionsCore iOS";
 			productName = "FileawayCore iOS";
-			productReference = D8D14DC7216F015F00D6E1DF /* FileawayCore.framework */;
+			productReference = D8D14DC7216F015F00D6E1DF /* FileActionsCore.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D8D14DCE216F015F00D6E1DF /* FileawayCore iOSTests */ = {
+		D8D14DCE216F015F00D6E1DF /* FileActionsCore iOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D8D14DDB216F015F00D6E1DF /* Build configuration list for PBXNativeTarget "FileawayCore iOSTests" */;
+			buildConfigurationList = D8D14DDB216F015F00D6E1DF /* Build configuration list for PBXNativeTarget "FileActionsCore iOSTests" */;
 			buildPhases = (
 				D8D14DCB216F015F00D6E1DF /* Sources */,
 				D8D14DCC216F015F00D6E1DF /* Frameworks */,
@@ -260,9 +260,9 @@
 			dependencies = (
 				D8D14DD2216F015F00D6E1DF /* PBXTargetDependency */,
 			);
-			name = "FileawayCore iOSTests";
+			name = "FileActionsCore iOSTests";
 			productName = "FileawayCore iOSTests";
-			productReference = D8D14DCF216F015F00D6E1DF /* FileawayCore iOSTests.xctest */;
+			productReference = D8D14DCF216F015F00D6E1DF /* FileActionsCore iOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -289,7 +289,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D81F7C3F216E3AA80070AAA0 /* Build configuration list for PBXProject "FileawayCore" */;
+			buildConfigurationList = D81F7C3F216E3AA80070AAA0 /* Build configuration list for PBXProject "FileActionsCore" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -301,10 +301,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D8D14D9F216E3E0E00D6E1DF /* FileawayCore macOS */,
-				D8D14DA7216E3E0E00D6E1DF /* FileawayCore macOSTests */,
-				D8D14DC6216F015F00D6E1DF /* FileawayCore iOS */,
-				D8D14DCE216F015F00D6E1DF /* FileawayCore iOSTests */,
+				D8D14D9F216E3E0E00D6E1DF /* FileActionsCore macOS */,
+				D8D14DA7216E3E0E00D6E1DF /* FileActionsCore macOSTests */,
+				D8D14DC6216F015F00D6E1DF /* FileActionsCore iOS */,
+				D8D14DCE216F015F00D6E1DF /* FileActionsCore iOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -382,12 +382,12 @@
 /* Begin PBXTargetDependency section */
 		D8D14DAB216E3E0E00D6E1DF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D8D14D9F216E3E0E00D6E1DF /* FileawayCore macOS */;
+			target = D8D14D9F216E3E0E00D6E1DF /* FileActionsCore macOS */;
 			targetProxy = D8D14DAA216E3E0E00D6E1DF /* PBXContainerItemProxy */;
 		};
 		D8D14DD2216F015F00D6E1DF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D8D14DC6216F015F00D6E1DF /* FileawayCore iOS */;
+			target = D8D14DC6216F015F00D6E1DF /* FileActionsCore iOS */;
 			targetProxy = D8D14DD1216F015F00D6E1DF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -537,7 +537,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.FileawayCore-macOS";
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
-				PRODUCT_NAME = FileawayCore;
+				PRODUCT_NAME = FileActionsCore;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
@@ -566,7 +566,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.FileawayCore-macOS";
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
-				PRODUCT_NAME = FileawayCore;
+				PRODUCT_NAME = FileActionsCore;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
@@ -635,7 +635,7 @@
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.FileawayCore-iOS";
-				PRODUCT_NAME = FileawayCore;
+				PRODUCT_NAME = FileActionsCore;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -660,7 +660,7 @@
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.FileawayCore-iOS";
-				PRODUCT_NAME = FileawayCore;
+				PRODUCT_NAME = FileActionsCore;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -708,7 +708,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D81F7C3F216E3AA80070AAA0 /* Build configuration list for PBXProject "FileawayCore" */ = {
+		D81F7C3F216E3AA80070AAA0 /* Build configuration list for PBXProject "FileActionsCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D81F7C57216E3AA90070AAA0 /* Debug */,
@@ -717,7 +717,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D8D14DB1216E3E0E00D6E1DF /* Build configuration list for PBXNativeTarget "FileawayCore macOS" */ = {
+		D8D14DB1216E3E0E00D6E1DF /* Build configuration list for PBXNativeTarget "FileActionsCore macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D8D14DB2216E3E0E00D6E1DF /* Debug */,
@@ -726,7 +726,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D8D14DB4216E3E0E00D6E1DF /* Build configuration list for PBXNativeTarget "FileawayCore macOSTests" */ = {
+		D8D14DB4216E3E0E00D6E1DF /* Build configuration list for PBXNativeTarget "FileActionsCore macOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D8D14DB5216E3E0E00D6E1DF /* Debug */,
@@ -735,7 +735,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D8D14DD8216F015F00D6E1DF /* Build configuration list for PBXNativeTarget "FileawayCore iOS" */ = {
+		D8D14DD8216F015F00D6E1DF /* Build configuration list for PBXNativeTarget "FileActionsCore iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D8D14DD9216F015F00D6E1DF /* Debug */,
@@ -744,7 +744,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D8D14DDB216F015F00D6E1DF /* Build configuration list for PBXNativeTarget "FileawayCore iOSTests" */ = {
+		D8D14DDB216F015F00D6E1DF /* Build configuration list for PBXNativeTarget "FileActionsCore iOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D8D14DDC216F015F00D6E1DF /* Debug */,
