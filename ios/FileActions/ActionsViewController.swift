@@ -25,16 +25,6 @@ class ActionsViewController: UIHostingController<ActionsView> {
 
 extension ActionsViewController: ActionsViewDelegate {
 
-    func settingsTapped() {
-        guard
-            let navigationController = AppDelegate.shared.instantiateViewController(identifier: .settings) as? UINavigationController,
-            let settingsViewController = navigationController.topViewController as? SettingsViewController else {
-                return
-        }
-        settingsViewController.delegate = self
-        self.present(navigationController, animated: true, completion: nil)
-    }
-
     func moveFileTapped() {
         let viewController = MoveFileViewController()
         self.present(viewController, animated: true, completion: nil)
@@ -48,14 +38,6 @@ extension ActionsViewController: ActionsViewDelegate {
                 completion(nil)
             }
         }
-    }
-
-}
-
-extension ActionsViewController: SettingsViewControllerDelegate {
-
-    func settingsViewControllerDidFinish(_ controller: SettingsViewController) {
-        controller.dismiss(animated: true, completion: nil)
     }
 
 }

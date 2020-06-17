@@ -11,7 +11,6 @@ import MobileCoreServices
 import SwiftUI
 
 protocol ActionsViewDelegate: NSObject {
-    func settingsTapped()
     func moveFileTapped()
     func reversePages(url: URL, completion: @escaping (Error?) -> Void)
 }
@@ -20,7 +19,8 @@ struct ActionsView: View {
 
     weak var delegate: ActionsViewDelegate?
     @ObservedObject var settings: Settings
-    @State private var displayModal = false
+    @State private var displayReversePages = false
+    @State private var displaySettings = false
 
     var body: some View {
         VStack {
@@ -35,12 +35,12 @@ struct ActionsView: View {
                 }
                 Section {
                     ActionView(text: "Reverse pages...", imageName: "doc.on.doc") {
-                        self.displayModal = true
+                        self.displayReversePages = true
                     }
                 }
             }.listStyle(GroupedListStyle())
         }
-        .sheet(isPresented: $displayModal) {
+        .sheet(isPresented: $displayReversePages) {
             ReversePages { url, completion in
                 guard let delegate = self.delegate else {
                     return
@@ -48,13 +48,14 @@ struct ActionsView: View {
                 delegate.reversePages(url: url, completion: completion)
             }
         }
+        .sheet(isPresented: $displaySettings) {
+            NavigationView {
+                SettingsView(settings: self.settings, tasks: self.settings.tasks)
+            }
+        }
         .navigationBarTitle("File Actions")
         .navigationBarItems(leading: Button(action: {
-            print("Settings tapped")
-            guard let delegate = self.delegate else {
-                return
-            }
-            delegate.settingsTapped()
+            self.displaySettings = true
         }, label: {
             Text("Settings")
         }))

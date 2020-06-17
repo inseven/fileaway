@@ -23,32 +23,6 @@
             </objects>
             <point key="canvasLocation" x="-146" y="132"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="SG1-aR-XdN">
-            <objects>
-                <navigationController storyboardIdentifier="Settings" id="eub-1D-qKH" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LZB-1C-cLx">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="vpw-pk-8rB" kind="relationship" relationship="rootViewController" id="ufq-ZD-WHo"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CuE-sS-n6W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="657" y="867"/>
-        </scene>
-        <!--Settings-->
-        <scene sceneID="Sf1-MJ-XAE">
-            <objects>
-                <hostingController id="vpw-pk-8rB" customClass="SettingsViewController" customModule="File_Actions" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="Settings" id="b7a-bd-UtB"/>
-                </hostingController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EQe-Tl-b6t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1606" y="867"/>
-        </scene>
         <!--Move File-->
         <scene sceneID="NZq-go-Zdw">
             <objects>

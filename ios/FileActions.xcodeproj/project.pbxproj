@@ -36,7 +36,6 @@
 		D8CCB81B2143672700AC445F /* FileActionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCB81A2143672700AC445F /* FileActionsTests.swift */; };
 		D8CCB8262143672700AC445F /* FileActionsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCB8252143672700AC445F /* FileActionsUITests.swift */; };
 		D8CCD293246EDC6A007EF2BB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCD292246EDC6A007EF2BB /* SettingsView.swift */; };
-		D8CCD298246EDE6E007EF2BB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCD297246EDE6E007EF2BB /* SettingsViewController.swift */; };
 		EEFF05A221AD1E5A0014C89B /* UIViewController+Alerting.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFF05A121AD1E5A0014C89B /* UIViewController+Alerting.swift */; };
 /* End PBXBuildFile section */
 
@@ -106,7 +105,6 @@
 		D8CCB8252143672700AC445F /* FileActionsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileActionsUITests.swift; sourceTree = "<group>"; };
 		D8CCB8272143672700AC445F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8CCD292246EDC6A007EF2BB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		D8CCD297246EDE6E007EF2BB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		EEFF05A121AD1E5A0014C89B /* UIViewController+Alerting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alerting.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -193,7 +191,6 @@
 				D84319A8249AB8C70014CFE9 /* ReversePages.swift */,
 				D84319B0249ABA1E0014CFE9 /* Settings.swift */,
 				D8CCD292246EDC6A007EF2BB /* SettingsView.swift */,
-				D8CCD297246EDE6E007EF2BB /* SettingsViewController.swift */,
 				D89941002145E6AE00097F3D /* StorageManager.swift */,
 				D84319A2249AB7FE0014CFE9 /* StoryboardIdentifier.swift */,
 				D84319A4249AB83B0014CFE9 /* String+Utilities.swift */,
@@ -366,7 +363,6 @@
 				D88F3D4C217048B400BFE0F9 /* TypeViewController.swift in Sources */,
 				D88F3D4F2170689200BFE0F9 /* TextTableViewCell.swift in Sources */,
 				D84319AF249AB9A40014CFE9 /* ActivityIndicator.swift in Sources */,
-				D8CCD298246EDE6E007EF2BB /* SettingsViewController.swift in Sources */,
 				D84319B3249ABA9A0014CFE9 /* URL+Utilities.swift in Sources */,
 				D89941012145E6AE00097F3D /* StorageManager.swift in Sources */,
 				D88F3D54217070A400BFE0F9 /* DateTableViewCell.swift in Sources */,
@@ -556,7 +552,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
 				INFOPLIST_FILE = FileActions/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -573,7 +569,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
 				INFOPLIST_FILE = FileActions/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

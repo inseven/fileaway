@@ -161,6 +161,7 @@ struct TasksView: View {
 
 struct SettingsView: View {
 
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @ObservedObject var settings: Settings
     @State var tasks: [TaskState]
 
@@ -177,6 +178,12 @@ struct SettingsView: View {
                 }
             }.listStyle(GroupedListStyle())
         }
+        .navigationBarTitle("Settings", displayMode: .inline)
+        .navigationBarItems(leading: Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }, label: {
+            Text("Cancel")
+        }))
     }
 
 }

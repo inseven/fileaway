@@ -27,4 +27,8 @@ class Settings: ObservableObject {
         destination = try? StorageManager.rootUrl()
     }
 
+    var tasks: [TaskState] {
+        AppDelegate.shared.manager!.tasks.map { TaskState(task: $0) }
+    }
+
 }
