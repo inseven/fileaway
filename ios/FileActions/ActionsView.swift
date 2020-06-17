@@ -18,6 +18,8 @@ enum ActionSheet {
     case none
     case settings
     case reversePages
+    case interleave
+    case fakeDuplex
 }
 
 struct ActionsView: View {
@@ -43,6 +45,14 @@ struct ActionsView: View {
                         self.activeSheet = .reversePages
                         self.showSheet = true
                     }
+                    ActionView(text: "Interleave pages...", imageName: "doc.on.doc") {
+                        self.activeSheet = .interleave
+                        self.showSheet = true
+                    }
+                    ActionView(text: "Fake duplex...", imageName: "doc.on.doc") {
+                        self.activeSheet = .fakeDuplex
+                        self.showSheet = true
+                    }
                 }
             }.listStyle(GroupedListStyle())
         }
@@ -53,6 +63,10 @@ struct ActionsView: View {
                 }
             } else if self.activeSheet == .reversePages {
                 ReversePages(task: ReverseTask())
+            } else if self.activeSheet == .interleave {
+                MergeDocumentsView(task: MergeTask())
+            } else if self.activeSheet == .fakeDuplex {
+                FakeDuplexView(task: FakeDuplexTask())
             } else {
                 Text("None")
             }
