@@ -106,6 +106,8 @@ struct SettingsView: View {
                 Section() {
                     NavigationLink(destination: TasksView(tasks: settings.tasks)) {
                         Text("Tasks")
+                        Spacer()
+                        Text("\(settings.tasks.tasks.count)").foregroundColor(.secondary)
                     }
                 }
             }.listStyle(GroupedListStyle())
