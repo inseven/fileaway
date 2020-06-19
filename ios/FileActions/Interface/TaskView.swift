@@ -36,7 +36,7 @@ struct TaskView: View {
     var body: some View {
         return VStack {
             List {
-                Section(header: Text("Name".uppercased())) {
+                Section {
                     EditText("Task", text: $task.name)
                 }
                 Section(header: Text("Variables".uppercased())) {
