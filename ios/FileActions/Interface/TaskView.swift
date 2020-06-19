@@ -11,53 +11,33 @@ import SwiftUI
 
 import FileActionsCore
 
-struct DestinationView: View {
+struct EditText: View {
 
-    @Binding var variables: [VariableState]
-    @Binding var components: [ComponentState]
-
-    func description(for component: ComponentState) -> String {
-        switch component.type {
-        case .text:
-            return component.value
-        case .variable:
-            guard let variable = (variables.first { $0.name == component.value }) else {
-                return "Missing Variable"
-            }
-            switch variable.type {
-            case .date(hasDay: true):
-                return "YYYY-mm-dd"
-            case .date(hasDay: false):
-                return "YYYY-mm"
-            case .string:
-                return variable.name
-            }
-        }
-    }
+    var name: String
+    @Binding var text: String
+    @Environment(\.editMode) var editMode
 
     var body: some View {
-        HStack {
-            components.map {
-                Text(self.description(for: $0))
-                    .foregroundColor($0.type == .variable ? .blue : .primary)
-                    .fontWeight($0.type == .variable ? .bold : .none)
-            }
-            .reduce( Text(""), + )
-        }
+        TextField(name, text: $text).disabled(editMode != nil ? editMode!.wrappedValue != .active : false)
+    }
+
+    init(_ name: String, text: Binding<String>) {
+        self.name = name
+        self._text = text
     }
 
 }
 
 struct TaskView: View {
 
-    @State private var isEditing = EditMode.inactive
+    @State private var editMode = EditMode.inactive
     @ObservedObject var task: TaskState
 
     var body: some View {
         return VStack {
             List {
                 Section(header: Text("Name".uppercased())) {
-                    TextField("Task", text: $task.name)
+                    EditText("Task", text: $task.name)
                 }
                 Section(header: Text("Variables".uppercased())) {
                     ForEach(task.variables) { variable in
@@ -92,15 +72,19 @@ struct TaskView: View {
                     }
                 }
             }
+            .environment(\.editMode, $editMode)
             .listStyle(GroupedListStyle())
         }
         .animation(Animation.spring())
         .navigationBarTitle(task.name)
         .navigationBarItems(trailing: Button(action: {
-            self.isEditing = self.isEditing == .active ? .inactive : .active
+            // SwiftUI gets crashy if there's a first responder attached to a TextView when it's hidden.
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            self.editMode = self.editMode == .active ? .inactive : .active
+
         }) {
-            if self.isEditing == .active {
-                Text("Save")
+            if self.editMode == .active {
+                Text("Save").bold()
             } else {
                 Text("Edit")
             }

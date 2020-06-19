@@ -29,6 +29,7 @@
 		D85D0A16249ADFDC00D4B414 /* FakeDuplexTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85D0A15249ADFDC00D4B414 /* FakeDuplexTask.swift */; };
 		D85D0A18249AE0A000D4B414 /* FakeDuplexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85D0A17249AE0A000D4B414 /* FakeDuplexView.swift */; };
 		D86A8F13249C12BB00839D1A /* VariableState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86A8F12249C12BB00839D1A /* VariableState.swift */; };
+		D86A8F15249C5F9800839D1A /* DestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86A8F14249C5F9800839D1A /* DestinationView.swift */; };
 		D88F3D43216F847D00BFE0F9 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88F3D42216F847D00BFE0F9 /* PickerViewController.swift */; };
 		D88F3D4A216F961700BFE0F9 /* PreviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88F3D49216F961700BFE0F9 /* PreviewTableViewCell.swift */; };
 		D88F3D4C217048B400BFE0F9 /* TypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88F3D4B217048B400BFE0F9 /* TypeViewController.swift */; };
@@ -103,6 +104,7 @@
 		D85D0A15249ADFDC00D4B414 /* FakeDuplexTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeDuplexTask.swift; sourceTree = "<group>"; };
 		D85D0A17249AE0A000D4B414 /* FakeDuplexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeDuplexView.swift; sourceTree = "<group>"; };
 		D86A8F12249C12BB00839D1A /* VariableState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableState.swift; sourceTree = "<group>"; };
+		D86A8F14249C5F9800839D1A /* DestinationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationView.swift; sourceTree = "<group>"; };
 		D88F3D42216F847D00BFE0F9 /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		D88F3D49216F961700BFE0F9 /* PreviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewTableViewCell.swift; sourceTree = "<group>"; };
 		D88F3D4B217048B400BFE0F9 /* TypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeViewController.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 			children = (
 				D84319A6249AB8720014CFE9 /* ActionsView.swift */,
 				D84319AA249AB9280014CFE9 /* ActionView.swift */,
+				D86A8F14249C5F9800839D1A /* DestinationView.swift */,
 				D85D0A17249AE0A000D4B414 /* FakeDuplexView.swift */,
 				D84319AC249AB97A0014CFE9 /* FilePicker.swift */,
 				D843199E249A85680014CFE9 /* FilePickerSheet.swift */,
@@ -413,6 +416,7 @@
 				D84319AF249AB9A40014CFE9 /* ActivityIndicator.swift in Sources */,
 				D84319B3249ABA9A0014CFE9 /* URL+Utilities.swift in Sources */,
 				D89941012145E6AE00097F3D /* StorageManager.swift in Sources */,
+				D86A8F15249C5F9800839D1A /* DestinationView.swift in Sources */,
 				D88F3D54217070A400BFE0F9 /* DateTableViewCell.swift in Sources */,
 				EEFF05A221AD1E5A0014C89B /* UIViewController+Alerting.swift in Sources */,
 				D81C5D91249BE2A70083BD6F /* TaskState.swift in Sources */,

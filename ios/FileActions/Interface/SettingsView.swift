@@ -93,22 +93,20 @@ struct VariableView: View {
 
 struct ComponentItem: View {
 
-    enum ActionType {
-        case up
-        case down
-    }
 
+    @Environment(\.editMode) var editMode
     @State var component: ComponentState
 
     var body: some View {
         HStack {
             if component.type == .text {
-                TextField("Name", text: $component.value)
+                EditText("Component", text: $component.value).environment(\.editMode, editMode)
             } else {
                 Text(component.value)
                 .foregroundColor(.secondary)
             }
         }
+        .environment(\.editMode, editMode)
     }
 
 }
