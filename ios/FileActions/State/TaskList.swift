@@ -20,6 +20,10 @@ class TaskList: ObservableObject, BackChannelable {
         self.tasks = []
     }
 
+    var count: Int {
+        return tasks.count
+    }
+
     init(_ tasks: [Task]) {
         self.tasks = tasks.map { TaskState(task: $0) }
     }
