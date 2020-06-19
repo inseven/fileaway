@@ -24,7 +24,7 @@ struct FakeDuplexView: View {
         NavigationView {
             VStack {
                 Form {
-                    Section(footer: Text(self.error != nil ? String(describing: error!) : "").foregroundColor(.red)) {
+                    Section(footer: ErrorText(text: self.error?.localizedDescription)) {
                         FilePicker(placeholder: "Select file...", documentTypes: [kUTTypePDF as String], url: $url1).lineLimit(1)
                         FilePicker(placeholder: "Select file...", documentTypes: [kUTTypePDF as String], url: $url2).lineLimit(1)
                     }

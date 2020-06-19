@@ -28,34 +28,6 @@ extension VariableType: CustomStringConvertible {
 
 }
 
-struct Selectable<Content: View>: View {
-
-    let isSelected: Bool
-    let action: () -> Void
-    let content: () -> Content
-
-    var body: some View {
-        HStack {
-            Button(action: action) {
-                content()
-            }
-            .foregroundColor(.primary)
-            if isSelected {
-                Spacer()
-                Image(systemName: "checkmark")
-                    .foregroundColor(.accentColor)
-            }
-        }
-    }
-
-    @inlinable public init(isSelected: Bool, action: @escaping () -> Void, @ViewBuilder content: @escaping () -> Content) {
-        self.isSelected = isSelected
-        self.action = action
-        self.content = content
-    }
-
-}
-
 extension VariableType: Identifiable {
 
     public var id: String {
@@ -65,28 +37,36 @@ extension VariableType: Identifiable {
 
 struct VariableView: View {
 
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @ObservedObject var task: TaskState
     @ObservedObject var variable: VariableState
 
     var body: some View {
-        VStack {
-            Form {
-                Section {
-                    TextField("Name", text: $variable.name)
-                }
-                Section(header: Text("Type".uppercased())) {
-                    ForEach(VariableType.allCases) { type in
-                        Selectable(isSelected: self.variable.type.id == type.id, action: {
-//                            self.task.objectWillChange.send()
-                            self.variable.type = type
-                        }) {
-                            Text(String(describing: type))
+        NavigationView {
+            VStack {
+                Form {
+                    Section(footer: ErrorText(text: task.validate() ? nil : "Variable names must be unique.")) {
+                        TextField("Name", text: $variable.name)
+                    }
+                    Section(header: Text("Type".uppercased())) {
+                        ForEach(VariableType.allCases) { type in
+                            Selectable(isSelected: self.variable.type.id == type.id, action: {
+                                self.variable.type = type
+                            }) {
+                                Text(String(describing: type))
+                            }
                         }
                     }
                 }
             }
+            .navigationBarTitle("Edit Variable", displayMode: .inline)
+            .navigationBarItems(trailing: Button(action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }) {
+                Text("Done").bold().disabled(!task.validate())
+            })
         }
-        .navigationBarTitle(variable.name)
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 
 }
@@ -95,6 +75,7 @@ struct ComponentItem: View {
 
 
     @Environment(\.editMode) var editMode
+    @ObservedObject var task: TaskState
     @State var component: ComponentState
 
     var body: some View {
@@ -102,7 +83,7 @@ struct ComponentItem: View {
             if component.type == .text {
                 EditText("Component", text: $component.value).environment(\.editMode, editMode)
             } else {
-                Text(component.value)
+                Text(task.name(for: component))
                 .foregroundColor(.secondary)
             }
         }
@@ -115,7 +96,6 @@ struct SettingsView: View {
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @ObservedObject var settings: Settings
-    @State var tasks: [TaskState]
 
     var body: some View {
         VStack {
@@ -124,7 +104,7 @@ struct SettingsView: View {
                     FilePicker(placeholder: "Select...", documentTypes: [kUTTypeFolder as String], url: $settings.destination).lineLimit(1)
                 }
                 Section() {
-                    NavigationLink(destination: TasksView(tasks: tasks)) {
+                    NavigationLink(destination: TasksView(tasks: settings.tasks)) {
                         Text("Tasks")
                     }
                 }

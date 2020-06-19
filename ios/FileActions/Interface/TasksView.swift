@@ -9,40 +9,16 @@
 import Foundation
 import SwiftUI
 
-
-class TaskList: ObservableObject, BackChannelable {
-
-    @Published var tasks: [TaskState]
-    var tasksBackChannel: BackChannel<TaskState>?
-
-    init(tasks: [TaskState]) {
-        self.tasks = tasks
-    }
-
-    func establishBackChannel() {
-        tasksBackChannel = BackChannel(value: tasks, publisher: $tasks).bind {
-            self.objectWillChange.send()
-        }
-    }
-
-}
-
-
 struct TasksView: View {
 
     @ObservedObject var tasks: TaskList
-
-    init(tasks: [TaskState]) {
-        self.tasks = TaskList(tasks: tasks)
-        self.tasks.establishBackChannel()
-    }
 
     var body: some View {
         VStack {
             List {
                 Section() {
                     ForEach(tasks.tasks) { task in
-                        NavigationLink(destination: TaskView(task: task)) {
+                        NavigationLink(destination: TaskView(tasks: self.tasks, task: task)) {
                             Text(task.name)
                         }
                     }
@@ -51,7 +27,7 @@ struct TasksView: View {
             }
             .listStyle(DefaultListStyle())
         }.navigationBarItems(trailing: Button(action: {
-            print("Add")
+            self.tasks.createTask()
         }) {
             Text("Add")
         })

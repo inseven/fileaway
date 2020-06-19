@@ -18,17 +18,13 @@ extension UIApplication {
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var manager: Manager?
-    public var settings = Settings()
+    public let settings = Settings()
 
     static var shared: AppDelegate {
         UIApplication.shared.delegate as! AppDelegate
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        if let configurationUrl = try? StorageManager.configurationUrl() {
-            manager = Manager(configurationUrl: configurationUrl)
-        }
         return true
     }
 
@@ -55,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return false
         }
         // TODO: Double check that this is a PDF!
-        pickerViewController.manager = manager
+        pickerViewController.manager = settings.manager!
         do {
             try url.prepareForSecureAccess()
         } catch {

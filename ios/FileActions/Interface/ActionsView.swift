@@ -59,7 +59,7 @@ struct ActionsView: View {
         .sheet(isPresented: $showSheet) {
             if self.activeSheet == .settings {
                 NavigationView {
-                    SettingsView(settings: self.settings, tasks: self.settings.tasks)
+                    SettingsView(settings: self.settings)
                 }
                 .navigationViewStyle(StackNavigationViewStyle())
             } else if self.activeSheet == .reversePages {

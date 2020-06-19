@@ -43,7 +43,7 @@ extension MoveFileViewController: UIDocumentBrowserViewControllerDelegate {
             let pickerViewController = AppDelegate.shared.instantiateViewController(identifier: .picker) as? PickerViewController else {
                 return
         }
-        pickerViewController.manager = AppDelegate.shared.manager
+        pickerViewController.manager = AppDelegate.shared.settings.manager!
         do {
             try url.prepareForSecureAccess()
         } catch {

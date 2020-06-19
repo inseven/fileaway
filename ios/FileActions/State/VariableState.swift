@@ -30,6 +30,12 @@ class VariableState: ObservableObject, Identifiable {
         self.type = variable.type
     }
 
+    public init(_ variable: VariableState) {
+        id = variable.id
+        name = String(variable.name)
+        type = variable.type
+    }
+
     public init(name: String, type: VariableType) {
         self.name = name
         self.type = type
