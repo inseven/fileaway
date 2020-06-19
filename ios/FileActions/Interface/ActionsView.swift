@@ -61,6 +61,7 @@ struct ActionsView: View {
                 NavigationView {
                     SettingsView(settings: self.settings, tasks: self.settings.tasks)
                 }
+                .navigationViewStyle(StackNavigationViewStyle())
             } else if self.activeSheet == .reversePages {
                 ReversePages(task: ReverseTask())
             } else if self.activeSheet == .interleave {

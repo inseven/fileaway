@@ -11,6 +11,10 @@ import Foundation
 public struct Configuration: Codable {
     public let variables: [Variable]
     public let destination: [Component]
+    public init(variables: [Variable], destination: [Component]) {
+        self.variables = variables
+        self.destination = destination
+    }
 }
 
 public enum ComponentType: String, Codable {
@@ -28,9 +32,14 @@ public struct Component: Codable {
     }
 }
 
-public enum VariableType {
+public enum VariableType: CaseIterable {
+
     case string
     case date(hasDay: Bool)
+
+    public static var allCases: [VariableType] {
+        return [.string, .date(hasDay: true), .date(hasDay: false)]
+    }
 }
 
 public struct Variable {
@@ -97,4 +106,8 @@ extension Variable: Codable {
 public struct Task {
     public let name: String
     public let configuration: Configuration
+    public init(name: String, configuration: Configuration) {
+        self.name = name
+        self.configuration = configuration
+    }
 }

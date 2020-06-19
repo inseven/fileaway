@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D81C5D91249BE2A70083BD6F /* TaskState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81C5D90249BE2A70083BD6F /* TaskState.swift */; };
+		D81C5D93249BE3710083BD6F /* TasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81C5D92249BE3710083BD6F /* TasksView.swift */; };
+		D81C5D95249BE6F40083BD6F /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81C5D94249BE6F40083BD6F /* TaskView.swift */; };
+		D81C5D97249BF2410083BD6F /* ComponentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81C5D96249BF2410083BD6F /* ComponentState.swift */; };
 		D843199F249A85680014CFE9 /* FilePickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D843199E249A85680014CFE9 /* FilePickerSheet.swift */; };
 		D84319A1249AB1EE0014CFE9 /* PDFDocument+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84319A0249AB1EE0014CFE9 /* PDFDocument+Utilities.swift */; };
 		D84319A3249AB7FE0014CFE9 /* StoryboardIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84319A2249AB7FE0014CFE9 /* StoryboardIdentifier.swift */; };
@@ -24,6 +28,7 @@
 		D85D0A14249ADCE900D4B414 /* MergeDocumentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85D0A13249ADCE900D4B414 /* MergeDocumentsView.swift */; };
 		D85D0A16249ADFDC00D4B414 /* FakeDuplexTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85D0A15249ADFDC00D4B414 /* FakeDuplexTask.swift */; };
 		D85D0A18249AE0A000D4B414 /* FakeDuplexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85D0A17249AE0A000D4B414 /* FakeDuplexView.swift */; };
+		D86A8F13249C12BB00839D1A /* VariableState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86A8F12249C12BB00839D1A /* VariableState.swift */; };
 		D88F3D43216F847D00BFE0F9 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88F3D42216F847D00BFE0F9 /* PickerViewController.swift */; };
 		D88F3D4A216F961700BFE0F9 /* PreviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88F3D49216F961700BFE0F9 /* PreviewTableViewCell.swift */; };
 		D88F3D4C217048B400BFE0F9 /* TypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88F3D4B217048B400BFE0F9 /* TypeViewController.swift */; };
@@ -76,6 +81,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D81C5D90249BE2A70083BD6F /* TaskState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskState.swift; sourceTree = "<group>"; };
+		D81C5D92249BE3710083BD6F /* TasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksView.swift; sourceTree = "<group>"; };
+		D81C5D94249BE6F40083BD6F /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
+		D81C5D96249BF2410083BD6F /* ComponentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentState.swift; sourceTree = "<group>"; };
 		D843199E249A85680014CFE9 /* FilePickerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePickerSheet.swift; sourceTree = "<group>"; };
 		D84319A0249AB1EE0014CFE9 /* PDFDocument+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PDFDocument+Utilities.swift"; sourceTree = "<group>"; };
 		D84319A2249AB7FE0014CFE9 /* StoryboardIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardIdentifier.swift; sourceTree = "<group>"; };
@@ -93,6 +102,7 @@
 		D85D0A13249ADCE900D4B414 /* MergeDocumentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeDocumentsView.swift; sourceTree = "<group>"; };
 		D85D0A15249ADFDC00D4B414 /* FakeDuplexTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeDuplexTask.swift; sourceTree = "<group>"; };
 		D85D0A17249AE0A000D4B414 /* FakeDuplexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeDuplexView.swift; sourceTree = "<group>"; };
+		D86A8F12249C12BB00839D1A /* VariableState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableState.swift; sourceTree = "<group>"; };
 		D88F3D42216F847D00BFE0F9 /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		D88F3D49216F961700BFE0F9 /* PreviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewTableViewCell.swift; sourceTree = "<group>"; };
 		D88F3D4B217048B400BFE0F9 /* TypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeViewController.swift; sourceTree = "<group>"; };
@@ -144,6 +154,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D81C5D8F249BDD3C0083BD6F /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				D84319A6249AB8720014CFE9 /* ActionsView.swift */,
+				D84319AA249AB9280014CFE9 /* ActionView.swift */,
+				D85D0A17249AE0A000D4B414 /* FakeDuplexView.swift */,
+				D84319AC249AB97A0014CFE9 /* FilePicker.swift */,
+				D843199E249A85680014CFE9 /* FilePickerSheet.swift */,
+				D85D0A13249ADCE900D4B414 /* MergeDocumentsView.swift */,
+				D84319A8249AB8C70014CFE9 /* ReversePages.swift */,
+				D8CCD292246EDC6A007EF2BB /* SettingsView.swift */,
+				D81C5D92249BE3710083BD6F /* TasksView.swift */,
+				D81C5D94249BE6F40083BD6F /* TaskView.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		D81C5D98249BF2560083BD6F /* State */ = {
+			isa = PBXGroup;
+			children = (
+				D81C5D96249BF2410083BD6F /* ComponentState.swift */,
+				D81C5D90249BE2A70083BD6F /* TaskState.swift */,
+				D86A8F12249C12BB00839D1A /* VariableState.swift */,
+			);
+			path = State;
+			sourceTree = "<group>";
+		};
 		D890DD3D216F16C300922453 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,25 +222,19 @@
 			isa = PBXGroup;
 			children = (
 				D8CCB8112143672700AC445F /* Info.plist */,
-				D84319A6249AB8720014CFE9 /* ActionsView.swift */,
-				D85D0A17249AE0A000D4B414 /* FakeDuplexView.swift */,
 				D89265832498AC3A00297825 /* ActionsViewController.swift */,
-				D84319AA249AB9280014CFE9 /* ActionView.swift */,
 				D84319AE249AB9A40014CFE9 /* ActivityIndicator.swift */,
 				D8CCB8052143672700AC445F /* AppDelegate.swift */,
 				D88F3D53217070A400BFE0F9 /* DateTableViewCell.swift */,
 				D84319B4249AC1D60014CFE9 /* Destination.swift */,
-				D84319AC249AB97A0014CFE9 /* FilePicker.swift */,
-				D843199E249A85680014CFE9 /* FilePickerSheet.swift */,
+				D85D0A15249ADFDC00D4B414 /* FakeDuplexTask.swift */,
+				D85D0A11249ADAB400D4B414 /* MergeTask.swift */,
 				D89265882498C58C00297825 /* MoveFileViewController.swift */,
 				D84319A0249AB1EE0014CFE9 /* PDFDocument+Utilities.swift */,
 				D88F3D42216F847D00BFE0F9 /* PickerViewController.swift */,
 				D88F3D49216F961700BFE0F9 /* PreviewTableViewCell.swift */,
-				D84319A8249AB8C70014CFE9 /* ReversePages.swift */,
-				D85D0A13249ADCE900D4B414 /* MergeDocumentsView.swift */,
 				D85D0A0F249ADA6700D4B414 /* ReverseTask.swift */,
 				D84319B0249ABA1E0014CFE9 /* Settings.swift */,
-				D8CCD292246EDC6A007EF2BB /* SettingsView.swift */,
 				D89941002145E6AE00097F3D /* StorageManager.swift */,
 				D84319A2249AB7FE0014CFE9 /* StoryboardIdentifier.swift */,
 				D84319A4249AB83B0014CFE9 /* String+Utilities.swift */,
@@ -212,10 +243,10 @@
 				EEFF05A121AD1E5A0014C89B /* UIViewController+Alerting.swift */,
 				D84319B2249ABA9A0014CFE9 /* URL+Utilities.swift */,
 				D8CCB80C2143672700AC445F /* Assets.xcassets */,
+				D81C5D8F249BDD3C0083BD6F /* Interface */,
 				D8CCB80E2143672700AC445F /* LaunchScreen.storyboard */,
 				D8CCB8092143672700AC445F /* Main.storyboard */,
-				D85D0A11249ADAB400D4B414 /* MergeTask.swift */,
-				D85D0A15249ADFDC00D4B414 /* FakeDuplexTask.swift */,
+				D81C5D98249BF2560083BD6F /* State */,
 			);
 			path = FileActions;
 			sourceTree = "<group>";
@@ -376,6 +407,7 @@
 				D85D0A14249ADCE900D4B414 /* MergeDocumentsView.swift in Sources */,
 				D84319A7249AB8720014CFE9 /* ActionsView.swift in Sources */,
 				D843199F249A85680014CFE9 /* FilePickerSheet.swift in Sources */,
+				D81C5D97249BF2410083BD6F /* ComponentState.swift in Sources */,
 				D88F3D4C217048B400BFE0F9 /* TypeViewController.swift in Sources */,
 				D88F3D4F2170689200BFE0F9 /* TextTableViewCell.swift in Sources */,
 				D84319AF249AB9A40014CFE9 /* ActivityIndicator.swift in Sources */,
@@ -383,7 +415,10 @@
 				D89941012145E6AE00097F3D /* StorageManager.swift in Sources */,
 				D88F3D54217070A400BFE0F9 /* DateTableViewCell.swift in Sources */,
 				EEFF05A221AD1E5A0014C89B /* UIViewController+Alerting.swift in Sources */,
+				D81C5D91249BE2A70083BD6F /* TaskState.swift in Sources */,
 				D84319A3249AB7FE0014CFE9 /* StoryboardIdentifier.swift in Sources */,
+				D86A8F13249C12BB00839D1A /* VariableState.swift in Sources */,
+				D81C5D95249BE6F40083BD6F /* TaskView.swift in Sources */,
 				D89265842498AC3A00297825 /* ActionsViewController.swift in Sources */,
 				D8CCD293246EDC6A007EF2BB /* SettingsView.swift in Sources */,
 				D88F3D43216F847D00BFE0F9 /* PickerViewController.swift in Sources */,
@@ -391,6 +426,7 @@
 				D88F3D4A216F961700BFE0F9 /* PreviewTableViewCell.swift in Sources */,
 				D84319AB249AB9280014CFE9 /* ActionView.swift in Sources */,
 				D8CCB8062143672700AC445F /* AppDelegate.swift in Sources */,
+				D81C5D93249BE3710083BD6F /* TasksView.swift in Sources */,
 				D84319A1249AB1EE0014CFE9 /* PDFDocument+Utilities.swift in Sources */,
 				D84319A9249AB8C70014CFE9 /* ReversePages.swift in Sources */,
 				D85D0A10249ADA6700D4B414 /* ReverseTask.swift in Sources */,
