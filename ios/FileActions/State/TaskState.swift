@@ -56,14 +56,25 @@ class TaskState: ObservableObject, Identifiable, BackChannelable, CustomStringCo
         }
     }
 
-    init(_ task: TaskState) {
-        id = task.id
-        name = String(task.name)
-        let variables = task.variables.map { VariableState($0) }
+    init(id: UUID, name: String, variables: [VariableState], destination: [ComponentState]) {
+        self.id = id
+        self.name = name
         self.variables = variables
-        destination = task.destination.map { component in
-            ComponentState(component, variable: variables.first { $0.name == component.value } )
+        self.destination = destination
+        for component in destination {
+            guard case .variable = component.type else {
+                continue
+            }
+            let variable = variables.first { $0.name == component.value }
+            component.variable = variable
         }
+    }
+
+    convenience init(_ task: TaskState) {
+        self.init(id: task.id,
+                  name: String(task.name),
+                  variables: task.variables.map { VariableState($0) },
+                  destination: task.destination.map { ComponentState($0, variable: nil) })
     }
 
     init(task: Task) {

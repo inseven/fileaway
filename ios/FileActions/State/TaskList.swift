@@ -73,7 +73,13 @@ class TaskList: ObservableObject, BackChannelable {
             name = "Task \(index)"
             index = index + 1
         } while names.contains(name)
-        self.tasks.append(TaskState(name: name))
+        let task = TaskState(id: UUID(),
+                             name: name,
+                             variables: [VariableState(name: "Date", type: .date(hasDay: true))],
+                             destination: [
+                                ComponentState(value: "Date", type: .variable, variable: nil),
+                                ComponentState(value: " Description", type: .text, variable: nil)])
+        self.tasks.append(task)
     }
 
 }

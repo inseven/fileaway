@@ -18,7 +18,7 @@ struct TasksView: View {
             List {
                 Section() {
                     ForEach(tasks.tasks) { task in
-                        NavigationLink(destination: TaskView(tasks: self.tasks, task: task)) {
+                        NavigationLink(destination: TaskView(tasks: self.tasks, editingTask: TaskState(task), originalTask: task)) {
                             Text(task.name)
                         }
                     }

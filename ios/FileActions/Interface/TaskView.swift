@@ -100,69 +100,59 @@ struct TaskView: View {
 
     @State private var editMode = EditMode.inactive
     @ObservedObject var tasks: TaskList
-    @ObservedObject var taskContainer: Container<TaskState>
+    @ObservedObject var editingTask: TaskState
     var originalTask: TaskState
 
-    init(tasks: TaskList, task: TaskState) {
-        self.tasks = tasks
-        self.taskContainer = Container(TaskState(task))
-        let taskContainer = Container(TaskState(task))
-        taskContainer.object.establishBackChannel()
-        self.taskContainer = taskContainer
-        self.originalTask = task
-    }
-
     func edit() {
-        self.taskContainer.object = TaskState(originalTask)
-        self.taskContainer.establishBackChannel()
+        self.editingTask.establishBackChannel()
         self.editMode = .active
     }
 
     func save() {
         // SwiftUI gets crashy if there's a first responder attached to a TextView when it's hidden.
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-        tasks.replace(task: originalTask, with: taskContainer.object)
+        tasks.replace(task: originalTask, with: editingTask)
         self.editMode = .inactive
     }
 
     func validate() -> Bool {
-        return tasks.validate(task: taskContainer.object) && !taskContainer.object.name.isEmpty
+        return tasks.validate(task: editingTask) && !editingTask.name.isEmpty
     }
 
     var body: some View {
         return VStack {
             List {
                 Section(footer: ErrorText(text: validate() ? nil : "Task names must be unique.")) {
-                    EditText("Task", text: $taskContainer.object.name)
+                    EditText("Task", text: $editingTask.name)
                 }
-                Section(header: Text("Variables".uppercased()), footer: ErrorText(text: taskContainer.object.validate() ? nil : "Variable names must be unique.")) {
-                    ForEach(taskContainer.object.variables) { variable in
-                        VariableRow(task: self.taskContainer.object, variable: variable)
+                Section(header: Text("Variables".uppercased()), footer: ErrorText(text: editingTask.validate() ? nil : "Variable names must be unique.")) {
+                    ForEach(editingTask.variables) { variable in
+                        VariableRow(task: self.editingTask, variable: variable)
                     }
-                    .onDelete { self.taskContainer.object.remove(variableOffsets: $0) }
+                    .onDelete { self.editingTask.remove(variableOffsets: $0) }
                     if self.editMode == .active {
                         EditSafeButton(action: {
-                            self.taskContainer.object.createVariable()
+                            self.editingTask.createVariable()
                         }) {
                             Text("New variable...")
                         }
                     }
                 }
-                Section(header: Text("Destination".uppercased()), footer: DestinationFooter(task: taskContainer.object)) {
-                    ForEach(taskContainer.object.destination) { component in
-                        ComponentItem(task: self.taskContainer.object, component: component)
+                Section(header: Text("Destination".uppercased()), footer: DestinationFooter(task: editingTask)) {
+                    ForEach(editingTask.destination) { component in
+                        ComponentItem(task: self.editingTask, component: component)
                     }
                     .onMove { (fromOffsets, toOffset) in
-                        self.taskContainer.object.destination.move(fromOffsets: fromOffsets, toOffset: toOffset)
+                        self.editingTask.destination.move(fromOffsets: fromOffsets, toOffset: toOffset)
                     }
-                    .onDelete { self.taskContainer.object.destination.remove(atOffsets: $0) }
+                    .onDelete { self.editingTask.destination.remove(atOffsets: $0) }
                 }
             }
             .environment(\.editMode, $editMode)
             .listStyle(GroupedListStyle())
         }
         .animation(Animation.spring())
-        .navigationBarTitle(taskContainer.object.name)
+        .navigationBarTitle(editingTask.name)
         .navigationBarBackButtonHidden(editMode == .active)
         .navigationBarItems(trailing: Button(action: {
             if (self.editMode == .active) {
@@ -172,7 +162,7 @@ struct TaskView: View {
             }
         }) {
             if self.editMode == .active {
-                Text("Save").bold().disabled(!validate() || !taskContainer.object.validate())
+                Text("Save").bold().disabled(!validate() || !editingTask.validate())
             } else {
                 Text("Edit")
             }
