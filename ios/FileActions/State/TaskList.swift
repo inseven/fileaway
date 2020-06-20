@@ -55,13 +55,13 @@ class TaskList: ObservableObject, BackChannelable {
         }
     }
 
-    func replace(task: TaskState, with newTask: TaskState) {
+    func update(task: TaskState) {
         guard
             let index = self.tasks.firstIndex(where: { $0.id == task.id }),
             let range = Range(NSRange(location: index, length: 1))else {
                 return
         }
-        self.tasks.replaceSubrange(range, with: [newTask])
+        self.tasks.replaceSubrange(range, with: [task])
         assert(validate() && validateChildren())
     }
 
@@ -77,6 +77,7 @@ class TaskList: ObservableObject, BackChannelable {
                              name: name,
                              variables: [VariableState(name: "Date", type: .date(hasDay: true))],
                              destination: [
+                                ComponentState(value: "New Folder/", type: .text, variable: nil),
                                 ComponentState(value: "Date", type: .variable, variable: nil),
                                 ComponentState(value: " Description", type: .text, variable: nil)])
         self.tasks.append(task)

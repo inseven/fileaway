@@ -111,7 +111,7 @@ struct TaskView: View {
     func save() {
         // SwiftUI gets crashy if there's a first responder attached to a TextView when it's hidden.
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-        tasks.replace(task: originalTask, with: editingTask)
+        tasks.update(task: editingTask)
         self.editMode = .inactive
     }
 
