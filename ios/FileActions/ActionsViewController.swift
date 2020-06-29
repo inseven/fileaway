@@ -19,6 +19,7 @@ class ActionsViewController: UIHostingController<ActionsView> {
 
     override func viewDidLoad() {
         self.rootView.delegate = self
+        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
 
 }
