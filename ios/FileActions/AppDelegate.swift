@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        self.window?.tintColor = #colorLiteral(red: 1, green: 0.4940795302, blue: 0.4728332758, alpha: 1)
         return true
     }
 
