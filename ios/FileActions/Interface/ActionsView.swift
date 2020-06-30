@@ -30,31 +30,39 @@ struct ActionsView: View {
     @State private var activeSheet: ActionSheet = .none
 
     var body: some View {
+        ScrollView {
         VStack {
-            List {
-                Section(footer: Destination(url: $settings.destination)) {
-                    ActionView(text: "Move file...", imageName: "folder") {
+            ActionMenu {
+                ActionGroup(footer: Destination(url: self.$settings.destination)) {
+                    ActionButton("Move File", systemName: "folder") {
                         guard let delegate = self.delegate else {
                             return
                         }
                         delegate.moveFileTapped()
                     }
+                    .buttonStyle(ActionButtonStyle(backgroundColor: .accentColor, foregroundColor: .white))
                 }
-                Section {
-                    ActionView(text: "Reverse pages...", imageName: "doc.on.doc") {
+                ActionGroup(footer: EmptyView()) {
+                    ActionButton("Reverse Pages", systemName: "doc.on.doc") {
                         self.activeSheet = .reversePages
                         self.showSheet = true
                     }
-                    ActionView(text: "Interleave pages...", imageName: "doc.on.doc") {
+                    .buttonStyle(ActionButtonStyle(backgroundColor: Color(UIColor.systemFill)))
+                    ActionButton("Interleave Pages", systemName: "doc.on.doc") {
                         self.activeSheet = .interleave
                         self.showSheet = true
                     }
-                    ActionView(text: "Fake duplex...", imageName: "doc.on.doc") {
+                    .buttonStyle(ActionButtonStyle(backgroundColor: Color(UIColor.systemFill)))
+                    ActionButton("Fake Duplex", systemName: "doc.on.doc") {
                         self.activeSheet = .fakeDuplex
                         self.showSheet = true
                     }
+                    .buttonStyle(ActionButtonStyle(backgroundColor: Color(UIColor.systemFill)))
                 }
-            }.listStyle(GroupedListStyle())
+            }
+            .padding()
+            .frame(maxWidth: 520)
+            }
         }
         .sheet(isPresented: $showSheet) {
             if self.activeSheet == .settings {
