@@ -16,7 +16,7 @@ struct DestinationView: View {
         HStack {
             task.destination.map {
                 Text(self.task.name(for: $0, format: .short))
-                    .foregroundColor($0.type == .variable ? .blue : .accentColor)
+                    .foregroundColor($0.type == .variable ? .accentColor : .primary)
                     .fontWeight($0.type == .variable ? .bold : .none)
             }
             .reduce( Text(""), + )
