@@ -15,19 +15,47 @@ protocol ActionsViewDelegate: NSObject {
 }
 
 enum ActionSheet {
-    case none
     case settings
     case reversePages
     case interleave
     case fakeDuplex
 }
 
+extension ActionSheet: Identifiable {
+    public var id: ActionSheet { self }
+}
+
+extension View {
+    func eraseToAnyView() -> AnyView {
+        return AnyView(self)
+    }
+}
+
 struct ActionsView: View {
 
     weak var delegate: ActionsViewDelegate?
     @ObservedObject var settings: Settings
-    @State private var showSheet = false
-    @State private var activeSheet: ActionSheet = .none
+    @State private var activeSheet: ActionSheet?
+
+    func sheet(type: ActionSheet) -> some View {
+        switch type {
+        case .settings:
+            return NavigationView {
+                SettingsView(settings: self.settings)
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
+            .eraseToAnyView()
+        case .reversePages:
+            return ReversePages(task: ReverseTask())
+                .eraseToAnyView()
+        case .interleave:
+            return MergeDocumentsView(task: MergeTask())
+                .eraseToAnyView()
+        case .fakeDuplex:
+            return FakeDuplexView(task: FakeDuplexTask())
+                .eraseToAnyView()
+        }
+    }
 
     var body: some View {
         ScrollView {
@@ -45,17 +73,14 @@ struct ActionsView: View {
                 ActionGroup(footer: EmptyView()) {
                     ActionButton("Reverse Pages", systemName: "doc.on.doc") {
                         self.activeSheet = .reversePages
-                        self.showSheet = true
                     }
                     .buttonStyle(ActionButtonStyle(backgroundColor: Color(UIColor.systemFill)))
                     ActionButton("Interleave Pages", systemName: "doc.on.doc") {
                         self.activeSheet = .interleave
-                        self.showSheet = true
                     }
                     .buttonStyle(ActionButtonStyle(backgroundColor: Color(UIColor.systemFill)))
                     ActionButton("Fake Duplex", systemName: "doc.on.doc") {
                         self.activeSheet = .fakeDuplex
-                        self.showSheet = true
                     }
                     .buttonStyle(ActionButtonStyle(backgroundColor: Color(UIColor.systemFill)))
                 }
@@ -64,26 +89,14 @@ struct ActionsView: View {
             .frame(maxWidth: 520)
             }
         }
-        .sheet(isPresented: $showSheet) {
-            if self.activeSheet == .settings {
-                NavigationView {
-                    SettingsView(settings: self.settings)
-                }
-                .navigationViewStyle(StackNavigationViewStyle())
-            } else if self.activeSheet == .reversePages {
-                ReversePages(task: ReverseTask())
-            } else if self.activeSheet == .interleave {
-                MergeDocumentsView(task: MergeTask())
-            } else if self.activeSheet == .fakeDuplex {
-                FakeDuplexView(task: FakeDuplexTask())
-            } else {
-                Text("None")
-            }
-        }
+        .sheet(item: $activeSheet, onDismiss: {
+            self.activeSheet = nil
+        }, content: { sheet in
+            return self.sheet(type: sheet)
+        })
         .navigationBarTitle("File Actions")
         .navigationBarItems(leading: Button(action: {
             self.activeSheet = .settings
-            self.showSheet = true
         }, label: {
             Text("Settings")
         }))
