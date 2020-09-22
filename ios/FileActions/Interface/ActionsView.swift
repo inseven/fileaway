@@ -89,11 +89,9 @@ struct ActionsView: View {
             .frame(maxWidth: 520)
             }
         }
-        .sheet(item: $activeSheet, onDismiss: {
-            self.activeSheet = nil
-        }, content: { sheet in
+        .sheet(item: $activeSheet) { sheet in
             return self.sheet(type: sheet)
-        })
+        }
         .navigationBarTitle("File Actions")
         .navigationBarItems(leading: Button(action: {
             self.activeSheet = .settings
