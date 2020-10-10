@@ -46,7 +46,7 @@ class ViewController: NSViewController, DragDelegate {
     }
 
     var rootURL: URL {
-        return URL(fileURLWithPath: NSString(string: "~/Dropbox/Documents/Paperwork").expandingTildeInPath)
+        return URL(fileURLWithPath: NSString(string: UserDefaults.standard.string(forKey: "root")!).expandingTildeInPath)
     }
 
     var variableView: VariableView? {

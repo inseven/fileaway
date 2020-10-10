@@ -32,7 +32,7 @@ public class Manager {
     }
 
     public var rootUrl: URL {
-        return URL(fileURLWithPath: NSString(string: "~/Documents").expandingTildeInPath)
+        return URL(fileURLWithPath: NSString(string: UserDefaults.standard.string(forKey: "root")!).expandingTildeInPath)
     }
 
     static func load(_ url: URL) throws -> [Task] {
