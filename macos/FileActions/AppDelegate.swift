@@ -23,7 +23,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     override init() {
         super.init()
-        let rootUrl = URL(fileURLWithPath: NSString(string: "~/Dropbox/Documents/Paperwork").expandingTildeInPath)
+        let userDefaultsRoot = UserDefaults.standard.string(forKey: "root")!
+        let rootUrl = URL(fileURLWithPath: NSString(string: userDefaultsRoot).expandingTildeInPath)
         let configurationUrl = rootUrl.appendingPathComponent("file-actions.json")
         manager = Manager(configurationUrl: configurationUrl)
     }
