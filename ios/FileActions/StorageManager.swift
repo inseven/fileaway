@@ -29,7 +29,12 @@ extension URL {
 class StorageManager {
 
     static func documentUrl() -> URL? {
-        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let fileManager = FileManager.default
+        if !fileManager.fileExists(atPath: documentsUrl.path) {
+            try! fileManager.createDirectory(at: documentsUrl, withIntermediateDirectories: true, attributes: nil)
+        }
+        return documentsUrl
     }
 
     static func bookmarkUrl() -> URL? {
@@ -42,19 +47,16 @@ class StorageManager {
 
     static func setRootUrl(_ url: URL) throws {
         try url.prepareForSecureAccess()
-        let bookmarkData = try url.bookmarkData(options: .suitableForBookmarkFile, includingResourceValuesForKeys: nil, relativeTo: nil)
-        guard let bookmarkUrl = bookmarkUrl() else {
-            throw StorageManagerError.pathError("Unable to get bookmark url")
-        }
-        try URL.writeBookmarkData(bookmarkData, to: bookmarkUrl)
+        let bookmarkData = try url.bookmarkData(options: .withSecurityScope,
+                                                includingResourceValuesForKeys: nil,
+                                                relativeTo: nil)
+        UserDefaults.standard.set(bookmarkData, forKey: "root");
     }
 
     static func rootUrl() throws -> URL {
-        guard let bookmarkUrl = bookmarkUrl() else {
-            throw StorageManagerError.pathError("Unable to get bookmark url")
+        guard let bookmarkData = UserDefaults.standard.data(forKey: "root") else {
+            throw StorageManagerError.accessError("No data!")
         }
-        
-        let bookmarkData = try URL.bookmarkData(withContentsOf: bookmarkUrl)
         var isStale = true
         let rootUrl = try URL(resolvingBookmarkData: bookmarkData, bookmarkDataIsStale: &isStale)!
         try rootUrl.prepareForSecureAccess()

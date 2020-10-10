@@ -21,7 +21,7 @@ class Settings: ObservableObject {
             do {
                 try StorageManager.setRootUrl(url)
             } catch {
-                print("Failed to set destination to \(url).")
+                print("Failed to set destination to \(url) with error \(error).")
             }
             if let configurationUrl = try? StorageManager.configurationUrl() {
                 let manager = Manager(configurationUrl: configurationUrl)
