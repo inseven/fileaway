@@ -35,7 +35,7 @@ struct ContentView: View {
                     }
                 }
                 List {
-                    Group {
+                    Section(header: Text("Locations")) {
                         if let inbox = manager.inbox {
                             NavigationLink(destination: DirectoryView(directoryObserver: inbox), label: {
                                 Image(systemName: "tray")
@@ -52,7 +52,6 @@ struct ContentView: View {
                         }
                     }
                 }
-                EmptyView()
             }
         }
     }
