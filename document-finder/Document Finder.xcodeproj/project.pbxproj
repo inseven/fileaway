@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		D829DDB425787C100066A807 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D829DDB325787C100066A807 /* Settings.swift */; };
+		D85C9572257999130007AE1E /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C9571257999130007AE1E /* FileManager.swift */; };
+		D85C957725799B2E0007AE1E /* FileActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C957625799B2E0007AE1E /* FileActions.swift */; };
+		D85C957C2579CDAA0007AE1E /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C957B2579CDAA0007AE1E /* String.swift */; };
+		D85C95812579CED30007AE1E /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C95802579CED30007AE1E /* Toolbar.swift */; };
+		D85C95872579DD9D0007AE1E /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C95862579DD9D0007AE1E /* Selection.swift */; };
+		D85C958C2579DE140007AE1E /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C958B2579DE140007AE1E /* View.swift */; };
 		D87DEF7F25774F6C006CFE85 /* Document_FinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEF7E25774F6C006CFE85 /* Document_FinderApp.swift */; };
 		D87DEF8125774F6C006CFE85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEF8025774F6C006CFE85 /* ContentView.swift */; };
 		D87DEF8325774F6D006CFE85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D87DEF8225774F6D006CFE85 /* Assets.xcassets */; };
@@ -40,6 +46,12 @@
 
 /* Begin PBXFileReference section */
 		D829DDB325787C100066A807 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		D85C9571257999130007AE1E /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		D85C957625799B2E0007AE1E /* FileActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileActions.swift; sourceTree = "<group>"; };
+		D85C957B2579CDAA0007AE1E /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		D85C95802579CED30007AE1E /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
+		D85C95862579DD9D0007AE1E /* Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
+		D85C958B2579DE140007AE1E /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		D87DEF7B25774F6C006CFE85 /* Document Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Document Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87DEF7E25774F6C006CFE85 /* Document_FinderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document_FinderApp.swift; sourceTree = "<group>"; };
 		D87DEF8025774F6C006CFE85 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -85,6 +97,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D85C95852579DD880007AE1E /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				D85C95802579CED30007AE1E /* Toolbar.swift */,
+				D85C95862579DD9D0007AE1E /* Selection.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
 		D87DEF7225774F6C006CFE85 = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +129,7 @@
 		D87DEF7D25774F6C006CFE85 /* Document Finder */ = {
 			isa = PBXGroup;
 			children = (
+				D85C95852579DD880007AE1E /* Modifiers */,
 				D87DEFC2257848A7006CFE85 /* Extensions */,
 				D87DEF7E25774F6C006CFE85 /* Document_FinderApp.swift */,
 				D87DEF8025774F6C006CFE85 /* ContentView.swift */,
@@ -119,6 +141,7 @@
 				D87DEFB825783F66006CFE85 /* DirectoryView.swift */,
 				D87DEFBD257840B1006CFE85 /* Manager.swift */,
 				D829DDB325787C100066A807 /* Settings.swift */,
+				D85C957625799B2E0007AE1E /* FileActions.swift */,
 			);
 			path = "Document Finder";
 			sourceTree = "<group>";
@@ -153,6 +176,9 @@
 			isa = PBXGroup;
 			children = (
 				D87DEFC3257848B7006CFE85 /* URL.swift */,
+				D85C9571257999130007AE1E /* FileManager.swift */,
+				D85C957B2579CDAA0007AE1E /* String.swift */,
+				D85C958B2579DE140007AE1E /* View.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -292,13 +318,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D85C958C2579DE140007AE1E /* View.swift in Sources */,
+				D85C95872579DD9D0007AE1E /* Selection.swift in Sources */,
 				D87DEF8125774F6C006CFE85 /* ContentView.swift in Sources */,
+				D85C95812579CED30007AE1E /* Toolbar.swift in Sources */,
+				D85C957725799B2E0007AE1E /* FileActions.swift in Sources */,
+				D85C957C2579CDAA0007AE1E /* String.swift in Sources */,
 				D87DEF7F25774F6C006CFE85 /* Document_FinderApp.swift in Sources */,
 				D87DEFB925783F66006CFE85 /* DirectoryView.swift in Sources */,
 				D87DEFB425780BA4006CFE85 /* DirectoryObserver.swift in Sources */,
 				D829DDB425787C100066A807 /* Settings.swift in Sources */,
 				D87DEFBE257840B1006CFE85 /* Manager.swift in Sources */,
 				D87DEFC4257848B7006CFE85 /* URL.swift in Sources */,
+				D85C9572257999130007AE1E /* FileManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

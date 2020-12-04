@@ -19,6 +19,55 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 }
 
+struct GeneralSettingsView: View {
+
+    @ObservedObject var manager: Manager
+
+    var body: some View {
+        VStack {
+            Button("Set Inbox") {
+                let openPanel = NSOpenPanel()
+                openPanel.canChooseFiles = false
+                openPanel.canChooseDirectories = true
+                if (openPanel.runModal() ==  NSApplication.ModalResponse.OK) {
+                    try! manager.setInboxUrl(openPanel.url!)
+                }
+            }
+            Button("Set Archive") {
+                let openPanel = NSOpenPanel()
+                openPanel.canChooseFiles = false
+                openPanel.canChooseDirectories = true
+                if (openPanel.runModal() ==  NSApplication.ModalResponse.OK) {
+                    try! manager.setArchiveUrl(openPanel.url!)
+                }
+            }
+        }
+    }
+
+}
+
+struct SettingsView: View {
+
+    private enum Tabs: Hashable {
+        case general
+    }
+
+    @ObservedObject var manager: Manager
+
+    var body: some View {
+        TabView {
+            GeneralSettingsView(manager: manager)
+                .tabItem {
+                    Label("General", systemImage: "gear")
+                }
+                .tag(Tabs.general)
+        }
+        .padding(20)
+        .frame(width: 375, height: 150)
+    }
+
+}
+
 @main
 struct Document_FinderApp: App {
 
@@ -70,6 +119,9 @@ struct Document_FinderApp: App {
             @unknown default:
                 print("app state unknown")
             }
+        }
+        SwiftUI.Settings {
+            SettingsView(manager: appDelegate.manager)
         }
     }
 }

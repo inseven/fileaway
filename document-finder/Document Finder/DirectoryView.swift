@@ -53,95 +53,53 @@ class QLCoordinator: NSObject, QLPreviewPanelDataSource {
     }
 }
 
-class FileActions {
-
-    static func open(urls: [URL]) {
-        let configuration = NSWorkspace.OpenConfiguration()
-        NSWorkspace.shared.open(urls,
-                                withApplicationAt: URL(fileURLWithPath: "/Applications/File Actions.app"),
-                                configuration: configuration) { (application, error) in
-            if let error = error {
-                print(error)
-            }
-        }
-    }
-
-    static func open() {
-        NSWorkspace.shared.openApplication(at: URL(fileURLWithPath: "/Applications/File Actions.app"),
-                                           configuration: NSWorkspace.OpenConfiguration()) { (application, error) in
-            if let error = error {
-                print(error)
-            }
-        }
-    }
-
-    static func openiOS() {
-        NSWorkspace.shared.openApplication(at: URL(fileURLWithPath: "/Applications/File Actions for iOS.app"),
-                                           configuration: NSWorkspace.OpenConfiguration()) { (application, error) in
-            if let error = error {
-                print(error)
-            }
-        }
-    }
-
-}
-
 struct DirectoryView: View {
 
     @ObservedObject var directoryObserver: DirectoryObserver
-    @State var selectKeeper = Set<URL>()
+//    @State var selection = Set<FileInfo>()
     let qlCoordinator = QLCoordinator()
 
+    @State var selection: URL?
+
+    var columns: [GridItem] = [
+        GridItem(.flexible(minimum: 0, maximum: .infinity))
+    ]
+
     var body: some View {
-        List(directoryObserver.searchResults, selection: $selectKeeper) { file in
-            Text(file.lastPathComponent)
-                .gesture(
-                    TapGesture().onEnded {
-                        selectKeeper = [file]
+        ScrollView {
+            LazyVGrid(columns: columns) {
+                ForEach(directoryObserver.searchResults) { file in
+                    HStack {
+                        Text(file.name)
+                        Spacer()
                     }
-                    .simultaneously(with: TapGesture(count: 2).onEnded {
-                        NSWorkspace.shared.open(file)
+                    .padding(6)
+                    .modifier(Selection(active: file.url == selection))
+                    .padding(.leading)
+                    .padding(.trailing)
+                    .gesture(
+                        TapGesture().onEnded {
+                            selection = file.url
+                        }
+                        .simultaneously(with: TapGesture(count: 2).onEnded {
+                            NSWorkspace.shared.open(file.url)
+                        }))
+                    .contextMenu(ContextMenu(menuItems: {
+                        Button("Open") {
+                            NSWorkspace.shared.open(file.url)
+                        }
+                        Button("Open with File Actions") {
+                            FileActions.open(urls: [file.url])
+                        }
+                        Divider()
+                        Button("Reveal in Finder") {
+                            NSWorkspace.shared.activateFileViewerSelecting([file.url])
+                        }
                     }))
-                .contextMenu(ContextMenu(menuItems: {
-                    Button("Open") {
-                        NSWorkspace.shared.open(file)
-                    }
-                    Button("Open with File Actions") {
-                        FileActions.open(urls: Array(selectKeeper))
-                    }
-                    Divider()
-                    Button("Reveal in Finder") {
-                        NSWorkspace.shared.activateFileViewerSelecting([file])
-                    }
-                }))
-        }
-        .toolbar {
-            ToolbarItem {
-                Button {
-                    print("Preview")
-                    let panel = QLPreviewPanel.shared()
-                    qlCoordinator.set(path: selectKeeper.first!)
-                    panel?.center()
-                    panel?.dataSource = self.qlCoordinator
-                    panel?.makeKeyAndOrderFront(nil)
-                } label: {
-                    Image(systemName: "eye")
                 }
-                .disabled(selectKeeper.count != 1)
-            }
-            ToolbarItem {
-                Button {
-                    FileActions.open(urls: Array(selectKeeper))
-                } label: {
-                    Image(systemName: "archivebox")
-                }
-                .disabled(selectKeeper.count != 1)
-            }
-            ToolbarItem {
-                TextField("Search", text: directoryObserver.filter)
-                    .frame(minWidth: 100, idealWidth: 200, maxWidth: .infinity)
             }
         }
+        .modifier(Toolbar(selection: selection, filter: directoryObserver.filter, qlCoordinator: qlCoordinator))
         .navigationTitle(directoryObserver.name)
     }
 

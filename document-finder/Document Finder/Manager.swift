@@ -29,13 +29,21 @@ class Manager: ObservableObject {
         inbox.start()
         NSApp.dockTile.badgeLabel = "\(inbox.files.count)"
         badgeObserver = inbox.objectWillChange.sink(receiveValue: {
+            self.updateBadge()
+        })
+        updateBadge()
+    }
+
+    func updateBadge() {
+        DispatchQueue.main.async {
             guard let inbox = self.inbox else {
-                NSApp.dockTile.badgeLabel = ""
+                print("Unable to get badge count without inbox; clearing")
+                NSApp.dockTile.badgeLabel = nil
                 return
             }
-            NSApp.dockTile.badgeLabel = "\(inbox.files.count)"
-        })
-
+            print("badge = \(inbox.count)")
+            NSApp.dockTile.badgeLabel = "\(inbox.count)"
+        }
     }
 
     func createArchiveObserver(url: URL) {
