@@ -69,6 +69,7 @@ struct DirectoryView: View {
             LazyVGrid(columns: columns, spacing: 0) {
                 ForEach(directoryObserver.searchResults) { file in
                     FileRow(file: file, isSelected: file.url == selection)
+                        .onDrag { NSItemProvider(object: file.url as NSURL) }
                     .gesture(
                         TapGesture().onEnded {
                             selection = file.url
