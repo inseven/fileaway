@@ -28,7 +28,7 @@ struct Toolbar: ViewModifier {
                     } label: {
                         Image(systemName: "eye")
                     }
-                    .disabled(selection != nil)
+                    .disabled(selection == nil)
                 }
                 ToolbarItem {
                     Button {
@@ -36,7 +36,7 @@ struct Toolbar: ViewModifier {
                     } label: {
                         Image(systemName: "archivebox")
                     }
-                    .disabled(selection != nil)
+                    .disabled(selection == nil)
                 }
                 ToolbarItem {
                     Button {
@@ -44,7 +44,7 @@ struct Toolbar: ViewModifier {
                     } label: {
                         Image(systemName: "trash")
                     }
-                    .disabled(selection != nil)
+                    .disabled(selection == nil)
                 }
                 ToolbarItem {
                     TextField("Search", text: $filter)

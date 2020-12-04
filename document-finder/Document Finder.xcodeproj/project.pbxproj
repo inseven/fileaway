@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D821E92B257A8F87005D3205 /* FileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821E92A257A8F87005D3205 /* FileInfo.swift */; };
+		D821E939257A959D005D3205 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821E938257A959D005D3205 /* DateView.swift */; };
+		D821E93E257A960C005D3205 /* FileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821E93D257A960C005D3205 /* FileProvider.swift */; };
+		D821E946257AA5FC005D3205 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821E945257AA5FC005D3205 /* Sidebar.swift */; };
 		D829DDB425787C100066A807 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D829DDB325787C100066A807 /* Settings.swift */; };
 		D85C9572257999130007AE1E /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C9571257999130007AE1E /* FileManager.swift */; };
 		D85C957725799B2E0007AE1E /* FileActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C957625799B2E0007AE1E /* FileActions.swift */; };
@@ -45,6 +49,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D821E92A257A8F87005D3205 /* FileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfo.swift; sourceTree = "<group>"; };
+		D821E938257A959D005D3205 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
+		D821E93D257A960C005D3205 /* FileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileProvider.swift; sourceTree = "<group>"; };
+		D821E945257AA5FC005D3205 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 		D829DDB325787C100066A807 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		D85C9571257999130007AE1E /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		D85C957625799B2E0007AE1E /* FileActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileActions.swift; sourceTree = "<group>"; };
@@ -97,6 +105,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D821E937257A9591005D3205 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D821E938257A959D005D3205 /* DateView.swift */,
+				D821E945257AA5FC005D3205 /* Sidebar.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		D85C95852579DD880007AE1E /* Modifiers */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +146,7 @@
 		D87DEF7D25774F6C006CFE85 /* Document Finder */ = {
 			isa = PBXGroup;
 			children = (
+				D821E937257A9591005D3205 /* Views */,
 				D85C95852579DD880007AE1E /* Modifiers */,
 				D87DEFC2257848A7006CFE85 /* Extensions */,
 				D87DEF7E25774F6C006CFE85 /* Document_FinderApp.swift */,
@@ -142,6 +160,8 @@
 				D87DEFBD257840B1006CFE85 /* Manager.swift */,
 				D829DDB325787C100066A807 /* Settings.swift */,
 				D85C957625799B2E0007AE1E /* FileActions.swift */,
+				D821E92A257A8F87005D3205 /* FileInfo.swift */,
+				D821E93D257A960C005D3205 /* FileProvider.swift */,
 			);
 			path = "Document Finder";
 			sourceTree = "<group>";
@@ -318,12 +338,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D821E939257A959D005D3205 /* DateView.swift in Sources */,
 				D85C958C2579DE140007AE1E /* View.swift in Sources */,
 				D85C95872579DD9D0007AE1E /* Selection.swift in Sources */,
 				D87DEF8125774F6C006CFE85 /* ContentView.swift in Sources */,
+				D821E92B257A8F87005D3205 /* FileInfo.swift in Sources */,
 				D85C95812579CED30007AE1E /* Toolbar.swift in Sources */,
 				D85C957725799B2E0007AE1E /* FileActions.swift in Sources */,
+				D821E946257AA5FC005D3205 /* Sidebar.swift in Sources */,
 				D85C957C2579CDAA0007AE1E /* String.swift in Sources */,
+				D821E93E257A960C005D3205 /* FileProvider.swift in Sources */,
 				D87DEF7F25774F6C006CFE85 /* Document_FinderApp.swift in Sources */,
 				D87DEFB925783F66006CFE85 /* DirectoryView.swift in Sources */,
 				D87DEFB425780BA4006CFE85 /* DirectoryObserver.swift in Sources */,

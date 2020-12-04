@@ -53,10 +53,43 @@ class QLCoordinator: NSObject, QLPreviewPanelDataSource {
     }
 }
 
+struct FileRow: View {
+
+    var file: FileInfo
+    var isSelected: Bool
+
+    var body: some View {
+        VStack {
+            HStack {
+                Text(file.name)
+                    .font(.headline)
+                    .foregroundColor(isSelected ? .white : .primary)
+                Spacer()
+                if let date = file.date {
+                    DateView(date: date)
+                        .foregroundColor(isSelected ? .white : .secondary)
+                }
+            }
+            HStack {
+                Text(file.url.lastPathComponent)
+                    .foregroundColor(isSelected ? .white : .secondary)
+                    .font(.subheadline)
+                Spacer()
+            }
+        }
+        .padding(.leading)
+        .padding(.trailing)
+        .padding(6)
+        .background(isSelected ? Color.accentColor.cornerRadius(6).eraseToAnyView() : Color(NSColor.textBackgroundColor).eraseToAnyView())
+        .padding(.leading)
+        .padding(.trailing)
+    }
+
+}
+
 struct DirectoryView: View {
 
     @ObservedObject var directoryObserver: DirectoryObserver
-//    @State var selection = Set<FileInfo>()
     let qlCoordinator = QLCoordinator()
 
     @State var selection: URL?
@@ -69,14 +102,7 @@ struct DirectoryView: View {
         ScrollView {
             LazyVGrid(columns: columns) {
                 ForEach(directoryObserver.searchResults) { file in
-                    HStack {
-                        Text(file.name)
-                        Spacer()
-                    }
-                    .padding(6)
-                    .modifier(Selection(active: file.url == selection))
-                    .padding(.leading)
-                    .padding(.trailing)
+                    FileRow(file: file, isSelected: file.url == selection)
                     .gesture(
                         TapGesture().onEnded {
                             selection = file.url
@@ -98,7 +124,12 @@ struct DirectoryView: View {
                     }))
                 }
             }
+
         }
+        .onTapGesture {
+            selection = nil
+        }
+        .background(Color(NSColor.textBackgroundColor))
         .modifier(Toolbar(selection: selection, filter: directoryObserver.filter, qlCoordinator: qlCoordinator))
         .navigationTitle(directoryObserver.name)
     }
