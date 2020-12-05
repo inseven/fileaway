@@ -23,6 +23,10 @@ struct FocusedSelectionKey : FocusedValueKey {
     typealias Value = Binding<Set<URL>>
 }
 
+struct FocusedIntKey : FocusedValueKey {
+    typealias Value = Binding<Int>
+}
+
 extension FocusedValues {
 
     var selection: FocusedSelectionKey.Value? {
@@ -30,30 +34,36 @@ extension FocusedValues {
         set { self[FocusedSelectionKey.self] = newValue }
     }
 
+    var item: FocusedIntKey.Value? {
+        get { self[FocusedIntKey.self] }
+        set { self[FocusedIntKey.self] = newValue }
+    }
+
 }
 
 struct GlobalCommands: Commands {
 
-    @FocusedBinding(\.selection) var selection: Set<URL>?
+//    @FocusedBinding(\.selection) var selection: Set<URL>?
+    @FocusedBinding(\.item) var item: Int?
 
     var body: some Commands {
 
         ToolbarCommands()
         SidebarCommands()
 
-        CommandGroup(after: .systemServices) {
-            Divider()
-            Button {
-                FileActions.open()
-            } label: {
-                Text("File Actions...")
-            }
-            Button {
-                FileActions.openiOS()
-            } label: {
-                Text("File Actions for iOS...")
-            }
-        }
+//        CommandGroup(after: .systemServices) {
+//            Divider()
+//            Button {
+//                FileActions.open()
+//            } label: {
+//                Text("File Actions...")
+//            }
+//            Button {
+//                FileActions.openiOS()
+//            } label: {
+//                Text("File Actions for iOS...")
+//            }
+//        }
     }
 
 }

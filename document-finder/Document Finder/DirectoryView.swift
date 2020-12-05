@@ -58,6 +58,8 @@ struct DirectoryView: View {
     @ObservedObject var directoryObserver: DirectoryObserver
     let qlCoordinator = QLCoordinator()
 
+    @State var firstResponder: Bool = false
+
     @State var selection: Set<URL> = []
 
     var columns: [GridItem] = [
@@ -92,10 +94,13 @@ struct DirectoryView: View {
                 }
             }
         }
+        .background(Color(NSColor.textBackgroundColor))
+        .background(ResponderView(firstResponder: $firstResponder))
+        .focusedValue(\.item, Binding.constant(1))
         .onTapGesture {
             selection = []
+            firstResponder = true
         }
-        .background(Color(NSColor.textBackgroundColor))
         .onMoveCommand { direction in
 
             // Don't do anything if there aren't any items in the list.

@@ -10,9 +10,23 @@ import SwiftUI
 struct Sidebar: View {
 
     @ObservedObject var manager: Manager
+    @State var firstResponder: Bool = false
+    @State var item: Int = 30
+    @State var value: String = "SAkdfjh"
 
     var body: some View {
-        VStack {
+//        VStack {
+//            Text("Hello")
+//                .padding()
+//                .background(firstResponder ? Color.pink : Color.clear)
+//                .cornerRadius(6)
+//                .background(ResponderView(firstResponder: $firstResponder))
+//                .onTapGesture {
+//                    firstResponder = true
+//                }
+//                .focusedValue(\.item, Binding.constant(230))
+//            TextField("Title", text: $value)
+//                .focusedValue(\.item, Binding.constant(230))
             List {
                 Section(header: Text("Locations")) {
                     if let inbox = manager.inbox {
@@ -27,7 +41,7 @@ struct Sidebar: View {
                     }
                 }
             }
-        }
+//        }
     }
 
 }
