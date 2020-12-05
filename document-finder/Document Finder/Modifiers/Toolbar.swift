@@ -46,7 +46,9 @@ struct SearchField: NSViewRepresentable {
 
 struct Toolbar: ViewModifier {
 
-    @FocusedBinding(\.selection) var selection: Set<URL>?
+//    @FocusedBinding(\.selection) var selection: Set<URL>?
+
+    var selection: Set<URL>? = []
 
     @Binding var filter: String
     let qlCoordinator: QLCoordinator
