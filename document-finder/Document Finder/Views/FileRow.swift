@@ -9,6 +9,8 @@ import SwiftUI
 
 struct FileRow: View {
 
+    @Environment(\.isFocused) var isFocused
+
     var file: FileInfo
     var isSelected: Bool
 
@@ -17,17 +19,19 @@ struct FileRow: View {
             VStack {
                 HStack {
                     Text(file.name)
+                        .lineLimit(1)
                         .font(.headline)
-                        .foregroundColor(isSelected ? .white : .primary)
+                        .foregroundColor(isSelected || isFocused ? .white : .primary)
                     Spacer()
                     if let date = file.date {
                         DateView(date: date)
-                            .foregroundColor(isSelected ? .white : .secondary)
+                            .foregroundColor(isSelected || isFocused ? .white : .secondary)
                     }
                 }
                 HStack {
                     Text(file.url.lastPathComponent)
-                        .foregroundColor(isSelected ? .white : .secondary)
+                        .lineLimit(1)
+                        .foregroundColor(isSelected || isFocused ? .white : .secondary)
                         .font(.subheadline)
                     Spacer()
                 }
@@ -35,7 +39,7 @@ struct FileRow: View {
             .padding(.leading)
             .padding(.trailing)
             .padding(6)
-            .background(isSelected ? Color.accentColor.cornerRadius(6).eraseToAnyView() : Color(NSColor.textBackgroundColor).eraseToAnyView())
+            .background(isSelected || isFocused ? Color.accentColor.cornerRadius(6).eraseToAnyView() : Color(NSColor.textBackgroundColor).eraseToAnyView())
             Divider()
         }
         .padding(.leading)

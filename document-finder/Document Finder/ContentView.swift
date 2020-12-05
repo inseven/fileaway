@@ -7,26 +7,6 @@
 
 import SwiftUI
 
-struct MailboxRow: View {
-
-    @ObservedObject var directoryObserver: DirectoryObserver
-    var title: String
-    var imageSystemName: String
-
-    var body: some View {
-        HStack {
-            Image(systemName: imageSystemName)
-                .foregroundColor(.accentColor)
-            Text(title)
-            Spacer()
-            if directoryObserver.count > 0 {
-                Text(String(directoryObserver.count))
-            }
-        }
-    }
-
-}
-
 struct ContentView: View {
 
     @ObservedObject var manager: Manager
@@ -35,7 +15,8 @@ struct ContentView: View {
         NavigationView {
             Sidebar(manager: manager)
             EmptyView()
-                .modifier(Toolbar(selection: nil, filter: Binding.constant(""), qlCoordinator: QLCoordinator()))
+                .background(Color(NSColor.textBackgroundColor))
+                .modifier(Toolbar(filter: Binding.constant(""), qlCoordinator: QLCoordinator()))
         }
     }
 }

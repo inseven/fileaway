@@ -30,6 +30,9 @@
 		D87DEFB925783F66006CFE85 /* DirectoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEFB825783F66006CFE85 /* DirectoryView.swift */; };
 		D87DEFBE257840B1006CFE85 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEFBD257840B1006CFE85 /* Manager.swift */; };
 		D87DEFC4257848B7006CFE85 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEFC3257848B7006CFE85 /* URL.swift */; };
+		D8FC5334257BB6D2008FB609 /* MailboxRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5333257BB6D2008FB609 /* MailboxRow.swift */; };
+		D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5341257BB77C008FB609 /* SettingsView.swift */; };
+		D8FC534A257BB7A4008FB609 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5349257BB7A4008FB609 /* GeneralSettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +82,9 @@
 		D87DEFB825783F66006CFE85 /* DirectoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryView.swift; sourceTree = "<group>"; };
 		D87DEFBD257840B1006CFE85 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		D87DEFC3257848B7006CFE85 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
+		D8FC5333257BB6D2008FB609 /* MailboxRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailboxRow.swift; sourceTree = "<group>"; };
+		D8FC5341257BB77C008FB609 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		D8FC5349257BB7A4008FB609 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +119,9 @@
 				D821E938257A959D005D3205 /* DateView.swift */,
 				D821E945257AA5FC005D3205 /* Sidebar.swift */,
 				D821E94A257AB2C9005D3205 /* FileRow.swift */,
+				D8FC5333257BB6D2008FB609 /* MailboxRow.swift */,
+				D8FC5341257BB77C008FB609 /* SettingsView.swift */,
+				D8FC5349257BB7A4008FB609 /* GeneralSettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -149,6 +158,7 @@
 		D87DEF7D25774F6C006CFE85 /* Document Finder */ = {
 			isa = PBXGroup;
 			children = (
+				D8FC5340257BB72F008FB609 /* Utilities */,
 				D821E937257A9591005D3205 /* Views */,
 				D85C95852579DD880007AE1E /* Modifiers */,
 				D87DEFC2257848A7006CFE85 /* Extensions */,
@@ -158,13 +168,11 @@
 				D87DEF8725774F6D006CFE85 /* Info.plist */,
 				D87DEF8825774F6D006CFE85 /* Document_Finder.entitlements */,
 				D87DEF8425774F6D006CFE85 /* Preview Content */,
-				D87DEFB325780BA4006CFE85 /* DirectoryObserver.swift */,
 				D87DEFB825783F66006CFE85 /* DirectoryView.swift */,
 				D87DEFBD257840B1006CFE85 /* Manager.swift */,
 				D829DDB325787C100066A807 /* Settings.swift */,
 				D85C957625799B2E0007AE1E /* FileActions.swift */,
 				D821E92A257A8F87005D3205 /* FileInfo.swift */,
-				D821E93D257A960C005D3205 /* FileProvider.swift */,
 			);
 			path = "Document Finder";
 			sourceTree = "<group>";
@@ -204,6 +212,15 @@
 				D85C958B2579DE140007AE1E /* View.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D8FC5340257BB72F008FB609 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				D821E93D257A960C005D3205 /* FileProvider.swift */,
+				D87DEFB325780BA4006CFE85 /* DirectoryObserver.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -346,6 +363,7 @@
 				D85C95872579DD9D0007AE1E /* Selection.swift in Sources */,
 				D87DEF8125774F6C006CFE85 /* ContentView.swift in Sources */,
 				D821E94B257AB2C9005D3205 /* FileRow.swift in Sources */,
+				D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */,
 				D821E92B257A8F87005D3205 /* FileInfo.swift in Sources */,
 				D85C95812579CED30007AE1E /* Toolbar.swift in Sources */,
 				D85C957725799B2E0007AE1E /* FileActions.swift in Sources */,
@@ -357,7 +375,9 @@
 				D87DEFB425780BA4006CFE85 /* DirectoryObserver.swift in Sources */,
 				D829DDB425787C100066A807 /* Settings.swift in Sources */,
 				D87DEFBE257840B1006CFE85 /* Manager.swift in Sources */,
+				D8FC534A257BB7A4008FB609 /* GeneralSettingsView.swift in Sources */,
 				D87DEFC4257848B7006CFE85 /* URL.swift in Sources */,
+				D8FC5334257BB6D2008FB609 /* MailboxRow.swift in Sources */,
 				D85C9572257999130007AE1E /* FileManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

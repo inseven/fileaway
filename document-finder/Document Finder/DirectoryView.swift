@@ -58,7 +58,7 @@ struct DirectoryView: View {
     @ObservedObject var directoryObserver: DirectoryObserver
     let qlCoordinator = QLCoordinator()
 
-    @State var selection: URL?
+    @State var selection: Set<URL> = []
 
     var columns: [GridItem] = [
         GridItem(.flexible(minimum: 0, maximum: .infinity))
@@ -68,36 +68,61 @@ struct DirectoryView: View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 0) {
                 ForEach(directoryObserver.searchResults) { file in
-                    FileRow(file: file, isSelected: file.url == selection)
+                    FileRow(file: file, isSelected: selection.contains(file.url))
                         .onDrag { NSItemProvider(object: file.url as NSURL) }
-                    .gesture(
-                        TapGesture().onEnded {
-                            selection = file.url
-                        }
-                        .simultaneously(with: TapGesture(count: 2).onEnded {
-                            NSWorkspace.shared.open(file.url)
+                        .gesture(
+                            TapGesture().onEnded {
+                                selection = [file.url]
+                            }
+                            .simultaneously(with: TapGesture(count: 2).onEnded {
+                                NSWorkspace.shared.open(file.url)
+                            }))
+                        .contextMenu(ContextMenu(menuItems: {
+                            Button("Open") {
+                                NSWorkspace.shared.open(file.url)
+                            }
+                            Button("Open with File Actions") {
+                                FileActions.open(urls: [file.url])
+                            }
+                            Divider()
+                            Button("Reveal in Finder") {
+                                NSWorkspace.shared.activateFileViewerSelecting([file.url])
+                            }
                         }))
-                    .contextMenu(ContextMenu(menuItems: {
-                        Button("Open") {
-                            NSWorkspace.shared.open(file.url)
-                        }
-                        Button("Open with File Actions") {
-                            FileActions.open(urls: [file.url])
-                        }
-                        Divider()
-                        Button("Reveal in Finder") {
-                            NSWorkspace.shared.activateFileViewerSelecting([file.url])
-                        }
-                    }))
                 }
             }
-
         }
         .onTapGesture {
-            selection = nil
+            selection = []
         }
         .background(Color(NSColor.textBackgroundColor))
-        .modifier(Toolbar(selection: selection, filter: directoryObserver.filter, qlCoordinator: qlCoordinator))
+        .onMoveCommand { direction in
+
+            // Don't do anything if there aren't any items in the list.
+            guard directoryObserver.searchResults.count > 0 else {
+                return
+            }
+
+            switch direction {
+            case .up:
+                let selection = self.selection.first
+                let index = directoryObserver.searchResults.firstIndex { $0.url == selection } ?? -1
+                let nextIndex = index - 1
+                self.selection = [directoryObserver.searchResults[nextIndex > 0 ? nextIndex : 0].url]
+            case .down:
+                let selection = self.selection.first
+                let index = directoryObserver.searchResults.firstIndex { $0.url == selection } ?? -1
+                let nextIndex = index + 1
+                self.selection = [directoryObserver.searchResults[nextIndex < directoryObserver.searchResults.count ? nextIndex : index].url]
+            case .left:
+                print("left")
+            case .right:
+                print("right")
+            default:
+                print("unhandled command")
+            }
+        }
+        .modifier(Toolbar(filter: directoryObserver.filter, qlCoordinator: qlCoordinator))
         .navigationTitle(directoryObserver.name)
     }
 

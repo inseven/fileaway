@@ -30,7 +30,7 @@ struct SearchField: NSViewRepresentable {
     @Binding var search: String
 
     func makeNSView(context: Context) -> NSSearchField {
-        NSSearchField(frame: .zero)
+        return NSSearchField(frame: .zero)
     }
 
     func updateNSView(_ searchField: NSSearchField, context: Context) {
@@ -46,7 +46,8 @@ struct SearchField: NSViewRepresentable {
 
 struct Toolbar: ViewModifier {
 
-    var selection: URL?
+    @FocusedBinding(\.selection) var selection: Set<URL>?
+
     @Binding var filter: String
     let qlCoordinator: QLCoordinator
 
@@ -57,18 +58,18 @@ struct Toolbar: ViewModifier {
                     Button {
                         print("Preview")
                         let panel = QLPreviewPanel.shared()
-                        qlCoordinator.set(path: selection!)
+                        qlCoordinator.set(path: selection!.first!)
                         panel?.center()
                         panel?.dataSource = self.qlCoordinator
                         panel?.makeKeyAndOrderFront(nil)
                     } label: {
                         Image(systemName: "eye")
                     }
-                    .disabled(selection == nil)
+                    .disabled(selection?.count == 0)
                 }
                 ToolbarItem {
                     Button {
-                        FileActions.open(urls: [selection!])
+                        FileActions.open(urls: Array(selection ?? []))
                     } label: {
                         Image(systemName: "archivebox")
                     }
@@ -76,7 +77,9 @@ struct Toolbar: ViewModifier {
                 }
                 ToolbarItem {
                     Button {
-                        try? FileManager.default.removeItem(at: selection!)
+                        for url in Array(selection ?? []) {
+                            try? FileManager.default.removeItem(at: url)
+                        }
                     } label: {
                         Image(systemName: "trash")
                     }

@@ -19,51 +19,41 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 }
 
-struct GeneralSettingsView: View {
+struct FocusedSelectionKey : FocusedValueKey {
+    typealias Value = Binding<Set<URL>>
+}
 
-    @ObservedObject var manager: Manager
+extension FocusedValues {
 
-    var body: some View {
-        VStack {
-            Button("Set Inbox") {
-                let openPanel = NSOpenPanel()
-                openPanel.canChooseFiles = false
-                openPanel.canChooseDirectories = true
-                if (openPanel.runModal() ==  NSApplication.ModalResponse.OK) {
-                    try! manager.setInboxUrl(openPanel.url!)
-                }
-            }
-            Button("Set Archive") {
-                let openPanel = NSOpenPanel()
-                openPanel.canChooseFiles = false
-                openPanel.canChooseDirectories = true
-                if (openPanel.runModal() ==  NSApplication.ModalResponse.OK) {
-                    try! manager.setArchiveUrl(openPanel.url!)
-                }
-            }
-        }
+    var selection: FocusedSelectionKey.Value? {
+        get { self[FocusedSelectionKey.self] }
+        set { self[FocusedSelectionKey.self] = newValue }
     }
 
 }
 
-struct SettingsView: View {
+struct GlobalCommands: Commands {
 
-    private enum Tabs: Hashable {
-        case general
-    }
+    @FocusedBinding(\.selection) var selection: Set<URL>?
 
-    @ObservedObject var manager: Manager
+    var body: some Commands {
 
-    var body: some View {
-        TabView {
-            GeneralSettingsView(manager: manager)
-                .tabItem {
-                    Label("General", systemImage: "gear")
-                }
-                .tag(Tabs.general)
+        ToolbarCommands()
+        SidebarCommands()
+
+        CommandGroup(after: .systemServices) {
+            Divider()
+            Button {
+                FileActions.open()
+            } label: {
+                Text("File Actions...")
+            }
+            Button {
+                FileActions.openiOS()
+            } label: {
+                Text("File Actions for iOS...")
+            }
         }
-        .padding(20)
-        .frame(width: 375, height: 150)
     }
 
 }
@@ -93,20 +83,7 @@ struct Document_FinderApp: App {
             ContentView(manager: appDelegate.manager)
         }
         .commands {
-            CommandGroup(after: .systemServices) {
-                Divider()
-                Button {
-                    FileActions.open()
-                } label: {
-                    Text("File Actions...")
-                }
-                Button {
-                    FileActions.openiOS()
-                } label: {
-                    Text("File Actions for iOS...")
-                }
-
-            }
+            GlobalCommands()
         }
         .onChange(of: phase) { phase in
             switch phase {

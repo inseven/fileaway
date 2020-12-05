@@ -59,6 +59,9 @@ class FileInfo: Identifiable, Hashable {
     let url: URL
     let name: String
     var date: Date?
+    var sortDate: Date {
+        date ?? Date.distantPast
+    }
 
     init(url: URL) {
         self.url = url

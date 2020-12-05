@@ -57,7 +57,11 @@ class DirectoryObserver: ObservableObject, Identifiable {
                         $0.name.localizedSearchMatches(string: filter)
                 }
                 .sorted { fileInfo1, fileInfo2 -> Bool in
-                    fileInfo1.name.compare(fileInfo2.name) == .orderedAscending
+                    let dateComparison = fileInfo1.sortDate.compare(fileInfo2.sortDate)
+                    if dateComparison != .orderedSame {
+                        return dateComparison == .orderedDescending
+                    }
+                    return fileInfo1.name.compare(fileInfo2.name) == .orderedAscending
                 }
 
             DispatchQueue.main.async {
