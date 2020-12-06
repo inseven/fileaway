@@ -96,7 +96,6 @@ struct DirectoryView: View {
         }
         .background(Color(NSColor.textBackgroundColor))
         .background(ResponderView(firstResponder: $firstResponder))
-        .focusedValue(\.item, Binding.constant(1))
         .onTapGesture {
             selection = []
             firstResponder = true
