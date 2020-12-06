@@ -95,7 +95,7 @@ struct DirectoryView: View {
             }
         }
         .background(Color(NSColor.textBackgroundColor))
-        .background(ResponderView(firstResponder: $firstResponder))
+        .acceptsFirstResponder(isFirstResponder: $firstResponder)
         .onTapGesture {
             selection = []
             firstResponder = true
@@ -118,10 +118,6 @@ struct DirectoryView: View {
                 let index = directoryObserver.searchResults.firstIndex { $0.url == selection } ?? -1
                 let nextIndex = index + 1
                 self.selection = [directoryObserver.searchResults[nextIndex < directoryObserver.searchResults.count ? nextIndex : index].url]
-            case .left:
-                print("left")
-            case .right:
-                print("right")
             default:
                 print("unhandled command")
             }

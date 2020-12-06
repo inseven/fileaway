@@ -30,6 +30,7 @@
 		D87DEFB925783F66006CFE85 /* DirectoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEFB825783F66006CFE85 /* DirectoryView.swift */; };
 		D87DEFBE257840B1006CFE85 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEFBD257840B1006CFE85 /* Manager.swift */; };
 		D87DEFC4257848B7006CFE85 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEFC3257848B7006CFE85 /* URL.swift */; };
+		D8B6D021257D962F00C7E472 /* AcceptsFirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6D020257D962F00C7E472 /* AcceptsFirstResponder.swift */; };
 		D8DC5046257C0795009B3ECC /* ResponderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DC5045257C0795009B3ECC /* ResponderView.swift */; };
 		D8FC5334257BB6D2008FB609 /* MailboxRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5333257BB6D2008FB609 /* MailboxRow.swift */; };
 		D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5341257BB77C008FB609 /* SettingsView.swift */; };
@@ -83,6 +84,7 @@
 		D87DEFB825783F66006CFE85 /* DirectoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryView.swift; sourceTree = "<group>"; };
 		D87DEFBD257840B1006CFE85 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		D87DEFC3257848B7006CFE85 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
+		D8B6D020257D962F00C7E472 /* AcceptsFirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptsFirstResponder.swift; sourceTree = "<group>"; };
 		D8DC5045257C0795009B3ECC /* ResponderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponderView.swift; sourceTree = "<group>"; };
 		D8FC5333257BB6D2008FB609 /* MailboxRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailboxRow.swift; sourceTree = "<group>"; };
 		D8FC5341257BB77C008FB609 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				D829DDB325787C100066A807 /* Settings.swift */,
 				D85C957625799B2E0007AE1E /* FileActions.swift */,
 				D821E92A257A8F87005D3205 /* FileInfo.swift */,
+				D8B6D020257D962F00C7E472 /* AcceptsFirstResponder.swift */,
 			);
 			path = "Document Finder";
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 				D821E946257AA5FC005D3205 /* Sidebar.swift in Sources */,
 				D85C957C2579CDAA0007AE1E /* String.swift in Sources */,
 				D821E93E257A960C005D3205 /* FileProvider.swift in Sources */,
+				D8B6D021257D962F00C7E472 /* AcceptsFirstResponder.swift in Sources */,
 				D87DEF7F25774F6C006CFE85 /* Document_FinderApp.swift in Sources */,
 				D87DEFB925783F66006CFE85 /* DirectoryView.swift in Sources */,
 				D87DEFB425780BA4006CFE85 /* DirectoryObserver.swift in Sources */,
