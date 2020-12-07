@@ -39,14 +39,24 @@ struct DirectoryView: View {
                         .padding(.leading)
                         .padding(.trailing)
                         .onDrag { NSItemProvider(object: file.url as NSURL) }
-                        .gesture(
-                            TapGesture().onEnded {
-                                firstResponder = true
-                                tracker.select(item: file)
-                            }
-                            .simultaneously(with: TapGesture(count: 2).onEnded {
-                                NSWorkspace.shared.open(file.url)
-                            }))
+                        .gesture(TapGesture().onEnded {
+                            print("click")
+                            firstResponder = true
+                            tracker.select(item: file)
+                        }
+                        .simultaneously(with: TapGesture(count: 2).onEnded {
+                            NSWorkspace.shared.open(file.url)
+                        }))
+                        .highPriorityGesture(TapGesture(count: 1).modifiers(EventModifiers.command).onEnded {
+                            print("command click")
+                            firstResponder = true
+                            tracker.add(item: file)
+                        })
+                        .highPriorityGesture(TapGesture(count: 1).modifiers(EventModifiers.shift).onEnded {
+                            print("shift click")
+                            firstResponder = true
+                            try? tracker.extend(to: file)
+                        })
                         .contextMenu(ContextMenu(menuItems: {
                             Button("Open") {
                                 NSWorkspace.shared.open(file.url)
