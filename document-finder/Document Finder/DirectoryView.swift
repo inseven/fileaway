@@ -10,55 +10,9 @@ import Combine
 import Quartz
 import SwiftUI
 
-
-func loadPreviewItem(with name: String) -> NSURL {
-
-    let file = name.components(separatedBy: ".")
-    let path = Bundle.main.path(forResource: file.first!, ofType: file.last!)
-    let url = NSURL(fileURLWithPath: path!)
-
-    return url
-}
-
-struct MyPreview: NSViewRepresentable {
-    var fileName: String
-
-    func makeNSView(context: NSViewRepresentableContext<MyPreview>) -> QLPreviewView {
-        let preview = QLPreviewView(frame: .zero, style: .normal)
-        preview?.autostarts = true
-        preview?.previewItem = loadPreviewItem(with: fileName) as QLPreviewItem
-        return preview ?? QLPreviewView()
-    }
-
-    func updateNSView(_ nsView: QLPreviewView, context: NSViewRepresentableContext<MyPreview>) {
-    }
-
-    typealias NSViewType = QLPreviewView
-
-}
-
-class QLCoordinator: NSObject, QLPreviewPanelDataSource {
-
-    var url: URL?
-
-    func previewPanel(_ panel: QLPreviewPanel!, previewItemAt index: Int) -> QLPreviewItem! {
-        return url! as QLPreviewItem
-    }
-
-    func numberOfPreviewItems(in controller: QLPreviewPanel) -> Int {
-        return 1
-    }
-
-    func set(path: URL) {
-        self.url = path
-    }
-}
-
 struct DirectoryView: View {
 
     @ObservedObject var directoryObserver: DirectoryObserver
-
-    let qlCoordinator = QLCoordinator()
 
     @State var firstResponder: Bool = false
 
@@ -125,7 +79,7 @@ struct DirectoryView: View {
             }
         }
         .onCutCommand(perform: manager.cut)
-        .modifier(Toolbar(manager: manager, filter: directoryObserver.filter, qlCoordinator: qlCoordinator))
+        .modifier(Toolbar(manager: manager, filter: directoryObserver.filter))
         .navigationTitle(directoryObserver.name)
     }
 

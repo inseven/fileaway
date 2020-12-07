@@ -5,15 +5,12 @@
 //  Created by Jason Barrie Morley on 03/12/2020.
 //
 
-import Quartz
 import SwiftUI
 
 struct Toolbar: ViewModifier {
 
     @ObservedObject var manager: SelectionManager
     @Binding var filter: String
-
-    let qlCoordinator: QLCoordinator
 
     func body(content: Content) -> some View {
         content
@@ -23,11 +20,7 @@ struct Toolbar: ViewModifier {
                         guard let file = manager.tracker.selection.first else {
                             return
                         }
-                        let panel = QLPreviewPanel.shared()
-                        qlCoordinator.set(path: file.url)
-                        panel?.center()
-                        panel?.dataSource = self.qlCoordinator
-                        panel?.makeKeyAndOrderFront(nil)
+                        QuickLookCoordinator.shared.show(url: file.url)
                     } label: {
                         Image(systemName: "eye")
                     }
