@@ -46,11 +46,9 @@ struct SearchField: NSViewRepresentable {
 
 struct Toolbar: ViewModifier {
 
-//    @FocusedBinding(\.selection) var selection: Set<URL>?
-
-    var selection: Set<URL>? = []
-
+    @ObservedObject var manager: SelectionManager
     @Binding var filter: String
+
     let qlCoordinator: QLCoordinator
 
     func body(content: Content) -> some View {
@@ -58,34 +56,35 @@ struct Toolbar: ViewModifier {
             .toolbar {
                 ToolbarItem {
                     Button {
+                        guard let file = manager.tracker.selection.first else {
+                            return
+                        }
                         print("Preview")
                         let panel = QLPreviewPanel.shared()
-                        qlCoordinator.set(path: selection!.first!)
+                        qlCoordinator.set(path: file.url)
                         panel?.center()
                         panel?.dataSource = self.qlCoordinator
                         panel?.makeKeyAndOrderFront(nil)
                     } label: {
                         Image(systemName: "eye")
                     }
-                    .disabled(selection?.count == 0)
+                    .disabled(!manager.canPreview)
                 }
                 ToolbarItem {
                     Button {
-                        FileActions.open(urls: Array(selection ?? []))
+                        manager.archive()
                     } label: {
                         Image(systemName: "archivebox")
                     }
-                    .disabled(selection == nil)
+                    .disabled(!manager.canArchive)
                 }
                 ToolbarItem {
                     Button {
-                        for url in Array(selection ?? []) {
-                            try? FileManager.default.removeItem(at: url)
-                        }
+                        try? manager.trash()
                     } label: {
                         Image(systemName: "trash")
                     }
-                    .disabled(selection == nil)
+                    .disabled(!manager.canTrash)
                 }
                 ToolbarItem {
                     SearchField(search: $filter)

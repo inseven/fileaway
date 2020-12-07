@@ -16,7 +16,6 @@ struct ContentView: View {
             Sidebar(manager: manager)
             EmptyView()
                 .background(Color(NSColor.textBackgroundColor))
-                .modifier(Toolbar(filter: Binding.constant(""), qlCoordinator: QLCoordinator()))
         }
     }
 }

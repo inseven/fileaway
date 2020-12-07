@@ -15,7 +15,7 @@ class DirectoryObserver: ObservableObject, Identifiable {
     var locations: [URL]
     var extensions = ["pdf"]
     var count: Int { self.files.count }
-    var searchResults: [FileInfo] = []
+    @Published var searchResults: [FileInfo] = []
 
     var fileProvider: FileProvider?
 
