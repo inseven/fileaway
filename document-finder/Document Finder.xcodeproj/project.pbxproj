@@ -35,6 +35,7 @@
 		D8B6D02B257DBAF700C7E472 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6D02A257DBAF700C7E472 /* SearchField.swift */; };
 		D8B6D030257DBB7D00C7E472 /* SelectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6D02F257DBB7D00C7E472 /* SelectionManager.swift */; };
 		D8B6D035257E71CD00C7E472 /* QuickLookCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6D034257E71CD00C7E472 /* QuickLookCoordinator.swift */; };
+		D8B6D03A257E808900C7E472 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6D039257E808900C7E472 /* Color.swift */; };
 		D8DC5046257C0795009B3ECC /* ResponderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DC5045257C0795009B3ECC /* ResponderView.swift */; };
 		D8FC5334257BB6D2008FB609 /* MailboxRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5333257BB6D2008FB609 /* MailboxRow.swift */; };
 		D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5341257BB77C008FB609 /* SettingsView.swift */; };
@@ -93,6 +94,7 @@
 		D8B6D02A257DBAF700C7E472 /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
 		D8B6D02F257DBB7D00C7E472 /* SelectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionManager.swift; sourceTree = "<group>"; };
 		D8B6D034257E71CD00C7E472 /* QuickLookCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickLookCoordinator.swift; sourceTree = "<group>"; };
+		D8B6D039257E808900C7E472 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		D8DC5045257C0795009B3ECC /* ResponderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponderView.swift; sourceTree = "<group>"; };
 		D8FC5333257BB6D2008FB609 /* MailboxRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailboxRow.swift; sourceTree = "<group>"; };
 		D8FC5341257BB77C008FB609 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				D85C9571257999130007AE1E /* FileManager.swift */,
 				D85C957B2579CDAA0007AE1E /* String.swift */,
 				D85C958B2579DE140007AE1E /* View.swift */,
+				D8B6D039257E808900C7E472 /* Color.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 				D8B6D02B257DBAF700C7E472 /* SearchField.swift in Sources */,
 				D821E92B257A8F87005D3205 /* FileInfo.swift in Sources */,
 				D85C95812579CED30007AE1E /* Toolbar.swift in Sources */,
+				D8B6D03A257E808900C7E472 /* Color.swift in Sources */,
 				D85C957725799B2E0007AE1E /* FileActions.swift in Sources */,
 				D821E946257AA5FC005D3205 /* Sidebar.swift in Sources */,
 				D85C957C2579CDAA0007AE1E /* String.swift in Sources */,

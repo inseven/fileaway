@@ -30,12 +30,17 @@ struct DirectoryView: View {
         GridItem(.flexible(minimum: 0, maximum: .infinity))
     ]
 
+    var highlightColor: Color {
+        firstResponder ? Color.selectedContentBackgroundColor : Color.unemphasizedSelectedContentBackgroundColor
+    }
+
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 0) {
                 ForEach(tracker.items) { file in
                     FileRow(file: file, isSelected: tracker.isSelected(item: file))
-                        .background(tracker.isSelected(item: file) ? Color.accentColor.cornerRadius(6).eraseToAnyView() : Color(NSColor.textBackgroundColor).eraseToAnyView())
+                        .background(tracker.isSelected(item: file) ? highlightColor : Color(NSColor.textBackgroundColor))
+                        .cornerRadius(6)
                         .padding(.leading)
                         .padding(.trailing)
                         .onDrag { NSItemProvider(object: file.url as NSURL) }
