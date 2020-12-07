@@ -45,6 +45,7 @@ struct DirectoryView: View {
                             tracker.select(item: file)
                         }
                         .simultaneously(with: TapGesture(count: 2).onEnded {
+                            print("double click")
                             NSWorkspace.shared.open(file.url)
                         }))
                         .highPriorityGesture(TapGesture(count: 1).modifiers(EventModifiers.command).onEnded {
