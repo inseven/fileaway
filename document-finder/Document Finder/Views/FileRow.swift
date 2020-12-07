@@ -14,7 +14,7 @@ struct FileRow: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            VStack {
+            VStack(spacing: 0) {
                 HStack {
                     Text(file.name)
                         .lineLimit(1)
@@ -34,7 +34,8 @@ struct FileRow: View {
                     Spacer()
                 }
             }
-            .padding(6)
+            .padding(.top, 6)
+            .padding(.bottom, 6)
             Divider()
         }
         .padding(.leading)
