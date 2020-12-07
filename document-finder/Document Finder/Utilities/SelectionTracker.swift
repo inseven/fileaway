@@ -41,6 +41,34 @@ class SelectionTracker<T>: ObservableObject where T: Hashable {
         lastSelection = item
     }
 
+    func toggle(item: T) {
+        if selection.contains(item) {
+            selection.remove(item)
+        } else {
+            selection.insert(item)
+        }
+    }
+
+    func beginsSelection(item: T) -> Bool {
+        guard let index = self.index(of: item) else {
+            return false
+        }
+        if index < 1 {
+            return true
+        }
+        return !selection.contains(items[index - 1])
+    }
+
+    func endsSelection(item: T) -> Bool {
+        guard let index = self.index(of: item) else {
+            return false
+        }
+        if index >= items.count - 1 {
+            return true
+        }
+        return !selection.contains(items[index + 1])
+    }
+
     func extend(to item: T) throws {
         let indexes = self.indexes
         guard indexes.count > 0,
