@@ -63,12 +63,15 @@ class FileInfo: Identifiable, Hashable {
         date ?? Date.distantPast
     }
 
+    let directoryUrl: URL
+
     init(url: URL) {
         self.url = url
         let name = url.lastPathComponent.deletingPathExtension
         self.date = DateFinder.dates(from: name).first
         let title = TitleFinder.title(from: name)
         self.name = title.isEmpty ? name : title
+        self.directoryUrl = url.deletingLastPathComponent()
     }
 
     static func == (lhs: FileInfo, rhs: FileInfo) -> Bool {

@@ -27,7 +27,7 @@ struct FileRow: View {
                     }
                 }
                 HStack {
-                    Text(file.url.lastPathComponent)
+                    Text(file.directoryUrl.path)
                         .lineLimit(1)
                         .foregroundColor(isSelected ? .white : .secondary)
                         .font(.subheadline)

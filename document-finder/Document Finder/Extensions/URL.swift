@@ -20,6 +20,10 @@ extension URL {
         (path as NSString).lastPathComponent
     }
 
+    var deletingLastPathComponent: URL {
+        self.deletingLastPathComponent()
+    }
+
 }
 
 extension URL: Identifiable {
