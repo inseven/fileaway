@@ -77,7 +77,7 @@ struct DirectoryView: View {
 
     @ObservedObject var directoryObserver: DirectoryObserver
 
-    @State var firstResponder: Bool = true
+    @State var firstResponder: Bool = false
 
     @StateObject var tracker: SelectionTracker<FileInfo>
     @State var manager: SelectionManager
