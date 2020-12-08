@@ -47,6 +47,7 @@ class SelectionTracker<T>: ObservableObject where T: Hashable {
         } else {
             selection.insert(item)
         }
+        lastSelection = item
     }
 
     func beginsSelection(item: T) -> Bool {

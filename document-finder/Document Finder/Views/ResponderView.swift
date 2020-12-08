@@ -19,20 +19,14 @@ struct ResponderView: NSViewRepresentable {
         func didBecomeFirstResponder() { self.parent.firstResponder = true }
         func didResignFirstResponder() { self.parent.firstResponder = false }
         func shouldBeFirstResponder() -> Bool { self.parent.firstResponder }
+        func keyDown(with event: NSEvent) -> Bool { return self.parent.keyDown(with: event) }
+        func keyUp(with event: NSEvent) -> Bool { return self.parent.keyUp(with: event) }
     }
 
     class KeyboardView: NSView {
 
         weak var delegate: Coordinator?
         var isFirstResponder: Bool = false
-
-        required init() {
-            super.init(frame: .zero)
-        }
-
-        @objc required dynamic init?(coder aDecoder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
 
         override var acceptsFirstResponder: Bool { return true }
 
@@ -69,8 +63,30 @@ struct ResponderView: NSViewRepresentable {
             }
             return true
         }
+
+        override func keyDown(with event: NSEvent) {
+            guard let delegate = delegate else {
+                super.keyDown(with: event)
+                return
+            }
+            if !delegate.keyDown(with: event) {
+                super.keyDown(with: event)
+            }
+        }
+
+        override func keyUp(with event: NSEvent) {
+            guard let delegate = delegate else {
+                super.keyUp(with: event)
+                return
+            }
+            if !delegate.keyUp(with: event) {
+                super.keyUp(with: event)
+            }
+        }
     }
 
+    @Environment(\.keyDownHandlers) var keyDownHandlers;
+    @Environment(\.keyUpHandlers) var keyUpHandlers;
     @Binding var firstResponder: Bool
 
     func makeCoordinator() -> Coordinator {
@@ -78,7 +94,7 @@ struct ResponderView: NSViewRepresentable {
     }
 
     func makeNSView(context: Context) -> KeyboardView {
-        let keyboardView = KeyboardView()
+        let keyboardView = KeyboardView(frame: .zero)
         keyboardView.delegate = context.coordinator
         return keyboardView
     }
@@ -87,6 +103,24 @@ struct ResponderView: NSViewRepresentable {
         DispatchQueue.main.async {
             view.updateResponder()
         }
+    }
+
+    func keyDown(with event: NSEvent) -> Bool {
+        for handler in keyDownHandlers {
+            if handler(event) {
+                return true
+            }
+        }
+        return false
+    }
+
+    func keyUp(with event: NSEvent) -> Bool {
+        for handler in keyUpHandlers {
+            if handler(event) {
+                return true
+            }
+        }
+        return false
     }
 
 }

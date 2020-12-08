@@ -36,6 +36,7 @@
 		D8B6D030257DBB7D00C7E472 /* SelectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6D02F257DBB7D00C7E472 /* SelectionManager.swift */; };
 		D8B6D035257E71CD00C7E472 /* QuickLookCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6D034257E71CD00C7E472 /* QuickLookCoordinator.swift */; };
 		D8B6D03A257E808900C7E472 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6D039257E808900C7E472 /* Color.swift */; };
+		D8B6D047257F0B4300C7E472 /* KeyEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6D046257F0B4300C7E472 /* KeyEventHandler.swift */; };
 		D8DC5046257C0795009B3ECC /* ResponderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DC5045257C0795009B3ECC /* ResponderView.swift */; };
 		D8FC5334257BB6D2008FB609 /* MailboxRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5333257BB6D2008FB609 /* MailboxRow.swift */; };
 		D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5341257BB77C008FB609 /* SettingsView.swift */; };
@@ -95,6 +96,7 @@
 		D8B6D02F257DBB7D00C7E472 /* SelectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionManager.swift; sourceTree = "<group>"; };
 		D8B6D034257E71CD00C7E472 /* QuickLookCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickLookCoordinator.swift; sourceTree = "<group>"; };
 		D8B6D039257E808900C7E472 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		D8B6D046257F0B4300C7E472 /* KeyEventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEventHandler.swift; sourceTree = "<group>"; };
 		D8DC5045257C0795009B3ECC /* ResponderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponderView.swift; sourceTree = "<group>"; };
 		D8FC5333257BB6D2008FB609 /* MailboxRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailboxRow.swift; sourceTree = "<group>"; };
 		D8FC5341257BB77C008FB609 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				D8FC5349257BB7A4008FB609 /* GeneralSettingsView.swift */,
 				D8DC5045257C0795009B3ECC /* ResponderView.swift */,
 				D8B6D02A257DBAF700C7E472 /* SearchField.swift */,
+				D8B6D046257F0B4300C7E472 /* KeyEventHandler.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 				D829DDB425787C100066A807 /* Settings.swift in Sources */,
 				D87DEFBE257840B1006CFE85 /* Manager.swift in Sources */,
 				D8B6D035257E71CD00C7E472 /* QuickLookCoordinator.swift in Sources */,
+				D8B6D047257F0B4300C7E472 /* KeyEventHandler.swift in Sources */,
 				D8FC534A257BB7A4008FB609 /* GeneralSettingsView.swift in Sources */,
 				D87DEFC4257848B7006CFE85 /* URL.swift in Sources */,
 				D8FC5334257BB6D2008FB609 /* MailboxRow.swift in Sources */,
