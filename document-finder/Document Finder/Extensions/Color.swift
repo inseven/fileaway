@@ -25,4 +25,12 @@ extension Color {
         Color(NSColor.selectedContentBackgroundColor)
     }
 
+    static var selectedTextColor: Color {
+        Color(NSColor.selectedTextColor)
+    }
+
+    static var textBackgroundColor: Color {
+        Color(NSColor.textBackgroundColor)
+    }
+
 }

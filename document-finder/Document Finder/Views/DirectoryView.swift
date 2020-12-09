@@ -153,6 +153,7 @@ struct DirectoryView: View {
                         }))
                 }
             }
+            .padding(.top)
         }
         .background(Color(NSColor.textBackgroundColor))
         .acceptsFirstResponder(isFirstResponder: $firstResponder)
