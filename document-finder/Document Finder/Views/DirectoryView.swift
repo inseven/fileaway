@@ -165,9 +165,15 @@ struct DirectoryView: View {
             }
             QuickLookCoordinator.shared.show(url: selection.url)
         }
-        .logKeyEvents()
+        .onEnterCommand {
+            manager.open()
+        }
         .onKey(.upArrow, modifiers: .shift, perform: tracker.handleShiftDirectionUp)
         .onKey(.downArrow, modifiers: .shift, perform: tracker.handleShiftDirectionDown)
+        .onKey("a", modifiers: .command) {
+            print("select all")
+            tracker.selectAll()
+        }
         .onMoveCommand { direction in
             switch direction {
             case .up:

@@ -78,7 +78,7 @@ class SelectionTracker<T>: ObservableObject where T: Hashable {
         selection.remove(item)
     }
 
-    func beginsSelection(item: T) -> Bool {
+    fileprivate func beginsSelection(item: T) -> Bool {
         guard let index = self.index(of: item) else {
             return false
         }
@@ -88,7 +88,7 @@ class SelectionTracker<T>: ObservableObject where T: Hashable {
         return !selection.contains(items[index - 1])
     }
 
-    func endsSelection(item: T) -> Bool {
+    fileprivate func endsSelection(item: T) -> Bool {
         guard let index = self.index(of: item) else {
             return false
         }
@@ -102,12 +102,8 @@ class SelectionTracker<T>: ObservableObject where T: Hashable {
         return selection.contains(item)
     }
 
-    func index(of item: T) -> Int? {
+    fileprivate func index(of item: T) -> Int? {
         items.firstIndex { $0 == item }
-    }
-
-    var indexes: [Int] {
-        selection.compactMap { item in index(of: item) }
     }
 
     func selectFirst() throws {
@@ -220,6 +216,18 @@ class SelectionTracker<T>: ObservableObject where T: Hashable {
             bounds.anchor = item
             bounds.cursor = item
             select(item: item)
+        }
+    }
+
+    func selectAll() {
+        guard let first = items.first,
+              let last = items.last else {
+            return
+        }
+        bounds = SelectionBounds(tracker: self, cursor: first)
+        bounds?.cursor = last
+        self.items.forEach { item in
+            selection.insert(item)
         }
     }
 

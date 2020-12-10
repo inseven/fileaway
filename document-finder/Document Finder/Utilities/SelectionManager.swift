@@ -44,4 +44,10 @@ class SelectionManager: ObservableObject {
         try urls.forEach { try FileManager.default.trashItem(at: $0, resultingItemURL: nil) }
     }
 
+    func open() {
+        urls.forEach { url in
+            NSWorkspace.shared.open(url)
+        }
+    }
+
 }
