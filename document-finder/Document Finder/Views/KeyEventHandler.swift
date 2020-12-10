@@ -79,12 +79,41 @@ extension View {
         }))
     }
 
+    func onKey(_ key: KeyEquivalent, modifiers: EventModifiers = [], perform: @escaping () -> Void) -> some View {
+        let matches: (NSEvent) -> Bool = { event in
+            let matchesKey = event.characters?.first == key.character
+            let modifierFlags = modifiers.modifierFlags
+            let matchesModifiers = event.modifierFlags.intersection(modifierFlags) == modifierFlags
+            return matchesKey && matchesModifiers
+        }
+        return modifier(KeyEventHandler(onKeyDown: { event -> Bool in
+            guard matches(event) else {
+                return false
+            }
+            perform()
+            return true
+        }, onKeyUp: { event -> Bool in
+            guard matches(event) else {
+                return false
+            }
+            return true
+        }))
+    }
+
     func onSelectCommand(perform: @escaping () -> Void) -> some View {
         onKey(" ", perform: perform)
     }
 
     func onEnterCommand(perform: @escaping () -> Void) -> some View {
         onKey("\r", perform: perform)
+    }
+
+    func logKeyEvents() -> some View {
+        onKeyDown { event in
+            print("key down = \(event)")
+            return false
+        }
+
     }
 
 }

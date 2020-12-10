@@ -7,15 +7,15 @@
 
 import SwiftUI
 
+import Introspect
+
 extension String: Identifiable {
     public var id: String { self }
 }
 
-struct TaskPage: View {
+class Tasks: ObservableObject {
 
-    @State var isShowingChild: Bool = false
-
-    @State var items = [
+    @Published var items = [
         "1Password Invoice",
         "Adobe Illustrator Subscription",
         "Amazon Web Services Invoice",
@@ -24,32 +24,79 @@ struct TaskPage: View {
         "Phone Bill",
     ]
 
+}
+
+struct TaskPage: View {
+
+    @State var isShowingChild: Bool = false
+
+    @ObservedObject var tasks = Tasks()
+
+    @State var firstResponder: Bool = true
     @State var filter: String = ""
+    @StateObject var tracker: SelectionTracker<String>
+
+    var columns: [GridItem] = [
+        GridItem(.flexible(minimum: 0, maximum: .infinity))
+    ]
+
+    init() {
+        let tasks = Tasks()
+        let tracker = SelectionTracker(items: tasks.$items)
+        self.tasks = tasks
+        _tracker = StateObject(wrappedValue: tracker)
+    }
+
 
     var body: some View {
         VStack {
-            SearchField(search: $filter)
-            List {
-                ForEach(items.filter { $0.localizedSearchMatches(string: filter) } ) { item in
-                    PageLink(isActive: $isShowingChild, destination: DetailsPage()) {
-                        HStack {
-                            Text(item)
-                            Spacer()
-                            Image(systemName: "chevron.forward")
-                        }
-                        .padding()
-                        .background(Color.textBackgroundColor)
+            HStack {
+                TextField("Search", text: $filter)
+                    .font(.title)
+                    .textFieldStyle(PlainTextFieldStyle())
+                if !filter.isEmpty {
+                    Button {
+                        filter = ""
+                        tracker.clear()
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
                     }
-                    Divider()
+                    .buttonStyle(PlainButtonStyle())
                 }
-                HStack {
-                    Text("Add task...")
-                    Spacer()
-                    Image(systemName: "chevron.forward")
+            }
+            .padding()
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: 0) {
+                    ForEach(tasks.items.filter { $0.localizedSearchMatches(string: filter) } ) { item in
+                        PageLink(isActive: $isShowingChild, destination: DetailsPage()) {
+                            HStack {
+                                Text(item)
+                                Spacer()
+                                Image(systemName: "chevron.forward")
+                            }
+                            .padding()
+                            .background(tracker.isSelected(item: item) ? Color.selectedControlColor : Color(NSColor.textBackgroundColor))
+                            .cornerRadius(6, corners: tracker.corners(for: item))
+                        }
+                        Divider()
+                            .padding(.leading)
+                            .padding(.trailing)
+                    }
                 }
             }
         }
-        .pageTitle("Task")
+        .padding()
+        .acceptsFirstResponder(isFirstResponder: $firstResponder)
+        .onMoveCommand { direction in
+        }
+        .onChange(of: filter) { filter in
+            print("filter = \(filter)")
+            guard !filter.isEmpty else {
+                return
+            }
+            try? tracker.selectFirst()
+        }
+        .pageTitle("Select Task")
     }
 
 }

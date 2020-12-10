@@ -41,6 +41,8 @@
 		D8D78A9A2580DDF40088890F /* PageLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D78A992580DDF40088890F /* PageLink.swift */; };
 		D8D78A9F2580DE250088890F /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D78A9E2580DE250088890F /* PageView.swift */; };
 		D8D78AA72580DF190088890F /* ArchiveWizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D78AA62580DF190088890F /* ArchiveWizard.swift */; };
+		D8D78AAD2580E2440088890F /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = D8D78AAC2580E2440088890F /* Introspect */; };
+		D8D78AB32580E38F0088890F /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D78AB22580E38F0088890F /* RoundedCorner.swift */; };
 		D8DC5046257C0795009B3ECC /* ResponderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DC5045257C0795009B3ECC /* ResponderView.swift */; };
 		D8FC5334257BB6D2008FB609 /* MailboxRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5333257BB6D2008FB609 /* MailboxRow.swift */; };
 		D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5341257BB77C008FB609 /* SettingsView.swift */; };
@@ -105,6 +107,7 @@
 		D8D78A992580DDF40088890F /* PageLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageLink.swift; sourceTree = "<group>"; };
 		D8D78A9E2580DE250088890F /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
 		D8D78AA62580DF190088890F /* ArchiveWizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveWizard.swift; sourceTree = "<group>"; };
+		D8D78AB22580E38F0088890F /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
 		D8DC5045257C0795009B3ECC /* ResponderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponderView.swift; sourceTree = "<group>"; };
 		D8FC5333257BB6D2008FB609 /* MailboxRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailboxRow.swift; sourceTree = "<group>"; };
 		D8FC5341257BB77C008FB609 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -117,6 +120,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D87DEFAF2577E068006CFE85 /* EonilFSEvents in Frameworks */,
+				D8D78AAD2580E2440088890F /* Introspect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +195,7 @@
 		D87DEF7D25774F6C006CFE85 /* Document Finder */ = {
 			isa = PBXGroup;
 			children = (
+				D8D78AB12580E3770088890F /* Shapes */,
 				D8FC5340257BB72F008FB609 /* Utilities */,
 				D821E937257A9591005D3205 /* Views */,
 				D85C95852579DD880007AE1E /* Modifiers */,
@@ -247,6 +252,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		D8D78AB12580E3770088890F /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				D8D78AB22580E38F0088890F /* RoundedCorner.swift */,
+			);
+			path = Shapes;
+			sourceTree = "<group>";
+		};
 		D8FC5340257BB72F008FB609 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,6 +290,7 @@
 			name = "Document Finder";
 			packageProductDependencies = (
 				D87DEFAE2577E068006CFE85 /* EonilFSEvents */,
+				D8D78AAC2580E2440088890F /* Introspect */,
 			);
 			productName = "Document Finder";
 			productReference = D87DEF7B25774F6C006CFE85 /* Document Finder.app */;
@@ -351,6 +365,7 @@
 			mainGroup = D87DEF7225774F6C006CFE85;
 			packageReferences = (
 				D87DEFAD2577E068006CFE85 /* XCRemoteSwiftPackageReference "FSEvents" */,
+				D8D78AAB2580E2440088890F /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = D87DEF7C25774F6C006CFE85 /* Products */;
 			projectDirPath = "";
@@ -402,6 +417,7 @@
 				D821E94B257AB2C9005D3205 /* FileRow.swift in Sources */,
 				D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */,
 				D8B6D02B257DBAF700C7E472 /* SearchField.swift in Sources */,
+				D8D78AB32580E38F0088890F /* RoundedCorner.swift in Sources */,
 				D8D78A9A2580DDF40088890F /* PageLink.swift in Sources */,
 				D821E92B257A8F87005D3205 /* FileInfo.swift in Sources */,
 				D85C95812579CED30007AE1E /* Toolbar.swift in Sources */,
@@ -759,6 +775,14 @@
 				minimumVersion = 0.1.7;
 			};
 		};
+		D8D78AAB2580E2440088890F /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:siteline/SwiftUI-Introspect.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -766,6 +790,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D87DEFAD2577E068006CFE85 /* XCRemoteSwiftPackageReference "FSEvents" */;
 			productName = EonilFSEvents;
+		};
+		D8D78AAC2580E2440088890F /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8D78AAB2580E2440088890F /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
