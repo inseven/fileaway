@@ -51,19 +51,19 @@ struct GlobalCommands: Commands {
         ToolbarCommands()
         SidebarCommands()
 
-//        CommandGroup(after: .systemServices) {
-//            Divider()
-//            Button {
-//                FileActions.open()
-//            } label: {
-//                Text("File Actions...")
-//            }
-//            Button {
-//                FileActions.openiOS()
-//            } label: {
-//                Text("File Actions for iOS...")
-//            }
-//        }
+        CommandGroup(after: .systemServices) {
+            Divider()
+            Button {
+                FileActions.open()
+            } label: {
+                Text("File Actions...")
+            }
+            Button {
+                FileActions.openiOS()
+            } label: {
+                Text("File Actions for iOS...")
+            }
+        }
     }
 
 }
@@ -91,6 +91,7 @@ struct Document_FinderApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView(manager: appDelegate.manager)
+                .environment(\.manager, appDelegate.manager)
         }
         .commands {
             GlobalCommands()

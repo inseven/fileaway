@@ -13,38 +13,41 @@ extension String: Identifiable {
     public var id: String { self }
 }
 
-class Tasks: ObservableObject {
+//class Tasks: ObservableObject {
+//
+//    @Published var items = [
+//        "1Password Invoice",
+//        "Adobe Illustrator Subscription",
+//        "Amazon Web Services Invoice",
+//        "Apple Card Statement",
+//        "Bank Statement",
+//        "Phone Bill",
+//    ]
+//
+//}
 
-    @Published var items = [
-        "1Password Invoice",
-        "Adobe Illustrator Subscription",
-        "Amazon Web Services Invoice",
-        "Apple Card Statement",
-        "Bank Statement",
-        "Phone Bill",
-    ]
-
-}
+// TODO: High level filtered list?
 
 struct TaskPage: View {
 
+    @Environment(\.manager) var manager
     @State var isShowingChild: Bool = false
 
-    @ObservedObject var tasks = Tasks()
+//    @ObservedObject var tasks = Tasks()
 
     @State var firstResponder: Bool = true
     @State var filter: String = ""
-    @StateObject var tracker: SelectionTracker<String>
+//    @StateObject var tracker: SelectionTracker<String>
 
     var columns: [GridItem] = [
         GridItem(.flexible(minimum: 0, maximum: .infinity))
     ]
 
     init() {
-        let tasks = Tasks()
-        let tracker = SelectionTracker(items: tasks.$items)
-        self.tasks = tasks
-        _tracker = StateObject(wrappedValue: tracker)
+//        let tasks = Tasks()
+//        let tracker = SelectionTracker(items: tasks.$items)
+//        self.tasks = tasks
+//        _tracker = StateObject(wrappedValue: tracker)
     }
 
 
@@ -57,7 +60,7 @@ struct TaskPage: View {
                 if !filter.isEmpty {
                     Button {
                         filter = ""
-                        tracker.clear()
+//                        tracker.clear()
                     } label: {
                         Image(systemName: "xmark.circle.fill")
                     }
@@ -66,22 +69,26 @@ struct TaskPage: View {
             }
             .padding()
             ScrollView {
-                LazyVGrid(columns: columns, spacing: 0) {
-                    ForEach(tasks.items.filter { $0.localizedSearchMatches(string: filter) } ) { item in
-                        PageLink(isActive: $isShowingChild, destination: DetailsPage()) {
-                            HStack {
-                                Text(item)
-                                Spacer()
-                                Image(systemName: "chevron.forward")
+                if let rules = manager.rules.first {
+                    LazyVGrid(columns: columns, spacing: 0) {
+                        ForEach(rules.tasks) { task in
+                            PageLink(isActive: $isShowingChild, destination: DetailsPage()) {
+                                HStack {
+                                    Text(task.name)
+                                    Spacer()
+                                    Image(systemName: "chevron.forward")
+                                }
+                                .padding()
+//                                .background(tracker.isSelected(item: task) ? Color.selectedControlColor : Color(NSColor.textBackgroundColor))
+//                                .cornerRadius(6, corners: tracker.corners(for: task))
                             }
-                            .padding()
-                            .background(tracker.isSelected(item: item) ? Color.selectedControlColor : Color(NSColor.textBackgroundColor))
-                            .cornerRadius(6, corners: tracker.corners(for: item))
+                            Divider()
+                                .padding(.leading)
+                                .padding(.trailing)
                         }
-                        Divider()
-                            .padding(.leading)
-                            .padding(.trailing)
                     }
+                } else {
+                    EmptyView()
                 }
             }
         }
@@ -94,7 +101,7 @@ struct TaskPage: View {
             guard !filter.isEmpty else {
                 return
             }
-            try? tracker.selectFirst()
+//            try? tracker.selectFirst()
         }
         .pageTitle("Select Task")
     }

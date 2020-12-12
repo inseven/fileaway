@@ -6,8 +6,23 @@
 //
 
 import AppKit
-import Foundation
 import Combine
+import Foundation
+import SwiftUI
+
+struct ManagerKey: EnvironmentKey {
+    static var defaultValue: Manager = Manager()
+}
+
+extension EnvironmentValues {
+
+    var manager: Manager {
+        get { self[ManagerKey.self] }
+        set { self[ManagerKey.self] = newValue }
+    }
+
+}
+
 
 class Manager: ObservableObject {
 
@@ -16,6 +31,8 @@ class Manager: ObservableObject {
     @Published var locations: [URL] = []
     @Published var inbox: DirectoryObserver? = nil
     @Published var archive: DirectoryObserver? = nil
+
+    @Published var rules: [Rules] = []
 
     var badgeObserver: Cancellable?
 
@@ -42,7 +59,7 @@ class Manager: ObservableObject {
                 return
             }
             print("badge = \(inbox.count)")
-            NSApp.dockTile.badgeLabel = "\(inbox.count)"
+            NSApp.dockTile.badgeLabel = inbox.count > 0 ? "\(inbox.count)" : ""
         }
     }
 
@@ -61,6 +78,7 @@ class Manager: ObservableObject {
         }
         if let url = try? settings.archiveUrl() {
             self.createArchiveObserver(url: url)
+            self.rules.append(Rules(url: url))
         }
     }
 
