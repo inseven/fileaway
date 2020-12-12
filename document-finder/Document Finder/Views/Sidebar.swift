@@ -7,41 +7,34 @@
 
 import SwiftUI
 
+enum SidebarSection {
+    case inbox
+    case archive
+}
+
 struct Sidebar: View {
 
     @ObservedObject var manager: Manager
     @State var firstResponder: Bool = false
     @State var item: Int = 30
     @State var value: String = "SAkdfjh"
+    @State var selection: SidebarSection? = .inbox
 
     var body: some View {
-//        VStack {
-//            Text("Hello")
-//                .padding()
-//                .background(firstResponder ? Color.pink : Color.clear)
-//                .cornerRadius(6)
-//                .background(ResponderView(firstResponder: $firstResponder))
-//                .onTapGesture {
-//                    firstResponder = true
-//                }
-//                .focusedValue(\.item, Binding.constant(230))
-//            TextField("Title", text: $value)
-//                .focusedValue(\.item, Binding.constant(230))
-            List {
-                Section(header: Text("Locations")) {
-                    if let inbox = manager.inbox {
-                        NavigationLink(destination: DirectoryView(directoryObserver: inbox), label: {
-                            MailboxRow(directoryObserver: inbox, title: "Inbox", imageSystemName: "tray")
-                        })
+        List {
+            Section(header: Text("Locations")) {
+                if let inbox = manager.inbox {
+                    NavigationLink(destination: DirectoryView(directoryObserver: inbox), tag: .inbox, selection: $selection) {
+                        MailboxRow(directoryObserver: inbox, title: "Inbox", imageSystemName: "tray")
                     }
-                    if let archive = manager.archive {
-                        NavigationLink(destination: DirectoryView(directoryObserver: archive), label: {
-                            MailboxRow(directoryObserver: archive, title: "Archive", imageSystemName: "archivebox")
-                        })
+                }
+                if let archive = manager.archive {
+                    NavigationLink(destination: DirectoryView(directoryObserver: archive), tag: .archive, selection: $selection) {
+                        MailboxRow(directoryObserver: archive, title: "Archive", imageSystemName: "archivebox")
                     }
                 }
             }
-//        }
+        }
     }
-
+    
 }
