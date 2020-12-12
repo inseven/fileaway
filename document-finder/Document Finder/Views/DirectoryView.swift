@@ -95,11 +95,8 @@ struct DirectoryView: View {
             tracker.clear()
             firstResponder = true
         }
-        .onSelectCommand {
-            guard let selection = tracker.selection.first else {
-                return
-            }
-            QuickLookCoordinator.shared.show(url: selection.url)
+        .onKey(.space) {
+            manager.preview()
         }
         .onEnterCommand {
             manager.open()

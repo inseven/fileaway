@@ -26,6 +26,13 @@ class SelectionManager: ObservableObject {
 
     var canPreview: Bool { !tracker.selection.isEmpty }
 
+    func preview() {
+        guard let url = tracker.selection.first?.url else {
+            return
+        }
+        QuickLookCoordinator.shared.show(url: url)
+    }
+
     var canArchive: Bool { !tracker.selection.isEmpty }
 
     func archive() {
