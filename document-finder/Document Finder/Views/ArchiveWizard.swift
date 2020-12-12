@@ -54,7 +54,6 @@ struct TaskPage: View {
     @StateObject var filter: LazyFilter<Task>
     @StateObject var tracker: SelectionTracker<Task>
 
-    @State var isShowingChild: Bool = false
     @State var firstResponder: Bool = true
 
     var columns: [GridItem] = [
@@ -63,7 +62,6 @@ struct TaskPage: View {
 
     init(manager: Manager) {
         self.manager = manager
-
         let filter = Deferred(LazyFilter(items: manager.$tasks, test: { filter, item in
             filter.isEmpty ? true : item.name.localizedCaseInsensitiveContains(filter)
         }, initialSortDescriptor: { lhs, rhs in lhs.name.lexicographicallyPrecedes(rhs.name) }))
@@ -90,7 +88,7 @@ struct TaskPage: View {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 0) {
                     ForEach(tracker.items) { task in
-                        PageLink(isActive: $isShowingChild, destination: DetailsPage()) {
+                        PageLink(destination: DetailsPage(task: task)) {
                             HStack {
                                 Text(task.name)
                                 Spacer()
@@ -114,31 +112,113 @@ struct TaskPage: View {
 
 }
 
-struct DonePage: View {
+
+class VariableInstance: ObservableObject, Identifiable {
+
+    public var id: UUID { variable.id }
+
+    var variable: Variable
+
+    var name: String { variable.name }
+
+    init(variable: Variable) {
+        self.variable = variable
+    }
+
+}
+
+class DateInstance: VariableInstance {
+
+    @Published var date: Date
+
+    init(variable: Variable, initialValue: Date) {
+        _date = Published(initialValue: initialValue)
+        super.init(variable: variable)
+    }
+
+}
+
+class StringInstance: VariableInstance {
+
+    @Published var string: String
+
+    init(variable: Variable, initialValue: String) {
+        _string = Published(initialValue: initialValue)
+        super.init(variable: variable)
+    }
+
+}
+
+extension Variable {
+
+    func instance() -> VariableInstance {
+        switch self.type {
+        case .string:
+            return StringInstance(variable: self, initialValue: "")
+        case .date:
+            return DateInstance(variable:self, initialValue: Date())
+        }
+    }
+
+}
+
+class TaskInstance: ObservableObject {
+
+    var task: Task
+    var variables: [VariableInstance]
+
+    var name: String { task.name }
+
+    init(task: Task) {
+        self.task = task
+        self.variables = task.configuration.variables.map { $0.instance() }
+    }
+
+}
+
+struct VariableDateView: View {
+
+    @StateObject var date: DateInstance
 
     var body: some View {
         HStack {
-            Text("Empty MKII")
+            Text(date.name)
+            Spacer()
+            DatePicker("", selection: $date.date, displayedComponents: [.date])
         }
-        .pageTitle("Empty View")
     }
 
 }
 
 struct DetailsPage: View {
 
-    @State var active: Bool = false
+    @StateObject var task: TaskInstance
+
+    @State var date: Date = Date()
+    @State var year = "2020"
+
+    init(task: Task) {
+        _task = StateObject(wrappedValue: TaskInstance(task: task))
+    }
 
     var body: some View {
-        VStack {
-            PageLink(isActive: $active, destination: DonePage()) {
-                Text("Click me")
+        ScrollView {
+            VStack {
+                ForEach(task.variables) { variable in
+                    HStack {
+                        if let variable = variable as? DateInstance {
+                            VariableDateView(date: variable)
+                        } else {
+                            Text(variable.name)
+                            Spacer()
+                            Text("Unsupported")
+                        }
+                    }
+                    .padding()
+                }
             }
-            Spacer()
-            Text("Empty view")
-            Spacer()
         }
-        .pageTitle("Details")
+        .pageTitle(task.name)
         .frame(minWidth: 0, maxWidth: .infinity)
     }
 

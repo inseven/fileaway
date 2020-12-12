@@ -108,6 +108,7 @@ struct PageView<Content>: View where Content: View {
                     Spacer()
                 }
                 Text(title)
+                    .lineLimit(1)
                     .font(.headline)
             }
             if pageViewStack.pages.count > 0 {

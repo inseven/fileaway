@@ -7,13 +7,16 @@
 
 import Foundation
 
-public struct Configuration: Codable {
-    public let variables: [Variable]
-    public let destination: [Component]
-    public init(variables: [Variable], destination: [Component]) {
+struct Configuration: Codable {
+
+    let variables: [Variable]
+    let destination: [Component]
+
+    init(variables: [Variable], destination: [Component]) {
         self.variables = variables
         self.destination = destination
     }
+    
 }
 
 public enum ComponentType: String, Codable {
@@ -36,19 +39,40 @@ public enum VariableType: CaseIterable {
     case string
     case date(hasDay: Bool)
 
-    public static var allCases: [VariableType] {
-        return [.string, .date(hasDay: true), .date(hasDay: false)]
-    }
+    public static var allCases: [VariableType] { [
+        .string,
+        .date(hasDay: true),
+        .date(hasDay: false)
+    ] }
 }
 
-public struct Variable {
-    public let name: String
-    public let type: VariableType
+extension VariableType: CustomStringConvertible {
 
-    public init(name: String, type: VariableType) {
+    public var description: String {
+        switch self {
+        case .string:
+            return "String"
+        case .date(hasDay: true):
+            return "Day, Month, Year"
+        case .date(hasDay: false):
+            return "Month, Year"
+        }
+    }
+
+}
+
+struct Variable: Identifiable {
+
+    public var id = UUID()
+
+    let name: String
+    let type: VariableType
+
+    init(name: String, type: VariableType) {
         self.name = name
         self.type = type
     }
+
 }
 
 extension Variable: Codable {

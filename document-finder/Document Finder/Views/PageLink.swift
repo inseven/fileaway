@@ -11,15 +11,11 @@ struct PageLink<Destination, Content>: View where Destination: View, Content: Vi
 
     @Environment(\.pageViewStack) var pageViewStack
 
-    @Binding var isActive: Bool
-
     let destination: Destination
     let content: Content
 
-    @inlinable public init(isActive: Binding<Bool>,
-                           destination: Destination,
+    @inlinable public init(destination: Destination,
                            @ViewBuilder content: () -> Content) {
-        _isActive = isActive
         self.destination = destination
         self.content = content()
     }
