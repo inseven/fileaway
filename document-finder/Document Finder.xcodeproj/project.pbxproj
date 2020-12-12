@@ -33,6 +33,7 @@
 		D87DEFB925783F66006CFE85 /* DirectoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEFB825783F66006CFE85 /* DirectoryView.swift */; };
 		D87DEFBE257840B1006CFE85 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEFBD257840B1006CFE85 /* Manager.swift */; };
 		D87DEFC4257848B7006CFE85 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEFC3257848B7006CFE85 /* URL.swift */; };
+		D88DF5FB258463310068404E /* LazyFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88DF5FA258463310068404E /* LazyFilter.swift */; };
 		D8B6D021257D962F00C7E472 /* AcceptsFirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6D020257D962F00C7E472 /* AcceptsFirstResponder.swift */; };
 		D8B6D026257DBA8B00C7E472 /* SelectionTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6D025257DBA8B00C7E472 /* SelectionTracker.swift */; };
 		D8B6D02B257DBAF700C7E472 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6D02A257DBAF700C7E472 /* SearchField.swift */; };
@@ -102,6 +103,7 @@
 		D87DEFB825783F66006CFE85 /* DirectoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryView.swift; sourceTree = "<group>"; };
 		D87DEFBD257840B1006CFE85 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		D87DEFC3257848B7006CFE85 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
+		D88DF5FA258463310068404E /* LazyFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyFilter.swift; sourceTree = "<group>"; };
 		D8B6D020257D962F00C7E472 /* AcceptsFirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptsFirstResponder.swift; sourceTree = "<group>"; };
 		D8B6D025257DBA8B00C7E472 /* SelectionTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTracker.swift; sourceTree = "<group>"; };
 		D8B6D02A257DBAF700C7E472 /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				D85C957625799B2E0007AE1E /* FileActions.swift */,
 				D821E92A257A8F87005D3205 /* FileInfo.swift */,
 				D8B6D020257D962F00C7E472 /* AcceptsFirstResponder.swift */,
+				D88DF5FA258463310068404E /* LazyFilter.swift */,
 			);
 			path = "Document Finder";
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 				D85C957C2579CDAA0007AE1E /* String.swift in Sources */,
 				D8005AC1258276250001BE2C /* Configuration.swift in Sources */,
 				D8B6D026257DBA8B00C7E472 /* SelectionTracker.swift in Sources */,
+				D88DF5FB258463310068404E /* LazyFilter.swift in Sources */,
 				D821E93E257A960C005D3205 /* FileProvider.swift in Sources */,
 				D8B6D021257D962F00C7E472 /* AcceptsFirstResponder.swift in Sources */,
 				D87DEF7F25774F6C006CFE85 /* Document_FinderApp.swift in Sources */,

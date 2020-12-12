@@ -13,54 +13,35 @@ extension String: Identifiable {
     public var id: String { self }
 }
 
-//class Tasks: ObservableObject {
-//
-//    @Published var items = [
-//        "1Password Invoice",
-//        "Adobe Illustrator Subscription",
-//        "Amazon Web Services Invoice",
-//        "Apple Card Statement",
-//        "Bank Statement",
-//        "Phone Bill",
-//    ]
-//
-//}
-
-// TODO: High level filtered list?
-
 struct TaskPage: View {
 
-    @Environment(\.manager) var manager
+    var manager: Manager
+
+    @StateObject var filter: LazyFilter<Task>
+
     @State var isShowingChild: Bool = false
-
-//    @ObservedObject var tasks = Tasks()
-
     @State var firstResponder: Bool = true
-    @State var filter: String = ""
-//    @StateObject var tracker: SelectionTracker<String>
 
     var columns: [GridItem] = [
         GridItem(.flexible(minimum: 0, maximum: .infinity))
     ]
 
-    init() {
-//        let tasks = Tasks()
-//        let tracker = SelectionTracker(items: tasks.$items)
-//        self.tasks = tasks
-//        _tracker = StateObject(wrappedValue: tracker)
+    init(manager: Manager) {
+        self.manager = manager
+        self._filter = StateObject(wrappedValue: LazyFilter(items: manager.$tasks, test: { filter, item in
+            filter.isEmpty ? true : item.name.localizedCaseInsensitiveContains(filter)
+        }, initialSortDescriptor: { lhs, rhs in return true }))
     }
-
 
     var body: some View {
         VStack {
             HStack {
-                TextField("Search", text: $filter)
+                TextField("Search", text: $filter.filter)
                     .font(.title)
                     .textFieldStyle(PlainTextFieldStyle())
-                if !filter.isEmpty {
+                if !filter.filter.isEmpty {
                     Button {
-                        filter = ""
-//                        tracker.clear()
+                        filter.filter = ""
                     } label: {
                         Image(systemName: "xmark.circle.fill")
                     }
@@ -69,39 +50,26 @@ struct TaskPage: View {
             }
             .padding()
             ScrollView {
-                if let rules = manager.rules.first {
-                    LazyVGrid(columns: columns, spacing: 0) {
-                        ForEach(rules.tasks) { task in
-                            PageLink(isActive: $isShowingChild, destination: DetailsPage()) {
-                                HStack {
-                                    Text(task.name)
-                                    Spacer()
-                                    Image(systemName: "chevron.forward")
-                                }
-                                .padding()
-//                                .background(tracker.isSelected(item: task) ? Color.selectedControlColor : Color(NSColor.textBackgroundColor))
-//                                .cornerRadius(6, corners: tracker.corners(for: task))
+                LazyVGrid(columns: columns, spacing: 0) {
+                    ForEach(filter.items) { task in
+                        PageLink(isActive: $isShowingChild, destination: DetailsPage()) {
+                            HStack {
+                                Text(task.name)
+                                Spacer()
+                                Image(systemName: "chevron.forward")
                             }
-                            Divider()
-                                .padding(.leading)
-                                .padding(.trailing)
+                            .padding()
                         }
+                        Divider()
+                            .padding(.leading)
+                            .padding(.trailing)
                     }
-                } else {
-                    EmptyView()
                 }
             }
         }
         .padding()
         .acceptsFirstResponder(isFirstResponder: $firstResponder)
         .onMoveCommand { direction in
-        }
-        .onChange(of: filter) { filter in
-            print("filter = \(filter)")
-            guard !filter.isEmpty else {
-                return
-            }
-//            try? tracker.selectFirst()
         }
         .pageTitle("Select Task")
     }
@@ -140,6 +108,8 @@ struct DetailsPage: View {
 
 struct ArchiveWizard: View {
 
+    @Environment(\.manager) var manager
+
     @State var url: URL
     var onDismiss: () -> Void
 
@@ -150,7 +120,7 @@ struct ArchiveWizard: View {
             HStack {
                 QuickLookPreview(url: url)
                 PageView {
-                    TaskPage()
+                    TaskPage(manager: manager)
                 }
             }
             Button(action: onDismiss) {

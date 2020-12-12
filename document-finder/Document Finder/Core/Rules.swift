@@ -5,12 +5,12 @@
 //  Created by Jason Barrie Morley on 10/12/2020.
 //
 
-import Foundation
+import SwiftUI
 
 class Rules {
 
     let url: URL
-    let tasks: [Task]
+    var tasks: [Task]
 
     // TODO: Rename Task to Rule
     static func load(url: URL) throws -> [Task] {

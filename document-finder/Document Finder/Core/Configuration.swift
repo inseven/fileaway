@@ -102,12 +102,25 @@ extension Variable: Codable {
     }
 }
 
-public struct Task: Identifiable {
+class Task: Identifiable, Hashable {
+
     public var id = UUID()
     public let name: String
     public let configuration: Configuration
+
     public init(name: String, configuration: Configuration) {
         self.name = name
         self.configuration = configuration
     }
+
+    // TODO: Flesh these out
+
+    static func == (lhs: Task, rhs: Task) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+
 }

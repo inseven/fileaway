@@ -31,8 +31,7 @@ class Manager: ObservableObject {
     @Published var locations: [URL] = []
     @Published var inbox: DirectoryObserver? = nil
     @Published var archive: DirectoryObserver? = nil
-
-    @Published var rules: [Rules] = []
+    @Published var tasks: [Task] = []
 
     var badgeObserver: Cancellable?
 
@@ -78,7 +77,8 @@ class Manager: ObservableObject {
         }
         if let url = try? settings.archiveUrl() {
             self.createArchiveObserver(url: url)
-            self.rules.append(Rules(url: url))
+            let rules = Rules(url: url)
+            self.tasks = rules.tasks
         }
     }
 
