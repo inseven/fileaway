@@ -13,11 +13,46 @@ extension String: Identifiable {
     public var id: String { self }
 }
 
+struct TrackerInput<T>: ViewModifier where T: Hashable {
+
+    var tracker: SelectionTracker<T>
+
+    func body(content: Content) -> some View {
+        content
+            .onMoveCommand { direction in
+                print("tracker = \(tracker), direction = \(direction)")
+                switch direction {
+                case .up:
+                    tracker.handleDirectionUp()
+                case .down:
+                    tracker.handleDirectionDown()
+                default:
+                    return
+                }
+            }
+    }
+
+}
+
+struct Highlight<T>: ViewModifier where T: Hashable {
+
+    @ObservedObject var tracker: SelectionTracker<T>
+    var item: T
+
+    func body(content: Content) -> some View {
+        content
+            .background(tracker.isSelected(item: item) ? Color.selectedContentBackgroundColor : Color(NSColor.textBackgroundColor))
+            .cornerRadius(6, corners: tracker.corners(for: item))
+    }
+
+}
+
 struct TaskPage: View {
 
     var manager: Manager
 
     @StateObject var filter: LazyFilter<Task>
+    @StateObject var tracker: SelectionTracker<Task>
 
     @State var isShowingChild: Bool = false
     @State var firstResponder: Bool = true
@@ -28,9 +63,12 @@ struct TaskPage: View {
 
     init(manager: Manager) {
         self.manager = manager
-        self._filter = StateObject(wrappedValue: LazyFilter(items: manager.$tasks, test: { filter, item in
+
+        let filter = Deferred(LazyFilter(items: manager.$tasks, test: { filter, item in
             filter.isEmpty ? true : item.name.localizedCaseInsensitiveContains(filter)
-        }, initialSortDescriptor: { lhs, rhs in return true }))
+        }, initialSortDescriptor: { lhs, rhs in lhs.name.lexicographicallyPrecedes(rhs.name) }))
+        self._filter = StateObject(wrappedValue: filter.get())
+        self._tracker = StateObject(wrappedValue: SelectionTracker(items: filter.get().$items))
     }
 
     var body: some View {
@@ -51,7 +89,7 @@ struct TaskPage: View {
             .padding()
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 0) {
-                    ForEach(filter.items) { task in
+                    ForEach(tracker.items) { task in
                         PageLink(isActive: $isShowingChild, destination: DetailsPage()) {
                             HStack {
                                 Text(task.name)
@@ -59,6 +97,7 @@ struct TaskPage: View {
                                 Image(systemName: "chevron.forward")
                             }
                             .padding()
+                            .modifier(Highlight(tracker: tracker, item: task))
                         }
                         Divider()
                             .padding(.leading)
@@ -69,8 +108,7 @@ struct TaskPage: View {
         }
         .padding()
         .acceptsFirstResponder(isFirstResponder: $firstResponder)
-        .onMoveCommand { direction in
-        }
+        .modifier(TrackerInput(tracker: tracker))
         .pageTitle("Select Task")
     }
 
