@@ -22,6 +22,8 @@
 		D85C95812579CED30007AE1E /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C95802579CED30007AE1E /* Toolbar.swift */; };
 		D85C95872579DD9D0007AE1E /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C95862579DD9D0007AE1E /* Selection.swift */; };
 		D85C958C2579DE140007AE1E /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C958B2579DE140007AE1E /* View.swift */; };
+		D87B1260258511EC004EC884 /* Deferred.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87B125F258511EC004EC884 /* Deferred.swift */; };
+		D87B126525851218004EC884 /* EventModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87B126425851218004EC884 /* EventModifiers.swift */; };
 		D87DEF7F25774F6C006CFE85 /* Document_FinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEF7E25774F6C006CFE85 /* Document_FinderApp.swift */; };
 		D87DEF8125774F6C006CFE85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEF8025774F6C006CFE85 /* ContentView.swift */; };
 		D87DEF8325774F6D006CFE85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D87DEF8225774F6D006CFE85 /* Assets.xcassets */; };
@@ -86,6 +88,8 @@
 		D85C95802579CED30007AE1E /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		D85C95862579DD9D0007AE1E /* Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
 		D85C958B2579DE140007AE1E /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		D87B125F258511EC004EC884 /* Deferred.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deferred.swift; sourceTree = "<group>"; };
+		D87B126425851218004EC884 /* EventModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModifiers.swift; sourceTree = "<group>"; };
 		D87DEF7B25774F6C006CFE85 /* Document Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Document Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87DEF7E25774F6C006CFE85 /* Document_FinderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document_FinderApp.swift; sourceTree = "<group>"; };
 		D87DEF8025774F6C006CFE85 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -268,6 +272,7 @@
 				D85C957B2579CDAA0007AE1E /* String.swift */,
 				D85C958B2579DE140007AE1E /* View.swift */,
 				D8B6D039257E808900C7E472 /* Color.swift */,
+				D87B126425851218004EC884 /* EventModifiers.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -288,6 +293,7 @@
 				D8B6D034257E71CD00C7E472 /* QuickLookCoordinator.swift */,
 				D8B6D02F257DBB7D00C7E472 /* SelectionManager.swift */,
 				D8B6D025257DBA8B00C7E472 /* SelectionTracker.swift */,
+				D87B125F258511EC004EC884 /* Deferred.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -436,9 +442,11 @@
 				D87DEF8125774F6C006CFE85 /* ContentView.swift in Sources */,
 				D821E94B257AB2C9005D3205 /* FileRow.swift in Sources */,
 				D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */,
+				D87B1260258511EC004EC884 /* Deferred.swift in Sources */,
 				D8B6D02B257DBAF700C7E472 /* SearchField.swift in Sources */,
 				D8D78AB32580E38F0088890F /* RoundedCorner.swift in Sources */,
 				D8D78A9A2580DDF40088890F /* PageLink.swift in Sources */,
+				D87B126525851218004EC884 /* EventModifiers.swift in Sources */,
 				D821E92B257A8F87005D3205 /* FileInfo.swift in Sources */,
 				D85C95812579CED30007AE1E /* Toolbar.swift in Sources */,
 				D8B6D03A257E808900C7E472 /* Color.swift in Sources */,
