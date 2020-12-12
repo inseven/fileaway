@@ -82,6 +82,26 @@ extension EventModifiers {
 
 }
 
+class Deferred<T> {
+
+    var constructor: () -> T
+    var instance: T?
+
+    init(_ constructor: @autoclosure @escaping () -> T) {
+        self.constructor = constructor
+    }
+
+    func get() -> T {
+        if let instance = instance {
+            return instance
+        }
+        let instance = constructor()
+        self.instance = instance
+        return instance
+    }
+
+}
+
 struct DirectoryView: View {
 
     @ObservedObject var directoryObserver: DirectoryObserver
@@ -89,13 +109,13 @@ struct DirectoryView: View {
     @State var firstResponder: Bool = false
 
     @StateObject var tracker: SelectionTracker<FileInfo>
-    @State var manager: SelectionManager
+    @StateObject var manager: SelectionManager
 
     init(directoryObserver: DirectoryObserver) {
         self.directoryObserver = directoryObserver
-        let tracker = SelectionTracker(items: directoryObserver.$searchResults)
-        _tracker = StateObject(wrappedValue: tracker)
-        _manager = State(initialValue: SelectionManager(tracker: tracker))
+        let tracker = Deferred(SelectionTracker(items: directoryObserver.$searchResults))
+        _tracker = StateObject(wrappedValue: tracker.get())
+        _manager = StateObject(wrappedValue: SelectionManager(tracker: tracker.get()))
     }
 
     var columns: [GridItem] = [
