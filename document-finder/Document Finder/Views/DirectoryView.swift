@@ -95,18 +95,11 @@ struct DirectoryView: View {
             tracker.clear()
             firstResponder = true
         }
-        .onKey(.space) {
-            manager.preview()
-        }
-        .onEnterCommand {
-            manager.open()
-        }
+        .onKey(.space, perform: manager.preview)
+        .onEnterCommand(perform: manager.open)
         .onKey(.upArrow, modifiers: .shift, perform: tracker.handleShiftDirectionUp)
         .onKey(.downArrow, modifiers: .shift, perform: tracker.handleShiftDirectionDown)
-        .onKey("a", modifiers: .command) {
-            print("select all")
-            tracker.selectAll()
-        }
+        .onKey("a", modifiers: .command, perform: tracker.selectAll)
         .onMoveCommand { direction in
             switch direction {
             case .up:
