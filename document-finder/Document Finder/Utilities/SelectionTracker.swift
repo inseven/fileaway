@@ -61,6 +61,7 @@ class SelectionTracker<T>: ObservableObject where T: Hashable {
     var bounds: SelectionBounds<T>?
 
     init(items: Published<[T]>.Publisher) {
+        // TODO: Consider making this a proxy?
         publisher = items
         subscription = publisher.assign(to: \.items, on: self)
     }
