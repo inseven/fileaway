@@ -178,17 +178,32 @@ class TaskInstance: ObservableObject {
 
 struct VariableDateView: View {
 
-    @StateObject var date: DateInstance
+    @StateObject var variable: DateInstance
 
     var body: some View {
         HStack {
-            Text(date.name)
+            Text(variable.name)
             Spacer()
-            DatePicker("", selection: $date.date, displayedComponents: [.date])
+            DatePicker("", selection: $variable.date, displayedComponents: [.date])
         }
     }
 
 }
+
+struct VariableStringView: View {
+
+    @StateObject var variable: StringInstance
+
+    var body: some View {
+        HStack {
+            Text(variable.name)
+            Spacer()
+            TextField("", text: $variable.string)
+        }
+    }
+
+}
+
 
 struct DetailsPage: View {
 
@@ -207,7 +222,9 @@ struct DetailsPage: View {
                 ForEach(task.variables) { variable in
                     HStack {
                         if let variable = variable as? DateInstance {
-                            VariableDateView(date: variable)
+                            VariableDateView(variable: variable)
+                        } else if let variable = variable as? StringInstance {
+                            VariableStringView(variable: variable)
                         } else {
                             Text(variable.name)
                             Spacer()
