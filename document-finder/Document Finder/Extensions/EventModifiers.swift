@@ -28,7 +28,7 @@ extension EventModifiers {
             case .function:
                 modifierFlags.insert(.function)
             default:
-                print("ignoring modifier \(eventModifier)")
+                continue
             }
         }
         return modifierFlags
