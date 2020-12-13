@@ -5,6 +5,7 @@
 //  Created by Jason Barrie Morley on 09/12/2020.
 //
 
+import Combine
 import SwiftUI
 
 import Introspect
@@ -50,6 +51,7 @@ struct Highlight<T>: ViewModifier where T: Hashable {
 struct TaskPage: View {
 
     var manager: Manager
+    var url: URL
 
     @StateObject var filter: LazyFilter<Task>
     @StateObject var tracker: SelectionTracker<Task>
@@ -60,13 +62,19 @@ struct TaskPage: View {
         GridItem(.flexible(minimum: 0, maximum: .infinity))
     ]
 
-    init(manager: Manager) {
+    init(manager: Manager, url: URL) {
         self.manager = manager
+        self.url = url
         let filter = Deferred(LazyFilter(items: manager.$tasks, test: { filter, item in
             filter.isEmpty ? true : item.name.localizedCaseInsensitiveContains(filter)
         }, initialSortDescriptor: { lhs, rhs in lhs.name.lexicographicallyPrecedes(rhs.name) }))
         self._filter = StateObject(wrappedValue: filter.get())
         self._tracker = StateObject(wrappedValue: SelectionTracker(items: filter.get().$items))
+    }
+
+    // TODO: Move this into the manager.
+    var rootUrl: URL {
+        (try? manager.settings.archiveUrl())!
     }
 
     var body: some View {
@@ -88,7 +96,7 @@ struct TaskPage: View {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 0) {
                     ForEach(tracker.items) { task in
-                        PageLink(destination: DetailsPage(task: task)) {
+                        PageLink(destination: DetailsPage(url: url, rootUrl: rootUrl, task: task)) {
                             HStack {
                                 Text(task.name)
                                 Spacer()
@@ -113,7 +121,7 @@ struct TaskPage: View {
 }
 
 
-class VariableInstance: ObservableObject, Identifiable {
+class VariableInstance: Identifiable {
 
     public var id: UUID { variable.id }
 
@@ -127,24 +135,52 @@ class VariableInstance: ObservableObject, Identifiable {
 
 }
 
-class DateInstance: VariableInstance {
+protocol TextProvider {
+
+    var textRepresentation: String { get }
+
+}
+
+protocol Observable {
+    func observe(_ onChange: @escaping () -> Void) -> AnyCancellable
+}
+
+class DateInstance: VariableInstance, ObservableObject, Observable, TextProvider {
 
     @Published var date: Date
+
+    var textRepresentation: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: date)
+    }
 
     init(variable: Variable, initialValue: Date) {
         _date = Published(initialValue: initialValue)
         super.init(variable: variable)
     }
 
+    func observe(_ onChange: @escaping () -> Void) -> AnyCancellable {
+        self.objectWillChange.sink(receiveValue: onChange)
+    }
+
 }
 
-class StringInstance: VariableInstance {
+class StringInstance: VariableInstance, ObservableObject, Observable, TextProvider {
+
+    var textRepresentation: String {
+        return string
+    }
 
     @Published var string: String
 
     init(variable: Variable, initialValue: String) {
         _string = Published(initialValue: initialValue)
         super.init(variable: variable)
+    }
+
+    func observe(_ onChange: @escaping () -> Void) -> AnyCancellable {
+        self.objectWillChange.sink(receiveValue: onChange)
     }
 
 }
@@ -162,23 +198,9 @@ extension Variable {
 
 }
 
-class TaskInstance: ObservableObject {
-
-    var task: Task
-    var variables: [VariableInstance]
-
-    var name: String { task.name }
-
-    init(task: Task) {
-        self.task = task
-        self.variables = task.configuration.variables.map { $0.instance() }
-    }
-
-}
-
 struct VariableDateView: View {
 
-    @StateObject var variable: DateInstance
+    @ObservedObject var variable: DateInstance
 
     var body: some View {
         HStack {
@@ -193,6 +215,7 @@ struct VariableDateView: View {
 struct VariableStringView: View {
 
     @StateObject var variable: StringInstance
+    @State var string: String = ""
 
     var body: some View {
         HStack {
@@ -204,35 +227,57 @@ struct VariableStringView: View {
 
 }
 
-
 struct DetailsPage: View {
 
+    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.manager) var manager
+
+    var url: URL
     @StateObject var task: TaskInstance
 
     @State var date: Date = Date()
     @State var year = "2020"
 
-    init(task: Task) {
-        _task = StateObject(wrappedValue: TaskInstance(task: task))
+    init(url: URL, rootUrl: URL, task: Task) {
+        self.url = url
+        _task = StateObject(wrappedValue: TaskInstance(url: rootUrl, task: task))
     }
 
     var body: some View {
-        ScrollView {
-            VStack {
-                ForEach(task.variables) { variable in
-                    HStack {
-                        if let variable = variable as? DateInstance {
-                            VariableDateView(variable: variable)
-                        } else if let variable = variable as? StringInstance {
-                            VariableStringView(variable: variable)
-                        } else {
-                            Text(variable.name)
-                            Spacer()
-                            Text("Unsupported")
+        VStack {
+            ScrollView {
+                VStack {
+                    ForEach(task.variables) { variable in
+                        HStack {
+                            if let variable = variable as? DateInstance {
+                                VariableDateView(variable: variable)
+                            } else if let variable = variable as? StringInstance {
+                                VariableStringView(variable: variable)
+                            } else {
+                                Text(variable.name)
+                                Spacer()
+                                Text("Unsupported")
+                            }
                         }
+                        .padding()
                     }
-                    .padding()
                 }
+            }
+            Text(task.destinationUrl.path)
+                .lineLimit(1)
+                .truncationMode(.head)
+                .help(task.destinationUrl.path)
+            Button {
+                print("moving to \(task.destinationUrl)...")
+                do {
+                    try task.move(url: url)
+                } catch {
+                    print("Failed to move file with error \(error)")
+                }
+
+                presentationMode.wrappedValue.dismiss()
+            } label: {
+                Text("Move")
             }
         }
         .pageTitle(task.name)
@@ -255,7 +300,7 @@ struct ArchiveWizard: View {
             HStack {
                 QuickLookPreview(url: url)
                 PageView {
-                    TaskPage(manager: manager)
+                    TaskPage(manager: manager, url: url)
                 }
             }
             Button(action: onDismiss) {

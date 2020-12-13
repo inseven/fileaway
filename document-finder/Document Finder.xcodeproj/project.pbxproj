@@ -50,6 +50,7 @@
 		D8D78AAD2580E2440088890F /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = D8D78AAC2580E2440088890F /* Introspect */; };
 		D8D78AB32580E38F0088890F /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D78AB22580E38F0088890F /* RoundedCorner.swift */; };
 		D8DC5046257C0795009B3ECC /* ResponderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DC5045257C0795009B3ECC /* ResponderView.swift */; };
+		D8F8BE002586C6B90010432F /* TaskInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BDFF2586C6B90010432F /* TaskInstance.swift */; };
 		D8FC5334257BB6D2008FB609 /* MailboxRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5333257BB6D2008FB609 /* MailboxRow.swift */; };
 		D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5341257BB77C008FB609 /* SettingsView.swift */; };
 		D8FC534A257BB7A4008FB609 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5349257BB7A4008FB609 /* GeneralSettingsView.swift */; };
@@ -121,6 +122,7 @@
 		D8D78AA62580DF190088890F /* ArchiveWizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveWizard.swift; sourceTree = "<group>"; };
 		D8D78AB22580E38F0088890F /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
 		D8DC5045257C0795009B3ECC /* ResponderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponderView.swift; sourceTree = "<group>"; };
+		D8F8BDFF2586C6B90010432F /* TaskInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInstance.swift; sourceTree = "<group>"; };
 		D8FC5333257BB6D2008FB609 /* MailboxRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailboxRow.swift; sourceTree = "<group>"; };
 		D8FC5341257BB77C008FB609 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D8FC5349257BB7A4008FB609 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				D8005AC0258276250001BE2C /* Configuration.swift */,
 				D8005AC8258277290001BE2C /* Rules.swift */,
 				D8005ACD258279530001BE2C /* VariableProvider.swift */,
+				D8F8BDFF2586C6B90010432F /* TaskInstance.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				D821E92B257A8F87005D3205 /* FileInfo.swift in Sources */,
 				D85C95812579CED30007AE1E /* Toolbar.swift in Sources */,
 				D8B6D03A257E808900C7E472 /* Color.swift in Sources */,
+				D8F8BE002586C6B90010432F /* TaskInstance.swift in Sources */,
 				D85C957725799B2E0007AE1E /* FileActions.swift in Sources */,
 				D821E946257AA5FC005D3205 /* Sidebar.swift in Sources */,
 				D8005ACE258279530001BE2C /* VariableProvider.swift in Sources */,
