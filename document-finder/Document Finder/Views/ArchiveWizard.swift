@@ -66,7 +66,7 @@ struct TaskPage: View {
         self.manager = manager
         self.url = url
         let filter = Deferred(LazyFilter(items: manager.$tasks, test: { filter, item in
-            filter.isEmpty ? true : item.name.localizedCaseInsensitiveContains(filter)
+            item.name.localizedSearchMatches(string: filter)
         }, initialSortDescriptor: { lhs, rhs in lhs.name.lexicographicallyPrecedes(rhs.name) }))
         self._filter = StateObject(wrappedValue: filter.get())
         self._tracker = StateObject(wrappedValue: SelectionTracker(items: filter.get().$items))
