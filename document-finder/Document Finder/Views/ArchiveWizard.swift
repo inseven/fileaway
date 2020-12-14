@@ -53,6 +53,8 @@ struct TaskPage: View {
     var manager: Manager
     var url: URL
 
+    @Environment(\.close) var close
+
     @StateObject var filter: LazyFilter<Task>
     @StateObject var tracker: SelectionTracker<Task>
 
@@ -110,6 +112,11 @@ struct TaskPage: View {
                             .padding(.trailing)
                     }
                 }
+            }
+            Button {
+                close()
+            } label: {
+                Text("Close")
             }
         }
         .padding()
@@ -307,6 +314,25 @@ struct ArchiveWizardContainer: View {
     }
 
 }
+
+// TODO: Check if the scene can accept a command to do this?
+
+
+struct CloseKey: EnvironmentKey {
+    static var defaultValue: () -> Void = {
+        NSApplication.shared.keyWindow?.close()
+    }
+}
+
+extension EnvironmentValues {
+
+    var close: () -> Void {
+        get { self[CloseKey.self] }
+        set { self[CloseKey.self] = newValue }
+    }
+
+}
+
 
 struct ArchiveWizard: View {
 
