@@ -356,7 +356,6 @@ struct ArchiveWizard: View {
         .acceptsFirstResponder(isFirstResponder: $firstResponder)
         .padding()
         .frame(minWidth: 800, minHeight: 600, idealHeight: 600)
-//        .onExitCommand(perform: onDismiss)
     }
 
 }
