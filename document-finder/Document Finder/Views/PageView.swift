@@ -88,37 +88,39 @@ struct PageView<Content>: View where Content: View {
     }
 
     var body: some View {
-        VStack {
-            ZStack {
-                HStack {
-                    if pageViewStack.pages.count > 0 {
-                        Button {
-                            withAnimation {
-                                guard pageViewStack.pages.count > 0 else {
-                                    return
+        GeometryReader { geometry in
+            VStack {
+                ZStack {
+                    HStack {
+                        if pageViewStack.pages.count > 0 {
+                            Button {
+                                withAnimation {
+                                    guard pageViewStack.pages.count > 0 else {
+                                        return
+                                    }
+                                    pageViewStack.pages.removeLast()
                                 }
-                                pageViewStack.pages.removeLast()
+                            } label: {
+                                Image(systemName: "chevron.backward")
                             }
-                        } label: {
-                            Image(systemName: "chevron.backward")
-                                .foregroundColor(.accentColor)
                         }
-                        .buttonStyle(BorderlessButtonStyle())
+                        Spacer()
                     }
-                    Spacer()
+                    Text(title)
+                        .lineLimit(1)
+                        .truncationMode(.middle)
+                        .font(.headline)
+                        .frame(maxWidth: geometry.size.width - 80)
                 }
-                Text(title)
-                    .lineLimit(1)
-                    .font(.headline)
+                if pageViewStack.pages.count > 0 {
+                    PageStack(items: pageViewStack.pages)
+                        .transition(AnyTransition.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                } else {
+                    content
+                        .transition(AnyTransition.asymmetric(insertion:.move(edge: .leading), removal: .move(edge: .trailing)))
+                }
+                Spacer()
             }
-            if pageViewStack.pages.count > 0 {
-                PageStack(items: pageViewStack.pages)
-                    .transition(AnyTransition.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-            } else {
-                content
-                    .transition(AnyTransition.asymmetric(insertion:.move(edge: .leading), removal: .move(edge: .trailing)))
-            }
-            Spacer()
         }
         .environment(\.pageViewStack, pageViewStack)
         .frame(width: 300)
