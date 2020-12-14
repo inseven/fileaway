@@ -210,9 +210,10 @@
 		D85C95852579DD880007AE1E /* Modifiers */ = {
 			isa = PBXGroup;
 			children = (
-				D85C95802579CED30007AE1E /* Toolbar.swift */,
-				D85C95862579DD9D0007AE1E /* Selection.swift */,
+				D8B6D020257D962F00C7E472 /* AcceptsFirstResponder.swift */,
 				D8F8BE3B25881C650010432F /* Highlight.swift */,
+				D85C95862579DD9D0007AE1E /* Selection.swift */,
+				D85C95802579CED30007AE1E /* Toolbar.swift */,
 				D8F8BE4025881CEC0010432F /* TrackerInput.swift */,
 			);
 			path = Modifiers;
@@ -243,7 +244,6 @@
 			children = (
 				D87DEF8825774F6D006CFE85 /* Document_Finder.entitlements */,
 				D87DEF8725774F6D006CFE85 /* Info.plist */,
-				D8B6D020257D962F00C7E472 /* AcceptsFirstResponder.swift */,
 				D87DEF7E25774F6C006CFE85 /* Document_FinderApp.swift */,
 				D85C957625799B2E0007AE1E /* FileActions.swift */,
 				D821E92A257A8F87005D3205 /* FileInfo.swift */,
