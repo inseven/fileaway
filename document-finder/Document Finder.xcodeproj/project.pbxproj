@@ -247,7 +247,6 @@
 				D87DEF7E25774F6C006CFE85 /* Document_FinderApp.swift */,
 				D85C957625799B2E0007AE1E /* FileActions.swift */,
 				D821E92A257A8F87005D3205 /* FileInfo.swift */,
-				D88DF5FA258463310068404E /* LazyFilter.swift */,
 				D87DEFBD257840B1006CFE85 /* Manager.swift */,
 				D829DDB325787C100066A807 /* Settings.swift */,
 				D87DEF8225774F6D006CFE85 /* Assets.xcassets */,
@@ -331,12 +330,13 @@
 		D8FC5340257BB72F008FB609 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				D87B125F258511EC004EC884 /* Deferred.swift */,
 				D87DEFB325780BA4006CFE85 /* DirectoryObserver.swift */,
 				D821E93D257A960C005D3205 /* FileProvider.swift */,
+				D88DF5FA258463310068404E /* LazyFilter.swift */,
 				D8B6D034257E71CD00C7E472 /* QuickLookCoordinator.swift */,
 				D8B6D02F257DBB7D00C7E472 /* SelectionManager.swift */,
 				D8B6D025257DBA8B00C7E472 /* SelectionTracker.swift */,
-				D87B125F258511EC004EC884 /* Deferred.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
