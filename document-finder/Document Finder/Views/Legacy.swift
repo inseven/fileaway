@@ -10,10 +10,6 @@ import SwiftUI
 
 import Introspect
 
-extension String: Identifiable {
-    public var id: String { self }
-}
-
 protocol TextProvider {
     var textRepresentation: String { get }
 }
