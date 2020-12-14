@@ -14,27 +14,6 @@ extension String: Identifiable {
     public var id: String { self }
 }
 
-struct TrackerInput<T>: ViewModifier where T: Hashable {
-
-    var tracker: SelectionTracker<T>
-
-    func body(content: Content) -> some View {
-        content
-            .onMoveCommand { direction in
-                print("tracker = \(tracker), direction = \(direction)")
-                switch direction {
-                case .up:
-                    tracker.handleDirectionUp()
-                case .down:
-                    tracker.handleDirectionDown()
-                default:
-                    return
-                }
-            }
-    }
-
-}
-
 protocol TextProvider {
     var textRepresentation: String { get }
 }
