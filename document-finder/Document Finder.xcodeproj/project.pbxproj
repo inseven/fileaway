@@ -46,12 +46,13 @@
 		D8D78A922580DD750088890F /* QuickLookPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D78A912580DD750088890F /* QuickLookPreview.swift */; };
 		D8D78A9A2580DDF40088890F /* PageLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D78A992580DDF40088890F /* PageLink.swift */; };
 		D8D78A9F2580DE250088890F /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D78A9E2580DE250088890F /* PageView.swift */; };
-		D8D78AA72580DF190088890F /* ArchiveWizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D78AA62580DF190088890F /* ArchiveWizard.swift */; };
+		D8D78AA72580DF190088890F /* Legacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D78AA62580DF190088890F /* Legacy.swift */; };
 		D8D78AAD2580E2440088890F /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = D8D78AAC2580E2440088890F /* Introspect */; };
 		D8D78AB32580E38F0088890F /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D78AB22580E38F0088890F /* RoundedCorner.swift */; };
 		D8DC5046257C0795009B3ECC /* ResponderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DC5045257C0795009B3ECC /* ResponderView.swift */; };
 		D8F8BE002586C6B90010432F /* TaskInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BDFF2586C6B90010432F /* TaskInstance.swift */; };
 		D8F8BE0C2588179E0010432F /* CloseKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BE0B2588179E0010432F /* CloseKey.swift */; };
+		D8F8BE12258818450010432F /* ArchiveWizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BE11258818450010432F /* ArchiveWizard.swift */; };
 		D8FC5334257BB6D2008FB609 /* MailboxRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5333257BB6D2008FB609 /* MailboxRow.swift */; };
 		D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5341257BB77C008FB609 /* SettingsView.swift */; };
 		D8FC534A257BB7A4008FB609 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5349257BB7A4008FB609 /* GeneralSettingsView.swift */; };
@@ -120,11 +121,12 @@
 		D8D78A912580DD750088890F /* QuickLookPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickLookPreview.swift; sourceTree = "<group>"; };
 		D8D78A992580DDF40088890F /* PageLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageLink.swift; sourceTree = "<group>"; };
 		D8D78A9E2580DE250088890F /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
-		D8D78AA62580DF190088890F /* ArchiveWizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveWizard.swift; sourceTree = "<group>"; };
+		D8D78AA62580DF190088890F /* Legacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Legacy.swift; sourceTree = "<group>"; };
 		D8D78AB22580E38F0088890F /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
 		D8DC5045257C0795009B3ECC /* ResponderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponderView.swift; sourceTree = "<group>"; };
 		D8F8BDFF2586C6B90010432F /* TaskInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInstance.swift; sourceTree = "<group>"; };
 		D8F8BE0B2588179E0010432F /* CloseKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseKey.swift; sourceTree = "<group>"; };
+		D8F8BE11258818450010432F /* ArchiveWizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveWizard.swift; sourceTree = "<group>"; };
 		D8FC5333257BB6D2008FB609 /* MailboxRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailboxRow.swift; sourceTree = "<group>"; };
 		D8FC5341257BB77C008FB609 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D8FC5349257BB7A4008FB609 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 		D821E937257A9591005D3205 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D8F8BE102588182C0010432F /* Wizard */,
 				D87DEF8025774F6C006CFE85 /* ContentView.swift */,
 				D821E938257A959D005D3205 /* DateView.swift */,
 				D87DEFB825783F66006CFE85 /* DirectoryView.swift */,
@@ -185,7 +188,7 @@
 				D8B6D02A257DBAF700C7E472 /* SearchField.swift */,
 				D8FC5341257BB77C008FB609 /* SettingsView.swift */,
 				D821E945257AA5FC005D3205 /* Sidebar.swift */,
-				D8D78AA62580DF190088890F /* ArchiveWizard.swift */,
+				D8D78AA62580DF190088890F /* Legacy.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -297,6 +300,14 @@
 				D8F8BE0B2588179E0010432F /* CloseKey.swift */,
 			);
 			path = Environment;
+			sourceTree = "<group>";
+		};
+		D8F8BE102588182C0010432F /* Wizard */ = {
+			isa = PBXGroup;
+			children = (
+				D8F8BE11258818450010432F /* ArchiveWizard.swift */,
+			);
+			path = Wizard;
 			sourceTree = "<group>";
 		};
 		D8FC5340257BB72F008FB609 /* Utilities */ = {
@@ -473,6 +484,7 @@
 				D8B6D026257DBA8B00C7E472 /* SelectionTracker.swift in Sources */,
 				D88DF5FB258463310068404E /* LazyFilter.swift in Sources */,
 				D821E93E257A960C005D3205 /* FileProvider.swift in Sources */,
+				D8F8BE12258818450010432F /* ArchiveWizard.swift in Sources */,
 				D8B6D021257D962F00C7E472 /* AcceptsFirstResponder.swift in Sources */,
 				D87DEF7F25774F6C006CFE85 /* Document_FinderApp.swift in Sources */,
 				D87DEFB925783F66006CFE85 /* DirectoryView.swift in Sources */,
@@ -488,7 +500,7 @@
 				D8F8BE0C2588179E0010432F /* CloseKey.swift in Sources */,
 				D87DEFC4257848B7006CFE85 /* URL.swift in Sources */,
 				D8FC5334257BB6D2008FB609 /* MailboxRow.swift in Sources */,
-				D8D78AA72580DF190088890F /* ArchiveWizard.swift in Sources */,
+				D8D78AA72580DF190088890F /* Legacy.swift in Sources */,
 				D8B6D030257DBB7D00C7E472 /* SelectionManager.swift in Sources */,
 				D85C9572257999130007AE1E /* FileManager.swift in Sources */,
 			);
