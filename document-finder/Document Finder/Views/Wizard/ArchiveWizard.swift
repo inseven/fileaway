@@ -11,21 +11,30 @@ struct ArchiveWizard: View {
 
     @Environment(\.manager) var manager
 
-    @State var url: URL
+    @State var url: URL?
 
     @State var firstResponder: Bool = true
 
     var body: some View {
         VStack {
-            HStack {
-                QuickLookPreview(url: url)
-                PageView {
-                    TaskPage(manager: manager, url: url)
+            if let url = url {
+                HStack {
+                    QuickLookPreview(url: url)
+                    PageView {
+                        TaskPage(manager: manager, url: url)
+                    }
                 }
+            } else {
+                Text("No File Selected")
+                    .font(.largeTitle)
+                    .foregroundColor(.secondary)
             }
         }
         .acceptsFirstResponder(isFirstResponder: $firstResponder)
         .padding()
+        .onOpenURL { url in
+            self.url = URL(fileURLWithPath: url.path)
+        }
         .frame(minWidth: 800, minHeight: 600, idealHeight: 600)
     }
 

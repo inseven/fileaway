@@ -294,25 +294,3 @@ struct DetailsPage: View {
     }
 
 }
-
-struct ArchiveWizardContainer: View {
-
-    @State var url: URL?
-
-    var body: some View {
-        HStack {
-            if let url = url {
-                ArchiveWizard(url: url)
-            } else {
-                Text("No File Selected")
-                    .font(.largeTitle)
-                    .foregroundColor(.secondary)
-            }
-        }
-        .onOpenURL { url in
-            self.url = URL(fileURLWithPath: url.path)
-        }
-        .frame(minWidth: 800, minHeight: 600, idealHeight: 600)
-    }
-
-}
