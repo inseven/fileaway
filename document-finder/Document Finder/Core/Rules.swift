@@ -29,21 +29,5 @@ class Rules {
         self.url = url
         self.tasks = (try? Self.load(url: self.url.appendingPathComponent("file-actions.json"))) ?? []
     }
-
-    // TODO: Move this functionality to each rule.
-    func destinationUrl(_ task: Task, variableProvider: VariableProvider, rootUrl: URL? = nil) -> URL {
-        let destination = task.configuration.destination.reduce("") { (result, component) -> String in
-            switch component.type {
-            case .text:
-                return result.appending(component.value)
-            case .variable:
-                guard let value = variableProvider.variable(forKey: component.value) else {
-                    return result
-                }
-                return result.appending(value)
-            }
-        }
-        return url.appendingPathComponent(destination).appendingPathExtension("pdf")
-    }
-
+    
 }

@@ -145,52 +145,14 @@ class VariableInstance: Identifiable {
 }
 
 protocol TextProvider {
-
     var textRepresentation: String { get }
-
 }
 
 protocol Observable {
     func observe(_ onChange: @escaping () -> Void) -> AnyCancellable
 }
 
-class DateInstance: VariableInstance, ObservableObject, Observable, TextProvider {
-
-    @Published var date: Date
-
-    var textRepresentation: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.string(from: date)
-    }
-
-    init(variable: Variable, initialValue: Date) {
-        _date = Published(initialValue: initialValue)
-        super.init(variable: variable)
-    }
-
-    func observe(_ onChange: @escaping () -> Void) -> AnyCancellable {
-        self.objectWillChange.sink(receiveValue: onChange)
-    }
-
-}
-
-class StringInstance: VariableInstance, ObservableObject, Observable, TextProvider {
-
-    var textRepresentation: String {
-        return string
-    }
-
-    @Published var string: String
-
-    init(variable: Variable, initialValue: String) {
-        _string = Published(initialValue: initialValue)
-        super.init(variable: variable)
-    }
-
-    func observe(_ onChange: @escaping () -> Void) -> AnyCancellable {
-        self.objectWillChange.sink(receiveValue: onChange)
-    }
+protocol VariableProvider: TextProvider, Observable {
 
 }
 
@@ -232,65 +194,6 @@ struct VariableStringView: View {
             Spacer()
             TextField("", text: $variable.string)
         }
-    }
-
-}
-
-struct DetailsPage: View {
-
-    @Environment(\.presentationMode) var presentationMode
-    @Environment(\.manager) var manager
-
-    var url: URL
-    @StateObject var task: TaskInstance
-
-    @State var date: Date = Date()
-    @State var year = "2020"
-
-    init(url: URL, rootUrl: URL, task: Task) {
-        self.url = url
-        _task = StateObject(wrappedValue: TaskInstance(url: rootUrl, task: task))
-    }
-
-    var body: some View {
-        VStack {
-            ScrollView {
-                VStack {
-                    ForEach(task.variables) { variable in
-                        HStack {
-                            if let variable = variable as? DateInstance {
-                                VariableDateView(variable: variable)
-                            } else if let variable = variable as? StringInstance {
-                                VariableStringView(variable: variable)
-                            } else {
-                                Text(variable.name)
-                                Spacer()
-                                Text("Unsupported")
-                            }
-                        }
-                        .padding()
-                    }
-                }
-            }
-            Text(task.destinationUrl.path)
-                .lineLimit(1)
-                .truncationMode(.head)
-                .help(task.destinationUrl.path)
-            Button {
-                print("moving to \(task.destinationUrl)...")
-                do {
-                    try task.move(url: url)
-                } catch {
-                    print("Failed to move file with error \(error)")
-                }
-
-                presentationMode.wrappedValue.dismiss()
-            } label: {
-                Text("Move")
-            }
-        }
-        .pageTitle(task.name)
-        .frame(minWidth: 0, maxWidth: .infinity)
     }
 
 }
