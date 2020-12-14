@@ -320,22 +320,6 @@ struct ArchiveWizardContainer: View {
 // TODO: Check if the scene can accept a command to do this?
 
 
-struct CloseKey: EnvironmentKey {
-    static var defaultValue: () -> Void = {
-        NSApplication.shared.keyWindow?.close()
-    }
-}
-
-extension EnvironmentValues {
-
-    var close: () -> Void {
-        get { self[CloseKey.self] }
-        set { self[CloseKey.self] = newValue }
-    }
-
-}
-
-
 struct ArchiveWizard: View {
 
     @Environment(\.manager) var manager
