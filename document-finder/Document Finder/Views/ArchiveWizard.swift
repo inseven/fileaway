@@ -42,6 +42,7 @@ struct Highlight<T>: ViewModifier where T: Hashable {
 
     func body(content: Content) -> some View {
         content
+            .foregroundColor(tracker.isSelected(item: item) ? .white : .primary)
             .background(tracker.isSelected(item: item) ? Color.selectedContentBackgroundColor : Color.clear)
             .cornerRadius(6, corners: tracker.corners(for: item))
         }
