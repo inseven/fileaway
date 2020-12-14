@@ -47,17 +47,9 @@ struct Toolbar: ViewModifier {
                         }
                         sheetType = .wizard(url: file.url)
                     } label: {
-                        Image(systemName: "folder")
-                    }
-                    .keyboardShortcut(KeyboardShortcut(.return, modifiers: .command))
-                }
-                ToolbarItem {
-                    Button {
-                        manager.archive()
-                    } label: {
                         Image(systemName: "archivebox")
                     }
-                    .disabled(!manager.canArchive)
+                    .keyboardShortcut(KeyboardShortcut(.return, modifiers: .command))
                 }
                 ToolbarItem {
                     Button {

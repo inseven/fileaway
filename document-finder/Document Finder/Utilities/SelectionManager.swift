@@ -33,12 +33,6 @@ class SelectionManager: ObservableObject {
         QuickLookCoordinator.shared.show(url: url)
     }
 
-    var canArchive: Bool { !tracker.selection.isEmpty }
-
-    func archive() {
-        FileActions.open(urls: urls)
-    }
-
     var canCut: Bool { !tracker.selection.isEmpty }
 
     func cut() -> [NSItemProvider] {
