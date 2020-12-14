@@ -42,9 +42,9 @@ struct Highlight<T>: ViewModifier where T: Hashable {
 
     func body(content: Content) -> some View {
         content
-            .background(tracker.isSelected(item: item) ? Color.selectedContentBackgroundColor : Color(NSColor.textBackgroundColor))
+            .background(tracker.isSelected(item: item) ? Color.selectedContentBackgroundColor : Color.clear)
             .cornerRadius(6, corners: tracker.corners(for: item))
-    }
+        }
 
 }
 
@@ -286,12 +286,31 @@ struct DetailsPage: View {
 
 }
 
+struct ArchiveWizardContainer: View {
+
+    @State var url: URL?
+
+    var body: some View {
+        HStack {
+            if let url = url {
+                ArchiveWizard(url: url)
+            } else {
+                Text("No File Selected")
+            }
+        }
+        .onOpenURL { url in
+            self.url = URL(fileURLWithPath: url.path)
+        }
+        .frame(minWidth: 800, minHeight: 600, idealHeight: 600)
+    }
+
+}
+
 struct ArchiveWizard: View {
 
     @Environment(\.manager) var manager
 
     @State var url: URL
-    var onDismiss: () -> Void
 
     @State var firstResponder: Bool = true
 
@@ -303,15 +322,11 @@ struct ArchiveWizard: View {
                     TaskPage(manager: manager, url: url)
                 }
             }
-            Button(action: onDismiss) {
-                Text("Cancel")
-            }
-            .padding()
         }
         .acceptsFirstResponder(isFirstResponder: $firstResponder)
         .padding()
         .frame(minWidth: 800, minHeight: 600, idealHeight: 600)
-        .onExitCommand(perform: onDismiss)
+//        .onExitCommand(perform: onDismiss)
     }
 
 }

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct Toolbar: ViewModifier {
 
+    @Environment(\.openURL) var openURL
+
     enum SheetType {
         case wizard(url: URL)
     }
@@ -20,9 +22,7 @@ struct Toolbar: ViewModifier {
     func sheet(sheetType: SheetType) -> some View {
         switch sheetType {
         case .wizard(let url):
-            return ArchiveWizard(url: url) {
-                self.sheetType = nil
-            }
+            return ArchiveWizard(url: url)
         }
     }
 
@@ -42,10 +42,25 @@ struct Toolbar: ViewModifier {
                 }
                 ToolbarItem {
                     Button {
+//                        guard let file = manager.tracker.selection.first else {
+//                            return
+//                        }
+//                        sheetType = .wizard(url: file.url)
+
                         guard let file = manager.tracker.selection.first else {
                             return
                         }
-                        sheetType = .wizard(url: file.url)
+
+//                        if let url = URL(string: "file-actions://viewer") {
+
+                        var components = URLComponents()
+                        components.scheme = "file-actions"
+                        components.path = file.url.path
+                        guard let url = components.url else {
+                            return
+                        }
+                        openURL(url)
+//                        }
                     } label: {
                         Image(systemName: "archivebox")
                     }

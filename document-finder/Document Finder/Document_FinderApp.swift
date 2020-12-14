@@ -68,6 +68,27 @@ struct GlobalCommands: Commands {
 
 }
 
+struct VisualEffectView: NSViewRepresentable
+{
+    let material: NSVisualEffectView.Material
+    let blendingMode: NSVisualEffectView.BlendingMode
+
+    func makeNSView(context: Context) -> NSVisualEffectView
+    {
+        let visualEffectView = NSVisualEffectView()
+        visualEffectView.material = material
+        visualEffectView.blendingMode = blendingMode
+        visualEffectView.state = NSVisualEffectView.State.active
+        return visualEffectView
+    }
+
+    func updateNSView(_ visualEffectView: NSVisualEffectView, context: Context)
+    {
+        visualEffectView.material = material
+        visualEffectView.blendingMode = blendingMode
+    }
+}
+
 @main
 struct Document_FinderApp: App {
 
@@ -89,7 +110,7 @@ struct Document_FinderApp: App {
     }
 
     var body: some Scene {
-        WindowGroup {
+        WindowGroup(id: "MainWindow") {
             ContentView(manager: appDelegate.manager)
                 .environment(\.manager, appDelegate.manager)
         }
@@ -108,6 +129,14 @@ struct Document_FinderApp: App {
                 print("app state unknown")
             }
         }
+        WindowGroup("Wizard") {
+            ArchiveWizardContainer()
+                .environment(\.manager, appDelegate.manager)
+                .handlesExternalEvents(preferring: Set(arrayLiteral: "*"), allowing: Set(arrayLiteral: "*"))
+                .background(VisualEffectView(material: NSVisualEffectView.Material.popover, blendingMode: NSVisualEffectView.BlendingMode.withinWindow))
+        }
+        .windowStyle(HiddenTitleBarWindowStyle())
+        .handlesExternalEvents(matching: Set(arrayLiteral: "*"))
         SwiftUI.Settings {
             SettingsView(manager: appDelegate.manager)
         }
