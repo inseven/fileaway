@@ -105,6 +105,7 @@ struct TaskPage: View {
                                 Image(systemName: "chevron.forward")
                             }
                             .padding()
+                            .contentShape(Rectangle())
                             .modifier(Highlight(tracker: tracker, item: task))
                         }
                         Divider()
