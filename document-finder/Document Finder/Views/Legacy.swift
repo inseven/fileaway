@@ -129,21 +129,6 @@ struct TaskPage: View {
 
 }
 
-
-class VariableInstance: Identifiable {
-
-    public var id: UUID { variable.id }
-
-    var variable: Variable
-
-    var name: String { variable.name }
-
-    init(variable: Variable) {
-        self.variable = variable
-    }
-
-}
-
 protocol TextProvider {
     var textRepresentation: String { get }
 }
