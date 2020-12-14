@@ -8,7 +8,7 @@
 import Combine
 import SwiftUI
 
-class StringInstance: VariableInstance, ObservableObject, VariableProvider {
+class StringInstance: VariableInstance, VariableProvider {
 
     var textRepresentation: String {
         return string

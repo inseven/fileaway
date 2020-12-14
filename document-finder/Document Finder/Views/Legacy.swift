@@ -152,7 +152,7 @@ protocol Observable {
     func observe(_ onChange: @escaping () -> Void) -> AnyCancellable
 }
 
-protocol VariableProvider: TextProvider, Observable {
+protocol VariableProvider: TextProvider, Observable, ObservableObject {
 
 }
 

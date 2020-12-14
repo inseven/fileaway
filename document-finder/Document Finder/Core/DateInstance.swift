@@ -8,7 +8,7 @@
 import Combine
 import SwiftUI
 
-class DateInstance: VariableInstance, ObservableObject, VariableProvider {
+class DateInstance: VariableInstance, VariableProvider {
 
     @Published var date: Date
 
