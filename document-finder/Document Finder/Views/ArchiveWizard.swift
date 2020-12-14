@@ -317,9 +317,6 @@ struct ArchiveWizardContainer: View {
 
 }
 
-// TODO: Check if the scene can accept a command to do this?
-
-
 struct ArchiveWizard: View {
 
     @Environment(\.manager) var manager
