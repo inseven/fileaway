@@ -296,6 +296,8 @@ struct ArchiveWizardContainer: View {
                 ArchiveWizard(url: url)
             } else {
                 Text("No File Selected")
+                    .font(.largeTitle)
+                    .foregroundColor(.secondary)
             }
         }
         .onOpenURL { url in
