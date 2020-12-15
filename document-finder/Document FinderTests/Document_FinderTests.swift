@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import Document_Finder
+@testable import Fileaway
 
 class Document_FinderTests: XCTestCase {
 
