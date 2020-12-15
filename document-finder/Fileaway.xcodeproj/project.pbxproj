@@ -104,7 +104,7 @@
 		D87DEF8225774F6D006CFE85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D87DEF8525774F6D006CFE85 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D87DEF8725774F6D006CFE85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D87DEF8825774F6D006CFE85 /* Document_Finder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Document_Finder.entitlements; sourceTree = "<group>"; };
+		D87DEF8825774F6D006CFE85 /* Fileaway.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fileaway.entitlements; sourceTree = "<group>"; };
 		D87DEF8D25774F6D006CFE85 /* FileawayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileawayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87DEF9125774F6D006CFE85 /* Document_FinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document_FinderTests.swift; sourceTree = "<group>"; };
 		D87DEF9325774F6D006CFE85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -242,7 +242,7 @@
 		D87DEF7D25774F6C006CFE85 /* Document Finder */ = {
 			isa = PBXGroup;
 			children = (
-				D87DEF8825774F6D006CFE85 /* Document_Finder.entitlements */,
+				D87DEF8825774F6D006CFE85 /* Fileaway.entitlements */,
 				D87DEF8725774F6D006CFE85 /* Info.plist */,
 				D87DEF7E25774F6C006CFE85 /* Document_FinderApp.swift */,
 				D85C957625799B2E0007AE1E /* FileActions.swift */,
@@ -682,7 +682,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Document Finder/Document_Finder.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Document Finder/Fileaway.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Document Finder/Preview Content\"";
@@ -706,7 +706,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Document Finder/Document_Finder.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Document Finder/Fileaway.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Document Finder/Preview Content\"";
