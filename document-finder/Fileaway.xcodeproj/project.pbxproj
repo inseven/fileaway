@@ -98,17 +98,17 @@
 		D85C958B2579DE140007AE1E /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		D87B125F258511EC004EC884 /* Deferred.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deferred.swift; sourceTree = "<group>"; };
 		D87B126425851218004EC884 /* EventModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModifiers.swift; sourceTree = "<group>"; };
-		D87DEF7B25774F6C006CFE85 /* Document Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Document Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D87DEF7B25774F6C006CFE85 /* Fileaway.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fileaway.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87DEF7E25774F6C006CFE85 /* Document_FinderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document_FinderApp.swift; sourceTree = "<group>"; };
 		D87DEF8025774F6C006CFE85 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D87DEF8225774F6D006CFE85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D87DEF8525774F6D006CFE85 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D87DEF8725774F6D006CFE85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D87DEF8825774F6D006CFE85 /* Document_Finder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Document_Finder.entitlements; sourceTree = "<group>"; };
-		D87DEF8D25774F6D006CFE85 /* Document FinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Document FinderTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D87DEF8D25774F6D006CFE85 /* FileawayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileawayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87DEF9125774F6D006CFE85 /* Document_FinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document_FinderTests.swift; sourceTree = "<group>"; };
 		D87DEF9325774F6D006CFE85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D87DEF9825774F6D006CFE85 /* Document FinderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Document FinderUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D87DEF9825774F6D006CFE85 /* FileawayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileawayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87DEF9C25774F6D006CFE85 /* Document_FinderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document_FinderUITests.swift; sourceTree = "<group>"; };
 		D87DEF9E25774F6D006CFE85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D87DEFB325780BA4006CFE85 /* DirectoryObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryObserver.swift; sourceTree = "<group>"; };
@@ -232,9 +232,9 @@
 		D87DEF7C25774F6C006CFE85 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D87DEF7B25774F6C006CFE85 /* Document Finder.app */,
-				D87DEF8D25774F6D006CFE85 /* Document FinderTests.xctest */,
-				D87DEF9825774F6D006CFE85 /* Document FinderUITests.xctest */,
+				D87DEF7B25774F6C006CFE85 /* Fileaway.app */,
+				D87DEF8D25774F6D006CFE85 /* FileawayTests.xctest */,
+				D87DEF9825774F6D006CFE85 /* FileawayUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -344,9 +344,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D87DEF7A25774F6C006CFE85 /* Document Finder */ = {
+		D87DEF7A25774F6C006CFE85 /* Fileaway */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D87DEFA125774F6D006CFE85 /* Build configuration list for PBXNativeTarget "Document Finder" */;
+			buildConfigurationList = D87DEFA125774F6D006CFE85 /* Build configuration list for PBXNativeTarget "Fileaway" */;
 			buildPhases = (
 				D87DEF7725774F6C006CFE85 /* Sources */,
 				D87DEF7825774F6C006CFE85 /* Frameworks */,
@@ -356,18 +356,18 @@
 			);
 			dependencies = (
 			);
-			name = "Document Finder";
+			name = Fileaway;
 			packageProductDependencies = (
 				D87DEFAE2577E068006CFE85 /* EonilFSEvents */,
 				D8D78AAC2580E2440088890F /* Introspect */,
 			);
 			productName = "Document Finder";
-			productReference = D87DEF7B25774F6C006CFE85 /* Document Finder.app */;
+			productReference = D87DEF7B25774F6C006CFE85 /* Fileaway.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D87DEF8C25774F6D006CFE85 /* Document FinderTests */ = {
+		D87DEF8C25774F6D006CFE85 /* FileawayTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D87DEFA425774F6D006CFE85 /* Build configuration list for PBXNativeTarget "Document FinderTests" */;
+			buildConfigurationList = D87DEFA425774F6D006CFE85 /* Build configuration list for PBXNativeTarget "FileawayTests" */;
 			buildPhases = (
 				D87DEF8925774F6D006CFE85 /* Sources */,
 				D87DEF8A25774F6D006CFE85 /* Frameworks */,
@@ -378,14 +378,14 @@
 			dependencies = (
 				D87DEF8F25774F6D006CFE85 /* PBXTargetDependency */,
 			);
-			name = "Document FinderTests";
+			name = FileawayTests;
 			productName = "Document FinderTests";
-			productReference = D87DEF8D25774F6D006CFE85 /* Document FinderTests.xctest */;
+			productReference = D87DEF8D25774F6D006CFE85 /* FileawayTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		D87DEF9725774F6D006CFE85 /* Document FinderUITests */ = {
+		D87DEF9725774F6D006CFE85 /* FileawayUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D87DEFA725774F6D006CFE85 /* Build configuration list for PBXNativeTarget "Document FinderUITests" */;
+			buildConfigurationList = D87DEFA725774F6D006CFE85 /* Build configuration list for PBXNativeTarget "FileawayUITests" */;
 			buildPhases = (
 				D87DEF9425774F6D006CFE85 /* Sources */,
 				D87DEF9525774F6D006CFE85 /* Frameworks */,
@@ -396,9 +396,9 @@
 			dependencies = (
 				D87DEF9A25774F6D006CFE85 /* PBXTargetDependency */,
 			);
-			name = "Document FinderUITests";
+			name = FileawayUITests;
 			productName = "Document FinderUITests";
-			productReference = D87DEF9825774F6D006CFE85 /* Document FinderUITests.xctest */;
+			productReference = D87DEF9825774F6D006CFE85 /* FileawayUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -423,7 +423,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D87DEF7625774F6C006CFE85 /* Build configuration list for PBXProject "Document Finder" */;
+			buildConfigurationList = D87DEF7625774F6C006CFE85 /* Build configuration list for PBXProject "Fileaway" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -440,9 +440,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D87DEF7A25774F6C006CFE85 /* Document Finder */,
-				D87DEF8C25774F6D006CFE85 /* Document FinderTests */,
-				D87DEF9725774F6D006CFE85 /* Document FinderUITests */,
+				D87DEF7A25774F6C006CFE85 /* Fileaway */,
+				D87DEF8C25774F6D006CFE85 /* FileawayTests */,
+				D87DEF9725774F6D006CFE85 /* FileawayUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -551,12 +551,12 @@
 /* Begin PBXTargetDependency section */
 		D87DEF8F25774F6D006CFE85 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D87DEF7A25774F6C006CFE85 /* Document Finder */;
+			target = D87DEF7A25774F6C006CFE85 /* Fileaway */;
 			targetProxy = D87DEF8E25774F6D006CFE85 /* PBXContainerItemProxy */;
 		};
 		D87DEF9A25774F6D006CFE85 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D87DEF7A25774F6C006CFE85 /* Document Finder */;
+			target = D87DEF7A25774F6C006CFE85 /* Fileaway */;
 			targetProxy = D87DEF9925774F6D006CFE85 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -743,7 +743,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.Document-FinderTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Document Finder.app/Contents/MacOS/Document Finder";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fileaway.app/Contents/MacOS/Fileaway";
 			};
 			name = Debug;
 		};
@@ -765,7 +765,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.Document-FinderTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Document Finder.app/Contents/MacOS/Document Finder";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fileaway.app/Contents/MacOS/Fileaway";
 			};
 			name = Release;
 		};
@@ -812,7 +812,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D87DEF7625774F6C006CFE85 /* Build configuration list for PBXProject "Document Finder" */ = {
+		D87DEF7625774F6C006CFE85 /* Build configuration list for PBXProject "Fileaway" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D87DEF9F25774F6D006CFE85 /* Debug */,
@@ -821,7 +821,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D87DEFA125774F6D006CFE85 /* Build configuration list for PBXNativeTarget "Document Finder" */ = {
+		D87DEFA125774F6D006CFE85 /* Build configuration list for PBXNativeTarget "Fileaway" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D87DEFA225774F6D006CFE85 /* Debug */,
@@ -830,7 +830,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D87DEFA425774F6D006CFE85 /* Build configuration list for PBXNativeTarget "Document FinderTests" */ = {
+		D87DEFA425774F6D006CFE85 /* Build configuration list for PBXNativeTarget "FileawayTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D87DEFA525774F6D006CFE85 /* Debug */,
@@ -839,7 +839,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D87DEFA725774F6D006CFE85 /* Build configuration list for PBXNativeTarget "Document FinderUITests" */ = {
+		D87DEFA725774F6D006CFE85 /* Build configuration list for PBXNativeTarget "FileawayUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D87DEFA825774F6D006CFE85 /* Debug */,

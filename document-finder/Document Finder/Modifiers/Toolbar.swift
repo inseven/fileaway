@@ -42,25 +42,16 @@ struct Toolbar: ViewModifier {
                 }
                 ToolbarItem {
                     Button {
-//                        guard let file = manager.tracker.selection.first else {
-//                            return
-//                        }
-//                        sheetType = .wizard(url: file.url)
-
                         guard let file = manager.tracker.selection.first else {
                             return
                         }
-
-//                        if let url = URL(string: "file-actions://viewer") {
-
                         var components = URLComponents()
-                        components.scheme = "file-actions"
+                        components.scheme = "fileaway"
                         components.path = file.url.path
                         guard let url = components.url else {
                             return
                         }
                         openURL(url)
-//                        }
                     } label: {
                         Image(systemName: "archivebox")
                     }
