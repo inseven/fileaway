@@ -222,7 +222,7 @@
 		D87DEF7225774F6C006CFE85 = {
 			isa = PBXGroup;
 			children = (
-				D87DEF7D25774F6C006CFE85 /* Document Finder */,
+				D87DEF7D25774F6C006CFE85 /* Fileaway */,
 				D87DEF9025774F6D006CFE85 /* Document FinderTests */,
 				D87DEF9B25774F6D006CFE85 /* Document FinderUITests */,
 				D87DEF7C25774F6C006CFE85 /* Products */,
@@ -239,7 +239,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D87DEF7D25774F6C006CFE85 /* Document Finder */ = {
+		D87DEF7D25774F6C006CFE85 /* Fileaway */ = {
 			isa = PBXGroup;
 			children = (
 				D87DEF8825774F6D006CFE85 /* Fileaway.entitlements */,
@@ -259,7 +259,7 @@
 				D8FC5340257BB72F008FB609 /* Utilities */,
 				D821E937257A9591005D3205 /* Views */,
 			);
-			path = "Document Finder";
+			path = Fileaway;
 			sourceTree = "<group>";
 		};
 		D87DEF8425774F6D006CFE85 /* Preview Content */ = {
@@ -682,14 +682,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Document Finder/Fileaway.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Fileaway/Fileaway.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"Document Finder/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Fileaway/Preview Content\"";
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Document Finder/Info.plist";
+				INFOPLIST_FILE = Fileaway/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -706,14 +706,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Document Finder/Fileaway.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Fileaway/Fileaway.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"Document Finder/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Fileaway/Preview Content\"";
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Document Finder/Info.plist";
+				INFOPLIST_FILE = Fileaway/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
