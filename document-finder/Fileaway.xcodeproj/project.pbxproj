@@ -23,7 +23,7 @@
 		D85C958C2579DE140007AE1E /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C958B2579DE140007AE1E /* View.swift */; };
 		D87B1260258511EC004EC884 /* Deferred.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87B125F258511EC004EC884 /* Deferred.swift */; };
 		D87B126525851218004EC884 /* EventModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87B126425851218004EC884 /* EventModifiers.swift */; };
-		D87DEF7F25774F6C006CFE85 /* Document_FinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEF7E25774F6C006CFE85 /* Document_FinderApp.swift */; };
+		D87DEF7F25774F6C006CFE85 /* FileawayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEF7E25774F6C006CFE85 /* FileawayApp.swift */; };
 		D87DEF8125774F6C006CFE85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEF8025774F6C006CFE85 /* ContentView.swift */; };
 		D87DEF8325774F6D006CFE85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D87DEF8225774F6D006CFE85 /* Assets.xcassets */; };
 		D87DEF8625774F6D006CFE85 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D87DEF8525774F6D006CFE85 /* Preview Assets.xcassets */; };
@@ -99,7 +99,7 @@
 		D87B125F258511EC004EC884 /* Deferred.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deferred.swift; sourceTree = "<group>"; };
 		D87B126425851218004EC884 /* EventModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModifiers.swift; sourceTree = "<group>"; };
 		D87DEF7B25774F6C006CFE85 /* Fileaway.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fileaway.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D87DEF7E25774F6C006CFE85 /* Document_FinderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document_FinderApp.swift; sourceTree = "<group>"; };
+		D87DEF7E25774F6C006CFE85 /* FileawayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileawayApp.swift; sourceTree = "<group>"; };
 		D87DEF8025774F6C006CFE85 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D87DEF8225774F6D006CFE85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D87DEF8525774F6D006CFE85 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -244,7 +244,7 @@
 			children = (
 				D87DEF8825774F6D006CFE85 /* Fileaway.entitlements */,
 				D87DEF8725774F6D006CFE85 /* Info.plist */,
-				D87DEF7E25774F6C006CFE85 /* Document_FinderApp.swift */,
+				D87DEF7E25774F6C006CFE85 /* FileawayApp.swift */,
 				D85C957625799B2E0007AE1E /* FileActions.swift */,
 				D821E92A257A8F87005D3205 /* FileInfo.swift */,
 				D87DEFBD257840B1006CFE85 /* Manager.swift */,
@@ -507,7 +507,7 @@
 				D821E93E257A960C005D3205 /* FileProvider.swift in Sources */,
 				D8F8BE12258818450010432F /* ArchiveWizard.swift in Sources */,
 				D8B6D021257D962F00C7E472 /* AcceptsFirstResponder.swift in Sources */,
-				D87DEF7F25774F6C006CFE85 /* Document_FinderApp.swift in Sources */,
+				D87DEF7F25774F6C006CFE85 /* FileawayApp.swift in Sources */,
 				D87DEFB925783F66006CFE85 /* DirectoryView.swift in Sources */,
 				D87DEFB425780BA4006CFE85 /* DirectoryObserver.swift in Sources */,
 				D8DC5046257C0795009B3ECC /* ResponderView.swift in Sources */,

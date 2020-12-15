@@ -90,7 +90,7 @@ struct VisualEffectView: NSViewRepresentable
 }
 
 @main
-struct Document_FinderApp: App {
+struct FileawayApp: App {
 
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @Environment(\.scenePhase) private var phase
