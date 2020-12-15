@@ -224,7 +224,7 @@
 			children = (
 				D87DEF7D25774F6C006CFE85 /* Fileaway */,
 				D87DEF9025774F6D006CFE85 /* FileawayTests */,
-				D87DEF9B25774F6D006CFE85 /* Document FinderUITests */,
+				D87DEF9B25774F6D006CFE85 /* FileawayUITests */,
 				D87DEF7C25774F6C006CFE85 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -279,13 +279,13 @@
 			path = FileawayTests;
 			sourceTree = "<group>";
 		};
-		D87DEF9B25774F6D006CFE85 /* Document FinderUITests */ = {
+		D87DEF9B25774F6D006CFE85 /* FileawayUITests */ = {
 			isa = PBXGroup;
 			children = (
 				D87DEF9C25774F6D006CFE85 /* Document_FinderUITests.swift */,
 				D87DEF9E25774F6D006CFE85 /* Info.plist */,
 			);
-			path = "Document FinderUITests";
+			path = FileawayUITests;
 			sourceTree = "<group>";
 		};
 		D87DEFC2257848A7006CFE85 /* Extensions */ = {
@@ -776,7 +776,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
-				INFOPLIST_FILE = "Document FinderUITests/Info.plist";
+				INFOPLIST_FILE = FileawayUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -785,7 +785,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.Document-FinderUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = "Document Finder";
+				TEST_TARGET_NAME = Fileaway;
 			};
 			name = Debug;
 		};
@@ -796,7 +796,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
-				INFOPLIST_FILE = "Document FinderUITests/Info.plist";
+				INFOPLIST_FILE = FileawayUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -805,7 +805,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.Document-FinderUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = "Document Finder";
+				TEST_TARGET_NAME = Fileaway;
 			};
 			name = Release;
 		};
