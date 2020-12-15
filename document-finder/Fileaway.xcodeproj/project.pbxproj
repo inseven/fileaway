@@ -223,7 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				D87DEF7D25774F6C006CFE85 /* Fileaway */,
-				D87DEF9025774F6D006CFE85 /* Document FinderTests */,
+				D87DEF9025774F6D006CFE85 /* FileawayTests */,
 				D87DEF9B25774F6D006CFE85 /* Document FinderUITests */,
 				D87DEF7C25774F6C006CFE85 /* Products */,
 			);
@@ -270,13 +270,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		D87DEF9025774F6D006CFE85 /* Document FinderTests */ = {
+		D87DEF9025774F6D006CFE85 /* FileawayTests */ = {
 			isa = PBXGroup;
 			children = (
 				D87DEF9125774F6D006CFE85 /* Document_FinderTests.swift */,
 				D87DEF9325774F6D006CFE85 /* Info.plist */,
 			);
-			path = "Document FinderTests";
+			path = FileawayTests;
 			sourceTree = "<group>";
 		};
 		D87DEF9B25774F6D006CFE85 /* Document FinderUITests */ = {
@@ -733,7 +733,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
-				INFOPLIST_FILE = "Document FinderTests/Info.plist";
+				INFOPLIST_FILE = FileawayTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -755,7 +755,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
-				INFOPLIST_FILE = "Document FinderTests/Info.plist";
+				INFOPLIST_FILE = FileawayTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
