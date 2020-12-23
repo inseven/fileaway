@@ -43,7 +43,6 @@ extension FocusedValues {
 
 struct GlobalCommands: Commands {
 
-//    @FocusedBinding(\.selection) var selection: Set<URL>?
     @FocusedBinding(\.item) var item: Int?
 
     var body: some Commands {
@@ -53,11 +52,6 @@ struct GlobalCommands: Commands {
 
         CommandGroup(after: .systemServices) {
             Divider()
-            Button {
-                FileActions.open()
-            } label: {
-                Text("File Actions...")
-            }
             Button {
                 FileActions.openiOS()
             } label: {
