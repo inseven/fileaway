@@ -50,7 +50,6 @@ struct DetailsPage: View {
                 }
             }
             Text(task.destinationUrl.path)
-                .lineLimit(1)
                 .truncationMode(.head)
                 .help(task.destinationUrl.path)
             Button {

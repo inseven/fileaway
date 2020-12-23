@@ -107,8 +107,7 @@ struct PageView<Content>: View where Content: View {
                         Spacer()
                     }
                     Text(title)
-                        .lineLimit(1)
-                        .truncationMode(.middle)
+                        .multilineTextAlignment(.center)
                         .font(.headline)
                         .frame(maxWidth: geometry.size.width - 80)
                 }
