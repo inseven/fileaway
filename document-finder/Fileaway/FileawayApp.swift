@@ -133,7 +133,9 @@ struct FileawayApp: App {
             ArchiveWizard()
                 .environment(\.manager, appDelegate.manager)
                 .handlesExternalEvents(preferring: Set(arrayLiteral: "*"), allowing: Set(arrayLiteral: "*"))
-                .background(VisualEffectView(material: NSVisualEffectView.Material.popover, blendingMode: NSVisualEffectView.BlendingMode.withinWindow))
+                .background(VisualEffectView(material: NSVisualEffectView.Material.popover,
+                                             blendingMode: NSVisualEffectView.BlendingMode.withinWindow)
+                                .edgesIgnoringSafeArea(.all))
         }
         .windowStyle(HiddenTitleBarWindowStyle())
         .handlesExternalEvents(matching: Set(arrayLiteral: "*"))
