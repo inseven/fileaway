@@ -50,8 +50,6 @@ struct DetailsPage: View {
                 }
             }
             Text(task.destinationUrl.path)
-                .truncationMode(.head)
-                .help(task.destinationUrl.path)
             Button {
                 print("moving to \(task.destinationUrl)...")
                 do {
