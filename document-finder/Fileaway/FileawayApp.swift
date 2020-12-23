@@ -134,7 +134,7 @@ struct FileawayApp: App {
                 .environment(\.manager, appDelegate.manager)
                 .handlesExternalEvents(preferring: Set(arrayLiteral: "*"), allowing: Set(arrayLiteral: "*"))
                 .background(VisualEffectView(material: NSVisualEffectView.Material.popover,
-                                             blendingMode: NSVisualEffectView.BlendingMode.withinWindow)
+                                             blendingMode: NSVisualEffectView.BlendingMode.behindWindow)
                                 .edgesIgnoringSafeArea(.all))
         }
         .windowStyle(HiddenTitleBarWindowStyle())
