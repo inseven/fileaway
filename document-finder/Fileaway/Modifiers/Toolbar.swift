@@ -11,20 +11,8 @@ struct Toolbar: ViewModifier {
 
     @Environment(\.openURL) var openURL
 
-    enum SheetType {
-        case wizard(url: URL)
-    }
-
     @ObservedObject var manager: SelectionManager
     @Binding var filter: String
-    @State var sheetType: SheetType?
-
-    func sheet(sheetType: SheetType) -> some View {
-        switch sheetType {
-        case .wizard(let url):
-            return ArchiveWizard(url: url)
-        }
-    }
 
     func body(content: Content) -> some View {
         content
@@ -70,17 +58,5 @@ struct Toolbar: ViewModifier {
                         .frame(minWidth: 100, idealWidth: 200, maxWidth: .infinity)
                 }
             }
-            .sheet(item: $sheetType, onDismiss: {
-                sheetType = nil
-            }, content: sheet)
-    }
-}
-
-extension Toolbar.SheetType: Identifiable {
-    public var id: String {
-        switch self {
-        case .wizard(let url):
-            return "wizard-\(url)"
-        }
     }
 }

@@ -10,9 +10,7 @@ import SwiftUI
 struct ArchiveWizard: View {
 
     @Environment(\.manager) var manager
-
-    @State var url: URL?
-
+    @SceneStorage("ArchiveWizard.documentUrl") var url: URL?
     @State var firstResponder: Bool = true
 
     var body: some View {
