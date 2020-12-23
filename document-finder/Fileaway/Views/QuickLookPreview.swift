@@ -13,7 +13,7 @@ struct QuickLookPreview: NSViewRepresentable {
     var url: URL
 
     func makeNSView(context: NSViewRepresentableContext<QuickLookPreview>) -> QLPreviewView {
-        let preview = QLPreviewView(frame: .zero, style: .normal)
+        let preview = QLPreviewView(frame: .zero, style: .compact)
         preview?.autostarts = true
         preview?.previewItem = url as QLPreviewItem
         return preview ?? QLPreviewView()
