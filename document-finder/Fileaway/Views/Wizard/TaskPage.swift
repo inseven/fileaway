@@ -12,8 +12,6 @@ struct TaskPage: View {
     var manager: Manager
     var url: URL
 
-    @Environment(\.close) var close
-
     @StateObject var filter: LazyFilter<Task>
     @StateObject var tracker: SelectionTracker<Task>
 
@@ -72,11 +70,6 @@ struct TaskPage: View {
                             .padding(.trailing)
                     }
                 }
-            }
-            Button {
-                close()
-            } label: {
-                Text("Close")
             }
         }
         .padding()
