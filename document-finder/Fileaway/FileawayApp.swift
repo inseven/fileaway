@@ -127,7 +127,7 @@ struct FileawayApp: App {
             ArchiveWizard()
                 .environment(\.manager, appDelegate.manager)
                 .handlesExternalEvents(preferring: Set(arrayLiteral: "*"), allowing: Set(arrayLiteral: "*"))
-                .background(VisualEffectView(material: NSVisualEffectView.Material.popover,
+                .background(VisualEffectView(material: NSVisualEffectView.Material.sidebar,
                                              blendingMode: NSVisualEffectView.BlendingMode.behindWindow)
                                 .edgesIgnoringSafeArea(.all))
         }
