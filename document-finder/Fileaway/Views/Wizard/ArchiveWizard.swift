@@ -18,6 +18,9 @@ struct ArchiveWizard: View {
             if let url = url {
                 HStack {
                     QuickLookPreview(url: url)
+                        .onTapGesture(count: 2) {
+                            NSWorkspace.shared.open(url)
+                        }
                     PageView {
                         TaskPage(manager: manager, url: url)
                     }
