@@ -136,56 +136,64 @@ class SelectionTracker<T>: ObservableObject where T: Hashable {
         return items[index]
     }
 
-    func handleDirectionUp() {
+    func handleDirectionUp() -> T? {
         guard let bounds = bounds else {
             if let last = self.items.last {
                 clear(selectingItem: last)
+                return last
             }
-            return
+            return nil
         }
         guard let previous = item(before: bounds.cursor) else {
-            return
+            return nil
         }
         clear(selectingItem: previous)
+        return previous
     }
 
-    func handleDirectionDown() {
+    func handleDirectionDown() -> T? {
         guard let bounds = bounds else {
             if let first = self.items.first {
                 clear(selectingItem: first)
+                return first
             }
-            return
+            return nil
         }
         guard let next = item(after: bounds.cursor) else {
-            return
+            return nil
         }
         clear(selectingItem: next)
+        return next
     }
 
-    func handleShiftDirectionUp() {
+    func handleShiftDirectionUp() -> T? {
         guard let bounds = bounds else {
             if let last = self.items.last {
                 clear(selectingItem: last)
+                return last
             }
-            return
+            return nil
         }
         guard let previous = item(before: bounds.cursor) else {
-            return
+            return nil
         }
         bounds.adjustSelectionByMovingCursor(to: previous)
+        return previous
     }
 
-    func handleShiftDirectionDown() {
+    func handleShiftDirectionDown() -> T? {
         guard let bounds = bounds else {
             if let first = self.items.first {
                 clear(selectingItem: first)
+                return first
             }
-            return
+            return nil
         }
         guard let next = item(after: bounds.cursor) else {
-            return
+            return nil
         }
         bounds.adjustSelectionByMovingCursor(to: next)
+        return next
     }
 
     fileprivate func clear(selectingItem item: T) {
