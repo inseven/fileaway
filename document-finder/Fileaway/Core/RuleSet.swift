@@ -22,12 +22,10 @@ class RuleSet: ObservableObject {
         let data = try Data(contentsOf: url)
         let decoder = JSONDecoder()
         let configurations = try decoder.decode([String: Configuration].self, from: data)
-        let tasks = configurations.map { (name, configuration) -> Rule in
+        let rules = configurations.map { (name, configuration) -> Rule in
             return Rule(name: name, configuration: configuration)
-            }.sorted { (task0, task1) -> Bool in
-                return task0.name < task1.name
-        }
-        return tasks
+            }.sorted { $0.name < $1.name }
+        return rules
     }
 
     init(url: URL) {
