@@ -23,8 +23,6 @@ class Rule: Identifiable, Hashable {
         self.configuration = configuration
     }
 
-    // TODO: Flesh these out
-
     static func == (lhs: Rule, rhs: Rule) -> Bool {
         lhs.id == rhs.id
     }
