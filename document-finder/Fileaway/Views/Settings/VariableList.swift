@@ -18,10 +18,15 @@ struct VariableList: View {
                 List(rule.variables, id: \.self, selection: $selection) { variable in
                     Text("\(variable.name) (\(String(describing: variable.type)))")
                 }
-                if let selection = selection {
-                    VariableTextField(variable: selection)
-                        .id(selection)
+                VStack {
+                    if let selection = selection {
+                        VariableTextField(variable: selection)
+                            .id(selection)
+                    } else {
+                        Text("No Variable Selected")
+                    }
                 }
+                .frame(width: 200)
             }
             HStack {
                 Button {

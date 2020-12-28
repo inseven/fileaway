@@ -7,6 +7,23 @@
 
 import SwiftUI
 
+struct ComponentView: View {
+
+    @ObservedObject var component: ComponentState
+
+    var body: some View {
+        VStack {
+            switch component.type {
+            case .text:
+                TextField("Contents", text: $component.value)
+            case .variable:
+                Text("Variable")
+            }
+        }
+    }
+
+}
+
 struct DestinationList: View {
 
     @ObservedObject var rule: RuleState
@@ -18,6 +35,15 @@ struct DestinationList: View {
                 List(rule.destination, id: \.self, selection: $selection) { component in
                     Text(component.value)
                 }
+                VStack {
+                    if let component = selection {
+                        ComponentView(component: component)
+                            .id(component)
+                    } else {
+                        Text("No Component Selected")
+                    }
+                }
+                .frame(width: 200)
             }
             HStack {
                 ForEach(rule.variables) { variable in

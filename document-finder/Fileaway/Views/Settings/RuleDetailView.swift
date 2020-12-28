@@ -12,19 +12,17 @@ struct RuleDetailView: View {
     @ObservedObject var rule: RuleState
 
     var body: some View {
-        GroupBox {
-            VStack(alignment: .leading) {
-                TextField("Title", text: $rule.name)
-                Text("Variables")
-                    .font(.headline)
-                VariableList(rule: rule)
-                Text("Destination")
-                    .font(.headline)
-                DestinationList(rule: rule)
-                Spacer()
-            }
-            .padding()
+        VStack(alignment: .leading) {
+            TextField("Title", text: $rule.name)
+            Text("Variables")
+                .font(.headline)
+            VariableList(rule: rule)
+            Text("Destination")
+                .font(.headline)
+            DestinationList(rule: rule)
+            Spacer()
         }
+        .padding()
     }
 
 }
