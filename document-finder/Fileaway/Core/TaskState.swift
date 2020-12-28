@@ -7,16 +7,6 @@
 
 import SwiftUI
 
-extension Task {
-
-    convenience init(_ state: TaskState) {
-        self.init(name: state.name,
-                  configuration: Configuration(variables: state.variables.map { Variable($0) },
-                                               destination: state.destination.map { Component($0) }))
-    }
-
-}
-
 class TaskState: ObservableObject, Identifiable, CustomStringConvertible, Hashable {
 
     enum TaskStateNameFormat {
@@ -166,6 +156,16 @@ class TaskState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
+    }
+
+}
+
+extension Task {
+
+    convenience init(_ state: TaskState) {
+        self.init(name: state.name,
+                  configuration: Configuration(variables: state.variables.map { Variable($0) },
+                                               destination: state.destination.map { Component($0) }))
     }
 
 }

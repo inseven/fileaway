@@ -58,6 +58,10 @@
 		D8E7F9D325999EA900C7409B /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9D225999EA900C7409B /* Component.swift */; };
 		D8E7F9DE2599AFE000C7409B /* RuleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9DD2599AFE000C7409B /* RuleDetailView.swift */; };
 		D8E7F9E32599B00A00C7409B /* DestinationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9E22599B00A00C7409B /* DestinationList.swift */; };
+		D8E7F9EB2599B05300C7409B /* VariableList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9EA2599B05300C7409B /* VariableList.swift */; };
+		D8E7F9F02599B08600C7409B /* VariableState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9EF2599B08600C7409B /* VariableState.swift */; };
+		D8E7F9F82599B0D600C7409B /* ComponentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9F72599B0D600C7409B /* ComponentState.swift */; };
+		D8E7F9FD2599B10500C7409B /* BackChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9FC2599B10500C7409B /* BackChannel.swift */; };
 		D8F8BE002586C6B90010432F /* TaskInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BDFF2586C6B90010432F /* TaskInstance.swift */; };
 		D8F8BE0C2588179E0010432F /* CloseKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BE0B2588179E0010432F /* CloseKey.swift */; };
 		D8F8BE12258818450010432F /* ArchiveWizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BE11258818450010432F /* ArchiveWizard.swift */; };
@@ -147,6 +151,10 @@
 		D8E7F9D225999EA900C7409B /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		D8E7F9DD2599AFE000C7409B /* RuleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleDetailView.swift; sourceTree = "<group>"; };
 		D8E7F9E22599B00A00C7409B /* DestinationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationList.swift; sourceTree = "<group>"; };
+		D8E7F9EA2599B05300C7409B /* VariableList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableList.swift; sourceTree = "<group>"; };
+		D8E7F9EF2599B08600C7409B /* VariableState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableState.swift; sourceTree = "<group>"; };
+		D8E7F9F72599B0D600C7409B /* ComponentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentState.swift; sourceTree = "<group>"; };
+		D8E7F9FC2599B10500C7409B /* BackChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackChannel.swift; sourceTree = "<group>"; };
 		D8F8BDFF2586C6B90010432F /* TaskInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInstance.swift; sourceTree = "<group>"; };
 		D8F8BE0B2588179E0010432F /* CloseKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseKey.swift; sourceTree = "<group>"; };
 		D8F8BE11258818450010432F /* ArchiveWizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveWizard.swift; sourceTree = "<group>"; };
@@ -192,7 +200,9 @@
 		D8005ABF258276160001BE2C /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				D8E7F9FC2599B10500C7409B /* BackChannel.swift */,
 				D8E7F9D225999EA900C7409B /* Component.swift */,
+				D8E7F9F72599B0D600C7409B /* ComponentState.swift */,
 				D8E7F9C525999E2E00C7409B /* ComponentType.swift */,
 				D8005AC0258276250001BE2C /* Configuration.swift */,
 				D8F8BE26258819C80010432F /* DateInstance.swift */,
@@ -203,6 +213,7 @@
 				D8E7F9A725999B1000C7409B /* TaskState.swift */,
 				D8E7F9C025999DB300C7409B /* Variable.swift */,
 				D8F8BE3125881BC50010432F /* VariableInstance.swift */,
+				D8E7F9EF2599B08600C7409B /* VariableState.swift */,
 				D8E7F9B825999D1300C7409B /* VariableType.swift */,
 			);
 			path = Core;
@@ -340,6 +351,7 @@
 				D8E7F9DD2599AFE000C7409B /* RuleDetailView.swift */,
 				D8E7F9B025999C8800C7409B /* RulesSettingsView.swift */,
 				D8FC5341257BB77C008FB609 /* SettingsView.swift */,
+				D8E7F9EA2599B05300C7409B /* VariableList.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -523,9 +535,11 @@
 				D821E94B257AB2C9005D3205 /* FileRow.swift in Sources */,
 				D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */,
 				D8F8BE3725881C1A0010432F /* TaskPage.swift in Sources */,
+				D8E7F9FD2599B10500C7409B /* BackChannel.swift in Sources */,
 				D8E7F9C125999DB300C7409B /* Variable.swift in Sources */,
 				D87B1260258511EC004EC884 /* Deferred.swift in Sources */,
 				D8B6D02B257DBAF700C7E472 /* SearchField.swift in Sources */,
+				D8E7F9F02599B08600C7409B /* VariableState.swift in Sources */,
 				D8D78AB32580E38F0088890F /* RoundedCorner.swift in Sources */,
 				D8D78A9A2580DDF40088890F /* PageLink.swift in Sources */,
 				D87B126525851218004EC884 /* EventModifiers.swift in Sources */,
@@ -557,6 +571,8 @@
 				D87DEFBE257840B1006CFE85 /* Manager.swift in Sources */,
 				D8F8BE3C25881C650010432F /* Highlight.swift in Sources */,
 				D8B6D035257E71CD00C7E472 /* QuickLookCoordinator.swift in Sources */,
+				D8E7F9EB2599B05300C7409B /* VariableList.swift in Sources */,
+				D8E7F9F82599B0D600C7409B /* ComponentState.swift in Sources */,
 				D8B6D047257F0B4300C7E472 /* KeyEventHandler.swift in Sources */,
 				D8FC534A257BB7A4008FB609 /* GeneralSettingsView.swift in Sources */,
 				D8005AC9258277290001BE2C /* Rules.swift in Sources */,
