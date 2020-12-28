@@ -54,14 +54,15 @@ struct DetailsPage: View {
                 }
             }
             .padding()
-            Text(rule.destinationUrl.path)
+            Text(rule.destination(for: url).path)
             Button {
-                print("moving to \(rule.destinationUrl)...")
+                let destinationUrl = rule.destination(for: url)
+                print("moving to \(destinationUrl)...")
                 do {
                     try rule.move(url: url)
                     close()
                 } catch CocoaError.fileWriteFileExists {
-                    alert = .duplicate(duplicateUrl: rule.destinationUrl)
+                    alert = .duplicate(duplicateUrl: destinationUrl)
                 } catch {
                     alert = .error(error: error)
                 }

@@ -24,6 +24,10 @@ extension URL {
         self.deletingLastPathComponent()
     }
 
+    var pathExtension: String {
+        (path as NSString).pathExtension
+    }
+
 }
 
 extension URL: Identifiable {

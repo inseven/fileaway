@@ -32,7 +32,7 @@ class RuleInstance: ObservableObject {
         return variable as? TextProvider
     }
 
-    var destinationUrl: URL {
+    func destination(for url: URL) -> URL {
         let destination = rule.configuration.destination.reduce("") { (result, component) -> String in
             switch component.type {
             case .text:
@@ -44,15 +44,11 @@ class RuleInstance: ObservableObject {
                 return result.appending(variable.textRepresentation)
             }
         }
-        // TODO: This should support something other than PDFs!
-        return url.appendingPathComponent(destination).appendingPathExtension("pdf")
+        return self.url.appendingPathComponent(destination).appendingPathExtension(url.pathExtension)
     }
 
-    // TODO: Make this more generic??
-    // TODO: Guard against unsafe moves?
-    // TODO: Protocol for this to allow multiple options?
     func move(url: URL) throws {
-        let destinationUrl = self.destinationUrl
+        let destinationUrl = self.destination(for: url)
         let fileManager = FileManager.default
         try fileManager.createDirectory(at: destinationUrl.deletingLastPathComponent(),
                                         withIntermediateDirectories: true,
