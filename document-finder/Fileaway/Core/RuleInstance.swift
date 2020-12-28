@@ -1,5 +1,5 @@
 //
-//  TaskInstance.swift
+//  RuleInstance.swift
 //  Document Finder
 //
 //  Created by Jason Barrie Morley on 13/12/2020.
@@ -8,7 +8,7 @@
 import Combine
 import SwiftUI
 
-class TaskInstance: ObservableObject {
+class RuleInstance: ObservableObject {
 
     var url: URL  // TODO: This should be on the task!
     var rule: Rule

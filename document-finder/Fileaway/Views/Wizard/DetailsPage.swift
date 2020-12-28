@@ -19,7 +19,7 @@ struct DetailsPage: View {
     @Environment(\.close) var close
 
     var url: URL
-    @StateObject var task: TaskInstance
+    @StateObject var task: RuleInstance
     @State var alert: AlertType?
     @State var date: Date = Date()
     @State var year = "2020"
@@ -31,7 +31,7 @@ struct DetailsPage: View {
 
     init(url: URL, rootUrl: URL, rule: Rule) {
         self.url = url
-        _task = StateObject(wrappedValue: TaskInstance(url: rootUrl, rule: rule))
+        _task = StateObject(wrappedValue: RuleInstance(url: rootUrl, rule: rule))
     }
 
     var body: some View {
