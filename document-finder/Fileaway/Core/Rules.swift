@@ -40,6 +40,7 @@ class Rules: ObservableObject {
         updateSubscription()
     }
 
+    // TODO: Consider removing this.
     func updateSubscription() {
         let changes = self.mutableRules.map { $0.objectWillChange }
         rulesSubscription = Publishers.MergeMany(changes).receive(on: DispatchQueue.main).sink { _ in
@@ -64,7 +65,7 @@ class Rules: ObservableObject {
         var index = 1
         var name = ""
         repeat {
-            name = "Task \(index)"
+            name = "Rule \(index)"
             index = index + 1
         } while names.contains(name)
         let task = TaskState(id: UUID(),
