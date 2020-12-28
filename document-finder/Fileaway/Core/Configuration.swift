@@ -34,33 +34,6 @@ public struct Component: Codable {
     }
 }
 
-public enum VariableType: CaseIterable {
-
-    case string
-    case date(hasDay: Bool)
-
-    public static var allCases: [VariableType] { [
-        .string,
-        .date(hasDay: true),
-        .date(hasDay: false)
-    ] }
-}
-
-extension VariableType: CustomStringConvertible {
-
-    public var description: String {
-        switch self {
-        case .string:
-            return "String"
-        case .date(hasDay: true):
-            return "Day, Month, Year"
-        case .date(hasDay: false):
-            return "Month, Year"
-        }
-    }
-
-}
-
 struct Variable: Identifiable {
 
     public var id = UUID()
