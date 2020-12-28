@@ -9,7 +9,7 @@ import Foundation
 
 class ComponentState: ObservableObject, Identifiable, Hashable {
 
-    var id = UUID() // TODO: Why doesn't this work if it's a let.
+    var id = UUID()
     @Published var value: String
     @Published var type: ComponentType
     var variable: VariableState? = nil
