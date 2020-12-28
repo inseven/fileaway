@@ -9,32 +9,25 @@ import SwiftUI
 import QuickLook
 
 extension NSImage {
+
     static func previewForFile(path fileURL: URL, ofSize size: CGSize, asIcon: Bool) -> NSImage? {
 
         let dict = [
-            kQLThumbnailOptionIconModeKey: NSNumber(booleanLiteral: asIcon)
+            kQLThumbnailOptionIconModeKey: NSNumber(booleanLiteral: asIcon),
+            kQLThumbnailOptionScaleFactorKey: 2,
         ] as CFDictionary
 
 
         let ref = QLThumbnailImageCreate(kCFAllocatorDefault, fileURL as CFURL, size, dict)
-
         if let cgImage = ref?.takeUnretainedValue() {
-            // Take advantage of NSBitmapImageRep's -initWithCGImage: initializer, new in Leopard,
-            // which is a lot more efficient than copying pixel data into a brand new NSImage.
-            // Thanks to Troy Stephens @ Apple for pointing this new method out to me.
             let bitmapImageRep = NSBitmapImageRep.init(cgImage: cgImage)
             let newImage = NSImage.init(size: bitmapImageRep.size)
             newImage.addRepresentation(bitmapImageRep)
-
             ref?.release()
-
             return newImage
         } else {
-            // If we couldn't get a Quick Look preview, fall back on the file's Finder icon.
             let icon = NSWorkspace.shared.icon(forFile: fileURL.path)
-
             icon.size = size
-
             return icon
         }
     }
@@ -49,7 +42,7 @@ class IconProvider: ObservableObject {
         self.url = url
         self.image = NSWorkspace.shared.icon(forFile: url.path)
         DispatchQueue.global(qos: .userInteractive).async {
-            guard let image = NSImage.previewForFile(path: url, ofSize: CGSize(width: 96, height: 96), asIcon: true) else {
+            guard let image = NSImage.previewForFile(path: url, ofSize: CGSize(width: 48, height: 48), asIcon: true) else {
                 return
             }
             DispatchQueue.main.async {
