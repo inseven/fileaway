@@ -128,11 +128,16 @@ extension Variable: Codable {
 
 class Task: Identifiable, Hashable {
 
-    public var id = UUID()
-    public let name: String
-    public let configuration: Configuration
+    var id = UUID()
+    let name: String
+    let configuration: Configuration
 
-    public init(name: String, configuration: Configuration) {
+    init(name: String) {
+        self.name = name
+        self.configuration = Configuration(variables: [], destination: [])
+    }
+
+    init(name: String, configuration: Configuration) {
         self.name = name
         self.configuration = configuration
     }

@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-class Rules {
+class Rules: ObservableObject {
 
     let url: URL
-    var tasks: [Task]
+
+    @Published var rules: [Task]
 
     // TODO: Rename Task to Rule
     static func load(url: URL) throws -> [Task] {
@@ -26,8 +27,32 @@ class Rules {
     }
 
     init(url: URL) {
-        self.url = url
-        self.tasks = (try? Self.load(url: self.url.appendingPathComponent("file-actions.json"))) ?? []
+        self.url = url.appendingPathComponent("file-actions.json")
+        self.rules = (try? Self.load(url: self.url)) ?? []
+    }
+
+    func add(_ rule: Task) throws {
+        var rules = Array(self.rules)
+        rules.append(rule)
+        self.rules = rules.sorted { (task0, task1) -> Bool in
+            return task0.name < task1.name
+        }
+        try save()
+    }
+
+    func remove(_ rule: Task) throws {
+        rules.removeAll { $0 == rule }
+        try save()
+    }
+
+    func save() throws {
+        let configuration = rules.reduce(into: [:]) { result, task in
+            result[task.name] = task.configuration
+        }
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        let data = try encoder.encode(configuration)
+        try data.write(to: url)
     }
     
 }

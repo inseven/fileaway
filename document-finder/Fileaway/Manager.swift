@@ -27,6 +27,7 @@ extension EnvironmentValues {
 class Manager: ObservableObject {
 
     var settings = Settings()
+    var rules: Rules?
 
     @Published var locations: [URL] = []
     @Published var inbox: DirectoryObserver? = nil
@@ -78,7 +79,8 @@ class Manager: ObservableObject {
         if let url = try? settings.archiveUrl() {
             self.createArchiveObserver(url: url)
             let rules = Rules(url: url)
-            self.tasks = rules.tasks
+            self.rules = rules
+            self.tasks = rules.rules
         }
     }
 

@@ -40,11 +40,9 @@ struct VariableDateView: View {
     @ObservedObject var variable: DateInstance
 
     var body: some View {
-        HStack {
-            Text(variable.name)
-            Spacer()
-            DatePicker("", selection: $variable.date, displayedComponents: [.date])
-        }
+        DatePicker("", selection: $variable.date, displayedComponents: [.date])
+            .padding(.leading, -8)
+            .frame(maxWidth: .infinity)
     }
 
 }
@@ -55,11 +53,7 @@ struct VariableStringView: View {
     @State var string: String = ""
 
     var body: some View {
-        HStack {
-            Text(variable.name)
-            Spacer()
-            TextField("", text: $variable.string)
-        }
+        TextField("", text: $variable.string)
     }
 
 }

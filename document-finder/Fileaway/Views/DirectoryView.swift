@@ -73,7 +73,10 @@ struct DirectoryView: View {
                             firstResponder = true
                             tracker.handleShiftClick(item: file)
                         })
-                        .contextMenu(ContextMenu(menuItems: {
+                        .focusable(true) { focus in
+                            print("FOCUS = \(focus)")
+                        }
+                        .contextMenu {
                             Button("Open") {
                                 NSWorkspace.shared.open(file.url)
                             }
@@ -84,7 +87,7 @@ struct DirectoryView: View {
                             Button("Reveal in Finder") {
                                 NSWorkspace.shared.activateFileViewerSelecting([file.url])
                             }
-                        }))
+                        }
                 }
             }
             .padding(.top)

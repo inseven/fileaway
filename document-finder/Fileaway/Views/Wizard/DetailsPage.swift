@@ -24,6 +24,11 @@ struct DetailsPage: View {
     @State var date: Date = Date()
     @State var year = "2020"
 
+    private var columns: [GridItem] = [
+        GridItem(.flexible(maximum: 80), alignment: .trailing),
+        GridItem(.flexible()),
+    ]
+
     init(url: URL, rootUrl: URL, task: Task) {
         self.url = url
         _task = StateObject(wrappedValue: TaskInstance(url: rootUrl, task: task))
@@ -32,23 +37,23 @@ struct DetailsPage: View {
     var body: some View {
         VStack {
             ScrollView {
-                VStack {
+                LazyVGrid(columns: columns) {
                     ForEach(task.variables) { variable in
+                        Text(variable.name)
                         HStack {
                             if let variable = variable as? DateInstance {
                                 VariableDateView(variable: variable)
                             } else if let variable = variable as? StringInstance {
                                 VariableStringView(variable: variable)
                             } else {
-                                Text(variable.name)
-                                Spacer()
                                 Text("Unsupported")
                             }
                         }
-                        .padding()
+                        .padding(.trailing, 8)
                     }
                 }
             }
+            .padding()
             Text(task.destinationUrl.path)
             Button {
                 print("moving to \(task.destinationUrl)...")
