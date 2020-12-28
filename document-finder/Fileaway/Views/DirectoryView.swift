@@ -52,6 +52,7 @@ struct DirectoryView: View {
                             .cornerRadius(6, corners: tracker.corners(for: file))
                             .padding(.leading)
                             .padding(.trailing)
+                            .id(file.id)
                             .onDrag {
                                 NSItemProvider(object: file.url as NSURL)
                             }
@@ -89,7 +90,6 @@ struct DirectoryView: View {
                                     NSWorkspace.shared.activateFileViewerSelecting([file.url])
                                 }
                             }
-                            .id(file.id)
                     }
                 }
                 .padding(.top)
@@ -126,7 +126,6 @@ struct DirectoryView: View {
                         return
                     }
                     scrollView.scrollTo(next.id)
-                    print(next.name)
                 default:
                     return
                 }
