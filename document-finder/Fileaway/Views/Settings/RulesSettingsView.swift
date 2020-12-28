@@ -10,23 +10,22 @@ import SwiftUI
 struct RulesSettingsView: View {
 
     @ObservedObject var rules: Rules
-    @State var selection: Task?
-    @State var newSelection: Task?
+    @State var selection: TaskState?
+    @State var newSelection: TaskState?
 
     var body: some View {
         HStack {
             VStack {
                 ScrollViewReader { scrollView in
-                    List(rules.rules, id: \.self, selection: $selection) { rule in
+                    List(rules.mutableRules, id: \.self, selection: $selection) { rule in
                         Text(rule.name)
                             .lineLimit(1)
                             .id(rule.id)
                     }
                     HStack {
                         ListButtons {
-                            let rule = Task(name: "New rule")
                             do {
-                                try rules.add(rule)
+                                let rule = try rules.new()
                                 selection = rule
                                 newSelection = rule
                             } catch {

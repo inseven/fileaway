@@ -7,7 +7,17 @@
 
 import SwiftUI
 
-class TaskState: ObservableObject, Identifiable, CustomStringConvertible {
+extension Task {
+
+    convenience init(_ state: TaskState) {
+        self.init(name: state.name,
+                  configuration: Configuration(variables: state.variables.map { Variable($0) },
+                                               destination: state.destination.map { Component($0) }))
+    }
+
+}
+
+class TaskState: ObservableObject, Identifiable, CustomStringConvertible, Hashable {
 
     enum TaskStateNameFormat {
         case long
@@ -148,6 +158,14 @@ class TaskState: ObservableObject, Identifiable, CustomStringConvertible {
             index = index + 1
         } while names.contains(name)
         self.variables.append(VariableState(name: name, type: .string))
+    }
+
+    static func == (lhs: TaskState, rhs: TaskState) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 
 }

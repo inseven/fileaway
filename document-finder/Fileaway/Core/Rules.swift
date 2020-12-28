@@ -5,6 +5,7 @@
 //  Created by Jason Barrie Morley on 10/12/2020.
 //
 
+import Combine
 import SwiftUI
 
 class Rules: ObservableObject {
@@ -12,6 +13,9 @@ class Rules: ObservableObject {
     let url: URL
 
     @Published var rules: [Task]
+    @Published var mutableRules: [TaskState]
+
+    var rulesSubscription: Cancellable?
 
     // TODO: Rename Task to Rule
     static func load(url: URL) throws -> [Task] {
@@ -28,20 +32,54 @@ class Rules: ObservableObject {
 
     init(url: URL) {
         self.url = url.appendingPathComponent("file-actions.json")
-        self.rules = (try? Self.load(url: self.url)) ?? []
+        let rules = (try? Self.load(url: self.url)) ?? []
+        self.rules = rules
+        self.mutableRules = rules.map { rule in
+            TaskState(task: rule)
+        }
+        updateSubscription()
     }
 
-    func add(_ rule: Task) throws {
+    func updateSubscription() {
+        let changes = self.mutableRules.map { $0.objectWillChange }
+        rulesSubscription = Publishers.MergeMany(changes).sink { _ in
+            self.objectWillChange.send()
+        }
+    }
+
+    func add(_ rule: TaskState) throws {
+        mutableRules.append(rule)
         var rules = Array(self.rules)
-        rules.append(rule)
+        rules.append(Task(rule))
         self.rules = rules.sorted { (task0, task1) -> Bool in
             return task0.name < task1.name
         }
+        updateSubscription()
         try save()
     }
 
-    func remove(_ rule: Task) throws {
-        rules.removeAll { $0 == rule }
+    func new() throws -> TaskState {
+        let names = Set(mutableRules.map { $0.name })
+        var index = 1
+        var name = ""
+        repeat {
+            name = "Task \(index)"
+            index = index + 1
+        } while names.contains(name)
+        let task = TaskState(id: UUID(),
+                             name: name,
+                             variables: [VariableState(name: "Date", type: .date(hasDay: true))],
+                             destination: [
+                                ComponentState(value: "New Folder/", type: .text, variable: nil),
+                                ComponentState(value: "Date", type: .variable, variable: nil),
+                                ComponentState(value: " Description", type: .text, variable: nil)])
+        try add(task)
+        return task
+    }
+
+    func remove(_ rule: TaskState) throws {
+        mutableRules.removeAll { $0 == rule }
+        rules.removeAll { $0.id == rule.id }
         try save()
     }
 

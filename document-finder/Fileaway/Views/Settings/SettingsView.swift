@@ -261,10 +261,6 @@ struct RuleDetailView: View {
 
     @ObservedObject var rule: TaskState
 
-    init(rule: Task) {
-        _rule = ObservedObject(initialValue: TaskState(task: rule))
-    }
-
     var body: some View {
         GroupBox {
             VStack(alignment: .leading) {
