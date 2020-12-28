@@ -52,7 +52,6 @@ struct DirectoryView: View {
                             .cornerRadius(6, corners: tracker.corners(for: file))
                             .padding(.leading)
                             .padding(.trailing)
-                            .id(file.id)
                             .onDrag {
                                 NSItemProvider(object: file.url as NSURL)
                             }
