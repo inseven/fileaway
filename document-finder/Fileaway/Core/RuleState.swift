@@ -1,5 +1,5 @@
 //
-//  TaskState.swift
+//  RuleState.swift
 //  Fileaway
 //
 //  Created by Jason Barrie Morley on 27/12/2020.

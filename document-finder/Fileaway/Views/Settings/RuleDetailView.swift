@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RuleDetailView: View {
 
-    @ObservedObject var rule: TaskState
+    @ObservedObject var rule: RuleState
 
     var body: some View {
         GroupBox {

@@ -13,7 +13,7 @@ class Rules: ObservableObject {
     let url: URL
 
     @Published var rules: [Rule]
-    @Published var mutableRules: [TaskState]
+    @Published var mutableRules: [RuleState]
 
     var rulesSubscription: Cancellable?
 
@@ -35,7 +35,7 @@ class Rules: ObservableObject {
         let rules = (try? Self.load(url: self.url)) ?? []
         self.rules = rules
         self.mutableRules = rules.map { rule in
-            TaskState(rule)
+            RuleState(rule)
         }
         updateSubscription()
     }
@@ -49,7 +49,7 @@ class Rules: ObservableObject {
         }
     }
 
-    func add(_ rule: TaskState) throws {
+    func add(_ rule: RuleState) throws {
         mutableRules.append(rule)
         var rules = Array(self.rules)
         rules.append(Rule(rule))
@@ -60,7 +60,7 @@ class Rules: ObservableObject {
         try save()
     }
 
-    func new() throws -> TaskState {
+    func new() throws -> RuleState {
         let names = Set(mutableRules.map { $0.name })
         var index = 1
         var name = ""
@@ -68,7 +68,7 @@ class Rules: ObservableObject {
             name = "Rule \(index)"
             index = index + 1
         } while names.contains(name)
-        let task = TaskState(id: UUID(),
+        let task = RuleState(id: UUID(),
                              name: name,
                              variables: [VariableState(name: "Date", type: .date(hasDay: true))],
                              destination: [
@@ -79,7 +79,7 @@ class Rules: ObservableObject {
         return task
     }
 
-    func remove(_ rule: TaskState) throws {
+    func remove(_ rule: RuleState) throws {
         mutableRules.removeAll { $0 == rule }
         rules.removeAll { $0.id == rule.id }
         try save()

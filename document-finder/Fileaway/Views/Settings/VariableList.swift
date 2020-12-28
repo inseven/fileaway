@@ -9,7 +9,7 @@ import SwiftUI
 
 struct VariableList: View {
 
-    @ObservedObject var rule: TaskState
+    @ObservedObject var rule: RuleState
     @State var selection: VariableState?
 
     var body: some View {

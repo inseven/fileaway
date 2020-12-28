@@ -10,8 +10,8 @@ import SwiftUI
 struct RulesSettingsView: View {
 
     @ObservedObject var rules: Rules
-    @State var selection: TaskState?
-    @State var newSelection: TaskState?
+    @State var selection: RuleState?
+    @State var newSelection: RuleState?
 
     var body: some View {
         HStack {

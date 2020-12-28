@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DestinationList: View {
 
-    @ObservedObject var rule: TaskState
+    @ObservedObject var rule: RuleState
     @State var selection: ComponentState?
 
     var body: some View {
