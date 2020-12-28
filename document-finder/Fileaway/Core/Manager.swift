@@ -32,7 +32,7 @@ class Manager: ObservableObject {
     @Published var locations: [URL] = []
     @Published var inbox: DirectoryObserver? = nil
     @Published var archive: DirectoryObserver? = nil
-    @Published var tasks: [Rule] = [] // TODO: Delete this?
+    @Published var rules: [Rule] = []
 
     var badgeObserver: Cancellable?
 
@@ -80,7 +80,7 @@ class Manager: ObservableObject {
             self.createArchiveObserver(url: url)
             let ruleSet = RuleSet(url: url)
             self.ruleSet = ruleSet
-            self.tasks = ruleSet.rules
+            self.rules = ruleSet.rules
         }
     }
 

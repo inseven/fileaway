@@ -24,7 +24,7 @@ struct TaskPage: View {
     init(manager: Manager, url: URL) {
         self.manager = manager
         self.url = url
-        let filter = Deferred(LazyFilter(items: manager.$tasks, test: { filter, item in
+        let filter = Deferred(LazyFilter(items: manager.$rules, test: { filter, item in
             item.name.localizedSearchMatches(string: filter)
         }, initialSortDescriptor: { lhs, rhs in lhs.name.lexicographicallyPrecedes(rhs.name) }))
         self._filter = StateObject(wrappedValue: filter.get())
