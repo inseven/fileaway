@@ -11,16 +11,16 @@ import SwiftUI
 class TaskInstance: ObservableObject {
 
     var url: URL  // TODO: This should be on the task!
-    var task: Task
+    var rule: Rule
     var variables: [VariableInstance]
     var subscriptions: [Cancellable]?
 
-    var name: String { task.name }
+    var name: String { rule.name }
 
-    init(url: URL, task: Task) {
+    init(url: URL, rule: Rule) {
         self.url = url
-        self.task = task
-        let variables = task.configuration.variables.map { $0.instance() }
+        self.rule = rule
+        let variables = rule.configuration.variables.map { $0.instance() }
         self.variables = variables
         self.subscriptions = variables.map { $0 as! Observable }.map { $0.observe { self.objectWillChange.send() } }
     }
@@ -33,7 +33,7 @@ class TaskInstance: ObservableObject {
     }
 
     var destinationUrl: URL {
-        let destination = task.configuration.destination.reduce("") { (result, component) -> String in
+        let destination = rule.configuration.destination.reduce("") { (result, component) -> String in
             switch component.type {
             case .text:
                 return result.appending(component.value)

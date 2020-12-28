@@ -12,8 +12,8 @@ struct TaskPage: View {
     var manager: Manager
     var url: URL
 
-    @StateObject var filter: LazyFilter<Task>
-    @StateObject var tracker: SelectionTracker<Task>
+    @StateObject var filter: LazyFilter<Rule>
+    @StateObject var tracker: SelectionTracker<Rule>
 
     @State var firstResponder: Bool = true
 
@@ -54,16 +54,16 @@ struct TaskPage: View {
             .padding()
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 0) {
-                    ForEach(tracker.items) { task in
-                        PageLink(destination: DetailsPage(url: url, rootUrl: rootUrl, task: task)) {
+                    ForEach(tracker.items) { rule in
+                        PageLink(destination: DetailsPage(url: url, rootUrl: rootUrl, rule: rule)) {
                             HStack {
-                                Text(task.name)
+                                Text(rule.name)
                                 Spacer()
                                 Image(systemName: "chevron.forward")
                             }
                             .padding()
                             .contentShape(Rectangle())
-                            .modifier(Highlight(tracker: tracker, item: task))
+                            .modifier(Highlight(tracker: tracker, item: rule))
                         }
                         Divider()
                             .padding(.leading)

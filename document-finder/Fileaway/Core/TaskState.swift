@@ -63,11 +63,11 @@ class TaskState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
                   destination: task.destination.map { ComponentState($0, variable: nil) })
     }
 
-    init(task: Task) {
-        name = task.name
-        let variables = task.configuration.variables.map { VariableState($0) }
+    init(_ rule: Rule) {
+        name = rule.name
+        let variables = rule.configuration.variables.map { VariableState($0) }
         self.variables = variables
-        destination = task.configuration.destination.map { component in
+        destination = rule.configuration.destination.map { component in
             ComponentState(component, variable: variables.first { $0.name == component.value } )
         }
         self.establishBackChannel()
@@ -160,7 +160,7 @@ class TaskState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
 
 }
 
-extension Task {
+extension Rule {
 
     convenience init(_ state: TaskState) {
         self.init(name: state.name,

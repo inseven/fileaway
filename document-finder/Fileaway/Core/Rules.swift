@@ -12,18 +12,18 @@ class Rules: ObservableObject {
 
     let url: URL
 
-    @Published var rules: [Task]
+    @Published var rules: [Rule]
     @Published var mutableRules: [TaskState]
 
     var rulesSubscription: Cancellable?
 
     // TODO: Rename Task to Rule
-    static func load(url: URL) throws -> [Task] {
+    static func load(url: URL) throws -> [Rule] {
         let data = try Data(contentsOf: url)
         let decoder = JSONDecoder()
         let configurations = try decoder.decode([String: Configuration].self, from: data)
-        let tasks = configurations.map { (name, configuration) -> Task in
-            return Task(name: name, configuration: configuration)
+        let tasks = configurations.map { (name, configuration) -> Rule in
+            return Rule(name: name, configuration: configuration)
             }.sorted { (task0, task1) -> Bool in
                 return task0.name < task1.name
         }
@@ -35,7 +35,7 @@ class Rules: ObservableObject {
         let rules = (try? Self.load(url: self.url)) ?? []
         self.rules = rules
         self.mutableRules = rules.map { rule in
-            TaskState(task: rule)
+            TaskState(rule)
         }
         updateSubscription()
     }
@@ -52,7 +52,7 @@ class Rules: ObservableObject {
     func add(_ rule: TaskState) throws {
         mutableRules.append(rule)
         var rules = Array(self.rules)
-        rules.append(Task(rule))
+        rules.append(Rule(rule))
         self.rules = rules.sorted { (task0, task1) -> Bool in
             return task0.name < task1.name
         }
@@ -86,7 +86,7 @@ class Rules: ObservableObject {
     }
 
     func save() throws {
-        let configuration = mutableRules.map { Task($0) }.reduce(into: [:]) { result, task in
+        let configuration = mutableRules.map { Rule($0) }.reduce(into: [:]) { result, task in
             result[task.name] = task.configuration
         }
         let encoder = JSONEncoder()

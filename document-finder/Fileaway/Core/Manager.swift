@@ -32,7 +32,7 @@ class Manager: ObservableObject {
     @Published var locations: [URL] = []
     @Published var inbox: DirectoryObserver? = nil
     @Published var archive: DirectoryObserver? = nil
-    @Published var tasks: [Task] = []
+    @Published var tasks: [Rule] = [] // TODO: Delete this?
 
     var badgeObserver: Cancellable?
 

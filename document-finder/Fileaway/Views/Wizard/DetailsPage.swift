@@ -29,9 +29,9 @@ struct DetailsPage: View {
         GridItem(.flexible()),
     ]
 
-    init(url: URL, rootUrl: URL, task: Task) {
+    init(url: URL, rootUrl: URL, rule: Rule) {
         self.url = url
-        _task = StateObject(wrappedValue: TaskInstance(url: rootUrl, task: task))
+        _task = StateObject(wrappedValue: TaskInstance(url: rootUrl, rule: rule))
     }
 
     var body: some View {

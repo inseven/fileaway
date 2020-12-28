@@ -1,5 +1,5 @@
 //
-//  Task.swift
+//  Rule.swift
 //  Fileaway
 //
 //  Created by Jason Barrie Morley on 27/12/2020.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Task: Identifiable, Hashable {
+class Rule: Identifiable, Hashable {
 
     var id = UUID()
     let name: String
@@ -25,7 +25,7 @@ class Task: Identifiable, Hashable {
 
     // TODO: Flesh these out
 
-    static func == (lhs: Task, rhs: Task) -> Bool {
+    static func == (lhs: Rule, rhs: Rule) -> Bool {
         lhs.id == rhs.id
     }
 
