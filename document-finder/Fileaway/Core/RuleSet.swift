@@ -17,7 +17,6 @@ class RuleSet: ObservableObject {
 
     var rulesSubscription: Cancellable?
 
-    // TODO: Rename Task to Rule
     static func load(url: URL) throws -> [Rule] {
         let data = try Data(contentsOf: url)
         let decoder = JSONDecoder()
@@ -51,9 +50,7 @@ class RuleSet: ObservableObject {
         mutableRules.append(rule)
         var rules = Array(self.rules)
         rules.append(Rule(rule))
-        self.rules = rules.sorted { (task0, task1) -> Bool in
-            return task0.name < task1.name
-        }
+        self.rules = rules.sorted { $0.name < $1.name }
         updateSubscription()
         try save()
     }
@@ -66,15 +63,15 @@ class RuleSet: ObservableObject {
             name = "Rule \(index)"
             index = index + 1
         } while names.contains(name)
-        let task = RuleState(id: UUID(),
+        let rule = RuleState(id: UUID(),
                              name: name,
                              variables: [VariableState(name: "Date", type: .date(hasDay: true))],
                              destination: [
                                 ComponentState(value: "New Folder/", type: .text, variable: nil),
                                 ComponentState(value: "Date", type: .variable, variable: nil),
                                 ComponentState(value: " Description", type: .text, variable: nil)])
-        try add(task)
-        return task
+        try add(rule)
+        return rule
     }
 
     func remove(_ rule: RuleState) throws {
@@ -84,8 +81,8 @@ class RuleSet: ObservableObject {
     }
 
     func save() throws {
-        let configuration = mutableRules.map { Rule($0) }.reduce(into: [:]) { result, task in
-            result[task.name] = task.configuration
+        let configuration = mutableRules.map { Rule($0) }.reduce(into: [:]) { result, rule in
+            result[rule.name] = rule.configuration
         }
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]

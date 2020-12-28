@@ -9,7 +9,7 @@ import SwiftUI
 
 class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashable {
 
-    enum TaskStateNameFormat {
+    enum NameFormat {
         case long
         case short
     }
@@ -56,11 +56,11 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         self.establishBackChannel()
     }
 
-    convenience init(_ task: RuleState) {
-        self.init(id: task.id,
-                  name: String(task.name),
-                  variables: task.variables.map { VariableState($0) },
-                  destination: task.destination.map { ComponentState($0, variable: nil) })
+    convenience init(_ rule: RuleState) {
+        self.init(id: rule.id,
+                  name: String(rule.name),
+                  variables: rule.variables.map { VariableState($0) },
+                  destination: rule.destination.map { ComponentState($0, variable: nil) })
     }
 
     init(_ rule: Rule) {
@@ -111,7 +111,7 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         variables.remove(atOffsets: variableOffsets)
     }
 
-    func name(for component: ComponentState, format: TaskStateNameFormat = .long) -> String {
+    func name(for component: ComponentState, format: NameFormat = .long) -> String {
         switch component.type {
         case .text:
             return component.value

@@ -10,7 +10,7 @@ import SwiftUI
 
 class RuleInstance: ObservableObject {
 
-    var url: URL  // TODO: This should be on the task!
+    var url: URL  // TODO: This should be on the rule
     var rule: Rule
     var variables: [VariableInstance]
     var subscriptions: [Cancellable]?

@@ -19,7 +19,7 @@ struct DetailsPage: View {
     @Environment(\.close) var close
 
     var url: URL
-    @StateObject var task: RuleInstance
+    @StateObject var rule: RuleInstance
     @State var alert: AlertType?
     @State var date: Date = Date()
     @State var year = "2020"
@@ -31,14 +31,14 @@ struct DetailsPage: View {
 
     init(url: URL, rootUrl: URL, rule: Rule) {
         self.url = url
-        _task = StateObject(wrappedValue: RuleInstance(url: rootUrl, rule: rule))
+        _rule = StateObject(wrappedValue: RuleInstance(url: rootUrl, rule: rule))
     }
 
     var body: some View {
         VStack {
             ScrollView {
                 LazyVGrid(columns: columns) {
-                    ForEach(task.variables) { variable in
+                    ForEach(rule.variables) { variable in
                         Text(variable.name)
                         HStack {
                             if let variable = variable as? DateInstance {
@@ -54,14 +54,14 @@ struct DetailsPage: View {
                 }
             }
             .padding()
-            Text(task.destinationUrl.path)
+            Text(rule.destinationUrl.path)
             Button {
-                print("moving to \(task.destinationUrl)...")
+                print("moving to \(rule.destinationUrl)...")
                 do {
-                    try task.move(url: url)
+                    try rule.move(url: url)
                     close()
                 } catch CocoaError.fileWriteFileExists {
-                    alert = .duplicate(duplicateUrl: task.destinationUrl)
+                    alert = .duplicate(duplicateUrl: rule.destinationUrl)
                 } catch {
                     alert = .error(error: error)
                 }
@@ -71,7 +71,7 @@ struct DetailsPage: View {
                 Text("Move")
             }
         }
-        .pageTitle(task.name)
+        .pageTitle(rule.name)
         .frame(minWidth: 0, maxWidth: .infinity)
         .alert(item: $alert) { alert in
             switch alert {
