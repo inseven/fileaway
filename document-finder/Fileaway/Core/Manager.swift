@@ -35,6 +35,7 @@ class Manager: ObservableObject {
     @Published var rules: [Rule] = []
 
     var badgeObserver: Cancellable?
+    var rulesSubscription: Cancellable?
 
     func createInboxObserver(url: URL) {
         dispatchPrecondition(condition: .onQueue(.main))
@@ -81,6 +82,9 @@ class Manager: ObservableObject {
             let ruleSet = RuleSet(url: url)
             self.ruleSet = ruleSet
             self.rules = ruleSet.rules
+            rulesSubscription = ruleSet.objectWillChange.receive(on: DispatchQueue.main).sink {
+                self.rules = ruleSet.mutableRules.map { Rule($0) }
+            }
         }
     }
 
