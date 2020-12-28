@@ -10,6 +10,7 @@ import SwiftUI
 
 class RuleSet: ObservableObject {
 
+    let rootUrl: URL
     let url: URL
 
     @Published var rules: [Rule]
@@ -28,11 +29,12 @@ class RuleSet: ObservableObject {
     }
 
     init(url: URL) {
+        self.rootUrl = url
         self.url = url.appendingPathComponent("file-actions.json")
         let rules = (try? Self.load(url: self.url)) ?? []
         self.rules = rules
         self.mutableRules = rules.map { rule in
-            RuleState(rule)
+            RuleState(rule, rootUrl: url)
         }
         updateSubscription()
     }
@@ -64,6 +66,7 @@ class RuleSet: ObservableObject {
             index = index + 1
         } while names.contains(name)
         let rule = RuleState(id: UUID(),
+                             rootUrl: rootUrl,
                              name: name,
                              variables: [VariableState(name: "Date", type: .date(hasDay: true))],
                              destination: [

@@ -15,6 +15,7 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
     }
 
     var id = UUID()
+    let rootUrl: URL
     @Published var name: String
 
     @Published var variables: [VariableState]
@@ -41,8 +42,9 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         }
     }
 
-    init(id: UUID, name: String, variables: [VariableState], destination: [ComponentState]) {
+    init(id: UUID, rootUrl: URL, name: String, variables: [VariableState], destination: [ComponentState]) {
         self.id = id
+        self.rootUrl = rootUrl
         self.name = name
         self.variables = variables
         self.destination = destination
@@ -56,24 +58,28 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         self.establishBackChannel()
     }
 
-    convenience init(_ rule: RuleState) {
+    convenience init(_ rule: RuleState, rootUrl: URL) {
         self.init(id: rule.id,
+                  rootUrl: rootUrl,
                   name: String(rule.name),
                   variables: rule.variables.map { VariableState($0) },
                   destination: rule.destination.map { ComponentState($0, variable: nil) })
     }
 
-    init(_ rule: Rule) {
+    init(_ rule: Rule, rootUrl: URL) {
         name = rule.name
         let variables = rule.configuration.variables.map { VariableState($0) }
         self.variables = variables
         destination = rule.configuration.destination.map { component in
             ComponentState(component, variable: variables.first { $0.name == component.value } )
         }
+        self.rootUrl = rootUrl
         self.establishBackChannel()
     }
 
-    init(name: String) {
+    // TODO: Check if this is used
+    init(rootUrl: URL, name: String) {
+        self.rootUrl = rootUrl
         self.name = name
         self.variables = []
         self.destination = []

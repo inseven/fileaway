@@ -9,13 +9,28 @@ import SwiftUI
 
 struct ComponentView: View {
 
+    @State var rule: RuleState
     @ObservedObject var component: ComponentState
 
     var body: some View {
         VStack {
             switch component.type {
             case .text:
-                TextField("Contents", text: $component.value)
+                VStack {
+                    TextField("Contents", text: $component.value)
+                    Button("Set Folder") {
+                        let openPanel = NSOpenPanel()
+                        openPanel.canChooseFiles = false
+                        openPanel.canChooseDirectories = true
+                        guard openPanel.runModal() == NSApplication.ModalResponse.OK,
+                              let url = openPanel.url,
+                              let relativePath = url.relativePath(from: rule.rootUrl) else {
+                            return
+                        }
+                        component.value = relativePath + "/"
+                    }
+
+                }
             case .variable:
                 Text("Variable")
             }
@@ -37,7 +52,7 @@ struct DestinationList: View {
                 }
                 VStack {
                     if let component = selection {
-                        ComponentView(component: component)
+                        ComponentView(rule: rule, component: component)
                             .id(component)
                     } else {
                         Text("No Component Selected")
