@@ -13,20 +13,30 @@ struct GeneralSettingsView: View {
 
     var body: some View {
         VStack {
-            Button("Set Inbox") {
-                let openPanel = NSOpenPanel()
-                openPanel.canChooseFiles = false
-                openPanel.canChooseDirectories = true
-                if (openPanel.runModal() ==  NSApplication.ModalResponse.OK) {
-                    try! manager.setInboxUrl(openPanel.url!)
+            HStack {
+                Text("Inbox")
+                    .font(.headline)
+                Text(manager.inboxUrl?.path ?? "")
+                Button("Choose...") {
+                    let openPanel = NSOpenPanel()
+                    openPanel.canChooseFiles = false
+                    openPanel.canChooseDirectories = true
+                    if (openPanel.runModal() ==  NSApplication.ModalResponse.OK) {
+                        try! manager.setInboxUrl(openPanel.url!)
+                    }
                 }
             }
-            Button("Set Archive") {
-                let openPanel = NSOpenPanel()
-                openPanel.canChooseFiles = false
-                openPanel.canChooseDirectories = true
-                if (openPanel.runModal() ==  NSApplication.ModalResponse.OK) {
-                    try! manager.setArchiveUrl(openPanel.url!)
+            HStack {
+                Text("Archive")
+                    .font(.headline)
+                Text(manager.archiveUrl?.path ?? "")
+                Button("Choose...") {
+                    let openPanel = NSOpenPanel()
+                    openPanel.canChooseFiles = false
+                    openPanel.canChooseDirectories = true
+                    if (openPanel.runModal() ==  NSApplication.ModalResponse.OK) {
+                        try! manager.setArchiveUrl(openPanel.url!)
+                    }
                 }
             }
         }

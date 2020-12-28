@@ -88,10 +88,14 @@ class Manager: ObservableObject {
         }
     }
 
+    var inboxUrl: URL? { try? settings.inboxUrl() }
+
     func setInboxUrl(_ url: URL) throws {
         try settings.setInboxUrl(url)
         self.createInboxObserver(url: url)
     }
+
+    var archiveUrl: URL? { try? settings.archiveUrl() }
 
     func setArchiveUrl(_ url: URL) throws {
         try settings.setArchiveUrl(url)
