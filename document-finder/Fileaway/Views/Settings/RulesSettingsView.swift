@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RulesSettingsView: View {
 
-    @ObservedObject var rules: Rules
+    @ObservedObject var rules: RuleSet
     @State var selection: RuleState?
     @State var newSelection: RuleState?
 

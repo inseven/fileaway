@@ -8,7 +8,7 @@
 import Combine
 import SwiftUI
 
-class Rules: ObservableObject {
+class RuleSet: ObservableObject {
 
     let url: URL
 

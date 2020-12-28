@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D8005AC1258276250001BE2C /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8005AC0258276250001BE2C /* Configuration.swift */; };
-		D8005AC9258277290001BE2C /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8005AC8258277290001BE2C /* Rules.swift */; };
+		D8005AC9258277290001BE2C /* RuleSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8005AC8258277290001BE2C /* RuleSet.swift */; };
 		D821E92B257A8F87005D3205 /* FileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821E92A257A8F87005D3205 /* FileInfo.swift */; };
 		D821E939257A959D005D3205 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821E938257A959D005D3205 /* DateView.swift */; };
 		D821E93E257A960C005D3205 /* FileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821E93D257A960C005D3205 /* FileProvider.swift */; };
@@ -96,7 +96,7 @@
 
 /* Begin PBXFileReference section */
 		D8005AC0258276250001BE2C /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
-		D8005AC8258277290001BE2C /* Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
+		D8005AC8258277290001BE2C /* RuleSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleSet.swift; sourceTree = "<group>"; };
 		D821E92A257A8F87005D3205 /* FileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfo.swift; sourceTree = "<group>"; };
 		D821E938257A959D005D3205 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
 		D821E93D257A960C005D3205 /* FileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileProvider.swift; sourceTree = "<group>"; };
@@ -208,7 +208,7 @@
 				D8F8BE26258819C80010432F /* DateInstance.swift */,
 				D821E92A257A8F87005D3205 /* FileInfo.swift */,
 				D87DEFBD257840B1006CFE85 /* Manager.swift */,
-				D8005AC8258277290001BE2C /* Rules.swift */,
+				D8005AC8258277290001BE2C /* RuleSet.swift */,
 				D8F8BE21258819860010432F /* StringInstance.swift */,
 				D8E7F9CD25999E7A00C7409B /* Rule.swift */,
 				D8F8BDFF2586C6B90010432F /* RuleInstance.swift */,
@@ -575,7 +575,7 @@
 				D8E7F9F82599B0D600C7409B /* ComponentState.swift in Sources */,
 				D8B6D047257F0B4300C7E472 /* KeyEventHandler.swift in Sources */,
 				D8FC534A257BB7A4008FB609 /* GeneralSettingsView.swift in Sources */,
-				D8005AC9258277290001BE2C /* Rules.swift in Sources */,
+				D8005AC9258277290001BE2C /* RuleSet.swift in Sources */,
 				D8D78A922580DD750088890F /* QuickLookPreview.swift in Sources */,
 				D8F8BE0C2588179E0010432F /* CloseKey.swift in Sources */,
 				D87DEFC4257848B7006CFE85 /* URL.swift in Sources */,

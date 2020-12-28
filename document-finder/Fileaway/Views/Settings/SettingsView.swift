@@ -60,7 +60,7 @@ struct SettingsView: View {
                     Label("General", systemImage: "gear")
                 }
                 .tag(Tabs.general)
-            RulesSettingsView(rules: manager.rules!)
+            RulesSettingsView(rules: manager.ruleSet!)
                 .tabItem {
                     Label("Rules", systemImage: "tray.and.arrow.down")
                 }
