@@ -57,33 +57,27 @@ struct DirectoryView: View {
                                 NSItemProvider(object: file.url as NSURL)
                             }
                             .gesture(TapGesture().onEnded {
-                                print("click")
+                                // click
                                 firstResponder = true
                                 tracker.handleClick(item: file)
                             }
                             .simultaneously(with: TapGesture(count: 2).onEnded {
-                                print("double click")
+                                // double click
                                 NSWorkspace.shared.open(file.url)
                             }))
                             .highPriorityGesture(TapGesture(count: 1).modifiers(EventModifiers.command).onEnded {
-                                print("command click")
+                                // command click
                                 firstResponder = true
                                 tracker.handleCommandClick(item: file)
                             })
                             .highPriorityGesture(TapGesture(count: 1).modifiers(EventModifiers.shift).onEnded {
-                                print("shift click")
+                                // shift click
                                 firstResponder = true
                                 tracker.handleShiftClick(item: file)
                             })
-                            .focusable(true) { focus in
-                                print("FOCUS = \(focus)")
-                            }
                             .contextMenu {
                                 Button("Open") {
                                     NSWorkspace.shared.open(file.url)
-                                }
-                                Button("Open with File Actions") {
-                                    FileActions.open(urls: [file.url])
                                 }
                                 Divider()
                                 Button("Reveal in Finder") {
