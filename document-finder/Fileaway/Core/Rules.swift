@@ -42,8 +42,9 @@ class Rules: ObservableObject {
 
     func updateSubscription() {
         let changes = self.mutableRules.map { $0.objectWillChange }
-        rulesSubscription = Publishers.MergeMany(changes).sink { _ in
+        rulesSubscription = Publishers.MergeMany(changes).receive(on: DispatchQueue.main).sink { _ in
             self.objectWillChange.send()
+            try? self.save()
         }
     }
 
@@ -84,7 +85,7 @@ class Rules: ObservableObject {
     }
 
     func save() throws {
-        let configuration = rules.reduce(into: [:]) { result, task in
+        let configuration = mutableRules.map { Task($0) }.reduce(into: [:]) { result, task in
             result[task.name] = task.configuration
         }
         let encoder = JSONEncoder()
