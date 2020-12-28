@@ -16,7 +16,6 @@
 		D821E94B257AB2C9005D3205 /* FileRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821E94A257AB2C9005D3205 /* FileRow.swift */; };
 		D829DDB425787C100066A807 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D829DDB325787C100066A807 /* Settings.swift */; };
 		D85C9572257999130007AE1E /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C9571257999130007AE1E /* FileManager.swift */; };
-		D85C957725799B2E0007AE1E /* FileActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C957625799B2E0007AE1E /* FileActions.swift */; };
 		D85C957C2579CDAA0007AE1E /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C957B2579CDAA0007AE1E /* String.swift */; };
 		D85C95812579CED30007AE1E /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C95802579CED30007AE1E /* Toolbar.swift */; };
 		D85C95872579DD9D0007AE1E /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C95862579DD9D0007AE1E /* Selection.swift */; };
@@ -104,7 +103,6 @@
 		D821E94A257AB2C9005D3205 /* FileRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileRow.swift; sourceTree = "<group>"; };
 		D829DDB325787C100066A807 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		D85C9571257999130007AE1E /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
-		D85C957625799B2E0007AE1E /* FileActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileActions.swift; sourceTree = "<group>"; };
 		D85C957B2579CDAA0007AE1E /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		D85C95802579CED30007AE1E /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		D85C95862579DD9D0007AE1E /* Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
@@ -281,7 +279,6 @@
 				D87DEF8825774F6D006CFE85 /* Fileaway.entitlements */,
 				D87DEF8725774F6D006CFE85 /* Info.plist */,
 				D87DEF7E25774F6C006CFE85 /* FileawayApp.swift */,
-				D85C957625799B2E0007AE1E /* FileActions.swift */,
 				D829DDB325787C100066A807 /* Settings.swift */,
 				D87DEF8225774F6D006CFE85 /* Assets.xcassets */,
 				D8005ABF258276160001BE2C /* Core */,
@@ -547,7 +544,6 @@
 				D85C95812579CED30007AE1E /* Toolbar.swift in Sources */,
 				D8B6D03A257E808900C7E472 /* Color.swift in Sources */,
 				D8F8BE002586C6B90010432F /* RuleInstance.swift in Sources */,
-				D85C957725799B2E0007AE1E /* FileActions.swift in Sources */,
 				D8E7F9B125999C8800C7409B /* RulesSettingsView.swift in Sources */,
 				D8F8BE22258819860010432F /* StringInstance.swift in Sources */,
 				D8F8BE3225881BC50010432F /* VariableInstance.swift in Sources */,

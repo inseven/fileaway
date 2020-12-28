@@ -46,18 +46,8 @@ struct GlobalCommands: Commands {
     @FocusedBinding(\.item) var item: Int?
 
     var body: some Commands {
-
         ToolbarCommands()
         SidebarCommands()
-
-        CommandGroup(after: .systemServices) {
-            Divider()
-            Button {
-                FileActions.openiOS()
-            } label: {
-                Text("File Actions for iOS...")
-            }
-        }
     }
 
 }

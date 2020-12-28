@@ -17,9 +17,9 @@ struct TrackerInput<T>: ViewModifier where T: Hashable {
                 print("tracker = \(tracker), direction = \(direction)")
                 switch direction {
                 case .up:
-                    tracker.handleDirectionUp()
+                    _ = tracker.handleDirectionUp()
                 case .down:
-                    tracker.handleDirectionDown()
+                    _ = tracker.handleDirectionDown()
                 default:
                     return
                 }
