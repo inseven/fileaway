@@ -60,10 +60,12 @@ struct SettingsView: View {
                     Label("General", systemImage: "gear")
                 }
                 .tag(Tabs.general)
-            RulesSettingsView(rules: manager.ruleSet!)
-                .tabItem {
-                    Label("Rules", systemImage: "tray.and.arrow.down")
-                }
+            if let ruleSet = manager.ruleSet {
+                RulesSettingsView(rules: ruleSet)
+                    .tabItem {
+                        Label("Rules", systemImage: "tray.and.arrow.down")
+                    }
+            }
         }
         .padding()
         .frame(minWidth: 400, maxWidth: .infinity, minHeight: 460, maxHeight: .infinity)
