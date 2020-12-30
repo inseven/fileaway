@@ -1,4 +1,4 @@
-# File Actions
+# Fileaway
 
 ## Configuration
 
