@@ -155,18 +155,18 @@ class TrackingNSHostingView<Content>: NSHostingView<Content> where Content : Vie
     init(onContextMenuFocusChange: @escaping (Bool) -> Void, rootView: Content) {
         self.onContextMenuFocusChange = onContextMenuFocusChange
         super.init(rootView: rootView)
-        let recognizer = ObservingGestureRecognizer { [weak self] in
-            self?.onContextMenuFocusChange(true)
-        }
-        addGestureRecognizer(recognizer)
-        NotificationCenter.default.addObserver(self, selector: #selector(menuDidComplete),
-                                               name: NSNotification.Name(rawValue: "NSMenuDidCompleteInteractionNotification"),
-                                               object: nil)
+//        let recognizer = ObservingGestureRecognizer { [weak self] in
+//            self?.onContextMenuFocusChange(true)
+//        }
+//        addGestureRecognizer(recognizer)
+//        NotificationCenter.default.addObserver(self, selector: #selector(menuDidComplete),
+//                                               name: NSNotification.Name(rawValue: "NSMenuDidCompleteInteractionNotification"),
+//                                               object: nil)
     }
 
-    @objc func menuDidComplete(_ notification: NSNotification) {
-        onContextMenuFocusChange(false)
-    }
+//    @objc func menuDidComplete(_ notification: NSNotification) {
+//        onContextMenuFocusChange(false)
+//    }
 
     required init(rootView: Content) {
         fatalError("init(rootView:) has not been implemented")
@@ -175,10 +175,10 @@ class TrackingNSHostingView<Content>: NSHostingView<Content> where Content : Vie
     @objc required dynamic init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    override func hitTest(_ point: NSPoint) -> NSView? {
-        return self
-    }
+//
+//    override func hitTest(_ point: NSPoint) -> NSView? {
+//        return self
+//    }
 
 }
 
@@ -208,7 +208,8 @@ struct Selectable<Content: View>: View {
 
     var body: some View {
         ZStack {
-            if isSelected { highlightColor }
+            if isSelected { highlightColor
+            }
             content()
             if hasContextMenuFocus {
                 RoundedRectangle(cornerRadius: borderRadius)
@@ -233,8 +234,12 @@ struct ContextMenuFocusable<MenuItems>: ViewModifier where MenuItems : View {
     @State var isShowingContextMenu: Bool = false
 
     func body(content: Content) -> some View {
-        content
-            .trackingMouse { isShowingContextMenu = $0 }
+        ZStack {
+            RightClickableSwiftUIView { isShowingContextMenu = $0 }
+            content
+                .allowsHitTesting(false)
+        }
+//        .trackingMouse { isShowingContextMenu = $0 }
             .contextMenu(menuItems: menuItems)
             .environment(\.hasContextMenuFocus, isShowingContextMenu)
     }
@@ -319,8 +324,15 @@ struct DirectoryView: View {
                         Selectable(isFocused: firstResponder, isSelected: tracker.isSelected(item: file), radius: 6, corners: tracker.corners(for: file)) {
                             FileRow(file: file, isSelected: tracker.isSelected(item: file))
                         }
-                        .padding(.leading)
-                        .padding(.trailing)
+                        .contextMenuTrackingFocus {
+                            Button("Open") {
+                                NSWorkspace.shared.open(file.url)
+                            }
+                            Divider()
+                            Button("Reveal in Finder") {
+                                NSWorkspace.shared.activateFileViewerSelecting([file.url])
+                            }
+                        }
                         .onDrag {
                             NSItemProvider(object: file.url as NSURL)
                         }
@@ -338,15 +350,9 @@ struct DirectoryView: View {
                             firstResponder = true
                             tracker.handleShiftClick(item: file)
                         }
-                        .contextMenuTrackingFocus {
-                            Button("Open") {
-                                NSWorkspace.shared.open(file.url)
-                            }
-                            Divider()
-                            Button("Reveal in Finder") {
-                                NSWorkspace.shared.activateFileViewerSelecting([file.url])
-                            }
-                        }
+                        .padding(.leading)
+                        .padding(.trailing)
+
                     }
                 }
                 .padding(.top)
