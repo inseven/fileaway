@@ -10,13 +10,7 @@ import Combine
 import Quartz
 import SwiftUI
 
-extension View {
-
-    func cornerRadius(_ radius: CGFloat, corners: RectCorner) -> some View {
-        clipShape(RoundedCorner(radius: radius, corners: corners))
-    }
-
-}
+import Interaction
 
 struct RightClickableSwiftUIView: NSViewRepresentable {
 
@@ -68,7 +62,6 @@ class ObservingGestureRecognizer: NSGestureRecognizer {
     }
 
     override func rightMouseDown(with event: NSEvent) {
-        print("rightMouseDown")
         defer { self.state = .failed }
         guard let view = view else {
             return
