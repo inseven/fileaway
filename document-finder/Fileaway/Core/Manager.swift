@@ -23,7 +23,6 @@ extension EnvironmentValues {
 
 }
 
-
 class Manager: ObservableObject {
 
     var settings = Settings()

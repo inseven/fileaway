@@ -18,8 +18,216 @@ extension View {
 
 }
 
+struct RightClickableSwiftUIView: NSViewRepresentable {
+
+    var onRightClickFocusChange: (Bool) -> Void
+
+    class Coordinator: NSObject, RightClickObservingViewDelegate {
+
+        var parent: RightClickableSwiftUIView
+
+        init(_ parent: RightClickableSwiftUIView) {
+            self.parent = parent
+        }
+
+        func rightClickFocusDidChange(focused: Bool) {
+            print("\(self) rightClickFocusDidChange: \(focused)")
+            parent.onRightClickFocusChange(focused)
+        }
+
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+    func makeNSView(context: Context) -> RightClickObservingView {
+        let view = RightClickObservingView()
+        view.delegate = context.coordinator
+        return view
+    }
+
+    func updateNSView(_ view: RightClickObservingView, context: NSViewRepresentableContext<RightClickableSwiftUIView>) {
+        view.delegate = context.coordinator
+    }
+
+}
+
+class ObservingGestureRecognizer: NSGestureRecognizer {
+
+    var onRightMouseDown: (() -> Void)?
+
+    init(onRightMouseDown: @escaping () -> Void) {
+        super.init(target: nil, action: nil)
+        self.onRightMouseDown = onRightMouseDown
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func rightMouseDown(with event: NSEvent) {
+        defer { self.state = .cancelled }
+        guard let view = view else {
+            return
+        }
+        let mouseLocation = view.convert(event.locationInWindow, from: nil)
+        guard view.bounds.contains(mouseLocation) else {
+            return
+        }
+        if let onRightMouseDown = onRightMouseDown {
+            onRightMouseDown()
+        }
+        super.rightMouseDown(with: event)
+    }
+
+}
+
+protocol RightClickObservingViewDelegate: NSObject {
+
+    func rightClickFocusDidChange(focused: Bool)
+
+}
+
+class RightClickObservingView : NSView {
+
+    weak var delegate: RightClickObservingViewDelegate?
+
+    override init(frame frameRect: NSRect) {
+        super.init(frame: frameRect)
+
+        let recognizer = ObservingGestureRecognizer { [weak self] in
+            self?.delegate?.rightClickFocusDidChange(focused: true)
+        }
+        addGestureRecognizer(recognizer)
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveNotification),
+                                               name: NSNotification.Name(rawValue: "NSMenuDidCompleteInteractionNotification"),
+                                               object: nil)
+    }
+
+    @objc func didReceiveNotification(_ notification: NSNotification) {
+        delegate?.rightClickFocusDidChange(focused: false)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+}
+
+struct Selectable<Content: View>: View {
+
+    var isFocused: Bool  // TODO: Environment variable?
+    var isSelected: Bool
+    var radius: CGFloat
+    var corners: RectCorner
+    private let content: () -> Content
+    @Environment(\.hasContextMenuFocus) var hasContextMenuFocus
+
+    var borderWidth: CGFloat { isSelected ? 2 : 3 }
+    var borderColor: Color { isSelected ? Color.white : highlightColor }
+    var borderPadding: CGFloat { isSelected ? 2 : 0 }
+    var borderRadius: CGFloat { radius + (borderWidth / 2) - borderPadding }
+    var highlightColor: Color { isFocused ? Color.selectedContentBackgroundColor : Color.unemphasizedSelectedContentBackgroundColor }
+    var activeCorners: RectCorner { isSelected ? corners : RectCorner.all }
+
+    init(isFocused: Bool, isSelected: Bool, radius: CGFloat, corners: RectCorner, @ViewBuilder _ content: @escaping () -> Content) {
+        self.isFocused = isFocused
+        self.isSelected = isSelected
+        self.radius = radius
+        self.corners = corners
+        self.content = content
+    }
+
+    var body: some View {
+        ZStack {
+            if isSelected { highlightColor }
+            content()
+            if hasContextMenuFocus {
+                RoundedRectangle(cornerRadius: borderRadius)
+                    .stroke(borderColor, lineWidth: borderWidth)
+                    .padding(borderPadding)
+            }
+        }
+        .cornerRadius(radius, corners: activeCorners)
+        .contentShape(Rectangle())
+        .onChange(of: hasContextMenuFocus) { hasContextMenuFocus in
+            print("focus = \(hasContextMenuFocus)")
+        }
+    }
+}
+
+
+struct ContextMenuFocusable<MenuItems>: ViewModifier where MenuItems : View {
+
+    let menuItems: () -> MenuItems
+    let onContextMenuChange: (Bool) -> Void
+
+    @State var isShowingContextMenu: Bool = false
+
+    func body(content: Content) -> some View {
+        ZStack {
+            RightClickableSwiftUIView { isShowingContextMenu = $0 }
+            content
+        }
+        .contextMenu(menuItems: menuItems)
+        .environment(\.hasContextMenuFocus, isShowingContextMenu)
+    }
+
+}
+
+// TODO: Consider the naming for this.
+struct ContextMenuFocusKey: EnvironmentKey {
+    static var defaultValue: Bool = false
+}
+
+extension EnvironmentValues {
+
+    var hasContextMenuFocus: Bool {
+        get { self[ContextMenuFocusKey.self] }
+        set { self[ContextMenuFocusKey.self] = newValue }
+    }
+
+}
+
+
+extension View {
+
+    func contextMenuTrackingFocus<MenuItems>(@ViewBuilder menuItems: @escaping () -> MenuItems, onContextMenuChange: @escaping (Bool) -> Void) -> some View where MenuItems : View {
+        return self
+            .modifier(ContextMenuFocusable(menuItems: menuItems, onContextMenuChange: onContextMenuChange))
+    }
+
+    func contextMenuTrackingFocus<MenuItems>(@ViewBuilder menuItems: @escaping () -> MenuItems) -> some View where MenuItems : View {
+        return self.contextMenuTrackingFocus(menuItems: menuItems) { _ in }
+    }
+
+}
+
+extension View {
+
+    func onClick(_ click: @escaping () -> Void, doubleClick: @escaping () -> Void) -> some View {
+        return gesture(TapGesture()
+                        .onEnded(click)
+                        .simultaneously(with: TapGesture(count: 2)
+                                            .onEnded(doubleClick)))
+    }
+
+    func onShiftClick(_ action: @escaping () -> Void) -> some View {
+        return highPriorityGesture(TapGesture(count: 1)
+                                    .modifiers(EventModifiers.shift).onEnded(action))
+    }
+
+    func onCommandClick(_ action: @escaping () -> Void) -> some View {
+        return highPriorityGesture(TapGesture(count: 1)
+                                    .modifiers(EventModifiers.command).onEnded(action))
+    }
+
+}
+
 struct DirectoryView: View {
 
+    @State var backgroundColor: Color = .clear
     @ObservedObject var directoryObserver: DirectoryObserver
 
     @State var firstResponder: Bool = false
@@ -38,51 +246,42 @@ struct DirectoryView: View {
         GridItem(.flexible(minimum: 0, maximum: .infinity))
     ]
 
-    var highlightColor: Color {
-        firstResponder ? Color.selectedContentBackgroundColor : Color.unemphasizedSelectedContentBackgroundColor
-    }
-
     var body: some View {
         ScrollViewReader { scrollView in
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 0) {
                     ForEach(tracker.items) { file in
-                        FileRow(file: file, isSelected: tracker.isSelected(item: file))
-                            .background(tracker.isSelected(item: file) ? highlightColor : Color(NSColor.textBackgroundColor))
-                            .cornerRadius(6, corners: tracker.corners(for: file))
-                            .padding(.leading)
-                            .padding(.trailing)
-                            .onDrag {
-                                NSItemProvider(object: file.url as NSURL)
-                            }
-                            .gesture(TapGesture().onEnded {
-                                // click
-                                firstResponder = true
-                                tracker.handleClick(item: file)
-                            }
-                            .simultaneously(with: TapGesture(count: 2).onEnded {
-                                // double click
+                        Selectable(isFocused: firstResponder, isSelected: tracker.isSelected(item: file), radius: 6, corners: tracker.corners(for: file)) {
+                            FileRow(file: file, isSelected: tracker.isSelected(item: file))
+                        }
+                        .padding(.leading)
+                        .padding(.trailing)
+                        .onDrag {
+                            NSItemProvider(object: file.url as NSURL)
+                        }
+                        .onClick {
+                            firstResponder = true
+                            tracker.handleClick(item: file)
+                        } doubleClick: { // TODO: Perhaps there's a better way to do this with environment variables?
+                            NSWorkspace.shared.open(file.url)
+                        }
+                        .onCommandClick {
+                            firstResponder = true  // TODO: Do this with a globally observing view / gesture recognizer?
+                            tracker.handleCommandClick(item: file)
+                        }
+                        .onShiftClick {
+                            firstResponder = true
+                            tracker.handleShiftClick(item: file)
+                        }
+                        .contextMenuTrackingFocus {
+                            Button("Open") {
                                 NSWorkspace.shared.open(file.url)
-                            }))
-                            .highPriorityGesture(TapGesture(count: 1).modifiers(EventModifiers.command).onEnded {
-                                // command click
-                                firstResponder = true
-                                tracker.handleCommandClick(item: file)
-                            })
-                            .highPriorityGesture(TapGesture(count: 1).modifiers(EventModifiers.shift).onEnded {
-                                // shift click
-                                firstResponder = true
-                                tracker.handleShiftClick(item: file)
-                            })
-                            .contextMenu {
-                                Button("Open") {
-                                    NSWorkspace.shared.open(file.url)
-                                }
-                                Divider()
-                                Button("Reveal in Finder") {
-                                    NSWorkspace.shared.activateFileViewerSelecting([file.url])
-                                }
                             }
+                            Divider()
+                            Button("Reveal in Finder") {
+                                NSWorkspace.shared.activateFileViewerSelecting([file.url])
+                            }
+                        }
                     }
                 }
                 .padding(.top)
