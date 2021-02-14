@@ -117,71 +117,6 @@ class RightClickObservingView : NSView {
 
 }
 
-extension View {
-    func trackingMouse(onContextMenuFocusChange: @escaping (Bool) -> Void) -> some View {
-        TrackinAreaView(onContextMenuFocusChange: onContextMenuFocusChange) { self }
-    }
-}
-
-struct TrackinAreaView<Content>: View where Content : View {
-    let onContextMenuFocusChange: (Bool) -> Void
-    let content: () -> Content
-
-    init(onContextMenuFocusChange: @escaping (Bool) -> Void, @ViewBuilder content: @escaping () -> Content) {
-        self.onContextMenuFocusChange = onContextMenuFocusChange
-        self.content = content
-    }
-
-    var body: some View {
-        TrackingAreaRepresentable(onContextMenuFocusChange: onContextMenuFocusChange, content: self.content())
-    }
-}
-
-struct TrackingAreaRepresentable<Content>: NSViewRepresentable where Content: View {
-    let onContextMenuFocusChange: (Bool) -> Void
-    let content: Content
-
-    func makeNSView(context: Context) -> NSHostingView<Content> {
-        return TrackingNSHostingView(onContextMenuFocusChange: onContextMenuFocusChange, rootView: self.content)
-    }
-
-    func updateNSView(_ nsView: NSHostingView<Content>, context: Context) {
-    }
-}
-
-class TrackingNSHostingView<Content>: NSHostingView<Content> where Content : View {
-    let onContextMenuFocusChange: (Bool) -> Void
-
-    init(onContextMenuFocusChange: @escaping (Bool) -> Void, rootView: Content) {
-        self.onContextMenuFocusChange = onContextMenuFocusChange
-        super.init(rootView: rootView)
-//        let recognizer = ObservingGestureRecognizer { [weak self] in
-//            self?.onContextMenuFocusChange(true)
-//        }
-//        addGestureRecognizer(recognizer)
-//        NotificationCenter.default.addObserver(self, selector: #selector(menuDidComplete),
-//                                               name: NSNotification.Name(rawValue: "NSMenuDidCompleteInteractionNotification"),
-//                                               object: nil)
-    }
-
-//    @objc func menuDidComplete(_ notification: NSNotification) {
-//        onContextMenuFocusChange(false)
-//    }
-
-    required init(rootView: Content) {
-        fatalError("init(rootView:) has not been implemented")
-    }
-
-    @objc required dynamic init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-//
-//    override func hitTest(_ point: NSPoint) -> NSView? {
-//        return self
-//    }
-
-}
-
 struct Selectable<Content: View>: View {
 
     var isFocused: Bool  // TODO: Environment variable?
@@ -239,9 +174,8 @@ struct ContextMenuFocusable<MenuItems>: ViewModifier where MenuItems : View {
             content
                 .allowsHitTesting(false)
         }
-//        .trackingMouse { isShowingContextMenu = $0 }
-            .contextMenu(menuItems: menuItems)
-            .environment(\.hasContextMenuFocus, isShowingContextMenu)
+        .contextMenu(menuItems: menuItems)
+        .environment(\.hasContextMenuFocus, isShowingContextMenu)
     }
 
 }
@@ -340,6 +274,7 @@ struct DirectoryView: View {
                             firstResponder = true
                             tracker.handleClick(item: file)
                         } doubleClick: { // TODO: Perhaps there's a better way to do this with environment variables?
+                            firstResponder = true
                             NSWorkspace.shared.open(file.url)
                         }
                         .onCommandClick {
