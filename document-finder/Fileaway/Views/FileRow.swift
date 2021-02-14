@@ -96,7 +96,6 @@ struct FileRow: View {
             }
             .padding(.top, 6)
             .padding(.bottom, 6)
-            Divider()
         }
         .padding(.leading)
         .padding(.trailing)

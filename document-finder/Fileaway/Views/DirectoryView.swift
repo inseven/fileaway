@@ -350,12 +350,14 @@ struct DirectoryView: View {
                             firstResponder = true
                             tracker.handleShiftClick(item: file)
                         }
-                        .padding(.leading)
-                        .padding(.trailing)
-
+                        Divider()
+                            .padding(.leading)
+                            .padding(.trailing)
                     }
                 }
                 .padding(.top)
+                .padding(.leading)
+                .padding(.trailing)
             }
             .acceptsFirstResponder(isFirstResponder: $firstResponder)
             .onTapGesture {
