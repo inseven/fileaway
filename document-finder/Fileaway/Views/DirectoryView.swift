@@ -31,6 +31,7 @@ struct RightClickableSwiftUIView: NSViewRepresentable {
         }
 
         func rightClickFocusDidChange(focused: Bool) {
+            // TODO: Remove repeated entries here? Maybe this could be a publisher?
             print("\(self) rightClickFocusDidChange: \(focused)")
             parent.onRightClickFocusChange(focused)
         }
@@ -67,7 +68,8 @@ class ObservingGestureRecognizer: NSGestureRecognizer {
     }
 
     override func rightMouseDown(with event: NSEvent) {
-        defer { self.state = .cancelled }
+        print("rightMouseDown")
+        defer { self.state = .failed }
         guard let view = view else {
             return
         }
@@ -111,6 +113,71 @@ class RightClickObservingView : NSView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+}
+
+extension View {
+    func trackingMouse(onContextMenuFocusChange: @escaping (Bool) -> Void) -> some View {
+        TrackinAreaView(onContextMenuFocusChange: onContextMenuFocusChange) { self }
+    }
+}
+
+struct TrackinAreaView<Content>: View where Content : View {
+    let onContextMenuFocusChange: (Bool) -> Void
+    let content: () -> Content
+
+    init(onContextMenuFocusChange: @escaping (Bool) -> Void, @ViewBuilder content: @escaping () -> Content) {
+        self.onContextMenuFocusChange = onContextMenuFocusChange
+        self.content = content
+    }
+
+    var body: some View {
+        TrackingAreaRepresentable(onContextMenuFocusChange: onContextMenuFocusChange, content: self.content())
+    }
+}
+
+struct TrackingAreaRepresentable<Content>: NSViewRepresentable where Content: View {
+    let onContextMenuFocusChange: (Bool) -> Void
+    let content: Content
+
+    func makeNSView(context: Context) -> NSHostingView<Content> {
+        return TrackingNSHostingView(onContextMenuFocusChange: onContextMenuFocusChange, rootView: self.content)
+    }
+
+    func updateNSView(_ nsView: NSHostingView<Content>, context: Context) {
+    }
+}
+
+class TrackingNSHostingView<Content>: NSHostingView<Content> where Content : View {
+    let onContextMenuFocusChange: (Bool) -> Void
+
+    init(onContextMenuFocusChange: @escaping (Bool) -> Void, rootView: Content) {
+        self.onContextMenuFocusChange = onContextMenuFocusChange
+        super.init(rootView: rootView)
+        let recognizer = ObservingGestureRecognizer { [weak self] in
+            self?.onContextMenuFocusChange(true)
+        }
+        addGestureRecognizer(recognizer)
+        NotificationCenter.default.addObserver(self, selector: #selector(menuDidComplete),
+                                               name: NSNotification.Name(rawValue: "NSMenuDidCompleteInteractionNotification"),
+                                               object: nil)
+    }
+
+    @objc func menuDidComplete(_ notification: NSNotification) {
+        onContextMenuFocusChange(false)
+    }
+
+    required init(rootView: Content) {
+        fatalError("init(rootView:) has not been implemented")
+    }
+
+    @objc required dynamic init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func hitTest(_ point: NSPoint) -> NSView? {
+        return self
     }
 
 }
@@ -166,12 +233,10 @@ struct ContextMenuFocusable<MenuItems>: ViewModifier where MenuItems : View {
     @State var isShowingContextMenu: Bool = false
 
     func body(content: Content) -> some View {
-        ZStack {
-            RightClickableSwiftUIView { isShowingContextMenu = $0 }
-            content
-        }
-        .contextMenu(menuItems: menuItems)
-        .environment(\.hasContextMenuFocus, isShowingContextMenu)
+        content
+            .trackingMouse { isShowingContextMenu = $0 }
+            .contextMenu(menuItems: menuItems)
+            .environment(\.hasContextMenuFocus, isShowingContextMenu)
     }
 
 }
@@ -232,7 +297,7 @@ struct DirectoryView: View {
 
     @State var firstResponder: Bool = false
 
-    @StateObject var tracker: SelectionTracker<FileInfo>
+    @StateObject var tracker: SelectionTracker<FileInfo>  // TODO: Could the selection tracker take a binding to a set to expose a simple API?
     @StateObject var manager: SelectionManager
 
     init(directoryObserver: DirectoryObserver) {
