@@ -38,7 +38,6 @@ struct ResponderView: NSViewRepresentable {
             }
             let shouldBeFirstResponder = delegate.shouldBeFirstResponder()
             guard isFirstResponder != shouldBeFirstResponder else {
-                print("no changes to be made")
                 return
             }
             if shouldBeFirstResponder {
