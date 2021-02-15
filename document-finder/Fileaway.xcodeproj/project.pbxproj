@@ -70,6 +70,7 @@
 		D8F90C9925DAAED700F0EFB8 /* ObservingGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F90C9825DAAED700F0EFB8 /* ObservingGestureRecognizer.swift */; };
 		D8F90C9E25DAAF7A00F0EFB8 /* Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F90C9D25DAAF7A00F0EFB8 /* Selectable.swift */; };
 		D8F90CA325DAB02100F0EFB8 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F90CA225DAB02100F0EFB8 /* View.swift */; };
+		D8F90CA825DAB1DF00F0EFB8 /* ContextMenuFocusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F90CA725DAB1DF00F0EFB8 /* ContextMenuFocusable.swift */; };
 		D8FC5334257BB6D2008FB609 /* MailboxRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5333257BB6D2008FB609 /* MailboxRow.swift */; };
 		D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5341257BB77C008FB609 /* SettingsView.swift */; };
 		D8FC534A257BB7A4008FB609 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5349257BB7A4008FB609 /* GeneralSettingsView.swift */; };
@@ -161,6 +162,7 @@
 		D8F90C9825DAAED700F0EFB8 /* ObservingGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservingGestureRecognizer.swift; sourceTree = "<group>"; };
 		D8F90C9D25DAAF7A00F0EFB8 /* Selectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selectable.swift; sourceTree = "<group>"; };
 		D8F90CA225DAB02100F0EFB8 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		D8F90CA725DAB1DF00F0EFB8 /* ContextMenuFocusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuFocusable.swift; sourceTree = "<group>"; };
 		D8FC5333257BB6D2008FB609 /* MailboxRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailboxRow.swift; sourceTree = "<group>"; };
 		D8FC5341257BB77C008FB609 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D8FC5349257BB7A4008FB609 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				D8F8BE3B25881C650010432F /* Highlight.swift */,
 				D85C95802579CED30007AE1E /* Toolbar.swift */,
 				D8F8BE4025881CEC0010432F /* TrackerInput.swift */,
+				D8F90CA725DAB1DF00F0EFB8 /* ContextMenuFocusable.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -560,6 +563,7 @@
 				D8DC5046257C0795009B3ECC /* ResponderView.swift in Sources */,
 				D8F90C9925DAAED700F0EFB8 /* ObservingGestureRecognizer.swift in Sources */,
 				D8E7F9CE25999E7A00C7409B /* Rule.swift in Sources */,
+				D8F90CA825DAB1DF00F0EFB8 /* ContextMenuFocusable.swift in Sources */,
 				D829DDB425787C100066A807 /* Settings.swift in Sources */,
 				D87DEFBE257840B1006CFE85 /* Manager.swift in Sources */,
 				D8F8BE3C25881C650010432F /* Highlight.swift in Sources */,
