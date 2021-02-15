@@ -164,7 +164,6 @@
 		D8F8BE3B25881C650010432F /* Highlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Highlight.swift; sourceTree = "<group>"; };
 		D8F8BE4025881CEC0010432F /* TrackerInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerInput.swift; sourceTree = "<group>"; };
 		D8F90C4A25D9C91D00F0EFB8 /* ViewA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewA.swift; sourceTree = "<group>"; };
-		D8F90C5225D9C9C200F0EFB8 /* Interaction */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Interaction; path = "../../photo-export/Interaction"; sourceTree = "<group>"; };
 		D8FC5333257BB6D2008FB609 /* MailboxRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailboxRow.swift; sourceTree = "<group>"; };
 		D8FC5341257BB77C008FB609 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D8FC5349257BB7A4008FB609 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
@@ -260,7 +259,6 @@
 		D87DEF7225774F6C006CFE85 = {
 			isa = PBXGroup;
 			children = (
-				D8F90C5225D9C9C200F0EFB8 /* Interaction */,
 				D87DEF7D25774F6C006CFE85 /* Fileaway */,
 				D87DEF9025774F6D006CFE85 /* FileawayTests */,
 				D87DEF9B25774F6D006CFE85 /* FileawayUITests */,
