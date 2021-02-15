@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import Interact
+
 struct Highlight<T>: ViewModifier where T: Hashable {
 
     @ObservedObject var tracker: SelectionTracker<T>
