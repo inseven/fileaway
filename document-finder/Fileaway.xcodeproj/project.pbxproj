@@ -67,6 +67,9 @@
 		D8F8BE3C25881C650010432F /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BE3B25881C650010432F /* Highlight.swift */; };
 		D8F8BE4125881CEC0010432F /* TrackerInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BE4025881CEC0010432F /* TrackerInput.swift */; };
 		D8F90C7325DAA72700F0EFB8 /* Interact in Frameworks */ = {isa = PBXBuildFile; productRef = D8F90C7225DAA72700F0EFB8 /* Interact */; };
+		D8F90C9925DAAED700F0EFB8 /* ObservingGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F90C9825DAAED700F0EFB8 /* ObservingGestureRecognizer.swift */; };
+		D8F90C9E25DAAF7A00F0EFB8 /* Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F90C9D25DAAF7A00F0EFB8 /* Selectable.swift */; };
+		D8F90CA325DAB02100F0EFB8 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F90CA225DAB02100F0EFB8 /* View.swift */; };
 		D8FC5334257BB6D2008FB609 /* MailboxRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5333257BB6D2008FB609 /* MailboxRow.swift */; };
 		D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5341257BB77C008FB609 /* SettingsView.swift */; };
 		D8FC534A257BB7A4008FB609 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5349257BB7A4008FB609 /* GeneralSettingsView.swift */; };
@@ -155,6 +158,9 @@
 		D8F8BE3B25881C650010432F /* Highlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Highlight.swift; sourceTree = "<group>"; };
 		D8F8BE4025881CEC0010432F /* TrackerInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerInput.swift; sourceTree = "<group>"; };
 		D8F90C6B25DAA6A400F0EFB8 /* interact */ = {isa = PBXFileReference; lastKnownFileType = folder; name = interact; path = ../interact; sourceTree = "<group>"; };
+		D8F90C9825DAAED700F0EFB8 /* ObservingGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservingGestureRecognizer.swift; sourceTree = "<group>"; };
+		D8F90C9D25DAAF7A00F0EFB8 /* Selectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selectable.swift; sourceTree = "<group>"; };
+		D8F90CA225DAB02100F0EFB8 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		D8FC5333257BB6D2008FB609 /* MailboxRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailboxRow.swift; sourceTree = "<group>"; };
 		D8FC5341257BB77C008FB609 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D8FC5349257BB7A4008FB609 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
@@ -282,6 +288,8 @@
 				D87DEF8425774F6D006CFE85 /* Preview Content */,
 				D8FC5340257BB72F008FB609 /* Utilities */,
 				D821E937257A9591005D3205 /* Views */,
+				D8F90C9825DAAED700F0EFB8 /* ObservingGestureRecognizer.swift */,
+				D8F90C9D25DAAF7A00F0EFB8 /* Selectable.swift */,
 			);
 			path = Fileaway;
 			sourceTree = "<group>";
@@ -318,6 +326,7 @@
 				D87DEFC3257848B7006CFE85 /* URL.swift */,
 				D85C9571257999130007AE1E /* FileManager.swift */,
 				D87B126425851218004EC884 /* EventModifiers.swift */,
+				D8F90CA225DAB02100F0EFB8 /* View.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -519,6 +528,7 @@
 				D8E7F9E32599B00A00C7409B /* DestinationList.swift in Sources */,
 				D821E94B257AB2C9005D3205 /* FileRow.swift in Sources */,
 				D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */,
+				D8F90C9E25DAAF7A00F0EFB8 /* Selectable.swift in Sources */,
 				D8F8BE3725881C1A0010432F /* TaskPage.swift in Sources */,
 				D8E7F9FD2599B10500C7409B /* BackChannel.swift in Sources */,
 				D8E7F9C125999DB300C7409B /* Variable.swift in Sources */,
@@ -527,6 +537,7 @@
 				D8E7F9F02599B08600C7409B /* VariableState.swift in Sources */,
 				D8D78A9A2580DDF40088890F /* PageLink.swift in Sources */,
 				D87B126525851218004EC884 /* EventModifiers.swift in Sources */,
+				D8F90CA325DAB02100F0EFB8 /* View.swift in Sources */,
 				D821E92B257A8F87005D3205 /* FileInfo.swift in Sources */,
 				D85C95812579CED30007AE1E /* Toolbar.swift in Sources */,
 				D8F8BE002586C6B90010432F /* RuleInstance.swift in Sources */,
@@ -547,6 +558,7 @@
 				D87DEFB925783F66006CFE85 /* DirectoryView.swift in Sources */,
 				D87DEFB425780BA4006CFE85 /* DirectoryObserver.swift in Sources */,
 				D8DC5046257C0795009B3ECC /* ResponderView.swift in Sources */,
+				D8F90C9925DAAED700F0EFB8 /* ObservingGestureRecognizer.swift in Sources */,
 				D8E7F9CE25999E7A00C7409B /* Rule.swift in Sources */,
 				D829DDB425787C100066A807 /* Settings.swift in Sources */,
 				D87DEFBE257840B1006CFE85 /* Manager.swift in Sources */,

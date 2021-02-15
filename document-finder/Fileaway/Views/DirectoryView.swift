@@ -48,36 +48,6 @@ struct RightClickableSwiftUIView: NSViewRepresentable {
 
 }
 
-class ObservingGestureRecognizer: NSGestureRecognizer {
-
-    var onRightMouseDown: (() -> Void)?
-
-    init(onRightMouseDown: @escaping () -> Void) {
-        super.init(target: nil, action: nil)
-        self.onRightMouseDown = onRightMouseDown
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    override func rightMouseDown(with event: NSEvent) {
-        defer { self.state = .failed }
-        guard let view = view else {
-            return
-        }
-        let mouseLocation = view.convert(event.locationInWindow, from: nil)
-        guard view.bounds.contains(mouseLocation) else {
-            return
-        }
-        if let onRightMouseDown = onRightMouseDown {
-            onRightMouseDown()
-        }
-        super.rightMouseDown(with: event)
-    }
-
-}
-
 protocol RightClickObservingViewDelegate: NSObject {
 
     func rightClickFocusDidChange(focused: Bool)
@@ -110,50 +80,6 @@ class RightClickObservingView : NSView {
 
 }
 
-struct Selectable<Content: View>: View {
-
-    var isFocused: Bool  // TODO: Environment variable?
-    var isSelected: Bool
-    var radius: CGFloat
-    var corners: RectCorner
-    private let content: () -> Content
-    @Environment(\.hasContextMenuFocus) var hasContextMenuFocus
-
-    var borderWidth: CGFloat { isSelected ? 2 : 3 }
-    var borderColor: Color { isSelected ? Color.white : highlightColor }
-    var borderPadding: CGFloat { isSelected ? 2 : 0 }
-    var borderRadius: CGFloat { radius + (borderWidth / 2) - borderPadding }
-    var highlightColor: Color { isFocused ? Color.selectedContentBackgroundColor : Color.unemphasizedSelectedContentBackgroundColor }
-    var activeCorners: RectCorner { isSelected ? corners : RectCorner.all }
-
-    init(isFocused: Bool, isSelected: Bool, radius: CGFloat, corners: RectCorner, @ViewBuilder _ content: @escaping () -> Content) {
-        self.isFocused = isFocused
-        self.isSelected = isSelected
-        self.radius = radius
-        self.corners = corners
-        self.content = content
-    }
-
-    var body: some View {
-        ZStack {
-            if isSelected { highlightColor
-            }
-            content()
-            if hasContextMenuFocus {
-                RoundedRectangle(cornerRadius: borderRadius)
-                    .stroke(borderColor, lineWidth: borderWidth)
-                    .padding(borderPadding)
-            }
-        }
-        .cornerRadius(radius, corners: activeCorners)
-        .contentShape(Rectangle())
-        .onChange(of: hasContextMenuFocus) { hasContextMenuFocus in
-            print("focus = \(hasContextMenuFocus)")
-        }
-    }
-}
-
-
 struct ContextMenuFocusable<MenuItems>: ViewModifier where MenuItems : View {
 
     let menuItems: () -> MenuItems
@@ -163,7 +89,10 @@ struct ContextMenuFocusable<MenuItems>: ViewModifier where MenuItems : View {
 
     func body(content: Content) -> some View {
         ZStack {
-            RightClickableSwiftUIView { isShowingContextMenu = $0 }
+            RightClickableSwiftUIView { showingContextMenu in
+                isShowingContextMenu = showingContextMenu
+                onContextMenuChange(showingContextMenu)
+            }
             content
                 .allowsHitTesting(false)
         }
@@ -187,19 +116,6 @@ extension EnvironmentValues {
 
 }
 
-
-extension View {
-
-    func contextMenuTrackingFocus<MenuItems>(@ViewBuilder menuItems: @escaping () -> MenuItems, onContextMenuChange: @escaping (Bool) -> Void) -> some View where MenuItems : View {
-        return self
-            .modifier(ContextMenuFocusable(menuItems: menuItems, onContextMenuChange: onContextMenuChange))
-    }
-
-    func contextMenuTrackingFocus<MenuItems>(@ViewBuilder menuItems: @escaping () -> MenuItems) -> some View where MenuItems : View {
-        return self.contextMenuTrackingFocus(menuItems: menuItems) { _ in }
-    }
-
-}
 
 extension View {
 
@@ -251,7 +167,7 @@ struct DirectoryView: View {
                         Selectable(isFocused: firstResponder, isSelected: tracker.isSelected(item: file), radius: 6, corners: tracker.corners(for: file)) {
                             FileRow(file: file, isSelected: tracker.isSelected(item: file))
                         }
-                        .contextMenuTrackingFocus {
+                        .contextMenuFocusable {
                             Button("Open") {
                                 NSWorkspace.shared.open(file.url)
                             }
@@ -259,6 +175,11 @@ struct DirectoryView: View {
                             Button("Reveal in Finder") {
                                 NSWorkspace.shared.activateFileViewerSelecting([file.url])
                             }
+                        } onContextMenuChange: { focused in
+                            guard focused else {
+                                return
+                            }
+                            firstResponder = true
                         }
                         .onDrag {
                             NSItemProvider(object: file.url as NSURL)
