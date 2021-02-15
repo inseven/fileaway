@@ -8,7 +8,7 @@
 import Combine
 import SwiftUI
 
-import Interaction
+import Interact
 
 enum SelectionTrackerError: Error {
     case outOfRange

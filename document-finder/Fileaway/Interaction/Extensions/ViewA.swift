@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-import Interaction
+import Interact
 
 extension View {
 

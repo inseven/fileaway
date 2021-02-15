@@ -71,7 +71,7 @@
 		D8F8BE3C25881C650010432F /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BE3B25881C650010432F /* Highlight.swift */; };
 		D8F8BE4125881CEC0010432F /* TrackerInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BE4025881CEC0010432F /* TrackerInput.swift */; };
 		D8F90C4B25D9C91D00F0EFB8 /* ViewA.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F90C4A25D9C91D00F0EFB8 /* ViewA.swift */; };
-		D8F90C5B25D9CA0700F0EFB8 /* Interaction in Frameworks */ = {isa = PBXBuildFile; productRef = D8F90C5A25D9CA0700F0EFB8 /* Interaction */; };
+		D8F90C7325DAA72700F0EFB8 /* Interact in Frameworks */ = {isa = PBXBuildFile; productRef = D8F90C7225DAA72700F0EFB8 /* Interact */; };
 		D8FC5334257BB6D2008FB609 /* MailboxRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5333257BB6D2008FB609 /* MailboxRow.swift */; };
 		D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5341257BB77C008FB609 /* SettingsView.swift */; };
 		D8FC534A257BB7A4008FB609 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5349257BB7A4008FB609 /* GeneralSettingsView.swift */; };
@@ -164,6 +164,7 @@
 		D8F8BE3B25881C650010432F /* Highlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Highlight.swift; sourceTree = "<group>"; };
 		D8F8BE4025881CEC0010432F /* TrackerInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerInput.swift; sourceTree = "<group>"; };
 		D8F90C4A25D9C91D00F0EFB8 /* ViewA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewA.swift; sourceTree = "<group>"; };
+		D8F90C6B25DAA6A400F0EFB8 /* interact */ = {isa = PBXFileReference; lastKnownFileType = folder; name = interact; path = ../interact; sourceTree = "<group>"; };
 		D8FC5333257BB6D2008FB609 /* MailboxRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailboxRow.swift; sourceTree = "<group>"; };
 		D8FC5341257BB77C008FB609 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D8FC5349257BB7A4008FB609 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
@@ -174,9 +175,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8F90C5B25D9CA0700F0EFB8 /* Interaction in Frameworks */,
 				D87DEFAF2577E068006CFE85 /* EonilFSEvents in Frameworks */,
 				D8D78AAD2580E2440088890F /* Introspect in Frameworks */,
+				D8F90C7325DAA72700F0EFB8 /* Interact in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +260,7 @@
 		D87DEF7225774F6C006CFE85 = {
 			isa = PBXGroup;
 			children = (
+				D8F90C6B25DAA6A400F0EFB8 /* interact */,
 				D87DEF7D25774F6C006CFE85 /* Fileaway */,
 				D87DEF9025774F6D006CFE85 /* FileawayTests */,
 				D87DEF9B25774F6D006CFE85 /* FileawayUITests */,
@@ -422,7 +424,7 @@
 			packageProductDependencies = (
 				D87DEFAE2577E068006CFE85 /* EonilFSEvents */,
 				D8D78AAC2580E2440088890F /* Introspect */,
-				D8F90C5A25D9CA0700F0EFB8 /* Interaction */,
+				D8F90C7225DAA72700F0EFB8 /* Interact */,
 			);
 			productName = "Document Finder";
 			productReference = D87DEF7B25774F6C006CFE85 /* Fileaway.app */;
@@ -959,9 +961,9 @@
 			package = D8D78AAB2580E2440088890F /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
 		};
-		D8F90C5A25D9CA0700F0EFB8 /* Interaction */ = {
+		D8F90C7225DAA72700F0EFB8 /* Interact */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Interaction;
+			productName = Interact;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

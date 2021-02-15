@@ -10,7 +10,7 @@ import Combine
 import Quartz
 import SwiftUI
 
-import Interaction
+import Interact
 
 struct RightClickableSwiftUIView: NSViewRepresentable {
 
