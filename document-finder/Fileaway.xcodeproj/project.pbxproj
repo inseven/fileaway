@@ -17,7 +17,6 @@
 		D829DDB425787C100066A807 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D829DDB325787C100066A807 /* Settings.swift */; };
 		D85C9572257999130007AE1E /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C9571257999130007AE1E /* FileManager.swift */; };
 		D85C95812579CED30007AE1E /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C95802579CED30007AE1E /* Toolbar.swift */; };
-		D87B1260258511EC004EC884 /* Deferred.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87B125F258511EC004EC884 /* Deferred.swift */; };
 		D87B126525851218004EC884 /* EventModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87B126425851218004EC884 /* EventModifiers.swift */; };
 		D87DEF7F25774F6C006CFE85 /* FileawayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEF7E25774F6C006CFE85 /* FileawayApp.swift */; };
 		D87DEF8125774F6C006CFE85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEF8025774F6C006CFE85 /* ContentView.swift */; };
@@ -104,7 +103,6 @@
 		D829DDB325787C100066A807 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		D85C9571257999130007AE1E /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		D85C95802579CED30007AE1E /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
-		D87B125F258511EC004EC884 /* Deferred.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deferred.swift; sourceTree = "<group>"; };
 		D87B126425851218004EC884 /* EventModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModifiers.swift; sourceTree = "<group>"; };
 		D87DEF7B25774F6C006CFE85 /* Fileaway.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fileaway.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87DEF7E25774F6C006CFE85 /* FileawayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileawayApp.swift; sourceTree = "<group>"; };
@@ -375,7 +373,6 @@
 		D8FC5340257BB72F008FB609 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				D87B125F258511EC004EC884 /* Deferred.swift */,
 				D87DEFB325780BA4006CFE85 /* DirectoryObserver.swift */,
 				D821E93D257A960C005D3205 /* FileProvider.swift */,
 				D88DF5FA258463310068404E /* LazyFilter.swift */,
@@ -535,7 +532,6 @@
 				D8F8BE3725881C1A0010432F /* TaskPage.swift in Sources */,
 				D8E7F9FD2599B10500C7409B /* BackChannel.swift in Sources */,
 				D8E7F9C125999DB300C7409B /* Variable.swift in Sources */,
-				D87B1260258511EC004EC884 /* Deferred.swift in Sources */,
 				D8B6D02B257DBAF700C7E472 /* SearchField.swift in Sources */,
 				D8E7F9F02599B08600C7409B /* VariableState.swift in Sources */,
 				D8D78A9A2580DDF40088890F /* PageLink.swift in Sources */,
