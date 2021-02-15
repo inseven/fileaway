@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import Interact
+
 struct RuleSheet: View {
 
     @Environment(\.presentationMode) var presentationMode
@@ -25,7 +27,7 @@ struct RuleSheet: View {
             }
             .padding()
         }
-        .background(Color(NSColor.windowBackgroundColor))
+        .background(Color.windowBackgroundColor)
         .frame(minWidth: 600, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
     }
 

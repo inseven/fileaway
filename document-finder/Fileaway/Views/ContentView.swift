@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import Interact
+
 struct ContentView: View {
 
     @ObservedObject var manager: Manager
@@ -15,7 +17,7 @@ struct ContentView: View {
         NavigationView {
             Sidebar(manager: manager)
             EmptyView()
-                .background(Color(NSColor.textBackgroundColor))
+                .background(Color.textBackgroundColor)
         }
     }
 }

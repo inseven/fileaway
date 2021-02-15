@@ -325,7 +325,7 @@ struct DirectoryView: View {
             }
             .onCutCommand(perform: manager.cut)
         }
-        .background(Color(NSColor.textBackgroundColor))
+        .background(Color.textBackgroundColor)
         .modifier(Toolbar(manager: manager, filter: directoryObserver.filter))
         .navigationTitle(directoryObserver.name)
     }
