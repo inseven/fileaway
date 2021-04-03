@@ -4,6 +4,8 @@
 
 Document management app for iOS and macOS.
 
+![macOS screenshot](screenshot.png)
+
 ## Licensing
 
 Bookmarks is licensed under the MIT License (see [LICENSE](LICENSE)).
