@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D8005AC1258276250001BE2C /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8005AC0258276250001BE2C /* Configuration.swift */; };
 		D8005AC9258277290001BE2C /* RuleSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8005AC8258277290001BE2C /* RuleSet.swift */; };
+		D8037B122617F8CD00F41971 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = D8037B112617F8CD00F41971 /* Introspect */; };
 		D821E92B257A8F87005D3205 /* FileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821E92A257A8F87005D3205 /* FileInfo.swift */; };
 		D821E939257A959D005D3205 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821E938257A959D005D3205 /* DateView.swift */; };
 		D821E93E257A960C005D3205 /* FileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821E93D257A960C005D3205 /* FileProvider.swift */; };
@@ -40,7 +41,6 @@
 		D8D78A9A2580DDF40088890F /* PageLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D78A992580DDF40088890F /* PageLink.swift */; };
 		D8D78A9F2580DE250088890F /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D78A9E2580DE250088890F /* PageView.swift */; };
 		D8D78AA72580DF190088890F /* Legacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D78AA62580DF190088890F /* Legacy.swift */; };
-		D8D78AAD2580E2440088890F /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = D8D78AAC2580E2440088890F /* Introspect */; };
 		D8DC5046257C0795009B3ECC /* ResponderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DC5045257C0795009B3ECC /* ResponderView.swift */; };
 		D8E7F9A825999B1000C7409B /* RuleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9A725999B1000C7409B /* RuleState.swift */; };
 		D8E7F9B125999C8800C7409B /* RulesSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9B025999C8800C7409B /* RulesSettingsView.swift */; };
@@ -172,7 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D87DEFAF2577E068006CFE85 /* EonilFSEvents in Frameworks */,
-				D8D78AAD2580E2440088890F /* Introspect in Frameworks */,
+				D8037B122617F8CD00F41971 /* Introspect in Frameworks */,
 				D8F90C7325DAA72700F0EFB8 /* Interact in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -401,8 +401,8 @@
 			name = Fileaway;
 			packageProductDependencies = (
 				D87DEFAE2577E068006CFE85 /* EonilFSEvents */,
-				D8D78AAC2580E2440088890F /* Introspect */,
 				D8F90C7225DAA72700F0EFB8 /* Interact */,
+				D8037B112617F8CD00F41971 /* Introspect */,
 			);
 			productName = "Document Finder";
 			productReference = D87DEF7B25774F6C006CFE85 /* Fileaway.app */;
@@ -477,7 +477,7 @@
 			mainGroup = D87DEF7225774F6C006CFE85;
 			packageReferences = (
 				D87DEFAD2577E068006CFE85 /* XCRemoteSwiftPackageReference "FSEvents" */,
-				D8D78AAB2580E2440088890F /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				D8037B102617F8CD00F41971 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = D87DEF7C25774F6C006CFE85 /* Products */;
 			projectDirPath = "";
@@ -908,6 +908,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D8037B102617F8CD00F41971 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.3;
+			};
+		};
 		D87DEFAD2577E068006CFE85 /* XCRemoteSwiftPackageReference "FSEvents" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/eonil/FSEvents";
@@ -916,26 +924,18 @@
 				minimumVersion = 0.1.7;
 			};
 		};
-		D8D78AAB2580E2440088890F /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:siteline/SwiftUI-Introspect.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.2;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D8037B112617F8CD00F41971 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8037B102617F8CD00F41971 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
 		D87DEFAE2577E068006CFE85 /* EonilFSEvents */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D87DEFAD2577E068006CFE85 /* XCRemoteSwiftPackageReference "FSEvents" */;
 			productName = EonilFSEvents;
-		};
-		D8D78AAC2580E2440088890F /* Introspect */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D8D78AAB2580E2440088890F /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = Introspect;
 		};
 		D8F90C7225DAA72700F0EFB8 /* Interact */ = {
 			isa = XCSwiftPackageProductDependency;
