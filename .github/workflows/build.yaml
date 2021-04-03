@@ -1,0 +1,25 @@
+name: Build
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+  schedule:
+    - cron:  '0 1 * * *'
+
+jobs:
+  test:
+
+    name: Build macOS project
+    runs-on: macOS-latest  # Unfortunately macOS 11 is currently unavailable.
+
+    steps:
+
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        submodules: recursive
+
+    - name: Build
+      run: exec ./scripts/build.sh
