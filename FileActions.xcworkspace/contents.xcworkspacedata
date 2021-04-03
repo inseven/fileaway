@@ -5,6 +5,6 @@
       location = "group:core/FileActionsCore.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:/Users/jbmorley/Projects/file-actions/ios/FileActions-iOS.xcodeproj">
+      location = "group:ios/FileActions-iOS.xcodeproj">
    </FileRef>
 </Workspace>
