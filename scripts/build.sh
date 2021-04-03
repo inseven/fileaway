@@ -8,11 +8,11 @@ SCRIPT_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 ROOT_DIRECTORY="${SCRIPT_DIRECTORY}/.."
 
 FILEAWAY_PROJECT_PATH="${ROOT_DIRECTORY}/macos/Fileaway.xcodeproj"
-FILE_ACTIONS_WORKSPACE_PATH="${ROOT_DIRECTORY}/FileActions.xcworkspace"
+FILEAWAY_WORKSPACE_PATH="${ROOT_DIRECTORY}/Fileaway.xcworkspace"
 
 # TODO: Enable test builds if possible using a locally generated signing key.
 
-# Fileaway
+# macOS Project
 
 # macOS app
 xcodebuild \
@@ -23,11 +23,11 @@ xcodebuild \
     CODE_SIGN_IDENTITY="" \
     CODE_SIGNING_REQUIRED=NO | xcpretty
 
-# File Actions
+# Workspace
 
 # iOS app
 xcodebuild \
-    -workspace "$FILE_ACTIONS_WORKSPACE_PATH" \
+    -workspace "$FILEAWAY_WORKSPACE_PATH" \
     -scheme "File Actions iOS" \
     clean \
     build \
@@ -36,7 +36,7 @@ xcodebuild \
 
 # FileActionsCore iOS
 xcodebuild \
-    -workspace "$FILE_ACTIONS_WORKSPACE_PATH" \
+    -workspace "$FILEAWAY_WORKSPACE_PATH" \
     -scheme "FileActionsCore iOS" \
     clean \
     build \
@@ -45,7 +45,7 @@ xcodebuild \
 
 # FileActionsCore macOS
 xcodebuild \
-    -workspace "$FILE_ACTIONS_WORKSPACE_PATH" \
+    -workspace "$FILEAWAY_WORKSPACE_PATH" \
     -scheme "FileActionsCore macOS" \
     clean \
     build \
