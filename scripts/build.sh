@@ -33,3 +33,21 @@ xcodebuild \
     build \
     CODE_SIGN_IDENTITY="" \
     CODE_SIGNING_REQUIRED=NO | xcpretty
+
+# FileActionsCore iOS
+xcodebuild \
+    -workspace "$FILE_ACTIONS_WORKSPACE_PATH" \
+    -scheme "FileActionsCore iOS" \
+    clean \
+    build \
+    CODE_SIGN_IDENTITY="" \
+    CODE_SIGNING_REQUIRED=NO | xcpretty
+
+# FileActionsCore macOS
+xcodebuild \
+    -workspace "$FILE_ACTIONS_WORKSPACE_PATH" \
+    -scheme "FileActionsCore macOS" \
+    clean \
+    build \
+    CODE_SIGN_IDENTITY="" \
+    CODE_SIGNING_REQUIRED=NO | xcpretty
