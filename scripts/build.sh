@@ -21,7 +21,7 @@ xcodebuild \
     clean \
     build \
     CODE_SIGN_IDENTITY="" \
-    CODE_SIGNING_REQUIRED=NO
+    CODE_SIGNING_REQUIRED=NO | xcpretty
 
 # File Actions
 
@@ -32,4 +32,4 @@ xcodebuild \
     clean \
     build \
     CODE_SIGN_IDENTITY="" \
-    CODE_SIGNING_REQUIRED=NO
+    CODE_SIGNING_REQUIRED=NO | xcpretty
