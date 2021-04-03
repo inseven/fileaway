@@ -7,7 +7,7 @@ set -x
 SCRIPT_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 ROOT_DIRECTORY="${SCRIPT_DIRECTORY}/.."
 
-FILEAWAY_PROJECT_PATH="${ROOT_DIRECTORY}/document-finder/Fileaway.xcodeproj"
+FILEAWAY_PROJECT_PATH="${ROOT_DIRECTORY}/macos/Fileaway.xcodeproj"
 FILE_ACTIONS_WORKSPACE_PATH="${ROOT_DIRECTORY}/FileActions.xcworkspace"
 
 # TODO: Enable test builds if possible using a locally generated signing key.
