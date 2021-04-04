@@ -12,6 +12,12 @@ Document management app for iOS and macOS.
 
 Right now the macOS and iOS apps are incredibly divergent having been written with significantly different ideas of what makes for a good file management app: the iOS came first and focuses solely on the process of rule based filing, while the latest iteration of the macOS app (there have been many) also introduces a Mail-like file browser.
 
+## Changelog
+
+### macOS 0.1.0
+
+Initial release with support for a single inbox and archive directories, rules wizard, and simple rule editing.
+
 ## Licensing
 
 Bookmarks is licensed under the MIT License (see [LICENSE](LICENSE)).
