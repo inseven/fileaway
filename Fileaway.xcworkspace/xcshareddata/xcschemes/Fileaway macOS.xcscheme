@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D8D14D9F216E3E0E00D6E1DF"
-               BuildableName = "FileawayCore.framework"
-               BlueprintName = "FileawayCore macOS"
-               ReferencedContainer = "container:FileawayCore.xcodeproj">
+               BlueprintIdentifier = "D87DEF7A25774F6C006CFE85"
+               BuildableName = "Fileaway.app"
+               BlueprintName = "Fileaway"
+               ReferencedContainer = "container:macos/Fileaway-macOS.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,20 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D8D14DA7216E3E0E00D6E1DF"
-               BuildableName = "FileawayCore macOSTests.xctest"
-               BlueprintName = "FileawayCore macOSTests"
-               ReferencedContainer = "container:FileawayCore.xcodeproj">
+               BlueprintIdentifier = "D87DEF8C25774F6D006CFE85"
+               BuildableName = "FileawayTests.xctest"
+               BlueprintName = "FileawayTests"
+               ReferencedContainer = "container:macos/Fileaway-macOS.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D87DEF9725774F6D006CFE85"
+               BuildableName = "FileawayUITests.xctest"
+               BlueprintName = "FileawayUITests"
+               ReferencedContainer = "container:macos/Fileaway-macOS.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -50,6 +60,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "D87DEF7A25774F6C006CFE85"
+            BuildableName = "Fileaway.app"
+            BlueprintName = "Fileaway"
+            ReferencedContainer = "container:macos/Fileaway-macOS.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -57,15 +77,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D8D14D9F216E3E0E00D6E1DF"
-            BuildableName = "FileawayCore.framework"
-            BlueprintName = "FileawayCore macOS"
-            ReferencedContainer = "container:FileawayCore.xcodeproj">
+            BlueprintIdentifier = "D87DEF7A25774F6C006CFE85"
+            BuildableName = "Fileaway.app"
+            BlueprintName = "Fileaway"
+            ReferencedContainer = "container:macos/Fileaway-macOS.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
