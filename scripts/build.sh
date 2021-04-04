@@ -10,10 +10,10 @@ ROOT_DIRECTORY="${SCRIPT_DIRECTORY}/.."
 # TODO: Enable test builds if possible using a locally generated signing key.
 
 # Disable code signing for the build server.
-export CODE_SIGN_IDENTITY=""
-export CODE_SIGNING_REQUIRED=NO
+# export CODE_SIGN_IDENTITY=""
+# export CODE_SIGNING_REQUIRED=NO
 # export CODE_SIGNING_ALLOWED=NO
-export DEVELOPMENT_TEAM=""
+# export DEVELOPMENT_TEAM=""
 
 # Clean up derived data (mostly for GitHub's benefit).
 rm -rf ~/Library/Developer/Xcode/DerivedData
@@ -24,30 +24,17 @@ cd "$ROOT_DIRECTORY"
 # List the available schemes.
 xcodebuild -workspace Fileaway.xcworkspace -list
 
-# FileawayCore iOS
-xcodebuild \
-    -workspace Fileaway.xcworkspace \
-    -scheme "FileawayCore iOS" \
-    clean \
-    build | xcpretty
+function build_scheme {
+    xcodebuild \
+        -workspace Fileaway.xcworkspace \
+        -scheme "$1" \
+        clean \
+        build \
+        CODE_SIGN_IDENTITY="" \
+        CODE_SIGNING_REQUIRED=NO | xcpretty
+}
 
-# FileawayCore macOS
-xcodebuild \
-    -workspace Fileaway.xcworkspace \
-    -scheme "FileawayCore macOS" \
-    clean \
-    build | xcpretty
-
-# iOS app
-xcodebuild \
-    -workspace Fileaway.xcworkspace \
-    -scheme "Fileaway iOS" \
-    clean \
-    build | xcpretty
-
-# macOS app
-xcodebuild \
-    -workspace Fileaway.xcworkspace \
-    -scheme "Fileaway macOS" \
-    clean \
-    build | xcpretty
+build_scheme "FileawayCore iOS"
+build_scheme "FileawayCore macOS"
+build_scheme "Fileaway iOS"
+build_scheme "Fileaway macOS"
