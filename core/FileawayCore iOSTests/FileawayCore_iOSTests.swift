@@ -19,7 +19,7 @@
 // SOFTWARE.
 
 import XCTest
-@testable import FileActionsCore
+@testable import FileawayCore
 
 class FileawayCore_iOSTests: XCTestCase {
 
