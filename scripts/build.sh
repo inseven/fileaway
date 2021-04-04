@@ -17,6 +17,9 @@ export CODE_SIGNING_REQUIRED=NO
 export CODE_SIGNING_ALLOWED=NO
 export DEVELOPMENT_TEAM=""
 
+# List the available schemes.
+xcodebuild -workspace "$FILEAWAY_WORKSPACE_PATH" -list
+
 # FileawayCore iOS
 xcodebuild \
     -workspace "$FILEAWAY_WORKSPACE_PATH" \
