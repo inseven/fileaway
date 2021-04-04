@@ -18,28 +18,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import XCTest
-@testable import FileawayCore
+import SwiftUI
 
-class FileawayCore_macOSTests: XCTestCase {
+struct DestinationView: View {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+    @ObservedObject var task: TaskState
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    var body: some View {
+        HStack {
+            task.destination.map {
+                Text(self.task.name(for: $0, format: .short))
+                    .foregroundColor($0.type == .variable ? .accentColor : .primary)
+                    .fontWeight($0.type == .variable ? .bold : .none)
+            }
+            .reduce( Text(""), + )
         }
     }
 

@@ -18,28 +18,28 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import XCTest
-@testable import FileawayCore
+import Foundation
+import SwiftUI
 
-class FileawayCore_macOSTests: XCTestCase {
+struct FilePicker: View {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+    @State private var showingFilePicker = false
+    let placeholder: String
+    let documentTypes: [String]
+    @Binding var url: URL?
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    var body: some View {
+        Button(action: {
+            self.showingFilePicker = true
+        }) {
+            if url == nil {
+                Text(placeholder)
+            } else {
+                Text(url!.lastPathComponent)
+            }
+        }
+        .sheet(isPresented: $showingFilePicker) {
+            FilePickerSheet(documentTypes: self.documentTypes, url: self.$url)
         }
     }
 

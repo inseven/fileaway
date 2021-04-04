@@ -18,29 +18,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import XCTest
-@testable import FileawayCore
+import Foundation
+import SwiftUI
 
-class FileawayCore_macOSTests: XCTestCase {
+struct TasksView: View {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+    @ObservedObject var tasks: TaskList
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    var body: some View {
+        VStack {
+            List {
+                Section() {
+                    ForEach(tasks.tasks) { task in
+                        NavigationLink(destination: TaskView(tasks: self.tasks, editingTask: TaskState(task), originalTask: task)) {
+                            Text(task.name)
+                        }
+                    }
+                    .onDelete { self.tasks.tasks.remove(atOffsets: $0) }
+                }
+            }
+            .listStyle(DefaultListStyle())
+        }.navigationBarItems(trailing: Button(action: {
+            self.tasks.createTask()
+        }) {
+            Text("Add")
+        })
+        .navigationBarTitle("Tasks")
     }
 
 }

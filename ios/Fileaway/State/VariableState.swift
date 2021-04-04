@@ -18,29 +18,37 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import XCTest
-@testable import FileawayCore
+import Foundation
 
-class FileawayCore_macOSTests: XCTestCase {
+import FileawayCore
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+extension Variable {
+
+    init(_ state: VariableState) {
+        self.init(name: state.name, type: state.type)
+    }
+    
+}
+
+class VariableState: ObservableObject, Identifiable {
+
+    var id = UUID()
+    @Published var name: String
+    @Published var type: VariableType
+
+    public init(_ variable: Variable) {
+        self.name = variable.name
+        self.type = variable.type
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    public init(_ variable: VariableState) {
+        id = variable.id
+        name = String(variable.name)
+        type = variable.type
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    public init(name: String, type: VariableType) {
+        self.name = name
+        self.type = type
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }

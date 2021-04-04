@@ -18,29 +18,50 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import XCTest
-@testable import FileawayCore
+import Foundation
+import SwiftUI
 
-class FileawayCore_macOSTests: XCTestCase {
+import FileawayCore
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+extension Component {
+
+    init(_ state: ComponentState) {
+        self.init(type: state.type, value: state.value)
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+}
+
+class ComponentState: ObservableObject, Identifiable {
+
+    var id = UUID() // TODO: Why doesn't this work if it's a let.
+    @Published var value: String
+    @Published var type: ComponentType
+    var variable: VariableState? = nil
+
+    init(value: String, type: ComponentType, variable: VariableState?) {
+        self.value = value
+        self.type = type
+        self.variable = variable
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    init(_ component: Component, variable: VariableState?) {
+        value = component.value
+        type = component.type
+        self.variable = variable
     }
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    init(_ component: ComponentState, variable: VariableState?) {
+        id = component.id
+        value = String(component.value)
+        type = component.type
+        self.variable = variable
+    }
+
+    func update() {
+        guard let variable = self.variable else {
+            return
         }
+        self.value = variable.name
     }
 
 }

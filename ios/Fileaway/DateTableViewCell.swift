@@ -18,29 +18,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import XCTest
-@testable import FileawayCore
+import UIKit
 
-class FileawayCore_macOSTests: XCTestCase {
+import FileawayCore
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+protocol DateTableViewCellDelegate: class {
+    func dateTableViewCellDidChange(_ dateTableViewCell: DateTableViewCell)
+}
+
+class DateTableViewCell: UITableViewCell {
+
+    var variable: Variable?
+    weak var delegate: DateTableViewCellDelegate?
+    @IBOutlet weak var datePicker: UIDatePicker!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        datePicker.addTarget(self, action: #selector(DateTableViewCell.datePickerDidChange), for: .valueChanged)
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    @objc func datePickerDidChange(sender: UIDatePicker) {
+        guard let delegate = delegate else {
+            return
         }
+        delegate.dateTableViewCellDidChange(self)
     }
-
 }
