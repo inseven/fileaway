@@ -15,6 +15,7 @@ FILEAWAY_WORKSPACE_PATH="${ROOT_DIRECTORY}/Fileaway.xcworkspace"
 export CODE_SIGN_IDENTITY=""
 export CODE_SIGNING_REQUIRED=NO
 export CODE_SIGNING_ALLOWED=NO
+export DEVELOPMENT_TEAM=""
 
 # FileActionsCore iOS
 xcodebuild \
