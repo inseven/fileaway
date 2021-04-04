@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D8CCB8012143672700AC445F"
-               BuildableName = "File Actions.app"
+               BuildableName = "Fileaway.app"
                BlueprintName = "Fileaway"
                ReferencedContainer = "container:Fileaway-iOS.xcodeproj">
             </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D8CCB8012143672700AC445F"
-            BuildableName = "File Actions.app"
+            BuildableName = "Fileaway.app"
             BlueprintName = "Fileaway"
             ReferencedContainer = "container:Fileaway-iOS.xcodeproj">
          </BuildableReference>
@@ -82,7 +82,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D8CCB8012143672700AC445F"
-            BuildableName = "File Actions.app"
+            BuildableName = "Fileaway.app"
             BlueprintName = "Fileaway"
             ReferencedContainer = "container:Fileaway-iOS.xcodeproj">
          </BuildableReference>
