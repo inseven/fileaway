@@ -18,51 +18,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
 import SwiftUI
 
-import FileawayCore
+class RightClickObservingView : NSView {
 
-extension Component {
+    weak var delegate: RightClickObservingViewDelegate?
 
-    init(_ state: ComponentState) {
-        self.init(type: state.type, value: state.value)
-    }
+    override init(frame frameRect: NSRect) {
+        super.init(frame: frameRect)
 
-}
-
-class ComponentState: ObservableObject, Identifiable {
-
-    var id = UUID() // TODO: Why doesn't this work if it's a let.
-    @Published var value: String
-    @Published var type: ComponentType
-    var variable: VariableState? = nil
-
-    init(value: String, type: ComponentType, variable: VariableState?) {
-        self.value = value
-        self.type = type
-        self.variable = variable
-    }
-
-    init(_ component: Component, variable: VariableState?) {
-        value = component.value
-        type = component.type
-        self.variable = variable
-    }
-
-    // TODO: How do we actually copy???
-    init(_ component: ComponentState, variable: VariableState?) {
-        id = component.id
-        value = String(component.value)
-        type = component.type
-        self.variable = variable
-    }
-
-    func update() {
-        guard let variable = self.variable else {
-            return
+        let recognizer = ObservingGestureRecognizer { [weak self] in
+            self?.delegate?.rightClickFocusDidChange(focused: true)
         }
-        self.value = variable.name
+        addGestureRecognizer(recognizer)
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveNotification),
+                                               name: NSNotification.Name(rawValue: "NSMenuDidCompleteInteractionNotification"),
+                                               object: nil)
+    }
+
+    @objc func didReceiveNotification(_ notification: NSNotification) {
+        delegate?.rightClickFocusDidChange(focused: false)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
 }

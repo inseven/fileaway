@@ -18,51 +18,46 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
 import SwiftUI
 
-import FileawayCore
+struct RightClickableSwiftUIView: NSViewRepresentable {
 
-extension Component {
+    var onRightClickFocusChange: (Bool) -> Void
 
-    init(_ state: ComponentState) {
-        self.init(type: state.type, value: state.value)
+    class Coordinator: NSObject, RightClickObservingViewDelegate {
+
+        var parent: RightClickableSwiftUIView
+
+        init(_ parent: RightClickableSwiftUIView) {
+            self.parent = parent
+        }
+
+        func rightClickFocusDidChange(focused: Bool) {
+            // TODO: Remove repeated entries here? Maybe this could be a publisher?
+            print("\(self) rightClickFocusDidChange: \(focused)")
+            parent.onRightClickFocusChange(focused)
+        }
+
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+    func makeNSView(context: Context) -> RightClickObservingView {
+        let view = RightClickObservingView()
+        view.delegate = context.coordinator
+        return view
+    }
+
+    func updateNSView(_ view: RightClickObservingView, context: NSViewRepresentableContext<RightClickableSwiftUIView>) {
+        view.delegate = context.coordinator
     }
 
 }
 
-class ComponentState: ObservableObject, Identifiable {
+protocol RightClickObservingViewDelegate: NSObject {
 
-    var id = UUID() // TODO: Why doesn't this work if it's a let.
-    @Published var value: String
-    @Published var type: ComponentType
-    var variable: VariableState? = nil
-
-    init(value: String, type: ComponentType, variable: VariableState?) {
-        self.value = value
-        self.type = type
-        self.variable = variable
-    }
-
-    init(_ component: Component, variable: VariableState?) {
-        value = component.value
-        type = component.type
-        self.variable = variable
-    }
-
-    // TODO: How do we actually copy???
-    init(_ component: ComponentState, variable: VariableState?) {
-        id = component.id
-        value = String(component.value)
-        type = component.type
-        self.variable = variable
-    }
-
-    func update() {
-        guard let variable = self.variable else {
-            return
-        }
-        self.value = variable.name
-    }
+    func rightClickFocusDidChange(focused: Bool)
 
 }

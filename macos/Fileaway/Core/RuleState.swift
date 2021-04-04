@@ -72,8 +72,17 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
     }
 
     convenience init(_ rule: RuleState, rootUrl: URL) {
+        // TODO: This looks like a copy constructor, but totally isn't.
         self.init(id: rule.id,
                   rootUrl: rootUrl,
+                  name: String(rule.name),
+                  variables: rule.variables.map { VariableState($0) },
+                  destination: rule.destination.map { ComponentState($0, variable: nil) })
+    }
+
+    convenience init(_ rule: RuleState) {
+        self.init(id: UUID(),
+                  rootUrl: rule.rootUrl,
                   name: String(rule.name),
                   variables: rule.variables.map { VariableState($0) },
                   destination: rule.destination.map { ComponentState($0, variable: nil) })

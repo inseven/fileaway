@@ -39,9 +39,14 @@ struct RulesSettingsView: View {
         case rule(rule: RuleState)
     }
 
+    enum AlertType {
+        case duplicationFailure(error: Error)
+    }
+
     @ObservedObject var rules: RuleSet
     @State var selection: RuleState?
     @State var sheet: SheetType?
+    @State var alert: AlertType?
 
     var body: some View {
         HStack {
@@ -54,6 +59,15 @@ struct RulesSettingsView: View {
                             .onTapGesture(count: 2) {
                                 print("Double tapped!")
                                 sheet = .rule(rule: rule)
+                            }
+                            .contextMenu {
+                                Button("Duplicate") {
+                                    do {
+                                        let _ = try rules.duplicate(rule, preferredName: "Copy of " + rule.name)
+                                    } catch {
+                                        alert = .duplicationFailure(error: error)
+                                    }
+                                }
                             }
                     }
                     HStack {
@@ -96,6 +110,12 @@ struct RulesSettingsView: View {
                     RuleSheet(rule: rule)
                 }
             }
+            .alert(item: $alert) { alert in
+                switch alert {
+                case .duplicationFailure(let error):
+                    return Alert(title: Text("Duplicate Rule Failed"), message: Text(error.localizedDescription))
+                }
+            }
         }
     }
 
@@ -107,6 +127,17 @@ extension RulesSettingsView.SheetType: Identifiable {
         switch self {
         case .rule:
             return "rule"
+        }
+    }
+
+}
+
+extension RulesSettingsView.AlertType: Identifiable {
+
+    public var id: String {
+        switch self {
+        case .duplicationFailure(let error):
+            return "duplicationFailure:\(error)"
         }
     }
 

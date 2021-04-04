@@ -92,6 +92,7 @@ struct DetailsPage: View {
 }
 
 extension DetailsPage.AlertType: Identifiable {
+
     public var id: String {
         switch self {
         case .error(let error):
@@ -100,4 +101,5 @@ extension DetailsPage.AlertType: Identifiable {
             return "duplicate:\(duplicateUrl)"
         }
     }
+    
 }
