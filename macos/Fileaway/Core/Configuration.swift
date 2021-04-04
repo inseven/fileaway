@@ -25,11 +25,6 @@ struct Configuration: Codable {
     let variables: [Variable]
     let destination: [Component]
 
-    init(_ configuration: Configuration) {
-        self.variables = configuration.variables
-        self.destination = configuration.destination
-    }
-
     init(variables: [Variable], destination: [Component]) {
         self.variables = variables
         self.destination = destination
