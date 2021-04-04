@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:macos/Fileaway.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:core/FileActionsCore.xcodeproj">
    </FileRef>
    <FileRef
