@@ -41,6 +41,6 @@ xcodebuild \
 # macOS app
 xcodebuild \
     -workspace "$FILEAWAY_WORKSPACE_PATH" \
-    -scheme "Fileaway" \
+    -scheme "Fileaway macOS" \
     clean \
     build | xcpretty
