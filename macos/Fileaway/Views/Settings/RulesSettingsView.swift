@@ -86,7 +86,7 @@ struct RulesSettingsView: View {
                     HStack {
                         ListButtons {
                             do {
-                                let rule = try rules.new()
+                                let rule = try rules.new(preferredName: "Rule")
                                 selection = rule
                                 sheet = .rule(rule: rule)
                             } catch {

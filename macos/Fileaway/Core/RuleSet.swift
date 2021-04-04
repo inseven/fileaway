@@ -88,13 +88,26 @@ class RuleSet: ObservableObject {
         return names.contains(name)
     }
 
-    func add(_ rule: RuleState) throws {
+    /**
+     Generate a guaranteed unique name based on a preferred name by appending an incrementing instance number to the
+     name in the case that the preferred name is not found to be unique. This is intended to match the behaviour of
+     duplication in Finder.
+     */
+    // TODO: Determine if it's necessary to localize this in the future
+    fileprivate func uniqueRuleName(preferredName: String) -> String {
+        var name = preferredName
+        var index = 2
+        while contains(ruleNamed: name) {
+            name = "\(preferredName) \(index)"
+            index = index + 1
+        }
+        return name
+    }
 
-        // Check there are no existing rules with the same name.
+    func add(_ rule: RuleState) throws {
         guard !contains(ruleNamed: rule.name) else {
             throw RuleSetError.duplicateName
         }
-
         mutableRules.append(rule)
         var rules = Array(self.rules)
         rules.append(Rule(rule))
@@ -103,16 +116,8 @@ class RuleSet: ObservableObject {
         try save()
     }
 
-    func new() throws -> RuleState {
-
-        // Determine a unique name based on the preferred name.
-        var index = 1
-        var name = ""
-        repeat {
-            name = "Rule \(index)"
-            index = index + 1
-        } while contains(ruleNamed: name)
-
+    func new(preferredName: String) throws -> RuleState {
+        let name = uniqueRuleName(preferredName: preferredName)
         let rule = RuleState(id: UUID(),
                              rootUrl: rootUrl,
                              name: name,
@@ -126,20 +131,10 @@ class RuleSet: ObservableObject {
     }
 
     func duplicate(_ rule: RuleState, preferredName: String) throws -> RuleState {
-
-        // Determine a unique name based on the preferred name.
-        var name = preferredName
-        var index = 1
-        while contains(ruleNamed: name) {
-            name = "\(preferredName) \(index)"
-            index = index + 1
-        }
-
-        // Create and insert the new rule.
+        let name = uniqueRuleName(preferredName: preferredName)
         let newRule = RuleState(rule)
         newRule.name = name
         try add(newRule)
-
         return newRule
     }
 
