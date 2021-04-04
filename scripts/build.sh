@@ -35,7 +35,7 @@ xcodebuild \
 xcodebuild \
     -workspace "$FILEAWAY_WORKSPACE_PATH" \
     -scheme "Fileaway iOS" \
-    # -allowProvisioningUpdates \
+    -allowProvisioningUpdates \
     clean \
     build | xcpretty
 
