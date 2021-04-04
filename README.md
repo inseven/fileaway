@@ -14,7 +14,7 @@ Right now the macOS and iOS apps are incredibly divergent having been written wi
 
 ## Changelog
 
-### macOS 0.1.0
+### Version 0.1.0 (macOS)
 
 Initial release with support for a single inbox and archive directories, rules wizard, and simple rule editing.
 
