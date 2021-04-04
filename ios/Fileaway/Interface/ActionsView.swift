@@ -104,7 +104,7 @@ struct ActionsView: View {
         .sheet(item: $activeSheet) { sheet in
             return self.sheet(type: sheet)
         }
-        .navigationBarTitle("File Actions")
+        .navigationBarTitle("Fileaway")
         .navigationBarItems(leading: Button(action: {
             self.activeSheet = .settings
         }, label: {

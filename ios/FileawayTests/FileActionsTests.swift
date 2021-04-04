@@ -19,7 +19,7 @@
 // SOFTWARE.
 
 import XCTest
-@testable import File_Actions
+@testable import Fileaway
 
 class FileActionsTests: XCTestCase {
     
