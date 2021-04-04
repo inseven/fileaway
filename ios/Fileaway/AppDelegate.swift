@@ -22,10 +22,6 @@ import UIKit
 
 import FileawayCore
 
-extension UIApplication {
-
-}
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
