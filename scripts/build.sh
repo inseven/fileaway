@@ -14,7 +14,7 @@ FILEAWAY_WORKSPACE_PATH="${ROOT_DIRECTORY}/Fileaway.xcworkspace"
 # Disable code signing for the build server.
 export CODE_SIGN_IDENTITY=""
 export CODE_SIGNING_REQUIRED=NO
-# export CODE_SIGNING_ALLOWED=NO
+export CODE_SIGNING_ALLOWED=NO
 export DEVELOPMENT_TEAM=""
 
 # FileActionsCore iOS
@@ -35,7 +35,6 @@ xcodebuild \
 xcodebuild \
     -workspace "$FILEAWAY_WORKSPACE_PATH" \
     -scheme "Fileaway iOS" \
-    -allowProvisioningUpdates \
     clean \
     build | xcpretty
 
