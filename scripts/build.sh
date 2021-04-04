@@ -32,7 +32,7 @@ xcodebuild \
 # iOS app
 xcodebuild \
     -workspace "$FILEAWAY_WORKSPACE_PATH" \
-    -scheme "File Actions iOS" \
+    -scheme "Fileaway iOS" \
     clean \
     build \
     CODE_SIGN_IDENTITY="" \

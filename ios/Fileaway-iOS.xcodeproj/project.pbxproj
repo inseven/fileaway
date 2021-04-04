@@ -138,10 +138,10 @@
 		D8CCB80C2143672700AC445F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D8CCB80F2143672700AC445F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D8CCB8112143672700AC445F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D8CCB8162143672700AC445F /* FileActionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileActionsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8CCB8162143672700AC445F /* FileawayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileawayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8CCB81A2143672700AC445F /* FileActionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileActionsTests.swift; sourceTree = "<group>"; };
 		D8CCB81C2143672700AC445F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D8CCB8212143672700AC445F /* FileActionsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileActionsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8CCB8212143672700AC445F /* FileawayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileawayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8CCB8252143672700AC445F /* FileActionsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileActionsUITests.swift; sourceTree = "<group>"; };
 		D8CCB8272143672700AC445F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8CCD292246EDC6A007EF2BB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -227,7 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				D8B0B3D425314771001EB2C2 /* File Actions.entitlements */,
-				D8CCB8042143672700AC445F /* FileActions */,
+				D8CCB8042143672700AC445F /* Fileaway */,
 				D8CCB8192143672700AC445F /* FileActionsTests */,
 				D8CCB8242143672700AC445F /* FileActionsUITests */,
 				D890DD3D216F16C300922453 /* Resources */,
@@ -240,13 +240,13 @@
 			isa = PBXGroup;
 			children = (
 				D8CCB8022143672700AC445F /* File Actions.app */,
-				D8CCB8162143672700AC445F /* FileActionsTests.xctest */,
-				D8CCB8212143672700AC445F /* FileActionsUITests.xctest */,
+				D8CCB8162143672700AC445F /* FileawayTests.xctest */,
+				D8CCB8212143672700AC445F /* FileawayUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D8CCB8042143672700AC445F /* FileActions */ = {
+		D8CCB8042143672700AC445F /* Fileaway */ = {
 			isa = PBXGroup;
 			children = (
 				D8CCB8112143672700AC445F /* Info.plist */,
@@ -276,7 +276,7 @@
 				D81C5D98249BF2560083BD6F /* State */,
 				D8E4CA54249CF69800F5BC8E /* Utilities */,
 			);
-			path = FileActions;
+			path = Fileaway;
 			sourceTree = "<group>";
 		};
 		D8CCB8192143672700AC445F /* FileActionsTests */ = {
@@ -326,9 +326,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D8CCB8012143672700AC445F /* File Actions */ = {
+		D8CCB8012143672700AC445F /* Fileaway */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D8CCB82A2143672700AC445F /* Build configuration list for PBXNativeTarget "File Actions" */;
+			buildConfigurationList = D8CCB82A2143672700AC445F /* Build configuration list for PBXNativeTarget "Fileaway" */;
 			buildPhases = (
 				D8CCB7FE2143672700AC445F /* Sources */,
 				D8CCB7FF2143672700AC445F /* Frameworks */,
@@ -339,14 +339,14 @@
 			);
 			dependencies = (
 			);
-			name = "File Actions";
+			name = Fileaway;
 			productName = Fileaway;
 			productReference = D8CCB8022143672700AC445F /* File Actions.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D8CCB8152143672700AC445F /* FileActionsTests */ = {
+		D8CCB8152143672700AC445F /* FileawayTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D8CCB82D2143672700AC445F /* Build configuration list for PBXNativeTarget "FileActionsTests" */;
+			buildConfigurationList = D8CCB82D2143672700AC445F /* Build configuration list for PBXNativeTarget "FileawayTests" */;
 			buildPhases = (
 				D8CCB8122143672700AC445F /* Sources */,
 				D8CCB8132143672700AC445F /* Frameworks */,
@@ -357,14 +357,14 @@
 			dependencies = (
 				D8CCB8182143672700AC445F /* PBXTargetDependency */,
 			);
-			name = FileActionsTests;
+			name = FileawayTests;
 			productName = FileawayTests;
-			productReference = D8CCB8162143672700AC445F /* FileActionsTests.xctest */;
+			productReference = D8CCB8162143672700AC445F /* FileawayTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		D8CCB8202143672700AC445F /* FileActionsUITests */ = {
+		D8CCB8202143672700AC445F /* FileawayUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D8CCB8302143672700AC445F /* Build configuration list for PBXNativeTarget "FileActionsUITests" */;
+			buildConfigurationList = D8CCB8302143672700AC445F /* Build configuration list for PBXNativeTarget "FileawayUITests" */;
 			buildPhases = (
 				D8CCB81D2143672700AC445F /* Sources */,
 				D8CCB81E2143672700AC445F /* Frameworks */,
@@ -375,9 +375,9 @@
 			dependencies = (
 				D8CCB8232143672700AC445F /* PBXTargetDependency */,
 			);
-			name = FileActionsUITests;
+			name = FileawayUITests;
 			productName = FileawayUITests;
-			productReference = D8CCB8212143672700AC445F /* FileActionsUITests.xctest */;
+			productReference = D8CCB8212143672700AC445F /* FileawayUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -406,7 +406,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D8CCB7FD2143672700AC445F /* Build configuration list for PBXProject "FileActions-iOS" */;
+			buildConfigurationList = D8CCB7FD2143672700AC445F /* Build configuration list for PBXProject "Fileaway-iOS" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -419,9 +419,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D8CCB8012143672700AC445F /* File Actions */,
-				D8CCB8152143672700AC445F /* FileActionsTests */,
-				D8CCB8202143672700AC445F /* FileActionsUITests */,
+				D8CCB8012143672700AC445F /* Fileaway */,
+				D8CCB8152143672700AC445F /* FileawayTests */,
+				D8CCB8202143672700AC445F /* FileawayUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -527,12 +527,12 @@
 /* Begin PBXTargetDependency section */
 		D8CCB8182143672700AC445F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D8CCB8012143672700AC445F /* File Actions */;
+			target = D8CCB8012143672700AC445F /* Fileaway */;
 			targetProxy = D8CCB8172143672700AC445F /* PBXContainerItemProxy */;
 		};
 		D8CCB8232143672700AC445F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D8CCB8012143672700AC445F /* File Actions */;
+			target = D8CCB8012143672700AC445F /* Fileaway */;
 			targetProxy = D8CCB8222143672700AC445F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -677,11 +677,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
-				INFOPLIST_FILE = FileActions/Info.plist;
+				INFOPLIST_FILE = Fileaway/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.file-actions";
 				PRODUCT_NAME = "File Actions";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -697,11 +697,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
-				INFOPLIST_FILE = FileActions/Info.plist;
+				INFOPLIST_FILE = Fileaway/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.file-actions";
 				PRODUCT_NAME = "File Actions";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -777,7 +777,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D8CCB7FD2143672700AC445F /* Build configuration list for PBXProject "FileActions-iOS" */ = {
+		D8CCB7FD2143672700AC445F /* Build configuration list for PBXProject "Fileaway-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D8CCB8282143672700AC445F /* Debug */,
@@ -786,7 +786,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D8CCB82A2143672700AC445F /* Build configuration list for PBXNativeTarget "File Actions" */ = {
+		D8CCB82A2143672700AC445F /* Build configuration list for PBXNativeTarget "Fileaway" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D8CCB82B2143672700AC445F /* Debug */,
@@ -795,7 +795,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D8CCB82D2143672700AC445F /* Build configuration list for PBXNativeTarget "FileActionsTests" */ = {
+		D8CCB82D2143672700AC445F /* Build configuration list for PBXNativeTarget "FileawayTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D8CCB82E2143672700AC445F /* Debug */,
@@ -804,7 +804,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D8CCB8302143672700AC445F /* Build configuration list for PBXNativeTarget "FileActionsUITests" */ = {
+		D8CCB8302143672700AC445F /* Build configuration list for PBXNativeTarget "FileawayUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D8CCB8312143672700AC445F /* Debug */,

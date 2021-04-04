@@ -4,7 +4,13 @@
 
 Document management app for iOS and macOS.
 
-![macOS screenshot](screenshot.png)
+![macOS screenshot](screenshots/macos.png)
+
+![iOS screenshot](screenshots/ios.png)
+
+## Overview
+
+Right now the macOS and iOS apps are incredibly divergent having been written with significantly different ideas of what makes for a good file management app: the iOS came first and focuses solely on the process of rule based filing, while the latest iteration of the macOS app (there have been many) also introduces a Mail-like file browser.
 
 ## Licensing
 
