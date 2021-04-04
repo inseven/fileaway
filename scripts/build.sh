@@ -11,38 +11,35 @@ FILEAWAY_WORKSPACE_PATH="${ROOT_DIRECTORY}/Fileaway.xcworkspace"
 
 # TODO: Enable test builds if possible using a locally generated signing key.
 
+# Disable code signing for the build server.
+export CODE_SIGN_IDENTITY=""
+export CODE_SIGNING_REQUIRED=NO
+export CODE_SIGNING_ALLOWED=NO
+
 # FileActionsCore iOS
 xcodebuild \
     -workspace "$FILEAWAY_WORKSPACE_PATH" \
     -scheme "FileActionsCore iOS" \
     clean \
-    build \
-    CODE_SIGN_IDENTITY="" \
-    CODE_SIGNING_REQUIRED=NO | xcpretty
+    build | xcpretty
 
 # FileActionsCore macOS
 xcodebuild \
     -workspace "$FILEAWAY_WORKSPACE_PATH" \
     -scheme "FileActionsCore macOS" \
     clean \
-    build \
-    CODE_SIGN_IDENTITY="" \
-    CODE_SIGNING_REQUIRED=NO | xcpretty
+    build | xcpretty
 
 # iOS app
 xcodebuild \
     -workspace "$FILEAWAY_WORKSPACE_PATH" \
     -scheme "Fileaway iOS" \
     clean \
-    build \
-    CODE_SIGN_IDENTITY="" \
-    CODE_SIGNING_REQUIRED=NO | xcpretty
+    build | xcpretty
 
 # macOS app
 xcodebuild \
     -workspace "$FILEAWAY_WORKSPACE_PATH" \
     -scheme "Fileaway" \
     clean \
-    build \
-    CODE_SIGN_IDENTITY="" \
-    CODE_SIGNING_REQUIRED=NO | xcpretty
+    build | xcpretty
