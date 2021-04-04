@@ -681,7 +681,7 @@
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
 				INFOPLIST_FILE = Fileaway/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.file-actions";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.fileaway;
 				PRODUCT_NAME = Fileaway;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
@@ -701,7 +701,7 @@
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
 				INFOPLIST_FILE = Fileaway/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.file-actions";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.fileaway;
 				PRODUCT_NAME = Fileaway;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
