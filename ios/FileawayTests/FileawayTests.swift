@@ -21,6 +21,6 @@
 import XCTest
 @testable import Fileaway
 
-class FileActionsTests: XCTestCase {
+class FileawayTests: XCTestCase {
     
 }

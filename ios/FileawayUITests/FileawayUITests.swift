@@ -20,6 +20,6 @@
 
 import XCTest
 
-class FileActionsUITests: XCTestCase {
+class FileawayUITests: XCTestCase {
     
 }
