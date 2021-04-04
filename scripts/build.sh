@@ -7,8 +7,6 @@ set -x
 SCRIPT_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 ROOT_DIRECTORY="${SCRIPT_DIRECTORY}/.."
 
-FILEAWAY_WORKSPACE_PATH="${ROOT_DIRECTORY}/Fileaway.xcworkspace"
-
 # TODO: Enable test builds if possible using a locally generated signing key.
 
 # Disable code signing for the build server.
@@ -17,12 +15,15 @@ FILEAWAY_WORKSPACE_PATH="${ROOT_DIRECTORY}/Fileaway.xcworkspace"
 # export CODE_SIGNING_ALLOWED=NO
 # export DEVELOPMENT_TEAM=""
 
+# Set the working directory.
+cd "$ROOT_DIRECTORY"
+
 # List the available schemes.
-xcodebuild -workspace "$FILEAWAY_WORKSPACE_PATH" -list
+xcodebuild -workspace Fileaway.xcworkspace -list
 
 # FileawayCore iOS
 xcodebuild \
-    -workspace "$FILEAWAY_WORKSPACE_PATH" \
+    -workspace Fileaway.xcworkspace \
     -scheme "FileawayCore iOS" \
     clean \
     build \
@@ -30,7 +31,7 @@ xcodebuild \
 
 # FileawayCore macOS
 xcodebuild \
-    -workspace "$FILEAWAY_WORKSPACE_PATH" \
+    -workspace Fileaway.xcworkspace \
     -scheme "FileawayCore macOS" \
     clean \
     build \
@@ -38,7 +39,7 @@ xcodebuild \
 
 # iOS app
 xcodebuild \
-    -workspace "$FILEAWAY_WORKSPACE_PATH" \
+    -workspace Fileaway.xcworkspace \
     -scheme "Fileaway iOS" \
     clean \
     build \
@@ -46,7 +47,7 @@ xcodebuild \
 
 # macOS app
 xcodebuild \
-    -workspace "$FILEAWAY_WORKSPACE_PATH" \
+    -workspace Fileaway.xcworkspace \
     -scheme "Fileaway macOS" \
     clean \
     build \
