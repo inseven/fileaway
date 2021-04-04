@@ -29,29 +29,25 @@ xcodebuild \
     -workspace Fileaway.xcworkspace \
     -scheme "FileawayCore iOS" \
     clean \
-    build \
-    build-for-testing | xcpretty
+    build | xcpretty
 
 # FileawayCore macOS
 xcodebuild \
     -workspace Fileaway.xcworkspace \
     -scheme "FileawayCore macOS" \
     clean \
-    build \
-    build-for-testing | xcpretty
+    build | xcpretty
 
 # iOS app
 xcodebuild \
     -workspace Fileaway.xcworkspace \
     -scheme "Fileaway iOS" \
     clean \
-    build \
-    build-for-testing | xcpretty
+    build | xcpretty
 
 # macOS app
 xcodebuild \
     -workspace Fileaway.xcworkspace \
     -scheme "Fileaway macOS" \
     clean \
-    build \
-    build-for-testing | xcpretty
+    build | xcpretty
