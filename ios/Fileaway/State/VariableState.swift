@@ -20,7 +20,7 @@
 
 import Foundation
 
-import FileActionsCore
+import FileawayCore
 
 extension Variable {
 

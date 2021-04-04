@@ -19,7 +19,7 @@
 // SOFTWARE.
 
 import UIKit
-import FileActionsCore
+import FileawayCore
 
 protocol TypeViewControllerDelegate: class {
     func typeViewController(_ typeViewController: TypeViewController, didSelectIndex index: Int)

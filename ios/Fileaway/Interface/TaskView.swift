@@ -22,7 +22,7 @@ import Combine
 import Foundation
 import SwiftUI
 
-import FileActionsCore
+import FileawayCore
 
 struct VariableRow : View {
 

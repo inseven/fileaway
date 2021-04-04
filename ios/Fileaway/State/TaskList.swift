@@ -21,7 +21,7 @@
 import Combine
 import Foundation
 
-import FileActionsCore
+import FileawayCore
 
 class TaskList: ObservableObject, BackChannelable {
 

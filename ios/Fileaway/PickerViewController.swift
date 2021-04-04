@@ -21,7 +21,7 @@
 import UIKit
 import QuickLook
 
-import FileActionsCore
+import FileawayCore
 
 enum ReuseIdentifier: String {
     case textCell = "TextCell"

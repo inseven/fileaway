@@ -17,30 +17,34 @@ export CODE_SIGNING_REQUIRED=NO
 export CODE_SIGNING_ALLOWED=NO
 export DEVELOPMENT_TEAM=""
 
-# FileActionsCore iOS
+# FileawayCore iOS
 xcodebuild \
     -workspace "$FILEAWAY_WORKSPACE_PATH" \
-    -scheme "FileActionsCore iOS" \
+    -scheme "FileawayCore iOS" \
     clean \
-    build | xcpretty
+    build \
+    build-for-testing | xcpretty
 
-# FileActionsCore macOS
+# FileawayCore macOS
 xcodebuild \
     -workspace "$FILEAWAY_WORKSPACE_PATH" \
-    -scheme "FileActionsCore macOS" \
+    -scheme "FileawayCore macOS" \
     clean \
-    build | xcpretty
+    build \
+    build-for-testing | xcpretty
 
 # iOS app
 xcodebuild \
     -workspace "$FILEAWAY_WORKSPACE_PATH" \
     -scheme "Fileaway iOS" \
     clean \
-    build | xcpretty
+    build \
+    build-for-testing | xcpretty
 
 # macOS app
 xcodebuild \
     -workspace "$FILEAWAY_WORKSPACE_PATH" \
     -scheme "Fileaway macOS" \
     clean \
-    build | xcpretty
+    build \
+    build-for-testing | xcpretty

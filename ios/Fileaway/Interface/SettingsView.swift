@@ -21,7 +21,7 @@
 import MobileCoreServices
 import SwiftUI
 
-import FileActionsCore
+import FileawayCore
 
 extension VariableType: CustomStringConvertible {
 

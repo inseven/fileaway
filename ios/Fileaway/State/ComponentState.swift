@@ -21,7 +21,7 @@
 import Foundation
 import SwiftUI
 
-import FileActionsCore
+import FileawayCore
 
 extension Component {
 

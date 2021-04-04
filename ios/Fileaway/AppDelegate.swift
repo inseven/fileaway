@@ -20,7 +20,7 @@
 
 import UIKit
 
-import FileActionsCore
+import FileawayCore
 
 extension UIApplication {
 

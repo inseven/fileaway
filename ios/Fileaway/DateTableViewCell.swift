@@ -19,7 +19,8 @@
 // SOFTWARE.
 
 import UIKit
-import FileActionsCore
+
+import FileawayCore
 
 protocol DateTableViewCellDelegate: class {
     func dateTableViewCellDidChange(_ dateTableViewCell: DateTableViewCell)

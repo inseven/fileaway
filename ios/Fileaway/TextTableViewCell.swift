@@ -19,7 +19,7 @@
 // SOFTWARE.
 
 import UIKit
-import FileActionsCore
+import FileawayCore
 
 protocol TextTableViewCellDelegate: class {
     func textTableViewCellDidChange(_ textTableViewCell: TextTableViewCell)

@@ -19,7 +19,7 @@
 // SOFTWARE.
 
 import XCTest
-@testable import FileawayCore_macOS
+@testable import FileawayCore
 
 class FileawayCore_macOSTests: XCTestCase {
 

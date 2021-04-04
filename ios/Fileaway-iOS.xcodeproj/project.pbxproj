@@ -32,6 +32,8 @@
 		D85D0A14249ADCE900D4B414 /* MergeDocumentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85D0A13249ADCE900D4B414 /* MergeDocumentsView.swift */; };
 		D85D0A16249ADFDC00D4B414 /* FakeDuplexTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85D0A15249ADFDC00D4B414 /* FakeDuplexTask.swift */; };
 		D85D0A18249AE0A000D4B414 /* FakeDuplexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85D0A17249AE0A000D4B414 /* FakeDuplexView.swift */; };
+		D866D66426197AC80025329E /* FileawayCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D866D66326197AC80025329E /* FileawayCore.framework */; };
+		D866D66526197AC80025329E /* FileawayCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D866D66326197AC80025329E /* FileawayCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D86A8F13249C12BB00839D1A /* VariableState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86A8F12249C12BB00839D1A /* VariableState.swift */; };
 		D86A8F15249C5F9800839D1A /* DestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86A8F14249C5F9800839D1A /* DestinationView.swift */; };
 		D88F3D43216F847D00BFE0F9 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88F3D42216F847D00BFE0F9 /* PickerViewController.swift */; };
@@ -42,8 +44,6 @@
 		D89265842498AC3A00297825 /* ActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89265832498AC3A00297825 /* ActionsViewController.swift */; };
 		D89265892498C58C00297825 /* MoveFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89265882498C58C00297825 /* MoveFileViewController.swift */; };
 		D89941012145E6AE00097F3D /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89941002145E6AE00097F3D /* StorageManager.swift */; };
-		D8B76B3824999EEE005EC4A1 /* FileActionsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8B76B3724999EEE005EC4A1 /* FileActionsCore.framework */; };
-		D8B76B3924999EF5005EC4A1 /* FileActionsCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D8B76B3724999EEE005EC4A1 /* FileActionsCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D8CAE3EE249D3AD70047CA36 /* ErrorText.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CAE3ED249D3AD70047CA36 /* ErrorText.swift */; };
 		D8CAE3F0249D6E1D0047CA36 /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CAE3EF249D6E1D0047CA36 /* TaskList.swift */; };
 		D8CCB8062143672700AC445F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCB8052143672700AC445F /* AppDelegate.swift */; };
@@ -85,7 +85,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D8B76B3924999EF5005EC4A1 /* FileActionsCore.framework in Embed Frameworks */,
+				D866D66526197AC80025329E /* FileawayCore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -118,6 +118,7 @@
 		D85D0A13249ADCE900D4B414 /* MergeDocumentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeDocumentsView.swift; sourceTree = "<group>"; };
 		D85D0A15249ADFDC00D4B414 /* FakeDuplexTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeDuplexTask.swift; sourceTree = "<group>"; };
 		D85D0A17249AE0A000D4B414 /* FakeDuplexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeDuplexView.swift; sourceTree = "<group>"; };
+		D866D66326197AC80025329E /* FileawayCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FileawayCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86A8F12249C12BB00839D1A /* VariableState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableState.swift; sourceTree = "<group>"; };
 		D86A8F14249C5F9800839D1A /* DestinationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationView.swift; sourceTree = "<group>"; };
 		D88F3D42216F847D00BFE0F9 /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
@@ -158,7 +159,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8B76B3824999EEE005EC4A1 /* FileActionsCore.framework in Frameworks */,
+				D866D66426197AC80025329E /* FileawayCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +212,7 @@
 		D8BCA522216F069B002A624D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D866D66326197AC80025329E /* FileawayCore.framework */,
 				D8B76B3724999EEE005EC4A1 /* FileActionsCore.framework */,
 			);
 			name = Frameworks;
@@ -665,7 +667,6 @@
 		D8CCB82B2143672700AC445F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Fileaway.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -685,7 +686,6 @@
 		D8CCB82C2143672700AC445F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Fileaway.entitlements;
 				CODE_SIGN_STYLE = Automatic;
