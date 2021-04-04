@@ -228,7 +228,7 @@
 			children = (
 				D8B0B3D425314771001EB2C2 /* File Actions.entitlements */,
 				D8CCB8042143672700AC445F /* Fileaway */,
-				D8CCB8192143672700AC445F /* FileActionsTests */,
+				D8CCB8192143672700AC445F /* FileawayTests */,
 				D8CCB8242143672700AC445F /* FileActionsUITests */,
 				D890DD3D216F16C300922453 /* Resources */,
 				D8CCB8032143672700AC445F /* Products */,
@@ -279,13 +279,13 @@
 			path = Fileaway;
 			sourceTree = "<group>";
 		};
-		D8CCB8192143672700AC445F /* FileActionsTests */ = {
+		D8CCB8192143672700AC445F /* FileawayTests */ = {
 			isa = PBXGroup;
 			children = (
 				D8CCB81A2143672700AC445F /* FileActionsTests.swift */,
 				D8CCB81C2143672700AC445F /* Info.plist */,
 			);
-			path = FileActionsTests;
+			path = FileawayTests;
 			sourceTree = "<group>";
 		};
 		D8CCB8242143672700AC445F /* FileActionsUITests */ = {
@@ -715,9 +715,9 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
-				INFOPLIST_FILE = FileActionsTests/Info.plist;
+				INFOPLIST_FILE = FileawayTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.FileActionsTests;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.FileawayTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -732,9 +732,9 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
-				INFOPLIST_FILE = FileActionsTests/Info.plist;
+				INFOPLIST_FILE = FileawayTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.FileActionsTests;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.FileawayTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
