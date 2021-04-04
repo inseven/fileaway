@@ -12,7 +12,7 @@ ROOT_DIRECTORY="${SCRIPT_DIRECTORY}/.."
 # Disable code signing for the build server.
 export CODE_SIGN_IDENTITY=""
 export CODE_SIGNING_REQUIRED=NO
-export CODE_SIGNING_ALLOWED=NO
+# export CODE_SIGNING_ALLOWED=NO
 export DEVELOPMENT_TEAM=""
 
 # Clean up derived data (mostly for GitHub's benefit).
