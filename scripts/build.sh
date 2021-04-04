@@ -10,10 +10,13 @@ ROOT_DIRECTORY="${SCRIPT_DIRECTORY}/.."
 # TODO: Enable test builds if possible using a locally generated signing key.
 
 # Disable code signing for the build server.
-# export CODE_SIGN_IDENTITY=""
-# export CODE_SIGNING_REQUIRED=NO
-# export CODE_SIGNING_ALLOWED=NO
-# export DEVELOPMENT_TEAM=""
+export CODE_SIGN_IDENTITY=""
+export CODE_SIGNING_REQUIRED=NO
+export CODE_SIGNING_ALLOWED=NO
+export DEVELOPMENT_TEAM=""
+
+# Clean up derived data (mostly for GitHub's benefit).
+rm -rf ~/Library/Developer/Xcode/DerivedData
 
 # Set the working directory.
 cd "$ROOT_DIRECTORY"
