@@ -21,9 +21,6 @@ jobs:
       with:
         submodules: recursive
 
-    - name: Force Xcode 12.4
-      run: sudo xcode-select -switch /Applications/Xcode_12.4.app
-
     - name: Trust the GitHub SSH keys
       run: |
         for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts
