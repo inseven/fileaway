@@ -10,8 +10,8 @@
 		D8BCA524216F08DF002A624D /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D14D56216E3BAE00D6E1DF /* Configuration.swift */; };
 		D8BCA525216F08DF002A624D /* VariableProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D14D57216E3BAE00D6E1DF /* VariableProvider.swift */; };
 		D8BCA526216F08DF002A624D /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D14D58216E3BAE00D6E1DF /* Manager.swift */; };
-		D8BCA527216F08E3002A624D /* FileActionsCore.h in Headers */ = {isa = PBXBuildFile; fileRef = D81F7C48216E3AA80070AAA0 /* FileActionsCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D8BCA528216F08E6002A624D /* FileActionsCore.h in Headers */ = {isa = PBXBuildFile; fileRef = D81F7C48216E3AA80070AAA0 /* FileActionsCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8BCA527216F08E3002A624D /* FileawayCore.h in Headers */ = {isa = PBXBuildFile; fileRef = D81F7C48216E3AA80070AAA0 /* FileawayCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8BCA528216F08E6002A624D /* FileawayCore.h in Headers */ = {isa = PBXBuildFile; fileRef = D81F7C48216E3AA80070AAA0 /* FileawayCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8D14DA9216E3E0E00D6E1DF /* FileawayCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8D14DA0216E3E0E00D6E1DF /* FileawayCore.framework */; };
 		D8D14DAE216E3E0E00D6E1DF /* FileawayCore_macOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D14DAD216E3E0E00D6E1DF /* FileawayCore_macOSTests.swift */; };
 		D8D14DB7216E3E1400D6E1DF /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D14D56216E3BAE00D6E1DF /* Configuration.swift */; };
@@ -39,7 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D81F7C48216E3AA80070AAA0 /* FileActionsCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileActionsCore.h; sourceTree = "<group>"; };
+		D81F7C48216E3AA80070AAA0 /* FileawayCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileawayCore.h; sourceTree = "<group>"; };
 		D81F7C49216E3AA80070AAA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D81F7C53216E3AA90070AAA0 /* FileawayCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileawayCoreTests.swift; sourceTree = "<group>"; };
 		D81F7C55216E3AA90070AAA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -122,7 +122,7 @@
 				D8D14D56216E3BAE00D6E1DF /* Configuration.swift */,
 				D8D14D57216E3BAE00D6E1DF /* VariableProvider.swift */,
 				D8D14D58216E3BAE00D6E1DF /* Manager.swift */,
-				D81F7C48216E3AA80070AAA0 /* FileActionsCore.h */,
+				D81F7C48216E3AA80070AAA0 /* FileawayCore.h */,
 				D81F7C49216E3AA80070AAA0 /* Info.plist */,
 			);
 			path = FileawayCore;
@@ -178,7 +178,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8BCA528216F08E6002A624D /* FileActionsCore.h in Headers */,
+				D8BCA528216F08E6002A624D /* FileawayCore.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,7 +186,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8BCA527216F08E3002A624D /* FileActionsCore.h in Headers */,
+				D8BCA527216F08E3002A624D /* FileawayCore.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

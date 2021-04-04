@@ -50,8 +50,8 @@
 		D8CCB80B2143672700AC445F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8CCB8092143672700AC445F /* Main.storyboard */; };
 		D8CCB80D2143672700AC445F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8CCB80C2143672700AC445F /* Assets.xcassets */; };
 		D8CCB8102143672700AC445F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8CCB80E2143672700AC445F /* LaunchScreen.storyboard */; };
-		D8CCB81B2143672700AC445F /* FileActionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCB81A2143672700AC445F /* FileActionsTests.swift */; };
-		D8CCB8262143672700AC445F /* FileActionsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCB8252143672700AC445F /* FileActionsUITests.swift */; };
+		D8CCB81B2143672700AC445F /* FileawayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCB81A2143672700AC445F /* FileawayTests.swift */; };
+		D8CCB8262143672700AC445F /* FileawayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCB8252143672700AC445F /* FileawayUITests.swift */; };
 		D8CCD293246EDC6A007EF2BB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCD292246EDC6A007EF2BB /* SettingsView.swift */; };
 		D8E4CA57249CF76500F5BC8E /* EditSafeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E4CA56249CF76500F5BC8E /* EditSafeButton.swift */; };
 		D8E4CA59249CF81800F5BC8E /* BackChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E4CA58249CF81800F5BC8E /* BackChannel.swift */; };
@@ -130,7 +130,6 @@
 		D89265882498C58C00297825 /* MoveFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveFileViewController.swift; sourceTree = "<group>"; };
 		D89941002145E6AE00097F3D /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		D8B0B3D425314771001EB2C2 /* Fileaway.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fileaway.entitlements; sourceTree = "<group>"; };
-		D8B76B3724999EEE005EC4A1 /* FileActionsCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FileActionsCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8CAE3ED249D3AD70047CA36 /* ErrorText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorText.swift; sourceTree = "<group>"; };
 		D8CAE3EF249D6E1D0047CA36 /* TaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskList.swift; sourceTree = "<group>"; };
 		D8CCB8022143672700AC445F /* Fileaway.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fileaway.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,10 +139,10 @@
 		D8CCB80F2143672700AC445F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D8CCB8112143672700AC445F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8CCB8162143672700AC445F /* FileawayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileawayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8CCB81A2143672700AC445F /* FileActionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileActionsTests.swift; sourceTree = "<group>"; };
+		D8CCB81A2143672700AC445F /* FileawayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileawayTests.swift; sourceTree = "<group>"; };
 		D8CCB81C2143672700AC445F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8CCB8212143672700AC445F /* FileawayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileawayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8CCB8252143672700AC445F /* FileActionsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileActionsUITests.swift; sourceTree = "<group>"; };
+		D8CCB8252143672700AC445F /* FileawayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileawayUITests.swift; sourceTree = "<group>"; };
 		D8CCB8272143672700AC445F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8CCD292246EDC6A007EF2BB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D8E4CA56249CF76500F5BC8E /* EditSafeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSafeButton.swift; sourceTree = "<group>"; };
@@ -213,7 +212,6 @@
 			isa = PBXGroup;
 			children = (
 				D866D66326197AC80025329E /* FileawayCore.framework */,
-				D8B76B3724999EEE005EC4A1 /* FileActionsCore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -224,7 +222,7 @@
 				D8B0B3D425314771001EB2C2 /* Fileaway.entitlements */,
 				D8CCB8042143672700AC445F /* Fileaway */,
 				D8CCB8192143672700AC445F /* FileawayTests */,
-				D8CCB8242143672700AC445F /* FileActionsUITests */,
+				D8CCB8242143672700AC445F /* FileawayUITests */,
 				D8CCB8032143672700AC445F /* Products */,
 				D8BCA522216F069B002A624D /* Frameworks */,
 			);
@@ -276,19 +274,19 @@
 		D8CCB8192143672700AC445F /* FileawayTests */ = {
 			isa = PBXGroup;
 			children = (
-				D8CCB81A2143672700AC445F /* FileActionsTests.swift */,
+				D8CCB81A2143672700AC445F /* FileawayTests.swift */,
 				D8CCB81C2143672700AC445F /* Info.plist */,
 			);
 			path = FileawayTests;
 			sourceTree = "<group>";
 		};
-		D8CCB8242143672700AC445F /* FileActionsUITests */ = {
+		D8CCB8242143672700AC445F /* FileawayUITests */ = {
 			isa = PBXGroup;
 			children = (
-				D8CCB8252143672700AC445F /* FileActionsUITests.swift */,
+				D8CCB8252143672700AC445F /* FileawayUITests.swift */,
 				D8CCB8272143672700AC445F /* Info.plist */,
 			);
-			path = FileActionsUITests;
+			path = FileawayUITests;
 			sourceTree = "<group>";
 		};
 		D8E4CA54249CF69800F5BC8E /* Utilities */ = {
@@ -504,7 +502,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8CCB81B2143672700AC445F /* FileActionsTests.swift in Sources */,
+				D8CCB81B2143672700AC445F /* FileawayTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,7 +510,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8CCB8262143672700AC445F /* FileActionsUITests.swift in Sources */,
+				D8CCB8262143672700AC445F /* FileawayUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -742,9 +740,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
-				INFOPLIST_FILE = FileActionsUITests/Info.plist;
+				INFOPLIST_FILE = FileawayUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.FileActionsUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.FileawayUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -758,9 +756,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
-				INFOPLIST_FILE = FileActionsUITests/Info.plist;
+				INFOPLIST_FILE = FileawayUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.FileActionsUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.FileawayUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
