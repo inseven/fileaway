@@ -2,10 +2,10 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:macos/Fileaway.xcodeproj">
+      location = "group:core/FileActionsCore.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:core/FileActionsCore.xcodeproj">
+      location = "group:/Users/jbmorley/Projects/fileaway/macos/Fileaway-macOS.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:ios/Fileaway-iOS.xcodeproj">

@@ -17,7 +17,7 @@
                BlueprintIdentifier = "D87DEF7A25774F6C006CFE85"
                BuildableName = "Fileaway.app"
                BlueprintName = "Fileaway"
-               ReferencedContainer = "container:Fileaway.xcodeproj">
+               ReferencedContainer = "container:Fileaway-macOS.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "D87DEF8C25774F6D006CFE85"
                BuildableName = "FileawayTests.xctest"
                BlueprintName = "FileawayTests"
-               ReferencedContainer = "container:Fileaway.xcodeproj">
+               ReferencedContainer = "container:Fileaway-macOS.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -45,7 +45,7 @@
                BlueprintIdentifier = "D87DEF9725774F6D006CFE85"
                BuildableName = "FileawayUITests.xctest"
                BlueprintName = "FileawayUITests"
-               ReferencedContainer = "container:Fileaway.xcodeproj">
+               ReferencedContainer = "container:Fileaway-macOS.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -67,7 +67,7 @@
             BlueprintIdentifier = "D87DEF7A25774F6C006CFE85"
             BuildableName = "Fileaway.app"
             BlueprintName = "Fileaway"
-            ReferencedContainer = "container:Fileaway.xcodeproj">
+            ReferencedContainer = "container:Fileaway-macOS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -84,7 +84,7 @@
             BlueprintIdentifier = "D87DEF7A25774F6C006CFE85"
             BuildableName = "Fileaway.app"
             BlueprintName = "Fileaway"
-            ReferencedContainer = "container:Fileaway.xcodeproj">
+            ReferencedContainer = "container:Fileaway-macOS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
