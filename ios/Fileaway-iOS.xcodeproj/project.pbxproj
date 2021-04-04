@@ -208,13 +208,6 @@
 			path = State;
 			sourceTree = "<group>";
 		};
-		D890DD3D216F16C300922453 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		D8BCA522216F069B002A624D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,7 +223,6 @@
 				D8CCB8042143672700AC445F /* Fileaway */,
 				D8CCB8192143672700AC445F /* FileawayTests */,
 				D8CCB8242143672700AC445F /* FileActionsUITests */,
-				D890DD3D216F16C300922453 /* Resources */,
 				D8CCB8032143672700AC445F /* Products */,
 				D8BCA522216F069B002A624D /* Frameworks */,
 			);
