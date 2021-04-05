@@ -20,17 +20,28 @@
 
 import SwiftUI
 
-struct DateView: View {
+class RightClickObservingView : NSView {
 
-    static var dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
-        return dateFormatter
-    }()
+    weak var delegate: RightClickObservingViewDelegate?
 
-    let date: Date
+    override init(frame frameRect: NSRect) {
+        super.init(frame: frameRect)
 
-    var body: some View {
-        Text(Self.dateFormatter.string(from: date))
+        let recognizer = ObservingGestureRecognizer { [weak self] in
+            self?.delegate?.rightClickFocusDidChange(focused: true)
+        }
+        addGestureRecognizer(recognizer)
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveNotification),
+                                               name: NSNotification.Name(rawValue: "NSMenuDidCompleteInteractionNotification"),
+                                               object: nil)
     }
+
+    @objc func didReceiveNotification(_ notification: NSNotification) {
+        delegate?.rightClickFocusDidChange(focused: false)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
 }

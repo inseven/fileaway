@@ -21,6 +21,21 @@
 import Combine
 import SwiftUI
 
+enum RuleSetError: Error {
+    case duplicateName
+}
+
+extension RuleSetError: LocalizedError {
+
+    public var errorDescription: String? {
+        switch self {
+        case .duplicateName:
+            return "Name already exists in Rule Set."
+        }
+    }
+
+}
+
 class RuleSet: ObservableObject {
 
     let rootUrl: URL
@@ -61,7 +76,37 @@ class RuleSet: ObservableObject {
         }
     }
 
+    /**
+     Check to see if a rule name already exists in the rule set.
+
+     This is necessary because, for the time being at least, rules must have unique names. Right now, it's a technical
+     limitation due to the way the rules file is stored (with the name as the key into a dictionary), but it probably
+     makes sense to prevent users from creating identically named rules.
+     */
+    func contains(ruleNamed name: String) -> Bool {
+        let names = Set(mutableRules.map { $0.name })
+        return names.contains(name)
+    }
+
+    /**
+     Generate a guaranteed unique name based on a preferred name by appending an incrementing instance number to the
+     name in the case that the preferred name is not found to be unique. This is intended to match the behaviour of
+     duplication in Finder.
+     */
+    fileprivate func uniqueRuleName(preferredName: String) -> String {
+        var name = preferredName
+        var index = 2
+        while contains(ruleNamed: name) {
+            name = "\(preferredName) \(index)"
+            index = index + 1
+        }
+        return name
+    }
+
     func add(_ rule: RuleState) throws {
+        guard !contains(ruleNamed: rule.name) else {
+            throw RuleSetError.duplicateName
+        }
         mutableRules.append(rule)
         var rules = Array(self.rules)
         rules.append(Rule(rule))
@@ -70,14 +115,8 @@ class RuleSet: ObservableObject {
         try save()
     }
 
-    func new() throws -> RuleState {
-        let names = Set(mutableRules.map { $0.name })
-        var index = 1
-        var name = ""
-        repeat {
-            name = "Rule \(index)"
-            index = index + 1
-        } while names.contains(name)
+    func new(preferredName: String) throws -> RuleState {
+        let name = uniqueRuleName(preferredName: preferredName)
         let rule = RuleState(id: UUID(),
                              rootUrl: rootUrl,
                              name: name,
@@ -88,6 +127,14 @@ class RuleSet: ObservableObject {
                                 ComponentState(value: " Description", type: .text, variable: nil)])
         try add(rule)
         return rule
+    }
+
+    func duplicate(_ rule: RuleState, preferredName: String) throws -> RuleState {
+        let name = uniqueRuleName(preferredName: preferredName)
+        let newRule = RuleState(rule)
+        newRule.name = name
+        try add(newRule)
+        return newRule
     }
 
     func remove(_ rule: RuleState) throws {

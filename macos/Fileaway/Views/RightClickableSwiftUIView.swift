@@ -20,17 +20,44 @@
 
 import SwiftUI
 
-struct DateView: View {
+struct RightClickableSwiftUIView: NSViewRepresentable {
 
-    static var dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
-        return dateFormatter
-    }()
+    var onRightClickFocusChange: (Bool) -> Void
 
-    let date: Date
+    class Coordinator: NSObject, RightClickObservingViewDelegate {
 
-    var body: some View {
-        Text(Self.dateFormatter.string(from: date))
+        var parent: RightClickableSwiftUIView
+
+        init(_ parent: RightClickableSwiftUIView) {
+            self.parent = parent
+        }
+
+        func rightClickFocusDidChange(focused: Bool) {
+            // TODO: Remove repeated entries here? Maybe this could be a publisher?
+            print("\(self) rightClickFocusDidChange: \(focused)")
+            parent.onRightClickFocusChange(focused)
+        }
+
     }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+    func makeNSView(context: Context) -> RightClickObservingView {
+        let view = RightClickObservingView()
+        view.delegate = context.coordinator
+        return view
+    }
+
+    func updateNSView(_ view: RightClickObservingView, context: NSViewRepresentableContext<RightClickableSwiftUIView>) {
+        view.delegate = context.coordinator
+    }
+
+}
+
+protocol RightClickObservingViewDelegate: NSObject {
+
+    func rightClickFocusDidChange(focused: Bool)
+
 }

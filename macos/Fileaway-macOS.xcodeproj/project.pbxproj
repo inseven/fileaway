@@ -73,6 +73,8 @@
 		D8FC5334257BB6D2008FB609 /* MailboxRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5333257BB6D2008FB609 /* MailboxRow.swift */; };
 		D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5341257BB77C008FB609 /* SettingsView.swift */; };
 		D8FC534A257BB7A4008FB609 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5349257BB7A4008FB609 /* GeneralSettingsView.swift */; };
+		D8FDDA2C261A43B30060D256 /* RightClickObservingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FDDA2B261A43B30060D256 /* RightClickObservingView.swift */; };
+		D8FDDA31261A442B0060D256 /* RightClickableSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FDDA30261A442B0060D256 /* RightClickableSwiftUIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,6 +166,8 @@
 		D8FC5333257BB6D2008FB609 /* MailboxRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailboxRow.swift; sourceTree = "<group>"; };
 		D8FC5341257BB77C008FB609 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D8FC5349257BB7A4008FB609 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
+		D8FDDA2B261A43B30060D256 /* RightClickObservingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightClickObservingView.swift; sourceTree = "<group>"; };
+		D8FDDA30261A442B0060D256 /* RightClickableSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightClickableSwiftUIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +241,8 @@
 				D8B6D02A257DBAF700C7E472 /* SearchField.swift */,
 				D821E945257AA5FC005D3205 /* Sidebar.swift */,
 				D8D78AA62580DF190088890F /* Legacy.swift */,
+				D8FDDA2B261A43B30060D256 /* RightClickObservingView.swift */,
+				D8FDDA30261A442B0060D256 /* RightClickableSwiftUIView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -542,7 +548,9 @@
 				D8F8BE002586C6B90010432F /* RuleInstance.swift in Sources */,
 				D8E7F9B125999C8800C7409B /* RulesSettingsView.swift in Sources */,
 				D8F8BE22258819860010432F /* StringInstance.swift in Sources */,
+				D8FDDA31261A442B0060D256 /* RightClickableSwiftUIView.swift in Sources */,
 				D8F8BE3225881BC50010432F /* VariableInstance.swift in Sources */,
+				D8FDDA2C261A43B30060D256 /* RightClickObservingView.swift in Sources */,
 				D821E946257AA5FC005D3205 /* Sidebar.swift in Sources */,
 				D8F8BE4125881CEC0010432F /* TrackerInput.swift in Sources */,
 				D8005AC1258276250001BE2C /* Configuration.swift in Sources */,
@@ -739,7 +747,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Fileaway/Preview Content\"";
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -750,7 +758,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.fileaway;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -766,7 +774,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Fileaway/Preview Content\"";
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -777,7 +785,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.fileaway;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

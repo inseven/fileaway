@@ -82,11 +82,11 @@ class TaskState: ObservableObject, Identifiable, BackChannelable, CustomStringCo
         }
     }
 
-    convenience init(_ task: TaskState) {
-        self.init(id: task.id,
-                  name: String(task.name),
-                  variables: task.variables.map { VariableState($0) },
-                  destination: task.destination.map { ComponentState($0, variable: nil) })
+    convenience init(_ taskState: TaskState) {
+        self.init(id: UUID(),
+                  name: String(taskState.name),
+                  variables: taskState.variables.map { VariableState($0) },
+                  destination: taskState.destination.map { ComponentState($0, variable: nil) })
     }
 
     init(task: Task) {
