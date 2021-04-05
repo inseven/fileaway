@@ -14,6 +14,10 @@ Right now the macOS and iOS apps are incredibly divergent having been written wi
 
 ## Changelog
 
+### Version 0.1.1 (macOS)
+
+- Support duplicating rules
+
 ### Version 0.1.0 (macOS)
 
 Initial release with support for a single inbox and archive directories, rules wizard, and simple rule editing.
