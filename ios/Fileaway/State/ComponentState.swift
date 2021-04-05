@@ -50,7 +50,6 @@ class ComponentState: ObservableObject, Identifiable {
         self.variable = variable
     }
 
-    // TODO: How do we actually copy???
     init(_ component: ComponentState, variable: VariableState?) {
         id = component.id
         value = String(component.value)

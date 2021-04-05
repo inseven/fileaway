@@ -41,13 +41,6 @@ class VariableState: ObservableObject, Identifiable {
         self.type = variable.type
     }
 
-    // TODO: This should generate a new ID, and there should be explicit setters if we're setting variables.
-    public init(_ variable: VariableState) {
-        id = variable.id // TODO: Check why this uses the same id!
-        name = String(variable.name)
-        type = variable.type
-    }
-
     public init(name: String, type: VariableType) {
         self.name = name
         self.type = type
