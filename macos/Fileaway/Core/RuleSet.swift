@@ -93,7 +93,6 @@ class RuleSet: ObservableObject {
      name in the case that the preferred name is not found to be unique. This is intended to match the behaviour of
      duplication in Finder.
      */
-    // TODO: Determine if it's necessary to localize this in the future
     fileprivate func uniqueRuleName(preferredName: String) -> String {
         var name = preferredName
         var index = 2
