@@ -41,20 +41,6 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         self.name
     }
 
-    func establishBackChannel() {
-        variablesBackChannel = BackChannel(value: variables, publisher: $variables).bind {
-            self.objectWillChange.send()
-            DispatchQueue.main.async {
-                for component in self.destination {
-                    component.update()
-                }
-            }
-        }
-        destinationBackChannel = BackChannel(value: destination, publisher: $destination).bind {
-            self.objectWillChange.send()
-        }
-    }
-
     init(id: UUID, rootUrl: URL, name: String, variables: [VariableState], destination: [ComponentState]) {
         self.id = id
         self.rootUrl = rootUrl
@@ -69,15 +55,6 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
             component.variable = variable
         }
         self.establishBackChannel()
-    }
-
-    convenience init(_ rule: RuleState, rootUrl: URL) {
-        // TODO: This looks like a copy constructor, but totally isn't.
-        self.init(id: rule.id,
-                  rootUrl: rootUrl,
-                  name: String(rule.name),
-                  variables: rule.variables.map { VariableState($0) },
-                  destination: rule.destination.map { ComponentState($0, variable: nil) })
     }
 
     convenience init(_ rule: RuleState) {
@@ -99,12 +76,18 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         self.establishBackChannel()
     }
 
-    // TODO: Check if this is used
-    init(rootUrl: URL, name: String) {
-        self.rootUrl = rootUrl
-        self.name = name
-        self.variables = []
-        self.destination = []
+    func establishBackChannel() {
+        variablesBackChannel = BackChannel(value: variables, publisher: $variables).bind {
+            self.objectWillChange.send()
+            DispatchQueue.main.async {
+                for component in self.destination {
+                    component.update()
+                }
+            }
+        }
+        destinationBackChannel = BackChannel(value: destination, publisher: $destination).bind {
+            self.objectWillChange.send()
+        }
     }
 
     func remove(component: ComponentState) {
