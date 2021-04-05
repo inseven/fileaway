@@ -31,10 +31,10 @@ class VariableState: ObservableObject, Identifiable, Hashable {
         self.type = variable.type
     }
 
-    public init(_ variable: VariableState) {
-        id = variable.id
-        name = String(variable.name)
-        type = variable.type
+    public init(_ variableState: VariableState) {
+        id = UUID()
+        name = String(variableState.name)
+        type = variableState.type
     }
 
     public init(name: String, type: VariableType) {
