@@ -16,6 +16,9 @@
 		D821E946257AA5FC005D3205 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821E945257AA5FC005D3205 /* Sidebar.swift */; };
 		D821E94B257AB2C9005D3205 /* FileRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821E94A257AB2C9005D3205 /* FileRow.swift */; };
 		D829DDB425787C100066A807 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D829DDB325787C100066A807 /* Settings.swift */; };
+		D83CDCE02620F94C0063C91C /* ListButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83CDCDF2620F94C0063C91C /* ListButtons.swift */; };
+		D83CDCE52620F97F0063C91C /* VariableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83CDCE42620F97F0063C91C /* VariableTextField.swift */; };
+		D83CDCEA2620FF210063C91C /* RuleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83CDCE92620FF210063C91C /* RuleSheet.swift */; };
 		D85C9572257999130007AE1E /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C9571257999130007AE1E /* FileManager.swift */; };
 		D85C95812579CED30007AE1E /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C95802579CED30007AE1E /* Toolbar.swift */; };
 		D87B126525851218004EC884 /* EventModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87B126425851218004EC884 /* EventModifiers.swift */; };
@@ -102,6 +105,9 @@
 		D821E945257AA5FC005D3205 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 		D821E94A257AB2C9005D3205 /* FileRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileRow.swift; sourceTree = "<group>"; };
 		D829DDB325787C100066A807 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		D83CDCDF2620F94C0063C91C /* ListButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListButtons.swift; sourceTree = "<group>"; };
+		D83CDCE42620F97F0063C91C /* VariableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableTextField.swift; sourceTree = "<group>"; };
+		D83CDCE92620FF210063C91C /* RuleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleSheet.swift; sourceTree = "<group>"; };
 		D85C9571257999130007AE1E /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		D85C95802579CED30007AE1E /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		D87B126425851218004EC884 /* EventModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModifiers.swift; sourceTree = "<group>"; };
@@ -340,10 +346,13 @@
 			children = (
 				D8E7F9E22599B00A00C7409B /* DestinationList.swift */,
 				D8FC5349257BB7A4008FB609 /* GeneralSettingsView.swift */,
+				D83CDCDF2620F94C0063C91C /* ListButtons.swift */,
 				D8E7F9DD2599AFE000C7409B /* RuleDetailView.swift */,
+				D83CDCE92620FF210063C91C /* RuleSheet.swift */,
 				D8E7F9B025999C8800C7409B /* RulesSettingsView.swift */,
 				D8FC5341257BB77C008FB609 /* SettingsView.swift */,
 				D8E7F9EA2599B05300C7409B /* VariableList.swift */,
+				D83CDCE42620F97F0063C91C /* VariableTextField.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -525,11 +534,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D821E939257A959D005D3205 /* DateView.swift in Sources */,
+				D83CDCE02620F94C0063C91C /* ListButtons.swift in Sources */,
 				D8E7F9B925999D1300C7409B /* VariableType.swift in Sources */,
 				D8D78A9F2580DE250088890F /* PageView.swift in Sources */,
 				D87DEF8125774F6C006CFE85 /* ContentView.swift in Sources */,
 				D8E7F9E32599B00A00C7409B /* DestinationList.swift in Sources */,
 				D821E94B257AB2C9005D3205 /* FileRow.swift in Sources */,
+				D83CDCEA2620FF210063C91C /* RuleSheet.swift in Sources */,
 				D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */,
 				D8F90C9E25DAAF7A00F0EFB8 /* Selectable.swift in Sources */,
 				D8F8BE3725881C1A0010432F /* TaskPage.swift in Sources */,
@@ -562,6 +573,7 @@
 				D87DEFB425780BA4006CFE85 /* DirectoryObserver.swift in Sources */,
 				D8DC5046257C0795009B3ECC /* ResponderView.swift in Sources */,
 				D8F90C9925DAAED700F0EFB8 /* ObservingGestureRecognizer.swift in Sources */,
+				D83CDCE52620F97F0063C91C /* VariableTextField.swift in Sources */,
 				D8E7F9CE25999E7A00C7409B /* Rule.swift in Sources */,
 				D8F90CA825DAB1DF00F0EFB8 /* ContextMenuFocusable.swift in Sources */,
 				D829DDB425787C100066A807 /* Settings.swift in Sources */,

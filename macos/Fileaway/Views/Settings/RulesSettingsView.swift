@@ -22,30 +22,6 @@ import SwiftUI
 
 import Interact
 
-struct RuleSheet: View {
-
-    @Environment(\.presentationMode) var presentationMode
-    @State var rule: RuleState
-
-    var body: some View {
-        VStack {
-            RuleDetailView(rule: rule)
-            HStack {
-                Spacer()
-                Button {
-                    presentationMode.wrappedValue.dismiss()
-                } label: {
-                    Text("Done")
-                }
-            }
-            .padding()
-        }
-        .background(Color.windowBackgroundColor)
-        .frame(minWidth: 600, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
-    }
-
-}
-
 struct RulesSettingsView: View {
 
     enum SheetType {

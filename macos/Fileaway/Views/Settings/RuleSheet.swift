@@ -20,30 +20,26 @@
 
 import SwiftUI
 
-struct SettingsView: View {
+struct RuleSheet: View {
 
-    private enum Tabs: Hashable {
-        case general
-    }
-
-    @ObservedObject var manager: Manager
+    @Environment(\.presentationMode) var presentationMode
+    @State var rule: RuleState
 
     var body: some View {
-        TabView {
-            GeneralSettingsView(manager: manager)
-                .tabItem {
-                    Label("General", systemImage: "gear")
+        VStack {
+            RuleDetailView(rule: rule)
+            HStack {
+                Spacer()
+                Button {
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    Text("Done")
                 }
-                .tag(Tabs.general)
-            if let ruleSet = manager.ruleSet {
-                RulesSettingsView(rules: ruleSet)
-                    .tabItem {
-                        Label("Rules", systemImage: "tray.and.arrow.down")
-                    }
             }
+            .padding()
         }
-        .padding()
-        .frame(minWidth: 400, maxWidth: .infinity, minHeight: 460, maxHeight: .infinity)
+        .background(Color.windowBackgroundColor)
+        .frame(minWidth: 600, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
     }
 
 }

@@ -20,30 +20,21 @@
 
 import SwiftUI
 
-struct SettingsView: View {
+struct VariableTextField: View {
 
-    private enum Tabs: Hashable {
-        case general
-    }
-
-    @ObservedObject var manager: Manager
+    @ObservedObject var variable: VariableState
+    @State var variableType: VariableType = .string
 
     var body: some View {
-        TabView {
-            GeneralSettingsView(manager: manager)
-                .tabItem {
-                    Label("General", systemImage: "gear")
+        VStack {
+            TextField("Name", text: $variable.name)
+            Picker(selection: $variable.type, label: Text("Type")) {
+                ForEach(VariableType.allCases, id: \.self) { type in
+                    Text(String(describing: type))
                 }
-                .tag(Tabs.general)
-            if let ruleSet = manager.ruleSet {
-                RulesSettingsView(rules: ruleSet)
-                    .tabItem {
-                        Label("Rules", systemImage: "tray.and.arrow.down")
-                    }
             }
+            Spacer()
         }
-        .padding()
-        .frame(minWidth: 400, maxWidth: .infinity, minHeight: 460, maxHeight: .infinity)
     }
 
 }
