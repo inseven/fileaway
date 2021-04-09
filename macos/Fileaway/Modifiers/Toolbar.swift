@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import Interact
+
 struct Toolbar: ViewModifier {
 
     @Environment(\.openURL) var openURL
