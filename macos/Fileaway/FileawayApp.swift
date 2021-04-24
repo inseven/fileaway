@@ -97,6 +97,7 @@ struct FileawayApp: App {
         WindowGroup(id: "MainWindow") {
             ContentView(manager: appDelegate.manager)
                 .environment(\.manager, appDelegate.manager)
+                .frameAutosaveName("Main Window")
         }
         .commands {
             GlobalCommands()
