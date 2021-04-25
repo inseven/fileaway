@@ -12,6 +12,8 @@
 
 skip_docs
 
+keychain_path = File.join(Dir.pwd, "..", "temporary-keychain")
+
 lane :certs do
     # In theory, this will create the keys and download them if necessary.
     # Failing because it somehow maps a Developer ID Application key to AppStore by mistake.
@@ -24,7 +26,20 @@ lane :certs do
         app_identifier: "uk.co.inseven.fileaway",
         readonly: true,
         skip_provisioning_profiles: true,
+        keychain_name: keychain_path,
+        keychain_password: ENV['TEMPORARY_KEYCHAIN_PASSWORD'],
     )
+end
+
+lane :init_keychain do
+
+    sh(
+        "security", "create-keychain",
+        "-p", ENV['TEMPORARY_KEYCHAIN_PASSWORD'],
+        keychain_path
+    )
+    certs
+
 end
 
 lane :release do
@@ -44,6 +59,8 @@ lane :release do
     zip_basename = output_name + "-macOS-" + version_number + "-" + build_number + ".zip"
     zip_path = File.join(output_directory, zip_basename)
 
+    sh("security", "unlock-keychain", "-p", ENV['TEMPORARY_KEYCHAIN_PASSWORD'], keychain_path)
+
     build_app(
         scheme: "Fileaway macOS",
         output_directory: output_directory,
@@ -52,17 +69,17 @@ lane :release do
             method: "developer-id",
             teamID: ENV['APPLE_TEAM_ID']
         },
-        xcargs: "BUILD_NUMBER=" + build_number
+        xcargs: "BUILD_NUMBER='%{build_number}' OTHER_CODE_SIGN_FLAGS='--keychain=\"%{keychain_path}\"'" % {build_number: build_number, keychain_path: keychain_path}
     )
-    notarize(
-        package: target,
-        username: ENV['APPLE_DEVELOPER_ID'],
-        verbose: true,
-    )
-    zip(
-        path: target,
-        output_path: zip_path
-    )
+    # notarize(
+    #     package: target,
+    #     username: ENV['APPLE_DEVELOPER_ID'],
+    #     verbose: true,
+    # )
+    # zip(
+    #     path: target,
+    #     output_path: zip_path
+    # )
 
 end
 

@@ -27,16 +27,18 @@ jobs:
 
     - name: Install the certificates
       env:
+        TEMPORARY_KEYCHAIN_PASSWORD: ${{ secrets.TEMPORARY_KEYCHAIN_PASSWORD }}
         MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
         CERTIFICATE_REPOSITORY: ${{ secrets.CERTIFICATE_REPOSITORY }}
         CERTIFICATE_REPOSITORY_AUTHORIZATION_KEY: ${{ secrets.CERTIFICATE_REPOSITORY_AUTHORIZATION_KEY }}
-      run: fastlane certs
+      run: fastlane init_keychain
 
     - name: Build and test
       run: fastlane test
 
     - name: Build and notarize macOS
       env:
+        TEMPORARY_KEYCHAIN_PASSWORD: ${{ secrets.TEMPORARY_KEYCHAIN_PASSWORD }}
         APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
         APPLE_DEVELOPER_ID: ${{ secrets.APPLE_DEVELOPER_ID }}
         FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
