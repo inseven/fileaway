@@ -77,7 +77,7 @@ lane :release do
             method: "developer-id",
             teamID: ENV['APPLE_TEAM_ID']
         },
-        xcargs: "BUILD_NUMBER='%{build_number}' OTHER_CODE_SIGN_FLAGS='--keychain=\"%{keychain_path}\"'" % {build_number: build_number, keychain_path: keychain_path}
+        xcargs: "BUILD_NUMBER='%{build_number}' OTHER_CODE_SIGN_FLAGS='$(inherited) --keychain=\"%{keychain_path}\" -timestamp'" % {build_number: build_number, keychain_path: keychain_path}
     )
     # notarize(
     #     package: target,
