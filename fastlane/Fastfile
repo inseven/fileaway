@@ -12,9 +12,27 @@
 
 skip_docs
 
-keychain_path = File.join(Dir.pwd, "..", "temporary-keychain")
+keychain_path = Pathname.new(File.join(Dir.pwd, "..", "temporary-keychain")).cleanpath.to_s
+puts(keychain_path)
 
-lane :certs do
+lane :init_keychain do
+
+    File.delete(keychain_path) if File.exist?(keychain_path)
+    sh(
+        "security", "create-keychain",
+        "-p", ENV['TEMPORARY_KEYCHAIN_PASSWORD'],
+        keychain_path
+    )
+    sh(
+        "security", "set-keychain-settings",
+        "-lut", "21600",
+        keychain_path
+    )
+    import_certificates
+
+end
+
+lane :import_certificates do
     # In theory, this will create the keys and download them if necessary.
     # Failing because it somehow maps a Developer ID Application key to AppStore by mistake.
     # We do this in a separate lane to ensure it doesn't taint our build (which is working fine, thank you very much).
@@ -29,17 +47,6 @@ lane :certs do
         keychain_name: keychain_path,
         keychain_password: ENV['TEMPORARY_KEYCHAIN_PASSWORD'],
     )
-end
-
-lane :init_keychain do
-
-    sh(
-        "security", "create-keychain",
-        "-p", ENV['TEMPORARY_KEYCHAIN_PASSWORD'],
-        keychain_path
-    )
-    certs
-
 end
 
 lane :release do
