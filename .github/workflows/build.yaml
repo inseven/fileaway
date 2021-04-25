@@ -33,8 +33,8 @@ jobs:
         CERTIFICATE_REPOSITORY_AUTHORIZATION_KEY: ${{ secrets.CERTIFICATE_REPOSITORY_AUTHORIZATION_KEY }}
       run: fastlane init_keychain
 
-    - name: Build and test
-      run: fastlane test
+    # - name: Build and test
+    #   run: fastlane test
 
     - name: Build and notarize macOS
       env:
