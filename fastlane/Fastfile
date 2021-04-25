@@ -57,6 +57,7 @@ lane :release do
     notarize(
         package: target,
         username: ENV['APPLE_DEVELOPER_ID'],
+        verbose: true,
     )
     zip(
         path: target,
