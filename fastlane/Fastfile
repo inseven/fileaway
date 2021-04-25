@@ -12,9 +12,22 @@
 
 skip_docs
 
+lane :certs do
+    # In theory, this will create the keys and download them if necessary.
+    # Failing because it somehow maps a Developer ID Application key to AppStore by mistake.
+    # We do this in a separate lane to ensure it doesn't taint our build (which is working fine, thank you very much).
+    sync_code_signing(
+        storage_mode: "git",
+        git_url: "git@github.com:inseven/certificates.git",
+        type: "developer_id",
+        app_identifier: "uk.co.inseven.fileaway",
+        readonly: true,
+        skip_provisioning_profiles: true,
+    )
+end
+
 lane :release do
 
-    # TODO: Add a certificate store.
     # TODO: Read the target name.
 
     output_directory = "builds"
@@ -26,16 +39,10 @@ lane :release do
     )
     commit = last_git_commit
     commit_fingerprint = commit[:abbreviated_commit_hash]
-    build_number = commit_fingerprint.capitalize + "." + Time.now.to_i.to_s
+    build_number = commit_fingerprint.upcase + "." + Time.now.to_i.to_s
     zip_basename = output_name + "-macOS-" + version_number + "-" + build_number + ".zip"
     zip_path = File.join(output_directory, zip_basename)
 
-    # sync_code_signing(
-    #     storage_mode: "git",
-    #     git_url: "git@github.com:inseven/certificates.git",
-    #     type: "development",
-    #     username: ENV['APPLE_DEVELOPER_ID']
-    # )
     build_app(
         scheme: "Fileaway macOS",
         output_directory: output_directory,

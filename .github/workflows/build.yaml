@@ -25,5 +25,10 @@ jobs:
       run: |
         for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts
 
+    - name: Install the certificates
+      env:
+        MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+      run: fastlane certs
+
     - name: Build and test
       run: fastlane test
