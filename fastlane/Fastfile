@@ -15,9 +15,6 @@ skip_docs
 lane :release do
 
     # TODO: Add a certificate store.
-    # TODO: Auto-generate a build number.
-    # TODO: Set the build number (using xcconfig?)
-    # TODO: Name the zip including the version and build number.
     # TODO: Read the target name.
 
     output_directory = "builds"
@@ -27,10 +24,18 @@ lane :release do
         xcodeproj: "macos/Fileaway-macOS.xcodeproj",
         target: "Fileaway"
     )
-    build_number = "2000"
+    commit = last_git_commit
+    commit_fingerprint = commit[:abbreviated_commit_hash]
+    build_number = commit_fingerprint.capitalize + "." + Time.now.to_i.to_s
     zip_basename = output_name + "-macOS-" + version_number + "-" + build_number + ".zip"
     zip_path = File.join(output_directory, zip_basename)
 
+    # sync_code_signing(
+    #     storage_mode: "git",
+    #     git_url: "git@github.com:inseven/certificates.git",
+    #     type: "development",
+    #     username: ENV['APPLE_DEVELOPER_ID']
+    # )
     build_app(
         scheme: "Fileaway macOS",
         output_directory: output_directory,
