@@ -11,5 +11,13 @@
 #
 
 lane :build do
-  gym
+    gym
+    notarize({
+        package: "Fileaway.app",
+        username: ENV['APPLE_DEVELOPER_ID'],
+    })
+    zip(
+        path: "Fileaway.app",
+        output_path: "Fileaway.app.zip"
+    )
 end
