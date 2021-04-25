@@ -79,15 +79,15 @@ lane :release do
         },
         xcargs: "BUILD_NUMBER='%{build_number}' OTHER_CODE_SIGN_FLAGS='--keychain=\"%{keychain_path}\"'" % {build_number: build_number, keychain_path: keychain_path}
     )
-    # notarize(
-    #     package: target,
-    #     username: ENV['APPLE_DEVELOPER_ID'],
-    #     verbose: true,
-    # )
-    # zip(
-    #     path: target,
-    #     output_path: zip_path
-    # )
+    notarize(
+        package: target,
+        username: ENV['APPLE_DEVELOPER_ID'],
+        verbose: true,
+    )
+    zip(
+        path: target,
+        output_path: zip_path
+    )
 
 end
 
