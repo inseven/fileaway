@@ -14,7 +14,9 @@ skip_docs
 
 lane :release do
 
-    # TODO: Set the build number.
+    # TODO: Add a certificate store.
+    # TODO: Auto-generate a build number.
+    # TODO: Set the build number (using xcconfig?)
     # TODO: Name the zip including the version and build number.
     # TODO: Read the target name.
 
