@@ -14,11 +14,16 @@ skip_docs
 
 lane :release do
 
+    # TODO: Set the build number.
+    # TODO: Read the version number.
+    # TODO: Name the zip including the version and build number.
+    # TODO: Read the target name.
+
     output_directory = "builds"
     output_name = "Fileaway"
     target = File.join(output_directory, output_name + ".app")
 
-    gym(
+    build_app(
         scheme: "Fileaway macOS",
         output_directory: output_directory,
         output_name: output_name,
