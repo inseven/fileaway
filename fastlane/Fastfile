@@ -27,7 +27,8 @@ lane :release do
         xcodeproj: "macos/Fileaway-macOS.xcodeproj",
         target: "Fileaway"
     )
-    zip_basename = output_name + "-macOS-" + version_number + ".zip"
+    build_number = "2000"
+    zip_basename = output_name + "-macOS-" + version_number + "-" + build_number + ".zip"
     zip_path = File.join(output_directory, zip_basename)
 
     build_app(
@@ -37,7 +38,8 @@ lane :release do
         export_options: {
             method: "developer-id",
             teamID: ENV['APPLE_TEAM_ID']
-        }
+        },
+        xcargs: "BUILD_NUMBER=" + build_number
     )
     notarize(
         package: target,
