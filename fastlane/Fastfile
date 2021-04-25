@@ -67,6 +67,7 @@ lane :release do
     zip_path = File.join(output_directory, zip_basename)
 
     sh("security", "unlock-keychain", "-p", ENV['TEMPORARY_KEYCHAIN_PASSWORD'], keychain_path)
+    sh("security", "list-keychain", "-d", "user", "-s", keychain_path)
 
     build_app(
         scheme: "Fileaway macOS",
