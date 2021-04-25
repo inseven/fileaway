@@ -18,7 +18,8 @@ lane :certs do
     # We do this in a separate lane to ensure it doesn't taint our build (which is working fine, thank you very much).
     sync_code_signing(
         storage_mode: "git",
-        git_url: "git@github.com:inseven/certificates.git",
+        git_url: ENV['CERTIFICATE_REPOSITORY'],
+        git_basic_authorization: ENV['CERTIFICATE_REPOSITORY_AUTHORIZATION_KEY'],
         type: "developer_id",
         app_identifier: "uk.co.inseven.fileaway",
         readonly: true,

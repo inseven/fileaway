@@ -28,6 +28,8 @@ jobs:
     - name: Install the certificates
       env:
         MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+        CERTIFICATE_REPOSITORY: ${{ secrets.CERTIFICATE_REPOSITORY }}
+        CERTIFICATE_REPOSITORY_AUTHORIZATION_KEY: ${{ secrets.CERTIFICATE_REPOSITORY_AUTHORIZATION_KEY }}
       run: fastlane certs
 
     - name: Build and test
