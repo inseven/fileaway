@@ -10,7 +10,7 @@
 #     https://docs.fastlane.tools/plugins/available-plugins
 #
 
-lane :build do
+lane :release do
     gym
     notarize({
         package: "Fileaway.app",
@@ -20,4 +20,8 @@ lane :build do
         path: "Fileaway.app",
         output_path: "Fileaway.app.zip"
     )
+end
+
+lane :test do
+    sh("../scripts/test.sh")
 end
