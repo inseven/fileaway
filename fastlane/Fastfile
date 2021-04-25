@@ -10,16 +10,32 @@
 #     https://docs.fastlane.tools/plugins/available-plugins
 #
 
+skip_docs
+
 lane :release do
-    gym
-    notarize({
-        package: "Fileaway.app",
-        username: ENV['APPLE_DEVELOPER_ID'],
-    })
-    zip(
-        path: "Fileaway.app",
-        output_path: "Fileaway.app.zip"
+
+    output_directory = "builds"
+    output_name = "Fileaway"
+    target = File.join(output_directory, output_name + ".app")
+
+    gym(
+        scheme: "Fileaway macOS",
+        output_directory: output_directory,
+        output_name: output_name,
+        export_options: {
+            method: "developer-id",
+            teamID: ENV['APPLE_TEAM_ID']
+        }
     )
+    notarize(
+        package: target,
+        username: ENV['APPLE_DEVELOPER_ID'],
+    )
+    zip(
+        path: target,
+        output_path: target + ".zip"
+    )
+
 end
 
 lane :test do

@@ -10,3 +10,4 @@ env.sh
 
 # Fastlane
 fastlane/report.xml
+builds
