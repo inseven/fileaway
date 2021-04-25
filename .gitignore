@@ -4,3 +4,9 @@
 # Xcode
 xcuserdata/
 **.xcuserdatad
+
+# Secrets
+env.sh
+
+# Fastlane
+fastlane/report.xml
