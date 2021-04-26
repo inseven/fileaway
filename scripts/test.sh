@@ -9,8 +9,9 @@ SCRIPT_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 ROOT_DIRECTORY="${SCRIPT_DIRECTORY}/.."
 BUILD_DIRECTORY="${ROOT_DIRECTORY}/build"
+TEMPORARY_DIRECTORY="${ROOT_DIRECTORY}/temp"
 
-KEYCHAIN_PATH="${ROOT_DIRECTORY}/temporary.keychain"
+KEYCHAIN_PATH="${TEMPORARY_DIRECTORY}/temporary.keychain"
 ARCHIVE_PATH="${BUILD_DIRECTORY}/Fileaway.xcarchive"
 FASTLANE_ENV_PATH="${ROOT_DIRECTORY}/fastlane/.env"
 
@@ -41,11 +42,15 @@ function build_scheme {
 
 cd "$ROOT_DIRECTORY"
 
-#xcodebuild -workspace Fileaway.xcworkspace -list  # List schemes
-#build_scheme "FileawayCore iOS"
-#build_scheme "FileawayCore macOS"
-#build_scheme "Fileaway iOS"
-#build_scheme "Fileaway macOS"
+# List the available schemes
+xcodebuild -workspace Fileaway.xcworkspace -list
+
+# Smoke test builds.
+
+build_scheme "FileawayCore iOS"
+build_scheme "FileawayCore macOS"
+build_scheme "Fileaway iOS"
+build_scheme "Fileaway macOS"
 
 # Build the macOS archive.
 
@@ -55,6 +60,14 @@ if [ -d "$BUILD_DIRECTORY" ] ; then
 fi
 mkdir -p "$BUILD_DIRECTORY"
 
+# Create the a new keychain.
+if [ -d "$TEMPORARY_DIRECTORY" ] ; then
+    rm -rf "$TEMPORARY_DIRECTORY"
+fi
+mkdir -p "$TEMPORARY_DIRECTORY"
+security create-keychain -p "$TEMPORARY_KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
+
 # Determine the version and build number.
 # TODO: Get Xcode to synthesise these itself so that builds also work there.
 VERSION_NUMBER=`cat macos/version.txt | tr -d '[:space:]'`
@@ -62,8 +75,8 @@ GIT_COMMIT=`git rev-parse --short HEAD`
 TIMESTAMP=`date +%s`
 BUILD_NUMBER="${GIT_COMMIT}.${TIMESTAMP}"
 
-# Import the certificates into a dedicated keychain.
-fastlane init_keychain
+# Import the certificates into our dedicated keychain.
+fastlane import_certificates
 security unlock-keychain -p "$TEMPORARY_KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
 security list-keychain -d user -s "$KEYCHAIN_PATH"
 
