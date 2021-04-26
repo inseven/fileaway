@@ -115,3 +115,6 @@ fastlane notarize_release package:"$APP_PATH"
 pushd "$BUILD_DIRECTORY"
 zip -r "Fileaway-macOS-${VERSION_NUMBER}-${BUILD_NUMBER}.zip" "."
 popd
+
+# Cleanup the temporary files and keychain.
+rm -rf "$TEMPORARY_DIRECTORY"
