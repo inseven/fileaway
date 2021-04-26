@@ -13,7 +13,6 @@
 skip_docs
 
 keychain_path = Pathname.new(File.join(Dir.pwd, "..", "temporary.keychain")).cleanpath.to_s
-puts(keychain_path)
 
 lane :init_keychain do
 
@@ -49,56 +48,10 @@ lane :import_certificates do
     )
 end
 
-lane :release do
-
-    # TODO: Read the target name.
-
-    output_directory = "builds"
-    output_name = "Fileaway"
-    target = File.join(output_directory, output_name + ".app")
-    version_number = get_version_number(
-        xcodeproj: "macos/Fileaway-macOS.xcodeproj",
-        target: "Fileaway"
-    )
-    commit = last_git_commit
-    commit_fingerprint = commit[:abbreviated_commit_hash]
-    build_number = commit_fingerprint.upcase + "." + Time.now.to_i.to_s
-    zip_basename = output_name + "-macOS-" + version_number + "-" + build_number + ".zip"
-    zip_path = File.join(output_directory, zip_basename)
-
-    sh("security", "unlock-keychain", "-p", ENV['TEMPORARY_KEYCHAIN_PASSWORD'], keychain_path)
-    sh("security", "list-keychain", "-d", "user", "-s", keychain_path)
-
-    build_app(
-        scheme: "Fileaway macOS",
-        output_directory: output_directory,
-        output_name: output_name,
-        export_options: {
-            method: "developer-id",
-            teamID: ENV['APPLE_TEAM_ID']
-        },
-        xcargs: "BUILD_NUMBER='%{build_number}' OTHER_CODE_SIGN_FLAGS='--timestamp --keychain=\"%{keychain_path}\"'" % {build_number: build_number, keychain_path: keychain_path}
-    )
-    # notarize(
-    #     package: target,
-    #     username: ENV['APPLE_DEVELOPER_ID'],
-    #     verbose: true,
-    # )
-    zip(
-        path: target,
-        output_path: zip_path
-    )
-
-end
-
-lane :not do
+lane :notarize_release do
     notarize(
         package: "builds/Fileaway.app",
         username: ENV['APPLE_DEVELOPER_ID'],
         verbose: true,
     )
-end
-
-lane :test do
-    sh("../scripts/test.sh")
 end
