@@ -11,8 +11,14 @@ BUILDS_DIRECTORY="${ROOT_DIRECTORY}/builds"
 
 KEYCHAIN_PATH="${ROOT_DIRECTORY}/temporary.keychain"
 ARCHIVE_PATH="${BUILDS_DIRECTORY}/Fileaway.xcarchive"
+FASTLANE_ENV_PATH="${ROOT_DIRECTORY}/fastlane/.env"
 
 # TODO: Source the env file if it exists?
+
+if [ -f "$FASTLANE_ENV_PATH" ] ; then
+    echo "Sourcing .env..."
+    source "$FASTLANE_ENV_PATH"
+fi
 
 
 function build_scheme {
@@ -62,5 +68,5 @@ xcodebuild -archivePath "$ARCHIVE_PATH" -exportArchive -exportPath "$BUILDS_DIRE
 codesign -dvv "$BUILDS_DIRECTORY/Fileaway.app"
 
 pushd "$BUILDS_DIRECTORY"
-zip "Fileaway.zip" "Fileaway.app"
+zip -r "Fileaway.zip" "Fileaway.app"
 popd
