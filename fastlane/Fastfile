@@ -1,11 +1,7 @@
 skip_docs
 
-keychain_path = Pathname.new(File.join(Dir.pwd, "..", "temp/temporary.keychain")).cleanpath.to_s
-
-lane :import_certificates do
-    # In theory, this will create the keys and download them if necessary.
-    # Failing because it somehow maps a Developer ID Application key to AppStore by mistake.
-    # We do this in a separate lane to ensure it doesn't taint our build (which is working fine, thank you very much).
+lane :import_certificates do |options|
+    # Import the Developer ID certificate (see https://developer.apple.com/developer-id/) to the named keychain.
     sync_code_signing(
         storage_mode: "git",
         git_url: ENV['CERTIFICATE_REPOSITORY'],
@@ -14,7 +10,7 @@ lane :import_certificates do
         app_identifier: "uk.co.inseven.fileaway",
         readonly: true,
         skip_provisioning_profiles: true,
-        keychain_name: keychain_path,
+        keychain_name: options[:keychain],
         keychain_password: ENV['TEMPORARY_KEYCHAIN_PASSWORD'],
     )
 end
