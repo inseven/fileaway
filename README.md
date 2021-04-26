@@ -12,6 +12,37 @@ Document management app for iOS and macOS.
 
 Right now the macOS and iOS apps are incredibly divergent having been written with significantly different ideas of what makes for a good file management app: the iOS came first and focuses solely on the process of rule based filing, while the latest iteration of the macOS app (there have been many) also introduces a Mail-like file browser.
 
+## Builds
+
+In order to make continuous integration easy the `scripts/build.sh` script builds the full project, including submitting the macOS app for notarization. In order to run this script (noting that you probably don't want to use it for regular development cycles), you'll need to configure your environment accordingly, by setting the following environment variables:
+
+- `MATCH_PASSWORD` -- the password/passphrase to secure the [match](https://docs.fastlane.tools/actions/match/) certificate store
+- `CERTIFICATE_REPOSITORY` -- the repository used for the match certificate store (must be HTTPS)
+- `CERTIFICATE_REPOSITORY_AUTHORIZATION_KEY` -- a GitHub authorization key used to access the certificate repository (see the [match authorization docs](https://docs.fastlane.tools/actions/match/#git-storage-on-github))
+- `APPLE_TEAM_ID` -- Apple Developer Team ID
+- `APPLE_DEVELOPER_ID` -- individual Apple Developer Account ID (used for notarization)
+- `FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD` -- [app-specific password](https://support.apple.com/en-us/HT204397) for the Developer Account
+
+The script (like Fastlane) will look for and source an environment file in the Fastlane directory (`Fastlane/.env`) which you can add your local details to. This file is, of course, in `.gitignore`. For example,
+
+```bash
+# Certificate store
+export MATCH_PASSWORD=
+export CERTIFICATE_REPOSITORY=
+export CERTIFICATE_REPOSITORY_AUTHORIZATION_KEY=
+
+# Developer account
+export APPLE_TEAM_ID=
+export APPLE_DEVELOPER_ID=
+export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=
+```
+
+Once you've added your environment variables to this, run the script from the root of the project directory as follows:
+
+```bash
+./scripts/build.sh
+```
+
 ## Changelog
 
 ### macOS

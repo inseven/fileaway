@@ -15,6 +15,9 @@ KEYCHAIN_PATH="${TEMPORARY_DIRECTORY}/temporary.keychain"
 ARCHIVE_PATH="${BUILD_DIRECTORY}/Fileaway.xcarchive"
 FASTLANE_ENV_PATH="${ROOT_DIRECTORY}/fastlane/.env"
 
+# Generate a random string to secure the local keychain.
+export TEMPORARY_KEYCHAIN_PASSWORD=`openssl rand -base64 14`
+
 # Source the Fastlane .env file if it exists to make local development easier.
 if [ -f "$FASTLANE_ENV_PATH" ] ; then
     echo "Sourcing .env..."
@@ -79,11 +82,13 @@ KEYCHAIN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\""
 xcodebuild -workspace Fileaway.xcworkspace -scheme "Fileaway macOS" -config Release -archivePath "$ARCHIVE_PATH"  OTHER_CODE_SIGN_FLAGS="$KEYCHAIN_FLAGS" BUILD_NUMBER=$BUILD_NUMBER MARKETING_VERSION=$VERSION_NUMBER archive
 xcodebuild -archivePath "$ARCHIVE_PATH" -exportArchive -exportPath "$BUILD_DIRECTORY" -exportOptionsPlist "ExportOptions.plist"
 
+APP_PATH="$BUILD_DIRECTORY/Fileaway.app"
+
 # Show the code signing details.
-codesign -dvv "$BUILD_DIRECTORY/Fileaway.app"
+codesign -dvv "$APP_PATH"
 
 # Notarize the release build.
-fastlane notarize_release
+fastlane notarize_release package:"$APP_PATH"
 
 # Archive the results.
 pushd "$BUILD_DIRECTORY"

@@ -19,9 +19,9 @@ lane :import_certificates do
     )
 end
 
-lane :notarize_release do
+lane :notarize_release do |options|
     notarize(
-        package: "build/Fileaway.app",
+        package: options[:package],
         username: ENV['APPLE_DEVELOPER_ID'],
         verbose: true,
     )
