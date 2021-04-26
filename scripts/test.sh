@@ -54,6 +54,8 @@ if [ -d "$BUILDS_DIRECTORY" ] ; then
 fi
 mkdir -p "$BUILDS_DIRECTORY"
 
+# TOOD: dSYM?
+
 # Import the certificates into a dedicated keychain.
 fastlane init_keychain
 security unlock-keychain -p "$TEMPORARY_KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
@@ -67,6 +69,10 @@ xcodebuild -archivePath "$ARCHIVE_PATH" -exportArchive -exportPath "$BUILDS_DIRE
 # Show the code signing details.
 codesign -dvv "$BUILDS_DIRECTORY/Fileaway.app"
 
+# Notarize the build.
+fastlane not
+
+# Archive the results.
 pushd "$BUILDS_DIRECTORY"
 zip -r "Fileaway.zip" "Fileaway.app"
 popd

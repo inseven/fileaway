@@ -91,6 +91,14 @@ lane :release do
 
 end
 
+lane :not do
+    notarize(
+        package: "builds/Fileaway.app",
+        username: ENV['APPLE_DEVELOPER_ID'],
+        verbose: true,
+    )
+end
+
 lane :test do
     sh("../scripts/test.sh")
 end
