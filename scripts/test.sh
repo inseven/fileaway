@@ -54,7 +54,10 @@ if [ -d "$BUILDS_DIRECTORY" ] ; then
 fi
 mkdir -p "$BUILDS_DIRECTORY"
 
-# TOOD: dSYM?
+# Determine the build number.
+GIT_COMMIT=`git rev-parse --short HEAD`
+TIMESTAMP=`date +%s`
+BUILD_NUMBER="${GIT_COMMIT}.${TIMESTAMP}"
 
 # Import the certificates into a dedicated keychain.
 fastlane init_keychain
@@ -63,7 +66,7 @@ security list-keychain -d user -s "$KEYCHAIN_PATH"
 
 # Archive and export the build.
 KEYCHAIN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\""
-xcodebuild -workspace Fileaway.xcworkspace -scheme "Fileaway macOS" -config Release -archivePath "$ARCHIVE_PATH" OTHER_CODE_SIGN_FLAGS="$KEYCHAIN_FLAGS" archive
+xcodebuild -workspace Fileaway.xcworkspace -scheme "Fileaway macOS" -config Release -archivePath "$ARCHIVE_PATH"  OTHER_CODE_SIGN_FLAGS="$KEYCHAIN_FLAGS" BUILD_NUMBER='$BUILD_NUMBER' archive
 xcodebuild -archivePath "$ARCHIVE_PATH" -exportArchive -exportPath "$BUILDS_DIRECTORY" -exportOptionsPlist "ExportOptions.plist"
 
 # Show the code signing details.
@@ -74,5 +77,5 @@ fastlane not
 
 # Archive the results.
 pushd "$BUILDS_DIRECTORY"
-zip -r "Fileaway.zip" "Fileaway.app"
+zip -r "Fileaway-macOS-${BUILD_NUMBER}.zip" "."
 popd
