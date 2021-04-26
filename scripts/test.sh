@@ -8,10 +8,10 @@ set -u
 SCRIPT_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 ROOT_DIRECTORY="${SCRIPT_DIRECTORY}/.."
-BUILDS_DIRECTORY="${ROOT_DIRECTORY}/builds"
+BUILD_DIRECTORY="${ROOT_DIRECTORY}/build"
 
 KEYCHAIN_PATH="${ROOT_DIRECTORY}/temporary.keychain"
-ARCHIVE_PATH="${BUILDS_DIRECTORY}/Fileaway.xcarchive"
+ARCHIVE_PATH="${BUILD_DIRECTORY}/Fileaway.xcarchive"
 FASTLANE_ENV_PATH="${ROOT_DIRECTORY}/fastlane/.env"
 
 # TODO: Source the env file if it exists?
@@ -50,10 +50,10 @@ cd "$ROOT_DIRECTORY"
 # Build the macOS archive.
 
 # Clean up the build directory.
-if [ -d "$BUILDS_DIRECTORY" ] ; then
-    rm -r "$BUILDS_DIRECTORY"
+if [ -d "$BUILD_DIRECTORY" ] ; then
+    rm -r "$BUILD_DIRECTORY"
 fi
-mkdir -p "$BUILDS_DIRECTORY"
+mkdir -p "$BUILD_DIRECTORY"
 
 # Determine the version and build number.
 # TODO: Get Xcode to synthesise these itself so that builds also work there.
@@ -70,15 +70,15 @@ security list-keychain -d user -s "$KEYCHAIN_PATH"
 # Archive and export the build.
 KEYCHAIN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\""
 xcodebuild -workspace Fileaway.xcworkspace -scheme "Fileaway macOS" -config Release -archivePath "$ARCHIVE_PATH"  OTHER_CODE_SIGN_FLAGS="$KEYCHAIN_FLAGS" BUILD_NUMBER=$BUILD_NUMBER MARKETING_VERSION=$VERSION_NUMBER archive
-xcodebuild -archivePath "$ARCHIVE_PATH" -exportArchive -exportPath "$BUILDS_DIRECTORY" -exportOptionsPlist "ExportOptions.plist"
+xcodebuild -archivePath "$ARCHIVE_PATH" -exportArchive -exportPath "$BUILD_DIRECTORY" -exportOptionsPlist "ExportOptions.plist"
 
 # Show the code signing details.
-codesign -dvv "$BUILDS_DIRECTORY/Fileaway.app"
+codesign -dvv "$BUILD_DIRECTORY/Fileaway.app"
 
 # Notarize the release build.
 fastlane notarize_release
 
 # Archive the results.
-pushd "$BUILDS_DIRECTORY"
+pushd "$BUILD_DIRECTORY"
 zip -r "Fileaway-macOS-${VERSION_NUMBER}-${BUILD_NUMBER}.zip" "."
 popd

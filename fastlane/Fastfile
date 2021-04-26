@@ -50,7 +50,7 @@ end
 
 lane :notarize_release do
     notarize(
-        package: "builds/Fileaway.app",
+        package: "build/Fileaway.app",
         username: ENV['APPLE_DEVELOPER_ID'],
         verbose: true,
     )

@@ -8,4 +8,4 @@ xcuserdata/
 # Fastlane
 fastlane/.env
 fastlane/report.xml
-builds
+build
