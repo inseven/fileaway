@@ -86,7 +86,8 @@ security create-keychain -p "$TEMPORARY_KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
 security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
 
 # Determine the version and build number.
-# TODO: Get Xcode to synthesise these itself so that builds also work there.
+# TODO: Use conventional commits and semantic versioning to auto-generate version numbers #91
+#       https://github.com/jbmorley/fileaway/issues/91
 VERSION_NUMBER=`cat macos/version.txt | tr -d '[:space:]'`
 GIT_COMMIT=`git rev-parse --short HEAD`
 TIMESTAMP=`date +%s`
