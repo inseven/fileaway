@@ -93,7 +93,7 @@ TIMESTAMP=`date +%s`
 BUILD_NUMBER="${GIT_COMMIT}.${TIMESTAMP}"
 
 # Import the certificates into our dedicated keychain.
-bundler exec fastlane import_certificates keychain:"$KEYCHAIN_PATH"
+fastlane import_certificates keychain:"$KEYCHAIN_PATH"
 security unlock-keychain -p "$TEMPORARY_KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
 security list-keychain -d user -s "$KEYCHAIN_PATH"
 
