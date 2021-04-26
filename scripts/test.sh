@@ -15,8 +15,7 @@ KEYCHAIN_PATH="${TEMPORARY_DIRECTORY}/temporary.keychain"
 ARCHIVE_PATH="${BUILD_DIRECTORY}/Fileaway.xcarchive"
 FASTLANE_ENV_PATH="${ROOT_DIRECTORY}/fastlane/.env"
 
-# TODO: Source the env file if it exists?
-
+# Source the Fastlane .env file if it exists to make local development easier.
 if [ -f "$FASTLANE_ENV_PATH" ] ; then
     echo "Sourcing .env..."
     source "$FASTLANE_ENV_PATH"
@@ -25,11 +24,6 @@ fi
 
 function build_scheme {
     # Disable code signing for the build server.
-    # TODO: Enable test builds if possible using a locally generated signing key.
-    # export CODE_SIGN_IDENTITY=""
-    # export CODE_SIGNING_REQUIRED=NO
-    # export CODE_SIGNING_ALLOWED=NO
-    # export DEVELOPMENT_TEAM=""
     xcodebuild \
         -workspace Fileaway.xcworkspace \
         -scheme "$1" \
