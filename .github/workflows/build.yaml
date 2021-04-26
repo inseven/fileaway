@@ -25,24 +25,16 @@ jobs:
       run: |
         for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts
 
-    - name: Install the certificates
+    - name: Build and test
       env:
         TEMPORARY_KEYCHAIN_PASSWORD: ${{ secrets.TEMPORARY_KEYCHAIN_PASSWORD }}
         MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
         CERTIFICATE_REPOSITORY: ${{ secrets.CERTIFICATE_REPOSITORY }}
         CERTIFICATE_REPOSITORY_AUTHORIZATION_KEY: ${{ secrets.CERTIFICATE_REPOSITORY_AUTHORIZATION_KEY }}
-      run: fastlane init_keychain
-
-    - name: Build and test
-      run: fastlane test
-
-    # - name: Build and notarize macOS
-    #   env:
-    #     TEMPORARY_KEYCHAIN_PASSWORD: ${{ secrets.TEMPORARY_KEYCHAIN_PASSWORD }}
-    #     APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
-    #     APPLE_DEVELOPER_ID: ${{ secrets.APPLE_DEVELOPER_ID }}
-    #     FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
-    #   run: fastlane release --verbose
+        APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        APPLE_DEVELOPER_ID: ${{ secrets.APPLE_DEVELOPER_ID }}
+        FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+      run: scripts/test.sh
 
     - name: Archive the binary
       uses: actions/upload-artifact@v2

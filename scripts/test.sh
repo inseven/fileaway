@@ -50,7 +50,10 @@ if [ -d "$BUILDS_DIRECTORY" ] ; then
 fi
 mkdir -p "$BUILDS_DIRECTORY"
 
+fastlane init_keychain
+
 security unlock-keychain -p "$TEMPORARY_KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+security list-keychain -d user -s "$KEYCHAIN_PATH"
 
 xcodebuild -workspace Fileaway.xcworkspace -scheme "Fileaway macOS" -config Release -archivePath "$ARCHIVE_PATH" OTHER_CODE_SIGN_FLAGS='--keychain="$KEYCHAIN_PATH"' archive
 xcodebuild -archivePath "$ARCHIVE_PATH" -exportArchive -exportPath "$BUILDS_DIRECTORY" -exportOptionsPlist "ExportOptions.plist"
