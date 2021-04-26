@@ -32,9 +32,6 @@ function build_scheme {
         CODE_SIGNING_ALLOWED=NO | xcpretty
 }
 
-# Clean up derived data (mostly for GitHub's benefit).
-# rm -rf ~/Library/Developer/Xcode/DerivedData
-
 cd "$ROOT_DIRECTORY"
 
 #xcodebuild -workspace Fileaway.xcworkspace -list  # List schemes
@@ -45,19 +42,23 @@ cd "$ROOT_DIRECTORY"
 
 # Build the macOS archive.
 
+# Clean up the build directory.
 if [ -d "$BUILDS_DIRECTORY" ] ; then
     rm -r "$BUILDS_DIRECTORY"
 fi
 mkdir -p "$BUILDS_DIRECTORY"
 
+# Import the certificates into a dedicated keychain.
 fastlane init_keychain
-
 security unlock-keychain -p "$TEMPORARY_KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
 security list-keychain -d user -s "$KEYCHAIN_PATH"
 
-xcodebuild -workspace Fileaway.xcworkspace -scheme "Fileaway macOS" -config Release -archivePath "$ARCHIVE_PATH" OTHER_CODE_SIGN_FLAGS='--keychain="${KEYCHAIN_PATH}"' archive
+# Archive and export the build.
+KEYCHAIN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\""
+xcodebuild -workspace Fileaway.xcworkspace -scheme "Fileaway macOS" -config Release -archivePath "$ARCHIVE_PATH" OTHER_CODE_SIGN_FLAGS="$KEYCHAIN_FLAGS" archive
 xcodebuild -archivePath "$ARCHIVE_PATH" -exportArchive -exportPath "$BUILDS_DIRECTORY" -exportOptionsPlist "ExportOptions.plist"
 
+# Show the code signing details.
 codesign -dvv "$BUILDS_DIRECTORY/Fileaway.app"
 
 pushd "$BUILDS_DIRECTORY"
