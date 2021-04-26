@@ -14,6 +14,20 @@ Right now the macOS and iOS apps are incredibly divergent having been written wi
 
 ## Development
 
+### Managing Certificates
+
+The build script (details below) uses Fastlane's match task to manage a certificates and a local keychain. Unfortunately, match seems very buggy when using Developer ID certificates, meaning it can't safely be used to fetch the certificates from Apple (it will keep creating new developer certificates until you reach your quota).
+
+Instead, you can manually import a manually created certificate and private keychain into an existing match certificate store:
+
+```bash
+fastlane match import --skip_certificate_matching true --type developer_id
+```
+
+Match will ask for the path to your certificate (`.cer`) and private key file (`.p12`).
+
+N.B. When manually importing certificates, match will not generate file names with identifiers so it's a good idea to name the certificate and private key with a matching, and obvious name.
+
 ### Builds
 
 In order to make continuous integration easy the `scripts/build.sh` script builds the full project, including submitting the macOS app for notarization. In order to run this script (noting that you probably don't want to use it for regular development cycles), you'll need to configure your environment accordingly, by setting the following environment variables:
@@ -37,6 +51,12 @@ export CERTIFICATE_REPOSITORY_AUTHORIZATION_KEY=
 export APPLE_TEAM_ID=
 export APPLE_DEVELOPER_ID=
 export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=
+```
+
+YOu can generate your GitHub authorization key as follows:
+
+```bash
+echo -n your_github_username:your_personal_access_token | base64
 ```
 
 Once you've added your environment variables to this, run the script from the root of the project directory as follows:
