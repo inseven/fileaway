@@ -30,7 +30,7 @@ struct QuickLookPreview: NSViewRepresentable {
         preview?.autostarts = true
         // TODO: Ensure the QLPreviewView instances are not leaking #100
         //       https://github.com/jbmorley/fileaway/issues/100
-        preview?.shouldCloseWithWindow = false // TODO: We should cleanup somehow.
+        preview?.shouldCloseWithWindow = false
         preview?.previewItem = url as QLPreviewItem
         return preview ?? QLPreviewView()
     }
