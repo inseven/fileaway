@@ -60,6 +60,7 @@ struct Toolbar: ViewModifier {
                         Image(systemName: "wand.and.stars")
                     }
                     .help("Move the selected items using the Rules Wizard")
+                    .disabled(!manager.canMove)
                     .keyboardShortcut(KeyboardShortcut(.return, modifiers: .command))
                 }
                 ToolbarItem {
