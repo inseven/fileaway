@@ -41,4 +41,5 @@ jobs:
     - name: Archive the binary
       uses: actions/upload-artifact@v2
       with:
-        path: build/*.zip
+        name: Artifacts
+        path: build/Artifacts.zip

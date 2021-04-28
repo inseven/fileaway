@@ -37,6 +37,24 @@ FASTLANE_ENV_PATH="${ROOT_DIRECTORY}/fastlane/.env"
 
 CHANGES_SCRIPT="${ROOT_DIRECTORY}/changes/changes"
 
+# Process the command line arguments.
+POSITIONAL=()
+NOTARIZE=true
+while [[ $# -gt 0 ]]
+do
+    key="$1"
+    case $key in
+        -N|--skip-notarize)
+        NOTARIZE=false
+        shift
+        ;;
+        *)
+        POSITIONAL+=("$1")
+        shift
+        ;;
+    esac
+done
+
 # Generate a random string to secure the local keychain.
 export TEMPORARY_KEYCHAIN_PASSWORD=`openssl rand -base64 14`
 
@@ -45,7 +63,6 @@ if [ -f "$FASTLANE_ENV_PATH" ] ; then
     echo "Sourcing .env..."
     source "$FASTLANE_ENV_PATH"
 fi
-
 
 function build_scheme {
     # Disable code signing for the build server.
@@ -103,17 +120,22 @@ KEYCHAIN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\""
 xcodebuild -workspace Fileaway.xcworkspace -scheme "Fileaway macOS" -config Release -archivePath "$ARCHIVE_PATH"  OTHER_CODE_SIGN_FLAGS="$KEYCHAIN_FLAGS" BUILD_NUMBER=$BUILD_NUMBER MARKETING_VERSION=$VERSION_NUMBER archive
 xcodebuild -archivePath "$ARCHIVE_PATH" -exportArchive -exportPath "$BUILD_DIRECTORY" -exportOptionsPlist "ExportOptions.plist"
 
-APP_PATH="$BUILD_DIRECTORY/Fileaway.app"
+APP_BASENAME="Fileaway.app"
+APP_PATH="$BUILD_DIRECTORY/$APP_BASENAME"
 
 # Show the code signing details.
 codesign -dvv "$APP_PATH"
 
 # Notarize the release build.
-fastlane notarize_release package:"$APP_PATH"
+if $NOTARIZE ; then
+    fastlane notarize_release package:"$APP_PATH"
+fi
 
 # Archive the results.
 pushd "$BUILD_DIRECTORY"
-zip -r "Fileaway-macOS-${VERSION_NUMBER}-${BUILD_NUMBER}.zip" "."
+zip -r "Fileaway-macOS-${VERSION_NUMBER}.zip" "$APP_BASENAME"
+rm -r "$APP_BASENAME"
+zip -r "Artifacts.zip" "."
 popd
 
 # Cleanup the temporary files and keychain.
