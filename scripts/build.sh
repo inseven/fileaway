@@ -40,12 +40,17 @@ CHANGES_SCRIPT="${ROOT_DIRECTORY}/changes/changes"
 # Process the command line arguments.
 POSITIONAL=()
 NOTARIZE=true
+RELEASE=false
 while [[ $# -gt 0 ]]
 do
     key="$1"
     case $key in
         -N|--skip-notarize)
         NOTARIZE=false
+        shift
+        ;;
+        -r|--release)
+        RELEASE=true
         shift
         ;;
         *)
@@ -140,3 +145,9 @@ popd
 
 # Cleanup the temporary files and keychain.
 rm -rf "$TEMPORARY_DIRECTORY"
+
+# Attempt to create a version tag and publish a GitHub release.
+# This fails quietly if there's no release to be made.
+if $RELEASE ; then
+    "$CHANGES_SCRIPT" --scope macOS release --skip-if-empty --push --command 'gh release create $CHANGES_TAG --prerelease --title "$CHANGES_TITLE" --notes "$CHANGES_NOTES" build/Fileaway-macOS*.zip'
+fi
