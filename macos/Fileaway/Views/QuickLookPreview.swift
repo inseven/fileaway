@@ -28,6 +28,9 @@ struct QuickLookPreview: NSViewRepresentable {
     func makeNSView(context: NSViewRepresentableContext<QuickLookPreview>) -> QLPreviewView {
         let preview = QLPreviewView(frame: .zero, style: .compact)
         preview?.autostarts = true
+        // TODO: Ensure the QLPreviewView instances are not leaking #100
+        //       https://github.com/jbmorley/fileaway/issues/100
+        preview?.shouldCloseWithWindow = false // TODO: We should cleanup somehow.
         preview?.previewItem = url as QLPreviewItem
         return preview ?? QLPreviewView()
     }
