@@ -41,6 +41,7 @@ struct Toolbar: ViewModifier {
                     } label: {
                         Image(systemName: "eye")
                     }
+                    .help("Show items with Quick Look")
                     .disabled(!manager.canPreview)
                 }
                 ToolbarItem {
@@ -56,8 +57,9 @@ struct Toolbar: ViewModifier {
                         }
                         openURL(url)
                     } label: {
-                        Image(systemName: "archivebox")
+                        Image(systemName: "wand.and.stars")
                     }
+                    .help("Move the selected items using the Rules Wizard")
                     .keyboardShortcut(KeyboardShortcut(.return, modifiers: .command))
                 }
                 ToolbarItem {
@@ -66,6 +68,7 @@ struct Toolbar: ViewModifier {
                     } label: {
                         Image(systemName: "trash")
                     }
+                    .help("Move the selected items to the Bin")
                     .disabled(!manager.canTrash)
                 }
                 ToolbarItem {
