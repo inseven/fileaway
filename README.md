@@ -65,24 +65,6 @@ Once you've added your environment variables to this, run the script from the ro
 ./scripts/build.sh
 ```
 
-## Changelog
-
-### macOS
-
-#### Unreleased
-
-Changes on `main` pending release.
-
-- Save the window size
-
-#### Version 0.1.1
-
-- Support duplicating rules
-
-#### Version 0.1.0
-
-Initial release with support for a single inbox and archive directories, rules wizard, and simple rule editing.
-
 ## Licensing
 
 Bookmarks is licensed under the MIT License (see [LICENSE](LICENSE)).
