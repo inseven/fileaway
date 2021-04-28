@@ -5,7 +5,7 @@ on:
     branches: [ main ]
   push:
     branches: [ main ]
-    tags: *
+    tags: [ * ]
   schedule:
     - cron:  '0 1 * * *'
 
