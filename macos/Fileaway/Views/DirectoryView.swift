@@ -115,6 +115,7 @@ struct DirectoryView: View {
                 scrollView.scrollTo(next.id)
             }
             .onKey("a", modifiers: .command, perform: tracker.selectAll)
+            .onKey(.downArrow, modifiers: .command, perform: manager.open)
             .onMoveCommand { direction in
                 switch direction {
                 case .up:
