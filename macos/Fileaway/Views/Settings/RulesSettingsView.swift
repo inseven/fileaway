@@ -43,10 +43,12 @@ struct RulesSettingsView: View {
                 ScrollViewReader { scrollView in
                     List(rules.mutableRules, id: \.self, selection: $selection) { rule in
                         Text(rule.name)
+                            .frame(maxWidth: .infinity, alignment: .topLeading)
                             .lineLimit(1)
-                            .id(rule.id)
-                            .onTapGesture(count: 2) {
-                                print("Double tapped!")
+                            .contentShape(Rectangle())
+                            .onClick {
+                                selection = rule
+                            } doubleClick: {
                                 sheet = .rule(rule: rule)
                             }
                             .contextMenu {
