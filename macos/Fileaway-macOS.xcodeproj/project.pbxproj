@@ -134,7 +134,6 @@
 		D8B6D02F257DBB7D00C7E472 /* SelectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionManager.swift; sourceTree = "<group>"; };
 		D8B6D034257E71CD00C7E472 /* QuickLookCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickLookCoordinator.swift; sourceTree = "<group>"; };
 		D8B6D046257F0B4300C7E472 /* KeyEventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEventHandler.swift; sourceTree = "<group>"; };
-		D8BCF1962635053300047E0A /* Version.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Version.xcconfig; sourceTree = "<group>"; };
 		D8BCF1972635062E00047E0A /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		D8BCF1982635064A00047E0A /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
 		D8BCF1992635067300047E0A /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
@@ -270,7 +269,6 @@
 			isa = PBXGroup;
 			children = (
 				D8BCF1982635064A00047E0A /* Common.xcconfig */,
-				D8BCF1962635053300047E0A /* Version.xcconfig */,
 				D8BCF1992635067300047E0A /* Debug.xcconfig */,
 				D8BCF1972635062E00047E0A /* Release.xcconfig */,
 				D8F90C6B25DAA6A400F0EFB8 /* interact */,

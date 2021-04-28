@@ -35,6 +35,8 @@ KEYCHAIN_PATH="${TEMPORARY_DIRECTORY}/temporary.keychain"
 ARCHIVE_PATH="${BUILD_DIRECTORY}/Fileaway.xcarchive"
 FASTLANE_ENV_PATH="${ROOT_DIRECTORY}/fastlane/.env"
 
+CHANGES_SCRIPT="${ROOT_DIRECTORY}/changes/changes"
+
 # Generate a random string to secure the local keychain.
 export TEMPORARY_KEYCHAIN_PASSWORD=`openssl rand -base64 14`
 
@@ -86,9 +88,7 @@ security create-keychain -p "$TEMPORARY_KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
 security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
 
 # Determine the version and build number.
-# TODO: Use conventional commits and semantic versioning to auto-generate version numbers #91
-#       https://github.com/jbmorley/fileaway/issues/91
-VERSION_NUMBER=`cat macos/version.txt | tr -d '[:space:]'`
+VERSION_NUMBER=`"$CHANGES_SCRIPT" --scope macOS current-version`
 GIT_COMMIT=`git rev-parse --short HEAD`
 TIMESTAMP=`date +%s`
 BUILD_NUMBER="${GIT_COMMIT}.${TIMESTAMP}"
