@@ -148,6 +148,6 @@ rm -rf "$TEMPORARY_DIRECTORY"
 
 # Attempt to create a version tag and publish a GitHub release.
 # This fails quietly if there's no release to be made.
-if $RELEASE ; then
+if $RELEASE || $TRY_RELEASE ; then
     "$CHANGES_SCRIPT" --scope macOS release --skip-if-empty --push --command 'gh release create $CHANGES_TAG --prerelease --title "$CHANGES_TITLE" --notes "$CHANGES_NOTES" build/Fileaway-macOS*.zip'
 fi
