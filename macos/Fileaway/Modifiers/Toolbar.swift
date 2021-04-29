@@ -37,18 +37,6 @@ struct Toolbar: ViewModifier {
                         guard let file = manager.tracker.selection.first else {
                             return
                         }
-                        QuickLookCoordinator.shared.show(url: file.url)
-                    } label: {
-                        Image(systemName: "eye")
-                    }
-                    .help("Show items with Quick Look")
-                    .disabled(!manager.canPreview)
-                }
-                ToolbarItem {
-                    Button {
-                        guard let file = manager.tracker.selection.first else {
-                            return
-                        }
                         var components = URLComponents()
                         components.scheme = "fileaway"
                         components.path = file.url.path
@@ -62,6 +50,18 @@ struct Toolbar: ViewModifier {
                     .help("Move the selected items using the Rules Wizard")
                     .disabled(!manager.canMove)
                     .keyboardShortcut(KeyboardShortcut(.return, modifiers: .command))
+                }
+                ToolbarItem {
+                    Button {
+                        guard let file = manager.tracker.selection.first else {
+                            return
+                        }
+                        QuickLookCoordinator.shared.show(url: file.url)
+                    } label: {
+                        Image(systemName: "eye")
+                    }
+                    .help("Show items with Quick Look")
+                    .disabled(!manager.canPreview)
                 }
                 ToolbarItem {
                     Button {
