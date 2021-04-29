@@ -58,7 +58,7 @@ export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=
 export GITHUB_TOKEN=
 ```
 
-You can generate your GitHub authorization key as follows:
+You can generate your GitHub authorization key (for `CERTIFICATE_REPOSITORY_AUTHORIZATION_KEY`) as follows:
 
 ```bash
 echo -n your_github_username:your_personal_access_token | base64
