@@ -27,6 +27,8 @@ import Interact
 
 struct DirectoryView: View {
 
+    @Environment(\.openURL) var openURL
+
     @State var backgroundColor: Color = .clear
     @ObservedObject var directoryObserver: DirectoryObserver
 
@@ -55,12 +57,25 @@ struct DirectoryView: View {
                             FileRow(file: file, isSelected: tracker.isSelected(item: file))
                         }
                         .contextMenuFocusable {
+                            Button("Rules Wizard") {
+                                var components = URLComponents()
+                                components.scheme = "fileaway"
+                                components.path = file.url.path
+                                guard let url = components.url else {
+                                    return
+                                }
+                                openURL(url)
+                            }
+                            Divider()
                             Button("Open") {
                                 NSWorkspace.shared.open(file.url)
                             }
-                            Divider()
                             Button("Reveal in Finder") {
                                 NSWorkspace.shared.activateFileViewerSelecting([file.url])
+                            }
+                            Divider()
+                            Button("Quick Look") {
+                                QuickLookCoordinator.shared.show(url: file.url)
                             }
                         } onContextMenuChange: { focused in
                             guard focused else {
