@@ -38,6 +38,7 @@ In order to make continuous integration easy the `scripts/build.sh` script build
 - `APPLE_TEAM_ID` -- Apple Developer Team ID
 - `APPLE_DEVELOPER_ID` -- individual Apple Developer Account ID (used for notarization)
 - `FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD` -- [app-specific password](https://support.apple.com/en-us/HT204397) for the Developer Account
+- `TRY_RELEASE` -- Boolean indicating whether to attempt a release. You can conditionally set this based on the current GitHub ref (e.g., `${{ github.ref == 'refs/heads/main' }}`); should be `false` for local builds
 
 The script (like Fastlane) will look for and source an environment file in the Fastlane directory (`Fastlane/.env`) which you can add your local details to. This file is, of course, in `.gitignore`. For example,
 

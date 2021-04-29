@@ -36,8 +36,7 @@ jobs:
         APPLE_DEVELOPER_ID: ${{ secrets.APPLE_DEVELOPER_ID }}
         FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
         GITHUB_REF: ${{ github.ref }}
-        IS_MAIN_BRANCH: ${{ github.ref == 'refs/heads/main' }}
-        IS_DEV_BRANCH: ${{ github.ref == 'refs/heads/automatic-releases' }}
+        TRY_RELEASE: ${{ github.ref == 'refs/heads/main' }}
       run: scripts/build.sh
 
     - name: Archive the binary
