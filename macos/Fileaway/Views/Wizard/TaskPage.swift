@@ -90,7 +90,7 @@ struct TaskPage: View {
         .padding()
         .acceptsFirstResponder(isFirstResponder: $firstResponder)
         .modifier(TrackerInput(tracker: tracker))
-        .pageTitle("Select Task")
+        .pageTitle("Select Rule")
     }
 
 }
