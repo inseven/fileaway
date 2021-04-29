@@ -52,6 +52,9 @@ struct RulesSettingsView: View {
                                 sheet = .rule(rule: rule)
                             }
                             .contextMenu {
+                                Button("Edit") {
+                                    sheet = .rule(rule: rule)
+                                }
                                 Button("Duplicate") {
                                     do {
                                         let _ = try rules.duplicate(rule, preferredName: "Copy of " + rule.name)
