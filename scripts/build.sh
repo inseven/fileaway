@@ -151,5 +151,5 @@ rm -rf "$TEMPORARY_DIRECTORY"
 if $RELEASE || $TRY_RELEASE ; then
     # List the current tags just to check GitHub has them.
     git tag
-    "$CHANGES_SCRIPT" --scope macOS release --skip-if-empty --push --command 'gh release create $CHANGES_TAG --prerelease --title "$CHANGES_TITLE" --notes "$CHANGES_NOTES" build/Fileaway-macOS*.zip'
+    "$CHANGES_SCRIPT" --scope macOS release --skip-if-empty --push --command 'gh release create "$CHANGES_TAG" --prerelease --title "$CHANGES_TITLE" --notes "$CHANGES_NOTES" build/Fileaway-macOS*.zip'
 fi
