@@ -38,7 +38,8 @@ In order to make continuous integration easy the `scripts/build.sh` script build
 - `APPLE_TEAM_ID` -- Apple Developer Team ID
 - `APPLE_DEVELOPER_ID` -- individual Apple Developer Account ID (used for notarization)
 - `FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD` -- [app-specific password](https://support.apple.com/en-us/HT204397) for the Developer Account
-- `TRY_RELEASE` -- Boolean indicating whether to attempt a release. You can conditionally set this based on the current GitHub ref (e.g., `${{ github.ref == 'refs/heads/main' }}`); should be `false` for local builds
+- `TRY_RELEASE` -- boolean indicating whether to attempt a release (conditionally set based on the current branch using `${{ github.ref == 'refs/heads/main' }}`)
+- `GITHUB_TOKEN` -- [GitHub token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) used to create the release
 
 The script (like Fastlane) will look for and source an environment file in the Fastlane directory (`Fastlane/.env`) which you can add your local details to. This file is, of course, in `.gitignore`. For example,
 
@@ -52,9 +53,12 @@ export CERTIFICATE_REPOSITORY_AUTHORIZATION_KEY=
 export APPLE_TEAM_ID=
 export APPLE_DEVELOPER_ID=
 export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=
+
+# GitHub (only required if publishing releases locally)
+export GITHUB_TOKEN=
 ```
 
-YOu can generate your GitHub authorization key as follows:
+You can generate your GitHub authorization key as follows:
 
 ```bash
 echo -n your_github_username:your_personal_access_token | base64
@@ -64,6 +68,12 @@ Once you've added your environment variables to this, run the script from the ro
 
 ```bash
 ./scripts/build.sh
+```
+
+You can publish a build locally by specifying the `--release` parameter:
+
+```bash
+./scripts/build.sh --release
 ```
 
 ## Licensing
