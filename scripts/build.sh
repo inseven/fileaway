@@ -121,8 +121,7 @@ security unlock-keychain -p "$TEMPORARY_KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
 security list-keychain -d user -s "$KEYCHAIN_PATH"
 
 # Archive and export the build.
-KEYCHAIN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\""
-xcodebuild -workspace Fileaway.xcworkspace -scheme "Fileaway macOS" -config Release -archivePath "$ARCHIVE_PATH"  OTHER_CODE_SIGN_FLAGS="$KEYCHAIN_FLAGS" BUILD_NUMBER=$BUILD_NUMBER MARKETING_VERSION=$VERSION_NUMBER archive
+xcodebuild -workspace Fileaway.xcworkspace -scheme "Fileaway macOS" -config Release -archivePath "$ARCHIVE_PATH"  OTHER_CODE_SIGN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\"" BUILD_NUMBER=$BUILD_NUMBER MARKETING_VERSION=$VERSION_NUMBER archive | xcpretty
 xcodebuild -archivePath "$ARCHIVE_PATH" -exportArchive -exportPath "$BUILD_DIRECTORY" -exportOptionsPlist "ExportOptions.plist"
 
 APP_BASENAME="Fileaway.app"
@@ -151,5 +150,5 @@ rm -rf "$TEMPORARY_DIRECTORY"
 if $RELEASE || $TRY_RELEASE ; then
     # List the current tags just to check GitHub has them.
     git tag
-    "$CHANGES_SCRIPT" --scope macOS release --skip-if-empty --push --command 'gh release create "$CHANGES_TAG" --prerelease --title "$CHANGES_TITLE" --notes "$CHANGES_NOTES" build/Fileaway-macOS*.zip'
+    "$CHANGES_SCRIPT" --scope macOS release --skip-if-empty --push --command 'scripts/release.sh'
 fi
