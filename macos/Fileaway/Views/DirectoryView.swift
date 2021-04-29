@@ -89,7 +89,7 @@ struct DirectoryView: View {
                         .onClick {
                             firstResponder = true
                             tracker.handleClick(item: file)
-                        } doubleClick: { // TODO: Perhaps there's a better way to do this with environment variables?
+                        } doubleClick: {
                             firstResponder = true
                             NSWorkspace.shared.open(file.url)
                         }
