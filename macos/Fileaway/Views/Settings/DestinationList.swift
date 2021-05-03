@@ -74,23 +74,21 @@ struct DestinationList: View {
                 .frame(width: 200)
             }
             HStack {
+
                 ForEach(rule.variables) { variable in
-                    Button(action: {
+                    Button(String(describing: variable.name)) {
                         rule.destination.append(ComponentState(value: variable.name, type: .variable, variable: variable))
-                    }) {
-                        Text(String(describing: variable.name))
                     }
                 }
-                Button {
-                    guard let component = selection else {
-                        return
-                    }
-                    rule.remove(component: component)
-                    selection = nil
-                } label: {
-                    Image(systemName: "minus")
+
+                Divider()
+
+                Button("Text") {
+                    rule.destination.append(ComponentState(value: "Text", type: .text, variable: nil))
                 }
-                .disabled(selection == nil)
+
+                Divider()
+
                 Button {
                     guard let component = selection else {
                         return
@@ -107,6 +105,20 @@ struct DestinationList: View {
                 } label: {
                     Image(systemName: "arrow.down")
                 }
+
+                Divider()
+
+                Button {
+                    guard let component = selection else {
+                        return
+                    }
+                    rule.remove(component: component)
+                    selection = nil
+                } label: {
+                    Image(systemName: "minus")
+                }
+                .disabled(selection == nil)
+
                 Spacer()
             }
 
