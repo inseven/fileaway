@@ -39,6 +39,15 @@ struct LocationsSettingsView: View {
         }
     }
 
+    func addLocation(type: DirectoryObserver.DirectoryType, url: URL) {
+        dispatchPrecondition(condition: .onQueue(.main))
+        do {
+            try manager.addLocation(type: type, url: url)
+        } catch {
+            alertType = .error(error: error)
+        }
+    }
+
     var body: some View {
         VStack {
             GroupBox(label: Text("Inboxes")) {
@@ -64,6 +73,19 @@ struct LocationsSettingsView: View {
                             }
                         }
                     }
+                    .onDrop(of: [.fileURL], isTargeted: Binding.constant(false)) { itemProviders in
+                        for item in itemProviders {
+                            _ = item.loadObject(ofClass: URL.self) { url, _ in
+                                guard let url = url else {
+                                    return
+                                }
+                                DispatchQueue.main.async {
+                                    addLocation(type: .inbox, url: url)
+                                }
+                            }
+                        }
+                        return true
+                    }
                     VStack {
                         Button {
                             let openPanel = NSOpenPanel()
@@ -74,11 +96,7 @@ struct LocationsSettingsView: View {
                                   let url = openPanel.url else {
                                 return
                             }
-                            do {
-                                try manager.addLocation(type: .inbox, url: url)
-                            } catch {
-                                alertType = .error(error: error)
-                            }
+                            addLocation(type: .inbox, url: url)
                         } label: {
                             Text("Add")
                                 .frame(maxWidth: .infinity)
@@ -91,7 +109,6 @@ struct LocationsSettingsView: View {
                         }
                         .disabled(inboxSelection == nil)
                         Spacer()
-
                     }
                 }
             }
