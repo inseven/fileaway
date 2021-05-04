@@ -23,6 +23,10 @@ import Combine
 import Foundation
 import SwiftUI
 
+enum FileawayError: Error {
+    case notFound
+}
+
 struct ManagerKey: EnvironmentKey {
     static var defaultValue: Manager = Manager()
 }
@@ -105,7 +109,7 @@ class Manager: ObservableObject {
 
     func addLocation(type: DirectoryObserver.DirectoryType, url: URL) throws {
         dispatchPrecondition(condition: .onQueue(.main))
-        let _ = try url.securityScopeBookmarkData()  // Ensure we can use the bookmark; TODO: Do this elsewhre.
+        let _ = try url.securityScopeBookmarkData() // Check that we can access the location.
         addDirectoryObserver(type: type, url: url)
         try save()
     }
@@ -117,14 +121,13 @@ class Manager: ObservableObject {
 
     func removeDirectoryObserver(directoryObserver: DirectoryObserver) throws {
         dispatchPrecondition(condition: .onQueue(.main))
-
-        // TODO: Assert that the directory observer is actually in the active set?
-
+        guard directories.contains(directoryObserver) else {
+            throw FileawayError.notFound
+        }
         if let countObserver = countObservers[directoryObserver.id] {
             countObserver.cancel()
             countObservers.removeValue(forKey: directoryObserver.id)
         }
-
         directoryObserver.stop()
         directories.removeAll { $0.id == directoryObserver.id }
         try save()
