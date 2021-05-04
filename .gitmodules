@@ -1,6 +1,6 @@
 [submodule "interact"]
 	path = interact
 	url = git@github.com:jbmorley/interact.git
-[submodule "changes"]
-	path = changes
+[submodule "scripts/changes"]
+	path = scripts/changes
 	url = git@github.com:jbmorley/changes.git
