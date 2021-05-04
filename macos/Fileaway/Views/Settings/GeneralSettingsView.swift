@@ -34,6 +34,7 @@ struct GeneralSettingsView: View {
                     let openPanel = NSOpenPanel()
                     openPanel.canChooseFiles = false
                     openPanel.canChooseDirectories = true
+                    openPanel.canCreateDirectories = true
                     if (openPanel.runModal() ==  NSApplication.ModalResponse.OK) {
                         try! manager.setInboxUrl(openPanel.url!)
                     }
@@ -47,6 +48,7 @@ struct GeneralSettingsView: View {
                     let openPanel = NSOpenPanel()
                     openPanel.canChooseFiles = false
                     openPanel.canChooseDirectories = true
+                    openPanel.canCreateDirectories = true
                     if (openPanel.runModal() ==  NSApplication.ModalResponse.OK) {
                         try! manager.setArchiveUrl(openPanel.url!)
                     }
