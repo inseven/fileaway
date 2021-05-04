@@ -35,7 +35,7 @@ KEYCHAIN_PATH="${TEMPORARY_DIRECTORY}/temporary.keychain"
 ARCHIVE_PATH="${BUILD_DIRECTORY}/Fileaway.xcarchive"
 FASTLANE_ENV_PATH="${ROOT_DIRECTORY}/fastlane/.env"
 
-CHANGES_SCRIPT="${ROOT_DIRECTORY}/changes/changes"
+CHANGES_SCRIPT="${ROOT_DIRECTORY}/scripts/changes/changes"
 
 # Process the command line arguments.
 POSITIONAL=()
