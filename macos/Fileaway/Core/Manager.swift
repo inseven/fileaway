@@ -38,59 +38,36 @@ extension EnvironmentValues {
 
 class Manager: ObservableObject {
 
+    // TODO: Make this fileprivate
     var settings = Settings()
     var ruleSet: RuleSet?
 
     @Published var locations: [URL] = []
-    @Published var inbox: DirectoryObserver? = nil
-    @Published var archive: DirectoryObserver? = nil
+    @Published var directories: [DirectoryObserver] = []
     @Published var rules: [Rule] = []
 
-    var badgeObserver: Cancellable?
+    var badgeObservers: [DirectoryObserver.ID: Cancellable] = [:]
     var rulesSubscription: Cancellable?
 
-    func createInboxObserver(url: URL) {
-        dispatchPrecondition(condition: .onQueue(.main))
-        inbox = DirectoryObserver(name: "Inbox", locations: [url])
-        badgeObserver = nil
-        guard let inbox = inbox else {
-            return
-        }
-        inbox.start()
-        NSApp.dockTile.badgeLabel = "\(inbox.files.count)"
-        badgeObserver = inbox.objectWillChange.sink(receiveValue: {
-            self.updateBadge()
-        })
-        updateBadge()
-    }
-
     func updateBadge() {
-        DispatchQueue.main.async {
-            guard let inbox = self.inbox else {
-                print("Unable to get badge count without inbox; clearing")
-                NSApp.dockTile.badgeLabel = nil
-                return
-            }
-            print("badge = \(inbox.count)")
-            NSApp.dockTile.badgeLabel = inbox.count > 0 ? "\(inbox.count)" : ""
-        }
-    }
-
-    func createArchiveObserver(url: URL) {
         dispatchPrecondition(condition: .onQueue(.main))
-        archive = DirectoryObserver(name: "Archive", locations: [url])
-        guard let archive = archive else {
-            return
+        let count = directories.filter { $0.type == .inbox }.map { $0.count }.reduce(0) { result, count in result + count }
+        print("badge = \(count)")
+        if count == 0 {
+            NSApp.dockTile.badgeLabel = nil
+        } else {
+            NSApp.dockTile.badgeLabel = String(describing: count)
         }
-        archive.start()
     }
 
     func start() {
-        if let url = try? settings.inboxUrl() {
-            self.createInboxObserver(url: url)
+        dispatchPrecondition(condition: .onQueue(.main))
+        for url in settings.inboxUrls {
+            addDirectoryObserver(type: .inbox, url: url)
         }
+
         if let url = try? settings.archiveUrl() {
-            self.createArchiveObserver(url: url)
+            addDirectoryObserver(type: .archive, url: url)
             let ruleSet = RuleSet(url: url)
             self.ruleSet = ruleSet
             self.rules = ruleSet.rules
@@ -100,18 +77,58 @@ class Manager: ObservableObject {
         }
     }
 
-    var inboxUrl: URL? { try? settings.inboxUrl() }
-
-    func setInboxUrl(_ url: URL) throws {
-        try settings.setInboxUrl(url)
-        self.createInboxObserver(url: url)
-    }
-
     var archiveUrl: URL? { try? settings.archiveUrl() }
 
     func setArchiveUrl(_ url: URL) throws {
+        dispatchPrecondition(condition: .onQueue(.main))
         try settings.setArchiveUrl(url)
-        self.createArchiveObserver(url: url)
+        addDirectoryObserver(type: .archive, url: url)
+    }
+
+    func addDirectoryObserver(type: DirectoryObserver.DirectoryType, url: URL) {
+        dispatchPrecondition(condition: .onQueue(.main))
+
+        // Create the directory observer and start it.
+        let directoryObserver = DirectoryObserver(type: type, location: url)
+        directories.append(directoryObserver)
+        directoryObserver.start()
+
+        // Start observing the counts to update the badge.
+        // updateBadge filters the directory observers so it's OK to add both inbox and archive observers here.
+        let observer = directoryObserver.objectWillChange.sink(receiveValue: {
+            DispatchQueue.main.async {
+                self.updateBadge()
+            }
+        })
+        badgeObservers[directoryObserver.id] = observer
+        updateBadge()
+    }
+
+    func addLocation(type: DirectoryObserver.DirectoryType, url: URL) throws {
+        dispatchPrecondition(condition: .onQueue(.main))
+        let _ = try url.securityScopeBookmarkData()  // Ensure we can use the bookmark; TODO: Do this elsewhre.
+        addDirectoryObserver(type: type, url: url)
+        try save()
+    }
+
+    func save() throws {
+        let inboxUrls = directories.filter { $0.type == .inbox }.map { $0.location }  // TODO: Rename location to URL
+        try settings.setInboxUrls(inboxUrls)
+    }
+
+    func removeDirectoryObserver(directoryObserver: DirectoryObserver) throws {
+        dispatchPrecondition(condition: .onQueue(.main))
+
+        // TODO: Assert that the directory observer is actually in the active set?
+
+        if let badgeObserver = badgeObservers[directoryObserver.id] {
+            badgeObserver.cancel()
+            badgeObservers.removeValue(forKey: directoryObserver.id)
+        }
+
+        directoryObserver.stop()
+        directories.removeAll { $0.id == directoryObserver.id }
+        try save()
     }
 
 }

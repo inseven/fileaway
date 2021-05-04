@@ -30,20 +30,20 @@ struct Sidebar: View {
     @ObservedObject var manager: Manager
     @State var firstResponder: Bool = false
     @State var item: Int = 30
-    @State var value: String = "SAkdfjh"
-    @State var selection: SidebarSection? = .inbox
 
     var body: some View {
         List {
-            Section(header: Text("Locations")) {
-                if let inbox = manager.inbox {
-                    NavigationLink(destination: DirectoryView(directoryObserver: inbox), tag: .inbox, selection: $selection) {
-                        MailboxRow(directoryObserver: inbox, title: "Inbox", imageSystemName: "tray")
+            Section(header: Text("Inboxes")) {
+                ForEach(manager.directories.filter({ $0.type == .inbox})) { inbox in
+                    NavigationLink(destination: DirectoryView(directoryObserver: inbox)) {
+                        MailboxRow(directoryObserver: inbox, title: inbox.name, imageSystemName: "tray")
                     }
                 }
-                if let archive = manager.archive {
-                    NavigationLink(destination: DirectoryView(directoryObserver: archive), tag: .archive, selection: $selection) {
-                        MailboxRow(directoryObserver: archive, title: "Archive", imageSystemName: "archivebox")
+            }
+            Section(header: Text("Archives")) {
+                ForEach(manager.directories.filter({ $0.type == .archive})) { archive in
+                    NavigationLink(destination: DirectoryView(directoryObserver: archive)) {
+                        MailboxRow(directoryObserver: archive, title: archive.name, imageSystemName: "archivebox")
                     }
                 }
             }

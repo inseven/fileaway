@@ -32,7 +32,7 @@ struct SettingsView: View {
         TabView {
             GeneralSettingsView(manager: manager)
                 .tabItem {
-                    Label("General", systemImage: "gear")
+                    Label("Locations", systemImage: "folder")
                 }
                 .tag(Tabs.general)
             if let ruleSet = manager.ruleSet {
