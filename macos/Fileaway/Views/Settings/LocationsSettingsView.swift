@@ -64,8 +64,11 @@ struct LocationsSettingsView: View {
                               let url = openPanel.url else {
                             return
                         }
-                        // TODO: Report an error.
-                        try? manager.addLocation(type: .inbox, url: url)
+                        do {
+                            try manager.addLocation(type: .inbox, url: url)
+                        } catch {
+                            alertType = .error(error: error)
+                        }
                     } label: {
                         Text("Add")
                             .frame(maxWidth: .infinity)
