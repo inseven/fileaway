@@ -25,9 +25,9 @@ set -o pipefail
 set -x
 set -u
 
-SCRIPT_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+SCRIPTS_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-ROOT_DIRECTORY="${SCRIPT_DIRECTORY}/.."
+ROOT_DIRECTORY="${SCRIPTS_DIRECTORY}/.."
 BUILD_DIRECTORY="${ROOT_DIRECTORY}/build"
 TEMPORARY_DIRECTORY="${ROOT_DIRECTORY}/temp"
 
@@ -35,7 +35,8 @@ KEYCHAIN_PATH="${TEMPORARY_DIRECTORY}/temporary.keychain"
 ARCHIVE_PATH="${BUILD_DIRECTORY}/Fileaway.xcarchive"
 FASTLANE_ENV_PATH="${ROOT_DIRECTORY}/fastlane/.env"
 
-CHANGES_SCRIPT="${ROOT_DIRECTORY}/scripts/changes/changes"
+CHANGES_SCRIPT="${SCRIPTS_DIRECTORY}/changes/changes"
+BUILD_TOOLS_SCRIPT="${SCRIPTS_DIRECTORY}/build-tools/build-tools"
 
 # Process the command line arguments.
 POSITIONAL=()
@@ -137,7 +138,9 @@ fi
 
 # Archive the results.
 pushd "$BUILD_DIRECTORY"
-zip -r "Fileaway-macOS-${VERSION_NUMBER}.zip" "$APP_BASENAME"
+ZIP_BASENAME="Fileaway-macOS-${VERSION_NUMBER}.zip"
+zip -r --symlinks "$ZIP_BASENAME" "$APP_BASENAME"
+"$BUILD_TOOLS_SCRIPT" verify-notarized-zip "$ZIP_BASENAME"
 rm -r "$APP_BASENAME"
 zip -r "Artifacts.zip" "."
 popd
