@@ -22,41 +22,34 @@ import SwiftUI
 
 struct GeneralSettingsView: View {
 
+    enum AlertType {
+        case error(error: Error)
+    }
+
     @ObservedObject var manager: Manager
 
     @State var inboxSelection: UUID?
+    @State var alertType: AlertType?
 
     var body: some View {
         VStack {
-            Text("Archive")
-                .frame(maxWidth: .infinity, alignment: .leading)
-            HStack {
-                Text(manager.archiveUrl?.path ?? "")
-                Spacer()
-                Button("Choose...") {
-                    let openPanel = NSOpenPanel()
-                    openPanel.canChooseFiles = false
-                    openPanel.canChooseDirectories = true
-                    openPanel.canCreateDirectories = true
-                    if (openPanel.runModal() ==  NSApplication.ModalResponse.OK) {
-                        try! manager.setArchiveUrl(openPanel.url!)
-                    }
-                }
-            }
             Text("Inboxes")
                 .frame(maxWidth: .infinity, alignment: .leading)
             HStack {
                 List(selection: $inboxSelection) {
                     ForEach(manager.directories.filter { $0.type == .inbox }) { directory in
-                        Text(directory.location.lastPathComponent)
+                        Text(directory.url.lastPathComponent)
                             .contextMenu {
                                 Button("Reveal in Finder") {
-                                    NSWorkspace.shared.activateFileViewerSelecting([directory.location])
+                                    NSWorkspace.shared.activateFileViewerSelecting([directory.url])
                                 }
                                 Divider()
                                 Button("Remove") {
-                                    // TODO: Handle the error here.
-                                    try? manager.removeDirectoryObserver(directoryObserver: directory)
+                                    do {
+                                        try manager.removeDirectoryObserver(directoryObserver: directory)
+                                    } catch {
+                                        alertType = .error(error: error)
+                                    }
                                 }
                             }
                     }
@@ -88,7 +81,37 @@ struct GeneralSettingsView: View {
 
                 }
             }
+            Text("Archive")
+                .frame(maxWidth: .infinity, alignment: .leading)
+            HStack {
+                Text(manager.archiveUrl?.path ?? "")
+                Spacer()
+                Button("Choose...") {
+                    let openPanel = NSOpenPanel()
+                    openPanel.canChooseFiles = false
+                    openPanel.canChooseDirectories = true
+                    openPanel.canCreateDirectories = true
+                    if (openPanel.runModal() ==  NSApplication.ModalResponse.OK) {
+                        try! manager.setArchiveUrl(openPanel.url!)
+                    }
+                }
+            }
+        }
+        .alert(item: $alertType) { alertType in
+            switch alertType {
+            case .error(let error):
+                return Alert(title: Text("Error"), message: Text(error.localizedDescription))
+            }
         }
     }
 
+}
+
+extension GeneralSettingsView.AlertType: Identifiable {
+    public var id: String {
+        switch self {
+        case .error(let error):
+            return "error-\(String(describing: error))"
+        }
+    }
 }

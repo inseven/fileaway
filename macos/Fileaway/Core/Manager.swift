@@ -24,7 +24,18 @@ import Foundation
 import SwiftUI
 
 enum FileawayError: Error {
-    case notFound
+    case directoryNotFound
+}
+
+extension FileawayError: LocalizedError {
+
+    var errorDescription: String? {
+        switch self {
+        case .directoryNotFound:
+            return "Directory not found."
+        }
+    }
+
 }
 
 struct ManagerKey: EnvironmentKey {
@@ -92,7 +103,7 @@ class Manager: ObservableObject {
         dispatchPrecondition(condition: .onQueue(.main))
 
         // Create the directory observer and start it.
-        let directoryObserver = DirectoryObserver(type: type, location: url)
+        let directoryObserver = DirectoryObserver(type: type, url: url)
         directories.append(directoryObserver)
         directoryObserver.start()
 
@@ -115,14 +126,14 @@ class Manager: ObservableObject {
     }
 
     func save() throws {
-        let inboxUrls = directories.filter { $0.type == .inbox }.map { $0.location }  // TODO: Rename location to URL
+        let inboxUrls = directories.filter { $0.type == .inbox }.map { $0.url }  // TODO: Rename location to URL
         try settings.setInboxUrls(inboxUrls)
     }
 
     func removeDirectoryObserver(directoryObserver: DirectoryObserver) throws {
         dispatchPrecondition(condition: .onQueue(.main))
         guard directories.contains(directoryObserver) else {
-            throw FileawayError.notFound
+            throw FileawayError.directoryNotFound
         }
         if let countObserver = countObservers[directoryObserver.id] {
             countObserver.cancel()
@@ -131,6 +142,7 @@ class Manager: ObservableObject {
         directoryObserver.stop()
         directories.removeAll { $0.id == directoryObserver.id }
         try save()
+        updateBadge()
     }
 
 }

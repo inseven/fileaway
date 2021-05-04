@@ -35,11 +35,11 @@ class DirectoryObserver: ObservableObject, Identifiable, Hashable {
     public var id: UUID = UUID()
 
     var type: DirectoryType
-    var location: URL
+    var url: URL
     var extensions = ["pdf"]
 
     var count: Int { self.files.count }
-    var name: String { location.lastPathComponent }
+    var name: String { url.lastPathComponent }
 
     @Published var searchResults: [FileInfo] = []
 
@@ -66,9 +66,9 @@ class DirectoryObserver: ObservableObject, Identifiable, Hashable {
         }
     }
 
-    init(type: DirectoryType, location: URL) {
+    init(type: DirectoryType, url: URL) {
         self.type = type
-        self.location = location
+        self.url = url
     }
 
     func hash(into hasher: inout Hasher) {
@@ -103,7 +103,7 @@ class DirectoryObserver: ObservableObject, Identifiable, Hashable {
 
     func start() {
         dispatchPrecondition(condition: .onQueue(.main))
-        self.fileProvider = try! FileProvider(locations: [location],
+        self.fileProvider = try! FileProvider(locations: [url],
                                               extensions: extensions,
                                               targetQueue: DispatchQueue.main,
                                               handler: { urls in
