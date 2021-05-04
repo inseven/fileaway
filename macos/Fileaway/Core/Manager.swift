@@ -126,7 +126,7 @@ class Manager: ObservableObject {
     }
 
     func save() throws {
-        let inboxUrls = directories.filter { $0.type == .inbox }.map { $0.url }  // TODO: Rename location to URL
+        let inboxUrls = directories.filter { $0.type == .inbox }.map { $0.url }
         try settings.setInboxUrls(inboxUrls)
     }
 
