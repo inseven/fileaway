@@ -46,7 +46,7 @@ class Manager: ObservableObject {
     @Published var directories: [DirectoryObserver] = []
     @Published var rules: [Rule] = []
 
-    var badgeObservers: [DirectoryObserver.ID: Cancellable] = [:]
+    var countObservers: [DirectoryObserver.ID: Cancellable] = [:]
     var rulesSubscription: Cancellable?
 
     func updateBadge() {
@@ -100,7 +100,7 @@ class Manager: ObservableObject {
                 self.updateBadge()
             }
         })
-        badgeObservers[directoryObserver.id] = observer
+        countObservers[directoryObserver.id] = observer
         updateBadge()
     }
 
@@ -121,9 +121,9 @@ class Manager: ObservableObject {
 
         // TODO: Assert that the directory observer is actually in the active set?
 
-        if let badgeObserver = badgeObservers[directoryObserver.id] {
-            badgeObserver.cancel()
-            badgeObservers.removeValue(forKey: directoryObserver.id)
+        if let countObserver = countObservers[directoryObserver.id] {
+            countObserver.cancel()
+            countObservers.removeValue(forKey: directoryObserver.id)
         }
 
         directoryObserver.stop()
