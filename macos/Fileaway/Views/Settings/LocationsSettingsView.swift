@@ -31,15 +31,23 @@ struct LocationsSettingsView: View {
     @State var inboxSelection: UUID?
     @State var alertType: AlertType?
 
+    func directories(type: DirectoryObserver.DirectoryType) -> [DirectoryObserver] {
+        manager.directories.filter { directoryObserver in
+            directoryObserver.type == type
+        }.sorted { lhs, rhs in
+            return lhs.name.localizedStandardCompare(rhs.name) == .orderedAscending
+        }
+    }
+
     var body: some View {
         VStack {
             GroupBox(label: Text("Inboxes")) {
                 HStack {
                     List(selection: $inboxSelection) {
-                        ForEach(manager.directories.filter { $0.type == .inbox }) { directory in
+                        ForEach(directories(type: .inbox)) { directory in
                             HStack {
                                 IconView(url: directory.url, size: CGSize(width: 16, height: 16))
-                                Text(directory.url.lastPathComponent)
+                                Text(directory.name)
                             }
                             .contextMenu {
                                 Button("Reveal in Finder") {
