@@ -33,72 +33,72 @@ struct LocationsSettingsView: View {
 
     var body: some View {
         VStack {
-            Text("Inboxes")
-                .frame(maxWidth: .infinity, alignment: .leading)
-            HStack {
-                List(selection: $inboxSelection) {
-                    ForEach(manager.directories.filter { $0.type == .inbox }) { directory in
-                        HStack {
-                            IconView(url: directory.url, size: CGSize(width: 16, height: 16))
-                            Text(directory.url.lastPathComponent)
-                        }
-                        .contextMenu {
-                            Button("Reveal in Finder") {
-                                NSWorkspace.shared.activateFileViewerSelecting([directory.url])
+            GroupBox(label: Text("Inboxes")) {
+                HStack {
+                    List(selection: $inboxSelection) {
+                        ForEach(manager.directories.filter { $0.type == .inbox }) { directory in
+                            HStack {
+                                IconView(url: directory.url, size: CGSize(width: 16, height: 16))
+                                Text(directory.url.lastPathComponent)
                             }
-                            Divider()
-                            Button("Remove") {
-                                do {
-                                    try manager.removeDirectoryObserver(directoryObserver: directory)
-                                } catch {
-                                    alertType = .error(error: error)
+                            .contextMenu {
+                                Button("Reveal in Finder") {
+                                    NSWorkspace.shared.activateFileViewerSelecting([directory.url])
+                                }
+                                Divider()
+                                Button("Remove") {
+                                    do {
+                                        try manager.removeDirectoryObserver(directoryObserver: directory)
+                                    } catch {
+                                        alertType = .error(error: error)
+                                    }
                                 }
                             }
                         }
                     }
+                    VStack {
+                        Button {
+                            let openPanel = NSOpenPanel()
+                            openPanel.canChooseFiles = false
+                            openPanel.canChooseDirectories = true
+                            openPanel.canCreateDirectories = true
+                            guard openPanel.runModal() ==  NSApplication.ModalResponse.OK,
+                                  let url = openPanel.url else {
+                                return
+                            }
+                            do {
+                                try manager.addLocation(type: .inbox, url: url)
+                            } catch {
+                                alertType = .error(error: error)
+                            }
+                        } label: {
+                            Text("Add")
+                                .frame(maxWidth: .infinity)
+                        }
+                        Button("Remove") {
+                            guard let directory = manager.directories.first(where: { $0.id == inboxSelection }) else {
+                                return
+                            }
+                            try? manager.removeDirectoryObserver(directoryObserver: directory)
+                        }
+                        .disabled(inboxSelection == nil)
+                        Spacer()
+
+                    }
                 }
-                VStack {
-                    Button {
+            }
+            GroupBox(label: Text("Archive")) {
+                HStack {
+                    Text(manager.archiveUrl?.path ?? "")
+                    Spacer()
+                    Button("Choose...") {
                         let openPanel = NSOpenPanel()
                         openPanel.canChooseFiles = false
                         openPanel.canChooseDirectories = true
                         openPanel.canCreateDirectories = true
-                        guard openPanel.runModal() ==  NSApplication.ModalResponse.OK,
-                              let url = openPanel.url else {
-                            return
+                        if (openPanel.runModal() ==  NSApplication.ModalResponse.OK) {
+                            try! manager.setArchiveUrl(openPanel.url!)
                         }
-                        do {
-                            try manager.addLocation(type: .inbox, url: url)
-                        } catch {
-                            alertType = .error(error: error)
-                        }
-                    } label: {
-                        Text("Add")
-                            .frame(maxWidth: .infinity)
-                    }
-                    Button("Remove") {
-                        guard let directory = manager.directories.first(where: { $0.id == inboxSelection }) else {
-                            return
-                        }
-                        try? manager.removeDirectoryObserver(directoryObserver: directory)
-                    }
-                    .disabled(inboxSelection == nil)
-                    Spacer()
-
-                }
-            }
-            Text("Archive")
-                .frame(maxWidth: .infinity, alignment: .leading)
-            HStack {
-                Text(manager.archiveUrl?.path ?? "")
-                Spacer()
-                Button("Choose...") {
-                    let openPanel = NSOpenPanel()
-                    openPanel.canChooseFiles = false
-                    openPanel.canChooseDirectories = true
-                    openPanel.canCreateDirectories = true
-                    if (openPanel.runModal() ==  NSApplication.ModalResponse.OK) {
-                        try! manager.setArchiveUrl(openPanel.url!)
                     }
                 }
             }
