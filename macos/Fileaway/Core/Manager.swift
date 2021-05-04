@@ -38,8 +38,7 @@ extension EnvironmentValues {
 
 class Manager: ObservableObject {
 
-    // TODO: Make this fileprivate
-    var settings = Settings()
+    fileprivate var settings = Settings()
     var ruleSet: RuleSet?
 
     @Published var locations: [URL] = []

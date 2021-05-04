@@ -47,9 +47,7 @@ struct TaskPage: View {
     }
 
     // TODO: Move this into the manager.
-    var rootUrl: URL {
-        (try? manager.settings.archiveUrl())!
-    }
+    var rootUrl: URL { manager.ruleSet!.rootUrl }
 
     var body: some View {
         VStack {
