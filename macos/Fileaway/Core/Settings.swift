@@ -78,10 +78,6 @@ class Settings: ObservableObject {
         inboxUrls = (try? UserDefaults.standard.securityScopeUrls(forKey: Self.inboxUrls)) ?? []
     }
 
-    func addInboxUrl(_ url: URL) throws {
-        inboxUrls.append(url)
-    }
-
     func setInboxUrls(_ urls: [URL]) throws {
         let bookmarks = try urls.map { try $0.securityScopeBookmarkData() }
         UserDefaults.standard.set(bookmarks, forKey: Self.inboxUrls);
