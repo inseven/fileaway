@@ -20,7 +20,7 @@
 
 import SwiftUI
 
-struct GeneralSettingsView: View {
+struct LocationsSettingsView: View {
 
     enum AlertType {
         case error(error: Error)
@@ -107,7 +107,7 @@ struct GeneralSettingsView: View {
 
 }
 
-extension GeneralSettingsView.AlertType: Identifiable {
+extension LocationsSettingsView.AlertType: Identifiable {
     public var id: String {
         switch self {
         case .error(let error):

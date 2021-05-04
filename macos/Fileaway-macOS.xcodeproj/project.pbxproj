@@ -74,7 +74,7 @@
 		D8F90CA825DAB1DF00F0EFB8 /* ContextMenuFocusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F90CA725DAB1DF00F0EFB8 /* ContextMenuFocusable.swift */; };
 		D8FC5334257BB6D2008FB609 /* MailboxRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5333257BB6D2008FB609 /* MailboxRow.swift */; };
 		D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5341257BB77C008FB609 /* SettingsView.swift */; };
-		D8FC534A257BB7A4008FB609 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5349257BB7A4008FB609 /* GeneralSettingsView.swift */; };
+		D8FC534A257BB7A4008FB609 /* LocationsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5349257BB7A4008FB609 /* LocationsSettingsView.swift */; };
 		D8FDDA2C261A43B30060D256 /* RightClickObservingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FDDA2B261A43B30060D256 /* RightClickObservingView.swift */; };
 		D8FDDA31261A442B0060D256 /* RightClickableSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FDDA30261A442B0060D256 /* RightClickableSwiftUIView.swift */; };
 /* End PBXBuildFile section */
@@ -172,7 +172,7 @@
 		D8F90CA725DAB1DF00F0EFB8 /* ContextMenuFocusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuFocusable.swift; sourceTree = "<group>"; };
 		D8FC5333257BB6D2008FB609 /* MailboxRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailboxRow.swift; sourceTree = "<group>"; };
 		D8FC5341257BB77C008FB609 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		D8FC5349257BB7A4008FB609 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
+		D8FC5349257BB7A4008FB609 /* LocationsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsSettingsView.swift; sourceTree = "<group>"; };
 		D8FDDA2B261A43B30060D256 /* RightClickObservingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightClickObservingView.swift; sourceTree = "<group>"; };
 		D8FDDA30261A442B0060D256 /* RightClickableSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightClickableSwiftUIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -351,8 +351,8 @@
 			isa = PBXGroup;
 			children = (
 				D8E7F9E22599B00A00C7409B /* DestinationList.swift */,
-				D8FC5349257BB7A4008FB609 /* GeneralSettingsView.swift */,
 				D83CDCDF2620F94C0063C91C /* ListButtons.swift */,
+				D8FC5349257BB7A4008FB609 /* LocationsSettingsView.swift */,
 				D8E7F9DD2599AFE000C7409B /* RuleDetailView.swift */,
 				D83CDCE92620FF210063C91C /* RuleSheet.swift */,
 				D8E7F9B025999C8800C7409B /* RulesSettingsView.swift */,
@@ -589,7 +589,7 @@
 				D8E7F9EB2599B05300C7409B /* VariableList.swift in Sources */,
 				D8E7F9F82599B0D600C7409B /* ComponentState.swift in Sources */,
 				D8B6D047257F0B4300C7E472 /* KeyEventHandler.swift in Sources */,
-				D8FC534A257BB7A4008FB609 /* GeneralSettingsView.swift in Sources */,
+				D8FC534A257BB7A4008FB609 /* LocationsSettingsView.swift in Sources */,
 				D8005AC9258277290001BE2C /* RuleSet.swift in Sources */,
 				D8D78A922580DD750088890F /* QuickLookPreview.swift in Sources */,
 				D8F8BE0C2588179E0010432F /* CloseKey.swift in Sources */,

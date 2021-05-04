@@ -30,7 +30,7 @@ struct SettingsView: View {
 
     var body: some View {
         TabView {
-            GeneralSettingsView(manager: manager)
+            LocationsSettingsView(manager: manager)
                 .tabItem {
                     Label("Locations", systemImage: "folder")
                 }
