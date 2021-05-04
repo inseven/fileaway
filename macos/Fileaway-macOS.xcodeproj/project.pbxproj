@@ -33,6 +33,9 @@
 		D87DEFB925783F66006CFE85 /* DirectoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEFB825783F66006CFE85 /* DirectoryView.swift */; };
 		D87DEFBE257840B1006CFE85 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEFBD257840B1006CFE85 /* Manager.swift */; };
 		D87DEFC4257848B7006CFE85 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEFC3257848B7006CFE85 /* URL.swift */; };
+		D88DAA7B26420B8B00BC7AD6 /* IconProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88DAA7A26420B8B00BC7AD6 /* IconProvider.swift */; };
+		D88DAA7D26420C5100BC7AD6 /* NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88DAA7C26420C5100BC7AD6 /* NSImage.swift */; };
+		D88DAA7F26420F8E00BC7AD6 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88DAA7E26420F8E00BC7AD6 /* IconView.swift */; };
 		D88DF5FB258463310068404E /* LazyFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88DF5FA258463310068404E /* LazyFilter.swift */; };
 		D8B6D021257D962F00C7E472 /* AcceptsFirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6D020257D962F00C7E472 /* AcceptsFirstResponder.swift */; };
 		D8B6D026257DBA8B00C7E472 /* SelectionTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6D025257DBA8B00C7E472 /* SelectionTracker.swift */; };
@@ -128,6 +131,9 @@
 		D87DEFB825783F66006CFE85 /* DirectoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryView.swift; sourceTree = "<group>"; };
 		D87DEFBD257840B1006CFE85 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		D87DEFC3257848B7006CFE85 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
+		D88DAA7A26420B8B00BC7AD6 /* IconProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconProvider.swift; sourceTree = "<group>"; };
+		D88DAA7C26420C5100BC7AD6 /* NSImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImage.swift; sourceTree = "<group>"; };
+		D88DAA7E26420F8E00BC7AD6 /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
 		D88DF5FA258463310068404E /* LazyFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyFilter.swift; sourceTree = "<group>"; };
 		D8B6D020257D962F00C7E472 /* AcceptsFirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptsFirstResponder.swift; sourceTree = "<group>"; };
 		D8B6D025257DBA8B00C7E472 /* SelectionTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTracker.swift; sourceTree = "<group>"; };
@@ -239,16 +245,17 @@
 				D821E938257A959D005D3205 /* DateView.swift */,
 				D87DEFB825783F66006CFE85 /* DirectoryView.swift */,
 				D821E94A257AB2C9005D3205 /* FileRow.swift */,
+				D88DAA7E26420F8E00BC7AD6 /* IconView.swift */,
 				D8B6D046257F0B4300C7E472 /* KeyEventHandler.swift */,
+				D8D78AA62580DF190088890F /* Legacy.swift */,
 				D8FC5333257BB6D2008FB609 /* MailboxRow.swift */,
 				D8D78A992580DDF40088890F /* PageLink.swift */,
 				D8D78A9E2580DE250088890F /* PageView.swift */,
 				D8D78A912580DD750088890F /* QuickLookPreview.swift */,
 				D8DC5045257C0795009B3ECC /* ResponderView.swift */,
-				D821E945257AA5FC005D3205 /* Sidebar.swift */,
-				D8D78AA62580DF190088890F /* Legacy.swift */,
-				D8FDDA2B261A43B30060D256 /* RightClickObservingView.swift */,
 				D8FDDA30261A442B0060D256 /* RightClickableSwiftUIView.swift */,
+				D8FDDA2B261A43B30060D256 /* RightClickObservingView.swift */,
+				D821E945257AA5FC005D3205 /* Sidebar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -339,9 +346,10 @@
 		D87DEFC2257848A7006CFE85 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				D87DEFC3257848B7006CFE85 /* URL.swift */,
-				D85C9571257999130007AE1E /* FileManager.swift */,
 				D87B126425851218004EC884 /* EventModifiers.swift */,
+				D85C9571257999130007AE1E /* FileManager.swift */,
+				D88DAA7C26420C5100BC7AD6 /* NSImage.swift */,
+				D87DEFC3257848B7006CFE85 /* URL.swift */,
 				D8F90CA225DAB02100F0EFB8 /* View.swift */,
 			);
 			path = Extensions;
@@ -393,6 +401,7 @@
 			children = (
 				D87DEFB325780BA4006CFE85 /* DirectoryObserver.swift */,
 				D821E93D257A960C005D3205 /* FileProvider.swift */,
+				D88DAA7A26420B8B00BC7AD6 /* IconProvider.swift */,
 				D88DF5FA258463310068404E /* LazyFilter.swift */,
 				D8B6D034257E71CD00C7E472 /* QuickLookCoordinator.swift */,
 				D8B6D02F257DBB7D00C7E472 /* SelectionManager.swift */,
@@ -540,6 +549,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D821E939257A959D005D3205 /* DateView.swift in Sources */,
+				D88DAA7B26420B8B00BC7AD6 /* IconProvider.swift in Sources */,
 				D83CDCE02620F94C0063C91C /* ListButtons.swift in Sources */,
 				D8E7F9B925999D1300C7409B /* VariableType.swift in Sources */,
 				D8D78A9F2580DE250088890F /* PageView.swift in Sources */,
@@ -572,6 +582,7 @@
 				D8E7F9D325999EA900C7409B /* Component.swift in Sources */,
 				D821E93E257A960C005D3205 /* FileProvider.swift in Sources */,
 				D8F8BE12258818450010432F /* ArchiveWizard.swift in Sources */,
+				D88DAA7D26420C5100BC7AD6 /* NSImage.swift in Sources */,
 				D8B6D021257D962F00C7E472 /* AcceptsFirstResponder.swift in Sources */,
 				D87DEF7F25774F6C006CFE85 /* FileawayApp.swift in Sources */,
 				D8E7F9C625999E2E00C7409B /* ComponentType.swift in Sources */,
@@ -586,6 +597,7 @@
 				D87DEFBE257840B1006CFE85 /* Manager.swift in Sources */,
 				D8F8BE3C25881C650010432F /* Highlight.swift in Sources */,
 				D8B6D035257E71CD00C7E472 /* QuickLookCoordinator.swift in Sources */,
+				D88DAA7F26420F8E00BC7AD6 /* IconView.swift in Sources */,
 				D8E7F9EB2599B05300C7409B /* VariableList.swift in Sources */,
 				D8E7F9F82599B0D600C7409B /* ComponentState.swift in Sources */,
 				D8B6D047257F0B4300C7E472 /* KeyEventHandler.swift in Sources */,

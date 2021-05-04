@@ -38,20 +38,23 @@ struct LocationsSettingsView: View {
             HStack {
                 List(selection: $inboxSelection) {
                     ForEach(manager.directories.filter { $0.type == .inbox }) { directory in
-                        Text(directory.url.lastPathComponent)
-                            .contextMenu {
-                                Button("Reveal in Finder") {
-                                    NSWorkspace.shared.activateFileViewerSelecting([directory.url])
-                                }
-                                Divider()
-                                Button("Remove") {
-                                    do {
-                                        try manager.removeDirectoryObserver(directoryObserver: directory)
-                                    } catch {
-                                        alertType = .error(error: error)
-                                    }
+                        HStack {
+                            IconView(url: directory.url, size: CGSize(width: 16, height: 16))
+                            Text(directory.url.lastPathComponent)
+                        }
+                        .contextMenu {
+                            Button("Reveal in Finder") {
+                                NSWorkspace.shared.activateFileViewerSelecting([directory.url])
+                            }
+                            Divider()
+                            Button("Remove") {
+                                do {
+                                    try manager.removeDirectoryObserver(directoryObserver: directory)
+                                } catch {
+                                    alertType = .error(error: error)
                                 }
                             }
+                        }
                     }
                 }
                 VStack {
