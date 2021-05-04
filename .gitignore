@@ -10,3 +10,6 @@ fastlane/.env
 fastlane/report.xml
 build
 temp
+
+# Editors
+.nova
