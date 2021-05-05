@@ -59,16 +59,8 @@ struct LocationsSettingsView: View {
                                 Text(directory.name)
                             }
                             .contextMenu {
-                                Button("Reveal in Finder") {
-                                    NSWorkspace.shared.activateFileViewerSelecting([directory.url])
-                                }
-                                Divider()
-                                Button("Remove") {
-                                    do {
-                                        try manager.removeDirectoryObserver(directoryObserver: directory)
-                                    } catch {
-                                        alertType = .error(error: error)
-                                    }
+                                LocationMenuItems(manager: manager, directoryObserver: directory) { error in
+                                    alertType = .error(error: error)
                                 }
                             }
                         }
@@ -131,7 +123,7 @@ struct LocationsSettingsView: View {
         .alert(item: $alertType) { alertType in
             switch alertType {
             case .error(let error):
-                return Alert(title: Text("Error"), message: Text(error.localizedDescription))
+                return Alert(error: error)
             }
         }
     }

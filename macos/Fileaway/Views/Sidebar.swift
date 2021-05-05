@@ -25,11 +25,23 @@ enum SidebarSection {
     case archive
 }
 
+extension Alert {
+
+    init(error: Error) {
+        self.init(title: Text("Error"), message: Text(error.localizedDescription))
+    }
+
+}
+
 struct Sidebar: View {
+
+    enum AlertType {
+        case error(error: Error)
+    }
 
     @ObservedObject var manager: Manager
     @State var firstResponder: Bool = false
-    @State var item: Int = 30
+    @State var alertType: AlertType?
 
     var body: some View {
         List {
@@ -38,6 +50,11 @@ struct Sidebar: View {
                     NavigationLink(destination: DirectoryView(directoryObserver: inbox)) {
                         MailboxRow(directoryObserver: inbox, title: inbox.name, imageSystemName: "tray")
                     }
+                    .contextMenu {
+                        LocationMenuItems(manager: manager, directoryObserver: inbox) { error in
+                            alertType = .error(error: error)
+                        }
+                    }
                 }
             }
             Section(header: Text("Archives")) {
@@ -45,9 +62,33 @@ struct Sidebar: View {
                     NavigationLink(destination: DirectoryView(directoryObserver: archive)) {
                         MailboxRow(directoryObserver: archive, title: archive.name, imageSystemName: "archivebox")
                     }
+                    .contextMenu {
+                        LocationMenuItems(manager: manager, directoryObserver: archive) { error in
+                            alertType = .error(error: error)
+                        }
+                    }
                 }
             }
         }
+        // TODO: Perhaps there's a better way to propagate this to the top-level of the app?
+        .alert(item: $alertType) { alertType in
+            switch alertType {
+            case .error(let error):
+                return Alert(error: error)
+            }
+        }
+
     }
     
+}
+
+extension Sidebar.AlertType: Identifiable {
+
+    public var id: String {
+        switch self {
+        case .error(let error):
+            return "error-\(String(describing: error))"
+        }
+    }
+
 }
