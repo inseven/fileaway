@@ -30,7 +30,6 @@ extension NSImage {
             kQLThumbnailOptionScaleFactorKey: 2,
         ] as CFDictionary
 
-
         let ref = QLThumbnailImageCreate(kCFAllocatorDefault, fileURL as CFURL, size, dict)
         if let cgImage = ref?.takeUnretainedValue() {
             let bitmapImageRep = NSBitmapImageRep.init(cgImage: cgImage)
@@ -43,6 +42,7 @@ extension NSImage {
             icon.size = size
             return icon
         }
+
     }
 
 }
