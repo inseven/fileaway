@@ -24,36 +24,6 @@ enum StorageManagerError: Error {
     case accessError(_ message: String)
 }
 
-// TODO: URL type in here?
-
-extension URL {
-
-    init(securityScopeBookmarkData: Data) throws {
-        var isStale = true
-        try self.init(resolvingBookmarkData: securityScopeBookmarkData,
-                      options: .withSecurityScope,
-                      bookmarkDataIsStale: &isStale)
-        if !startAccessingSecurityScopedResource() {
-            throw StorageManagerError.accessError("Failed access inbox url with security scope")
-        }
-    }
-
-    func securityScopeBookmarkData() throws -> Data {
-        try bookmarkData(options: .withSecurityScope,
-                             includingResourceValuesForKeys: nil,
-                             relativeTo: nil)
-    }
-
-}
-
-extension Data {
-
-    func asSecurityScopeUrl() throws -> URL {
-        try URL(securityScopeBookmarkData: self)
-    }
-
-}
-
 extension UserDefaults {
 
     func securityScopeUrls(forKey defaultName: String) throws -> [URL] {

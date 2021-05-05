@@ -22,6 +22,16 @@ import Foundation
 
 extension URL {
 
+    init(securityScopeBookmarkData: Data) throws {
+        var isStale = true
+        try self.init(resolvingBookmarkData: securityScopeBookmarkData,
+                      options: .withSecurityScope,
+                      bookmarkDataIsStale: &isStale)
+        if !startAccessingSecurityScopedResource() {
+            throw StorageManagerError.accessError("Failed access inbox url with security scope")
+        }
+    }
+
     func matches(extensions: [String]?) -> Bool {
         guard let extensions = extensions else {
             return true
@@ -62,6 +72,13 @@ extension URL {
         relComponents.append(contentsOf: destComponents[i...])
         return relComponents.joined(separator: "/")
     }
+
+    func securityScopeBookmarkData() throws -> Data {
+        try bookmarkData(options: .withSecurityScope,
+                             includingResourceValuesForKeys: nil,
+                             relativeTo: nil)
+    }
+
 
 }
 
