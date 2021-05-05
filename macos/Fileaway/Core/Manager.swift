@@ -49,17 +49,6 @@ class Manager: ObservableObject {
     var countSubscription: Cancellable?
     var rulesSubscription: Cancellable?
 
-    func updateBadge() {
-        dispatchPrecondition(condition: .onQueue(.main))
-        let count = directories.filter { $0.type == .inbox }.map { $0.count }.reduce(0) { result, count in result + count }
-        print("badge = \(count)")
-        if count == 0 {
-            NSApp.dockTile.badgeLabel = nil
-        } else {
-            NSApp.dockTile.badgeLabel = String(describing: count)
-        }
-    }
-
     func start() {
         dispatchPrecondition(condition: .onQueue(.main))
         for url in settings.inboxUrls {
@@ -71,12 +60,24 @@ class Manager: ObservableObject {
     }
 
     func updateCountSubscription() {
+        dispatchPrecondition(condition: .onQueue(.main))
+        let update: () -> Void = {
+            dispatchPrecondition(condition: .onQueue(.main))
+            let count = self.directories
+                .filter { $0.type == .inbox }
+                .map { $0.count }
+                .reduce(0) { result, count in result + count }
+            if count == 0 {
+                NSApp.dockTile.badgeLabel = nil
+            } else {
+                NSApp.dockTile.badgeLabel = String(describing: count)
+            }
+        }
         let directoryChanges = self.directories.map { $0.objectWillChange }
         countSubscription = Publishers.MergeMany(directoryChanges).receive(on: DispatchQueue.main).sink { _ in
-            dispatchPrecondition(condition: .onQueue(.main))
-            self.updateBadge()
+            update()
         }
-        updateBadge()
+        update()
     }
 
     func updateRuleSetSubscription() {
