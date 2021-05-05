@@ -57,7 +57,6 @@ struct Sidebar: View {
                 }
             }
         }
-        // TODO: Perhaps there's a better way to propagate this to the top-level of the app?
         .alert(item: $alertType) { alertType in
             switch alertType {
             case .error(let error):
