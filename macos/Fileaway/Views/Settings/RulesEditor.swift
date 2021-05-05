@@ -66,8 +66,7 @@ struct RulesEditor: View {
                             }
                     }
                     HStack {
-                        // TODO: Remove ListButtons
-                        ListButtons {
+                        Button {
                             do {
                                 let rule = try rules.new(preferredName: "Rule")
                                 selection = [rule]
@@ -75,7 +74,10 @@ struct RulesEditor: View {
                             } catch {
                                 print("Failed to add rule with error \(error).")
                             }
-                        } remove: {
+                        } label: {
+                            Image(systemName: "plus")
+                        }
+                        Button {
                             do {
                                 for rule in selection {
                                     try rules.remove(rule)
@@ -84,6 +86,8 @@ struct RulesEditor: View {
                             } catch {
                                 print("Failed to remove rule with error \(error).")
                             }
+                        } label: {
+                            Image(systemName: "minus")
                         }
                         Button {
                             guard selection.count == 1,
