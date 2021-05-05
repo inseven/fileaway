@@ -42,6 +42,7 @@ class DirectoryObserver: ObservableObject, Identifiable, Hashable {
     var name: String { url.lastPathComponent }
 
     @Published var searchResults: [FileInfo] = []
+    var ruleSet: RuleSet
 
     var fileProvider: FileProvider?
 
@@ -69,6 +70,8 @@ class DirectoryObserver: ObservableObject, Identifiable, Hashable {
     init(type: DirectoryType, url: URL) {
         self.type = type
         self.url = url
+        self.ruleSet = RuleSet(url: url)
+        // TODO: Consdier whether we should observe the rule set.
     }
 
     func hash(into hasher: inout Hasher) {

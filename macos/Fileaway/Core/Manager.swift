@@ -54,13 +54,14 @@ extension EnvironmentValues {
 class Manager: ObservableObject {
 
     fileprivate var settings = Settings()
-    var ruleSet: RuleSet?
 
     @Published var locations: [URL] = []
     @Published var directories: [DirectoryObserver] = []
-    @Published var rules: [Rule] = []
+    @Published var allRules: [Rule] = []
 
     var countObservers: [DirectoryObserver.ID: Cancellable] = [:]
+
+    var countSubscription: Cancellable?
     var rulesSubscription: Cancellable?
 
     func updateBadge() {
@@ -79,16 +80,31 @@ class Manager: ObservableObject {
         for url in settings.inboxUrls {
             addDirectoryObserver(type: .inbox, url: url)
         }
-
         if let url = try? settings.archiveUrl() {
             addDirectoryObserver(type: .archive, url: url)
-            let ruleSet = RuleSet(url: url)
-            self.ruleSet = ruleSet
-            self.rules = ruleSet.rules
-            rulesSubscription = ruleSet.objectWillChange.receive(on: DispatchQueue.main).sink {
-                self.rules = ruleSet.mutableRules.map { Rule($0) }
-            }
         }
+    }
+
+    func updateCountSubscription() {
+        let directoryChanges = self.directories.map { $0.objectWillChange }
+        countSubscription = Publishers.MergeMany(directoryChanges).receive(on: DispatchQueue.main).sink { _ in
+            dispatchPrecondition(condition: .onQueue(.main))
+            self.updateBadge()
+        }
+        updateBadge()
+    }
+
+    func updateRuleSetSubscription() {
+        dispatchPrecondition(condition: .onQueue(.main))
+        let update: () -> Void = {
+            dispatchPrecondition(condition: .onQueue(.main))
+            self.allRules = self.directories.map { $0.ruleSet.rules }.flatMap { $0 }
+        }
+        let changes = self.directories.map { $0.ruleSet.objectWillChange }
+        rulesSubscription = Publishers.MergeMany(changes).receive(on: DispatchQueue.main).sink { _ in
+            update()
+        }
+        update()
     }
 
     func directories(type: DirectoryObserver.DirectoryType) -> [DirectoryObserver] {
@@ -109,21 +125,23 @@ class Manager: ObservableObject {
 
     func addDirectoryObserver(type: DirectoryObserver.DirectoryType, url: URL) {
         dispatchPrecondition(condition: .onQueue(.main))
-
-        // Create the directory observer and start it.
         let directoryObserver = DirectoryObserver(type: type, url: url)
         directories.append(directoryObserver)
         directoryObserver.start()
+        updateCountSubscription()
+        updateRuleSetSubscription()
+    }
 
-        // Start observing the counts to update the badge.
-        // updateBadge filters the directory observers so it's OK to add both inbox and archive observers here.
-        let observer = directoryObserver.objectWillChange.sink(receiveValue: {
-            DispatchQueue.main.async {
-                self.updateBadge()
-            }
-        })
-        countObservers[directoryObserver.id] = observer
-        updateBadge()
+    func removeDirectoryObserver(directoryObserver: DirectoryObserver) throws {
+        dispatchPrecondition(condition: .onQueue(.main))
+        guard directories.contains(directoryObserver) else {
+            throw FileawayError.directoryNotFound
+        }
+        directoryObserver.stop()
+        directories.removeAll { $0.id == directoryObserver.id }
+        try save()
+        updateCountSubscription()
+        updateRuleSetSubscription()
     }
 
     func addLocation(type: DirectoryObserver.DirectoryType, url: URL) throws {
@@ -136,21 +154,6 @@ class Manager: ObservableObject {
     func save() throws {
         let inboxUrls = directories.filter { $0.type == .inbox }.map { $0.url }
         try settings.setInboxUrls(inboxUrls)
-    }
-
-    func removeDirectoryObserver(directoryObserver: DirectoryObserver) throws {
-        dispatchPrecondition(condition: .onQueue(.main))
-        guard directories.contains(directoryObserver) else {
-            throw FileawayError.directoryNotFound
-        }
-        if let countObserver = countObservers[directoryObserver.id] {
-            countObserver.cancel()
-            countObservers.removeValue(forKey: directoryObserver.id)
-        }
-        directoryObserver.stop()
-        directories.removeAll { $0.id == directoryObserver.id }
-        try save()
-        updateBadge()
     }
 
 }

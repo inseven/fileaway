@@ -145,7 +145,9 @@ class RuleSet: ObservableObject {
     }
 
     func save() throws {
-        let configuration = mutableRules.map { Rule($0) }.reduce(into: [:]) { result, rule in
+        dispatchPrecondition(condition: .onQueue(.main))
+        rules = mutableRules.map { Rule($0) }
+        let configuration = rules.reduce(into: [:]) { result, rule in
             result[rule.name] = rule.configuration
         }
         let encoder = JSONEncoder()

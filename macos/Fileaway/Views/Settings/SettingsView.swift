@@ -35,8 +35,8 @@ struct SettingsView: View {
                     Label("Locations", systemImage: "folder")
                 }
                 .tag(Tabs.general)
-            if let ruleSet = manager.ruleSet {
-                RulesSettingsView(rules: ruleSet)
+            if let ruleSet = manager.directories(type: .archive)[0].ruleSet {
+                RulesSettingsView(manager: manager)
                     .tabItem {
                         Label("Rules", systemImage: "tray.and.arrow.down")
                     }

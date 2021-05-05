@@ -22,112 +22,13 @@ import SwiftUI
 
 struct LocationsSettingsView: View {
 
-    enum AlertType {
-        case error(error: Error)
-    }
-
     @ObservedObject var manager: Manager
-
-    @State var inboxSelection: UUID?
-    @State var alertType: AlertType?
-
-    func addLocation(type: DirectoryObserver.DirectoryType, url: URL) {
-        dispatchPrecondition(condition: .onQueue(.main))
-        do {
-            try manager.addLocation(type: type, url: url)
-        } catch {
-            alertType = .error(error: error)
-        }
-    }
 
     var body: some View {
         VStack {
-            GroupBox(label: Text("Inboxes")) {
-                HStack {
-                    List(selection: $inboxSelection) {
-                        ForEach(manager.directories(type: .inbox)) { directory in
-                            HStack {
-                                IconView(url: directory.url, size: CGSize(width: 16, height: 16))
-                                Text(directory.name)
-                            }
-                            .contextMenu {
-                                LocationMenuItems(manager: manager, directoryObserver: directory) { error in
-                                    alertType = .error(error: error)
-                                }
-                            }
-                        }
-                    }
-                    .onDrop(of: [.fileURL], isTargeted: Binding.constant(false)) { itemProviders in
-                        for item in itemProviders {
-                            _ = item.loadObject(ofClass: URL.self) { url, _ in
-                                guard let url = url else {
-                                    return
-                                }
-                                DispatchQueue.main.async {
-                                    addLocation(type: .inbox, url: url)
-                                }
-                            }
-                        }
-                        return true
-                    }
-                    VStack {
-                        Button {
-                            let openPanel = NSOpenPanel()
-                            openPanel.canChooseFiles = false
-                            openPanel.canChooseDirectories = true
-                            openPanel.canCreateDirectories = true
-                            guard openPanel.runModal() ==  NSApplication.ModalResponse.OK,
-                                  let url = openPanel.url else {
-                                return
-                            }
-                            addLocation(type: .inbox, url: url)
-                        } label: {
-                            Text("Add")
-                                .frame(maxWidth: .infinity)
-                        }
-                        Button("Remove") {
-                            guard let directory = manager.directories.first(where: { $0.id == inboxSelection }) else {
-                                return
-                            }
-                            try? manager.removeDirectoryObserver(directoryObserver: directory)
-                        }
-                        .disabled(inboxSelection == nil)
-                        Spacer()
-                    }
-                }
-                .padding(4)
-            }
-            GroupBox(label: Text("Archive")) {
-                HStack {
-                    Text(manager.archiveUrl?.path ?? "")
-                    Spacer()
-                    Button("Choose...") {
-                        let openPanel = NSOpenPanel()
-                        openPanel.canChooseFiles = false
-                        openPanel.canChooseDirectories = true
-                        openPanel.canCreateDirectories = true
-                        if (openPanel.runModal() ==  NSApplication.ModalResponse.OK) {
-                            try! manager.setArchiveUrl(openPanel.url!)
-                        }
-                    }
-                }
-            }
-        }
-        .alert(item: $alertType) { alertType in
-            switch alertType {
-            case .error(let error):
-                return Alert(error: error)
-            }
+            LocationsEditor(name: "Inboxes", type: .inbox, manager: manager)
+            LocationsEditor(name: "Archives", type: .archive, manager: manager)
         }
     }
 
-}
-
-extension LocationsSettingsView.AlertType: Identifiable {
-    public var id: String {
-        switch self {
-        case .error(let error):
-            return "error-\(String(describing: error))"
-        }
-    }
 }
