@@ -23,21 +23,6 @@ import Combine
 import Foundation
 import SwiftUI
 
-enum FileawayError: Error {
-    case directoryNotFound
-}
-
-extension FileawayError: LocalizedError {
-
-    var errorDescription: String? {
-        switch self {
-        case .directoryNotFound:
-            return "Directory not found."
-        }
-    }
-
-}
-
 struct ManagerKey: EnvironmentKey {
     static var defaultValue: Manager = Manager()
 }
