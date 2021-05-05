@@ -42,9 +42,9 @@ struct DetailsPage: View {
         GridItem(.flexible()),
     ]
 
-    init(url: URL, rootUrl: URL, rule: Rule) {
+    init(url: URL, rule: Rule) {
         self.url = url
-        _rule = StateObject(wrappedValue: RuleInstance(url: rootUrl, rule: rule))
+        _rule = StateObject(wrappedValue: RuleInstance(rule: rule))
     }
 
     var body: some View {

@@ -23,15 +23,19 @@ import Foundation
 class Rule: Identifiable, Hashable {
 
     var id = UUID()
+
+    let rootUrl: URL
     let name: String
     let configuration: Configuration
 
-    init(name: String) {
+    init(rootUrl: URL, name: String) {
+        self.rootUrl = rootUrl
         self.name = name
         self.configuration = Configuration(variables: [], destination: [])
     }
 
-    init(name: String, configuration: Configuration) {
+    init(rootUrl: URL, name: String, configuration: Configuration) {
+        self.rootUrl = rootUrl
         self.name = name
         self.configuration = configuration
     }

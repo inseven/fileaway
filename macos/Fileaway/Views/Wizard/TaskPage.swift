@@ -46,9 +46,6 @@ struct TaskPage: View {
         self._tracker = StateObject(wrappedValue: SelectionTracker(items: filter.get().$items))
     }
 
-    // TODO: Move this into the manager.
-    var rootUrl: URL { manager.ruleSet!.rootUrl }
-
     var body: some View {
         VStack {
             HStack {
@@ -68,9 +65,13 @@ struct TaskPage: View {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 0) {
                     ForEach(tracker.items) { rule in
-                        PageLink(destination: DetailsPage(url: url, rootUrl: rootUrl, rule: rule)) {
+                        PageLink(destination: DetailsPage(url: url, rule: rule)) {
                             HStack {
-                                Text(rule.name)
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(rule.name)
+                                    Text(rule.rootUrl.lastPathComponent)
+                                        .foregroundColor(.secondary)
+                                }
                                 Spacer()
                                 Image(systemName: "chevron.forward")
                             }

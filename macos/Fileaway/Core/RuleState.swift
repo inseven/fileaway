@@ -28,6 +28,7 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
     }
 
     var id = UUID()
+
     let rootUrl: URL
     @Published var name: String
 
@@ -174,7 +175,8 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
 extension Rule {
 
     convenience init(_ state: RuleState) {
-        self.init(name: state.name,
+        self.init(rootUrl: state.rootUrl,
+                  name: state.name,
                   configuration: Configuration(variables: state.variables.map { Variable($0) },
                                                destination: state.destination.map { Component($0) }))
     }

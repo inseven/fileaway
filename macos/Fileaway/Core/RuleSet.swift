@@ -47,11 +47,12 @@ class RuleSet: ObservableObject {
     var rulesSubscription: Cancellable?
 
     static func load(url: URL) throws -> [Rule] {
+        let rootUrl = url.deletingLastPathComponent()
         let data = try Data(contentsOf: url)
         let decoder = JSONDecoder()
         let configurations = try decoder.decode([String: Configuration].self, from: data)
         let rules = configurations.map { (name, configuration) -> Rule in
-            return Rule(name: name, configuration: configuration)
+            return Rule(rootUrl: rootUrl, name: name, configuration: configuration)
             }.sorted { $0.name < $1.name }
         return rules
     }
