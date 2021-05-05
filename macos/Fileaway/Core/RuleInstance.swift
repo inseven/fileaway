@@ -23,7 +23,6 @@ import SwiftUI
 
 class RuleInstance: ObservableObject {
 
-    var rootUrl: URL  // TODO: This should be on the rule
     var rule: Rule
     var variables: [VariableInstance]
     var subscriptions: [Cancellable]?
@@ -31,7 +30,6 @@ class RuleInstance: ObservableObject {
     var name: String { rule.name }
 
     init(rule: Rule) {
-        self.rootUrl = rule.rootUrl
         self.rule = rule
         let variables = rule.configuration.variables.map { $0.instance() }
         self.variables = variables
@@ -57,7 +55,7 @@ class RuleInstance: ObservableObject {
                 return result.appending(variable.textRepresentation)
             }
         }
-        return self.rootUrl.appendingPathComponent(destination).appendingPathExtension(url.pathExtension)
+        return self.rule.rootUrl.appendingPathComponent(destination).appendingPathExtension(url.pathExtension)
     }
 
     func move(url: URL) throws {
