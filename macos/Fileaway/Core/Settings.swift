@@ -28,7 +28,6 @@ extension UserDefaults {
 
     func securityScopeUrls(forKey defaultName: String) throws -> [URL] {
         guard let urls = UserDefaults.standard.array(forKey: defaultName) as? [Data] else {
-            // TODO THrow something!
             return []
         }
         return try urls.map { try $0.asSecurityScopeUrl() }
