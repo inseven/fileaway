@@ -80,7 +80,7 @@ class Manager: ObservableObject {
         for url in settings.inboxUrls {
             addDirectoryObserver(type: .inbox, url: url)
         }
-        if let url = try? settings.archiveUrl() {
+        for url in settings.archiveUrls {
             addDirectoryObserver(type: .archive, url: url)
         }
     }
@@ -154,6 +154,8 @@ class Manager: ObservableObject {
     func save() throws {
         let inboxUrls = directories.filter { $0.type == .inbox }.map { $0.url }
         try settings.setInboxUrls(inboxUrls)
+        let archiveUrls = directories.filter { $0.type == .archive }.map { $0.url }
+        try settings.setArchiveUrls(archiveUrls)
     }
 
 }

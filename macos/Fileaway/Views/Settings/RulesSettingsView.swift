@@ -34,7 +34,14 @@ struct RulesSettingsView: View {
                     }
                 }
             }
-            RulesEditor(rules: (manager.directories.first { $0.id == selection })?.ruleSet ?? manager.directories(type: .archive)[0].ruleSet)
+            GroupBox {
+                if let ruleSet = manager.directories.first { $0.id == selection }?.ruleSet {
+                    RulesEditor(rules: ruleSet)
+                        .padding(4)
+                } else {
+                    Text("No Archive Selected")
+                }
+            }
         }
     }
 

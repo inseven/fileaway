@@ -35,12 +35,10 @@ struct SettingsView: View {
                     Label("Locations", systemImage: "folder")
                 }
                 .tag(Tabs.general)
-            if let ruleSet = manager.directories(type: .archive)[0].ruleSet {
-                RulesSettingsView(manager: manager)
-                    .tabItem {
-                        Label("Rules", systemImage: "tray.and.arrow.down")
-                    }
-            }
+            RulesSettingsView(manager: manager)
+                .tabItem {
+                    Label("Rules", systemImage: "tray.and.arrow.down")
+                }
         }
         .padding()
         .frame(minWidth: 400, maxWidth: .infinity, minHeight: 460, maxHeight: .infinity)
