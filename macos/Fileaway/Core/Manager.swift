@@ -130,10 +130,8 @@ class Manager: ObservableObject {
     }
 
     func save() throws {
-        let inboxUrls = directories.filter { $0.type == .inbox }.map { $0.url }
-        try settings.setInboxUrls(inboxUrls)
-        let archiveUrls = directories.filter { $0.type == .archive }.map { $0.url }
-        try settings.setArchiveUrls(archiveUrls)
+        try settings.setInboxUrls(self.directories(type: .inbox).map { $0.url })
+        try settings.setArchiveUrls(self.directories(type: .archive).map { $0.url })
     }
 
 }
