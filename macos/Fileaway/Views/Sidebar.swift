@@ -33,7 +33,7 @@ struct Sidebar: View {
     var body: some View {
         List {
             Section(header: Text("Inboxes")) {
-                ForEach(manager.directories.filter({ $0.type == .inbox})) { inbox in
+                ForEach(manager.directories(type: .inbox)) { inbox in
                     NavigationLink(destination: DirectoryView(directoryObserver: inbox)) {
                         MailboxRow(directoryObserver: inbox, title: inbox.name, imageSystemName: "tray")
                     }
@@ -45,7 +45,7 @@ struct Sidebar: View {
                 }
             }
             Section(header: Text("Archives")) {
-                ForEach(manager.directories.filter({ $0.type == .archive})) { archive in
+                ForEach(manager.directories(type: .archive)) { archive in
                     NavigationLink(destination: DirectoryView(directoryObserver: archive)) {
                         MailboxRow(directoryObserver: archive, title: archive.name, imageSystemName: "archivebox")
                     }

@@ -68,14 +68,16 @@ extension UserDefaults {
 
 class Settings: ObservableObject {
 
-    static let inboxUrl = "inbox-url"
     static let archiveUrl = "archive-url"
     static let inboxUrls = "inbox-urls"
+    static let archiveUrls = "archive-urls"
 
     @Published var inboxUrls: [URL] = []
+    @Published var archiveUrls: [URL] = []
 
     init() {
         inboxUrls = (try? UserDefaults.standard.securityScopeUrls(forKey: Self.inboxUrls)) ?? []
+        archiveUrls = (try? UserDefaults.standard.securityScopeUrls(forKey: Self.archiveUrls)) ?? []
     }
 
     func setInboxUrls(_ urls: [URL]) throws {
@@ -83,11 +85,9 @@ class Settings: ObservableObject {
         UserDefaults.standard.set(bookmarks, forKey: Self.inboxUrls);
     }
 
-    func inboxUrl() throws -> URL? {
-        guard let bookmarkData = UserDefaults.standard.data(forKey: Self.inboxUrl) else {
-            throw StorageManagerError.accessError("Failed to load inbox url")
-        }
-        return try bookmarkData.asSecurityScopeUrl()
+    func setArchiveUrls(_ urls: [URL]) throws {
+        let bookmarks = try urls.map { try $0.securityScopeBookmarkData() }
+        UserDefaults.standard.set(bookmarks, forKey: Self.archiveUrls);
     }
 
     func setArchiveUrl(_ url: URL) throws {

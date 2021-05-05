@@ -91,6 +91,14 @@ class Manager: ObservableObject {
         }
     }
 
+    func directories(type: DirectoryObserver.DirectoryType) -> [DirectoryObserver] {
+        self.directories.filter { directoryObserver in
+            directoryObserver.type == type
+        }.sorted { lhs, rhs in
+            return lhs.name.localizedStandardCompare(rhs.name) == .orderedAscending
+        }
+    }
+
     var archiveUrl: URL? { try? settings.archiveUrl() }
 
     func setArchiveUrl(_ url: URL) throws {

@@ -31,14 +31,6 @@ struct LocationsSettingsView: View {
     @State var inboxSelection: UUID?
     @State var alertType: AlertType?
 
-    func directories(type: DirectoryObserver.DirectoryType) -> [DirectoryObserver] {
-        manager.directories.filter { directoryObserver in
-            directoryObserver.type == type
-        }.sorted { lhs, rhs in
-            return lhs.name.localizedStandardCompare(rhs.name) == .orderedAscending
-        }
-    }
-
     func addLocation(type: DirectoryObserver.DirectoryType, url: URL) {
         dispatchPrecondition(condition: .onQueue(.main))
         do {
@@ -53,7 +45,7 @@ struct LocationsSettingsView: View {
             GroupBox(label: Text("Inboxes")) {
                 HStack {
                     List(selection: $inboxSelection) {
-                        ForEach(directories(type: .inbox)) { directory in
+                        ForEach(manager.directories(type: .inbox)) { directory in
                             HStack {
                                 IconView(url: directory.url, size: CGSize(width: 16, height: 16))
                                 Text(directory.name)
@@ -103,6 +95,7 @@ struct LocationsSettingsView: View {
                         Spacer()
                     }
                 }
+                .padding(4)
             }
             GroupBox(label: Text("Archive")) {
                 HStack {
