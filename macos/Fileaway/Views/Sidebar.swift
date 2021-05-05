@@ -20,19 +20,6 @@
 
 import SwiftUI
 
-enum SidebarSection {
-    case inbox
-    case archive
-}
-
-extension Alert {
-
-    init(error: Error) {
-        self.init(title: Text("Error"), message: Text(error.localizedDescription))
-    }
-
-}
-
 struct Sidebar: View {
 
     enum AlertType {
@@ -77,7 +64,6 @@ struct Sidebar: View {
                 return Alert(error: error)
             }
         }
-
     }
     
 }
