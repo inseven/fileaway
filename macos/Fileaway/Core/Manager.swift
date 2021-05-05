@@ -101,14 +101,6 @@ class Manager: ObservableObject {
         }
     }
 
-    var archiveUrl: URL? { try? settings.archiveUrl() }
-
-    func setArchiveUrl(_ url: URL) throws {
-        dispatchPrecondition(condition: .onQueue(.main))
-        try settings.setArchiveUrl(url)
-        addDirectoryObserver(type: .archive, url: url)
-    }
-
     func addDirectoryObserver(type: DirectoryObserver.DirectoryType, url: URL) {
         dispatchPrecondition(condition: .onQueue(.main))
         let directoryObserver = DirectoryObserver(type: type, url: url)
