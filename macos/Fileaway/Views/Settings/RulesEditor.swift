@@ -33,7 +33,7 @@ struct RulesEditor: View {
     }
 
     @ObservedObject var rules: RuleSet
-    @State var selection: RuleState?
+    @State var selection: Set<RuleState> = Set()
     @State var sheet: SheetType?
     @State var alert: AlertType?
 
@@ -47,8 +47,9 @@ struct RulesEditor: View {
                             .lineLimit(1)
                             .contentShape(Rectangle())
                             .onClick {
-                                selection = rule
+                                selection = [rule]
                             } doubleClick: {
+                                selection = [rule]
                                 sheet = .rule(rule: rule)
                             }
                             .contextMenu {
@@ -65,34 +66,35 @@ struct RulesEditor: View {
                             }
                     }
                     HStack {
+                        // TODO: Remove ListButtons
                         ListButtons {
                             do {
                                 let rule = try rules.new(preferredName: "Rule")
-                                selection = rule
+                                selection = [rule]
                                 sheet = .rule(rule: rule)
                             } catch {
                                 print("Failed to add rule with error \(error).")
                             }
                         } remove: {
-                            guard let rule = selection else {
-                                return
-                            }
                             do {
-                                try rules.remove(rule)
-                                selection = nil
+                                for rule in selection {
+                                    try rules.remove(rule)
+                                }
+                                selection = []
                             } catch {
                                 print("Failed to remove rule with error \(error).")
                             }
                         }
                         Button {
-                            guard let rule = selection else {
+                            guard selection.count == 1,
+                                  let rule = selection.first else {
                                 return
                             }
                             sheet = .rule(rule: rule)
                         } label: {
                             Text("Edit")
                         }
-                        .disabled(selection == nil)
+                        .disabled(selection.count != 1)
                         Spacer()
                     }
                 }
