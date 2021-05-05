@@ -20,118 +20,28 @@
 
 import SwiftUI
 
-import Interact
-
 struct RulesSettingsView: View {
 
-    enum SheetType {
-        case rule(rule: RuleState)
-    }
-
-    enum AlertType {
-        case duplicationFailure(error: Error)
-    }
-
-    @ObservedObject var rules: RuleSet
-    @State var selection: RuleState?
-    @State var sheet: SheetType?
-    @State var alert: AlertType?
+    @ObservedObject var manager: Manager
+    @State var selection: UUID?
 
     var body: some View {
         HStack {
             VStack {
-                ScrollViewReader { scrollView in
-                    List(rules.mutableRules, id: \.self, selection: $selection) { rule in
-                        Text(rule.name)
-                            .frame(maxWidth: .infinity, alignment: .topLeading)
-                            .lineLimit(1)
-                            .contentShape(Rectangle())
-                            .onClick {
-                                selection = rule
-                            } doubleClick: {
-                                sheet = .rule(rule: rule)
-                            }
-                            .contextMenu {
-                                Button("Edit") {
-                                    sheet = .rule(rule: rule)
-                                }
-                                Button("Duplicate") {
-                                    do {
-                                        let _ = try rules.duplicate(rule, preferredName: "Copy of " + rule.name)
-                                    } catch {
-                                        alert = .duplicationFailure(error: error)
-                                    }
-                                }
-                            }
-                    }
-                    HStack {
-                        ListButtons {
-                            do {
-                                let rule = try rules.new(preferredName: "Rule")
-                                selection = rule
-                                sheet = .rule(rule: rule)
-                            } catch {
-                                print("Failed to add rule with error \(error).")
-                            }
-                        } remove: {
-                            guard let rule = selection else {
-                                return
-                            }
-                            do {
-                                try rules.remove(rule)
-                                selection = nil
-                            } catch {
-                                print("Failed to remove rule with error \(error).")
-                            }
-                        }
-                        Button {
-                            guard let rule = selection else {
-                                return
-                            }
-                            sheet = .rule(rule: rule)
-                        } label: {
-                            Text("Edit")
-                        }
-                        .disabled(selection == nil)
-                        Spacer()
+                List(selection: $selection) {
+                    ForEach(manager.directories(type: .archive)) { directory in
+                        Text(directory.name)
                     }
                 }
             }
-            .frame(maxWidth: .infinity)
-            .sheet(item: $sheet) { sheet in
-                switch sheet {
-                case .rule(let rule):
-                    RuleSheet(rule: rule)
+            GroupBox {
+                if let ruleSet = manager.directories.first { $0.id == selection }?.ruleSet {
+                    RulesEditor(rules: ruleSet)
+                        .padding(4)
+                } else {
+                    Text("No Archive Selected")
                 }
             }
-            .alert(item: $alert) { alert in
-                switch alert {
-                case .duplicationFailure(let error):
-                    return Alert(title: Text("Duplicate Rule Failed"), message: Text(error.localizedDescription))
-                }
-            }
-        }
-    }
-
-}
-
-extension RulesSettingsView.SheetType: Identifiable {
-
-    var id: String {
-        switch self {
-        case .rule:
-            return "rule"
-        }
-    }
-
-}
-
-extension RulesSettingsView.AlertType: Identifiable {
-
-    public var id: String {
-        switch self {
-        case .duplicationFailure(let error):
-            return "duplicationFailure:\(error)"
         }
     }
 

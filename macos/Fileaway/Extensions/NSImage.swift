@@ -18,30 +18,31 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftUI
+import AppKit
+import QuickLook
 
-struct SettingsView: View {
+extension NSImage {
 
-    private enum Tabs: Hashable {
-        case general
-    }
+    static func previewForFile(path fileURL: URL, ofSize size: CGSize, asIcon: Bool) -> NSImage? {
 
-    @ObservedObject var manager: Manager
+        let dict = [
+            kQLThumbnailOptionIconModeKey: NSNumber(booleanLiteral: asIcon),
+            kQLThumbnailOptionScaleFactorKey: 2,
+        ] as CFDictionary
 
-    var body: some View {
-        TabView {
-            LocationsSettingsView(manager: manager)
-                .tabItem {
-                    Label("Locations", systemImage: "folder")
-                }
-                .tag(Tabs.general)
-            RulesSettingsView(manager: manager)
-                .tabItem {
-                    Label("Rules", systemImage: "tray.and.arrow.down")
-                }
+        let ref = QLThumbnailImageCreate(kCFAllocatorDefault, fileURL as CFURL, size, dict)
+        if let cgImage = ref?.takeUnretainedValue() {
+            let bitmapImageRep = NSBitmapImageRep.init(cgImage: cgImage)
+            let newImage = NSImage.init(size: bitmapImageRep.size)
+            newImage.addRepresentation(bitmapImageRep)
+            ref?.release()
+            return newImage
+        } else {
+            let icon = NSWorkspace.shared.icon(forFile: fileURL.path)
+            icon.size = size
+            return icon
         }
-        .padding()
-        .frame(minWidth: 400, maxWidth: .infinity, minHeight: 460, maxHeight: .infinity)
+
     }
 
 }

@@ -18,30 +18,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-struct SettingsView: View {
+extension Data {
 
-    private enum Tabs: Hashable {
-        case general
-    }
-
-    @ObservedObject var manager: Manager
-
-    var body: some View {
-        TabView {
-            LocationsSettingsView(manager: manager)
-                .tabItem {
-                    Label("Locations", systemImage: "folder")
-                }
-                .tag(Tabs.general)
-            RulesSettingsView(manager: manager)
-                .tabItem {
-                    Label("Rules", systemImage: "tray.and.arrow.down")
-                }
-        }
-        .padding()
-        .frame(minWidth: 400, maxWidth: .infinity, minHeight: 460, maxHeight: .infinity)
+    func asSecurityScopeUrl() throws -> URL {
+        try URL(securityScopeBookmarkData: self)
     }
 
 }

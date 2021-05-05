@@ -20,40 +20,14 @@
 
 import SwiftUI
 
-struct GeneralSettingsView: View {
+struct LocationsSettingsView: View {
 
     @ObservedObject var manager: Manager
 
     var body: some View {
         VStack {
-            HStack {
-                Text("Inbox")
-                    .font(.headline)
-                Text(manager.inboxUrl?.path ?? "")
-                Button("Choose...") {
-                    let openPanel = NSOpenPanel()
-                    openPanel.canChooseFiles = false
-                    openPanel.canChooseDirectories = true
-                    openPanel.canCreateDirectories = true
-                    if (openPanel.runModal() ==  NSApplication.ModalResponse.OK) {
-                        try! manager.setInboxUrl(openPanel.url!)
-                    }
-                }
-            }
-            HStack {
-                Text("Archive")
-                    .font(.headline)
-                Text(manager.archiveUrl?.path ?? "")
-                Button("Choose...") {
-                    let openPanel = NSOpenPanel()
-                    openPanel.canChooseFiles = false
-                    openPanel.canChooseDirectories = true
-                    openPanel.canCreateDirectories = true
-                    if (openPanel.runModal() ==  NSApplication.ModalResponse.OK) {
-                        try! manager.setArchiveUrl(openPanel.url!)
-                    }
-                }
-            }
+            LocationsEditor(name: "Inboxes", type: .inbox, manager: manager)
+            LocationsEditor(name: "Archives", type: .archive, manager: manager)
         }
     }
 

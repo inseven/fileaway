@@ -20,28 +20,10 @@
 
 import SwiftUI
 
-struct SettingsView: View {
+extension Alert {
 
-    private enum Tabs: Hashable {
-        case general
-    }
-
-    @ObservedObject var manager: Manager
-
-    var body: some View {
-        TabView {
-            LocationsSettingsView(manager: manager)
-                .tabItem {
-                    Label("Locations", systemImage: "folder")
-                }
-                .tag(Tabs.general)
-            RulesSettingsView(manager: manager)
-                .tabItem {
-                    Label("Rules", systemImage: "tray.and.arrow.down")
-                }
-        }
-        .padding()
-        .frame(minWidth: 400, maxWidth: .infinity, minHeight: 460, maxHeight: .infinity)
+    init(error: Error) {
+        self.init(title: Text("Error"), message: Text(error.localizedDescription))
     }
 
 }

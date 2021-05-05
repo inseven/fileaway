@@ -38,80 +38,100 @@ extension EnvironmentValues {
 
 class Manager: ObservableObject {
 
-    var settings = Settings()
-    var ruleSet: RuleSet?
+    fileprivate var settings = Settings()
 
     @Published var locations: [URL] = []
-    @Published var inbox: DirectoryObserver? = nil
-    @Published var archive: DirectoryObserver? = nil
-    @Published var rules: [Rule] = []
+    @Published var directories: [DirectoryObserver] = []
+    @Published var allRules: [Rule] = []
 
-    var badgeObserver: Cancellable?
+    var countObservers: [DirectoryObserver.ID: Cancellable] = [:]
+
+    var countSubscription: Cancellable?
     var rulesSubscription: Cancellable?
 
-    func createInboxObserver(url: URL) {
-        dispatchPrecondition(condition: .onQueue(.main))
-        inbox = DirectoryObserver(name: "Inbox", locations: [url])
-        badgeObserver = nil
-        guard let inbox = inbox else {
-            return
-        }
-        inbox.start()
-        NSApp.dockTile.badgeLabel = "\(inbox.files.count)"
-        badgeObserver = inbox.objectWillChange.sink(receiveValue: {
-            self.updateBadge()
-        })
-        updateBadge()
-    }
-
-    func updateBadge() {
-        DispatchQueue.main.async {
-            guard let inbox = self.inbox else {
-                print("Unable to get badge count without inbox; clearing")
-                NSApp.dockTile.badgeLabel = nil
-                return
-            }
-            print("badge = \(inbox.count)")
-            NSApp.dockTile.badgeLabel = inbox.count > 0 ? "\(inbox.count)" : ""
-        }
-    }
-
-    func createArchiveObserver(url: URL) {
-        dispatchPrecondition(condition: .onQueue(.main))
-        archive = DirectoryObserver(name: "Archive", locations: [url])
-        guard let archive = archive else {
-            return
-        }
-        archive.start()
-    }
-
     func start() {
-        if let url = try? settings.inboxUrl() {
-            self.createInboxObserver(url: url)
+        dispatchPrecondition(condition: .onQueue(.main))
+        for url in settings.inboxUrls {
+            addDirectoryObserver(type: .inbox, url: url)
         }
-        if let url = try? settings.archiveUrl() {
-            self.createArchiveObserver(url: url)
-            let ruleSet = RuleSet(url: url)
-            self.ruleSet = ruleSet
-            self.rules = ruleSet.rules
-            rulesSubscription = ruleSet.objectWillChange.receive(on: DispatchQueue.main).sink {
-                self.rules = ruleSet.mutableRules.map { Rule($0) }
+        for url in settings.archiveUrls {
+            addDirectoryObserver(type: .archive, url: url)
+        }
+    }
+
+    func updateCountSubscription() {
+        dispatchPrecondition(condition: .onQueue(.main))
+        let update: () -> Void = {
+            dispatchPrecondition(condition: .onQueue(.main))
+            let count = self.directories
+                .filter { $0.type == .inbox }
+                .map { $0.count }
+                .reduce(0) { result, count in result + count }
+            if count == 0 {
+                NSApp.dockTile.badgeLabel = nil
+            } else {
+                NSApp.dockTile.badgeLabel = String(describing: count)
             }
         }
+        let directoryChanges = self.directories.map { $0.objectWillChange }
+        countSubscription = Publishers.MergeMany(directoryChanges).receive(on: DispatchQueue.main).sink { _ in
+            update()
+        }
+        update()
     }
 
-    var inboxUrl: URL? { try? settings.inboxUrl() }
-
-    func setInboxUrl(_ url: URL) throws {
-        try settings.setInboxUrl(url)
-        self.createInboxObserver(url: url)
+    func updateRuleSetSubscription() {
+        dispatchPrecondition(condition: .onQueue(.main))
+        let update: () -> Void = {
+            dispatchPrecondition(condition: .onQueue(.main))
+            self.allRules = self.directories.map { $0.ruleSet.rules }.flatMap { $0 }
+        }
+        let changes = self.directories.map { $0.ruleSet.objectWillChange }
+        rulesSubscription = Publishers.MergeMany(changes).receive(on: DispatchQueue.main).sink { _ in
+            update()
+        }
+        update()
     }
 
-    var archiveUrl: URL? { try? settings.archiveUrl() }
+    func directories(type: DirectoryObserver.DirectoryType) -> [DirectoryObserver] {
+        self.directories.filter { directoryObserver in
+            directoryObserver.type == type
+        }.sorted { lhs, rhs in
+            return lhs.name.localizedStandardCompare(rhs.name) == .orderedAscending
+        }
+    }
 
-    func setArchiveUrl(_ url: URL) throws {
-        try settings.setArchiveUrl(url)
-        self.createArchiveObserver(url: url)
+    func addDirectoryObserver(type: DirectoryObserver.DirectoryType, url: URL) {
+        dispatchPrecondition(condition: .onQueue(.main))
+        let directoryObserver = DirectoryObserver(type: type, url: url)
+        directories.append(directoryObserver)
+        directoryObserver.start()
+        updateCountSubscription()
+        updateRuleSetSubscription()
+    }
+
+    func removeDirectoryObserver(directoryObserver: DirectoryObserver) throws {
+        dispatchPrecondition(condition: .onQueue(.main))
+        guard directories.contains(directoryObserver) else {
+            throw FileawayError.directoryNotFound
+        }
+        directoryObserver.stop()
+        directories.removeAll { $0.id == directoryObserver.id }
+        try save()
+        updateCountSubscription()
+        updateRuleSetSubscription()
+    }
+
+    func addLocation(type: DirectoryObserver.DirectoryType, url: URL) throws {
+        dispatchPrecondition(condition: .onQueue(.main))
+        let _ = try url.securityScopeBookmarkData() // Check that we can access the location.
+        addDirectoryObserver(type: type, url: url)
+        try save()
+    }
+
+    func save() throws {
+        try settings.setInboxUrls(self.directories(type: .inbox).map { $0.url })
+        try settings.setArchiveUrls(self.directories(type: .archive).map { $0.url })
     }
 
 }

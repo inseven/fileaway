@@ -21,23 +21,32 @@
 import SwiftUI
 
 
-class DirectoryObserver: ObservableObject, Identifiable {
+class DirectoryObserver: ObservableObject, Identifiable, Hashable {
+
+    enum DirectoryType {
+        case inbox
+        case archive
+    }
+
+    static func == (lhs: DirectoryObserver, rhs: DirectoryObserver) -> Bool {
+        return lhs.id == rhs.id
+    }
 
     public var id: UUID = UUID()
-    var name: String
-    var locations: [URL]
+
+    var type: DirectoryType
+    var url: URL
     var extensions = ["pdf"]
+
     var count: Int { self.files.count }
+    var name: String { url.lastPathComponent }
+
     @Published var searchResults: [FileInfo] = []
+    var ruleSet: RuleSet
 
     var fileProvider: FileProvider?
 
     let syncQueue = DispatchQueue.init(label: "DirectoryObserver.syncQueue")
-
-    init(name: String, locations: [URL]) {
-        self.name = name
-        self.locations = locations
-    }
 
     var activeFilter = "" {
         didSet {
@@ -56,6 +65,16 @@ class DirectoryObserver: ObservableObject, Identifiable {
         didSet {
             applyFilter()
         }
+    }
+
+    init(type: DirectoryType, url: URL) {
+        self.type = type
+        self.url = url
+        self.ruleSet = RuleSet(url: url)
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 
     func applyFilter() {
@@ -86,13 +105,21 @@ class DirectoryObserver: ObservableObject, Identifiable {
 
     func start() {
         dispatchPrecondition(condition: .onQueue(.main))
-        self.fileProvider = try! FileProvider(locations: locations,
+        self.fileProvider = try! FileProvider(locations: [url],
                                               extensions: extensions,
                                               targetQueue: DispatchQueue.main,
                                               handler: { urls in
                                                 self.files = urls
                                               })
         self.fileProvider?.start()
+    }
+
+    func stop() {
+        dispatchPrecondition(condition: .onQueue(.main))
+        guard let fileProvider = fileProvider else {
+            return
+        }
+        fileProvider.stop()
     }
 
 }

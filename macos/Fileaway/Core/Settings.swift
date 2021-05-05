@@ -24,51 +24,38 @@ enum StorageManagerError: Error {
     case accessError(_ message: String)
 }
 
+extension UserDefaults {
+
+    func securityScopeUrls(forKey defaultName: String) throws -> [URL] {
+        guard let urls = UserDefaults.standard.array(forKey: defaultName) as? [Data] else {
+            return []
+        }
+        return try urls.map { try $0.asSecurityScopeUrl() }
+    }
+
+}
+
 class Settings: ObservableObject {
 
-    static let inboxUrl = "inbox-url"
-    static let archiveUrl = "archive-url"
+    static let inboxUrls = "inbox-urls"
+    static let archiveUrls = "archive-urls"
 
-    func setInboxUrl(_ url: URL) throws {
-        let bookmarkData = try url.bookmarkData(options: .withSecurityScope,
-                                                includingResourceValuesForKeys: nil,
-                                                relativeTo: nil)
-        UserDefaults.standard.set(bookmarkData, forKey: Self.inboxUrl);
+    @Published var inboxUrls: [URL] = []
+    @Published var archiveUrls: [URL] = []
+
+    init() {
+        inboxUrls = (try? UserDefaults.standard.securityScopeUrls(forKey: Self.inboxUrls)) ?? []
+        archiveUrls = (try? UserDefaults.standard.securityScopeUrls(forKey: Self.archiveUrls)) ?? []
     }
 
-    func inboxUrl() throws -> URL? {
-        guard let bookmarkData = UserDefaults.standard.data(forKey: Self.inboxUrl) else {
-            throw StorageManagerError.accessError("Failed to load inbox url")
-        }
-        var isStale = true
-        let url = try URL(resolvingBookmarkData: bookmarkData,
-                          options: .withSecurityScope,
-                          bookmarkDataIsStale: &isStale)
-        if !url.startAccessingSecurityScopedResource() {
-            throw StorageManagerError.accessError("Failed access inbox url with security scope")
-        }
-        return url
+    func setInboxUrls(_ urls: [URL]) throws {
+        let bookmarks = try urls.map { try $0.securityScopeBookmarkData() }
+        UserDefaults.standard.set(bookmarks, forKey: Self.inboxUrls);
     }
 
-    func setArchiveUrl(_ url: URL) throws {
-        let bookmarkData = try url.bookmarkData(options: .withSecurityScope,
-                                                includingResourceValuesForKeys: nil,
-                                                relativeTo: nil)
-        UserDefaults.standard.set(bookmarkData, forKey: Self.archiveUrl);
-    }
-
-    func archiveUrl() throws -> URL? {
-        guard let bookmarkData = UserDefaults.standard.data(forKey: Self.archiveUrl) else {
-            throw StorageManagerError.accessError("Failed to load inbox url")
-        }
-        var isStale = true
-        let url = try URL(resolvingBookmarkData: bookmarkData,
-                          options: .withSecurityScope,
-                          bookmarkDataIsStale: &isStale)
-        if !url.startAccessingSecurityScopedResource() {
-            throw StorageManagerError.accessError("Failed access inbox url with security scope")
-        }
-        return url
+    func setArchiveUrls(_ urls: [URL]) throws {
+        let bookmarks = try urls.map { try $0.securityScopeBookmarkData() }
+        UserDefaults.standard.set(bookmarks, forKey: Self.archiveUrls);
     }
 
 }

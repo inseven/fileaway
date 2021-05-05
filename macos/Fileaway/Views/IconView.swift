@@ -20,28 +20,20 @@
 
 import SwiftUI
 
-struct SettingsView: View {
+struct IconView: View {
 
-    private enum Tabs: Hashable {
-        case general
+    @StateObject var iconProvider: IconProvider
+    let size: CGSize
+
+    init(url: URL, size: CGSize) {
+        self.size = size
+        _iconProvider = StateObject(wrappedValue: IconProvider(url: url, size: size))
     }
 
-    @ObservedObject var manager: Manager
-
     var body: some View {
-        TabView {
-            LocationsSettingsView(manager: manager)
-                .tabItem {
-                    Label("Locations", systemImage: "folder")
-                }
-                .tag(Tabs.general)
-            RulesSettingsView(manager: manager)
-                .tabItem {
-                    Label("Rules", systemImage: "tray.and.arrow.down")
-                }
-        }
-        .padding()
-        .frame(minWidth: 400, maxWidth: .infinity, minHeight: 460, maxHeight: .infinity)
+        Image(nsImage: iconProvider.image)
+            .resizable()
+            .frame(width: size.width, height: size.height)
     }
 
 }

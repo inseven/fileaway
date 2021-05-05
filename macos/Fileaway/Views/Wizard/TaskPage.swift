@@ -39,16 +39,11 @@ struct TaskPage: View {
     init(manager: Manager, url: URL) {
         self.manager = manager
         self.url = url
-        let filter = Deferred(LazyFilter(items: manager.$rules, test: { filter, item in
+        let filter = Deferred(LazyFilter(items: manager.$allRules, test: { filter, item in
             item.name.localizedSearchMatches(string: filter)
         }, initialSortDescriptor: { lhs, rhs in lhs.name.lexicographicallyPrecedes(rhs.name) }))
         self._filter = StateObject(wrappedValue: filter.get())
         self._tracker = StateObject(wrappedValue: SelectionTracker(items: filter.get().$items))
-    }
-
-    // TODO: Move this into the manager.
-    var rootUrl: URL {
-        (try? manager.settings.archiveUrl())!
     }
 
     var body: some View {
@@ -70,9 +65,13 @@ struct TaskPage: View {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 0) {
                     ForEach(tracker.items) { rule in
-                        PageLink(destination: DetailsPage(url: url, rootUrl: rootUrl, rule: rule)) {
+                        PageLink(destination: DetailsPage(url: url, rule: rule)) {
                             HStack {
-                                Text(rule.name)
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(rule.name)
+                                    Text(rule.rootUrl.lastPathComponent)
+                                        .foregroundColor(.secondary)
+                                }
                                 Spacer()
                                 Image(systemName: "chevron.forward")
                             }

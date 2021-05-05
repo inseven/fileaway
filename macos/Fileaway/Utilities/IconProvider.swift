@@ -20,28 +20,22 @@
 
 import SwiftUI
 
-struct SettingsView: View {
+class IconProvider: ObservableObject {
 
-    private enum Tabs: Hashable {
-        case general
-    }
+    let url: URL
+    @Published var image: NSImage
 
-    @ObservedObject var manager: Manager
-
-    var body: some View {
-        TabView {
-            LocationsSettingsView(manager: manager)
-                .tabItem {
-                    Label("Locations", systemImage: "folder")
-                }
-                .tag(Tabs.general)
-            RulesSettingsView(manager: manager)
-                .tabItem {
-                    Label("Rules", systemImage: "tray.and.arrow.down")
-                }
+    init(url: URL, size: CGSize) {
+        self.url = url
+        self.image = NSWorkspace.shared.icon(forFile: url.path)
+        DispatchQueue.global(qos: .userInteractive).async {
+            guard let image = NSImage.previewForFile(path: url, ofSize: size, asIcon: true) else {
+                return
+            }
+            DispatchQueue.main.async {
+                self.image = image
+            }
         }
-        .padding()
-        .frame(minWidth: 400, maxWidth: .infinity, minHeight: 460, maxHeight: .infinity)
     }
 
 }

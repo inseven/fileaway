@@ -20,18 +20,22 @@
 
 import SwiftUI
 
-struct ListButtons: View {
+struct LocationMenuItems: View {
 
-    var add: () -> Void
-    var remove: () -> Void
+    var manager: Manager
+    var directoryObserver: DirectoryObserver
+    var onError: (Error) -> Void
 
     var body: some View {
-        HStack {
-            Button(action: add) {
-                Image(systemName: "plus")
-            }
-            Button(action: remove) {
-                Image(systemName: "minus")
+        Button("Reveal in Finder") {
+            NSWorkspace.shared.activateFileViewerSelecting([directoryObserver.url])
+        }
+        Divider()
+        Button("Remove") {
+            do {
+                try manager.removeDirectoryObserver(directoryObserver: directoryObserver)
+            } catch {
+                self.onError(error)
             }
         }
     }

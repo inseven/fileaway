@@ -18,30 +18,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-struct SettingsView: View {
+enum FileawayError: Error {
+    case directoryNotFound
+}
 
-    private enum Tabs: Hashable {
-        case general
-    }
+extension FileawayError: LocalizedError {
 
-    @ObservedObject var manager: Manager
-
-    var body: some View {
-        TabView {
-            LocationsSettingsView(manager: manager)
-                .tabItem {
-                    Label("Locations", systemImage: "folder")
-                }
-                .tag(Tabs.general)
-            RulesSettingsView(manager: manager)
-                .tabItem {
-                    Label("Rules", systemImage: "tray.and.arrow.down")
-                }
+    var errorDescription: String? {
+        switch self {
+        case .directoryNotFound:
+            return "Directory not found."
         }
-        .padding()
-        .frame(minWidth: 400, maxWidth: .infinity, minHeight: 460, maxHeight: .infinity)
     }
 
 }

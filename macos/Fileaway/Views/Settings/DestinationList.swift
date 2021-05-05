@@ -81,13 +81,9 @@ struct DestinationList: View {
                     }
                 }
 
-                Divider()
-
                 Button("Text") {
                     rule.destination.append(ComponentState(value: "Text", type: .text, variable: nil))
                 }
-
-                Divider()
 
                 Button {
                     guard let component = selection else {
@@ -105,8 +101,6 @@ struct DestinationList: View {
                 } label: {
                     Image(systemName: "arrow.down")
                 }
-
-                Divider()
 
                 Button {
                     guard let component = selection else {

@@ -20,34 +20,60 @@
 
 import SwiftUI
 
-enum SidebarSection {
-    case inbox
-    case archive
-}
-
 struct Sidebar: View {
+
+    enum AlertType {
+        case error(error: Error)
+    }
 
     @ObservedObject var manager: Manager
     @State var firstResponder: Bool = false
-    @State var item: Int = 30
-    @State var value: String = "SAkdfjh"
-    @State var selection: SidebarSection? = .inbox
+    @State var alertType: AlertType?
 
     var body: some View {
         List {
-            Section(header: Text("Locations")) {
-                if let inbox = manager.inbox {
-                    NavigationLink(destination: DirectoryView(directoryObserver: inbox), tag: .inbox, selection: $selection) {
-                        MailboxRow(directoryObserver: inbox, title: "Inbox", imageSystemName: "tray")
+            Section(header: Text("Inboxes")) {
+                ForEach(manager.directories(type: .inbox)) { inbox in
+                    NavigationLink(destination: DirectoryView(directoryObserver: inbox)) {
+                        MailboxRow(directoryObserver: inbox, title: inbox.name, imageSystemName: "tray")
+                    }
+                    .contextMenu {
+                        LocationMenuItems(manager: manager, directoryObserver: inbox) { error in
+                            alertType = .error(error: error)
+                        }
                     }
                 }
-                if let archive = manager.archive {
-                    NavigationLink(destination: DirectoryView(directoryObserver: archive), tag: .archive, selection: $selection) {
-                        MailboxRow(directoryObserver: archive, title: "Archive", imageSystemName: "archivebox")
+            }
+            Section(header: Text("Archives")) {
+                ForEach(manager.directories(type: .archive)) { archive in
+                    NavigationLink(destination: DirectoryView(directoryObserver: archive)) {
+                        MailboxRow(directoryObserver: archive, title: archive.name, imageSystemName: "archivebox")
+                    }
+                    .contextMenu {
+                        LocationMenuItems(manager: manager, directoryObserver: archive) { error in
+                            alertType = .error(error: error)
+                        }
                     }
                 }
             }
         }
+        .alert(item: $alertType) { alertType in
+            switch alertType {
+            case .error(let error):
+                return Alert(error: error)
+            }
+        }
     }
     
+}
+
+extension Sidebar.AlertType: Identifiable {
+
+    public var id: String {
+        switch self {
+        case .error(let error):
+            return "error-\(String(describing: error))"
+        }
+    }
+
 }

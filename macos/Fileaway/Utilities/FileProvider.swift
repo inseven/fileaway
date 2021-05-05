@@ -80,6 +80,13 @@ class FileProvider {
         }
     }
 
+    func stop() {
+        dispatchPrecondition(condition: .notOnQueue(syncQueue))
+        syncQueue.sync {
+            self.stream.stop()
+        }
+    }
+
     func targetQueue_update() {
         dispatchPrecondition(condition: .onQueue(syncQueue))
         let files = Set(self.files)
