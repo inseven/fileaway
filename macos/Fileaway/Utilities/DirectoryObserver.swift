@@ -71,7 +71,6 @@ class DirectoryObserver: ObservableObject, Identifiable, Hashable {
         self.type = type
         self.url = url
         self.ruleSet = RuleSet(url: url)
-        // TODO: Consdier whether we should observe the rule set.
     }
 
     func hash(into hasher: inout Hasher) {
