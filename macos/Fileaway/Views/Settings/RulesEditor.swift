@@ -75,7 +75,7 @@ struct RulesEditor: View {
     func delete(rules: Set<RuleState>) {
         do {
             try rules.remove(from: ruleSet)
-            selection = []  // TODO: Better implementation.
+            selection = selection.filter { !rules.contains($0) }
         } catch {
             alert = .error(error: error)
         }
