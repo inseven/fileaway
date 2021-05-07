@@ -115,7 +115,7 @@ struct FileawayApp: App {
             }
         }
         WindowGroup("Wizard") {
-            ArchiveWizard()
+            RulesWizard()
                 .environment(\.manager, appDelegate.manager)
                 .handlesExternalEvents(preferring: Set(arrayLiteral: "*"), allowing: Set(arrayLiteral: "*"))
                 .background(VisualEffectView(material: NSVisualEffectView.Material.sidebar,
