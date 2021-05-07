@@ -36,7 +36,7 @@ struct RulesSettingsView: View {
             }
             GroupBox {
                 if let ruleSet = manager.directories.first { $0.id == selection }?.ruleSet {
-                    RulesEditor(rules: ruleSet)
+                    RulesEditor(ruleSet: ruleSet)
                         .padding(4)
                 } else {
                     Text("No Archive Selected")

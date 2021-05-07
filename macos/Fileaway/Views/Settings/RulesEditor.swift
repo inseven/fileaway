@@ -22,6 +22,22 @@ import SwiftUI
 
 import Interact
 
+extension Set where Element == RuleState {
+
+    func remove(from ruleSet: RuleSet) throws {
+        for rule in self {
+            try ruleSet.remove(rule)
+        }
+    }
+
+    func duplicate(in ruleSet: RuleSet) throws {
+        for rule in self {
+            let _ = try ruleSet.duplicate(rule, preferredName: "Copy of " + rule.name)
+        }
+    }
+
+}
+
 struct RulesEditor: View {
 
     enum SheetType {
@@ -30,18 +46,54 @@ struct RulesEditor: View {
 
     enum AlertType {
         case duplicationFailure(error: Error)
+        case error(error: Error)
     }
 
-    @ObservedObject var rules: RuleSet
+    @ObservedObject var ruleSet: RuleSet
     @State var selection: Set<RuleState> = Set()
     @State var sheet: SheetType?
     @State var alert: AlertType?
+
+    func add() {
+        do {
+            let rule = try ruleSet.new(preferredName: "Rule")
+            selection = [rule]
+            sheet = .rule(rule: rule)
+        } catch {
+            alert = .error(error: error)
+        }
+    }
+
+    func edit(rules: Set<RuleState>) {
+        guard rules.count == 1,
+              let rule = rules.first else {
+            return
+        }
+        sheet = .rule(rule: rule)
+    }
+
+    func delete(rules: Set<RuleState>) {
+        do {
+            try rules.remove(from: ruleSet)
+            selection = []  // TODO: Better implementation.
+        } catch {
+            alert = .error(error: error)
+        }
+    }
+
+    func duplicate(rules: Set<RuleState>) {
+        do {
+            let _ = try rules.duplicate(in: ruleSet)
+        } catch {
+            alert = .duplicationFailure(error: error)
+        }
+    }
 
     var body: some View {
         HStack {
             VStack {
                 ScrollViewReader { scrollView in
-                    List(rules.mutableRules, id: \.self, selection: $selection) { rule in
+                    List(ruleSet.mutableRules, id: \.self, selection: $selection) { rule in
                         Text(rule.name)
                             .frame(maxWidth: .infinity, alignment: .topLeading)
                             .lineLimit(1)
@@ -53,53 +105,45 @@ struct RulesEditor: View {
                                 sheet = .rule(rule: rule)
                             }
                             .contextMenu {
-                                Button("Edit") {
-                                    sheet = .rule(rule: rule)
+                                
+                                MenuItem("Edit", selection: $selection, item: rule) { items in
+                                    edit(rules: items)
                                 }
-                                Button("Duplicate") {
-                                    do {
-                                        let _ = try rules.duplicate(rule, preferredName: "Copy of " + rule.name)
-                                    } catch {
-                                        alert = .duplicationFailure(error: error)
-                                    }
+                                .itemLimit(1)
+
+                                MenuItem("Duplicate", selection: $selection, item: rule) { items in
+                                    duplicate(rules: items)
                                 }
+
+                                MenuItem("Delete", selection: $selection, item: rule) { items in
+                                    delete(rules: items)
+                                }
+
                             }
                     }
                     HStack {
+
                         Button {
-                            do {
-                                let rule = try rules.new(preferredName: "Rule")
-                                selection = [rule]
-                                sheet = .rule(rule: rule)
-                            } catch {
-                                print("Failed to add rule with error \(error).")
-                            }
+                            add()
                         } label: {
                             Image(systemName: "plus")
                         }
+
                         Button {
-                            do {
-                                for rule in selection {
-                                    try rules.remove(rule)
-                                }
-                                selection = []
-                            } catch {
-                                print("Failed to remove rule with error \(error).")
-                            }
+                            delete(rules: selection)
                         } label: {
                             Image(systemName: "minus")
                         }
+
                         Button {
-                            guard selection.count == 1,
-                                  let rule = selection.first else {
-                                return
-                            }
-                            sheet = .rule(rule: rule)
+                            edit(rules: selection)
                         } label: {
                             Text("Edit")
                         }
                         .disabled(selection.count != 1)
+
                         Spacer()
+
                     }
                 }
             }
@@ -114,6 +158,8 @@ struct RulesEditor: View {
                 switch alert {
                 case .duplicationFailure(let error):
                     return Alert(title: Text("Duplicate Rule Failed"), message: Text(error.localizedDescription))
+                case .error(let error):
+                    return Alert(error: error)
                 }
             }
         }
@@ -138,6 +184,8 @@ extension RulesEditor.AlertType: Identifiable {
         switch self {
         case .duplicationFailure(let error):
             return "duplicationFailure:\(error)"
+        case .error(let error):
+            return "error:\(String(describing: error))"
         }
     }
 
