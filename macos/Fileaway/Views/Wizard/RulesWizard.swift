@@ -20,10 +20,10 @@
 
 import SwiftUI
 
-struct ArchiveWizard: View {
+struct RulesWizard: View {
 
     @Environment(\.manager) var manager
-    @SceneStorage("ArchiveWizard.documentUrl") var url: URL?
+    @SceneStorage("RulesWizard.documentUrl") var url: URL?
     @State var firstResponder: Bool = true
 
     var body: some View {
