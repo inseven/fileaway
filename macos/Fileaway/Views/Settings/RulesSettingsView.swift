@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import Interact
+
 struct RulesSettingsView: View {
 
     @ObservedObject var manager: Manager
@@ -30,7 +32,10 @@ struct RulesSettingsView: View {
             VStack {
                 List(selection: $selection) {
                     ForEach(manager.directories(type: .archive)) { directory in
-                        Text(directory.name)
+                        HStack {
+                            IconView(url: directory.url, size: CGSize(width: 16, height: 16))
+                            Text(directory.name)
+                        }
                     }
                 }
             }
