@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import Interact
+
 struct FileRow: View {
 
     var file: FileInfo

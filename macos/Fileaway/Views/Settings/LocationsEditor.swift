@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import Interact
+
 struct LocationsEditor: View {
 
     enum AlertType {
