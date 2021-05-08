@@ -35,6 +35,15 @@ struct ComponentView: View {
                         let openPanel = NSOpenPanel()
                         openPanel.canChooseFiles = false
                         openPanel.canChooseDirectories = true
+                        openPanel.canCreateDirectories = true
+                        var isDirectory = ObjCBool(true)
+                        let currentDirectory = rule.rootUrl.appendingPathComponent(component.value)
+                        if FileManager.default.fileExists(atPath: currentDirectory.path,
+                                                          isDirectory: &isDirectory) && isDirectory.boolValue {
+                            openPanel.directoryURL = currentDirectory
+                        } else {
+                            openPanel.directoryURL = rule.rootUrl
+                        }
                         guard openPanel.runModal() == NSApplication.ModalResponse.OK,
                               let url = openPanel.url,
                               let relativePath = url.relativePath(from: rule.rootUrl) else {
