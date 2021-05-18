@@ -45,6 +45,8 @@
 		D8B6D030257DBB7D00C7E472 /* SelectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6D02F257DBB7D00C7E472 /* SelectionManager.swift */; };
 		D8B6D035257E71CD00C7E472 /* QuickLookCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6D034257E71CD00C7E472 /* QuickLookCoordinator.swift */; };
 		D8B6D047257F0B4300C7E472 /* KeyEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6D046257F0B4300C7E472 /* KeyEventHandler.swift */; };
+		D8B84AB22653FFBD005AA1B9 /* FileawayCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8B84AB12653FFBD005AA1B9 /* FileawayCore.framework */; };
+		D8B84AB32653FFBD005AA1B9 /* FileawayCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D8B84AB12653FFBD005AA1B9 /* FileawayCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D8D78A922580DD750088890F /* QuickLookPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D78A912580DD750088890F /* QuickLookPreview.swift */; };
 		D8D78A9A2580DDF40088890F /* PageLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D78A992580DDF40088890F /* PageLink.swift */; };
 		D8D78A9F2580DE250088890F /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D78A9E2580DE250088890F /* PageView.swift */; };
@@ -102,6 +104,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		D8B84AB42653FFBD005AA1B9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D8B84AB32653FFBD005AA1B9 /* FileawayCore.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		D8005AC0258276250001BE2C /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		D8005AC8258277290001BE2C /* RuleSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleSet.swift; sourceTree = "<group>"; };
@@ -146,6 +162,7 @@
 		D8B6D02F257DBB7D00C7E472 /* SelectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionManager.swift; sourceTree = "<group>"; };
 		D8B6D034257E71CD00C7E472 /* QuickLookCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickLookCoordinator.swift; sourceTree = "<group>"; };
 		D8B6D046257F0B4300C7E472 /* KeyEventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEventHandler.swift; sourceTree = "<group>"; };
+		D8B84AB12653FFBD005AA1B9 /* FileawayCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FileawayCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8BCF1972635062E00047E0A /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		D8BCF1982635064A00047E0A /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
 		D8BCF1992635067300047E0A /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
@@ -195,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D87DEFAF2577E068006CFE85 /* EonilFSEvents in Frameworks */,
+				D8B84AB22653FFBD005AA1B9 /* FileawayCore.framework in Frameworks */,
 				D8037B122617F8CD00F41971 /* Introspect in Frameworks */,
 				D8F90C7325DAA72700F0EFB8 /* Interact in Frameworks */,
 			);
@@ -402,6 +420,7 @@
 		D8F90C5925D9CA0700F0EFB8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D8B84AB12653FFBD005AA1B9 /* FileawayCore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -429,6 +448,7 @@
 				D87DEF7725774F6C006CFE85 /* Sources */,
 				D87DEF7825774F6C006CFE85 /* Frameworks */,
 				D87DEF7925774F6C006CFE85 /* Resources */,
+				D8B84AB42653FFBD005AA1B9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
