@@ -24,9 +24,20 @@ import XCTest
 
 class DateFinderTests: XCTestCase {
 
-    func testDatesFromString() {
+    var calendar: Calendar = Calendar.gregorian
+
+    func date(_ year: Int, _ month: Int, _ day: Int) -> Date {
+        Calendar.gregorian.date(year, month, day)!
+    }
+
+    func testDateFromString() {
         let dates = DateFinder.dates(from: "2018-12-23 Document title")
-        XCTAssertEqual(dates, [Calendar.gregorian.date(2018, 12, 23)!])
+        XCTAssertEqual(dates, [date(2018, 12, 23)])
+    }
+
+    func testMultipleDatesFromString() {
+        let dates = DateFinder.dates(from: "2018-12-23 Document title 2021-05-19")
+        XCTAssertEqual(dates, [date(2018, 12, 23), date(2021, 05, 19)])
     }
 
 }
