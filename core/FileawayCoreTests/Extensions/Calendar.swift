@@ -18,18 +18,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import XCTest
+import Foundation
 
-@testable import FileawayCore
+extension Calendar {
 
-class DateFinderTests: XCTestCase {
-
-    func testDatesFromString() {
-        let dates = DateFinder.dates(from: "2018-12-23 Document title")
-        let components = DateComponents(year: 2018, month: 12, day: 23)
-        let calendar = Calendar.init(identifier: .gregorian)
-        let date = Calendar.gregorian.date(from: components)!
-        XCTAssertEqual(dates, [date])
-    }
+    static var gregorian: Calendar = {
+        return Calendar.init(identifier: .gregorian)
+    }()
 
 }
