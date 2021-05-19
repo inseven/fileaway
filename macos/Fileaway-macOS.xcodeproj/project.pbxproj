@@ -22,6 +22,8 @@
 		D83CDCEA2620FF210063C91C /* RuleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83CDCE92620FF210063C91C /* RuleSheet.swift */; };
 		D85C9572257999130007AE1E /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C9571257999130007AE1E /* FileManager.swift */; };
 		D85C95812579CED30007AE1E /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C95802579CED30007AE1E /* Toolbar.swift */; };
+		D876A3B62654883F006D19FB /* FileawayCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D876A3B32654873E006D19FB /* FileawayCore.framework */; };
+		D876A3B72654883F006D19FB /* FileawayCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D876A3B32654873E006D19FB /* FileawayCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D87B126525851218004EC884 /* EventModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87B126425851218004EC884 /* EventModifiers.swift */; };
 		D87DEF7F25774F6C006CFE85 /* FileawayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEF7E25774F6C006CFE85 /* FileawayApp.swift */; };
 		D87DEF8125774F6C006CFE85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEF8025774F6C006CFE85 /* ContentView.swift */; };
@@ -45,8 +47,6 @@
 		D8B6D030257DBB7D00C7E472 /* SelectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6D02F257DBB7D00C7E472 /* SelectionManager.swift */; };
 		D8B6D035257E71CD00C7E472 /* QuickLookCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6D034257E71CD00C7E472 /* QuickLookCoordinator.swift */; };
 		D8B6D047257F0B4300C7E472 /* KeyEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6D046257F0B4300C7E472 /* KeyEventHandler.swift */; };
-		D8B84AB22653FFBD005AA1B9 /* FileawayCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8B84AB12653FFBD005AA1B9 /* FileawayCore.framework */; };
-		D8B84AB32653FFBD005AA1B9 /* FileawayCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D8B84AB12653FFBD005AA1B9 /* FileawayCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D8D78A922580DD750088890F /* QuickLookPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D78A912580DD750088890F /* QuickLookPreview.swift */; };
 		D8D78A9A2580DDF40088890F /* PageLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D78A992580DDF40088890F /* PageLink.swift */; };
 		D8D78A9F2580DE250088890F /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D78A9E2580DE250088890F /* PageView.swift */; };
@@ -64,7 +64,6 @@
 		D8E7F9EB2599B05300C7409B /* VariableList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9EA2599B05300C7409B /* VariableList.swift */; };
 		D8E7F9F02599B08600C7409B /* VariableState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9EF2599B08600C7409B /* VariableState.swift */; };
 		D8E7F9F82599B0D600C7409B /* ComponentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9F72599B0D600C7409B /* ComponentState.swift */; };
-		D8E7F9FD2599B10500C7409B /* BackChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9FC2599B10500C7409B /* BackChannel.swift */; };
 		D8F8BE002586C6B90010432F /* RuleInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BDFF2586C6B90010432F /* RuleInstance.swift */; };
 		D8F8BE0C2588179E0010432F /* CloseKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BE0B2588179E0010432F /* CloseKey.swift */; };
 		D8F8BE12258818450010432F /* RulesWizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BE11258818450010432F /* RulesWizard.swift */; };
@@ -105,13 +104,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D8B84AB42653FFBD005AA1B9 /* Embed Frameworks */ = {
+		D876A3B82654883F006D19FB /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D8B84AB32653FFBD005AA1B9 /* FileawayCore.framework in Embed Frameworks */,
+				D876A3B72654883F006D19FB /* FileawayCore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -133,6 +132,7 @@
 		D83CDCE92620FF210063C91C /* RuleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleSheet.swift; sourceTree = "<group>"; };
 		D85C9571257999130007AE1E /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		D85C95802579CED30007AE1E /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
+		D876A3B32654873E006D19FB /* FileawayCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FileawayCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87B126425851218004EC884 /* EventModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModifiers.swift; sourceTree = "<group>"; };
 		D87DEF7B25774F6C006CFE85 /* Fileaway.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fileaway.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87DEF7E25774F6C006CFE85 /* FileawayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileawayApp.swift; sourceTree = "<group>"; };
@@ -162,7 +162,6 @@
 		D8B6D02F257DBB7D00C7E472 /* SelectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionManager.swift; sourceTree = "<group>"; };
 		D8B6D034257E71CD00C7E472 /* QuickLookCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickLookCoordinator.swift; sourceTree = "<group>"; };
 		D8B6D046257F0B4300C7E472 /* KeyEventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEventHandler.swift; sourceTree = "<group>"; };
-		D8B84AB12653FFBD005AA1B9 /* FileawayCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FileawayCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8BCF1972635062E00047E0A /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		D8BCF1982635064A00047E0A /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
 		D8BCF1992635067300047E0A /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
@@ -183,7 +182,6 @@
 		D8E7F9EA2599B05300C7409B /* VariableList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableList.swift; sourceTree = "<group>"; };
 		D8E7F9EF2599B08600C7409B /* VariableState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableState.swift; sourceTree = "<group>"; };
 		D8E7F9F72599B0D600C7409B /* ComponentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentState.swift; sourceTree = "<group>"; };
-		D8E7F9FC2599B10500C7409B /* BackChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackChannel.swift; sourceTree = "<group>"; };
 		D8F8BDFF2586C6B90010432F /* RuleInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleInstance.swift; sourceTree = "<group>"; };
 		D8F8BE0B2588179E0010432F /* CloseKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseKey.swift; sourceTree = "<group>"; };
 		D8F8BE11258818450010432F /* RulesWizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesWizard.swift; sourceTree = "<group>"; };
@@ -212,7 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D87DEFAF2577E068006CFE85 /* EonilFSEvents in Frameworks */,
-				D8B84AB22653FFBD005AA1B9 /* FileawayCore.framework in Frameworks */,
+				D876A3B62654883F006D19FB /* FileawayCore.framework in Frameworks */,
 				D8037B122617F8CD00F41971 /* Introspect in Frameworks */,
 				D8F90C7325DAA72700F0EFB8 /* Interact in Frameworks */,
 			);
@@ -238,7 +236,6 @@
 		D8005ABF258276160001BE2C /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				D8E7F9FC2599B10500C7409B /* BackChannel.swift */,
 				D8E7F9D225999EA900C7409B /* Component.swift */,
 				D8E7F9F72599B0D600C7409B /* ComponentState.swift */,
 				D8E7F9C525999E2E00C7409B /* ComponentType.swift */,
@@ -420,7 +417,7 @@
 		D8F90C5925D9CA0700F0EFB8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D8B84AB12653FFBD005AA1B9 /* FileawayCore.framework */,
+				D876A3B32654873E006D19FB /* FileawayCore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -448,7 +445,7 @@
 				D87DEF7725774F6C006CFE85 /* Sources */,
 				D87DEF7825774F6C006CFE85 /* Frameworks */,
 				D87DEF7925774F6C006CFE85 /* Resources */,
-				D8B84AB42653FFBD005AA1B9 /* Embed Frameworks */,
+				D876A3B82654883F006D19FB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -589,7 +586,6 @@
 				D80F72D826430E3C0010BB38 /* Data.swift in Sources */,
 				D8F90C9E25DAAF7A00F0EFB8 /* Selectable.swift in Sources */,
 				D8F8BE3725881C1A0010432F /* TaskPage.swift in Sources */,
-				D8E7F9FD2599B10500C7409B /* BackChannel.swift in Sources */,
 				D8E7F9C125999DB300C7409B /* Variable.swift in Sources */,
 				D8E7F9F02599B08600C7409B /* VariableState.swift in Sources */,
 				D8D78A9A2580DDF40088890F /* PageLink.swift in Sources */,
@@ -804,8 +800,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Fileaway/Fileaway.entitlements;
-				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = $BUILD_NUMBER;
 				DEVELOPMENT_ASSET_PATHS = "\"Fileaway/Preview Content\"";
@@ -821,7 +817,7 @@
 				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.fileaway;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Fileaway Developer ID Application";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;

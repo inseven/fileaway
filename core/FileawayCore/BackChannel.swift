@@ -19,25 +19,25 @@
 // SOFTWARE.
 
 import Combine
+import SwiftUI
 
-protocol BackChannelable {
+public protocol BackChannelable {
     func establishBackChannel()
 }
 
-// TODO: Remove this as it should be unnecessary.
-class BackChannel<T> where T: ObservableObject {
+public class BackChannel<T> where T: ObservableObject {
 
     var value: [T] = []
     var publisher: Published<[T]>.Publisher
     var observer: Cancellable?
     var observers: [Cancellable] = []
 
-    init(value: [T], publisher: Published<[T]>.Publisher) {
+    public init(value: [T], publisher: Published<[T]>.Publisher) {
         self.value = value
         self.publisher = publisher
     }
 
-    func bind(completion: @escaping () -> Void) -> BackChannel<T> {
+    public func bind(completion: @escaping () -> Void) -> BackChannel<T> {
         observer = publisher.sink { array in
             self.observers = array.map { observable in
                 if let backChannelable = observable as? BackChannelable {

@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import FileawayCore
+
 class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashable {
 
     enum NameFormat {
