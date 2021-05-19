@@ -39,6 +39,5 @@ lane :notarize_release do |options|
     notarize(
         package: options[:package],
         username: ENV['APPLE_DEVELOPER_ID'],
-        verbose: true,
     )
 end
