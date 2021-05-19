@@ -18,16 +18,45 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
+import Combine
+import SwiftUI
 
-public struct Component: Codable {
+public protocol BackChannelable {
+    func establishBackChannel()
+}
 
-    public let type: ComponentType
-    public let value: String
+public class BackChannel<T> where T: ObservableObject {
 
-    public init(type: ComponentType, value: String) {
-        self.type = type
+    var value: [T] = []
+    var publisher: Published<[T]>.Publisher
+    var observer: Cancellable?
+    var observers: [Cancellable] = []
+
+    public init(value: [T], publisher: Published<[T]>.Publisher) {
         self.value = value
+        self.publisher = publisher
     }
-    
+
+    public func bind(completion: @escaping () -> Void) -> BackChannel<T> {
+        observer = publisher.sink { array in
+            self.observers = array.map { observable in
+                if let backChannelable = observable as? BackChannelable {
+                    backChannelable.establishBackChannel()
+                }
+                return observable.objectWillChange.sink { _ in
+                    completion()
+                }
+            }
+        }
+        return self
+    }
+
+    deinit {
+        observer?.cancel()
+        for observer in observers {
+            observer.cancel()
+        }
+        observers = []
+    }
+
 }

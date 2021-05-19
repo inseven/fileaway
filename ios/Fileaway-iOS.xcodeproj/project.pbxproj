@@ -54,7 +54,6 @@
 		D8CCB8262143672700AC445F /* FileawayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCB8252143672700AC445F /* FileawayUITests.swift */; };
 		D8CCD293246EDC6A007EF2BB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCD292246EDC6A007EF2BB /* SettingsView.swift */; };
 		D8E4CA57249CF76500F5BC8E /* EditSafeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E4CA56249CF76500F5BC8E /* EditSafeButton.swift */; };
-		D8E4CA59249CF81800F5BC8E /* BackChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E4CA58249CF81800F5BC8E /* BackChannel.swift */; };
 		D8E4CA5B249CF8A600F5BC8E /* Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E4CA5A249CF8A600F5BC8E /* Selectable.swift */; };
 		D8E4CA5D249D061D00F5BC8E /* EditableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E4CA5C249D061D00F5BC8E /* EditableText.swift */; };
 		D8E4CA5F249D317D00F5BC8E /* FilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E4CA5E249D317D00F5BC8E /* FilledButton.swift */; };
@@ -146,7 +145,6 @@
 		D8CCB8272143672700AC445F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8CCD292246EDC6A007EF2BB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D8E4CA56249CF76500F5BC8E /* EditSafeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSafeButton.swift; sourceTree = "<group>"; };
-		D8E4CA58249CF81800F5BC8E /* BackChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackChannel.swift; sourceTree = "<group>"; };
 		D8E4CA5A249CF8A600F5BC8E /* Selectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selectable.swift; sourceTree = "<group>"; };
 		D8E4CA5C249D061D00F5BC8E /* EditableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableText.swift; sourceTree = "<group>"; };
 		D8E4CA5E249D317D00F5BC8E /* FilledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledButton.swift; sourceTree = "<group>"; };
@@ -256,7 +254,6 @@
 				D8CCB8112143672700AC445F /* Info.plist */,
 				D89265832498AC3A00297825 /* ActionsViewController.swift */,
 				D8CCB8052143672700AC445F /* AppDelegate.swift */,
-				D8E4CA58249CF81800F5BC8E /* BackChannel.swift */,
 				D88F3D53217070A400BFE0F9 /* DateTableViewCell.swift */,
 				D84319B4249AC1D60014CFE9 /* Destination.swift */,
 				D85D0A15249ADFDC00D4B414 /* FakeDuplexTask.swift */,
@@ -453,7 +450,6 @@
 				D85D0A14249ADCE900D4B414 /* MergeDocumentsView.swift in Sources */,
 				D858CE6024AB1F2F00F9BCB2 /* ActionGroup.swift in Sources */,
 				D84319A7249AB8720014CFE9 /* ActionsView.swift in Sources */,
-				D8E4CA59249CF81800F5BC8E /* BackChannel.swift in Sources */,
 				D843199F249A85680014CFE9 /* FilePickerSheet.swift in Sources */,
 				D81C5D97249BF2410083BD6F /* ComponentState.swift in Sources */,
 				D8E4CA5F249D317D00F5BC8E /* FilledButton.swift in Sources */,
@@ -671,6 +667,7 @@
 				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
 				INFOPLIST_FILE = Fileaway/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.fileaway;
 				PRODUCT_NAME = Fileaway;
@@ -690,6 +687,7 @@
 				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
 				INFOPLIST_FILE = Fileaway/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.fileaway;
 				PRODUCT_NAME = Fileaway;

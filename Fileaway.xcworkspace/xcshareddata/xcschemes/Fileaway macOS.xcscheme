@@ -20,6 +20,20 @@
                ReferencedContainer = "container:macos/Fileaway-macOS.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D8D14D9F216E3E0E00D6E1DF"
+               BuildableName = "FileawayCore.framework"
+               BlueprintName = "FileawayCore macOS"
+               ReferencedContainer = "container:core/FileawayCore.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

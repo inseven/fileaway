@@ -18,45 +18,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Combine
+import Foundation
 
-protocol BackChannelable {
-    func establishBackChannel()
-}
-
-// TODO: Remove this as it should be unnecessary.
-class BackChannel<T> where T: ObservableObject {
-
-    var value: [T] = []
-    var publisher: Published<[T]>.Publisher
-    var observer: Cancellable?
-    var observers: [Cancellable] = []
-
-    init(value: [T], publisher: Published<[T]>.Publisher) {
-        self.value = value
-        self.publisher = publisher
+public struct Task {
+    public let name: String
+    public let configuration: Configuration
+    public init(name: String, configuration: Configuration) {
+        self.name = name
+        self.configuration = configuration
     }
-
-    func bind(completion: @escaping () -> Void) -> BackChannel<T> {
-        observer = publisher.sink { array in
-            self.observers = array.map { observable in
-                if let backChannelable = observable as? BackChannelable {
-                    backChannelable.establishBackChannel()
-                }
-                return observable.objectWillChange.sink { _ in
-                    completion()
-                }
-            }
-        }
-        return self
-    }
-
-    deinit {
-        observer?.cancel()
-        for observer in observers {
-            observer.cancel()
-        }
-        observers = []
-    }
-
 }

@@ -20,14 +20,14 @@
 
 import Foundation
 
-struct Variable: Identifiable {
+public struct Variable: Identifiable {
 
     public var id = UUID()
 
-    let name: String
-    let type: VariableType
+    public let name: String
+    public let type: VariableType
 
-    init(name: String, type: VariableType) {
+    public init(name: String, type: VariableType) {
         self.name = name
         self.type = type
     }

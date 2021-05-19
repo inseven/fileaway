@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import FileawayCore
+
 struct VariableTextField: View {
 
     @ObservedObject var variable: VariableState

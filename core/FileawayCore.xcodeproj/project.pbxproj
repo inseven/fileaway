@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D84E50B92654B02600496524 /* ComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E50B82654B02600496524 /* ComponentType.swift */; };
+		D84E50BA2654B02600496524 /* ComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E50B82654B02600496524 /* ComponentType.swift */; };
+		D84E50BC2654B05200496524 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E50BB2654B05200496524 /* Component.swift */; };
+		D84E50BD2654B05200496524 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E50BB2654B05200496524 /* Component.swift */; };
+		D84E50BF2654B07500496524 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E50BE2654B07500496524 /* Variable.swift */; };
+		D84E50C02654B07500496524 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E50BE2654B07500496524 /* Variable.swift */; };
+		D84E50C22654B0B000496524 /* VariableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E50C12654B0B000496524 /* VariableType.swift */; };
+		D84E50C32654B0B000496524 /* VariableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E50C12654B0B000496524 /* VariableType.swift */; };
+		D84E50C52654B0DE00496524 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E50C42654B0DE00496524 /* Task.swift */; };
+		D84E50C62654B0DE00496524 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E50C42654B0DE00496524 /* Task.swift */; };
+		D876A3BD26548C61006D19FB /* BackChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D876A3BC26548C61006D19FB /* BackChannel.swift */; };
+		D876A3BE26548C61006D19FB /* BackChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D876A3BC26548C61006D19FB /* BackChannel.swift */; };
 		D8BCA524216F08DF002A624D /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D14D56216E3BAE00D6E1DF /* Configuration.swift */; };
 		D8BCA525216F08DF002A624D /* VariableProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D14D57216E3BAE00D6E1DF /* VariableProvider.swift */; };
 		D8BCA526216F08DF002A624D /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D14D58216E3BAE00D6E1DF /* Manager.swift */; };
@@ -43,6 +55,12 @@
 		D81F7C49216E3AA80070AAA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D81F7C53216E3AA90070AAA0 /* FileawayCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileawayCoreTests.swift; sourceTree = "<group>"; };
 		D81F7C55216E3AA90070AAA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D84E50B82654B02600496524 /* ComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentType.swift; sourceTree = "<group>"; };
+		D84E50BB2654B05200496524 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		D84E50BE2654B07500496524 /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
+		D84E50C12654B0B000496524 /* VariableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableType.swift; sourceTree = "<group>"; };
+		D84E50C42654B0DE00496524 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		D876A3BC26548C61006D19FB /* BackChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackChannel.swift; sourceTree = "<group>"; };
 		D8D14D56216E3BAE00D6E1DF /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		D8D14D57216E3BAE00D6E1DF /* VariableProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableProvider.swift; sourceTree = "<group>"; };
 		D8D14D58216E3BAE00D6E1DF /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
@@ -119,11 +137,13 @@
 		D81F7C47216E3AA80070AAA0 /* FileawayCore */ = {
 			isa = PBXGroup;
 			children = (
-				D8D14D56216E3BAE00D6E1DF /* Configuration.swift */,
-				D8D14D57216E3BAE00D6E1DF /* VariableProvider.swift */,
-				D8D14D58216E3BAE00D6E1DF /* Manager.swift */,
+				D84E50C72654B56700496524 /* Configuration */,
+				D876A3BC26548C61006D19FB /* BackChannel.swift */,
 				D81F7C48216E3AA80070AAA0 /* FileawayCore.h */,
 				D81F7C49216E3AA80070AAA0 /* Info.plist */,
+				D8D14D58216E3BAE00D6E1DF /* Manager.swift */,
+				D8D14D57216E3BAE00D6E1DF /* VariableProvider.swift */,
+				D84E50C42654B0DE00496524 /* Task.swift */,
 			);
 			path = FileawayCore;
 			sourceTree = "<group>";
@@ -135,6 +155,18 @@
 				D81F7C55216E3AA90070AAA0 /* Info.plist */,
 			);
 			path = FileawayCoreTests;
+			sourceTree = "<group>";
+		};
+		D84E50C72654B56700496524 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				D84E50BB2654B05200496524 /* Component.swift */,
+				D84E50B82654B02600496524 /* ComponentType.swift */,
+				D8D14D56216E3BAE00D6E1DF /* Configuration.swift */,
+				D84E50BE2654B07500496524 /* Variable.swift */,
+				D84E50C12654B0B000496524 /* VariableType.swift */,
+			);
+			path = Configuration;
 			sourceTree = "<group>";
 		};
 		D8D14DA1216E3E0E00D6E1DF /* FileawayCore macOS */ = {
@@ -347,7 +379,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8D14DB8216E3E1400D6E1DF /* VariableProvider.swift in Sources */,
+				D84E50BF2654B07500496524 /* Variable.swift in Sources */,
+				D84E50BC2654B05200496524 /* Component.swift in Sources */,
 				D8D14DB9216E3E1400D6E1DF /* Manager.swift in Sources */,
+				D84E50B92654B02600496524 /* ComponentType.swift in Sources */,
+				D84E50C22654B0B000496524 /* VariableType.swift in Sources */,
+				D876A3BE26548C61006D19FB /* BackChannel.swift in Sources */,
+				D84E50C52654B0DE00496524 /* Task.swift in Sources */,
 				D8D14DB7216E3E1400D6E1DF /* Configuration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -365,7 +403,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8BCA525216F08DF002A624D /* VariableProvider.swift in Sources */,
+				D84E50C02654B07500496524 /* Variable.swift in Sources */,
+				D84E50BD2654B05200496524 /* Component.swift in Sources */,
 				D8BCA526216F08DF002A624D /* Manager.swift in Sources */,
+				D84E50BA2654B02600496524 /* ComponentType.swift in Sources */,
+				D84E50C32654B0B000496524 /* VariableType.swift in Sources */,
+				D876A3BD26548C61006D19FB /* BackChannel.swift in Sources */,
+				D84E50C62654B0DE00496524 /* Task.swift in Sources */,
 				D8BCA524216F08DF002A624D /* Configuration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -521,11 +565,11 @@
 		D8D14DB2216E3E0E00D6E1DF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = S4WXAUZQEV;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -537,10 +581,11 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.FileawayCore-macOS";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.FileawayCore;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = FileawayCore;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
@@ -550,11 +595,11 @@
 		D8D14DB3216E3E0E00D6E1DF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = S4WXAUZQEV;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -566,10 +611,11 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.FileawayCore-macOS";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.FileawayCore;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = FileawayCore;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
@@ -632,6 +678,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "FileawayCore iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -657,6 +704,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "FileawayCore iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

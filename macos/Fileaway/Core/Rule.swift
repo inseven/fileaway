@@ -20,6 +20,8 @@
 
 import Foundation
 
+import FileawayCore
+
 class Rule: Identifiable, Hashable {
 
     var id = UUID()
