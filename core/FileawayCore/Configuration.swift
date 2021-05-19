@@ -21,10 +21,13 @@
 import Foundation
 
 public struct Configuration: Codable {
+
     public let variables: [Variable]
     public let destination: [Component]
+
     public init(variables: [Variable], destination: [Component]) {
         self.variables = variables
         self.destination = destination
     }
+    
 }

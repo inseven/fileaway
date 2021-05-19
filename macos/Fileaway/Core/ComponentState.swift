@@ -20,6 +20,8 @@
 
 import Foundation
 
+import FileawayCore
+
 class ComponentState: ObservableObject, Identifiable, Hashable {
 
     var id = UUID()

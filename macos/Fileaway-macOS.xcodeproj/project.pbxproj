@@ -54,9 +54,7 @@
 		D8DC5046257C0795009B3ECC /* ResponderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DC5045257C0795009B3ECC /* ResponderView.swift */; };
 		D8E7F9A825999B1000C7409B /* RuleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9A725999B1000C7409B /* RuleState.swift */; };
 		D8E7F9B125999C8800C7409B /* RulesEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9B025999C8800C7409B /* RulesEditor.swift */; };
-		D8E7F9C625999E2E00C7409B /* ComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9C525999E2E00C7409B /* ComponentType.swift */; };
 		D8E7F9CE25999E7A00C7409B /* Rule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9CD25999E7A00C7409B /* Rule.swift */; };
-		D8E7F9D325999EA900C7409B /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9D225999EA900C7409B /* Component.swift */; };
 		D8E7F9DE2599AFE000C7409B /* RuleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9DD2599AFE000C7409B /* RuleDetailView.swift */; };
 		D8E7F9E32599B00A00C7409B /* DestinationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9E22599B00A00C7409B /* DestinationList.swift */; };
 		D8E7F9EB2599B05300C7409B /* VariableList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9EA2599B05300C7409B /* VariableList.swift */; };
@@ -170,9 +168,7 @@
 		D8DC5045257C0795009B3ECC /* ResponderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponderView.swift; sourceTree = "<group>"; };
 		D8E7F9A725999B1000C7409B /* RuleState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleState.swift; sourceTree = "<group>"; };
 		D8E7F9B025999C8800C7409B /* RulesEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesEditor.swift; sourceTree = "<group>"; };
-		D8E7F9C525999E2E00C7409B /* ComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentType.swift; sourceTree = "<group>"; };
 		D8E7F9CD25999E7A00C7409B /* Rule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rule.swift; sourceTree = "<group>"; };
-		D8E7F9D225999EA900C7409B /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		D8E7F9DD2599AFE000C7409B /* RuleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleDetailView.swift; sourceTree = "<group>"; };
 		D8E7F9E22599B00A00C7409B /* DestinationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationList.swift; sourceTree = "<group>"; };
 		D8E7F9EA2599B05300C7409B /* VariableList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableList.swift; sourceTree = "<group>"; };
@@ -232,9 +228,7 @@
 		D8005ABF258276160001BE2C /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				D8E7F9D225999EA900C7409B /* Component.swift */,
 				D8E7F9F72599B0D600C7409B /* ComponentState.swift */,
-				D8E7F9C525999E2E00C7409B /* ComponentType.swift */,
 				D8005AC0258276250001BE2C /* Configuration.swift */,
 				D8F8BE26258819C80010432F /* DateInstance.swift */,
 				D80F72D9264311690010BB38 /* FileawayError.swift */,
@@ -596,12 +590,10 @@
 				D8005AC1258276250001BE2C /* Configuration.swift in Sources */,
 				D8B6D026257DBA8B00C7E472 /* SelectionTracker.swift in Sources */,
 				D88DF5FB258463310068404E /* LazyFilter.swift in Sources */,
-				D8E7F9D325999EA900C7409B /* Component.swift in Sources */,
 				D821E93E257A960C005D3205 /* FileProvider.swift in Sources */,
 				D8F8BE12258818450010432F /* RulesWizard.swift in Sources */,
 				D8B6D021257D962F00C7E472 /* AcceptsFirstResponder.swift in Sources */,
 				D87DEF7F25774F6C006CFE85 /* FileawayApp.swift in Sources */,
-				D8E7F9C625999E2E00C7409B /* ComponentType.swift in Sources */,
 				D87DEFB925783F66006CFE85 /* DirectoryView.swift in Sources */,
 				D87DEFB425780BA4006CFE85 /* DirectoryObserver.swift in Sources */,
 				D8DC5046257C0795009B3ECC /* ResponderView.swift in Sources */,
