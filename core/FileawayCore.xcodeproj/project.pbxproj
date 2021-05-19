@@ -137,16 +137,12 @@
 		D81F7C47216E3AA80070AAA0 /* FileawayCore */ = {
 			isa = PBXGroup;
 			children = (
+				D84E50C72654B56700496524 /* Configuration */,
 				D876A3BC26548C61006D19FB /* BackChannel.swift */,
-				D84E50BB2654B05200496524 /* Component.swift */,
-				D84E50B82654B02600496524 /* ComponentType.swift */,
-				D8D14D56216E3BAE00D6E1DF /* Configuration.swift */,
 				D81F7C48216E3AA80070AAA0 /* FileawayCore.h */,
 				D81F7C49216E3AA80070AAA0 /* Info.plist */,
 				D8D14D58216E3BAE00D6E1DF /* Manager.swift */,
-				D84E50BE2654B07500496524 /* Variable.swift */,
 				D8D14D57216E3BAE00D6E1DF /* VariableProvider.swift */,
-				D84E50C12654B0B000496524 /* VariableType.swift */,
 				D84E50C42654B0DE00496524 /* Task.swift */,
 			);
 			path = FileawayCore;
@@ -159,6 +155,18 @@
 				D81F7C55216E3AA90070AAA0 /* Info.plist */,
 			);
 			path = FileawayCoreTests;
+			sourceTree = "<group>";
+		};
+		D84E50C72654B56700496524 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				D84E50BB2654B05200496524 /* Component.swift */,
+				D84E50B82654B02600496524 /* ComponentType.swift */,
+				D8D14D56216E3BAE00D6E1DF /* Configuration.swift */,
+				D84E50BE2654B07500496524 /* Variable.swift */,
+				D84E50C12654B0B000496524 /* VariableType.swift */,
+			);
+			path = Configuration;
 			sourceTree = "<group>";
 		};
 		D8D14DA1216E3E0E00D6E1DF /* FileawayCore macOS */ = {
