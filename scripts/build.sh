@@ -114,8 +114,16 @@ if [ -d "$TEMPORARY_DIRECTORY" ] ; then
     rm -rf "$TEMPORARY_DIRECTORY"
 fi
 mkdir -p "$TEMPORARY_DIRECTORY"
-security create-keychain -p "$TEMPORARY_KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
-security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
+echo "$TEMPORARY_KEYCHAIN_PASSWORD" | "$BUILD_TOOLS_SCRIPT" create-keychain "$KEYCHAIN_PATH" --password
+
+function cleanup {
+    # Cleanup the temporary files and keychain.
+    cd "$ROOT_DIRECTORY"
+    "$BUILD_TOOLS_SCRIPT" delete-keychain "$KEYCHAIN_PATH"
+    rm -rf "$TEMPORARY_DIRECTORY"
+}
+
+trap cleanup EXIT
 
 # Determine the version and build number.
 VERSION_NUMBER=`"$CHANGES_SCRIPT" --scope macOS current-version`
@@ -125,8 +133,6 @@ BUILD_NUMBER="${GIT_COMMIT}.${TIMESTAMP}"
 
 # Import the certificates into our dedicated keychain.
 fastlane import_certificates keychain:"$KEYCHAIN_PATH"
-security unlock-keychain -p "$TEMPORARY_KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
-security list-keychain -d user -s "$KEYCHAIN_PATH"
 
 # Archive and export the build.
 xcodebuild -workspace Fileaway.xcworkspace -scheme "Fileaway macOS" -config Release -archivePath "$ARCHIVE_PATH"  OTHER_CODE_SIGN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\"" BUILD_NUMBER=$BUILD_NUMBER MARKETING_VERSION=$VERSION_NUMBER archive | xcpretty
