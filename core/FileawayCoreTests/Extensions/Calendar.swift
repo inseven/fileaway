@@ -26,4 +26,13 @@ extension Calendar {
         return Calendar.init(identifier: .gregorian)
     }()
 
+    func date(year: Int, month: Int, day: Int) -> Date? {
+        let components = DateComponents(year: year, month: month, day: day)
+        return Calendar.gregorian.date(from: components)
+    }
+
+    func date(_ year: Int, _ month: Int, _ day: Int) -> Date? {
+        return date(year: year, month: month, day: day)
+    }
+
 }
