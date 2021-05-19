@@ -19,6 +19,16 @@
 		D84E50C62654B0DE00496524 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E50C42654B0DE00496524 /* Task.swift */; };
 		D876A3BD26548C61006D19FB /* BackChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D876A3BC26548C61006D19FB /* BackChannel.swift */; };
 		D876A3BE26548C61006D19FB /* BackChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D876A3BC26548C61006D19FB /* BackChannel.swift */; };
+		D898E653265578EC005EA6DE /* FileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D898E652265578EC005EA6DE /* FileInfo.swift */; };
+		D898E654265578EC005EA6DE /* FileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D898E652265578EC005EA6DE /* FileInfo.swift */; };
+		D898E6592655796B005EA6DE /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = D898E6582655796B005EA6DE /* String.swift */; };
+		D898E65A2655796B005EA6DE /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = D898E6582655796B005EA6DE /* String.swift */; };
+		D898E65C26557AC3005EA6DE /* DateFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D898E65B26557AC3005EA6DE /* DateFinder.swift */; };
+		D898E65D26557AC3005EA6DE /* DateFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D898E65B26557AC3005EA6DE /* DateFinder.swift */; };
+		D898E65F26557AFD005EA6DE /* TitleFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D898E65E26557AFD005EA6DE /* TitleFinder.swift */; };
+		D898E66026557AFD005EA6DE /* TitleFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D898E65E26557AFD005EA6DE /* TitleFinder.swift */; };
+		D898E66526557C69005EA6DE /* DateFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D898E66226557C28005EA6DE /* DateFinderTests.swift */; };
+		D898E66626557C6A005EA6DE /* DateFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D898E66226557C28005EA6DE /* DateFinderTests.swift */; };
 		D8BCA524216F08DF002A624D /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D14D56216E3BAE00D6E1DF /* Configuration.swift */; };
 		D8BCA525216F08DF002A624D /* VariableProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D14D57216E3BAE00D6E1DF /* VariableProvider.swift */; };
 		D8BCA526216F08DF002A624D /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D14D58216E3BAE00D6E1DF /* Manager.swift */; };
@@ -61,6 +71,11 @@
 		D84E50C12654B0B000496524 /* VariableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableType.swift; sourceTree = "<group>"; };
 		D84E50C42654B0DE00496524 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		D876A3BC26548C61006D19FB /* BackChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackChannel.swift; sourceTree = "<group>"; };
+		D898E652265578EC005EA6DE /* FileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfo.swift; sourceTree = "<group>"; };
+		D898E6582655796B005EA6DE /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		D898E65B26557AC3005EA6DE /* DateFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFinder.swift; sourceTree = "<group>"; };
+		D898E65E26557AFD005EA6DE /* TitleFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleFinder.swift; sourceTree = "<group>"; };
+		D898E66226557C28005EA6DE /* DateFinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFinderTests.swift; sourceTree = "<group>"; };
 		D8D14D56216E3BAE00D6E1DF /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		D8D14D57216E3BAE00D6E1DF /* VariableProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableProvider.swift; sourceTree = "<group>"; };
 		D8D14D58216E3BAE00D6E1DF /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
@@ -137,13 +152,17 @@
 		D81F7C47216E3AA80070AAA0 /* FileawayCore */ = {
 			isa = PBXGroup;
 			children = (
+				D898E66126557B91005EA6DE /* Extensions */,
 				D84E50C72654B56700496524 /* Configuration */,
 				D876A3BC26548C61006D19FB /* BackChannel.swift */,
 				D81F7C48216E3AA80070AAA0 /* FileawayCore.h */,
+				D898E652265578EC005EA6DE /* FileInfo.swift */,
 				D81F7C49216E3AA80070AAA0 /* Info.plist */,
 				D8D14D58216E3BAE00D6E1DF /* Manager.swift */,
-				D8D14D57216E3BAE00D6E1DF /* VariableProvider.swift */,
 				D84E50C42654B0DE00496524 /* Task.swift */,
+				D8D14D57216E3BAE00D6E1DF /* VariableProvider.swift */,
+				D898E65B26557AC3005EA6DE /* DateFinder.swift */,
+				D898E65E26557AFD005EA6DE /* TitleFinder.swift */,
 			);
 			path = FileawayCore;
 			sourceTree = "<group>";
@@ -151,6 +170,7 @@
 		D81F7C52216E3AA90070AAA0 /* FileawayCoreTests */ = {
 			isa = PBXGroup;
 			children = (
+				D898E66226557C28005EA6DE /* DateFinderTests.swift */,
 				D81F7C53216E3AA90070AAA0 /* FileawayCoreTests.swift */,
 				D81F7C55216E3AA90070AAA0 /* Info.plist */,
 			);
@@ -167,6 +187,14 @@
 				D84E50C12654B0B000496524 /* VariableType.swift */,
 			);
 			path = Configuration;
+			sourceTree = "<group>";
+		};
+		D898E66126557B91005EA6DE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D898E6582655796B005EA6DE /* String.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		D8D14DA1216E3E0E00D6E1DF /* FileawayCore macOS */ = {
@@ -379,14 +407,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8D14DB8216E3E1400D6E1DF /* VariableProvider.swift in Sources */,
+				D898E6592655796B005EA6DE /* String.swift in Sources */,
 				D84E50BF2654B07500496524 /* Variable.swift in Sources */,
 				D84E50BC2654B05200496524 /* Component.swift in Sources */,
 				D8D14DB9216E3E1400D6E1DF /* Manager.swift in Sources */,
+				D898E65C26557AC3005EA6DE /* DateFinder.swift in Sources */,
 				D84E50B92654B02600496524 /* ComponentType.swift in Sources */,
 				D84E50C22654B0B000496524 /* VariableType.swift in Sources */,
+				D898E65F26557AFD005EA6DE /* TitleFinder.swift in Sources */,
 				D876A3BE26548C61006D19FB /* BackChannel.swift in Sources */,
 				D84E50C52654B0DE00496524 /* Task.swift in Sources */,
 				D8D14DB7216E3E1400D6E1DF /* Configuration.swift in Sources */,
+				D898E654265578EC005EA6DE /* FileInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +427,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8D14DAE216E3E0E00D6E1DF /* FileawayCore_macOSTests.swift in Sources */,
+				D898E66526557C69005EA6DE /* DateFinderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,14 +436,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8BCA525216F08DF002A624D /* VariableProvider.swift in Sources */,
+				D898E65A2655796B005EA6DE /* String.swift in Sources */,
 				D84E50C02654B07500496524 /* Variable.swift in Sources */,
 				D84E50BD2654B05200496524 /* Component.swift in Sources */,
 				D8BCA526216F08DF002A624D /* Manager.swift in Sources */,
+				D898E65D26557AC3005EA6DE /* DateFinder.swift in Sources */,
 				D84E50BA2654B02600496524 /* ComponentType.swift in Sources */,
 				D84E50C32654B0B000496524 /* VariableType.swift in Sources */,
+				D898E66026557AFD005EA6DE /* TitleFinder.swift in Sources */,
 				D876A3BD26548C61006D19FB /* BackChannel.swift in Sources */,
 				D84E50C62654B0DE00496524 /* Task.swift in Sources */,
 				D8BCA524216F08DF002A624D /* Configuration.swift in Sources */,
+				D898E653265578EC005EA6DE /* FileInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,6 +456,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8D14DD5216F015F00D6E1DF /* FileawayCore_iOSTests.swift in Sources */,
+				D898E66626557C6A005EA6DE /* DateFinderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,6 +530,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -551,6 +590,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -581,7 +621,6 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.FileawayCore;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = FileawayCore;
@@ -611,7 +650,6 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.FileawayCore;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = FileawayCore;
@@ -636,7 +674,6 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.FileawayCore-macOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -658,7 +695,6 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.inseven.FileawayCore-macOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;

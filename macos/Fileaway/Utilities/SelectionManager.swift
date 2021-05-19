@@ -21,6 +21,8 @@
 import Combine
 import SwiftUI
 
+import FileawayCore
+
 class SelectionManager: ObservableObject {
 
     var tracker: SelectionTracker<FileInfo>

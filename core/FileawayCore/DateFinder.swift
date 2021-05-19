@@ -18,10 +18,28 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import XCTest
+import Foundation
 
-@testable import FileawayCore
+// TODO: Support multiple instances?
+class DateFinder {
 
-class FileawayCoreTests: XCTestCase {
+    static var cache: NSCache<NSString, NSArray> = {
+        return NSCache()
+    }()
+
+    static var dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter
+    }()
+
+    static func dates(from string: String) -> Array<Date> {
+        if let dates = Self.cache.object(forKey: string as NSString) as? Array<Date> {
+            return dates
+        }
+        let dates = string.tokens.compactMap { Self.dateFormatter.date(from: $0) }
+        Self.cache.setObject(dates as NSArray, forKey: string as NSString)
+        return dates
+    }
 
 }

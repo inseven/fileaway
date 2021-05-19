@@ -75,11 +75,9 @@ function build_scheme {
     xcodebuild \
         -workspace Fileaway.xcworkspace \
         -scheme "$1" \
-        clean \
-        build \
         CODE_SIGN_IDENTITY="" \
         CODE_SIGNING_REQUIRED=NO \
-        CODE_SIGNING_ALLOWED=NO | xcpretty
+        CODE_SIGNING_ALLOWED=NO "${@:2}" | xcpretty
 }
 
 cd "$ROOT_DIRECTORY"
@@ -89,10 +87,10 @@ xcodebuild -workspace Fileaway.xcworkspace -list
 
 # Smoke test builds.
 
-build_scheme "FileawayCore iOS"
-build_scheme "FileawayCore macOS"
-build_scheme "Fileaway iOS"
-build_scheme "Fileaway macOS"
+build_scheme "FileawayCore iOS" clean build
+build_scheme "FileawayCore macOS" clean build build-for-testing test
+build_scheme "Fileaway iOS" clean build
+build_scheme "Fileaway macOS" clean build
 
 # Build the macOS archive.
 

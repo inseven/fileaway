@@ -18,10 +18,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import XCTest
+import Foundation
 
-@testable import FileawayCore
+extension String {
 
-class FileawayCoreTests: XCTestCase {
+    public var deletingPathExtension: String {
+        (self as NSString).deletingPathExtension
+    }
+
+    public var tokens: [String] {
+        components(separatedBy: .whitespacesAndNewlines).filter { !$0.isEmpty }
+    }
 
 }

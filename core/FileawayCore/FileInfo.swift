@@ -18,10 +18,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import XCTest
+import Foundation
 
-@testable import FileawayCore
+public class FileInfo: Identifiable, Hashable {
 
-class FileawayCoreTests: XCTestCase {
+    public var id: URL { url }
+    
+    public let url: URL
+    public let name: String
+    public var date: Date?
+    public let directoryUrl: URL
+
+    public var sortDate: Date {
+        date ?? Date.distantPast
+    }
+
+    public init(url: URL) {
+        self.url = url
+        let name = url.lastPathComponent.deletingPathExtension
+        self.date = DateFinder.dates(from: name).first
+        let title = TitleFinder.title(from: name)
+        self.name = title.isEmpty ? name : title
+        self.directoryUrl = url.deletingLastPathComponent()
+    }
+
+    public static func == (lhs: FileInfo, rhs: FileInfo) -> Bool {
+        return lhs.url == rhs.url
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(url)
+    }
 
 }

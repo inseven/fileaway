@@ -20,6 +20,7 @@
 
 import SwiftUI
 
+import FileawayCore
 
 class DirectoryObserver: ObservableObject, Identifiable, Hashable {
 

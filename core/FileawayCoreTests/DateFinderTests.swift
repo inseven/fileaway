@@ -22,6 +22,14 @@ import XCTest
 
 @testable import FileawayCore
 
-class FileawayCoreTests: XCTestCase {
+class DateFinderTests: XCTestCase {
+
+    func testDatesFromString() {
+        let dates = DateFinder.dates(from: "2018-12-23 Document title")
+        let components = DateComponents(year: 2018, month: 12, day: 23)
+        let calendar = Calendar.init(identifier: .gregorian)
+        let date = calendar.date(from: components)!
+        XCTAssertEqual(dates, [date])
+    }
 
 }
