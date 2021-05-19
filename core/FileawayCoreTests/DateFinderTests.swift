@@ -19,28 +19,25 @@
 // SOFTWARE.
 
 import XCTest
+
 @testable import FileawayCore
 
-class FileawayCore_iOSTests: XCTestCase {
+class DateFinderTests: XCTestCase {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    var calendar: Calendar = Calendar.gregorian
+
+    func date(_ year: Int, _ month: Int, _ day: Int) -> Date {
+        Calendar.gregorian.date(year, month, day)!
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func testDateFromString() {
+        let dates = DateFinder.dates(from: "2018-12-23 Document title")
+        XCTAssertEqual(dates, [date(2018, 12, 23)])
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testMultipleDatesFromString() {
+        let dates = DateFinder.dates(from: "2018-12-23 Document title 2021-05-19")
+        XCTAssertEqual(dates, [date(2018, 12, 23), date(2021, 05, 19)])
     }
 
 }

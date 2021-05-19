@@ -61,6 +61,10 @@ do
     esac
 done
 
+# iPhone to be used for smoke test builds and tests.
+# This doesn't specify the OS version to allow the build script to recover from minor build changes.
+IPHONE_DESTINATION="platform=iOS Simulator,name=iPhone 12 Pro"
+
 # Generate a random string to secure the local keychain.
 export TEMPORARY_KEYCHAIN_PASSWORD=`openssl rand -base64 14`
 
@@ -75,11 +79,9 @@ function build_scheme {
     xcodebuild \
         -workspace Fileaway.xcworkspace \
         -scheme "$1" \
-        clean \
-        build \
         CODE_SIGN_IDENTITY="" \
         CODE_SIGNING_REQUIRED=NO \
-        CODE_SIGNING_ALLOWED=NO | xcpretty
+        CODE_SIGNING_ALLOWED=NO "${@:2}" | xcpretty
 }
 
 cd "$ROOT_DIRECTORY"
@@ -89,10 +91,15 @@ xcodebuild -workspace Fileaway.xcworkspace -list
 
 # Smoke test builds.
 
-build_scheme "FileawayCore iOS"
-build_scheme "FileawayCore macOS"
-build_scheme "Fileaway iOS"
-build_scheme "Fileaway macOS"
+# FileawayCore
+build_scheme "FileawayCore iOS" clean build build-for-testing test \
+  -sdk iphonesimulator \
+  -destination "$IPHONE_DESTINATION"
+build_scheme "FileawayCore macOS" clean build build-for-testing test
+
+# Apps
+build_scheme "Fileaway iOS" clean build
+build_scheme "Fileaway macOS" clean build
 
 # Build the macOS archive.
 
@@ -107,8 +114,16 @@ if [ -d "$TEMPORARY_DIRECTORY" ] ; then
     rm -rf "$TEMPORARY_DIRECTORY"
 fi
 mkdir -p "$TEMPORARY_DIRECTORY"
-security create-keychain -p "$TEMPORARY_KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
-security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
+echo "$TEMPORARY_KEYCHAIN_PASSWORD" | "$BUILD_TOOLS_SCRIPT" create-keychain "$KEYCHAIN_PATH" --password
+
+function cleanup {
+    # Cleanup the temporary files and keychain.
+    cd "$ROOT_DIRECTORY"
+    "$BUILD_TOOLS_SCRIPT" delete-keychain "$KEYCHAIN_PATH"
+    rm -rf "$TEMPORARY_DIRECTORY"
+}
+
+trap cleanup EXIT
 
 # Determine the version and build number.
 VERSION_NUMBER=`"$CHANGES_SCRIPT" --scope macOS current-version`
@@ -118,8 +133,6 @@ BUILD_NUMBER="${GIT_COMMIT}.${TIMESTAMP}"
 
 # Import the certificates into our dedicated keychain.
 fastlane import_certificates keychain:"$KEYCHAIN_PATH"
-security unlock-keychain -p "$TEMPORARY_KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
-security list-keychain -d user -s "$KEYCHAIN_PATH"
 
 # Archive and export the build.
 xcodebuild -workspace Fileaway.xcworkspace -scheme "Fileaway macOS" -config Release -archivePath "$ARCHIVE_PATH"  OTHER_CODE_SIGN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\"" BUILD_NUMBER=$BUILD_NUMBER MARKETING_VERSION=$VERSION_NUMBER archive | xcpretty
@@ -144,9 +157,6 @@ zip -r --symlinks "$ZIP_BASENAME" "$APP_BASENAME"
 rm -r "$APP_BASENAME"
 zip -r "Artifacts.zip" "."
 popd
-
-# Cleanup the temporary files and keychain.
-rm -rf "$TEMPORARY_DIRECTORY"
 
 # Attempt to create a version tag and publish a GitHub release.
 # This fails quietly if there's no release to be made.

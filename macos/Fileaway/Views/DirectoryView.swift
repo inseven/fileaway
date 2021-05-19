@@ -23,6 +23,7 @@ import Combine
 import Quartz
 import SwiftUI
 
+import FileawayCore
 import Interact
 
 struct DirectoryView: View {

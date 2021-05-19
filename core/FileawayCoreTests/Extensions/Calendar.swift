@@ -18,29 +18,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import XCTest
-@testable import FileawayCore
+import Foundation
 
-class FileawayCore_macOSTests: XCTestCase {
+extension Calendar {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    static var gregorian: Calendar = {
+        return Calendar.init(identifier: .gregorian)
+    }()
+
+    func date(year: Int, month: Int, day: Int) -> Date? {
+        let components = DateComponents(year: year, month: month, day: day)
+        return Calendar.gregorian.date(from: components)
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func date(_ year: Int, _ month: Int, _ day: Int) -> Date? {
+        return date(year: year, month: month, day: day)
     }
 
 }

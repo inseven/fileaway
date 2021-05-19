@@ -18,29 +18,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import XCTest
-@testable import FileawayCore
+import Foundation
 
-class FileawayCoreTests: XCTestCase {
+public class FileInfo: Identifiable, Hashable {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    public var id: URL { url }
+    
+    public let url: URL
+    public let name: String
+    public var date: Date?
+    public let directoryUrl: URL
+
+    public var sortDate: Date {
+        date ?? Date.distantPast
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    public init(url: URL) {
+        self.url = url
+        let name = url.lastPathComponent.deletingPathExtension
+        self.date = DateFinder.dates(from: name).first
+        let title = TitleFinder.title(from: name)
+        self.name = title.isEmpty ? name : title
+        self.directoryUrl = url.deletingLastPathComponent()
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    public static func == (lhs: FileInfo, rhs: FileInfo) -> Bool {
+        return lhs.url == rhs.url
     }
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(url)
     }
 
 }
