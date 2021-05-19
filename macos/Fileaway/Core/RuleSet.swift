@@ -21,6 +21,8 @@
 import Combine
 import SwiftUI
 
+import FileawayCore
+
 enum RuleSetError: Error {
     case duplicateName
 }
