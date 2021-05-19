@@ -158,9 +158,6 @@ rm -r "$APP_BASENAME"
 zip -r "Artifacts.zip" "."
 popd
 
-# Cleanup the temporary files and keychain.
-rm -rf "$TEMPORARY_DIRECTORY"
-
 # Attempt to create a version tag and publish a GitHub release.
 # This fails quietly if there's no release to be made.
 if $RELEASE || $TRY_RELEASE ; then
