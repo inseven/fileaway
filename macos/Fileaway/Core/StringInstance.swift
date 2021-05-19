@@ -21,6 +21,8 @@
 import Combine
 import SwiftUI
 
+import FileawayCore
+
 class StringInstance: VariableInstance, VariableProvider {
 
     var textRepresentation: String {

@@ -20,6 +20,8 @@
 
 import Foundation
 
+import FileawayCore
+
 class VariableInstance: Identifiable {
 
     public var id: UUID { variable.id }

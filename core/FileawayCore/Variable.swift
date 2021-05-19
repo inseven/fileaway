@@ -20,7 +20,10 @@
 
 import Foundation
 
-public struct Variable {
+public struct Variable: Identifiable {
+
+    public var id = UUID()
+
     public let name: String
     public let type: VariableType
 
@@ -28,9 +31,11 @@ public struct Variable {
         self.name = name
         self.type = type
     }
+
 }
 
 extension Variable: Codable {
+    
     enum CodingKeys: String, CodingKey {
         case name
         case type

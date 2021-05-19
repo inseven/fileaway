@@ -20,6 +20,8 @@
 
 import Foundation
 
+import FileawayCore
+
 struct Configuration: Codable {
 
     let variables: [Variable]

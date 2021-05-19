@@ -21,6 +21,8 @@
 import Combine
 import SwiftUI
 
+import FileawayCore
+
 class DateInstance: VariableInstance, VariableProvider {
 
     @Published var date: Date
