@@ -23,30 +23,6 @@ import SwiftUI
 
 import FileawayCore
 
-extension VariableType: CustomStringConvertible {
-
-    public var description: String {
-        switch self {
-        case .date(let hasDay):
-            if hasDay {
-                return "Date (YYYY-mm-dd)"
-            } else {
-                return "Date (YYYY-mm)"
-            }
-        case .string:
-            return "String"
-        }
-    }
-
-}
-
-extension VariableType: Identifiable {
-
-    public var id: String {
-        String(describing: self)
-    }
-}
-
 struct VariableView: View {
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
