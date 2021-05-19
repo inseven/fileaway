@@ -20,11 +20,11 @@
 
 import Foundation
 
-public struct Configuration: Codable {
-    public let variables: [Variable]
-    public let destination: [Component]
-    public init(variables: [Variable], destination: [Component]) {
-        self.variables = variables
-        self.destination = destination
+public struct Task {
+    public let name: String
+    public let configuration: Configuration
+    public init(name: String, configuration: Configuration) {
+        self.name = name
+        self.configuration = configuration
     }
 }

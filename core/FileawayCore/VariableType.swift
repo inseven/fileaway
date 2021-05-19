@@ -20,11 +20,12 @@
 
 import Foundation
 
-public struct Configuration: Codable {
-    public let variables: [Variable]
-    public let destination: [Component]
-    public init(variables: [Variable], destination: [Component]) {
-        self.variables = variables
-        self.destination = destination
+public enum VariableType: CaseIterable {
+
+    case string
+    case date(hasDay: Bool)
+
+    public static var allCases: [VariableType] {
+        return [.string, .date(hasDay: true), .date(hasDay: false)]
     }
 }
