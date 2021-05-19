@@ -61,6 +61,10 @@ do
     esac
 done
 
+# iPhone to be used for smoke test builds and tests.
+# This doesn't specify the OS version to allow the build script to recover from minor build changes.
+IPHONE_DESTINATION="platform=iOS Simulator,name=iPhone 12 Pro"
+
 # Generate a random string to secure the local keychain.
 export TEMPORARY_KEYCHAIN_PASSWORD=`openssl rand -base64 14`
 
@@ -87,8 +91,13 @@ xcodebuild -workspace Fileaway.xcworkspace -list
 
 # Smoke test builds.
 
-build_scheme "FileawayCore iOS" clean build
+# FileawayCore
+build_scheme "FileawayCore iOS" clean build build-for-testing test \
+  -sdk iphonesimulator \
+  -destination "$IPHONE_DESTINATION"
 build_scheme "FileawayCore macOS" clean build build-for-testing test
+
+# Apps
 build_scheme "Fileaway iOS" clean build
 build_scheme "Fileaway macOS" clean build
 
