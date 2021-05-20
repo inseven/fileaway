@@ -20,34 +20,10 @@
 
 import Foundation
 
-public class FileInfo: Identifiable, Hashable {
+public extension URL {
 
-    public var id: URL { url }
-    
-    public let url: URL
-    public let name: String
-    public var date: Date?
-    public let directoryUrl: URL
-
-    public var sortDate: Date {
-        date ?? Date.distantPast
-    }
-
-    public init(url: URL) {
-        self.url = url
-        let name = url.displayName.deletingPathExtension
-        self.date = DateFinder.dateInstances(from: name).map { $0.date }.first
-        let title = TitleFinder.title(from: name)
-        self.name = title.isEmpty ? name : title
-        self.directoryUrl = url.deletingLastPathComponent()
-    }
-
-    public static func == (lhs: FileInfo, rhs: FileInfo) -> Bool {
-        return lhs.url == rhs.url
-    }
-
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(url)
+    var displayName: String {
+        FileManager.default.displayName(atPath: self.path)
     }
 
 }

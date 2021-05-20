@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D82D01142656FAC100FD2974 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D01132656FAC100FD2974 /* URL.swift */; };
+		D82D01152656FAC100FD2974 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D01132656FAC100FD2974 /* URL.swift */; };
 		D84E50B92654B02600496524 /* ComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E50B82654B02600496524 /* ComponentType.swift */; };
 		D84E50BA2654B02600496524 /* ComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E50B82654B02600496524 /* ComponentType.swift */; };
 		D84E50BC2654B05200496524 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E50BB2654B05200496524 /* Component.swift */; };
@@ -68,6 +70,7 @@
 		D81F7C48216E3AA80070AAA0 /* FileawayCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileawayCore.h; sourceTree = "<group>"; };
 		D81F7C49216E3AA80070AAA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D81F7C55216E3AA90070AAA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D82D01132656FAC100FD2974 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		D84E50B82654B02600496524 /* ComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentType.swift; sourceTree = "<group>"; };
 		D84E50BB2654B05200496524 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		D84E50BE2654B07500496524 /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
@@ -207,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				D898E66C2655848D005EA6DE /* Calendar.swift */,
+				D82D01132656FAC100FD2974 /* URL.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -433,6 +437,7 @@
 				D8D14DB7216E3E1400D6E1DF /* Configuration.swift in Sources */,
 				D88B86FD2656D8BF004F2F60 /* DateInstance.swift in Sources */,
 				D898E654265578EC005EA6DE /* FileInfo.swift in Sources */,
+				D82D01142656FAC100FD2974 /* URL.swift in Sources */,
 				D898E66D2655848D005EA6DE /* Calendar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -464,6 +469,7 @@
 				D8BCA524216F08DF002A624D /* Configuration.swift in Sources */,
 				D88B86FE2656D8BF004F2F60 /* DateInstance.swift in Sources */,
 				D898E653265578EC005EA6DE /* FileInfo.swift in Sources */,
+				D82D01152656FAC100FD2974 /* URL.swift in Sources */,
 				D898E66E2655848D005EA6DE /* Calendar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

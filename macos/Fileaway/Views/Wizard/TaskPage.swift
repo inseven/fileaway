@@ -69,7 +69,7 @@ struct TaskPage: View {
                             HStack {
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(rule.name)
-                                    Text(rule.rootUrl.lastPathComponent)
+                                    Text(rule.rootUrl.displayName)
                                         .foregroundColor(.secondary)
                                 }
                                 Spacer()
