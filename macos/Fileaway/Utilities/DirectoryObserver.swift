@@ -56,6 +56,8 @@ class DirectoryObserver: ObservableObject, Identifiable, Hashable {
         }
     }
 
+    var cache: NSCache<NSURL, FileInfo> = NSCache()
+
     lazy var filter: Binding<String> = { Binding {
         self.activeFilter
     } set: { newValue in
@@ -78,19 +80,29 @@ class DirectoryObserver: ObservableObject, Identifiable, Hashable {
         hasher.combine(id)
     }
 
+    func syncQueue_fileInfo(for url: URL) -> FileInfo {
+        dispatchPrecondition(condition: .onQueue(syncQueue))
+        if let fileInfo = cache.object(forKey: url as NSURL) {
+            return fileInfo
+        }
+        let fileInfo = FileInfo(url: url)
+        cache.setObject(fileInfo, forKey: url as NSURL)
+        return fileInfo
+    }
+
     func applyFilter() {
         dispatchPrecondition(condition: .onQueue(.main))
         let files = Array(self.files)
         let filter = String(activeFilter)
         syncQueue.async {
             let results = files
-                .map { FileInfo(url: $0) }
+                .map { self.syncQueue_fileInfo(for: $0) }
                 .filter {
                     filter.isEmpty ||
                         $0.name.localizedSearchMatches(string: filter)
                 }
                 .sorted { fileInfo1, fileInfo2 -> Bool in
-                    let dateComparison = fileInfo1.sortDate.compare(fileInfo2.sortDate)
+                    let dateComparison = fileInfo1.date.date.compare(fileInfo2.date.date)
                     if dateComparison != .orderedSame {
                         return dateComparison == .orderedDescending
                     }

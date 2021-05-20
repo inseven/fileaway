@@ -22,21 +22,35 @@ import Foundation
 
 public class FileInfo: Identifiable, Hashable {
 
+    static func filenameDate(url: URL) -> FileDate? {
+        guard let date = DateFinder.dateInstances(from: url.displayName.deletingPathExtension).map({ $0.date }).first else {
+            return nil
+        }
+        return FileDate(date: date, type: .filename)
+    }
+
+    static func creationDate(url: URL) -> FileDate? {
+        guard let date = (try? FileManager.default.attributesOfItem(atPath: url.path))?[.creationDate] as? Date else {
+            return nil
+        }
+        return FileDate(date: date, type: .creation)
+    }
+
+    static func unknownDate() -> FileDate {
+        return FileDate(date: Date.distantPast, type: .unknown)
+    }
+
     public var id: URL { url }
     
     public let url: URL
     public let name: String
-    public var date: Date?
+    public var date: FileDate
     public let directoryUrl: URL
-
-    public var sortDate: Date {
-        date ?? Date.distantPast
-    }
 
     public init(url: URL) {
         self.url = url
         let name = url.displayName.deletingPathExtension
-        self.date = DateFinder.dateInstances(from: name).map { $0.date }.first
+        self.date = Self.filenameDate(url: url) ?? Self.creationDate(url: url) ?? Self.unknownDate()
         let title = TitleFinder.title(from: name)
         self.name = title.isEmpty ? name : title
         self.directoryUrl = url.deletingLastPathComponent()
