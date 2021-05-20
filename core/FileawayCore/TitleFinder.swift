@@ -22,6 +22,8 @@ import Foundation
 
 class TitleFinder {
 
+    // TODO: Revisit the caching in DateFinder and TitleFinder #160
+    //       https://github.com/jbmorley/fileaway/issues/160
     static var cache: NSCache<NSString, NSString> = {
         return NSCache()
     }()
@@ -32,12 +34,29 @@ class TitleFinder {
         return dateFormatter
     }()
 
+    static func stringRemovingFirstDate(from string: String) -> String {
+        guard let dateInstance = DateFinder.dateInstances(from: string).first,
+              dateInstance.range.location == 0 else {
+            return string
+        }
+        let index = string.index(string.startIndex, offsetBy: dateInstance.range.length)
+        let title = String(string[index...])
+        guard title.count > 0 else {
+            return string
+        }
+        return title
+    }
+
+    static func uncachedTitle(from string: String) -> String {
+        return stringRemovingFirstDate(from: string.trimmingCharacters(in: .whitespacesAndNewlines))
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
     static func title(from string: String) -> String {
         if let title = Self.cache.object(forKey: string as NSString) as String? {
             return title
         }
-        let names = string.tokens.filter { DateFinder.dateFormatter.date(from: $0) == nil }
-        let title = names.joined(separator: " ")
+        let title = uncachedTitle(from: string)
         Self.cache.setObject(title as NSString, forKey: string as NSString)
         return title
     }

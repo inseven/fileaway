@@ -22,6 +22,22 @@ import XCTest
 
 @testable import FileawayCore
 
+extension Array where Element == Date {
+
+    func matches(_ array: Array<Element>, granularity: Calendar.Component) -> Bool {
+        guard self.count == array.count else {
+            return false
+        }
+        for (index, date) in enumerated() {
+            if Calendar.gregorian.compare(date, to: array[index], toGranularity: granularity) != .orderedSame {
+                return false
+            }
+        }
+        return true
+    }
+
+}
+
 class DateFinderTests: XCTestCase {
 
     var calendar: Calendar = Calendar.gregorian
@@ -30,14 +46,18 @@ class DateFinderTests: XCTestCase {
         Calendar.gregorian.date(year, month, day)!
     }
 
+    func dates(from string: String) -> Array<Date> {
+        return DateFinder.dateInstances(from: string).map { $0.date }
+    }
+
     func testDateFromString() {
-        let dates = DateFinder.dates(from: "2018-12-23 Document title")
-        XCTAssertEqual(dates, [date(2018, 12, 23)])
+        let dates = self.dates(from: "2018-12-23 Document title")
+        XCTAssertTrue(dates.matches([date(2018, 12, 23)], granularity: .day))
     }
 
     func testMultipleDatesFromString() {
-        let dates = DateFinder.dates(from: "2018-12-23 Document title 2021-05-19")
-        XCTAssertEqual(dates, [date(2018, 12, 23), date(2021, 05, 19)])
+        let dates = self.dates(from: "2018-12-23 Document title 2021-05-19")
+        XCTAssertTrue(dates.matches([date(2018, 12, 23), date(2021, 05, 19)], granularity: .day))
     }
 
 }

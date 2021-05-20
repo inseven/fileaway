@@ -20,9 +20,10 @@
 
 import Foundation
 
-// TODO: Support multiple instances?
 class DateFinder {
 
+    // TODO: Revisit the caching in DateFinder and TitleFinder #160
+    //       https://github.com/jbmorley/fileaway/issues/160
     static var cache: NSCache<NSString, NSArray> = {
         return NSCache()
     }()
@@ -33,13 +34,28 @@ class DateFinder {
         return dateFormatter
     }()
 
-    static func dates(from string: String) -> Array<Date> {
-        if let dates = Self.cache.object(forKey: string as NSString) as? Array<Date> {
+    static func dateInstances(from string: String) -> Array<DateInstance> {
+
+        // Check the cache.
+        if let dates = Self.cache.object(forKey: string as NSString) as? Array<DateInstance> {
             return dates
         }
-        let dates = string.tokens.compactMap { Self.dateFormatter.date(from: $0) }
-        Self.cache.setObject(dates as NSArray, forKey: string as NSString)
-        return dates
+
+        // Find the dates.
+        let types: NSTextCheckingResult.CheckingType = [.date]
+        let detector = try! NSDataDetector(types: types.rawValue)
+        let matches = detector.matches(in: string, options: [], range: NSRange(location: 0, length: string.count))
+        let dateInstances: Array<DateInstance> = matches.compactMap { textCheckingResult in
+            guard let date = textCheckingResult.date else {
+                return nil
+            }
+            return DateInstance(date: date, range: textCheckingResult.range)
+        }
+
+        // Update the cache.
+        Self.cache.setObject(dateInstances as NSArray, forKey: string as NSString)
+
+        return dateInstances
     }
 
 }
