@@ -86,13 +86,16 @@ struct LocationsEditor: View {
                         addLocation(type: type, url: url)
                     } label: {
                         Text("Add")
-                            .frame(maxWidth: .infinity)
+                            .frame(width: 80)
                     }
-                    Button("Remove") {
+                    Button {
                         guard let directory = manager.directories.first(where: { $0.id == selection }) else {
                             return
                         }
                         try? manager.removeDirectoryObserver(directoryObserver: directory)
+                    } label: {
+                        Text("Remove")
+                            .frame(width: 80)
                     }
                     .disabled(selection == nil)
                     Spacer()
