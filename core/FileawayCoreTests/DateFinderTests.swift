@@ -51,12 +51,12 @@ class DateFinderTests: XCTestCase {
     }
 
     func testDateFromString() {
-        let dates = dates(from: "2018-12-23 Document title")
+        let dates = self.dates(from: "2018-12-23 Document title")
         XCTAssertTrue(dates.matches([date(2018, 12, 23)], granularity: .day))
     }
 
     func testMultipleDatesFromString() {
-        let dates = dates(from: "2018-12-23 Document title 2021-05-19")
+        let dates = self.dates(from: "2018-12-23 Document title 2021-05-19")
         XCTAssertTrue(dates.matches([date(2018, 12, 23), date(2021, 05, 19)], granularity: .day))
     }
 
