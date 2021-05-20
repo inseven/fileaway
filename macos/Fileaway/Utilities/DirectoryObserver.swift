@@ -40,7 +40,7 @@ class DirectoryObserver: ObservableObject, Identifiable, Hashable {
     var extensions = ["pdf"]
 
     var count: Int { self.files.count }
-    var name: String { url.lastPathComponent }
+    var name: String { url.displayName }
 
     @Published var searchResults: [FileInfo] = []
     var ruleSet: RuleSet
