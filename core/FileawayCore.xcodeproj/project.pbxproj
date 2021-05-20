@@ -349,6 +349,7 @@
 				TargetAttributes = {
 					D8D14D9F216E3E0E00D6E1DF = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1250;
 					};
 					D8D14DA7216E3E0E00D6E1DF = {
 						CreatedOnToolsVersion = 10.0;
