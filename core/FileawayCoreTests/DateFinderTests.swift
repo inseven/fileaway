@@ -51,13 +51,24 @@ class DateFinderTests: XCTestCase {
     }
 
     func testDateFromString() {
-        let dates = self.dates(from: "2018-12-23 Document title")
-        XCTAssertTrue(dates.matches([date(2018, 12, 23)], granularity: .day))
+        XCTAssertTrue(dates(from: "2018-12-23 Document title")
+                        .matches([date(2018, 12, 23)], granularity: .day))
     }
 
     func testMultipleDatesFromString() {
-        let dates = self.dates(from: "2018-12-23 Document title 2021-05-19")
-        XCTAssertTrue(dates.matches([date(2018, 12, 23), date(2021, 05, 19)], granularity: .day))
+        XCTAssertTrue(dates(from: "2018-12-23 Document title 2021-05-19")
+                        .matches([date(2018, 12, 23), date(2021, 05, 19)], granularity: .day))
     }
+
+    func testPackedISO8601() {
+        XCTAssertTrue(dates(from: "20181223 Document title")
+                        .matches([date(2018, 12, 23)], granularity: .day))
+    }
+
+    func testRichFormat() {
+        XCTAssertTrue(dates(from: "Dec 1, 2018 Document title")
+                        .matches([date(2018, 12, 1)], granularity: .day))
+    }
+
 
 }
