@@ -20,7 +20,6 @@
 
 import Foundation
 
-// TODO: Remove this cache? / String extension?
 class DateFinder {
 
     static var dateFormatter: DateFormatter = {

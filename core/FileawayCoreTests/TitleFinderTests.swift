@@ -82,6 +82,15 @@ class TitleFinderTests: XCTestCase {
                        "Date outside string 1982-12-28 Cheese")
     }
 
-    // TODO: Test Empty string
+    func testEmptyString() {
+        XCTAssertEqual(TitleFinder.title(from: ""),
+                       "")
+        XCTAssertEqual(TitleFinder.title(from: " "),
+                       "")
+        XCTAssertEqual(TitleFinder.title(from: "\t"),
+                       "")
+        XCTAssertEqual(TitleFinder.title(from: "\n"),
+                       "")
+    }
 
 }
