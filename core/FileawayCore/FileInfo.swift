@@ -36,7 +36,7 @@ public class FileInfo: Identifiable, Hashable {
     public init(url: URL) {
         self.url = url
         let name = url.lastPathComponent.deletingPathExtension
-        self.date = DateFinder.dates(from: name).first
+        self.date = DateFinder.dateInstances(from: name).map { $0.date }.first
         let title = TitleFinder.title(from: name)
         self.name = title.isEmpty ? name : title
         self.directoryUrl = url.deletingLastPathComponent()

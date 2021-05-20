@@ -20,26 +20,9 @@
 
 import Foundation
 
-// TODO: Remove this cache? / String extension?
-class DateFinder {
+struct DateInstance {
 
-    static var dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter
-    }()
-
-    static func dateInstances(from string: String) -> Array<DateInstance> {
-        let types: NSTextCheckingResult.CheckingType = [.date]
-        let detector = try! NSDataDetector(types: types.rawValue)
-        let matches = detector.matches(in: string, options: [], range: NSRange(location: 0, length: string.count))
-        let dateInstances: Array<DateInstance> = matches.compactMap { textCheckingResult in
-            guard let date = textCheckingResult.date else {
-                return nil
-            }
-            return DateInstance(date: date, range: textCheckingResult.range)
-        }
-        return dateInstances
-    }
+    let date: Date
+    let range: NSRange
 
 }
