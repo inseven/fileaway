@@ -31,28 +31,28 @@ class TitleFinderTests: XCTestCase {
     }
 
     func testSingleDate() {
-        let title = TitleFinder.title(from: "2018-12-23 Document title")
-        XCTAssertEqual(title, "Document title")
+        XCTAssertEqual(TitleFinder.title(from: "2018-12-23 Document title"),
+                       "Document title")
     }
 
     func testSingleDateLeadingWhitespace() {
-        let title = TitleFinder.title(from: " 2018-12-23 Document title")
-        XCTAssertEqual(title, "Document title")
+        XCTAssertEqual(TitleFinder.title(from: " 2018-12-23 Document title"),
+                       "Document title")
     }
 
     func testComplexDate() {
-        let title = TitleFinder.title(from: "Dec 23, 2018 Document title")
-        XCTAssertEqual(title, "Document title")
+        XCTAssertEqual(TitleFinder.title(from: "Dec 23, 2018 Document title"),
+                       "Document title")
     }
 
     func testMultipleDates() {
-        let title = TitleFinder.title(from: "2018-12-23 Document title 2021-05-19")
-        XCTAssertEqual(title, "Document title 2021-05-19")
+        XCTAssertEqual(TitleFinder.title(from: "2018-12-23 Document title 2021-05-19"),
+                       "Document title 2021-05-19")
     }
 
     func testFirstDateWithinString() {
-        let title = TitleFinder.title(from: "Document title 2018-12-23 Further details")
-        XCTAssertEqual(title, "Document title 2018-12-23 Further details")
+        XCTAssertEqual(TitleFinder.title(from: "Document title 2018-12-23 Further details"),
+                       "Document title 2018-12-23 Further details")
     }
 
     func testDateOnlyStringYieldsTitle() {
