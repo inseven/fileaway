@@ -18,45 +18,35 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import PDFKit
 import SwiftUI
 
-struct RightClickableSwiftUIView: NSViewRepresentable {
+public class DateExtractor: ObservableObject {
 
-    var onRightClickFocusChange: (Bool) -> Void
+    @Published public var dates: [Date] = []
 
-    class Coordinator: NSObject, RightClickObservingViewDelegate {
+    let url: URL
+    var uninitialized = true
 
-        var parent: RightClickableSwiftUIView
+    public init(url: URL) {
+        self.url = url
+    }
 
-        init(_ parent: RightClickableSwiftUIView) {
-            self.parent = parent
+    public func load() {
+        dispatchPrecondition(condition: .onQueue(.main))
+        guard uninitialized else {
+            return
         }
-
-        func rightClickFocusDidChange(focused: Bool) {
-            // TODO: Remove repeated entries here? Maybe this could be a publisher?
-            parent.onRightClickFocusChange(focused)
+        uninitialized = false
+        DispatchQueue.global(qos: .userInitiated).async {
+            guard let pdf = PDFDocument(url: self.url) else {
+                return
+            }
+            let dates = pdf.dates()
+            DispatchQueue.main.async {
+                self.dates = dates
+            }
         }
-
     }
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-
-    func makeNSView(context: Context) -> RightClickObservingView {
-        let view = RightClickObservingView()
-        view.delegate = context.coordinator
-        return view
-    }
-
-    func updateNSView(_ view: RightClickObservingView, context: NSViewRepresentableContext<RightClickableSwiftUIView>) {
-        view.delegate = context.coordinator
-    }
-
-}
-
-protocol RightClickObservingViewDelegate: NSObject {
-
-    func rightClickFocusDidChange(focused: Bool)
 
 }

@@ -70,5 +70,11 @@ class DateFinderTests: XCTestCase {
                         .matches([date(2018, 12, 1)], granularity: .day))
     }
 
+    func testDateRange() {
+        XCTExpectFailure("Date detection fails on date ranges")
+        XCTAssertTrue(dates(from: "19 May 2021 - 18 May 2022")
+                        .matches([date(2021, 5, 19), date(2022, 5, 18)], granularity: .day))
+    }
+
 
 }

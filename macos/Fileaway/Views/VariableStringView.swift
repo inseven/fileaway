@@ -20,43 +20,13 @@
 
 import SwiftUI
 
-struct RightClickableSwiftUIView: NSViewRepresentable {
+struct VariableStringView: View {
 
-    var onRightClickFocusChange: (Bool) -> Void
+    @StateObject var variable: StringInstance
+    @State var string: String = ""
 
-    class Coordinator: NSObject, RightClickObservingViewDelegate {
-
-        var parent: RightClickableSwiftUIView
-
-        init(_ parent: RightClickableSwiftUIView) {
-            self.parent = parent
-        }
-
-        func rightClickFocusDidChange(focused: Bool) {
-            // TODO: Remove repeated entries here? Maybe this could be a publisher?
-            parent.onRightClickFocusChange(focused)
-        }
-
+    var body: some View {
+        TextField("", text: $variable.string)
     }
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-
-    func makeNSView(context: Context) -> RightClickObservingView {
-        let view = RightClickObservingView()
-        view.delegate = context.coordinator
-        return view
-    }
-
-    func updateNSView(_ view: RightClickObservingView, context: NSViewRepresentableContext<RightClickableSwiftUIView>) {
-        view.delegate = context.coordinator
-    }
-
-}
-
-protocol RightClickObservingViewDelegate: NSObject {
-
-    func rightClickFocusDidChange(focused: Bool)
 
 }

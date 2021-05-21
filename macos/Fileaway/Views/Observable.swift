@@ -18,45 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftUI
+import Combine
 
-struct RightClickableSwiftUIView: NSViewRepresentable {
-
-    var onRightClickFocusChange: (Bool) -> Void
-
-    class Coordinator: NSObject, RightClickObservingViewDelegate {
-
-        var parent: RightClickableSwiftUIView
-
-        init(_ parent: RightClickableSwiftUIView) {
-            self.parent = parent
-        }
-
-        func rightClickFocusDidChange(focused: Bool) {
-            // TODO: Remove repeated entries here? Maybe this could be a publisher?
-            parent.onRightClickFocusChange(focused)
-        }
-
-    }
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-
-    func makeNSView(context: Context) -> RightClickObservingView {
-        let view = RightClickObservingView()
-        view.delegate = context.coordinator
-        return view
-    }
-
-    func updateNSView(_ view: RightClickObservingView, context: NSViewRepresentableContext<RightClickableSwiftUIView>) {
-        view.delegate = context.coordinator
-    }
-
-}
-
-protocol RightClickObservingViewDelegate: NSObject {
-
-    func rightClickFocusDidChange(focused: Bool)
-
+protocol Observable {
+    func observe(_ onChange: @escaping () -> Void) -> AnyCancellable
 }

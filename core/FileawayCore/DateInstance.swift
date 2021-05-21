@@ -20,9 +20,9 @@
 
 import Foundation
 
-struct DateInstance {
+public struct DateInstance {
 
-    let date: Date
-    let range: NSRange
+    public let date: Date
+    public let range: NSRange
 
 }

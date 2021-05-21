@@ -20,7 +20,7 @@
 
 import Foundation
 
-class DateFinder {
+public class DateFinder {
 
     static var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -28,7 +28,7 @@ class DateFinder {
         return dateFormatter
     }()
 
-    static func dateInstances(from string: String) -> Array<DateInstance> {
+    public static func dateInstances(from string: String) -> Array<DateInstance> {
         let types: NSTextCheckingResult.CheckingType = [.date]
         let detector = try! NSDataDetector(types: types.rawValue)
         let matches = detector.matches(in: string, options: [], range: NSRange(location: 0, length: string.count))
