@@ -18,45 +18,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftUI
+import PDFKit
 
-struct RightClickableSwiftUIView: NSViewRepresentable {
+public extension PDFDocument {
 
-    var onRightClickFocusChange: (Bool) -> Void
-
-    class Coordinator: NSObject, RightClickObservingViewDelegate {
-
-        var parent: RightClickableSwiftUIView
-
-        init(_ parent: RightClickableSwiftUIView) {
-            self.parent = parent
+    func dates() -> [Date] {
+        let pageCount = self.pageCount
+        let documentContent = NSMutableAttributedString()
+        for i in 0 ..< pageCount {
+            guard let page = self.page(at: i) else { continue }
+            guard let pageContent = page.attributedString else { continue }
+            documentContent.append(pageContent)
         }
-
-        func rightClickFocusDidChange(focused: Bool) {
-            // TODO: Remove repeated entries here? Maybe this could be a publisher?
-            parent.onRightClickFocusChange(focused)
-        }
-
+        let dates = DateFinder.dateInstances(from: documentContent.string).map { $0.date }.uniqued()
+        return dates
     }
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-
-    func makeNSView(context: Context) -> RightClickObservingView {
-        let view = RightClickObservingView()
-        view.delegate = context.coordinator
-        return view
-    }
-
-    func updateNSView(_ view: RightClickObservingView, context: NSViewRepresentableContext<RightClickableSwiftUIView>) {
-        view.delegate = context.coordinator
-    }
-
-}
-
-protocol RightClickObservingViewDelegate: NSObject {
-
-    func rightClickFocusDidChange(focused: Bool)
-
+    
 }

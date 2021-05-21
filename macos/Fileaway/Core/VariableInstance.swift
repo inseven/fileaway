@@ -33,3 +33,16 @@ class VariableInstance: Identifiable {
     }
 
 }
+
+extension Variable {
+
+    func instance() -> VariableInstance {
+        switch self.type {
+        case .string:
+            return StringInstance(variable: self, initialValue: "")
+        case .date:
+            return DateInstance(variable:self, initialValue: Date())
+        }
+    }
+
+}

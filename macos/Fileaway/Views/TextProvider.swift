@@ -18,56 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Combine
-import SwiftUI
-
-import FileawayCore
-import Introspect
+import Foundation
 
 protocol TextProvider {
     var textRepresentation: String { get }
-}
-
-protocol Observable {
-    func observe(_ onChange: @escaping () -> Void) -> AnyCancellable
-}
-
-protocol VariableProvider: TextProvider, Observable, ObservableObject {
-
-}
-
-extension Variable {
-
-    func instance() -> VariableInstance {
-        switch self.type {
-        case .string:
-            return StringInstance(variable: self, initialValue: "")
-        case .date:
-            return DateInstance(variable:self, initialValue: Date())
-        }
-    }
-
-}
-
-struct VariableDateView: View {
-
-    @ObservedObject var variable: DateInstance
-
-    var body: some View {
-        DatePicker("", selection: $variable.date, displayedComponents: [.date])
-            .padding(.leading, -8)
-            .frame(maxWidth: .infinity)
-    }
-
-}
-
-struct VariableStringView: View {
-
-    @StateObject var variable: StringInstance
-    @State var string: String = ""
-
-    var body: some View {
-        TextField("", text: $variable.string)
-    }
-
 }

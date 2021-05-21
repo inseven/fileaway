@@ -70,5 +70,4 @@ class DateFinderTests: XCTestCase {
                         .matches([date(2018, 12, 1)], granularity: .day))
     }
 
-
 }

@@ -15,6 +15,12 @@
 		D82D011A2657252B00FD2974 /* DateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D01182657252B00FD2974 /* DateType.swift */; };
 		D82D011C2657259F00FD2974 /* FileDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D011B2657259F00FD2974 /* FileDate.swift */; };
 		D82D011D2657259F00FD2974 /* FileDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D011B2657259F00FD2974 /* FileDate.swift */; };
+		D82D011F265748A200FD2974 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D011E265748A200FD2974 /* Sequence.swift */; };
+		D82D0120265748A200FD2974 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D011E265748A200FD2974 /* Sequence.swift */; };
+		D82D012C2657F7F500FD2974 /* PDFDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D012B2657F7F500FD2974 /* PDFDocument.swift */; };
+		D82D012D2657F7F500FD2974 /* PDFDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D012B2657F7F500FD2974 /* PDFDocument.swift */; };
+		D82D012F2657F8E800FD2974 /* DateExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D012E2657F8E800FD2974 /* DateExtractor.swift */; };
+		D82D01302657F8E800FD2974 /* DateExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D012E2657F8E800FD2974 /* DateExtractor.swift */; };
 		D84E50B92654B02600496524 /* ComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E50B82654B02600496524 /* ComponentType.swift */; };
 		D84E50BA2654B02600496524 /* ComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E50B82654B02600496524 /* ComponentType.swift */; };
 		D84E50BC2654B05200496524 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E50BB2654B05200496524 /* Component.swift */; };
@@ -77,6 +83,9 @@
 		D82D01132656FAC100FD2974 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		D82D01182657252B00FD2974 /* DateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateType.swift; sourceTree = "<group>"; };
 		D82D011B2657259F00FD2974 /* FileDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDate.swift; sourceTree = "<group>"; };
+		D82D011E265748A200FD2974 /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
+		D82D012B2657F7F500FD2974 /* PDFDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFDocument.swift; sourceTree = "<group>"; };
+		D82D012E2657F8E800FD2974 /* DateExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtractor.swift; sourceTree = "<group>"; };
 		D84E50B82654B02600496524 /* ComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentType.swift; sourceTree = "<group>"; };
 		D84E50BB2654B05200496524 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		D84E50BE2654B07500496524 /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
@@ -168,6 +177,7 @@
 				D84E50C72654B56700496524 /* Configuration */,
 				D898E66126557B91005EA6DE /* Extensions */,
 				D876A3BC26548C61006D19FB /* BackChannel.swift */,
+				D82D012E2657F8E800FD2974 /* DateExtractor.swift */,
 				D898E65B26557AC3005EA6DE /* DateFinder.swift */,
 				D88B86FC2656D8BF004F2F60 /* DateInstance.swift */,
 				D82D01182657252B00FD2974 /* DateType.swift */,
@@ -209,8 +219,10 @@
 		D898E66126557B91005EA6DE /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D82D011E265748A200FD2974 /* Sequence.swift */,
 				D898E6582655796B005EA6DE /* String.swift */,
 				D82D01132656FAC100FD2974 /* URL.swift */,
+				D82D012B2657F7F500FD2974 /* PDFDocument.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -435,11 +447,14 @@
 				D898E6592655796B005EA6DE /* String.swift in Sources */,
 				D84E50BF2654B07500496524 /* Variable.swift in Sources */,
 				D84E50BC2654B05200496524 /* Component.swift in Sources */,
+				D82D012F2657F8E800FD2974 /* DateExtractor.swift in Sources */,
 				D8D14DB9216E3E1400D6E1DF /* Manager.swift in Sources */,
 				D82D011C2657259F00FD2974 /* FileDate.swift in Sources */,
 				D898E65C26557AC3005EA6DE /* DateFinder.swift in Sources */,
 				D84E50B92654B02600496524 /* ComponentType.swift in Sources */,
+				D82D012C2657F7F500FD2974 /* PDFDocument.swift in Sources */,
 				D84E50C22654B0B000496524 /* VariableType.swift in Sources */,
+				D82D011F265748A200FD2974 /* Sequence.swift in Sources */,
 				D898E65F26557AFD005EA6DE /* TitleFinder.swift in Sources */,
 				D82D01192657252B00FD2974 /* DateType.swift in Sources */,
 				D876A3BE26548C61006D19FB /* BackChannel.swift in Sources */,
@@ -469,11 +484,14 @@
 				D898E65A2655796B005EA6DE /* String.swift in Sources */,
 				D84E50C02654B07500496524 /* Variable.swift in Sources */,
 				D84E50BD2654B05200496524 /* Component.swift in Sources */,
+				D82D01302657F8E800FD2974 /* DateExtractor.swift in Sources */,
 				D8BCA526216F08DF002A624D /* Manager.swift in Sources */,
 				D82D011D2657259F00FD2974 /* FileDate.swift in Sources */,
 				D898E65D26557AC3005EA6DE /* DateFinder.swift in Sources */,
 				D84E50BA2654B02600496524 /* ComponentType.swift in Sources */,
+				D82D012D2657F7F500FD2974 /* PDFDocument.swift in Sources */,
 				D84E50C32654B0B000496524 /* VariableType.swift in Sources */,
+				D82D0120265748A200FD2974 /* Sequence.swift in Sources */,
 				D898E66026557AFD005EA6DE /* TitleFinder.swift in Sources */,
 				D82D011A2657252B00FD2974 /* DateType.swift in Sources */,
 				D876A3BD26548C61006D19FB /* BackChannel.swift in Sources */,

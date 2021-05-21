@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import FileawayCore
+
 struct DetailsPage: View {
 
     enum AlertType {
@@ -36,6 +38,7 @@ struct DetailsPage: View {
     @State var alert: AlertType?
     @State var date: Date = Date()
     @State var year = "2020"
+    @StateObject var dateExtractor: DateExtractor
 
     private var columns: [GridItem] = [
         GridItem(.flexible(maximum: 80), alignment: .trailing),
@@ -45,6 +48,7 @@ struct DetailsPage: View {
     init(url: URL, rule: Rule) {
         self.url = url
         _rule = StateObject(wrappedValue: RuleInstance(rule: rule))
+        _dateExtractor = StateObject(wrappedValue: DateExtractor(url: url))
     }
 
     var body: some View {
@@ -55,7 +59,7 @@ struct DetailsPage: View {
                         Text(variable.name)
                         HStack {
                             if let variable = variable as? DateInstance {
-                                VariableDateView(variable: variable)
+                                VariableDateView(variable: variable, options: dateExtractor.dates)
                             } else if let variable = variable as? StringInstance {
                                 VariableStringView(variable: variable)
                             } else {
@@ -99,6 +103,9 @@ struct DetailsPage: View {
                                 NSWorkspace.shared.activateFileViewerSelecting([duplicateUrl])
                              }))
             }
+        }
+        .onAppear {
+            dateExtractor.load()
         }
     }
 
