@@ -29,16 +29,21 @@ public class DateFinder {
     }()
 
     public static func dateInstances(from string: String) -> Array<DateInstance> {
-        let types: NSTextCheckingResult.CheckingType = [.date]
+        let types: NSTextCheckingResult.CheckingType = [.date, .phoneNumber]
         let detector = try! NSDataDetector(types: types.rawValue)
         let matches = detector.matches(in: string, options: [], range: NSRange(location: 0, length: string.count))
-        let dateInstances: Array<DateInstance> = matches.compactMap { textCheckingResult in
+        let dateInstances: [[DateInstance]] = matches.compactMap { textCheckingResult in
             guard let date = textCheckingResult.date else {
                 return nil
             }
-            return DateInstance(date: date, range: textCheckingResult.range)
+            var results = [DateInstance(date: date, range: textCheckingResult.range)]
+            if textCheckingResult.duration > 0 {
+                let end = date.addingTimeInterval(textCheckingResult.duration)
+                results.append(DateInstance(date: end, range: textCheckingResult.range))
+            }
+            return results
         }
-        return dateInstances
+        return dateInstances.flatMap { $0 }
     }
 
 }
