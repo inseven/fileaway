@@ -20,29 +20,10 @@
 
 import Foundation
 
-class TitleFinder {
+public enum DateType {
 
-    static var dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter
-    }()
+    case unknown
+    case filename
+    case creation
 
-    static func stringRemovingFirstDate(from string: String) -> String {
-        guard let dateInstance = DateFinder.dateInstances(from: string).first,
-              dateInstance.range.location == 0 else {
-            return string
-        }
-        let index = string.index(string.startIndex, offsetBy: dateInstance.range.length)
-        let title = String(string[index...])
-        guard title.count > 0 else {
-            return string
-        }
-        return title
-    }
-
-    static func title(from string: String) -> String {
-        return stringRemovingFirstDate(from: string.trimmingCharacters(in: .whitespacesAndNewlines))
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-    }
 }
