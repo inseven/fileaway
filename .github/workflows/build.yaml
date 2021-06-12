@@ -27,6 +27,13 @@ jobs:
       run: |
         for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts
 
+    - name: Install Pipenv
+      run: |
+        sudo pip3 install pipenv
+
+    - name: Install dependencies
+      run: scripts/install-dependencies.sh
+
     - name: Build and test
       env:
         TEMPORARY_KEYCHAIN_PASSWORD: ${{ secrets.TEMPORARY_KEYCHAIN_PASSWORD }}
