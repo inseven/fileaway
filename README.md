@@ -33,7 +33,6 @@ In order to make continuous integration easy the `scripts/build.sh` script build
 - `MATCH_PASSWORD` -- the password/passphrase to secure the [match](https://docs.fastlane.tools/actions/match/) certificate store
 - `CERTIFICATE_REPOSITORY` -- the repository used for the match certificate store (must be HTTPS)
 - `CERTIFICATE_REPOSITORY_AUTHORIZATION_KEY` -- a GitHub authorization key used to access the certificate repository (see the [match authorization docs](https://docs.fastlane.tools/actions/match/#git-storage-on-github))
-- `APPLE_TEAM_ID` -- Apple Developer Team ID
 - `APPLE_DEVELOPER_ID` -- individual Apple Developer Account ID (used for notarization)
 - `FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD` -- [app-specific password](https://support.apple.com/en-us/HT204397) for the Developer Account
 - `TRY_RELEASE` -- boolean indicating whether to attempt a release (conditionally set based on the current branch using `${{ github.ref == 'refs/heads/main' }}`)
@@ -48,7 +47,6 @@ export CERTIFICATE_REPOSITORY=
 export CERTIFICATE_REPOSITORY_AUTHORIZATION_KEY=
 
 # Developer account
-export APPLE_TEAM_ID=
 export APPLE_DEVELOPER_ID=
 export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=
 
