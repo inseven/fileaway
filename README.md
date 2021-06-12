@@ -52,6 +52,9 @@ export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=
 
 # GitHub (only required if publishing releases locally)
 export GITHUB_TOKEN=
+
+# Release
+export TRY_RELEASE=false
 ```
 
 You can generate your GitHub authorization key (for `CERTIFICATE_REPOSITORY_AUTHORIZATION_KEY`) as follows:
@@ -74,6 +77,6 @@ You can publish a build locally by specifying the `--release` parameter:
 
 ## Licensing
 
-Bookmarks is licensed under the MIT License (see [LICENSE](LICENSE)).
+Fileaway is licensed under the MIT License (see [LICENSE](LICENSE)).
 
-During development, the plan is to make builds available for free through the [Releases](https://github.com/jbmorley/bookmarks/releases) section of the GitHub project. Once we reach something robust and ready for release, we'll make a paid version available through the [App Store](https://www.apple.com/app-store/) to fund on-going costs of development. The app will remain Open Source, and anyone is free to contribute or build their own copies, and we'll figure out a way to give free licenses to contributors.
+During development, the plan is to make builds available for free through the [Releases](https://github.com/jbmorley/fileaway/releases) section of the GitHub project. Once we reach something robust and ready for release, we'll make a paid version available through the [App Store](https://www.apple.com/app-store/) to fund on-going costs of development. The app will remain Open Source, and anyone is free to contribute or build their own copies, and we'll figure out a way to give free licenses to contributors.
