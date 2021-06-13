@@ -36,6 +36,7 @@ ARCHIVE_PATH="${BUILD_DIRECTORY}/Fileaway.xcarchive"
 FASTLANE_ENV_PATH="${ROOT_DIRECTORY}/fastlane/.env"
 
 CHANGES_SCRIPT="${SCRIPTS_DIRECTORY}/changes/changes"
+CHANGES_GITHUB_RELEASE_SCRIPT="${SCRIPTS_DIRECTORY}/changes/examples/gh-release.sh"
 BUILD_TOOLS_SCRIPT="${SCRIPTS_DIRECTORY}/build-tools/build-tools"
 
 # Process the command line arguments.
@@ -74,10 +75,14 @@ if [ -f "$FASTLANE_ENV_PATH" ] ; then
     source "$FASTLANE_ENV_PATH"
 fi
 
+function xcode {
+    xcodebuild \
+        -workspace Fileaway.xcworkspace "$@"
+}
+
 function build_scheme {
     # Disable code signing for the build server.
-    xcodebuild \
-        -workspace Fileaway.xcworkspace \
+    xcode \
         -scheme "$1" \
         CODE_SIGN_IDENTITY="" \
         CODE_SIGNING_REQUIRED=NO \
@@ -87,14 +92,14 @@ function build_scheme {
 cd "$ROOT_DIRECTORY"
 
 # List the available schemes
-xcodebuild -workspace Fileaway.xcworkspace -list
+xcode -list
 
 # Smoke test builds.
 
 # FileawayCore
 build_scheme "FileawayCore iOS" clean build build-for-testing test \
-  -sdk iphonesimulator \
-  -destination "$IPHONE_DESTINATION"
+    -sdk iphonesimulator \
+    -destination "$IPHONE_DESTINATION"
 build_scheme "FileawayCore macOS" clean build build-for-testing test
 
 # Apps
@@ -135,8 +140,18 @@ BUILD_NUMBER="${GIT_COMMIT}.${TIMESTAMP}"
 fastlane import_certificates keychain:"$KEYCHAIN_PATH"
 
 # Archive and export the build.
-xcodebuild -workspace Fileaway.xcworkspace -scheme "Fileaway macOS" -config Release -archivePath "$ARCHIVE_PATH"  OTHER_CODE_SIGN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\"" BUILD_NUMBER=$BUILD_NUMBER MARKETING_VERSION=$VERSION_NUMBER archive | xcpretty
-xcodebuild -archivePath "$ARCHIVE_PATH" -exportArchive -exportPath "$BUILD_DIRECTORY" -exportOptionsPlist "macos/ExportOptions.plist"
+xcode \
+    -scheme "Fileaway macOS" \
+    -config Release \
+    -archivePath "$ARCHIVE_PATH" \
+    OTHER_CODE_SIGN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\"" \
+    BUILD_NUMBER=$BUILD_NUMBER MARKETING_VERSION=$VERSION_NUMBER \
+    archive | xcpretty
+xcodebuild \
+    -archivePath "$ARCHIVE_PATH" \
+    -exportArchive \
+    -exportPath "$BUILD_DIRECTORY" \
+    -exportOptionsPlist "macos/ExportOptions.plist"
 
 APP_BASENAME="Fileaway.app"
 APP_PATH="$BUILD_DIRECTORY/$APP_BASENAME"
@@ -160,5 +175,11 @@ popd
 
 # Attempt to create a version tag and publish a GitHub release; fails quietly if there's no new release.
 if $RELEASE || $TRY_RELEASE ; then
-    "$CHANGES_SCRIPT" --scope macOS release --skip-if-empty --push --command 'scripts/release.sh'
+    "$CHANGES_SCRIPT" \
+        --scope macOS \
+        release \
+        --skip-if-empty \
+        --push \
+        --command "\"${CHANGES_GITHUB_RELEASE_SCRIPT}\" \"\$@\"" \
+        "${BUILD_DIRECTORY}/${ZIP_BASENAME}"
 fi
