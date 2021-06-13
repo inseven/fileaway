@@ -46,7 +46,7 @@ PATH=$PATH:$BUILD_TOOLS_DIRECTORY
 # Process the command line arguments.
 POSITIONAL=()
 NOTARIZE=${NOTARIZE:-false}
-RELEASE=false
+RELEASE=${TRY_RELEASE:-false}
 while [[ $# -gt 0 ]]
 do
     key="$1"
@@ -178,7 +178,7 @@ zip -r "Artifacts.zip" "."
 popd
 
 # Attempt to create a version tag and publish a GitHub release; fails quietly if there's no new release.
-if $RELEASE || $TRY_RELEASE ; then
+if $RELEASE ; then
     changes \
         --scope macOS \
         release \
