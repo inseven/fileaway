@@ -95,7 +95,7 @@ function build_scheme {
 
 cd "$ROOT_DIRECTORY"
 
-# List the available schemes
+# List the available schemes.
 xcode_project -list
 
 # Smoke test builds.
