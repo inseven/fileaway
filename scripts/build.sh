@@ -35,9 +35,13 @@ KEYCHAIN_PATH="${TEMPORARY_DIRECTORY}/temporary.keychain"
 ARCHIVE_PATH="${BUILD_DIRECTORY}/Fileaway.xcarchive"
 FASTLANE_ENV_PATH="${ROOT_DIRECTORY}/fastlane/.env"
 
-CHANGES_SCRIPT="${SCRIPTS_DIRECTORY}/changes/changes"
-CHANGES_GITHUB_RELEASE_SCRIPT="${SCRIPTS_DIRECTORY}/changes/examples/gh-release.sh"
-BUILD_TOOLS_SCRIPT="${SCRIPTS_DIRECTORY}/build-tools/build-tools"
+CHANGES_DIRECTORY="${SCRIPTS_DIRECTORY}/changes"
+BUILD_TOOLS_DIRECTORY="${SCRIPTS_DIRECTORY}/build-tools"
+
+CHANGES_GITHUB_RELEASE_SCRIPT="${CHANGES_DIRECTORY}/examples/gh-release.sh"
+
+PATH=$PATH:$CHANGES_DIRECTORY
+PATH=$PATH:$BUILD_TOOLS_DIRECTORY
 
 # Process the command line arguments.
 POSITIONAL=()
@@ -119,19 +123,19 @@ if [ -d "$TEMPORARY_DIRECTORY" ] ; then
     rm -rf "$TEMPORARY_DIRECTORY"
 fi
 mkdir -p "$TEMPORARY_DIRECTORY"
-echo "$TEMPORARY_KEYCHAIN_PASSWORD" | "$BUILD_TOOLS_SCRIPT" create-keychain "$KEYCHAIN_PATH" --password
+echo "$TEMPORARY_KEYCHAIN_PASSWORD" | build-tools create-keychain "$KEYCHAIN_PATH" --password
 
 function cleanup {
     # Cleanup the temporary files and keychain.
     cd "$ROOT_DIRECTORY"
-    "$BUILD_TOOLS_SCRIPT" delete-keychain "$KEYCHAIN_PATH"
+    build-tools delete-keychain "$KEYCHAIN_PATH"
     rm -rf "$TEMPORARY_DIRECTORY"
 }
 
 trap cleanup EXIT
 
 # Determine the version and build number.
-VERSION_NUMBER=`"$CHANGES_SCRIPT" --scope macOS version`
+VERSION_NUMBER=`changes --scope macOS version`
 GIT_COMMIT=`git rev-parse --short HEAD`
 TIMESTAMP=`date +%s`
 BUILD_NUMBER="${GIT_COMMIT}.${TIMESTAMP}"
@@ -168,14 +172,14 @@ fi
 pushd "$BUILD_DIRECTORY"
 ZIP_BASENAME="Fileaway-macOS-${VERSION_NUMBER}.zip"
 zip -r --symlinks "$ZIP_BASENAME" "$APP_BASENAME"
-"$BUILD_TOOLS_SCRIPT" verify-notarized-zip "$ZIP_BASENAME"
+build-tools verify-notarized-zip "$ZIP_BASENAME"
 rm -r "$APP_BASENAME"
 zip -r "Artifacts.zip" "."
 popd
 
 # Attempt to create a version tag and publish a GitHub release; fails quietly if there's no new release.
 if $RELEASE || $TRY_RELEASE ; then
-    "$CHANGES_SCRIPT" \
+    changes \
         --scope macOS \
         release \
         --skip-if-empty \
