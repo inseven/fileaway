@@ -43,7 +43,6 @@ jobs:
         APPLE_DEVELOPER_ID: ${{ secrets.APPLE_DEVELOPER_ID }}
         FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GITHUB_REF: ${{ github.ref }}
         NOTARIZE: ${{ github.ref == 'refs/heads/main' }}
         TRY_RELEASE: ${{ github.ref == 'refs/heads/main' }}
       run: scripts/build.sh
