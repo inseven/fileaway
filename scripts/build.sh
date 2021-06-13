@@ -108,7 +108,6 @@ build_scheme "FileawayCore macOS" clean build build-for-testing test
 
 # Apps
 build_scheme "Fileaway iOS" clean build
-build_scheme "Fileaway macOS" clean build
 
 # Build the macOS archive.
 
@@ -151,7 +150,7 @@ xcode_project \
     OTHER_CODE_SIGN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\"" \
     BUILD_NUMBER=$BUILD_NUMBER \
     MARKETING_VERSION=$VERSION_NUMBER \
-    archive | xcpretty
+    clean archive | xcpretty
 xcodebuild \
     -archivePath "$ARCHIVE_PATH" \
     -exportArchive \
