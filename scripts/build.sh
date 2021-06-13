@@ -75,14 +75,14 @@ if [ -f "$FASTLANE_ENV_PATH" ] ; then
     source "$FASTLANE_ENV_PATH"
 fi
 
-function xcode {
+function xcode_project {
     xcodebuild \
         -workspace Fileaway.xcworkspace "$@"
 }
 
 function build_scheme {
     # Disable code signing for the build server.
-    xcode \
+    xcode_project \
         -scheme "$1" \
         CODE_SIGN_IDENTITY="" \
         CODE_SIGNING_REQUIRED=NO \
@@ -92,7 +92,7 @@ function build_scheme {
 cd "$ROOT_DIRECTORY"
 
 # List the available schemes
-xcode -list
+xcode_project -list
 
 # Smoke test builds.
 
@@ -140,7 +140,7 @@ BUILD_NUMBER="${GIT_COMMIT}.${TIMESTAMP}"
 fastlane import_certificates keychain:"$KEYCHAIN_PATH"
 
 # Archive and export the build.
-xcode \
+xcode_project \
     -scheme "Fileaway macOS" \
     -config Release \
     -archivePath "$ARCHIVE_PATH" \
