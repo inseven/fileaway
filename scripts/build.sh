@@ -45,14 +45,14 @@ PATH=$PATH:$BUILD_TOOLS_DIRECTORY
 
 # Process the command line arguments.
 POSITIONAL=()
-NOTARIZE=true
+NOTARIZE=${NOTARIZE:-false}
 RELEASE=false
 while [[ $# -gt 0 ]]
 do
     key="$1"
     case $key in
-        -N|--skip-notarize)
-        NOTARIZE=false
+        -n|--notarize)
+        NOTARIZE=true
         shift
         ;;
         -r|--release)
