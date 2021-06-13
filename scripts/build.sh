@@ -149,7 +149,8 @@ xcode_project \
     -config Release \
     -archivePath "$ARCHIVE_PATH" \
     OTHER_CODE_SIGN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\"" \
-    BUILD_NUMBER=$BUILD_NUMBER MARKETING_VERSION=$VERSION_NUMBER \
+    BUILD_NUMBER=$BUILD_NUMBER \
+    MARKETING_VERSION=$VERSION_NUMBER \
     archive | xcpretty
 xcodebuild \
     -archivePath "$ARCHIVE_PATH" \
