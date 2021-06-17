@@ -7,3 +7,6 @@
 [submodule "scripts/build-tools"]
 	path = scripts/build-tools
 	url = git@github.com:jbmorley/build-tools.git
+[submodule "macos/Sparkle"]
+	path = macos/Sparkle
+	url = git@github.com:sparkle-project/Sparkle.git
