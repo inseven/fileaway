@@ -2,6 +2,7 @@
     --tint-color: #FB6666;
     --brand-color: #FB6666;
     --body-color: #000000;
+    --content-width: 800px;
 }
 
 body {
@@ -40,7 +41,7 @@ ul.navigation > li {
 }
 
 .content {
-    max-width: 800px;
+    max-width: var(--content-width);
     margin: auto;
     padding: 2em;
     font-size: 1.1em;
@@ -54,7 +55,7 @@ ul.navigation > li {
 }
 
 .footer {
-    max-width: 800px;
+    max-width: var(--content-width);
     margin: auto;
     padding: 2em;
 }
