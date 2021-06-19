@@ -1,9 +1,9 @@
 ---
 layout: default
-title:  "Changelog"
+title:  "Releases"
 ---
 
-# Changelog
+# Releases
 
 {% for release in releases -%}
 ## [Version {{ release.version }}](https://github.com/jbmorley/fileaway/releases/tag/macOS_{{ release.version }}){% if not release.is_released %} (Unreleased){% endif %}

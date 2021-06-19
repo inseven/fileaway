@@ -1,9 +1,9 @@
 ---
 layout: default
-title:  "Changelog"
+title:  "Releases"
 ---
 
-# Changelog
+# Releases
 
 ## [Version 0.11.1](https://github.com/jbmorley/fileaway/releases/tag/macOS_0.11.1)
 
