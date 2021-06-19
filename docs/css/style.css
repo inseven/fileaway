@@ -3,6 +3,7 @@
     --brand-color: #FB6666;
     --body-color: #000000;
     --content-width: 800px;
+    --vertical-spacing: 1.5em;
 }
 
 body {
@@ -49,7 +50,7 @@ ul.navigation > li {
     margin: auto;
     padding: 2em;
     font-size: 1.1em;
-    line-height: 1.5em;
+    line-height: var(--vertical-spacing);
 }
 
 .tagline {
@@ -75,7 +76,7 @@ h1 {
 
 .download {
     text-align: center;
-    margin-bottom: 1.5em;
+    margin-bottom: var(--vertical-spacing);
 }
 
 .button {
