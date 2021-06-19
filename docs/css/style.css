@@ -1,25 +1,24 @@
 :root {
     --tint-color: #FB6666;
     --brand-color: #FB6666;
+    --body-color: #000000;
 }
 
 body {
     font-family: Helvetica, sans-serif;
     font-weight: 200;
     margin: 0;
+    color: var(--body-color);
 }
 
 a {
     font-weight: 800;
     text-decoration: none;
-    color: #000000;
-    /* border-bottom: 3px solid transparent; */
+    color: var(--body-color);
 }
 
 a:hover {
     text-decoration: underline;
-    color: #000000;
-    /* border-bottom: 3px solid var(--brand-color); */
     color: var(--brand-color);
 }
 
@@ -44,6 +43,8 @@ ul.navigation > li {
     max-width: 800px;
     margin: auto;
     padding: 2em;
+    font-size: 1.1em;
+    line-height: 1.5em;
 }
 
 .footer {
