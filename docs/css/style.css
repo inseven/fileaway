@@ -1,0 +1,62 @@
+:root {
+    --tint-color: #FB6666;
+    --brand-color: #FB6666;
+}
+
+body {
+    font-family: Helvetica, sans-serif;
+    font-weight: 200;
+    margin: 0;
+}
+
+a {
+    font-weight: 800;
+    text-decoration: none;
+    color: #000000;
+    /* border-bottom: 3px solid transparent; */
+}
+
+a:hover {
+    text-decoration: none;
+    color: #000000;
+    /* border-bottom: 3px solid var(--brand-color); */
+    color: var(--brand-color);
+}
+
+ul.navigation {
+    list-style: none;
+    margin: 0;
+    padding: 1em;
+    background-color: white;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+ul.navigation > li {
+    display: inline-block;
+    padding: 0.4em;
+}
+
+.content {
+    max-width: 800px;
+    margin: auto;
+    padding: 2em;
+}
+
+.footer {
+    max-width: 800px;
+    margin: auto;
+    padding: 2em;
+}
+
+.copyright {
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    font-size: 4em;
+}
