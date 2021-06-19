@@ -4,6 +4,8 @@ title: About
 
 # Fileaway
 
+<p class="tagline">Rules-based file management for macOS</p>
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sodales lacus libero. Cras dapibus metus vel ipsum bibendum, at dapibus dui cursus. Pellentesque eleifend ullamcorper eros in tincidunt. In condimentum hendrerit porta. Quisque at volutpat nulla. Curabitur maximus elit eu dictum fermentum. Pellentesque tellus sem, pulvinar non lacus id, fringilla feugiat enim. Nam id felis in libero rutrum aliquam. Donec tincidunt, velit at tempus venenatis, lectus enim elementum nulla, sed vehicula nunc lacus vel urna. Nunc sed ligula vitae leo porttitor ullamcorper nec sit amet erat. Pellentesque velit neque, sollicitudin sit amet felis quis, malesuada convallis dui.
 
 Proin blandit ex eu arcu fringilla, ac tristique urna finibus. Pellentesque at tortor sagittis, fermentum velit nec, placerat nunc. Nunc eget est pulvinar, euismod felis sit amet, cursus velit. Nunc luctus dui at velit elementum ornare. Suspendisse quis tincidunt ante, vitae cursus sem. Proin lacinia nisi tristique arcu molestie, ut efficitur risus imperdiet. Aenean bibendum enim quis ultrices semper. Vestibulum tempor egestas posuere.

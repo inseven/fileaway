@@ -47,6 +47,12 @@ ul.navigation > li {
     line-height: 1.5em;
 }
 
+.tagline {
+    text-align: center;
+    font-size: 1.4em;
+    font-weight: 400;
+}
+
 .footer {
     max-width: 800px;
     margin: auto;
