@@ -6,7 +6,7 @@ title:  "Releases"
 # Releases
 
 {% for release in releases -%}
-## [Version {{ release.version }}](https://github.com/jbmorley/fileaway/releases/tag/macOS_{{ release.version }}){% if not release.is_released %} (Unreleased){% endif %}
+## [Version {{ release.version }}](https://github.com/inseven/fileaway/releases/tag/macOS_{{ release.version }}){% if not release.is_released %} (Unreleased){% endif %}
 {% for section in release.sections %}
 ### {{ section.title }}
 

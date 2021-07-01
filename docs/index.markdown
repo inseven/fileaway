@@ -8,7 +8,7 @@ title: About
 
 <div class="download">
     <div class="button">
-        <a href="https://github.com/jbmorley/fileaway/releases">Download Beta</a>
+        <a href="https://github.com/inseven/fileaway/releases">Download Beta</a>
     </div>
 </div>
 
