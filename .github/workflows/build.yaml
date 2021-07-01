@@ -23,14 +23,6 @@ jobs:
         submodules: recursive
         fetch-depth: 0
 
-    - name: Trust the GitHub SSH keys
-      run: |
-        for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts
-
-    - name: Install Pipenv
-      run: |
-        sudo pip3 install pipenv
-
     - name: Install dependencies
       run: scripts/install-dependencies.sh
 
