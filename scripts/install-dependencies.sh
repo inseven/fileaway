@@ -36,3 +36,4 @@ source "$ENVIRONMENT_PATH"
 PIPENV_PIPFILE="$CHANGES_DIRECTORY/Pipfile" pipenv install
 
 gem install xcpretty
+gem install fastlane
