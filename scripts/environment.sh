@@ -26,3 +26,5 @@ ROOT_DIRECTORY="${SCRIPTS_DIRECTORY}/.."
 
 export GEM_HOME="${ROOT_DIRECTORY}/gem"
 mkdir -p "$GEM_HOME"
+
+export PATH=$PATH:"${GEM_HOME}/bin"
