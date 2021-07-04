@@ -20,19 +20,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-set -e
-set -o pipefail
-set -x
-set -u
 
 SCRIPTS_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 ROOT_DIRECTORY="${SCRIPTS_DIRECTORY}/.."
-CHANGES_DIRECTORY="${SCRIPTS_DIRECTORY}/changes"
 
-ENVIRONMENT_PATH="${SCRIPTS_DIRECTORY}/environment.sh"
-
-source "$ENVIRONMENT_PATH"
-
-PIPENV_PIPFILE="$CHANGES_DIRECTORY/Pipfile" pipenv install
-
-gem install xcpretty
+export GEM_HOME="${ROOT_DIRECTORY}/gem"
+mkdir -p "$GEM_HOME"
