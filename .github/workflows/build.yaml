@@ -13,7 +13,7 @@ jobs:
   test:
 
     name: Build macOS project
-    runs-on: macos-10.15
+    runs-on: macos-10.15 macos-big-sur
 
     steps:
 
@@ -29,10 +29,12 @@ jobs:
 
     - name: Install Pipenv
       run: |
-        sudo pip3 install pipenv
+        sudo pip3 install --user pipenv
 
     - name: Install dependencies
-      run: scripts/install-dependencies.sh
+      run: |
+        export PATH=$PATH:~/Library/Python/3.8/bin
+        scripts/install-dependencies.sh
 
     - name: Build and test
       env:
@@ -44,7 +46,9 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NOTARIZE: ${{ github.ref == 'refs/heads/main' }}
         TRY_RELEASE: ${{ github.ref == 'refs/heads/main' }}
-      run: scripts/build.sh
+      run: |
+        export PATH=$PATH:~/Library/Python/3.8/bin
+        scripts/build.sh
 
     - name: Archive the binary
       uses: actions/upload-artifact@v2
