@@ -31,7 +31,7 @@ jobs:
 
     - name: Install Pipenv
       run: |
-        sudo pip3 install --user pipenv
+        pip3 install --user pipenv
 
     - name: Install dependencies
       run: |
