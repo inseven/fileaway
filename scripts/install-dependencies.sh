@@ -31,4 +31,4 @@ CHANGES_DIRECTORY="${SCRIPTS_DIRECTORY}/changes"
 
 PIPENV_PIPFILE="$CHANGES_DIRECTORY/Pipfile" pipenv install
 
-brew install xcpretty
+gem install xcpretty
