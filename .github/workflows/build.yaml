@@ -39,7 +39,6 @@ jobs:
 
     - name: Install dependencies
       run: |
-        export PATH=$PATH:~/Library/Python/3.8/bin
         scripts/install-dependencies.sh
 
     - name: Build and test
