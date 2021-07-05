@@ -34,12 +34,10 @@ jobs:
         for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts
 
     - name: Install Pipenv
-      run: |
-        pip3 install --user pipenv
+      run: pip3 install --user pipenv
 
     - name: Install dependencies
-      run: |
-        scripts/install-dependencies.sh
+      run: scripts/install-dependencies.sh
 
     - name: Build and test
       env:
