@@ -13,3 +13,7 @@ temp
 
 # Editors
 .nova
+
+# Libraries
+/pip
+/gem

@@ -33,6 +33,7 @@ ENVIRONMENT_PATH="${SCRIPTS_DIRECTORY}/environment.sh"
 
 source "$ENVIRONMENT_PATH"
 
+pip3 install --user pipenv
 PIPENV_PIPFILE="$CHANGES_DIRECTORY/Pipfile" pipenv install
 
 gem install xcpretty
