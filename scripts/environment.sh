@@ -24,10 +24,10 @@
 SCRIPTS_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 ROOT_DIRECTORY="${SCRIPTS_DIRECTORY}/.."
 
-export PYTHONUSERBASE="${ROOT_DIRECTORY}/pip"
+export PYTHONUSERBASE="${ROOT_DIRECTORY}/.local/python"
 mkdir -p "$PYTHONUSERBASE"
 export PATH="${PYTHONUSERBASE}/bin":$PATH
 
-export GEM_HOME="${ROOT_DIRECTORY}/gem"
+export GEM_HOME="${ROOT_DIRECTORY}/.local/ruby"
 mkdir -p "$GEM_HOME"
 export PATH="${GEM_HOME}/bin":$PATH
