@@ -20,21 +20,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-set -e
-set -o pipefail
-set -x
-set -u
 
 SCRIPTS_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 ROOT_DIRECTORY="${SCRIPTS_DIRECTORY}/.."
-CHANGES_DIRECTORY="${SCRIPTS_DIRECTORY}/changes"
 
-ENVIRONMENT_PATH="${SCRIPTS_DIRECTORY}/environment.sh"
+export PYTHONUSERBASE="${ROOT_DIRECTORY}/.local/python"
+mkdir -p "$PYTHONUSERBASE"
+export PATH="${PYTHONUSERBASE}/bin":$PATH
 
-source "$ENVIRONMENT_PATH"
-
-pip3 install --user pipenv
-PIPENV_PIPFILE="$CHANGES_DIRECTORY/Pipfile" pipenv install
-
-gem install xcpretty
-gem install fastlane
+export GEM_HOME="${ROOT_DIRECTORY}/.local/ruby"
+mkdir -p "$GEM_HOME"
+export PATH="${GEM_HOME}/bin":$PATH
