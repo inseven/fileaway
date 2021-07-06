@@ -13,3 +13,6 @@ temp
 
 # Editors
 .nova
+
+# Libraries
+/.local

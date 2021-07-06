@@ -13,7 +13,11 @@ jobs:
   test:
 
     name: Build macOS project
-    runs-on: macos-10.15
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ macos-latest, macos-big-sur ]
 
     steps:
 
@@ -25,11 +29,9 @@ jobs:
 
     - name: Trust the GitHub SSH keys
       run: |
+        mkdir -p ~/.ssh
+        touch ~/.ssh/known_hosts
         for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts
-
-    - name: Install Pipenv
-      run: |
-        sudo pip3 install pipenv
 
     - name: Install dependencies
       run: scripts/install-dependencies.sh
@@ -43,8 +45,9 @@ jobs:
         FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NOTARIZE: ${{ github.ref == 'refs/heads/main' }}
-        TRY_RELEASE: ${{ github.ref == 'refs/heads/main' }}
-      run: scripts/build.sh
+        TRY_RELEASE: ${{ github.ref == 'refs/heads/main' && matrix.os == 'macos-big-sur' }}
+      run: |
+        scripts/build.sh
 
     - name: Archive the binary
       uses: actions/upload-artifact@v2

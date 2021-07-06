@@ -43,6 +43,8 @@ CHANGES_GITHUB_RELEASE_SCRIPT="${CHANGES_DIRECTORY}/examples/gh-release.sh"
 PATH=$PATH:$CHANGES_DIRECTORY
 PATH=$PATH:$BUILD_TOOLS_DIRECTORY
 
+source "${SCRIPTS_DIRECTORY}/environment.sh"
+
 # Process the command line arguments.
 POSITIONAL=()
 NOTARIZE=${NOTARIZE:-false}
