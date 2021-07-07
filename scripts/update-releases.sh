@@ -22,8 +22,9 @@ if [ ! -d "$fileaway_directory" ] ; then
 fi
 
 cd "$fileaway_directory"
-git config url."https://github.com/".insteadOf git@github.com:
-git config url."https://".insteadOf git://
+git config submodule."interact".url "git@github.com:jbmorley/interact.git"
+git config submodule."scripts/build-tools".url "git@github.com:jbmorley/build-tools.git"
+git config submodule."scripts/changes".url "git@github.com:jbmorley/changes.git"
 git fetch origin --prune --prune-tags
 git checkout origin/main
 git submodule update --init --recursive
