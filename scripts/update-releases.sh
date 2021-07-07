@@ -6,9 +6,12 @@ set -x
 set -u
 
 scripts_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+source "${scripts_directory}/environment.sh"
+
 root_directory="${scripts_directory}/.."
 fileaway_directory="${root_directory}/fileaway"
-changes_directory="${fileaway_directory}/scripts/changes"
+changes_directory="${scripts_directory}/changes"
 
 changes_path="${changes_directory}/changes"
 changes_pipfile_path="${changes_directory}/Pipfile"
@@ -22,12 +25,9 @@ if [ ! -d "$fileaway_directory" ] ; then
 fi
 
 cd "$fileaway_directory"
-git config submodule."interact".url "https://github.com/jbmorley/interact.git"
-git config submodule."scripts/build-tools".url "https://github.com/jbmorley/build-tools.git"
-git config submodule."scripts/changes".url "https://github.com/jbmorley/changes.git"
 git fetch origin --prune --prune-tags
 git checkout origin/main
-git submodule update --init --recursive
 
+pip install --user pipenv
 PIPENV_PIPFILE="$changes_pipfile_path" pipenv install
 "$changes_path" --scope macOS notes --all --released --template "$releases_template_path" > "$releases_path"

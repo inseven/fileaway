@@ -24,9 +24,6 @@ jobs:
       with:
         ref: main
 
-    - name: Install Pipenv
-      uses: dschep/install-pipenv-action@v1
-
     - name: Update releases
       run: |
         scripts/update-releases.sh
