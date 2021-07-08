@@ -23,6 +23,8 @@ import Combine
 import Foundation
 import SwiftUI
 
+import FileawayCore
+
 struct ManagerKey: EnvironmentKey {
     static var defaultValue: Manager = Manager()
 }

@@ -20,16 +20,20 @@
 
 import Foundation
 
-enum FileawayError: Error {
+public enum FileawayError: Error {
     case directoryNotFound
+    case securityScopeAccessError
 }
 
+// TODO: Consider moving this into the app?
 extension FileawayError: LocalizedError {
 
-    var errorDescription: String? {
+    public var errorDescription: String? {
         switch self {
         case .directoryNotFound:
             return "Directory not found."
+        case .securityScopeAccessError:
+            return "Unable to access security scoped location."
         }
     }
 
