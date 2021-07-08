@@ -25,17 +25,17 @@ set -o pipefail
 set -x
 set -u
 
-SCRIPTS_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-ROOT_DIRECTORY="${SCRIPTS_DIRECTORY}/.."
-CHANGES_DIRECTORY="${SCRIPTS_DIRECTORY}/changes"
+scripts_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+root_directory="${scripts_directory}/.."
+changes_directory="${scripts_directory}/changes"
 
-ENVIRONMENT_PATH="${SCRIPTS_DIRECTORY}/environment.sh"
+environment_path="${scripts_directory}/environment.sh"
 
-source "$ENVIRONMENT_PATH"
+source "$environment_path"
 
 pip3 install --user pipenv
-PIPENV_PIPFILE="$CHANGES_DIRECTORY/Pipfile" pipenv install
+PIPENV_PIPFILE="$changes_directory/Pipfile" pipenv install
 
-cd "$ROOT_DIRECTORY"
+cd "$root_directory"
 gem install bundler
 bundle install
