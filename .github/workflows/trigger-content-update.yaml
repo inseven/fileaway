@@ -1,0 +1,19 @@
+name: Trigger content update
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  run:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Trigger changelog update
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        token: ${{ secrets.CONTENT_UPDATE_TOKEN }}
+        repository: inseven/fileaway-site
+        event-type: update-content
