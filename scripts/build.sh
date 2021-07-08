@@ -142,7 +142,7 @@ TIMESTAMP=`date +%s`
 BUILD_NUMBER="${GIT_COMMIT}.${TIMESTAMP}"
 
 # Import the certificates into our dedicated keychain.
-fastlane import_certificates keychain:"$KEYCHAIN_PATH"
+bundle exec fastlane import_certificates keychain:"$KEYCHAIN_PATH"
 
 # Archive and export the build.
 xcode_project \
@@ -167,7 +167,7 @@ codesign -dvv "$APP_PATH"
 
 # Notarize the release build.
 if $NOTARIZE ; then
-    fastlane notarize_release package:"$APP_PATH"
+    bundle exec fastlane notarize_release package:"$APP_PATH"
 fi
 
 # Archive the results.
