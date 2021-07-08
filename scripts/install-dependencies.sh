@@ -36,5 +36,6 @@ source "$ENVIRONMENT_PATH"
 pip3 install --user pipenv
 PIPENV_PIPFILE="$CHANGES_DIRECTORY/Pipfile" pipenv install
 
-gem install xcpretty
-gem install fastlane
+cd "$ROOT_DIRECTORY"
+gem install bundler
+bundle install
