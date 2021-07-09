@@ -32,6 +32,7 @@ public class FileProvider {
     let syncQueue = DispatchQueue.init(label: "FileProvider.syncQueue")
     let targetQueue: DispatchQueue
     let directoryWatcher: DirectoryWatcher
+    var watchers: [DirectoryWatcher] = []  // Synchronized on syncQueue
 
 //    lazy var stream: EonilFSEventStream = {
 //        let stream = try! EonilFSEventStream(
@@ -78,6 +79,7 @@ public class FileProvider {
         // TODO: Fail if there's more than one location.
         // TODO: Handle a failure to create the directory watcher / throw the error?
         // TODO: Weak self?
+        // TODO: Test rename
 
 
         directoryWatcher = DirectoryWatcher.watch(locations.first!)!
@@ -87,6 +89,9 @@ public class FileProvider {
             guard let self = self else {
                 return
             }
+
+            print("New Files: \(newFiles)")
+
             // TODO: Actually insert the new files.
             // TODO: Test that this handles renames??
             self.syncQueue.async {
