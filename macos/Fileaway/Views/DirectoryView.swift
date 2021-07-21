@@ -78,6 +78,11 @@ struct DirectoryView: View {
                             Button("Quick Look") {
                                 QuickLookCoordinator.shared.show(url: file.url)
                             }
+                            Divider()
+                            Button("Copy name") {
+                                NSPasteboard.general.clearContents()
+                                NSPasteboard.general.setString(file.name, forType: .string)
+                            }
                         } onContextMenuChange: { focused in
                             guard focused else {
                                 return
