@@ -45,6 +45,9 @@ PATH=$PATH:$BUILD_TOOLS_DIRECTORY
 
 source "${SCRIPTS_DIRECTORY}/environment.sh"
 
+# Check that the GitHub command is available on the path.
+which gh || (echo "GitHub cli (gh) not available on the path." && exit 1)
+
 # Process the command line arguments.
 POSITIONAL=()
 NOTARIZE=${NOTARIZE:-false}
