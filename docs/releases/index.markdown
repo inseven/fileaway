@@ -5,6 +5,12 @@ title:  "Releases"
 
 # Releases
 
+## Version 0.12.0
+
+### Changes
+
+- Copy file names from the context menu (#202)
+
 ## Version 0.11.1
 
 ### Fixes
