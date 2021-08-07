@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import Interact
+
 struct TrackerInput<T>: ViewModifier where T: Hashable, T: Identifiable {
 
     var tracker: SelectionTracker<T>
