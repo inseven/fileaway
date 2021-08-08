@@ -92,20 +92,18 @@ struct DirectoryView: View {
                         .onDrag {
                             NSItemProvider(object: file.url as NSURL)
                         }
-                        .onClick {
+                        .handleMouse {
                             firstResponder = true
                             tracker.handleClick(item: file)
                         } doubleClick: {
                             firstResponder = true
                             NSWorkspace.shared.open(file.url)
-                        }
-                        .onCommandClick {
-                            firstResponder = true  // TODO: Do this with a globally observing view / gesture recognizer?
-                            tracker.handleCommandClick(item: file)
-                        }
-                        .onShiftClick {
+                        } shiftClick: {
                             firstResponder = true
                             tracker.handleShiftClick(item: file)
+                        } commandClick: {
+                            firstResponder = true  // TODO: Do this with a globally observing view / gesture recognizer?
+                            tracker.handleCommandClick(item: file)
                         }
                         Divider()
                             .padding(.leading)

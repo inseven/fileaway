@@ -98,7 +98,7 @@ struct RulesEditor: View {
                             .frame(maxWidth: .infinity, alignment: .topLeading)
                             .lineLimit(1)
                             .contentShape(Rectangle())
-                            .onClick {
+                            .handleMouse {
                                 selection = [rule]
                             } doubleClick: {
                                 selection = [rule]
