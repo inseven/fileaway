@@ -68,15 +68,10 @@
 		D8F8BE3C25881C650010432F /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BE3B25881C650010432F /* Highlight.swift */; };
 		D8F8BE4125881CEC0010432F /* TrackerInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BE4025881CEC0010432F /* TrackerInput.swift */; };
 		D8F90C7325DAA72700F0EFB8 /* Interact in Frameworks */ = {isa = PBXBuildFile; productRef = D8F90C7225DAA72700F0EFB8 /* Interact */; };
-		D8F90C9925DAAED700F0EFB8 /* ObservingGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F90C9825DAAED700F0EFB8 /* ObservingGestureRecognizer.swift */; };
 		D8F90C9E25DAAF7A00F0EFB8 /* Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F90C9D25DAAF7A00F0EFB8 /* Selectable.swift */; };
-		D8F90CA325DAB02100F0EFB8 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F90CA225DAB02100F0EFB8 /* View.swift */; };
-		D8F90CA825DAB1DF00F0EFB8 /* ContextMenuFocusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F90CA725DAB1DF00F0EFB8 /* ContextMenuFocusable.swift */; };
 		D8FC5334257BB6D2008FB609 /* MailboxRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5333257BB6D2008FB609 /* MailboxRow.swift */; };
 		D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5341257BB77C008FB609 /* SettingsView.swift */; };
 		D8FC534A257BB7A4008FB609 /* LocationsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5349257BB7A4008FB609 /* LocationsSettingsView.swift */; };
-		D8FDDA2C261A43B30060D256 /* RightClickObservingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FDDA2B261A43B30060D256 /* RightClickObservingView.swift */; };
-		D8FDDA31261A442B0060D256 /* RightClickableSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FDDA30261A442B0060D256 /* RightClickableSwiftUIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -179,15 +174,10 @@
 		D8F8BE3B25881C650010432F /* Highlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Highlight.swift; sourceTree = "<group>"; };
 		D8F8BE4025881CEC0010432F /* TrackerInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerInput.swift; sourceTree = "<group>"; };
 		D8F90C6B25DAA6A400F0EFB8 /* interact */ = {isa = PBXFileReference; lastKnownFileType = folder; name = interact; path = ../interact; sourceTree = "<group>"; };
-		D8F90C9825DAAED700F0EFB8 /* ObservingGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservingGestureRecognizer.swift; sourceTree = "<group>"; };
 		D8F90C9D25DAAF7A00F0EFB8 /* Selectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selectable.swift; sourceTree = "<group>"; };
-		D8F90CA225DAB02100F0EFB8 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
-		D8F90CA725DAB1DF00F0EFB8 /* ContextMenuFocusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuFocusable.swift; sourceTree = "<group>"; };
 		D8FC5333257BB6D2008FB609 /* MailboxRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailboxRow.swift; sourceTree = "<group>"; };
 		D8FC5341257BB77C008FB609 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D8FC5349257BB7A4008FB609 /* LocationsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsSettingsView.swift; sourceTree = "<group>"; };
-		D8FDDA2B261A43B30060D256 /* RightClickObservingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightClickObservingView.swift; sourceTree = "<group>"; };
-		D8FDDA30261A442B0060D256 /* RightClickableSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightClickableSwiftUIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,8 +244,6 @@
 				D8D78A992580DDF40088890F /* PageLink.swift */,
 				D8D78A9E2580DE250088890F /* PageView.swift */,
 				D8D78A912580DD750088890F /* QuickLookPreview.swift */,
-				D8FDDA30261A442B0060D256 /* RightClickableSwiftUIView.swift */,
-				D8FDDA2B261A43B30060D256 /* RightClickObservingView.swift */,
 				D821E945257AA5FC005D3205 /* Sidebar.swift */,
 				D82D01292657F6D500FD2974 /* TextProvider.swift */,
 				D82D01212657632C00FD2974 /* VariableDateView.swift */,
@@ -271,7 +259,6 @@
 				D8F8BE3B25881C650010432F /* Highlight.swift */,
 				D85C95802579CED30007AE1E /* Toolbar.swift */,
 				D8F8BE4025881CEC0010432F /* TrackerInput.swift */,
-				D8F90CA725DAB1DF00F0EFB8 /* ContextMenuFocusable.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -315,7 +302,6 @@
 				D87DEF8425774F6D006CFE85 /* Preview Content */,
 				D8FC5340257BB72F008FB609 /* Utilities */,
 				D821E937257A9591005D3205 /* Views */,
-				D8F90C9825DAAED700F0EFB8 /* ObservingGestureRecognizer.swift */,
 				D8F90C9D25DAAF7A00F0EFB8 /* Selectable.swift */,
 			);
 			path = Fileaway;
@@ -353,7 +339,6 @@
 				D8B657E926421ECF009DE837 /* Alert.swift */,
 				D85C9571257999130007AE1E /* FileManager.swift */,
 				D87DEFC3257848B7006CFE85 /* URL.swift */,
-				D8F90CA225DAB02100F0EFB8 /* View.swift */,
 				D80F72D726430E3C0010BB38 /* Data.swift */,
 			);
 			path = Extensions;
@@ -566,14 +551,11 @@
 				D8F8BE3725881C1A0010432F /* TaskPage.swift in Sources */,
 				D8E7F9F02599B08600C7409B /* VariableState.swift in Sources */,
 				D8D78A9A2580DDF40088890F /* PageLink.swift in Sources */,
-				D8F90CA325DAB02100F0EFB8 /* View.swift in Sources */,
 				D85C95812579CED30007AE1E /* Toolbar.swift in Sources */,
 				D8F8BE002586C6B90010432F /* RuleInstance.swift in Sources */,
 				D8E7F9B125999C8800C7409B /* RulesEditor.swift in Sources */,
 				D8F8BE22258819860010432F /* StringInstance.swift in Sources */,
-				D8FDDA31261A442B0060D256 /* RightClickableSwiftUIView.swift in Sources */,
 				D8F8BE3225881BC50010432F /* VariableInstance.swift in Sources */,
-				D8FDDA2C261A43B30060D256 /* RightClickObservingView.swift in Sources */,
 				D82D01282657F69900FD2974 /* Observable.swift in Sources */,
 				D821E946257AA5FC005D3205 /* Sidebar.swift in Sources */,
 				D8F8BE4125881CEC0010432F /* TrackerInput.swift in Sources */,
@@ -584,10 +566,8 @@
 				D87DEF7F25774F6C006CFE85 /* FileawayApp.swift in Sources */,
 				D87DEFB925783F66006CFE85 /* DirectoryView.swift in Sources */,
 				D87DEFB425780BA4006CFE85 /* DirectoryObserver.swift in Sources */,
-				D8F90C9925DAAED700F0EFB8 /* ObservingGestureRecognizer.swift in Sources */,
 				D83CDCE52620F97F0063C91C /* VariableTextField.swift in Sources */,
 				D8E7F9CE25999E7A00C7409B /* Rule.swift in Sources */,
-				D8F90CA825DAB1DF00F0EFB8 /* ContextMenuFocusable.swift in Sources */,
 				D8B657E826421D5B009DE837 /* LocationMenuItems.swift in Sources */,
 				D829DDB425787C100066A807 /* Settings.swift in Sources */,
 				D87DEFBE257840B1006CFE85 /* Manager.swift in Sources */,
