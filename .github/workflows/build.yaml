@@ -13,11 +13,7 @@ jobs:
   test:
 
     name: Build macOS project
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ macos-latest, macos-big-sur ]
+    runs-on: macos-big-sur
 
     steps:
 
