@@ -24,6 +24,10 @@ import Interact
 
 struct TaskPage: View {
 
+    enum FocusableField: Hashable {
+        case search
+    }
+
     var manager: Manager
     var url: URL
 
@@ -31,6 +35,8 @@ struct TaskPage: View {
     @StateObject var tracker: SelectionTracker<Rule>
 
     @State var firstResponder: Bool = true
+
+    @FocusState private var focus: FocusableField?
 
     var columns: [GridItem] = [
         GridItem(.flexible(minimum: 0, maximum: .infinity))
@@ -52,6 +58,7 @@ struct TaskPage: View {
                 TextField("Search", text: $filter.filter)
                     .font(.title)
                     .textFieldStyle(PlainTextFieldStyle())
+                    .focused($focus, equals: .search)
                 if !filter.filter.isEmpty {
                     Button {
                         filter.filter = ""
@@ -90,6 +97,11 @@ struct TaskPage: View {
         .acceptsFirstResponder(isFirstResponder: $firstResponder)
         .modifier(TrackerInput(tracker: tracker))
         .pageTitle("Select Rule")
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                focus = .search
+            }
+        }
     }
 
 }
