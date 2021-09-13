@@ -5,6 +5,14 @@ title:  "Releases"
 
 # Releases
 
+## Version 0.12.1
+
+### Fixes
+
+- Target macOS 12 Monterey (#214)
+- Focus the search field when launching the rules wizard (#215)
+- Improve layout of the +/- buttons in the Settings rules list (#216)
+
 ## Version 0.12.0
 
 ### Changes
