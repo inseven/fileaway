@@ -5,6 +5,12 @@ title:  "Releases"
 
 # Releases
 
+## Version 0.13.0
+
+### Changes
+
+- Reorder rule variables (#220)
+
 ## Version 0.12.2
 
 ### Fixes
