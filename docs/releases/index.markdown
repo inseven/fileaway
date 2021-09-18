@@ -5,6 +5,12 @@ title:  "Releases"
 
 # Releases
 
+## Version 0.15.0
+
+### Changes
+
+- Filter rules by the archive name as well as the rule name (#223)
+
 ## Version 0.14.0
 
 ### Changes
