@@ -73,7 +73,6 @@ struct TaskPage: View {
                     .textFieldStyle(PlainTextFieldStyle())
                     .focused($focus, equals: .search)
                     .onSubmit {
-                        print("SUBMIT!")
                         if tracker.items.count == 1 {
                             activeRule = tracker.items.first
                             print("one item")
