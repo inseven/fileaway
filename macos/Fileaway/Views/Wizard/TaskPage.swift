@@ -75,7 +75,6 @@ struct TaskPage: View {
                     .onSubmit {
                         if tracker.items.count == 1 {
                             activeRule = tracker.items.first
-                            print("one item")
                         }
                     }
                 if !filter.filter.isEmpty {
