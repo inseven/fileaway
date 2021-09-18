@@ -42,22 +42,28 @@ struct VariableList: View {
                 .frame(width: 200)
             }
             HStack {
-                Button {
-                    rule.createVariable()
-                } label: {
-                    Image(systemName: "plus")
-                }
-                Button {
-                    guard let variable = selection else {
-                        return
+
+                ControlGroup {
+                    Button {
+                        rule.createVariable()
+                    } label: {
+                        Image(systemName: "plus")
                     }
-                    rule.remove(variable: variable)
-                    selection = nil
-                } label: {
-                    Image(systemName: "minus")
+                    Button {
+                        guard let variable = selection else {
+                            return
+                        }
+                        rule.remove(variable: variable)
+                        selection = nil
+                    } label: {
+                        Image(systemName: "minus")
+                    }
+                    .disabled(selection == nil)
                 }
-                .disabled(selection == nil)
+                
                 Spacer()
+                    .layoutPriority(1)
+
             }
 
         }
