@@ -5,6 +5,12 @@ title:  "Releases"
 
 # Releases
 
+## Version 0.13.1
+
+### Fixes
+
+- Disable the rule list edit buttons when no items are selected (#221)
+
 ## Version 0.13.0
 
 ### Changes
