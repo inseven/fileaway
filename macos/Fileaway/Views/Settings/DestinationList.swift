@@ -114,6 +114,7 @@ struct DestinationList: View {
                         Image(systemName: "arrow.down")
                     }
                 }
+                .disabled(selection == nil)
 
                 Button {
                     guard let component = selection else {

@@ -137,6 +137,7 @@ struct RulesEditor: View {
                             } label: {
                                 Image(systemName: "minus")
                             }
+                            .disabled(selection.count < 1)
 
                         }
 
