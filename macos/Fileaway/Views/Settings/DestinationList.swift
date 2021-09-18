@@ -93,7 +93,8 @@ struct DestinationList: View {
 
                 Button("Text") {
                     rule.destination.append(ComponentState(value: "Text", type: .text, variable: nil))
-                }.layoutPriority(2)
+                }
+                .layoutPriority(2)
 
                 ControlGroup {
                     Button {
