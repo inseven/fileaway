@@ -5,6 +5,12 @@ title:  "Releases"
 
 # Releases
 
+## Version 0.14.0
+
+### Changes
+
+- Hit enter to select the matching rule in the Rules Wizard (#222)
+
 ## Version 0.13.1
 
 ### Fixes
