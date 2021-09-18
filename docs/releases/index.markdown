@@ -5,6 +5,12 @@ title:  "Releases"
 
 # Releases
 
+## Version 0.12.2
+
+### Fixes
+
+- Better layout of the list buttons in the rule editor (#219)
+
 ## Version 0.12.1
 
 ### Fixes
