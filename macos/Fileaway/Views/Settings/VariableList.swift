@@ -79,6 +79,7 @@ struct VariableList: View {
                         Image(systemName: "arrow.down")
                     }
                 }
+                .disabled(selection == nil)
                 
                 Spacer()
                     .layoutPriority(1)
