@@ -23,22 +23,30 @@ import SwiftUI
 struct PageLink<Destination, Content>: View where Destination: View, Content: View {
 
     @Environment(\.pageViewStack) var pageViewStack
+    @Binding var isActive: Bool
 
     let destination: Destination
     let content: Content
 
     @inlinable public init(destination: Destination,
+                           isActive: Binding<Bool>,
                            @ViewBuilder content: () -> Content) {
         self.destination = destination
+        _isActive = isActive
         self.content = content()
     }
 
     var body: some View {
         content
-            .onTapGesture {
+            .onChange(of: isActive) { newValue in
                 withAnimation {
-                    pageViewStack.pages.append(ViewContainer(AnyView(destination)))
+                    if newValue {
+                        pageViewStack.pages.append(ViewContainer(AnyView(destination)))
+                    }
                 }
+            }
+            .onTapGesture {
+                isActive = true
             }
     }
 

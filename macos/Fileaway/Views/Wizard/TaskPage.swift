@@ -34,6 +34,7 @@ struct TaskPage: View {
     @StateObject var filter: LazyFilter<Rule>
     @StateObject var tracker: SelectionTracker<Rule>
 
+    @State var activeRule: Rule? = nil
     @State var firstResponder: Bool = true
 
     @FocusState private var focus: FocusableField?
@@ -52,6 +53,18 @@ struct TaskPage: View {
         self._tracker = StateObject(wrappedValue: SelectionTracker(items: filter.get().$items))
     }
 
+    func binding(for rule: Rule) -> Binding<Bool> {
+        Binding {
+            self.activeRule == rule
+        } set: { value in
+            if value {
+                self.activeRule = rule
+            } else if self.activeRule == rule {
+                self.activeRule = nil
+            }
+        }
+    }
+
     var body: some View {
         VStack {
             HStack {
@@ -59,6 +72,11 @@ struct TaskPage: View {
                     .font(.title)
                     .textFieldStyle(PlainTextFieldStyle())
                     .focused($focus, equals: .search)
+                    .onSubmit {
+                        if tracker.items.count == 1 {
+                            activeRule = tracker.items.first
+                        }
+                    }
                 if !filter.filter.isEmpty {
                     Button {
                         filter.filter = ""
@@ -72,7 +90,7 @@ struct TaskPage: View {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 0) {
                     ForEach(tracker.items) { rule in
-                        PageLink(destination: DetailsPage(url: url, rule: rule)) {
+                        PageLink(destination: DetailsPage(url: url, rule: rule), isActive: binding(for: rule)) {
                             HStack {
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(rule.name)
