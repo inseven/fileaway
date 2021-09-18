@@ -88,27 +88,31 @@ struct DestinationList: View {
                     Button(String(describing: variable.name)) {
                         rule.destination.append(ComponentState(value: variable.name, type: .variable, variable: variable))
                     }
+                    .layoutPriority(2)
                 }
 
                 Button("Text") {
                     rule.destination.append(ComponentState(value: "Text", type: .text, variable: nil))
                 }
+                .layoutPriority(2)
 
-                Button {
-                    guard let component = selection else {
-                        return
+                ControlGroup {
+                    Button {
+                        guard let component = selection else {
+                            return
+                        }
+                        rule.moveUp(component: component)
+                    } label: {
+                        Image(systemName: "arrow.up")
                     }
-                    rule.moveUp(component: component)
-                } label: {
-                    Image(systemName: "arrow.up")
-                }
-                Button {
-                    guard let component = selection else {
-                        return
+                    Button {
+                        guard let component = selection else {
+                            return
+                        }
+                        rule.moveDown(component: component)
+                    } label: {
+                        Image(systemName: "arrow.down")
                     }
-                    rule.moveDown(component: component)
-                } label: {
-                    Image(systemName: "arrow.down")
                 }
 
                 Button {
@@ -121,8 +125,10 @@ struct DestinationList: View {
                     Image(systemName: "minus")
                 }
                 .disabled(selection == nil)
+                .layoutPriority(2)
 
                 Spacer()
+                    .layoutPriority(1)
             }
 
         }
