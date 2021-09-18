@@ -60,6 +60,25 @@ struct VariableList: View {
                     }
                     .disabled(selection == nil)
                 }
+
+                ControlGroup {
+                    Button {
+                        guard let variable = selection else {
+                            return
+                        }
+                        rule.moveUp(variable: variable)
+                    } label: {
+                        Image(systemName: "arrow.up")
+                    }
+                    Button {
+                        guard let variable = selection else {
+                            return
+                        }
+                        rule.moveDown(variable: variable)
+                    } label: {
+                        Image(systemName: "arrow.down")
+                    }
+                }
                 
                 Spacer()
                     .layoutPriority(1)

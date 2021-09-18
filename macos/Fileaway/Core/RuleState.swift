@@ -113,6 +113,22 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         destination.swapAt(index, index + 1)
     }
 
+    func moveUp(variable: VariableState) {
+        guard let index = variables.firstIndex(of: variable),
+              index > 0 else {
+            return
+        }
+        variables.swapAt(index, index - 1)
+    }
+
+    func moveDown(variable: VariableState) {
+        guard let index = variables.firstIndex(of: variable),
+              index < variables.count - 1 else {
+            return
+        }
+        variables.swapAt(index, index + 1)
+    }
+
     func remove(variable: VariableState) {
         variables.removeAll { $0 == variable }
     }
