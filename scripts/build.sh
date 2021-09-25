@@ -43,6 +43,9 @@ CHANGES_GITHUB_RELEASE_SCRIPT="${CHANGES_DIRECTORY}/examples/gh-release.sh"
 PATH=$PATH:$CHANGES_DIRECTORY
 PATH=$PATH:$BUILD_TOOLS_DIRECTORY
 
+IOS_XCODE_PATH=${IOS_XCODE_PATH:-/Applications/Xcode.app}
+MACOS_XCODE_PATH=${MACOS_XCODE_PATH:-/Applications/Xcode.app}
+
 source "${SCRIPTS_DIRECTORY}/environment.sh"
 
 # Check that the GitHub command is available on the path.
@@ -105,14 +108,16 @@ xcode_project -list
 
 # Smoke test builds.
 
-# FileawayCore
+# iOS
+sudo xcode-select --switch "$IOS_XCODE_PATH"
 build_scheme "FileawayCore iOS" clean build build-for-testing test \
     -sdk iphonesimulator \
     -destination "$IPHONE_DESTINATION"
-build_scheme "FileawayCore macOS" clean build build-for-testing test
-
-# Apps
 build_scheme "Fileaway iOS" clean build
+
+# macOS
+sudo xcode-select --switch "$MACOS_XCODE_PATH"
+build_scheme "FileawayCore macOS" clean build build-for-testing test
 
 # Build the macOS archive.
 
@@ -147,7 +152,8 @@ BUILD_NUMBER="${GIT_COMMIT}.${TIMESTAMP}"
 # Import the certificates into our dedicated keychain.
 bundle exec fastlane import_certificates keychain:"$KEYCHAIN_PATH"
 
-# Archive and export the build.
+# Build and archive the macOS project.
+sudo xcode-select --switch "$MACOS_XCODE_PATH"
 xcode_project \
     -scheme "Fileaway macOS" \
     -config Release \
