@@ -1,0 +1,97 @@
+:root {
+    --tint-color: #FB6666;
+    --brand-color: #FB6666;
+    --body-color: #000000;
+    --content-width: 800px;
+    --vertical-spacing: 1.5em;
+}
+
+body {
+    font-family: Helvetica, sans-serif;
+    font-weight: 200;
+    margin: 0;
+    color: var(--body-color);
+}
+
+a {
+    font-weight: 800;
+    text-decoration: underline;
+    color: var(--body-color);
+}
+
+a:hover {
+    color: var(--brand-color);
+}
+
+ul.navigation a,
+.footer a {
+    text-decoration: none;
+}
+
+ul.navigation {
+    list-style: none;
+    margin: 0;
+    padding: 1em;
+    background-color: white;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+ul.navigation > li {
+    display: inline-block;
+    padding: 0.4em;
+}
+
+.content {
+    max-width: var(--content-width);
+    margin: auto;
+    padding: 2em;
+    font-size: 1.1em;
+    line-height: var(--vertical-spacing);
+}
+
+.tagline {
+    text-align: center;
+    font-size: 1.4em;
+    font-weight: 400;
+}
+
+.footer {
+    max-width: var(--content-width);
+    margin: auto;
+    padding: 2em;
+}
+
+.copyright {
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    font-size: 4em;
+}
+
+.download {
+    text-align: center;
+    margin-bottom: var(--vertical-spacing);
+}
+
+.button {
+    display: inline-block;
+    transition: transform .1s;
+}
+
+.button:hover {
+    transform: scale(1.1);
+}
+
+.button > a {
+    background-color: var(--brand-color);
+    color: #ffffff;
+    border-radius: 2em;
+    padding: 1em;
+    text-decoration: none;
+}

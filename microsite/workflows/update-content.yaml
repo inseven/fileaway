@@ -1,0 +1,35 @@
+name: Update content
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+  repository_dispatch:
+    types:
+    - update-content
+  push:
+    branches: [ main ]
+
+jobs:
+
+  run:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout source
+      uses: actions/checkout@v2
+      with:
+        ref: main
+        submodules: recursive
+
+    - name: Update releases
+      run: |
+        scripts/update-releases.sh
+
+    - name: Commit documentation
+      uses: stefanzweifel/git-auto-commit-action@v4
+      id: auto-commit
+      with:
+        commit_message: Update content
