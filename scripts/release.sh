@@ -27,17 +27,15 @@ set -x
 # This script expects the iOS IPA to be passed as the first argument, the macOS PKG as the second argument, and any
 # additional files to be attached to the GitHub release to be passed as subsequent arguments.
 
-MACOS_PACAKGE="$1"
-
 # Validate and upload the macOS build.
 xcrun altool --validate-app \
-    -f "$MACOS_PACKAGE" \
+    -f "$1" \
     --apiKey "$APPLE_API_KEY_ID" \
     --apiIssuer "$APPLE_API_KEY_ISSUER_ID" \
     --output-format json \
     --type macos
 xcrun altool --upload-app \
-    -f "$MACOS_PACKAGE" \
+    -f "$1" \
     --primary-bundle-id "uk.co.inseven.timezones" \
     --apiKey "$APPLE_API_KEY_ID" \
     --apiIssuer "$APPLE_API_KEY_ISSUER_ID" \
