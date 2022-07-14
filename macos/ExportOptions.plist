@@ -4,6 +4,8 @@
 <dict>
 	<key>destination</key>
 	<string>export</string>
+	<key>installerSigningCertificate</key>
+	<string>3rd Party Mac Developer Installer</string>
 	<key>manageAppVersionAndBuildNumber</key>
 	<true/>
 	<key>method</key>
@@ -12,12 +14,8 @@
 	<string>Apple Distribution</string>
 	<key>signingStyle</key>
 	<string>manual</string>
-	<key>stripSwiftSymbols</key>
-	<true/>
 	<key>teamID</key>
 	<string>S4WXAUZQEV</string>
-	<key>uploadBitcode</key>
-	<false/>
 	<key>uploadSymbols</key>
 	<true/>
 </dict>
