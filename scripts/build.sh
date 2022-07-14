@@ -152,6 +152,9 @@ BUILD_NUMBER=`build-tools generate-build-number`
 echo "$IOS_CERTIFICATE_PASSWORD" | build-tools import-base64-certificate --password "$KEYCHAIN_PATH" "$IOS_CERTIFICATE_BASE64"
 echo "$MACOS_DEVELOPER_INSTALLER_CERTIFICATE_PASSWORD" | build-tools import-base64-certificate --password "$KEYCHAIN_PATH" "$MACOS_DEVELOPER_INSTALLER_CERTIFICATE"
 
+# Install the provisioning profiles.
+build-tools install-provisioning-profile "macos/Fileaway_Mac_App_Store_Profile.provisionprofile"
+
 # Build and archive the macOS project.
 sudo xcode-select --switch "$MACOS_XCODE_PATH"
 xcode_project \
@@ -171,7 +174,6 @@ xcodebuild \
 APP_BASENAME="Fileaway.app"
 APP_PATH="$BUILD_DIRECTORY/$APP_BASENAME"
 
-# Attempt to create a version tag and publish a GitHub release; fails quietly if there's no new release.
 if $RELEASE ; then
 
     PKG_PATH="$BUILD_DIRECTORY/Fileaway.pkg"
