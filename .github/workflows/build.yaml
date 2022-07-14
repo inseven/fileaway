@@ -13,7 +13,7 @@ jobs:
   test:
 
     name: Build macOS project
-    runs-on: macos-monterey
+    runs-on: macos-ventura
 
     steps:
 
@@ -40,7 +40,7 @@ jobs:
         APPLE_DEVELOPER_ID: ${{ secrets.APPLE_DEVELOPER_ID }}
         FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        NOTARIZE: ${{ github.ref == 'refs/heads/main' }}
+        NOTARIZE: true
         TRY_RELEASE: ${{ github.ref == 'refs/heads/main' }}
       run: |
         scripts/build.sh
