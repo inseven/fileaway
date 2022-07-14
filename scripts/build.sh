@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (c) 2018-2021 InSeven Limited
+# Copyright (c) 2018-2022 InSeven Limited
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -33,12 +33,12 @@ TEMPORARY_DIRECTORY="${ROOT_DIRECTORY}/temp"
 
 KEYCHAIN_PATH="${TEMPORARY_DIRECTORY}/temporary.keychain"
 ARCHIVE_PATH="${BUILD_DIRECTORY}/Fileaway.xcarchive"
-FASTLANE_ENV_PATH="${ROOT_DIRECTORY}/fastlane/.env"
+ENV_PATH="${ROOT_DIRECTORY}/.env"
 
 CHANGES_DIRECTORY="${SCRIPTS_DIRECTORY}/changes"
 BUILD_TOOLS_DIRECTORY="${SCRIPTS_DIRECTORY}/build-tools"
 
-CHANGES_GITHUB_RELEASE_SCRIPT="${CHANGES_DIRECTORY}/examples/gh-release.sh"
+RELEASE_SCRIPT_PATH="${SCRIPTS_DIRECTORY}/release.sh"
 
 PATH=$PATH:$CHANGES_DIRECTORY
 PATH=$PATH:$BUILD_TOOLS_DIRECTORY
@@ -53,16 +53,11 @@ which gh || (echo "GitHub cli (gh) not available on the path." && exit 1)
 
 # Process the command line arguments.
 POSITIONAL=()
-NOTARIZE=${NOTARIZE:-false}
-RELEASE=${TRY_RELEASE:-false}
+RELEASE=${RELEASE:-false}
 while [[ $# -gt 0 ]]
 do
     key="$1"
     case $key in
-        -n|--notarize)
-        NOTARIZE=true
-        shift
-        ;;
         -r|--release)
         RELEASE=true
         shift
@@ -76,15 +71,15 @@ done
 
 # iPhone to be used for smoke test builds and tests.
 # This doesn't specify the OS version to allow the build script to recover from minor build changes.
-IPHONE_DESTINATION="platform=iOS Simulator,name=iPhone 12 Pro"
+IPHONE_DESTINATION="platform=iOS Simulator,name=iPhone 13 Pro"
 
 # Generate a random string to secure the local keychain.
 export TEMPORARY_KEYCHAIN_PASSWORD=`openssl rand -base64 14`
 
-# Source the Fastlane .env file if it exists to make local development easier.
-if [ -f "$FASTLANE_ENV_PATH" ] ; then
+# Source the .env file if it exists to make local development easier.
+if [ -f "$ENV_PATH" ] ; then
     echo "Sourcing .env..."
-    source "$FASTLANE_ENV_PATH"
+    source "$ENV_PATH"
 fi
 
 function xcode_project {
@@ -98,7 +93,7 @@ function build_scheme {
         -scheme "$1" \
         CODE_SIGN_IDENTITY="" \
         CODE_SIGNING_REQUIRED=NO \
-        CODE_SIGNING_ALLOWED=NO "${@:2}" | xcpretty
+        CODE_SIGNING_ALLOWED=NO "${@:2}"
 }
 
 cd "$ROOT_DIRECTORY"
@@ -135,22 +130,30 @@ mkdir -p "$TEMPORARY_DIRECTORY"
 echo "$TEMPORARY_KEYCHAIN_PASSWORD" | build-tools create-keychain "$KEYCHAIN_PATH" --password
 
 function cleanup {
+
     # Cleanup the temporary files and keychain.
     cd "$ROOT_DIRECTORY"
     build-tools delete-keychain "$KEYCHAIN_PATH"
     rm -rf "$TEMPORARY_DIRECTORY"
+
+    # Clean up any private keys.
+    if [ -f ~/.appstoreconnect/private_keys ]; then
+        rm -r ~/.appstoreconnect/private_keys
+    fi
 }
 
 trap cleanup EXIT
 
 # Determine the version and build number.
 VERSION_NUMBER=`changes --scope macOS version`
-GIT_COMMIT=`git rev-parse --short HEAD`
-TIMESTAMP=`date +%s`
-BUILD_NUMBER="${GIT_COMMIT}.${TIMESTAMP}"
+BUILD_NUMBER=`build-tools generate-build-number`
 
 # Import the certificates into our dedicated keychain.
-bundle exec fastlane import_certificates keychain:"$KEYCHAIN_PATH"
+echo "$IOS_CERTIFICATE_PASSWORD" | build-tools import-base64-certificate --password "$KEYCHAIN_PATH" "$IOS_CERTIFICATE_BASE64"
+echo "$MACOS_DEVELOPER_INSTALLER_CERTIFICATE_PASSWORD" | build-tools import-base64-certificate --password "$KEYCHAIN_PATH" "$MACOS_DEVELOPER_INSTALLER_CERTIFICATE"
+
+# Install the provisioning profiles.
+build-tools install-provisioning-profile "macos/Fileaway_Mac_App_Store_Profile.provisionprofile"
 
 # Build and archive the macOS project.
 sudo xcode-select --switch "$MACOS_XCODE_PATH"
@@ -161,7 +164,7 @@ xcode_project \
     OTHER_CODE_SIGN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\"" \
     BUILD_NUMBER=$BUILD_NUMBER \
     MARKETING_VERSION=$VERSION_NUMBER \
-    clean archive | xcpretty
+    clean archive
 xcodebuild \
     -archivePath "$ARCHIVE_PATH" \
     -exportArchive \
@@ -171,30 +174,28 @@ xcodebuild \
 APP_BASENAME="Fileaway.app"
 APP_PATH="$BUILD_DIRECTORY/$APP_BASENAME"
 
-# Show the code signing details.
-codesign -dvv "$APP_PATH"
-
-# Notarize the release build.
-if $NOTARIZE ; then
-    bundle exec fastlane notarize_release package:"$APP_PATH"
-fi
-
-# Archive the results.
-pushd "$BUILD_DIRECTORY"
-ZIP_BASENAME="Fileaway-macOS-${VERSION_NUMBER}.zip"
-zip -r --symlinks "$ZIP_BASENAME" "$APP_BASENAME"
-build-tools verify-notarized-zip "$ZIP_BASENAME"
-rm -r "$APP_BASENAME"
-zip -r "Artifacts.zip" "."
-popd
-
-# Attempt to create a version tag and publish a GitHub release; fails quietly if there's no new release.
 if $RELEASE ; then
+
+    PKG_PATH="$BUILD_DIRECTORY/Fileaway.pkg"
+
+    # Archive the build directory.
+    ZIP_BASENAME="build-${VERSION_NUMBER}-${BUILD_NUMBER}.zip"
+    ZIP_PATH="${BUILD_DIRECTORY}/${ZIP_BASENAME}"
+    pushd "${BUILD_DIRECTORY}"
+    zip -r "${ZIP_BASENAME}" .
+    popd
+
+    # Install the private key.
+    mkdir -p ~/.appstoreconnect/private_keys/
+    echo -n "$APPLE_API_KEY" | base64 --decode -o ~/".appstoreconnect/private_keys/AuthKey_${APPLE_API_KEY_ID}.p8"
+
     changes \
         --scope macOS \
         release \
         --skip-if-empty \
+        --pre-release \
         --push \
-        --exec "${CHANGES_GITHUB_RELEASE_SCRIPT}" \
-        "${BUILD_DIRECTORY}/${ZIP_BASENAME}"
+        --exec "${RELEASE_SCRIPT_PATH}" \
+        "${PKG_PATH}" "${ZIP_PATH}"
+
 fi

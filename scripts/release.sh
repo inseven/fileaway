@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (c) 2018-2021 InSeven Limited
+# Copyright (c) 2016-2022 InSeven Limited
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -23,25 +23,35 @@
 set -e
 set -o pipefail
 set -x
-set -u
 
-scripts_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-root_directory="${scripts_directory}/.."
-changes_directory="${scripts_directory}/changes"
+# This script expects the iOS IPA to be passed as the first argument, the macOS PKG as the second argument, and any
+# additional files to be attached to the GitHub release to be passed as subsequent arguments.
 
-environment_path="${scripts_directory}/environment.sh"
+# Validate and upload the macOS build.
+xcrun altool --validate-app \
+    -f "$1" \
+    --apiKey "$APPLE_API_KEY_ID" \
+    --apiIssuer "$APPLE_API_KEY_ISSUER_ID" \
+    --output-format json \
+    --type macos
+xcrun altool --upload-app \
+    -f "$1" \
+    --primary-bundle-id "uk.co.inseven.timezones" \
+    --apiKey "$APPLE_API_KEY_ID" \
+    --apiIssuer "$APPLE_API_KEY_ISSUER_ID" \
+    --type macos
 
-source "$environment_path"
-
-# Install the Python dependencies
-pip3 install --user pipenv
-PIPENV_PIPFILE="$changes_directory/Pipfile" pipenv install
-
-# Install the GitHub CLI
-github_cli_url="https://github.com"`curl -s -L https://github.com/cli/cli/releases/latest | grep -o -e "/.*macOS.*tar.gz"`
-if [ -d "$GITHUB_CLI_PATH" ] ; then
-    rm -r "$GITHUB_CLI_PATH"
+# Actually make the release.
+FLAGS=()
+if $CHANGES_INITIAL_DEVELOPMENT ; then
+    FLAGS+=("--prerelease")
+elif $CHANGES_PRE_RELEASE ; then
+    FLAGS+=("--prerelease")
 fi
-mkdir -p "$GITHUB_CLI_PATH"
-curl --location "$github_cli_url" --output "cli.tar.gz"
-tar --strip-components 1 -zxv -f "cli.tar.gz" -C "$GITHUB_CLI_PATH"
+gh release create "$CHANGES_TAG" --title "$CHANGES_QUALIFIED_TITLE" --notes-file "$CHANGES_NOTES_FILE" "${FLAGS[@]}"
+
+# Upload the attachments.
+for attachment in "$@"
+do
+    gh release upload "$CHANGES_TAG" "$attachment"
+done
