@@ -77,9 +77,9 @@ IPHONE_DESTINATION="platform=iOS Simulator,name=iPhone 13 Pro"
 export TEMPORARY_KEYCHAIN_PASSWORD=`openssl rand -base64 14`
 
 # Source the .env file if it exists to make local development easier.
-ENV_PATH" ] ; then
+if [ -f "$ENV_PATH" ] ; then
     echo "Sourcing .env..."
-    ENV_PATH"
+    source "$ENV_PATH"
 fi
 
 function xcode_project {
