@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (c) 2018-2021 InSeven Limited
+# Copyright (c) 2018-2022 InSeven Limited
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,7 @@ FASTLANE_ENV_PATH="${ROOT_DIRECTORY}/fastlane/.env"
 CHANGES_DIRECTORY="${SCRIPTS_DIRECTORY}/changes"
 BUILD_TOOLS_DIRECTORY="${SCRIPTS_DIRECTORY}/build-tools"
 
-CHANGES_GITHUB_RELEASE_SCRIPT="${CHANGES_DIRECTORY}/examples/gh-release.sh"
+RELEASE_SCRIPT_PATH="${SCRIPTS_DIRECTORY}/release.sh"
 
 PATH=$PATH:$CHANGES_DIRECTORY
 PATH=$PATH:$BUILD_TOOLS_DIRECTORY
@@ -53,7 +53,7 @@ which gh || (echo "GitHub cli (gh) not available on the path." && exit 1)
 
 # Process the command line arguments.
 POSITIONAL=()
-RELEASE=${TRY_RELEASE:-false}
+RELEASE=${RELEASE:-false}
 while [[ $# -gt 0 ]]
 do
     key="$1"
@@ -71,7 +71,7 @@ done
 
 # iPhone to be used for smoke test builds and tests.
 # This doesn't specify the OS version to allow the build script to recover from minor build changes.
-IPHONE_DESTINATION="platform=iOS Simulator,name=iPhone 12 Pro"
+IPHONE_DESTINATION="platform=iOS Simulator,name=iPhone 13 Pro"
 
 # Generate a random string to secure the local keychain.
 export TEMPORARY_KEYCHAIN_PASSWORD=`openssl rand -base64 14`
@@ -174,6 +174,15 @@ APP_PATH="$BUILD_DIRECTORY/$APP_BASENAME"
 # Attempt to create a version tag and publish a GitHub release; fails quietly if there's no new release.
 if $RELEASE ; then
 
+    PKG_PATH="$BUILD_DIRECTORY/Fileaway.pkg"
+
+    # Archive the build directory.
+    ZIP_BASENAME="build-${VERSION_NUMBER}-${BUILD_NUMBER}.zip"
+    ZIP_PATH="${BUILD_DIRECTORY}/${ZIP_BASENAME}"
+    pushd "${BUILD_DIRECTORY}"
+    zip -r "${ZIP_BASENAME}" .
+    popd
+
     # Install the private key.
     mkdir -p ~/.appstoreconnect/private_keys/
     echo -n "$APPLE_API_KEY" | base64 --decode -o ~/".appstoreconnect/private_keys/AuthKey_${APPLE_API_KEY_ID}.p8"
@@ -184,7 +193,7 @@ if $RELEASE ; then
         --skip-if-empty \
         --pre-release \
         --push \
-        --exec "${CHANGES_GITHUB_RELEASE_SCRIPT}" \
-        "${BUILD_DIRECTORY}/${ZIP_BASENAME}"
+        --exec "${RELEASE_SCRIPT_PATH}" \
+        "${PKG_PATH}" "${ZIP_PATH}"
 
 fi
