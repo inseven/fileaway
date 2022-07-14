@@ -33,7 +33,7 @@ TEMPORARY_DIRECTORY="${ROOT_DIRECTORY}/temp"
 
 KEYCHAIN_PATH="${TEMPORARY_DIRECTORY}/temporary.keychain"
 ARCHIVE_PATH="${BUILD_DIRECTORY}/Fileaway.xcarchive"
-FASTLANE_ENV_PATH="${ROOT_DIRECTORY}/fastlane/.env"
+ENV_PATH="${ROOT_DIRECTORY}/.env"
 
 CHANGES_DIRECTORY="${SCRIPTS_DIRECTORY}/changes"
 BUILD_TOOLS_DIRECTORY="${SCRIPTS_DIRECTORY}/build-tools"
@@ -76,11 +76,11 @@ IPHONE_DESTINATION="platform=iOS Simulator,name=iPhone 13 Pro"
 # Generate a random string to secure the local keychain.
 export TEMPORARY_KEYCHAIN_PASSWORD=`openssl rand -base64 14`
 
-# Source the Fastlane .env file if it exists to make local development easier.
-# if [ -f "$FASTLANE_ENV_PATH" ] ; then
-#     echo "Sourcing .env..."
-#     source "$FASTLANE_ENV_PATH"
-# fi
+# Source the .env file if it exists to make local development easier.
+ENV_PATH" ] ; then
+    echo "Sourcing .env..."
+    ENV_PATH"
+fi
 
 function xcode_project {
     xcodebuild \
