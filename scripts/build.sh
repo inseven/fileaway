@@ -183,9 +183,9 @@ if $RELEASE ; then
         --scope macOS \
         release \
         --skip-if-empty \
+        --pre-release \
         --push \
         --exec "${CHANGES_GITHUB_RELEASE_SCRIPT}" \
         "${BUILD_DIRECTORY}/${ZIP_BASENAME}"
-
 
 fi
