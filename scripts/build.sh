@@ -130,10 +130,16 @@ mkdir -p "$TEMPORARY_DIRECTORY"
 echo "$TEMPORARY_KEYCHAIN_PASSWORD" | build-tools create-keychain "$KEYCHAIN_PATH" --password
 
 function cleanup {
+
     # Cleanup the temporary files and keychain.
     cd "$ROOT_DIRECTORY"
     build-tools delete-keychain "$KEYCHAIN_PATH"
     rm -rf "$TEMPORARY_DIRECTORY"
+
+    # Clean up any private keys.
+    if [ -f ~/.appstoreconnect/private_keys ]; then
+        rm -r ~/.appstoreconnect/private_keys
+    fi
 }
 
 trap cleanup EXIT
@@ -168,6 +174,11 @@ APP_PATH="$BUILD_DIRECTORY/$APP_BASENAME"
 
 # Attempt to create a version tag and publish a GitHub release; fails quietly if there's no new release.
 if $RELEASE ; then
+
+    # Install the private key.
+    mkdir -p ~/.appstoreconnect/private_keys/
+    echo -n "$APPLE_API_KEY" | base64 --decode -o ~/".appstoreconnect/private_keys/AuthKey_${APPLE_API_KEY_ID}.p8"
+
     changes \
         --scope macOS \
         release \
@@ -175,4 +186,6 @@ if $RELEASE ; then
         --push \
         --exec "${CHANGES_GITHUB_RELEASE_SCRIPT}" \
         "${BUILD_DIRECTORY}/${ZIP_BASENAME}"
+
+
 fi
