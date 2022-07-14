@@ -124,22 +124,18 @@ struct RulesEditor: View {
 
                     HStack {
 
-                        ControlGroup {
-
-                            Button {
-                                add()
-                            } label: {
-                                Image(systemName: "plus")
-                            }
-
-                            Button {
-                                delete(rules: selection)
-                            } label: {
-                                Image(systemName: "minus")
-                            }
-                            .disabled(selection.count < 1)
-
+                        Button {
+                            add()
+                        } label: {
+                            Image(systemName: "plus")
                         }
+
+                        Button {
+                            delete(rules: selection)
+                        } label: {
+                            Image(systemName: "minus")
+                        }
+                        .disabled(selection.count < 1)
 
                         Button {
                             edit(rules: selection)
@@ -147,11 +143,8 @@ struct RulesEditor: View {
                             Text("Edit")
                         }
                         .disabled(selection.count != 1)
-                        .layoutPriority(2)
 
                         Spacer()
-                            .layoutPriority(1)
-
                     }
                 }
             }
