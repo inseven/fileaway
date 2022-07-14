@@ -77,10 +77,10 @@ IPHONE_DESTINATION="platform=iOS Simulator,name=iPhone 12 Pro"
 export TEMPORARY_KEYCHAIN_PASSWORD=`openssl rand -base64 14`
 
 # Source the Fastlane .env file if it exists to make local development easier.
-if [ -f "$FASTLANE_ENV_PATH" ] ; then
-    echo "Sourcing .env..."
-    source "$FASTLANE_ENV_PATH"
-fi
+# if [ -f "$FASTLANE_ENV_PATH" ] ; then
+#     echo "Sourcing .env..."
+#     source "$FASTLANE_ENV_PATH"
+# fi
 
 function xcode_project {
     xcodebuild \
@@ -146,12 +146,11 @@ trap cleanup EXIT
 
 # Determine the version and build number.
 VERSION_NUMBER=`changes --scope macOS version`
-GIT_COMMIT=`git rev-parse --short HEAD`
-TIMESTAMP=`date +%s`
-BUILD_NUMBER="${GIT_COMMIT}.${TIMESTAMP}"
+BUILD_NUMBER=`build-tools generate-build-number`
 
 # Import the certificates into our dedicated keychain.
-bundle exec fastlane import_certificates keychain:"$KEYCHAIN_PATH"
+echo "$IOS_CERTIFICATE_PASSWORD" | build-tools import-base64-certificate --password "$KEYCHAIN_PATH" "$IOS_CERTIFICATE_BASE64"
+echo "$MACOS_DEVELOPER_INSTALLER_CERTIFICATE_PASSWORD" | build-tools import-base64-certificate --password "$KEYCHAIN_PATH" "$MACOS_DEVELOPER_INSTALLER_CERTIFICATE"
 
 # Build and archive the macOS project.
 sudo xcode-select --switch "$MACOS_XCODE_PATH"
