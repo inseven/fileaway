@@ -53,16 +53,11 @@ which gh || (echo "GitHub cli (gh) not available on the path." && exit 1)
 
 # Process the command line arguments.
 POSITIONAL=()
-NOTARIZE=${NOTARIZE:-false}
 RELEASE=${TRY_RELEASE:-false}
 while [[ $# -gt 0 ]]
 do
     key="$1"
     case $key in
-        -n|--notarize)
-        NOTARIZE=true
-        shift
-        ;;
         -r|--release)
         RELEASE=true
         shift
@@ -170,23 +165,6 @@ xcodebuild \
 
 APP_BASENAME="Fileaway.app"
 APP_PATH="$BUILD_DIRECTORY/$APP_BASENAME"
-
-# Show the code signing details.
-codesign -dvv "$APP_PATH"
-
-# Notarize the release build.
-if $NOTARIZE ; then
-    bundle exec fastlane notarize_release package:"$APP_PATH"
-fi
-
-# Archive the results.
-pushd "$BUILD_DIRECTORY"
-ZIP_BASENAME="Fileaway-macOS-${VERSION_NUMBER}.zip"
-zip -r --symlinks "$ZIP_BASENAME" "$APP_BASENAME"
-build-tools verify-notarized-zip "$ZIP_BASENAME"
-rm -r "$APP_BASENAME"
-zip -r "Artifacts.zip" "."
-popd
 
 # Attempt to create a version tag and publish a GitHub release; fails quietly if there's no new release.
 if $RELEASE ; then
