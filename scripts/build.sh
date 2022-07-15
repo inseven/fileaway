@@ -114,8 +114,6 @@ build_scheme "Fileaway iOS" clean build
 sudo xcode-select --switch "$MACOS_XCODE_PATH"
 build_scheme "FileawayCore macOS" clean build build-for-testing test
 
-# Build the macOS archive.
-
 # Clean up the build directory.
 if [ -d "$BUILD_DIRECTORY" ] ; then
     rm -r "$BUILD_DIRECTORY"
