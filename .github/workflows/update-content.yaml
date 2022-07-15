@@ -1,12 +1,9 @@
-name: Update content
+name: update-release-notes
 
 on:
   schedule:
     - cron: '0 */6 * * *'
   workflow_dispatch:
-  repository_dispatch:
-    types:
-    - update-content
   push:
     branches: [ main ]
 
@@ -14,17 +11,21 @@ jobs:
 
   run:
 
-    runs-on: ubuntu-latest
+    runs-on: macos-ventura
 
     steps:
 
-    - name: Checkout source
+    - name: Checkout repository
       uses: actions/checkout@v2
       with:
-        ref: main
         submodules: recursive
+        fetch-depth: 0
+        ref: main
 
-    - name: Update releases
+    - name: Install dependencies
+      run: scripts/install-dependencies.sh
+
+    - name: Update release notes
       run: |
         scripts/update-releases.sh
 
@@ -32,4 +33,4 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v4
       id: auto-commit
       with:
-        commit_message: Update content
+        commit_message: "docs: Update release notes"
