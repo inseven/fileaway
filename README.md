@@ -12,19 +12,7 @@ Right now the macOS and iOS apps are incredibly divergent having been written wi
 
 ## Development
 
-### Managing Certificates
-
-The build script (details below) uses Fastlane's match task to manage a certificates and a local keychain. Unfortunately, match seems very buggy when using Developer ID certificates, meaning it can't safely be used to fetch the certificates from Apple (it will keep creating new developer certificates until you reach your quota).
-
-Instead, you can manually import a manually created certificate and private keychain into an existing match certificate store:
-
-```bash
-fastlane match import --skip_certificate_matching true --type developer_id
-```
-
-Match will ask for the path to your certificate (`.cer`) and private key file (`.p12`).
-
-N.B. When manually importing certificates, match will not generate file names with identifiers so it's a good idea to name the certificate and private key with a matching, and obvious name.
+Bookmarks follows the version numbering, build and signing conventions for InSeven Limited apps. Further details can be found [here](https://github.com/inseven/build-documentation).
 
 ### Builds
 
