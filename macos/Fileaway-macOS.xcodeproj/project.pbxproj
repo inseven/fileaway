@@ -785,7 +785,6 @@
 				CURRENT_PROJECT_VERSION = $BUILD_NUMBER;
 				DEVELOPMENT_ASSET_PATHS = "\"Fileaway/Preview Content\"";
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
-				"DEVELOPMENT_TEAM[sdk=macosx*]" = S4WXAUZQEV;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Fileaway/Info.plist;
@@ -797,7 +796,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.fileaway;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Fileaway Developer ID Application";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "Fileaway Mac App Store Profile";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
