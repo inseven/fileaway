@@ -12,7 +12,7 @@ Right now the macOS and iOS apps are incredibly divergent having been written wi
 
 ## Development
 
-Bookmarks follows the version numbering, build and signing conventions for InSeven Limited apps. Further details can be found [here](https://github.com/inseven/build-documentation).
+Fileaway follows the version numbering, build and signing conventions for InSeven Limited apps. Further details can be found [here](https://github.com/inseven/build-documentation).
 
 ### Builds
 
