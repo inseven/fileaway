@@ -44,11 +44,13 @@ struct VariableList: View {
             HStack {
 
                 ControlGroup {
+
                     Button {
                         rule.createVariable()
                     } label: {
                         Image(systemName: "plus")
                     }
+
                     Button {
                         guard let variable = selection else {
                             return
@@ -59,9 +61,11 @@ struct VariableList: View {
                         Image(systemName: "minus")
                     }
                     .disabled(selection == nil)
+
                 }
 
                 ControlGroup {
+
                     Button {
                         guard let variable = selection else {
                             return
@@ -70,6 +74,8 @@ struct VariableList: View {
                     } label: {
                         Image(systemName: "arrow.up")
                     }
+                    .disabled(selection == nil)
+
                     Button {
                         guard let variable = selection else {
                             return
@@ -78,11 +84,11 @@ struct VariableList: View {
                     } label: {
                         Image(systemName: "arrow.down")
                     }
+                    .disabled(selection == nil)
+
                 }
-                .disabled(selection == nil)
                 
                 Spacer()
-                    .layoutPriority(1)
 
             }
 

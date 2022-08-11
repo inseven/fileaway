@@ -88,15 +88,14 @@ struct DestinationList: View {
                     Button(String(describing: variable.name)) {
                         rule.destination.append(ComponentState(value: variable.name, type: .variable, variable: variable))
                     }
-                    .layoutPriority(2)
                 }
 
                 Button("Text") {
                     rule.destination.append(ComponentState(value: "Text", type: .text, variable: nil))
                 }
-                .layoutPriority(2)
 
                 ControlGroup {
+
                     Button {
                         guard let component = selection else {
                             return
@@ -105,6 +104,8 @@ struct DestinationList: View {
                     } label: {
                         Image(systemName: "arrow.up")
                     }
+                    .disabled(selection == nil)
+
                     Button {
                         guard let component = selection else {
                             return
@@ -113,8 +114,9 @@ struct DestinationList: View {
                     } label: {
                         Image(systemName: "arrow.down")
                     }
+                    .disabled(selection == nil)
+
                 }
-                .disabled(selection == nil)
 
                 Button {
                     guard let component = selection else {
@@ -126,10 +128,8 @@ struct DestinationList: View {
                     Image(systemName: "minus")
                 }
                 .disabled(selection == nil)
-                .layoutPriority(2)
 
                 Spacer()
-                    .layoutPriority(1)
             }
 
         }
