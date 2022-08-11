@@ -132,7 +132,7 @@ class RuleSet: ObservableObject {
         return rule
     }
 
-    func duplicate(_ rule: RuleState, preferredName: String) throws -> RuleState {
+    private func duplicate(_ rule: RuleState, preferredName: String) throws -> RuleState {
         let name = uniqueRuleName(preferredName: preferredName)
         let newRule = RuleState(rule)
         newRule.name = name
@@ -140,13 +140,18 @@ class RuleSet: ObservableObject {
         return newRule
     }
 
-    func remove(_ rule: RuleState) throws {
-        mutableRules.removeAll { $0 == rule }
-        rules.removeAll { $0.id == rule.id }
+    func duplicate(ids: Set<RuleState.ID>) throws -> [RuleState] {
+        let rules = mutableRules.filter { ids.contains($0.id) }
+        return try rules.map { try duplicate($0, preferredName: "Copy of " + $0.name) }
+    }
+
+    func remove(ids: Set<RuleState.ID>) throws {
+        mutableRules.removeAll { ids.contains($0.id) }
+        rules.removeAll { ids.contains($0.id) }
         try save()
     }
 
-    func save() throws {
+    private func save() throws {
         dispatchPrecondition(condition: .onQueue(.main))
         rules = mutableRules.map { Rule($0) }
         let configuration = rules.reduce(into: [:]) { result, rule in

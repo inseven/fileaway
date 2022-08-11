@@ -69,6 +69,7 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
     }
 
     init(_ rule: Rule, rootUrl: URL) {
+        id = rule.id
         name = rule.name
         let variables = rule.configuration.variables.map { VariableState($0) }
         self.variables = variables
