@@ -44,7 +44,16 @@ struct RulesSettingsView: View {
                     RulesEditor(ruleSet: ruleSet)
                         .padding(4)
                 } else {
-                    Text("No Archive Selected")
+                    VStack {
+                        Spacer()
+                        HStack {
+                            Spacer()
+                            Text("No Archive Selected")
+                                .foregroundColor(.secondary)
+                            Spacer()
+                        }
+                        Spacer()
+                    }
                 }
             }
         }
