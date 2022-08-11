@@ -22,26 +22,19 @@ import SwiftUI
 
 import Interact
 
-extension Set where Element == RuleState {
-
-    func remove(from ruleSet: RuleSet) throws {
-        for rule in self {
-            try ruleSet.remove(rule)
-        }
-    }
-
-    func duplicate(in ruleSet: RuleSet) throws {
-        for rule in self {
-            let _ = try ruleSet.duplicate(rule, preferredName: "Copy of " + rule.name)
-        }
-    }
-
-}
-
 struct RulesEditor: View {
 
-    enum SheetType {
+    enum SheetType: Identifiable {
+
         case rule(rule: RuleState)
+
+        var id: String {
+            switch self {
+            case .rule(let rule):
+                return "rule-\(rule.id)"
+            }
+        }
+
     }
 
     enum AlertType {
@@ -50,40 +43,46 @@ struct RulesEditor: View {
     }
 
     @ObservedObject var ruleSet: RuleSet
-    @State var selection: Set<RuleState> = Set()
+    @State var selection: Set<RuleState.ID> = Set()
     @State var sheet: SheetType?
     @State var alert: AlertType?
 
-    func add() {
+    @MainActor private func rules(for ids: Set<RuleState.ID>) -> Set<RuleState> {
+        return Set(ruleSet.mutableRules.filter { ids.contains($0.id) })
+    }
+
+    @MainActor private func add() {
         do {
             let rule = try ruleSet.new(preferredName: "Rule")
-            selection = [rule]
+            selection = [rule.id]
             sheet = .rule(rule: rule)
         } catch {
             alert = .error(error: error)
         }
     }
 
-    func edit(rules: Set<RuleState>) {
-        guard rules.count == 1,
-              let rule = rules.first else {
+    @MainActor private func edit(ids: Set<RuleState.ID>) {
+        guard ids.count == 1,
+              let rule = rules(for: ids).first
+        else {
             return
         }
         sheet = .rule(rule: rule)
     }
 
-    func delete(rules: Set<RuleState>) {
+    @MainActor private func delete(ids: Set<RuleState.ID>) {
         do {
-            try rules.remove(from: ruleSet)
-            selection = selection.filter { !rules.contains($0) }
+            try ruleSet.remove(ids: ids)
+            selection = selection.filter { !ids.contains($0) }
         } catch {
             alert = .error(error: error)
         }
     }
 
-    func duplicate(rules: Set<RuleState>) {
+    @MainActor private func duplicate(ids: Set<RuleState.ID>) {
         do {
-            let _ = try rules.duplicate(in: ruleSet)
+            let newRules = try ruleSet.duplicate(ids: ids)
+            selection = Set(newRules.map({ $0.id }))
         } catch {
             alert = .duplicationFailure(error: error)
         }
@@ -92,65 +91,59 @@ struct RulesEditor: View {
     var body: some View {
         HStack {
             VStack {
-                ScrollViewReader { scrollView in
-                    List(ruleSet.mutableRules, id: \.self, selection: $selection) { rule in
-                        Text(rule.name)
-                            .frame(maxWidth: .infinity, alignment: .topLeading)
-                            .lineLimit(1)
-                            .contentShape(Rectangle())
-                            .handleMouse {
-                                selection = [rule]
-                            } doubleClick: {
-                                selection = [rule]
-                                sheet = .rule(rule: rule)
-                            }
-                            .contextMenu {
-                                
-                                MenuItem("Edit", selection: $selection, item: rule) { items in
-                                    edit(rules: items)
-                                }
-                                .itemLimit(1)
+                List(ruleSet.mutableRules, selection: $selection) { rule in
+                    Text(rule.name)
+                        .lineLimit(1)
+                }
+                .contextMenu(forSelectionType: RuleState.ID.self) { items in
 
-                                MenuItem("Duplicate", selection: $selection, item: rule) { items in
-                                    duplicate(rules: items)
-                                }
-
-                                MenuItem("Delete", selection: $selection, item: rule) { items in
-                                    delete(rules: items)
-                                }
-
-                            }
+                    Button("Edit") {
+                        edit(ids: items)
                     }
+                    .disabled(items.count != 1)
 
-                    HStack {
+                    Button("Duplicate") {
+                        duplicate(ids: items)
+                    }
+                    .disabled(items.count < 1)
 
-                        ControlGroup {
+                    Button("Delete") {
+                        delete(ids: items)
+                    }
+                    .disabled(items.count < 1)
 
-                            Button {
-                                add()
-                            } label: {
-                                Image(systemName: "plus")
-                            }
+                } primaryAction: { items in
+                    edit(ids: selection)
+                }
 
-                            Button {
-                                delete(rules: selection)
-                            } label: {
-                                Image(systemName: "minus")
-                            }
-                            .disabled(selection.count < 1)
-                            
+                HStack {
+
+                    ControlGroup {
+
+                        Button {
+                            add()
+                        } label: {
+                            Image(systemName: "plus")
                         }
 
                         Button {
-                            edit(rules: selection)
+                            delete(ids: selection)
                         } label: {
-                            Text("Edit")
+                            Image(systemName: "minus")
                         }
-                        .disabled(selection.count != 1)
+                        .disabled(selection.count < 1)
+                        .keyboardShortcut(.delete)
 
-                        Spacer()
                     }
+
+                    Button("Edit") {
+                        edit(ids: selection)
+                    }
+                    .disabled(selection.count != 1)
+
+                    Spacer()
                 }
+
             }
             .frame(maxWidth: .infinity)
             .sheet(item: $sheet) { sheet in
@@ -167,17 +160,6 @@ struct RulesEditor: View {
                     return Alert(error: error)
                 }
             }
-        }
-    }
-
-}
-
-extension RulesEditor.SheetType: Identifiable {
-
-    var id: String {
-        switch self {
-        case .rule:
-            return "rule"
         }
     }
 
