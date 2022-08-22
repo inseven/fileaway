@@ -1,178 +1,177 @@
 ---
-layout: default
-title:  "Releases"
+title: Release Notes
 ---
 
-# Releases
+# Release Notes
 
-## Version 0.15.0
+## 0.15.0
 
-### Changes
+**Changes**
 
 - Filter rules by the archive name as well as the rule name (#223)
 
-## Version 0.14.0
+## 0.14.0
 
-### Changes
+**Changes**
 
 - Hit enter to select the matching rule in the Rules Wizard (#222)
 
-## Version 0.13.1
+## 0.13.1
 
-### Fixes
+**Fixes**
 
 - Disable the rule list edit buttons when no items are selected (#221)
 
-## Version 0.13.0
+## 0.13.0
 
-### Changes
+**Changes**
 
 - Reorder rule variables (#220)
 
-## Version 0.12.2
+## 0.12.2
 
-### Fixes
+**Fixes**
 
 - Better layout of the list buttons in the rule editor (#219)
 
-## Version 0.12.1
+## 0.12.1
 
-### Fixes
+**Fixes**
 
 - Target macOS 12 Monterey (#214)
 - Focus the search field when launching the rules wizard (#215)
 - Improve layout of the +/- buttons in the Settings rules list (#216)
 
-## Version 0.12.0
+## 0.12.0
 
-### Changes
+**Changes**
 
 - Copy file names from the context menu (#202)
 
-## Version 0.11.1
+## 0.11.1
 
-### Fixes
+**Fixes**
 
 - Correctly extract both dates from date ranges (#168)
 
-## Version 0.11.0
+## 0.11.0
 
-### Changes
+**Changes**
 
 - Automatically offer dates from within the PDF in the date picker of the Rules Wizard (#167)
 
-## Version 0.10.0
+## 0.10.0
 
-### Changes
+**Changes**
 
 - Sort by the file creation date if no date can be found in the filename (#166)
 
-## Version 0.9.6
+## 0.9.6
 
-### Fixes
+**Fixes**
 
 - Equal width for the location add/remove buttons (#165)
 
-## Version 0.9.5
+## 0.9.5
 
-### Fixes
+**Fixes**
 
 - Correct display name for iCloud Drive and other special directories (#164)
 
-## Version 0.9.4
+## 0.9.4
 
-### Fixes
+**Fixes**
 
 - Only strip dates at the beginning of filenames (#161)
 
-## Version 0.9.3
+## 0.9.3
 
-### Fixes
+**Fixes**
 
 - Add directory icons to the archives in the Rules settings tab (#146)macOS
 
-## Version 0.9.2
+## 0.9.2
 
-### Fixes
+**Fixes**
 
 - Set the initial directory when picking rules destinations (#143)macOS
 
-## Version 0.9.1
+## 0.9.1
 
-### Fixes
+**Fixes**
 
 - Duplicate and delete context menu items act on all selected rules in the Rules editor (#140)macOS
 
-## Version 0.9.0
+## 0.9.0
 
-### Changes
+**Changes**
 
 - Multiple inbox locations (#129)macOS
 
-## Version 0.8.0
+## 0.8.0
 
-### Changes
+**Changes**
 
 - Enable directory creation from the directory picker (#127)macOS
 
-## Version 0.7.0
+## 0.7.0
 
-### Changes
+**Changes**
 
 - Add a button to add text to rules (#123)macOS
 
-## Version 0.6.0
+## 0.6.0
 
-### Changes
+**Changes**
 
 - Add 'Edit' to the context menu in the Rules settings tab (#114)macOS
 
-## Version 0.5.1
+## 0.5.1
 
-### Fixes
+**Fixes**
 
 - Put the Rules Wizard first in the toolbar (#107)macOS
 
-## Version 0.5.0
+## 0.5.0
 
-### Changes
+**Changes**
 
 - Launch the Rules Wizard and Quick Look from the context menu (#104)
 
-### Fixes
+**Fixes**
 
 - Update the Rules Wizard title to ‘Select Rule’ (#105)macOS
 
-## Version 0.4.1
+## 0.4.1
 
-### Fixes
+**Fixes**
 
 - Move Wizard toolbar button should be disabled when no items are selected (#102)
 
-## Version 0.4.0
+## 0.4.0
 
-### Changes
+**Changes**
 
 - Update the wizard toolbar icon and add tooltips (#99)
 
-### Fixes
+**Fixes**
 
 - Fixed a crash when closing the Rules Wizard (#101)
 
-## Version 0.3.0
+## 0.3.0
 
-### Changes
+**Changes**
 
 - Command + down opens the current selection in the archive or inbox (#97)
 
-## Version 0.2.1
+## 0.2.1
 
-### Fixes
+**Fixes**
 
 - Make double-clicking to open rules in settings more reliable (#94)
 
-## Version 0.2.0
+## 0.2.0
 
-## Version 0.1.1
+## 0.1.1
 
-## Version 0.1.0
+## 0.1.0
