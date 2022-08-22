@@ -15,3 +15,7 @@ temp
 
 # Libraries
 /.local
+
+# Docs
+docs/.jekyll-cache
+docs/_site
