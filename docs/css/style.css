@@ -14,18 +14,12 @@ body {
 }
 
 a {
-    font-weight: 800;
     text-decoration: underline;
     color: var(--body-color);
 }
 
 a:hover {
     color: var(--brand-color);
-}
-
-ul.navigation a,
-.footer a {
-    text-decoration: none;
 }
 
 ul.navigation {
@@ -40,9 +34,17 @@ ul.navigation {
     box-sizing: border-box;
 }
 
+ul.navigation a {
+    text-decoration: none;
+}
+
 ul.navigation > li {
     display: inline-block;
     padding: 0.4em;
+}
+
+.header {
+    text-align: center;
 }
 
 .content {
