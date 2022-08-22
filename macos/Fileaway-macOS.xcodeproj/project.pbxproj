@@ -46,6 +46,7 @@
 		D8B657EE2642D40F009DE837 /* LocationsEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B657ED2642D40F009DE837 /* LocationsEditor.swift */; };
 		D8B6D030257DBB7D00C7E472 /* SelectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6D02F257DBB7D00C7E472 /* SelectionManager.swift */; };
 		D8B6D035257E71CD00C7E472 /* QuickLookCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6D034257E71CD00C7E472 /* QuickLookCoordinator.swift */; };
+		D8D275BE28B3865500200A7C /* Diligence in Frameworks */ = {isa = PBXBuildFile; productRef = D8D275BD28B3865500200A7C /* Diligence */; };
 		D8D78A922580DD750088890F /* QuickLookPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D78A912580DD750088890F /* QuickLookPreview.swift */; };
 		D8D78A9A2580DDF40088890F /* PageLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D78A992580DDF40088890F /* PageLink.swift */; };
 		D8D78A9F2580DE250088890F /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D78A9E2580DE250088890F /* PageView.swift */; };
@@ -152,6 +153,7 @@
 		D8BCF1972635062E00047E0A /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		D8BCF1982635064A00047E0A /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
 		D8BCF1992635067300047E0A /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		D8D275BC28B3862400200A7C /* diligence */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = diligence; path = ../diligence; sourceTree = "<group>"; };
 		D8D78A912580DD750088890F /* QuickLookPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickLookPreview.swift; sourceTree = "<group>"; };
 		D8D78A992580DDF40088890F /* PageLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageLink.swift; sourceTree = "<group>"; };
 		D8D78A9E2580DE250088890F /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 			files = (
 				D87DEFAF2577E068006CFE85 /* EonilFSEvents in Frameworks */,
 				D876A3B62654883F006D19FB /* FileawayCore.framework in Frameworks */,
+				D8D275BE28B3865500200A7C /* Diligence in Frameworks */,
 				D8037B122617F8CD00F41971 /* Introspect in Frameworks */,
 				D8F90C7325DAA72700F0EFB8 /* Interact in Frameworks */,
 			);
@@ -266,6 +269,7 @@
 		D87DEF7225774F6C006CFE85 = {
 			isa = PBXGroup;
 			children = (
+				D8D275BB28B3862400200A7C /* Packages */,
 				D8BCF1982635064A00047E0A /* Common.xcconfig */,
 				D8BCF1992635067300047E0A /* Debug.xcconfig */,
 				D8BCF1972635062E00047E0A /* Release.xcconfig */,
@@ -344,6 +348,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		D8D275BB28B3862400200A7C /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				D8D275BC28B3862400200A7C /* diligence */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		D8E7F9AF25999C5D00C7409B /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -420,6 +432,7 @@
 				D87DEFAE2577E068006CFE85 /* EonilFSEvents */,
 				D8F90C7225DAA72700F0EFB8 /* Interact */,
 				D8037B112617F8CD00F41971 /* Introspect */,
+				D8D275BD28B3865500200A7C /* Diligence */,
 			);
 			productName = "Document Finder";
 			productReference = D87DEF7B25774F6C006CFE85 /* Fileaway.app */;
@@ -956,6 +969,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D87DEFAD2577E068006CFE85 /* XCRemoteSwiftPackageReference "FSEvents" */;
 			productName = EonilFSEvents;
+		};
+		D8D275BD28B3865500200A7C /* Diligence */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Diligence;
 		};
 		D8F90C7225DAA72700F0EFB8 /* Interact */ = {
 			isa = XCSwiftPackageProductDependency;

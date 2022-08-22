@@ -21,6 +21,8 @@
 import SwiftUI
 import UserNotifications
 
+import Diligence
+
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     var manager = Manager()
@@ -140,5 +142,21 @@ struct FileawayApp: App {
         SwiftUI.Settings {
             SettingsView(manager: appDelegate.manager)
         }
+
+        About {
+            Action("InSeven Limited", url: URL(string: "https://inseven.co.uk")!)
+            Action("GitHub", url: URL(string: "https://github.com/inseven/fileaway")!)
+        } acknowledgements: {
+            Acknowledgements("Developers") {
+                Credit("Jason Morley", url: URL(string: "https://jbmorley.co.uk"))
+            }
+            Acknowledgements("Thanks") {
+                Credit("Michael Dales")
+                Credit("Pascal Pfiffner")
+                Credit("Sarah Barbour")
+                Credit("Terrence Talbot")
+            }
+        }
+
     }
 }
