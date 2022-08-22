@@ -45,3 +45,4 @@ fi
 mkdir -p "$GITHUB_CLI_PATH"
 curl --location "$github_cli_url" --output "cli.tar.gz"
 tar --strip-components 1 -zxv -f "cli.tar.gz" -C "$GITHUB_CLI_PATH"
+unlink "cli.tar.gz"
