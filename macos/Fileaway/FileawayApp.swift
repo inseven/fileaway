@@ -145,6 +145,7 @@ struct FileawayApp: App {
 
         About {
             Action("InSeven Limited", url: URL(string: "https://inseven.co.uk")!)
+            Action("Privacy Policy", url: URL(string: "https://fileaway.app/privacy-policy")!)
             Action("GitHub", url: URL(string: "https://github.com/inseven/fileaway")!)
         } acknowledgements: {
             Acknowledgements("Developers") {
