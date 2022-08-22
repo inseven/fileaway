@@ -1,0 +1,25 @@
+{
+  "systemImage" : "archivebox.fill",
+  "topColor" : {
+    "red" : 1,
+    "alpha" : 1,
+    "blue" : 0.69039613008499146,
+    "green" : 0.46602147817611694
+  },
+  "iconScale" : 0.74886022180944056,
+  "id" : "55E6DF57-1919-404E-ACA3-8DEE7208D37A",
+  "symbolColor" : {
+    "red" : 1,
+    "alpha" : 1,
+    "blue" : 1,
+    "green" : 1
+  },
+  "shadowOpacity" : 0.30112987598339153,
+  "shadowHeight" : 0.18236007156905598,
+  "bottomColor" : {
+    "red" : 1,
+    "alpha" : 1,
+    "blue" : 0.47399842739999998,
+    "green" : 0.49327188729999999
+  }
+}
