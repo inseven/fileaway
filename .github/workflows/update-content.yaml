@@ -20,14 +20,13 @@ jobs:
       with:
         submodules: recursive
         fetch-depth: 0
-        ref: main
 
     - name: Install dependencies
       run: scripts/install-dependencies.sh
 
     - name: Update release notes
       run: |
-        scripts/update-releases.sh
+        scripts/update-release-notes.sh
 
     - name: Commit documentation
       uses: stefanzweifel/git-auto-commit-action@v4

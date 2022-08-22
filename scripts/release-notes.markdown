@@ -1,14 +1,13 @@
 ---
-layout: default
-title:  "Releases"
+title: Release Notes
 ---
 
-# Releases
+# Release Notes
 
 {% for release in releases -%}
-## Version {{ release.version }}{% if not release.is_released %} (Unreleased){% endif %}
+## {{ release.version }}{% if not release.is_released %} (Unreleased){% endif %}
 {% for section in release.sections %}
-### {{ section.title }}
+**{{ section.title }}**
 
 {% for change in section.changes | reverse -%}
 - {{ change.description }}{% if change.scope %}{{ change.scope }}{% endif %}
