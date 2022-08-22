@@ -22,6 +22,7 @@ import SwiftUI
 import UserNotifications
 
 import Diligence
+import FileawayCore
 
 class AppDelegate: NSObject, NSApplicationDelegate {
 
@@ -143,20 +144,12 @@ struct FileawayApp: App {
             SettingsView(manager: appDelegate.manager)
         }
 
-        About {
-            Action("InSeven Limited", url: URL(string: "https://inseven.co.uk")!)
-            Action("Privacy Policy", url: URL(string: "https://fileaway.app/privacy-policy")!)
-            Action("GitHub", url: URL(string: "https://github.com/inseven/fileaway")!)
+        About(copyright: Legal.copyright) {
+            Legal.actions
         } acknowledgements: {
-            Acknowledgements("Developers") {
-                Credit("Jason Morley", url: URL(string: "https://jbmorley.co.uk"))
-            }
-            Acknowledgements("Thanks") {
-                Credit("Michael Dales")
-                Credit("Pascal Pfiffner")
-                Credit("Sarah Barbour")
-                Credit("Terrence Talbot")
-            }
+            Legal.acknowledgements
+        } licenses: {
+            Legal.licenses
         }
 
     }

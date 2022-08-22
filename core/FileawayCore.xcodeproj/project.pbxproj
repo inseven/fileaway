@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -57,6 +57,14 @@
 		D8D14DD0216F015F00D6E1DF /* FileawayCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8D14DC7216F015F00D6E1DF /* FileawayCore.framework */; };
 		D8D1732E265698610069326C /* TitleFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D1732C2656985E0069326C /* TitleFinderTests.swift */; };
 		D8D1732F265698620069326C /* TitleFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D1732C2656985E0069326C /* TitleFinderTests.swift */; };
+		D8D371CB28B43349009B72AD /* diligence-license in Resources */ = {isa = PBXBuildFile; fileRef = D8D371CA28B43349009B72AD /* diligence-license */; };
+		D8D371CD28B4350E009B72AD /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D371CC28B4350E009B72AD /* Bundle.swift */; };
+		D8D371CE28B43514009B72AD /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D371CC28B4350E009B72AD /* Bundle.swift */; };
+		D8D371D028B435D1009B72AD /* Legal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D371CF28B435D1009B72AD /* Legal.swift */; };
+		D8D371D328B43637009B72AD /* Diligence in Frameworks */ = {isa = PBXBuildFile; productRef = D8D371D228B43637009B72AD /* Diligence */; };
+		D8D371D528B43AFC009B72AD /* introspect-license in Resources */ = {isa = PBXBuildFile; fileRef = D8D371D428B43AFC009B72AD /* introspect-license */; };
+		D8D371D728B43C28009B72AD /* interact-license in Resources */ = {isa = PBXBuildFile; fileRef = D8D371D628B43C28009B72AD /* interact-license */; };
+		D8D371F428B43DE9009B72AD /* eonilfsevents-license in Resources */ = {isa = PBXBuildFile; fileRef = D8D371F328B43DE9009B72AD /* eonilfsevents-license */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +119,12 @@
 		D8D14DCF216F015F00D6E1DF /* FileawayCore iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FileawayCore iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8D14DD6216F015F00D6E1DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8D1732C2656985E0069326C /* TitleFinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleFinderTests.swift; sourceTree = "<group>"; };
+		D8D371CA28B43349009B72AD /* diligence-license */ = {isa = PBXFileReference; lastKnownFileType = text; path = "diligence-license"; sourceTree = "<group>"; };
+		D8D371CC28B4350E009B72AD /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
+		D8D371CF28B435D1009B72AD /* Legal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Legal.swift; sourceTree = "<group>"; };
+		D8D371D428B43AFC009B72AD /* introspect-license */ = {isa = PBXFileReference; lastKnownFileType = text; path = "introspect-license"; sourceTree = "<group>"; };
+		D8D371D628B43C28009B72AD /* interact-license */ = {isa = PBXFileReference; lastKnownFileType = text; path = "interact-license"; sourceTree = "<group>"; };
+		D8D371F328B43DE9009B72AD /* eonilfsevents-license */ = {isa = PBXFileReference; lastKnownFileType = text; path = "eonilfsevents-license"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8D371D328B43637009B72AD /* Diligence in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,6 +172,7 @@
 				D8D14DC8216F015F00D6E1DF /* FileawayCore iOS */,
 				D8D14DD3216F015F00D6E1DF /* FileawayCore iOSTests */,
 				D81F7C46216E3AA80070AAA0 /* Products */,
+				D8D371D128B43637009B72AD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -174,6 +190,7 @@
 		D81F7C47216E3AA80070AAA0 /* FileawayCore */ = {
 			isa = PBXGroup;
 			children = (
+				D8D371C928B43337009B72AD /* Licenses */,
 				D84E50C72654B56700496524 /* Configuration */,
 				D898E66126557B91005EA6DE /* Extensions */,
 				D876A3BC26548C61006D19FB /* BackChannel.swift */,
@@ -189,6 +206,7 @@
 				D84E50C42654B0DE00496524 /* Task.swift */,
 				D898E65E26557AFD005EA6DE /* TitleFinder.swift */,
 				D8D14D57216E3BAE00D6E1DF /* VariableProvider.swift */,
+				D8D371CF28B435D1009B72AD /* Legal.swift */,
 			);
 			path = FileawayCore;
 			sourceTree = "<group>";
@@ -223,6 +241,7 @@
 				D898E6582655796B005EA6DE /* String.swift */,
 				D82D01132656FAC100FD2974 /* URL.swift */,
 				D82D012B2657F7F500FD2974 /* PDFDocument.swift */,
+				D8D371CC28B4350E009B72AD /* Bundle.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -267,6 +286,24 @@
 			path = "FileawayCore iOSTests";
 			sourceTree = "<group>";
 		};
+		D8D371C928B43337009B72AD /* Licenses */ = {
+			isa = PBXGroup;
+			children = (
+				D8D371CA28B43349009B72AD /* diligence-license */,
+				D8D371F328B43DE9009B72AD /* eonilfsevents-license */,
+				D8D371D628B43C28009B72AD /* interact-license */,
+				D8D371D428B43AFC009B72AD /* introspect-license */,
+			);
+			path = Licenses;
+			sourceTree = "<group>";
+		};
+		D8D371D128B43637009B72AD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -303,6 +340,9 @@
 			dependencies = (
 			);
 			name = "FileawayCore macOS";
+			packageProductDependencies = (
+				D8D371D228B43637009B72AD /* Diligence */,
+			);
 			productName = "FileawayCore macOS";
 			productReference = D8D14DA0216E3E0E00D6E1DF /* FileawayCore.framework */;
 			productType = "com.apple.product-type.framework";
@@ -412,6 +452,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8D371CB28B43349009B72AD /* diligence-license in Resources */,
+				D8D371D528B43AFC009B72AD /* introspect-license in Resources */,
+				D8D371F428B43DE9009B72AD /* eonilfsevents-license in Resources */,
+				D8D371D728B43C28009B72AD /* interact-license in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,6 +488,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8D14DB8216E3E1400D6E1DF /* VariableProvider.swift in Sources */,
+				D8D371CD28B4350E009B72AD /* Bundle.swift in Sources */,
 				D898E6592655796B005EA6DE /* String.swift in Sources */,
 				D84E50BF2654B07500496524 /* Variable.swift in Sources */,
 				D84E50BC2654B05200496524 /* Component.swift in Sources */,
@@ -451,6 +496,7 @@
 				D8D14DB9216E3E1400D6E1DF /* Manager.swift in Sources */,
 				D82D011C2657259F00FD2974 /* FileDate.swift in Sources */,
 				D898E65C26557AC3005EA6DE /* DateFinder.swift in Sources */,
+				D8D371D028B435D1009B72AD /* Legal.swift in Sources */,
 				D84E50B92654B02600496524 /* ComponentType.swift in Sources */,
 				D82D012C2657F7F500FD2974 /* PDFDocument.swift in Sources */,
 				D84E50C22654B0B000496524 /* VariableType.swift in Sources */,
@@ -481,6 +527,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8BCA525216F08DF002A624D /* VariableProvider.swift in Sources */,
+				D8D371CE28B43514009B72AD /* Bundle.swift in Sources */,
 				D898E65A2655796B005EA6DE /* String.swift in Sources */,
 				D84E50C02654B07500496524 /* Variable.swift in Sources */,
 				D84E50BD2654B05200496524 /* Component.swift in Sources */,
@@ -583,7 +630,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -643,7 +690,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -894,6 +941,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D8D371D228B43637009B72AD /* Diligence */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Diligence;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D81F7C3C216E3AA80070AAA0 /* Project object */;
 }
