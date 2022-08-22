@@ -20,7 +20,6 @@ jobs:
       with:
         submodules: recursive
         fetch-depth: 0
-        ref: main
 
     - name: Install dependencies
       run: scripts/install-dependencies.sh
