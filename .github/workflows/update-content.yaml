@@ -27,7 +27,7 @@ jobs:
 
     - name: Update release notes
       run: |
-        scripts/update-releases.sh
+        scripts/update-release-notes.sh
 
     - name: Commit documentation
       uses: stefanzweifel/git-auto-commit-action@v4
