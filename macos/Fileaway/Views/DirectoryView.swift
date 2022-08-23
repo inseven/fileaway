@@ -28,7 +28,7 @@ import Interact
 
 struct DirectoryView: View {
 
-    @Environment(\.openURL) var openURL
+    @Environment(\.openWindow) var openWindow
 
     @ObservedObject var directoryObserver: DirectoryObserver
 
@@ -48,13 +48,7 @@ struct DirectoryView: View {
             if selection.count == 1, let file = selection.first {
 
                 Button("Rules Wizard") {
-                    var components = URLComponents()
-                    components.scheme = "fileaway"
-                    components.path = file.url.path
-                    guard let url = components.url else {
-                        return
-                    }
-                    openURL(url)
+                    openWindow(id: Wizard.windowID, value: file.url)
                 }
                 Divider()
                 Button("Open") {

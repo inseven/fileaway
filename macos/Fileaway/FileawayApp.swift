@@ -90,26 +90,17 @@ struct FileawayApp: App {
     }
 
     var body: some Scene {
+        
         WindowGroup(id: "MainWindow") {
             ContentView(manager: appDelegate.manager)
                 .environment(\.manager, appDelegate.manager)
-                .frameAutosaveName("Main Window")
         }
         .commands {
             ToolbarCommands()
             SidebarCommands()
         }
 
-        WindowGroup("Wizard") {
-            RulesWizard()
-                .environment(\.manager, appDelegate.manager)
-                .handlesExternalEvents(preferring: Set(arrayLiteral: "*"), allowing: Set(arrayLiteral: "*"))
-                .background(VisualEffectView(material: NSVisualEffectView.Material.sidebar,
-                                             blendingMode: NSVisualEffectView.BlendingMode.behindWindow)
-                                .edgesIgnoringSafeArea(.all))
-        }
-        .windowStyle(HiddenTitleBarWindowStyle())
-        .handlesExternalEvents(matching: Set(arrayLiteral: "*"))
+        Wizard(manager: appDelegate.manager)
 
         SwiftUI.Settings {
             SettingsView(manager: appDelegate.manager)
@@ -124,4 +115,25 @@ struct FileawayApp: App {
         }
 
     }
+}
+
+struct Wizard: Scene {
+
+    static let windowID = "wizard-window"
+
+    var manager: Manager
+
+    var body: some Scene {
+        WindowGroup(id: Self.windowID, for: URL.self) { $url in
+            if let url = url {
+                RulesWizard(url: url)
+                    .environment(\.manager, manager)
+                    .background(VisualEffectView(material: NSVisualEffectView.Material.sidebar,
+                                                 blendingMode: NSVisualEffectView.BlendingMode.behindWindow)
+                        .edgesIgnoringSafeArea(.all))
+            }
+        }
+        .windowStyle(.hiddenTitleBar)
+    }
+
 }
