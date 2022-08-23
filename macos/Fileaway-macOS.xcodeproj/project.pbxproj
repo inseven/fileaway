@@ -21,6 +21,7 @@
 		D82D01262657F66B00FD2974 /* VariableProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D01252657F66B00FD2974 /* VariableProvider.swift */; };
 		D82D01282657F69900FD2974 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D01272657F69900FD2974 /* Observable.swift */; };
 		D82D012A2657F6D500FD2974 /* TextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D01292657F6D500FD2974 /* TextProvider.swift */; };
+		D82D73D428B4C35A006F49F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D73D328B4C35A006F49F1 /* AppDelegate.swift */; };
 		D83CDCE52620F97F0063C91C /* VariableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83CDCE42620F97F0063C91C /* VariableTextField.swift */; };
 		D83CDCEA2620FF210063C91C /* RuleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83CDCE92620FF210063C91C /* RuleSheet.swift */; };
 		D85C9572257999130007AE1E /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C9571257999130007AE1E /* FileManager.swift */; };
@@ -120,6 +121,7 @@
 		D82D01252657F66B00FD2974 /* VariableProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableProvider.swift; sourceTree = "<group>"; };
 		D82D01272657F69900FD2974 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		D82D01292657F6D500FD2974 /* TextProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextProvider.swift; sourceTree = "<group>"; };
+		D82D73D328B4C35A006F49F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D83CDCE42620F97F0063C91C /* VariableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableTextField.swift; sourceTree = "<group>"; };
 		D83CDCE92620FF210063C91C /* RuleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleSheet.swift; sourceTree = "<group>"; };
 		D85C9571257999130007AE1E /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 		D8005ABF258276160001BE2C /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				D82D73D328B4C35A006F49F1 /* AppDelegate.swift */,
 				D8E7F9F72599B0D600C7409B /* ComponentState.swift */,
 				D8F8BE26258819C80010432F /* DateInstance.swift */,
 				D80F72D9264311690010BB38 /* FileawayError.swift */,
@@ -587,6 +590,7 @@
 				D8F8BE3C25881C650010432F /* Highlight.swift in Sources */,
 				D8B6D035257E71CD00C7E472 /* QuickLookCoordinator.swift in Sources */,
 				D82D012A2657F6D500FD2974 /* TextProvider.swift in Sources */,
+				D82D73D428B4C35A006F49F1 /* AppDelegate.swift in Sources */,
 				D82D01242657637700FD2974 /* VariableStringView.swift in Sources */,
 				D8E7F9EB2599B05300C7409B /* VariableList.swift in Sources */,
 				D8E7F9F82599B0D600C7409B /* ComponentState.swift in Sources */,
