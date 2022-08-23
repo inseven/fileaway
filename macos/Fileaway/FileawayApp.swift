@@ -24,17 +24,6 @@ import UserNotifications
 import Diligence
 import FileawayCore
 
-class AppDelegate: NSObject, NSApplicationDelegate {
-
-    var manager = Manager()
-
-    func applicationDidFinishLaunching(_ notification: Notification) {
-        print("Did finish launching")
-        manager.start()
-    }
-
-}
-
 struct FocusedSelectionKey : FocusedValueKey {
     typealias Value = SelectionManager
 }
