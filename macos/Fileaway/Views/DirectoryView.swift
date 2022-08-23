@@ -76,6 +76,7 @@ struct DirectoryView: View {
         // Enter to open.
         // Drag-and-drop.
         // .onCutCommand(perform: manager.cut)
+        .overlay(directoryObserver.searchResults.isEmpty ? Text("No Items").font(.title).foregroundColor(.secondary) : nil)
         .searchable(text: directoryObserver.filter)
         .toolbar(id: "main") {
             SelectionToolbar(manager: manager)

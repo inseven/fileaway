@@ -27,33 +27,36 @@ struct Sidebar: View {
     }
 
     @ObservedObject var manager: Manager
+
+    @Binding var section: URL?
+
     @State var firstResponder: Bool = false
     @State var alertType: AlertType?
 
     var body: some View {
-        List {
+        List(selection: $section) {
             Section(header: Text("Inboxes")) {
                 ForEach(manager.directories(type: .inbox)) { inbox in
-                    NavigationLink(destination: DirectoryView(directoryObserver: inbox)) {
-                        MailboxRow(directoryObserver: inbox, title: inbox.name, imageSystemName: "tray")
+                    NavigationLink(value: inbox.url) {
+                        Label(inbox.name, systemImage: "tray")
                     }
-                    .contextMenu {
-                        LocationMenuItems(manager: manager, directoryObserver: inbox) { error in
-                            alertType = .error(error: error)
-                        }
-                    }
+//                    .contextMenu {
+//                        LocationMenuItems(manager: manager, directoryObserver: inbox) { error in
+//                            alertType = .error(error: error)
+//                        }
+//                    }
                 }
             }
             Section(header: Text("Archives")) {
                 ForEach(manager.directories(type: .archive)) { archive in
-                    NavigationLink(destination: DirectoryView(directoryObserver: archive)) {
-                        MailboxRow(directoryObserver: archive, title: archive.name, imageSystemName: "archivebox")
+                    NavigationLink(value: archive.url) {
+                        Label(archive.name, systemImage: "archivebox")
                     }
-                    .contextMenu {
-                        LocationMenuItems(manager: manager, directoryObserver: archive) { error in
-                            alertType = .error(error: error)
-                        }
-                    }
+//                    .contextMenu {
+//                        LocationMenuItems(manager: manager, directoryObserver: archive) { error in
+//                            alertType = .error(error: error)
+//                        }
+//                    }
                 }
             }
         }
