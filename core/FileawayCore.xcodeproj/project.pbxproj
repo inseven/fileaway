@@ -21,6 +21,7 @@
 		D82D012D2657F7F500FD2974 /* PDFDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D012B2657F7F500FD2974 /* PDFDocument.swift */; };
 		D82D012F2657F8E800FD2974 /* DateExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D012E2657F8E800FD2974 /* DateExtractor.swift */; };
 		D82D01302657F8E800FD2974 /* DateExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D012E2657F8E800FD2974 /* DateExtractor.swift */; };
+		D82D73DD28B4E774006F49F1 /* Diligence in Frameworks */ = {isa = PBXBuildFile; productRef = D82D73DC28B4E774006F49F1 /* Diligence */; };
 		D84E50B92654B02600496524 /* ComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E50B82654B02600496524 /* ComponentType.swift */; };
 		D84E50BA2654B02600496524 /* ComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E50B82654B02600496524 /* ComponentType.swift */; };
 		D84E50BC2654B05200496524 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E50BB2654B05200496524 /* Component.swift */; };
@@ -61,7 +62,6 @@
 		D8D371CD28B4350E009B72AD /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D371CC28B4350E009B72AD /* Bundle.swift */; };
 		D8D371CE28B43514009B72AD /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D371CC28B4350E009B72AD /* Bundle.swift */; };
 		D8D371D028B435D1009B72AD /* Legal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D371CF28B435D1009B72AD /* Legal.swift */; };
-		D8D371D328B43637009B72AD /* Diligence in Frameworks */ = {isa = PBXBuildFile; productRef = D8D371D228B43637009B72AD /* Diligence */; };
 		D8D371D528B43AFC009B72AD /* introspect-license in Resources */ = {isa = PBXBuildFile; fileRef = D8D371D428B43AFC009B72AD /* introspect-license */; };
 		D8D371D728B43C28009B72AD /* interact-license in Resources */ = {isa = PBXBuildFile; fileRef = D8D371D628B43C28009B72AD /* interact-license */; };
 		D8D371F428B43DE9009B72AD /* eonilfsevents-license in Resources */ = {isa = PBXBuildFile; fileRef = D8D371F328B43DE9009B72AD /* eonilfsevents-license */; };
@@ -94,6 +94,7 @@
 		D82D011E265748A200FD2974 /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
 		D82D012B2657F7F500FD2974 /* PDFDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFDocument.swift; sourceTree = "<group>"; };
 		D82D012E2657F8E800FD2974 /* DateExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtractor.swift; sourceTree = "<group>"; };
+		D82D73DB28B4E762006F49F1 /* diligence */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = diligence; path = ../diligence; sourceTree = "<group>"; };
 		D84E50B82654B02600496524 /* ComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentType.swift; sourceTree = "<group>"; };
 		D84E50BB2654B05200496524 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		D84E50BE2654B07500496524 /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
@@ -132,7 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8D371D328B43637009B72AD /* Diligence in Frameworks */,
+				D82D73DD28B4E774006F49F1 /* Diligence in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,6 +166,7 @@
 		D81F7C3B216E3AA80070AAA0 = {
 			isa = PBXGroup;
 			children = (
+				D82D73DA28B4E762006F49F1 /* Packages */,
 				D81F7C47216E3AA80070AAA0 /* FileawayCore */,
 				D81F7C52216E3AA90070AAA0 /* FileawayCoreTests */,
 				D8D14DA1216E3E0E00D6E1DF /* FileawayCore macOS */,
@@ -220,6 +222,14 @@
 				D81F7C55216E3AA90070AAA0 /* Info.plist */,
 			);
 			path = FileawayCoreTests;
+			sourceTree = "<group>";
+		};
+		D82D73DA28B4E762006F49F1 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				D82D73DB28B4E762006F49F1 /* diligence */,
+			);
+			name = Packages;
 			sourceTree = "<group>";
 		};
 		D84E50C72654B56700496524 /* Configuration */ = {
@@ -341,7 +351,7 @@
 			);
 			name = "FileawayCore macOS";
 			packageProductDependencies = (
-				D8D371D228B43637009B72AD /* Diligence */,
+				D82D73DC28B4E774006F49F1 /* Diligence */,
 			);
 			productName = "FileawayCore macOS";
 			productReference = D8D14DA0216E3E0E00D6E1DF /* FileawayCore.framework */;
@@ -629,7 +639,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -689,7 +699,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -943,7 +953,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D8D371D228B43637009B72AD /* Diligence */ = {
+		D82D73DC28B4E774006F49F1 /* Diligence */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Diligence;
 		};
