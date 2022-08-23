@@ -37,7 +37,6 @@ struct DetailsPage: View {
     @StateObject var rule: RuleInstance
     @State var alert: AlertType?
     @State var date: Date = Date()
-    @State var year = "2020"
     @StateObject var dateExtractor: DateExtractor
 
     private var columns: [GridItem] = [
