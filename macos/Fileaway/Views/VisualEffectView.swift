@@ -20,26 +20,27 @@
 
 import SwiftUI
 
-struct Wizard: Scene {
+struct VisualEffectView: NSViewRepresentable {
 
-    static let windowID = "wizard-window"
+    static var sidebarBlendBehindWindow: Self = {
+        return VisualEffectView(material: NSVisualEffectView.Material.sidebar,
+                                blendingMode: NSVisualEffectView.BlendingMode.behindWindow)
+    }()
 
-    private var manager: Manager
+    let material: NSVisualEffectView.Material
+    let blendingMode: NSVisualEffectView.BlendingMode
 
-    init(manager: Manager) {
-        self.manager = manager
+    func makeNSView(context: Context) -> NSVisualEffectView {
+        let visualEffectView = NSVisualEffectView()
+        visualEffectView.material = material
+        visualEffectView.blendingMode = blendingMode
+        visualEffectView.state = NSVisualEffectView.State.active
+        return visualEffectView
     }
 
-    var body: some Scene {
-        WindowGroup(id: Self.windowID, for: URL.self) { $url in
-            if let url = url {
-                RulesWizard(url: url)
-                    .environment(\.manager, manager)
-                    .background(VisualEffectView.sidebarBlendBehindWindow
-                        .edgesIgnoringSafeArea(.all))
-            }
-        }
-        .windowStyle(.hiddenTitleBar)
+    func updateNSView(_ visualEffectView: NSVisualEffectView, context: Context) {
+        visualEffectView.material = material
+        visualEffectView.blendingMode = blendingMode
     }
-
+    
 }
