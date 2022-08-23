@@ -25,34 +25,33 @@ import Interact
 
 struct FileRow: View {
 
-    var file: FileInfo
-    var isSelected: Bool
+    struct LayoutMetrics {
+        static let iconSize = CGSize(width: 48.0, height: 48.0)
+    }
 
-    init(file: FileInfo, isSelected: Bool) {
+    var file: FileInfo
+
+    init(file: FileInfo) {
         self.file = file
-        self.isSelected = isSelected
     }
 
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                IconView(url: file.url, size: CGSize(width: 48, height: 48))
+//                IconView(url: file.url, size: LayoutMetrics.iconSize)
                 VStack(spacing: 0) {
                     HStack {
                         Text(file.name)
                             .lineLimit(1)
                             .font(.headline)
-                            .foregroundColor(isSelected ? .white : .primary)
                         Spacer()
                         if let date = file.date {
                             DateView(date: date)
-                                .foregroundColor(isSelected ? .white : .secondary)
                         }
                     }
                     HStack {
                         Text(file.directoryUrl.path)
                             .lineLimit(1)
-                            .foregroundColor(isSelected ? .white : .secondary)
                             .font(.subheadline)
                         Spacer()
                     }

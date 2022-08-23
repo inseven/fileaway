@@ -22,60 +22,55 @@ import SwiftUI
 
 import Interact
 
-struct Toolbar: ViewModifier {
+struct SelectionToolbar: CustomizableToolbarContent {
 
     @Environment(\.openURL) var openURL
 
     @ObservedObject var manager: SelectionManager
-    @Binding var filter: String
 
-    func body(content: Content) -> some View {
-        content
-            .toolbar {
-                ToolbarItem {
-                    Button {
-                        guard let file = manager.tracker.selection.first else {
-                            return
-                        }
-                        var components = URLComponents()
-                        components.scheme = "fileaway"
-                        components.path = file.url.path
-                        guard let url = components.url else {
-                            return
-                        }
-                        openURL(url)
-                    } label: {
-                        Image(systemName: "wand.and.stars")
-                    }
-                    .help("Move the selected items using the Rules Wizard")
-                    .disabled(!manager.canMove)
-                    .keyboardShortcut(KeyboardShortcut(.return, modifiers: .command))
+    var body: some CustomizableToolbarContent {
+        ToolbarItem(id: "wizard") {
+            Button {
+                guard let file = manager.selection.first else {
+                    return
                 }
-                ToolbarItem {
-                    Button {
-                        guard let file = manager.tracker.selection.first else {
-                            return
-                        }
-                        QuickLookCoordinator.shared.show(url: file.url)
-                    } label: {
-                        Image(systemName: "eye")
-                    }
-                    .help("Show items with Quick Look")
-                    .disabled(!manager.canPreview)
+                var components = URLComponents()
+                components.scheme = "fileaway"
+                components.path = file.url.path
+                guard let url = components.url else {
+                    return
                 }
-                ToolbarItem {
-                    Button {
-                        try? manager.trash()
-                    } label: {
-                        Image(systemName: "trash")
-                    }
-                    .help("Move the selected items to the Bin")
-                    .disabled(!manager.canTrash)
-                }
-                ToolbarItem {
-                    SearchField(search: $filter)
-                        .frame(minWidth: 100, idealWidth: 200, maxWidth: .infinity)
-                }
+                openURL(url)
+            } label: {
+                Image(systemName: "wand.and.stars")
             }
+            .help("Move the selected items using the Rules Wizard")
+            .keyboardShortcut(KeyboardShortcut(.return, modifiers: .command))
+            .disabled(!manager.canMove)
+        }
+        ToolbarItem(id: "preview") {
+            Button {
+                guard let file = manager.selection.first else {
+                    return
+                }
+                QuickLookCoordinator.shared.show(url: file.url)
+            } label: {
+                Label("Preview", systemImage: "eye")
+            }
+            .help("Show items with Quick Look")
+            .keyboardShortcut(.space, modifiers: [])
+            .disabled(!manager.canPreview)
+        }
+        ToolbarItem(id: "delete") {
+            Button {
+                try? manager.trash()
+            } label: {
+                Image(systemName: "trash")
+            }
+            .help("Move the selected items to the Bin")
+            .keyboardShortcut(.delete)
+            .disabled(!manager.canTrash)
+        }
     }
+
 }

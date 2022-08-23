@@ -36,11 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 }
 
 struct FocusedSelectionKey : FocusedValueKey {
-    typealias Value = Binding<Set<URL>>
-}
-
-struct FocusedIntKey : FocusedValueKey {
-    typealias Value = Binding<Int>
+    typealias Value = SelectionManager
 }
 
 extension FocusedValues {
@@ -48,22 +44,6 @@ extension FocusedValues {
     var selection: FocusedSelectionKey.Value? {
         get { self[FocusedSelectionKey.self] }
         set { self[FocusedSelectionKey.self] = newValue }
-    }
-
-    var item: FocusedIntKey.Value? {
-        get { self[FocusedIntKey.self] }
-        set { self[FocusedIntKey.self] = newValue }
-    }
-
-}
-
-struct GlobalCommands: Commands {
-
-    @FocusedBinding(\.item) var item: Int?
-
-    var body: some Commands {
-        ToolbarCommands()
-        SidebarCommands()
     }
 
 }
@@ -116,20 +96,10 @@ struct FileawayApp: App {
                 .frameAutosaveName("Main Window")
         }
         .commands {
-            GlobalCommands()
+            ToolbarCommands()
+            SidebarCommands()
         }
-        .onChange(of: phase) { phase in
-            switch phase {
-            case .active:
-                print("app state active")
-            case .background:
-                print("app state background")
-            case .inactive:
-                print("app state inactive")
-            @unknown default:
-                print("app state unknown")
-            }
-        }
+
         WindowGroup("Wizard") {
             RulesWizard()
                 .environment(\.manager, appDelegate.manager)
@@ -140,6 +110,7 @@ struct FileawayApp: App {
         }
         .windowStyle(HiddenTitleBarWindowStyle())
         .handlesExternalEvents(matching: Set(arrayLiteral: "*"))
+
         SwiftUI.Settings {
             SettingsView(manager: appDelegate.manager)
         }
