@@ -105,24 +105,3 @@ struct FileawayApp: App {
 
     }
 }
-
-struct Wizard: Scene {
-
-    static let windowID = "wizard-window"
-
-    var manager: Manager
-
-    var body: some Scene {
-        WindowGroup(id: Self.windowID, for: URL.self) { $url in
-            if let url = url {
-                RulesWizard(url: url)
-                    .environment(\.manager, manager)
-                    .background(VisualEffectView(material: NSVisualEffectView.Material.sidebar,
-                                                 blendingMode: NSVisualEffectView.BlendingMode.behindWindow)
-                        .edgesIgnoringSafeArea(.all))
-            }
-        }
-        .windowStyle(.hiddenTitleBar)
-    }
-
-}
