@@ -26,42 +26,47 @@ import Interact
 
 class SelectionManager: ObservableObject {
 
-    var tracker: SelectionTracker<FileInfo>
+    @Published var selection: Set<FileInfo> = []
+
     var cancellable: AnyCancellable? = nil
 
-    init(tracker: SelectionTracker<FileInfo>) {
-        self.tracker = tracker
-        cancellable = tracker.objectWillChange.sink { [weak self] _ in
-            self?.objectWillChange.send()
-        }
+    init() {
     }
 
     var urls: [URL] {
-        tracker.selection.map { $0.url }
+        selection.map { $0.url }
     }
 
-    var canPreview: Bool { !tracker.selection.isEmpty }
+    var canPreview: Bool {
+        return !selection.isEmpty
+    }
 
     func preview() {
-        guard let url = tracker.selection.first?.url else {
+        guard let url = selection.first?.url else {
             return
         }
         QuickLookCoordinator.shared.show(url: url)
     }
 
-    var canCut: Bool { !tracker.selection.isEmpty }
+    var canCut: Bool {
+        return !selection.isEmpty
+    }
 
     func cut() -> [NSItemProvider] {
         urls.map { NSItemProvider(object: $0 as NSURL) }
     }
 
-    var canTrash: Bool { !tracker.selection.isEmpty }
+    var canTrash: Bool {
+        return !selection.isEmpty
+    }
 
     func trash() throws {
         try urls.forEach { try FileManager.default.trashItem(at: $0, resultingItemURL: nil) }
     }
 
-    var canMove: Bool { !tracker.selection.isEmpty }
+    var canMove: Bool {
+        return !selection.isEmpty
+    }
 
     func open() {
         urls.forEach { url in

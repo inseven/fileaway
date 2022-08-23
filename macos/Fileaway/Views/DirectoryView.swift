@@ -30,131 +30,62 @@ struct DirectoryView: View {
 
     @Environment(\.openURL) var openURL
 
-    @State var backgroundColor: Color = .clear
     @ObservedObject var directoryObserver: DirectoryObserver
 
-    @State var firstResponder: Bool = false
-
-    @StateObject var tracker: SelectionTracker<FileInfo>  // TODO: Could the selection tracker take a binding to a set to expose a simple API?
-    @StateObject var manager: SelectionManager
+    @StateObject var manager = SelectionManager()
 
     init(directoryObserver: DirectoryObserver) {
         self.directoryObserver = directoryObserver
-        let tracker = Deferred(SelectionTracker(items: directoryObserver.$searchResults))
-        _tracker = StateObject(wrappedValue: tracker.get())
-        _manager = StateObject(wrappedValue: SelectionManager(tracker: tracker.get()))
     }
 
-    var columns: [GridItem] = [
-        GridItem(.flexible(minimum: 0, maximum: .infinity))
-    ]
-
     var body: some View {
-        ScrollViewReader { scrollView in
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: 0) {
-                    ForEach(tracker.items) { file in
-                        Selectable(isFocused: firstResponder, isSelected: tracker.isSelected(item: file), radius: 6, corners: tracker.corners(for: file)) {
-                            FileRow(file: file, isSelected: tracker.isSelected(item: file))
-                        }
-                        .contextMenuFocusable {
-                            Button("Rules Wizard") {
-                                var components = URLComponents()
-                                components.scheme = "fileaway"
-                                components.path = file.url.path
-                                guard let url = components.url else {
-                                    return
-                                }
-                                openURL(url)
-                            }
-                            Divider()
-                            Button("Open") {
-                                NSWorkspace.shared.open(file.url)
-                            }
-                            Button("Reveal in Finder") {
-                                NSWorkspace.shared.activateFileViewerSelecting([file.url])
-                            }
-                            Divider()
-                            Button("Quick Look") {
-                                QuickLookCoordinator.shared.show(url: file.url)
-                            }
-                            Divider()
-                            Button("Copy name") {
-                                NSPasteboard.general.clearContents()
-                                NSPasteboard.general.setString(file.name, forType: .string)
-                            }
-                        } onContextMenuChange: { focused in
-                            guard focused else {
-                                return
-                            }
-                            firstResponder = true
-                        }
-                        .onDrag {
-                            NSItemProvider(object: file.url as NSURL)
-                        }
-                        .handleMouse {
-                            firstResponder = true
-                            tracker.handleClick(item: file)
-                        } doubleClick: {
-                            firstResponder = true
-                            NSWorkspace.shared.open(file.url)
-                        } shiftClick: {
-                            firstResponder = true
-                            tracker.handleShiftClick(item: file)
-                        } commandClick: {
-                            firstResponder = true  // TODO: Do this with a globally observing view / gesture recognizer?
-                            tracker.handleCommandClick(item: file)
-                        }
-                        Divider()
-                            .padding(.leading)
-                            .padding(.trailing)
-                    }
-                }
-                .padding(.top)
-                .padding(.leading)
-                .padding(.trailing)
+        List(selection: $manager.selection) {
+            ForEach(directoryObserver.searchResults, id: \.self) { file in
+                FileRow(file: file)
             }
-            .acceptsFirstResponder(isFirstResponder: $firstResponder)
-            .onTapGesture {
-                tracker.clear()
-                firstResponder = true
-            }
-            .onKey(.space, perform: manager.preview)
-            .onEnterCommand(perform: manager.open)
-            .onKey(.upArrow, modifiers: .shift) {
-                guard let previous = tracker.handleShiftDirectionUp() else {
-                    return
-                }
-                scrollView.scrollTo(previous.id)
-            }
-            .onKey(.downArrow, modifiers: .shift) {
-                guard let next = tracker.handleShiftDirectionDown() else {
-                    return
-                }
-                scrollView.scrollTo(next.id)
-            }
-            .onKey("a", modifiers: .command, perform: tracker.selectAll)
-            .onKey(.downArrow, modifiers: .command, perform: manager.open)
-            .onMoveCommand { direction in
-                switch direction {
-                case .up:
-                    guard let previous = tracker.handleDirectionUp() else {
-                        return
-                    }
-                    scrollView.scrollTo(previous.id)
-                case .down:
-                    guard let next = tracker.handleDirectionDown() else {
-                        return
-                    }
-                    scrollView.scrollTo(next.id)
-                default:
-                    return
-                }
-            }
-            .onCutCommand(perform: manager.cut)
         }
-        .background(Color.textBackgroundColor)
-        .modifier(Toolbar(manager: manager, filter: directoryObserver.filter))
+        .contextMenu(forSelectionType: FileInfo.self) { selection in
+            if selection.count == 1, let file = selection.first {
+
+                Button("Rules Wizard") {
+                    var components = URLComponents()
+                    components.scheme = "fileaway"
+                    components.path = file.url.path
+                    guard let url = components.url else {
+                        return
+                    }
+                    openURL(url)
+                }
+                Divider()
+                Button("Open") {
+                    NSWorkspace.shared.open(file.url)
+                }
+                Button("Reveal in Finder") {
+                    NSWorkspace.shared.activateFileViewerSelecting([file.url])
+                }
+                Divider()
+                Button("Quick Look") {
+                    QuickLookCoordinator.shared.show(url: file.url)
+                }
+                Divider()
+                Button("Copy name") {
+                    NSPasteboard.general.clearContents()
+                    NSPasteboard.general.setString(file.name, forType: .string)
+                }
+
+            }
+        } primaryAction: { selection in
+            for file in selection {
+                NSWorkspace.shared.open(file.url)
+            }
+        }
+        // Enter to open.
+        // Drag-and-drop.
+        // .onCutCommand(perform: manager.cut)
+        .searchable(text: directoryObserver.filter)
+        .toolbar(id: "main") {
+            SelectionToolbar(manager: manager)
+        }
         .navigationTitle(directoryObserver.name)
     }
 
