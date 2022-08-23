@@ -23,25 +23,17 @@ import SwiftUI
 struct RulesWizard: View {
 
     @Environment(\.manager) var manager
-    @SceneStorage("RulesWizard.documentUrl") var url: URL?
+    @State var url: URL
     @State var firstResponder: Bool = true
 
     var body: some View {
-        VStack {
-            if let url = url {
-                HStack {
-                    QuickLookPreview(url: url)
-                        .onTapGesture(count: 2) {
-                            NSWorkspace.shared.open(url)
-                        }
-                    PageView {
-                        TaskPage(manager: manager, url: url)
-                    }
+        HStack {
+            QuickLookPreview(url: url)
+                .onTapGesture(count: 2) {
+                    NSWorkspace.shared.open(url)
                 }
-            } else {
-                Text("No File Selected")
-                    .font(.largeTitle)
-                    .foregroundColor(.secondary)
+            PageView {
+                TaskPage(manager: manager, url: url)
             }
         }
         .acceptsFirstResponder(isFirstResponder: $firstResponder)

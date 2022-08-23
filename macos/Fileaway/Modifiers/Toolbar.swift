@@ -24,7 +24,7 @@ import Interact
 
 struct SelectionToolbar: CustomizableToolbarContent {
 
-    @Environment(\.openURL) var openURL
+    @Environment(\.openWindow) var openWindow
 
     @ObservedObject var manager: SelectionManager
 
@@ -34,13 +34,7 @@ struct SelectionToolbar: CustomizableToolbarContent {
                 guard let file = manager.selection.first else {
                     return
                 }
-                var components = URLComponents()
-                components.scheme = "fileaway"
-                components.path = file.url.path
-                guard let url = components.url else {
-                    return
-                }
-                openURL(url)
+                openWindow(id: Wizard.windowID, value: file.url)
             } label: {
                 Image(systemName: "wand.and.stars")
             }
