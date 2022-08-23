@@ -171,10 +171,17 @@ xcodebuild \
 
 APP_BASENAME="Fileaway.app"
 APP_PATH="$BUILD_DIRECTORY/$APP_BASENAME"
+PKG_PATH="$BUILD_DIRECTORY/Fileaway.pkg"
+
+# Validate the macOS build.
+xcrun altool --validate-app \
+    -f "${PKG_PATH}" \
+    --apiKey "$APPLE_API_KEY_ID" \
+    --apiIssuer "$APPLE_API_KEY_ISSUER_ID" \
+    --output-format json \
+    --type macos
 
 if $RELEASE ; then
-
-    PKG_PATH="$BUILD_DIRECTORY/Fileaway.pkg"
 
     # Archive the build directory.
     ZIP_BASENAME="build-${VERSION_NUMBER}-${BUILD_NUMBER}.zip"
