@@ -103,16 +103,16 @@ xcode_project -list
 
 # Smoke test builds.
 
+# FileawayCore
+sudo xcode-select --switch "$MACOS_XCODE_PATH"
+pushd "core"
+swift test
+popd
+
 # iOS
 sudo xcode-select --switch "$IOS_XCODE_PATH"
-build_scheme "FileawayCore iOS" clean build build-for-testing test \
-    -sdk iphonesimulator \
-    -destination "$IPHONE_DESTINATION"
 build_scheme "Fileaway iOS" clean build
 
-# macOS
-sudo xcode-select --switch "$MACOS_XCODE_PATH"
-build_scheme "FileawayCore macOS" clean build build-for-testing test
 
 # Clean up the build directory.
 if [ -d "$BUILD_DIRECTORY" ] ; then
@@ -171,10 +171,17 @@ xcodebuild \
 
 APP_BASENAME="Fileaway.app"
 APP_PATH="$BUILD_DIRECTORY/$APP_BASENAME"
+PKG_PATH="$BUILD_DIRECTORY/Fileaway.pkg"
+
+# Validate the macOS build.
+xcrun altool --validate-app \
+    -f "${PKG_PATH}" \
+    --apiKey "$APPLE_API_KEY_ID" \
+    --apiIssuer "$APPLE_API_KEY_ISSUER_ID" \
+    --output-format json \
+    --type macos
 
 if $RELEASE ; then
-
-    PKG_PATH="$BUILD_DIRECTORY/Fileaway.pkg"
 
     # Archive the build directory.
     ZIP_BASENAME="build-${VERSION_NUMBER}-${BUILD_NUMBER}.zip"
