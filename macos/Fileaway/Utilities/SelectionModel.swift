@@ -30,7 +30,6 @@ class SelectionModel: ObservableObject {
 
     private let directory: DirectoryObserver
     private var cancellables: Set<AnyCancellable> = []
-    private let queue = DispatchQueue(label: "queue")
 
     init(directory: DirectoryObserver) {
         self.directory = directory
@@ -41,12 +40,10 @@ class SelectionModel: ObservableObject {
         // Remove missing files from the selection.
         directory
             .$searchResults
-            .receive(on: queue)
-            .combineLatest($selection)
-            .map { files, selection in
-                return Set(files.filter { selection.contains($0) })
-            }
             .receive(on: DispatchQueue.main)
+            .map { files in
+                return Set(files.filter { self.selection.contains($0) })
+            }
             .sink { selection in
                 guard self.selection != selection else {
                     return
