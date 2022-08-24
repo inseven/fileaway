@@ -59,7 +59,7 @@ struct SelectionToolbar: CustomizableToolbarContent {
             Button {
                 try? selectionManager.trash()
             } label: {
-                Image(systemName: "trash")
+                Label("Delete", systemImage: "trash")
             }
             .help("Move the selected items to the Bin")
             .keyboardShortcut(.delete)
