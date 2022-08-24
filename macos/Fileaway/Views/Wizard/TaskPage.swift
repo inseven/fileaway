@@ -66,27 +66,17 @@ struct TaskPage: View {
     }
 
     var body: some View {
-        VStack {
-            HStack {
-                TextField("Search", text: $filter.filter)
-                    .font(.title)
-                    .textFieldStyle(PlainTextFieldStyle())
-                    .focused($focus, equals: .search)
-                    .onSubmit {
-                        if tracker.items.count == 1 {
-                            activeRule = tracker.items.first
-                        }
+        VStack(spacing: 0) {
+            TextField("Search", text: $filter.filter)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .focused($focus, equals: .search)
+                .onSubmit {
+                    if tracker.items.count == 1 {
+                        activeRule = tracker.items.first
                     }
-                if !filter.filter.isEmpty {
-                    Button {
-                        filter.filter = ""
-                    } label: {
-                        Image(systemName: "xmark.circle.fill")
-                    }
-                    .buttonStyle(PlainButtonStyle())
                 }
-            }
-            .padding()
+                .padding()
+            Divider()
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 0) {
                     ForEach(tracker.items) { rule in

@@ -27,7 +27,7 @@ struct RulesWizard: View {
     @State var firstResponder: Bool = true
 
     var body: some View {
-        HStack {
+        HStack(spacing: 0) {
             QuickLookPreview(url: url)
                 .onTapGesture(count: 2) {
                     NSWorkspace.shared.open(url)
@@ -36,11 +36,8 @@ struct RulesWizard: View {
                 TaskPage(manager: manager, url: url)
             }
         }
-        .acceptsFirstResponder(isFirstResponder: $firstResponder)
         .padding()
-        .onOpenURL { url in
-            self.url = URL(fileURLWithPath: url.path)
-        }
+        .navigationTitle(url.displayName)
         .frame(minWidth: 800, minHeight: 600, idealHeight: 600)
     }
 

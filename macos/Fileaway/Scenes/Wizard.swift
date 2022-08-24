@@ -37,7 +37,6 @@ struct Wizard: Scene {
                     .environment(\.manager, manager)
             }
         }
-        .windowStyle(.hiddenTitleBar)
     }
 
 }
