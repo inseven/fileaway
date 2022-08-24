@@ -34,7 +34,7 @@ struct ReversePages: View {
             VStack {
                 Form {
                     Section(footer: Text(self.error != nil ? String(describing: error!) : "").foregroundColor(.red)) {
-                        FilePicker(placeholder: "Select file...", documentTypes: [kUTTypePDF as String], url: $url).lineLimit(1)
+                        FilePicker(placeholder: "Select file...", documentTypes: [.pdf], url: $url).lineLimit(1)
                     }
                 }
             }

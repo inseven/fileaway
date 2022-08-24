@@ -21,10 +21,11 @@
 import MobileCoreServices
 import SwiftUI
 import UIKit
+import UniformTypeIdentifiers
 
 struct FilePickerSheet: UIViewControllerRepresentable {
     @Environment(\.presentationMode) var presentationMode
-    var documentTypes: [String]
+    var documentTypes: [UTType]
     @Binding var url: URL?
 
     class Coordinator: NSObject, UINavigationControllerDelegate, UIDocumentPickerDelegate {
@@ -54,7 +55,7 @@ struct FilePickerSheet: UIViewControllerRepresentable {
     }
 
     func makeUIViewController(context: UIViewControllerRepresentableContext<FilePickerSheet>) -> UIDocumentPickerViewController {
-        let documentPicker = UIDocumentPickerViewController(documentTypes: documentTypes, in: .open)
+        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: documentTypes)
         documentPicker.delegate = context.coordinator
         return documentPicker
     }
