@@ -45,10 +45,10 @@ public struct Legal {
     ]
 
     public static let licenses = [
-        License("Diligence", author: "InSeven Limited", filename: "diligence-license", bundle: Bundle.fileaway),
-        License("EonilFSEvents", author: "Hoon H., Eonil", filename: "eonilfsevents-license", bundle: Bundle.fileaway),
-        License("Interact", author: "InSeven Limited", filename: "interact-license", bundle: Bundle.fileaway),
-        License("Introspect", author: "Timber Software", filename: "introspect-license", bundle: Bundle.fileaway),
+        License("Diligence", author: "InSeven Limited", filename: "diligence-license", bundle: .module),
+        License("EonilFSEvents", author: "Hoon H., Eonil", filename: "eonilfsevents-license", bundle: .module),
+        License("Interact", author: "InSeven Limited", filename: "interact-license", bundle: .module),
+        License("Introspect", author: "Timber Software", filename: "introspect-license", bundle: .module),
     ]
 
 }
