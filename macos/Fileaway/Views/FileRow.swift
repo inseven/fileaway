@@ -54,6 +54,7 @@ struct FileRow: View {
                         Text(file.directoryUrl.path)
                             .lineLimit(1)
                             .font(.subheadline)
+                            .foregroundColor(.secondary)
                         Spacer()
                     }
                 }
