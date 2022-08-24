@@ -128,6 +128,7 @@ struct TaskPage: View {
                     submit()
                 }
                 .padding()
+                .background(.regularMaterial)
         }
         .safeAreaInset(edge: .bottom) {
             HStack {

@@ -119,10 +119,6 @@ struct PageView<Content>: View where Content: View {
                         }
                         Spacer()
                     }
-                    Text(title)
-                        .multilineTextAlignment(.center)
-                        .font(.headline)
-                        .frame(maxWidth: geometry.size.width - 80)
                 }
                 if pageViewStack.pages.count > 0 {
                     PageStack(items: pageViewStack.pages)

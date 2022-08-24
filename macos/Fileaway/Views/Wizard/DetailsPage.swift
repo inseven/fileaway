@@ -52,15 +52,20 @@ struct DetailsPage: View {
 
     var body: some View {
         Form {
-            ForEach(rule.variables) { variable in
-                if let variable = variable as? DateInstance {
-                    VariableDateView(variable: variable,
-                                     creationDate: FileInfo.creationDate(url: url)?.date,
-                                     options: dateExtractor.dates)
-                } else if let variable = variable as? StringInstance {
-                    VariableStringView(variable: variable)
-                } else {
-                    Text("Unknown Variable Type")
+            Section {
+                Text(rule.name)
+            }
+            Section("Details") {
+                ForEach(rule.variables) { variable in
+                    if let variable = variable as? DateInstance {
+                        VariableDateView(variable: variable,
+                                         creationDate: FileInfo.creationDate(url: url)?.date,
+                                         options: dateExtractor.dates)
+                    } else if let variable = variable as? StringInstance {
+                        VariableStringView(variable: variable)
+                    } else {
+                        Text("Unknown Variable Type")
+                    }
                 }
             }
         }
