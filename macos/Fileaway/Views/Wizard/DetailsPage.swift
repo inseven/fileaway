@@ -51,41 +51,43 @@ struct DetailsPage: View {
     }
 
     var body: some View {
-        VStack {
-            ScrollView {
-                LazyVGrid(columns: columns) {
-                    ForEach(rule.variables) { variable in
-                        Text(variable.name)
-                        HStack {
-                            if let variable = variable as? DateInstance {
-                                VariableDateView(variable: variable, options: dateExtractor.dates)
-                            } else if let variable = variable as? StringInstance {
-                                VariableStringView(variable: variable)
-                            } else {
-                                Text("Unsupported")
-                            }
-                        }
-                        .padding(.trailing, 8)
-                    }
+        Form {
+            ForEach(rule.variables) { variable in
+                if let variable = variable as? DateInstance {
+                    VariableDateView(variable: variable,
+                                     creationDate: FileInfo.creationDate(url: url)?.date,
+                                     options: dateExtractor.dates)
+                } else if let variable = variable as? StringInstance {
+                    VariableStringView(variable: variable)
+                } else {
+                    Text("Unknown Variable Type")
                 }
             }
-            .padding()
-            Text(rule.destination(for: url).path)
-            Button {
-                let destinationUrl = rule.destination(for: url)
-                print("moving to \(destinationUrl)...")
-                do {
-                    try rule.move(url: url)
-                    close()
-                } catch CocoaError.fileWriteFileExists {
-                    alert = .duplicate(duplicateUrl: destinationUrl)
-                } catch {
-                    alert = .error(error: error)
+        }
+        .formStyle(.grouped)
+        .safeAreaInset(edge: .bottom) {
+            VStack {
+                Text(rule.destination(for: url).path)
+                HStack {
+                    Spacer()
+                    Button {
+                        let destinationUrl = rule.destination(for: url)
+                        print("moving to \(destinationUrl)...")
+                        do {
+                            try rule.move(url: url)
+                            close()
+                        } catch CocoaError.fileWriteFileExists {
+                            alert = .duplicate(duplicateUrl: destinationUrl)
+                        } catch {
+                            alert = .error(error: error)
+                        }
+                        
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Text("Move")
+                    }
+                    .keyboardShortcut(.defaultAction)
                 }
-
-                presentationMode.wrappedValue.dismiss()
-            } label: {
-                Text("Move")
             }
         }
         .pageTitle(rule.name)

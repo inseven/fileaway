@@ -26,7 +26,7 @@ struct VariableStringView: View {
     @State var string: String = ""
 
     var body: some View {
-        TextField("", text: $variable.string)
+        TextField(variable.name, text: $variable.string)
     }
 
 }

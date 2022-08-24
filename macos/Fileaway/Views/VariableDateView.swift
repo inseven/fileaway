@@ -30,6 +30,7 @@ struct VariableDateView: View {
     }
 
     @State var selection: Double = PickerDate.today.rawValue
+    let creationDate: Date?
     let options: [Date]
 
     var dateFormatter: DateFormatter = {
@@ -40,9 +41,14 @@ struct VariableDateView: View {
 
     var body: some View {
         VStack {
-            Picker("", selection: $selection) {
+            Picker(variable.name, selection: $selection) {
                 Text("Today")
                     .tag(PickerDate.today.rawValue)
+                if let creationDate = creationDate {
+                    Divider()
+                    Text("\(dateFormatter.string(from: creationDate)) – Created")
+                        .tag(creationDate.timeIntervalSince1970 as Double)
+                }
                 Divider()
                 Text("Custom")
                     .tag(PickerDate.custom.rawValue)
@@ -54,12 +60,8 @@ struct VariableDateView: View {
                     }
                 }
             }
-            .padding(.leading, -8)
-            .frame(maxWidth: .infinity)
             if selection == PickerDate.custom.rawValue {
                 DatePicker("", selection: $variable.date, displayedComponents: [.date])
-                    .padding(.leading, -8)
-                    .frame(maxWidth: .infinity)
             }
         }
         .onChange(of: selection) { selection in
@@ -74,8 +76,6 @@ struct VariableDateView: View {
             case .today:
                 $variable.date.wrappedValue = Date()
             }
-
-            print(tag)
         }
     }
 

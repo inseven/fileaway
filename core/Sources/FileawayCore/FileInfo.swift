@@ -29,7 +29,7 @@ public class FileInfo: Identifiable, Hashable {
         return FileDate(date: date, type: .filename)
     }
 
-    static func creationDate(url: URL) -> FileDate? {
+    public static func creationDate(url: URL) -> FileDate? {
         guard let date = (try? FileManager.default.attributesOfItem(atPath: url.path))?[.creationDate] as? Date else {
             return nil
         }
