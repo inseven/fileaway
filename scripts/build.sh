@@ -105,14 +105,16 @@ xcode_project -list
 
 # iOS
 sudo xcode-select --switch "$IOS_XCODE_PATH"
-build_scheme "FileawayCore iOS" clean build build-for-testing test \
-    -sdk iphonesimulator \
-    -destination "$IPHONE_DESTINATION"
+# TODO: Test the FileawayCore package.
+# build_scheme "FileawayCore iOS" clean build build-for-testing test \
+#     -sdk iphonesimulator \
+#     -destination "$IPHONE_DESTINATION"
 build_scheme "Fileaway iOS" clean build
 
 # macOS
 sudo xcode-select --switch "$MACOS_XCODE_PATH"
-build_scheme "FileawayCore macOS" clean build build-for-testing test
+# TODO: Test the FileawayCore package.
+# build_scheme "FileawayCore macOS" clean build build-for-testing test
 
 # Clean up the build directory.
 if [ -d "$BUILD_DIRECTORY" ] ; then
