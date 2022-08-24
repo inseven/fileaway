@@ -25,12 +25,22 @@ import Interact
 struct ContentView: View {
 
     @ObservedObject var manager: Manager
+    @State var section: URL?
+
+    init(manager: Manager) {
+        self.manager = manager
+    }
 
     var body: some View {
-        NavigationView {
-            Sidebar(manager: manager)
-            EmptyView()
-                .background(Color.textBackgroundColor)
+        NavigationSplitView {
+            Sidebar(manager: manager, section: $section)
+        } detail: {
+            if let section = section,
+               let directory = manager.directories.first(where: { $0.url == section })  {
+                DirectoryView(directoryObserver: directory)
+            } else {
+                Text("No Directory Selected")
+            }
         }
     }
 }
