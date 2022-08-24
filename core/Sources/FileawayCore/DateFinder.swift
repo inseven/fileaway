@@ -43,7 +43,17 @@ public class DateFinder {
             }
             return results
         }
-        return dateInstances.flatMap { $0 }
+        let dates = dateInstances
+            .flatMap { $0 }
+            .compactMap { DateInstance(date: Calendar.current.startOfDay(for: $0.date), range: $0.range) }
+        var uniqueDates: Set<Date> = []
+        return dates.filter { dateInstance in
+            guard !uniqueDates.contains(dateInstance.date) else {
+                return false
+            }
+            uniqueDates.insert(dateInstance.date)
+            return true
+        }
     }
 
 }
