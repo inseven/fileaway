@@ -45,27 +45,35 @@ struct DirectoryView: View {
             }
         }
         .contextMenu(forSelectionType: FileInfo.self) { selection in
-            if selection.count == 1, let file = selection.first {
+            if !selection.isEmpty, let file = selection.first {
 
-                Button("Rules Wizard") {
-                    openWindow(id: Wizard.windowID, value: file.url)
+                Button("Apply Rules") {
+                    for file in selection {
+                        openWindow(id: Wizard.windowID, value: file.url)
+                    }
                 }
                 Divider()
                 Button("Open") {
-                    NSWorkspace.shared.open(file.url)
+                    for file in selection {
+                        NSWorkspace.shared.open(file.url)
+                    }
                 }
                 Button("Reveal in Finder") {
-                    NSWorkspace.shared.activateFileViewerSelecting([file.url])
+                    for file in selection {
+                        NSWorkspace.shared.activateFileViewerSelecting([file.url])
+                    }
                 }
                 Divider()
                 Button("Quick Look") {
                     QuickLookCoordinator.shared.show(url: file.url)
                 }
+                .disabled(selection.count != 1)
                 Divider()
                 Button("Copy name") {
                     NSPasteboard.general.clearContents()
                     NSPasteboard.general.setString(file.name, forType: .string)
                 }
+                .disabled(selection.count != 1)
 
             }
         } primaryAction: { selection in
@@ -79,7 +87,7 @@ struct DirectoryView: View {
         .overlay(directoryObserver.searchResults.isEmpty ? Text("No Items").font(.title).foregroundColor(.secondary) : nil)
         .searchable(text: directoryObserver.filter)
         .toolbar(id: "main") {
-            SelectionToolbar(manager: manager)
+            SelectionToolbar(selectionManager: manager)
         }
         .navigationTitle(directoryObserver.name)
     }
