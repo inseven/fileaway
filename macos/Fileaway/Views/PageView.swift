@@ -116,8 +116,6 @@ struct PageView<Content>: View where Content: View {
                             } label: {
                                 Image(systemName: "chevron.backward")
                             }
-                            .buttonStyle(PlainButtonStyle())
-                            .foregroundColor(.accentColor)
                         }
                         Spacer()
                     }

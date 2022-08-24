@@ -22,7 +22,6 @@
 		D82D01282657F69900FD2974 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D01272657F69900FD2974 /* Observable.swift */; };
 		D82D012A2657F6D500FD2974 /* TextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D01292657F6D500FD2974 /* TextProvider.swift */; };
 		D82D73D728B4C659006F49F1 /* Wizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D73D628B4C659006F49F1 /* Wizard.swift */; };
-		D82D73D928B4C9C1006F49F1 /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D73D828B4C9C1006F49F1 /* VisualEffectView.swift */; };
 		D83CDCE52620F97F0063C91C /* VariableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83CDCE42620F97F0063C91C /* VariableTextField.swift */; };
 		D83CDCEA2620FF210063C91C /* RuleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83CDCE92620FF210063C91C /* RuleSheet.swift */; };
 		D85C9572257999130007AE1E /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C9571257999130007AE1E /* FileManager.swift */; };
@@ -107,7 +106,6 @@
 		D82D01272657F69900FD2974 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		D82D01292657F6D500FD2974 /* TextProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextProvider.swift; sourceTree = "<group>"; };
 		D82D73D628B4C659006F49F1 /* Wizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wizard.swift; sourceTree = "<group>"; };
-		D82D73D828B4C9C1006F49F1 /* VisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
 		D83CDCE42620F97F0063C91C /* VariableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableTextField.swift; sourceTree = "<group>"; };
 		D83CDCE92620FF210063C91C /* RuleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleSheet.swift; sourceTree = "<group>"; };
 		D85C9571257999130007AE1E /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
@@ -238,7 +236,6 @@
 				D82D01212657632C00FD2974 /* VariableDateView.swift */,
 				D82D01252657F66B00FD2974 /* VariableProvider.swift */,
 				D82D01232657637700FD2974 /* VariableStringView.swift */,
-				D82D73D828B4C9C1006F49F1 /* VisualEffectView.swift */,
 				D8E7F9AF25999C5D00C7409B /* Settings */,
 				D8F8BE102588182C0010432F /* Wizard */,
 			);
@@ -554,7 +551,6 @@
 				D8D78A9F2580DE250088890F /* PageView.swift in Sources */,
 				D87DEF8125774F6C006CFE85 /* ContentView.swift in Sources */,
 				D8E7F9E32599B00A00C7409B /* DestinationList.swift in Sources */,
-				D82D73D928B4C9C1006F49F1 /* VisualEffectView.swift in Sources */,
 				D821E94B257AB2C9005D3205 /* FileRow.swift in Sources */,
 				D83CDCEA2620FF210063C91C /* RuleSheet.swift in Sources */,
 				D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */,
