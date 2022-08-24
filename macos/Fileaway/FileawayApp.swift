@@ -40,7 +40,8 @@ extension FocusedValues {
 @main
 struct FileawayApp: App {
 
-    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @StateObject var manager = Manager()
+
     @Environment(\.scenePhase) private var phase
 
     func enableNotifications() {
@@ -60,18 +61,18 @@ struct FileawayApp: App {
     var body: some Scene {
         
         WindowGroup(id: "MainWindow") {
-            ContentView(manager: appDelegate.manager)
-                .environment(\.manager, appDelegate.manager)
+            ContentView(manager: manager)
+                .environment(\.manager, manager)
         }
         .commands {
             ToolbarCommands()
             SidebarCommands()
         }
 
-        Wizard(manager: appDelegate.manager)
+        Wizard(manager: manager)
 
         SwiftUI.Settings {
-            SettingsView(manager: appDelegate.manager)
+            SettingsView(manager: manager)
         }
 
         About(copyright: Legal.copyright) {

@@ -23,6 +23,8 @@ import Combine
 import Foundation
 import SwiftUI
 
+import FileawayCore
+
 struct ManagerKey: EnvironmentKey {
     static var defaultValue: Manager = Manager()
 }
@@ -49,6 +51,10 @@ class Manager: ObservableObject {
     var countSubscription: Cancellable?
     var rulesSubscription: Cancellable?
 
+    init() {
+        self.start()
+    }
+
     func start() {
         dispatchPrecondition(condition: .onQueue(.main))
         for url in settings.inboxUrls {
@@ -68,9 +74,9 @@ class Manager: ObservableObject {
                 .map { $0.count }
                 .reduce(0) { result, count in result + count }
             if count == 0 {
-                NSApp.dockTile.badgeLabel = nil
+                NSApplication.shared.dockTile.badgeLabel = nil
             } else {
-                NSApp.dockTile.badgeLabel = String(describing: count)
+                NSApplication.shared.dockTile.badgeLabel = String(describing: count)
             }
         }
         let directoryChanges = self.directories.map { $0.objectWillChange }
