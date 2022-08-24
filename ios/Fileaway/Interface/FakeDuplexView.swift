@@ -37,8 +37,8 @@ struct FakeDuplexView: View {
             VStack {
                 Form {
                     Section(footer: ErrorText(text: self.error?.localizedDescription)) {
-                        FilePicker(placeholder: "Select file...", documentTypes: [kUTTypePDF as String], url: $url1).lineLimit(1)
-                        FilePicker(placeholder: "Select file...", documentTypes: [kUTTypePDF as String], url: $url2).lineLimit(1)
+                        FilePicker(placeholder: "Select file...", documentTypes: [.pdf], url: $url1).lineLimit(1)
+                        FilePicker(placeholder: "Select file...", documentTypes: [.pdf], url: $url2).lineLimit(1)
                     }
                 }
             }

@@ -20,12 +20,13 @@
 
 import Foundation
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct FilePicker: View {
 
     @State private var showingFilePicker = false
     let placeholder: String
-    let documentTypes: [String]
+    let documentTypes: [UTType]
     @Binding var url: URL?
 
     var body: some View {

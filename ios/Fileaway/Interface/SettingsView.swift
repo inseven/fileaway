@@ -89,7 +89,7 @@ struct SettingsView: View {
         VStack {
             Form {
                 Section(header: Text("Destination".uppercased()), footer: Destination(url: $settings.destination)) {
-                    FilePicker(placeholder: "Select...", documentTypes: [kUTTypeFolder as String], url: $settings.destination).lineLimit(1)
+                    FilePicker(placeholder: "Select...", documentTypes: [.folder], url: $settings.destination).lineLimit(1)
                 }
                 Section() {
                     NavigationLink(destination: TasksView(tasks: settings.tasks)) {
