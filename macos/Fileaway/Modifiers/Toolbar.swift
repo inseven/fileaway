@@ -36,7 +36,7 @@ struct SelectionToolbar: CustomizableToolbarContent {
                 }
                 openWindow(id: Wizard.windowID, value: file.url)
             } label: {
-                Image(systemName: "wand.and.stars")
+                Label("Apply Rules", systemImage: "tray.and.arrow.down")
             }
             .help("Move the selected items using the Rules Wizard")
             .keyboardShortcut(KeyboardShortcut(.return, modifiers: .command))
