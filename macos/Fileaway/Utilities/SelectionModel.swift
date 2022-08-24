@@ -24,13 +24,40 @@ import SwiftUI
 import FileawayCore
 import Interact
 
-class SelectionManager: ObservableObject {
+class SelectionModel: ObservableObject {
 
     @Published var selection: Set<FileInfo> = []
 
-    var cancellable: AnyCancellable? = nil
+    private let directory: DirectoryObserver
+    private var cancellables: Set<AnyCancellable> = []
+    private let queue = DispatchQueue(label: "queue")
 
-    init() {
+    init(directory: DirectoryObserver) {
+        self.directory = directory
+    }
+
+    @MainActor func start() {
+
+        // Remove missing files from the selection.
+        directory
+            .$searchResults
+            .receive(on: queue)
+            .combineLatest($selection)
+            .map { files, selection in
+                return Set(files.filter { selection.contains($0) })
+            }
+            .receive(on: DispatchQueue.main)
+            .sink { selection in
+                guard self.selection != selection else {
+                    return
+                }
+                self.selection = selection
+            }
+            .store(in: &cancellables)
+    }
+
+    @MainActor func stop() {
+        cancellables.removeAll()
     }
 
     var urls: [URL] {

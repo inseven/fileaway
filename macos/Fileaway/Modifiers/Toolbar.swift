@@ -27,7 +27,7 @@ struct SelectionToolbar: CustomizableToolbarContent {
     @Environment(\.manager) var manager
     @Environment(\.openWindow) var openWindow
 
-    @ObservedObject var selectionManager: SelectionManager
+    @ObservedObject var selectionManager: SelectionModel
 
     var body: some CustomizableToolbarContent {
         ToolbarItem(id: "wizard") {

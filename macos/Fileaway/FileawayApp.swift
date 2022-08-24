@@ -25,7 +25,7 @@ import Diligence
 import FileawayCore
 
 struct FocusedSelectionKey : FocusedValueKey {
-    typealias Value = SelectionManager
+    typealias Value = SelectionModel
 }
 
 extension FocusedValues {

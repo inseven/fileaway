@@ -64,6 +64,7 @@ struct FileRow: View {
         }
         .padding(.leading)
         .padding(.trailing)
+        .help(file.url.lastPathComponent)
     }
 
 }

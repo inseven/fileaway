@@ -32,14 +32,15 @@ struct DirectoryView: View {
 
     @ObservedObject var directoryObserver: DirectoryObserver
 
-    @StateObject var manager = SelectionManager()
+    @StateObject var model: SelectionModel
 
     init(directoryObserver: DirectoryObserver) {
         self.directoryObserver = directoryObserver
+        _model = StateObject(wrappedValue: SelectionModel(directory: directoryObserver))
     }
 
     var body: some View {
-        List(selection: $manager.selection) {
+        List(selection: $model.selection) {
             ForEach(directoryObserver.searchResults, id: \.self) { file in
                 FileRow(file: file)
             }
@@ -87,9 +88,15 @@ struct DirectoryView: View {
         .overlay(directoryObserver.searchResults.isEmpty ? Text("No Items").font(.title).foregroundColor(.secondary) : nil)
         .searchable(text: directoryObserver.filter)
         .toolbar(id: "main") {
-            SelectionToolbar(selectionManager: manager)
+            SelectionToolbar(selectionManager: model)
         }
         .navigationTitle(directoryObserver.name)
+        .onAppear {
+            model.start()
+        }
+        .onDisappear {
+            model.stop()
+        }
     }
 
 }
