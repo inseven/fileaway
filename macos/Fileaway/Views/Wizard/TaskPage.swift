@@ -127,7 +127,7 @@ struct TaskPage: View {
                 .onSubmit {
                     submit()
                 }
-                .padding()
+                .padding(.bottom)
                 .background(.regularMaterial)
         }
         .safeAreaInset(edge: .bottom) {
@@ -138,7 +138,7 @@ struct TaskPage: View {
                 }
                 .keyboardShortcut(.defaultAction)
             }
-            .padding()
+            .padding(.top)
             .background(.regularMaterial)
         }
         .pageTitle("Select Rule")
