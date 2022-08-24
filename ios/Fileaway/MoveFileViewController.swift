@@ -26,7 +26,7 @@ class MoveFileViewController: UINavigationController {
     let documentBrowser: UIDocumentBrowserViewController
 
     init() {
-        documentBrowser = UIDocumentBrowserViewController(forOpeningFilesWithContentTypes: [kUTTypePDF as String])
+        documentBrowser = UIDocumentBrowserViewController(forOpening: [.pdf])
         documentBrowser.allowsDocumentCreation = false
         super.init(rootViewController: documentBrowser)
     }
