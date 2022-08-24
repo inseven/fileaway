@@ -24,27 +24,27 @@ import Interact
 
 struct SelectionToolbar: CustomizableToolbarContent {
 
+    @Environment(\.manager) var manager
     @Environment(\.openWindow) var openWindow
 
-    @ObservedObject var manager: SelectionManager
+    @ObservedObject var selectionManager: SelectionManager
 
     var body: some CustomizableToolbarContent {
         ToolbarItem(id: "wizard") {
             Button {
-                guard let file = manager.selection.first else {
-                    return
+                for file in selectionManager.selection {
+                    openWindow(id: Wizard.windowID, value: file.url)
                 }
-                openWindow(id: Wizard.windowID, value: file.url)
             } label: {
                 Label("Apply Rules", systemImage: "tray.and.arrow.down")
             }
             .help("Move the selected items using the Rules Wizard")
             .keyboardShortcut(KeyboardShortcut(.return, modifiers: .command))
-            .disabled(!manager.canMove)
+            .disabled(!selectionManager.canMove)
         }
         ToolbarItem(id: "preview") {
             Button {
-                guard let file = manager.selection.first else {
+                guard let file = selectionManager.selection.first else {
                     return
                 }
                 QuickLookCoordinator.shared.show(url: file.url)
@@ -53,17 +53,17 @@ struct SelectionToolbar: CustomizableToolbarContent {
             }
             .help("Show items with Quick Look")
             .keyboardShortcut(.space, modifiers: [])
-            .disabled(!manager.canPreview)
+            .disabled(!selectionManager.canPreview)
         }
         ToolbarItem(id: "delete") {
             Button {
-                try? manager.trash()
+                try? selectionManager.trash()
             } label: {
                 Image(systemName: "trash")
             }
             .help("Move the selected items to the Bin")
             .keyboardShortcut(.delete)
-            .disabled(!manager.canTrash)
+            .disabled(!selectionManager.canTrash)
         }
     }
 
