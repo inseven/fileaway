@@ -52,7 +52,7 @@ struct DetailsPage: View {
 
     var body: some View {
         Form {
-            Section {
+            Section("Rule") {
                 Text(rule.name)
             }
             Section("Details") {
@@ -68,34 +68,33 @@ struct DetailsPage: View {
                     }
                 }
             }
+            Section("Destination") {
+                Text(rule.destination(for: url).path)
+            }
         }
         .formStyle(.grouped)
         .safeAreaInset(edge: .bottom) {
-            VStack {
-                Text(rule.destination(for: url).path)
-                HStack {
-                    Spacer()
-                    Button {
-                        let destinationUrl = rule.destination(for: url)
-                        print("moving to \(destinationUrl)...")
-                        do {
-                            try rule.move(url: url)
-                            close()
-                        } catch CocoaError.fileWriteFileExists {
-                            alert = .duplicate(duplicateUrl: destinationUrl)
-                        } catch {
-                            alert = .error(error: error)
-                        }
-                        
-                        presentationMode.wrappedValue.dismiss()
-                    } label: {
-                        Text("Move")
+            HStack {
+                Spacer()
+                Button {
+                    let destinationUrl = rule.destination(for: url)
+                    print("moving to \(destinationUrl)...")
+                    do {
+                        try rule.move(url: url)
+                        close()
+                    } catch CocoaError.fileWriteFileExists {
+                        alert = .duplicate(duplicateUrl: destinationUrl)
+                    } catch {
+                        alert = .error(error: error)
                     }
-                    .keyboardShortcut(.defaultAction)
+
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    Text("Move")
                 }
+                .keyboardShortcut(.defaultAction)
             }
         }
-        .pageTitle(rule.name)
         .frame(minWidth: 0, maxWidth: .infinity)
         .alert(item: $alert) { alert in
             switch alert {

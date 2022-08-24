@@ -104,49 +104,60 @@ struct TaskPage: View {
     }
 
     var body: some View {
-        List(selection: $model.selection) {
-            ForEach(model.filteredRules) { rule in
-                PageLink(destination: DetailsPage(url: url, rule: rule), isActive: binding(for: rule)) {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(rule.name)
-                            Text(rule.rootUrl.displayName)
-                                .foregroundColor(.secondary)
+        VStack(spacing: 0) {
+            if let activeRule = activeRule {
+                DetailsPage(url: url, rule: activeRule)
+            } else {
+                List(selection: $model.selection) {
+                    ForEach(model.filteredRules) { rule in
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(rule.name)
+                                Text(rule.rootUrl.displayName)
+                                    .foregroundColor(.secondary)
+                            }
+                            Spacer()
+                            Image(systemName: "chevron.forward")
                         }
-                        Spacer()
-                        Image(systemName: "chevron.forward")
+                        .padding()
                     }
-                    .padding()
+                }
+                .safeAreaInset(edge: .top) {
+                    TextField("Search", text: $model.filter)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .focused($focus, equals: .search)
+                        .onSubmit {
+                            submit()
+                        }
+                        .padding(.bottom)
+                        .background(.regularMaterial)
+                }
+                .safeAreaInset(edge: .bottom) {
+                    HStack {
+                        Spacer()
+                        Button("Next") {
+                            submit()
+                        }
+                        .keyboardShortcut(.defaultAction)
+                    }
+                    .padding(.top)
+                    .background(.regularMaterial)
+                }
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        focus = .search
+                    }
                 }
             }
-        }
-        .safeAreaInset(edge: .top) {
-            TextField("Search", text: $model.filter)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .focused($focus, equals: .search)
-                .onSubmit {
-                    submit()
-                }
-                .padding(.bottom)
-                .background(.regularMaterial)
-        }
-        .safeAreaInset(edge: .bottom) {
             HStack {
-                Spacer()
-                Button("Next") {
-                    submit()
+                Button("Back") {
+                    activeRule = nil
                 }
-                .keyboardShortcut(.defaultAction)
+                .disabled(activeRule == nil)
             }
-            .padding(.top)
-            .background(.regularMaterial)
         }
-        .pageTitle("Select Rule")
         .onAppear {
             model.start()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                focus = .search
-            }
         }
         .onDisappear {
             model.stop()
