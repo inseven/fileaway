@@ -163,7 +163,6 @@ struct TaskView: View {
             .environment(\.editMode, $editMode)
             .listStyle(GroupedListStyle())
         }
-        .animation(Animation.spring())
         .navigationBarTitle(editingTask.name)
         .navigationBarBackButtonHidden(editMode == .active)
         .navigationBarItems(trailing: Button(action: {
