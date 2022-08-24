@@ -29,7 +29,6 @@ struct DetailsPage: View {
         case duplicate(duplicateUrl: URL)
     }
 
-    @Environment(\.presentationMode) var presentationMode
     @Environment(\.manager) var manager
     @Environment(\.close) var close
 
@@ -38,11 +37,6 @@ struct DetailsPage: View {
     @State var alert: AlertType?
     @State var date: Date = Date()
     @StateObject var dateExtractor: DateExtractor
-
-    private var columns: [GridItem] = [
-        GridItem(.flexible(maximum: 80), alignment: .trailing),
-        GridItem(.flexible()),
-    ]
 
     init(url: URL, rule: Rule) {
         self.url = url
@@ -87,8 +81,6 @@ struct DetailsPage: View {
                     } catch {
                         alert = .error(error: error)
                     }
-
-                    presentationMode.wrappedValue.dismiss()
                 } label: {
                     Text("Move")
                 }
