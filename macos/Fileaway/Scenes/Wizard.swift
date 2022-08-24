@@ -35,8 +35,6 @@ struct Wizard: Scene {
             if let url = url {
                 RulesWizard(url: url)
                     .environment(\.manager, manager)
-                    .background(VisualEffectView.sidebarBlendBehindWindow
-                        .edgesIgnoringSafeArea(.all))
             }
         }
         .windowStyle(.hiddenTitleBar)
