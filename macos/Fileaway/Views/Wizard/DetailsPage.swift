@@ -29,7 +29,6 @@ struct DetailsPage: View {
         case duplicate(duplicateUrl: URL)
     }
 
-    @Environment(\.presentationMode) var presentationMode
     @Environment(\.manager) var manager
     @Environment(\.close) var close
 
@@ -39,11 +38,6 @@ struct DetailsPage: View {
     @State var date: Date = Date()
     @StateObject var dateExtractor: DateExtractor
 
-    private var columns: [GridItem] = [
-        GridItem(.flexible(maximum: 80), alignment: .trailing),
-        GridItem(.flexible()),
-    ]
-
     init(url: URL, rule: Rule) {
         self.url = url
         _rule = StateObject(wrappedValue: RuleInstance(rule: rule))
@@ -52,45 +46,47 @@ struct DetailsPage: View {
 
     var body: some View {
         Form {
-            ForEach(rule.variables) { variable in
-                if let variable = variable as? DateInstance {
-                    VariableDateView(variable: variable,
-                                     creationDate: FileInfo.creationDate(url: url)?.date,
-                                     options: dateExtractor.dates)
-                } else if let variable = variable as? StringInstance {
-                    VariableStringView(variable: variable)
-                } else {
-                    Text("Unknown Variable Type")
+            Section("Rule") {
+                Text(rule.name)
+            }
+            Section("Details") {
+                ForEach(rule.variables) { variable in
+                    if let variable = variable as? DateInstance {
+                        VariableDateView(variable: variable,
+                                         creationDate: FileInfo.creationDate(url: url)?.date,
+                                         options: dateExtractor.dates)
+                    } else if let variable = variable as? StringInstance {
+                        VariableStringView(variable: variable)
+                    } else {
+                        Text("Unknown Variable Type")
+                    }
                 }
+            }
+            Section("Destination") {
+                Text(rule.destination(for: url).path)
             }
         }
         .formStyle(.grouped)
         .safeAreaInset(edge: .bottom) {
-            VStack {
-                Text(rule.destination(for: url).path)
-                HStack {
-                    Spacer()
-                    Button {
-                        let destinationUrl = rule.destination(for: url)
-                        print("moving to \(destinationUrl)...")
-                        do {
-                            try rule.move(url: url)
-                            close()
-                        } catch CocoaError.fileWriteFileExists {
-                            alert = .duplicate(duplicateUrl: destinationUrl)
-                        } catch {
-                            alert = .error(error: error)
-                        }
-                        
-                        presentationMode.wrappedValue.dismiss()
-                    } label: {
-                        Text("Move")
+            HStack {
+                Spacer()
+                Button {
+                    let destinationUrl = rule.destination(for: url)
+                    print("moving to \(destinationUrl)...")
+                    do {
+                        try rule.move(url: url)
+                        close()
+                    } catch CocoaError.fileWriteFileExists {
+                        alert = .duplicate(duplicateUrl: destinationUrl)
+                    } catch {
+                        alert = .error(error: error)
                     }
-                    .keyboardShortcut(.defaultAction)
+                } label: {
+                    Text("Move")
                 }
+                .keyboardShortcut(.defaultAction)
             }
         }
-        .pageTitle(rule.name)
         .frame(minWidth: 0, maxWidth: .infinity)
         .alert(item: $alert) { alert in
             switch alert {

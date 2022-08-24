@@ -32,9 +32,13 @@ struct RulesWizard: View {
                 .onTapGesture(count: 2) {
                     NSWorkspace.shared.open(url)
                 }
-            PageView {
+            HStack {
                 TaskPage(manager: manager, url: url)
             }
+            .frame(width: 300)
+//            PageView {
+//                TaskPage(manager: manager, url: url)
+//            }
         }
         .padding()
         .navigationTitle(url.displayName)

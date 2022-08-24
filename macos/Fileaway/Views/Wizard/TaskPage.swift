@@ -18,9 +18,53 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Combine
 import SwiftUI
 
 import Interact
+
+class TaskPageModel: ObservableObject {
+
+    @Published var filter: String = ""
+    @Published var filteredRules: [Rule] = []
+    @Published var selection: Rule.ID?
+
+    private var manager: Manager
+    private var cancellables: Set<AnyCancellable> = []
+    private var queue = DispatchQueue(label: "queue")
+
+    init(manager: Manager) {
+        self.manager = manager
+    }
+
+    @MainActor func start() {
+
+        manager
+            .$allRules
+            .combineLatest($filter)
+            .receive(on: queue)
+            .map { rules, filter in
+                guard !filter.isEmpty else {
+                    return rules
+                }
+                return rules.filter { item in
+                    [item.rootUrl.displayName, item.name].joined(separator: " ").localizedSearchMatches(string: filter)
+                }
+            }
+            .map { $0.sorted { lhs, rhs in lhs.name.lexicographicallyPrecedes(rhs.name) } }
+            .receive(on: DispatchQueue.main)
+            .sink { rules in
+                self.filteredRules = rules
+                self.selection = rules.first?.id
+            }
+            .store(in: &cancellables)
+    }
+
+    @MainActor func stop() {
+        cancellables.removeAll()
+    }
+
+}
 
 struct TaskPage: View {
 
@@ -31,26 +75,16 @@ struct TaskPage: View {
     var manager: Manager
     var url: URL
 
-    @StateObject var filter: LazyFilter<Rule>
-    @StateObject var tracker: SelectionTracker<Rule>
+    @StateObject var model: TaskPageModel
 
     @State var activeRule: Rule? = nil
-    @State var firstResponder: Bool = true
 
     @FocusState private var focus: FocusableField?
-
-    var columns: [GridItem] = [
-        GridItem(.flexible(minimum: 0, maximum: .infinity))
-    ]
 
     init(manager: Manager, url: URL) {
         self.manager = manager
         self.url = url
-        let filter = Deferred(LazyFilter(items: manager.$allRules, test: { filter, item in
-            [item.rootUrl.displayName, item.name].joined(separator: " ").localizedSearchMatches(string: filter)
-        }, initialSortDescriptor: { lhs, rhs in lhs.name.lexicographicallyPrecedes(rhs.name) }))
-        self._filter = StateObject(wrappedValue: filter.get())
-        self._tracker = StateObject(wrappedValue: SelectionTracker(items: filter.get().$items))
+        _model = StateObject(wrappedValue: TaskPageModel(manager: manager))
     }
 
     func binding(for rule: Rule) -> Binding<Bool> {
@@ -65,50 +99,68 @@ struct TaskPage: View {
         }
     }
 
+    @MainActor func submit() {
+        activeRule = model.filteredRules.first(where: { $0.id == model.selection })
+    }
+
     var body: some View {
         VStack(spacing: 0) {
-            TextField("Search", text: $filter.filter)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .focused($focus, equals: .search)
-                .onSubmit {
-                    if tracker.items.count == 1 {
-                        activeRule = tracker.items.first
-                    }
-                }
-                .padding()
-            Divider()
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: 0) {
-                    ForEach(tracker.items) { rule in
-                        PageLink(destination: DetailsPage(url: url, rule: rule), isActive: binding(for: rule)) {
-                            HStack {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(rule.name)
-                                    Text(rule.rootUrl.displayName)
-                                        .foregroundColor(.secondary)
-                                }
-                                Spacer()
-                                Image(systemName: "chevron.forward")
+            if let activeRule = activeRule {
+                DetailsPage(url: url, rule: activeRule)
+            } else {
+                List(selection: $model.selection) {
+                    ForEach(model.filteredRules) { rule in
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(rule.name)
+                                Text(rule.rootUrl.displayName)
+                                    .foregroundColor(.secondary)
                             }
-                            .padding()
-                            .contentShape(Rectangle())
-                            .modifier(Highlight(tracker: tracker, item: rule))
+                            Spacer()
+                            Image(systemName: "chevron.forward")
                         }
-                        Divider()
-                            .padding(.leading)
-                            .padding(.trailing)
+                        .padding()
                     }
                 }
+                .safeAreaInset(edge: .top) {
+                    TextField("Search", text: $model.filter)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .focused($focus, equals: .search)
+                        .onSubmit {
+                            submit()
+                        }
+                        .padding(.bottom)
+                        .background(.regularMaterial)
+                }
+                .safeAreaInset(edge: .bottom) {
+                    HStack {
+                        Spacer()
+                        Button("Next") {
+                            submit()
+                        }
+                        .keyboardShortcut(.defaultAction)
+                    }
+                    .padding(.top)
+                    .background(.regularMaterial)
+                }
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        focus = .search
+                    }
+                }
+            }
+            HStack {
+                Button("Back") {
+                    activeRule = nil
+                }
+                .disabled(activeRule == nil)
             }
         }
-        .padding()
-        .acceptsFirstResponder(isFirstResponder: $firstResponder)
-        .modifier(TrackerInput(tracker: tracker))
-        .pageTitle("Select Rule")
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                focus = .search
-            }
+            model.start()
+        }
+        .onDisappear {
+            model.stop()
         }
     }
 
