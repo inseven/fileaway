@@ -28,9 +28,5 @@ export PYTHONUSERBASE="${ROOT_DIRECTORY}/.local/python"
 mkdir -p "$PYTHONUSERBASE"
 export PATH="${PYTHONUSERBASE}/bin":$PATH
 
-export GITHUB_CLI_PATH="${ROOT_DIRECTORY}/.local/gh"
-mkdir -p "$GITHUB_CLI_PATH"
-export PATH="${GITHUB_CLI_PATH}/bin":$PATH
-
 export PATH=$PATH:"${SCRIPTS_DIRECTORY}/changes"
 export PATH=$PATH:"${SCRIPTS_DIRECTORY}/build-tools"
