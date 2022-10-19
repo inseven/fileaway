@@ -24,6 +24,8 @@ import Diligence
 
 public struct Legal {
 
+    public static let repository = "inseven/fileaway"
+
     public static let copyright = "Copyright © 2018-2022 InSeven Limited"
 
     public static let actions = [
