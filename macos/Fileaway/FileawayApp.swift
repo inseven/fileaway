@@ -75,7 +75,7 @@ struct FileawayApp: App {
             SettingsView(manager: manager)
         }
 
-        About(copyright: Legal.copyright) {
+        About(repository: Legal.repository, copyright: Legal.copyright) {
             Legal.actions
         } acknowledgements: {
             Legal.acknowledgements
