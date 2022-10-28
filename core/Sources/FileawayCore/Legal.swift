@@ -47,7 +47,6 @@ public struct Legal {
     ]
 
     public static let licenses = [
-        License("Diligence", author: "InSeven Limited", filename: "diligence-license", bundle: .module),
         License("EonilFSEvents", author: "Hoon H., Eonil", filename: "eonilfsevents-license", bundle: .module),
         License("Interact", author: "InSeven Limited", filename: "interact-license", bundle: .module),
         License("Introspect", author: "Timber Software", filename: "introspect-license", bundle: .module),
