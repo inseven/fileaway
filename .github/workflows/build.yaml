@@ -54,3 +54,4 @@ jobs:
       with:
         name: Artifacts
         path: build/build-*.zip
+        if-no-files-found: error
