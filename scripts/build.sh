@@ -175,14 +175,14 @@ xcrun altool --validate-app \
     --output-format json \
     --type macos
 
-if $RELEASE ; then
+# Archive the build directory.
+ZIP_BASENAME="build-${VERSION_NUMBER}-${BUILD_NUMBER}.zip"
+ZIP_PATH="${BUILD_DIRECTORY}/${ZIP_BASENAME}"
+pushd "${BUILD_DIRECTORY}"
+zip -r "${ZIP_BASENAME}" .
+popd
 
-    # Archive the build directory.
-    ZIP_BASENAME="build-${VERSION_NUMBER}-${BUILD_NUMBER}.zip"
-    ZIP_PATH="${BUILD_DIRECTORY}/${ZIP_BASENAME}"
-    pushd "${BUILD_DIRECTORY}"
-    zip -r "${ZIP_BASENAME}" .
-    popd
+if $RELEASE ; then
 
     # Install the private key.
     mkdir -p ~/.appstoreconnect/private_keys/
