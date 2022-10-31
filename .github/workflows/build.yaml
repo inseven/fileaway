@@ -50,7 +50,7 @@ jobs:
         scripts/build.sh
 
     - name: Archive the binary
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Artifacts
-        path: build/Artifacts.zip
+        path: build/build-*.zip
