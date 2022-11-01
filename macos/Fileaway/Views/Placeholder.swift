@@ -20,27 +20,19 @@
 
 import SwiftUI
 
-import Interact
+struct Placeholder: View {
 
-struct ContentView: View {
+    var text: String
 
-    @ObservedObject var manager: Manager
-    @State var section: URL?
-
-    init(manager: Manager) {
-        self.manager = manager
+    init(_ text: String) {
+        self.text = text
     }
 
     var body: some View {
-        NavigationSplitView {
-            Sidebar(manager: manager, section: $section)
-        } detail: {
-            if let section = section,
-               let directory = manager.directories.first(where: { $0.url == section })  {
-                DirectoryView(directoryObserver: directory)
-            } else {
-                Placeholder("No Directory Selected")
-            }
-        }
+        Text(text)
+            .font(.title)
+            .foregroundColor(.secondary)
+            .edgesIgnoringSafeArea(.all)
     }
+
 }
