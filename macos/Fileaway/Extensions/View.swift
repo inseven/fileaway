@@ -20,32 +20,12 @@
 
 import SwiftUI
 
-import Interact
+extension View {
 
-struct ContentView: View {
-
-    @ObservedObject var manager: Manager
-    @State var section: URL?
-    @FocusedValue(\.selectionModel) var selectionModel
-
-    init(manager: Manager) {
-        self.manager = manager
+    func searchable() -> some View {
+        return self
+            .searchable(text: Binding.constant(""))
+            .disabled(true)
     }
 
-    var body: some View {
-        NavigationSplitView {
-            Sidebar(manager: manager, section: $section)
-        } detail: {
-            if let section = section,
-               let directory = manager.directories.first(where: { $0.url == section })  {
-                DirectoryView(directoryObserver: directory)
-            } else {
-                Placeholder("No Directory Selected")
-                    .searchable()
-            }
-        }
-        .toolbar(id: "main") {
-            SelectionToolbar(selectionModel: selectionModel ?? SelectionModel())
-        }
-    }
 }

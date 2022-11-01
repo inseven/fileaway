@@ -28,14 +28,18 @@ class SelectionModel: ObservableObject {
 
     @Published var selection: Set<FileInfo> = []
 
-    private let directory: DirectoryObserver
+    private let directory: DirectoryObserver?
     private var cancellables: Set<AnyCancellable> = []
 
-    init(directory: DirectoryObserver) {
+    init(directory: DirectoryObserver? = nil) {
         self.directory = directory
     }
 
     @MainActor func start() {
+
+        guard let directory = directory else {
+            return
+        }
 
         // Remove missing files from the selection.
         directory

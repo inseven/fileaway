@@ -20,32 +20,15 @@
 
 import SwiftUI
 
-import Interact
+struct FocusedSelectionModelKey : FocusedValueKey {
+    typealias Value = SelectionModel
+}
 
-struct ContentView: View {
+extension FocusedValues {
 
-    @ObservedObject var manager: Manager
-    @State var section: URL?
-    @FocusedValue(\.selectionModel) var selectionModel
-
-    init(manager: Manager) {
-        self.manager = manager
+    var selectionModel: FocusedSelectionModelKey.Value? {
+        get { self[FocusedSelectionModelKey.self] }
+        set { self[FocusedSelectionModelKey.self] = newValue }
     }
 
-    var body: some View {
-        NavigationSplitView {
-            Sidebar(manager: manager, section: $section)
-        } detail: {
-            if let section = section,
-               let directory = manager.directories.first(where: { $0.url == section })  {
-                DirectoryView(directoryObserver: directory)
-            } else {
-                Placeholder("No Directory Selected")
-                    .searchable()
-            }
-        }
-        .toolbar(id: "main") {
-            SelectionToolbar(selectionModel: selectionModel ?? SelectionModel())
-        }
-    }
 }
