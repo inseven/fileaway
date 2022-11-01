@@ -45,11 +45,7 @@ struct ContentView: View {
             }
         }
         .toolbar(id: "main") {
-            if let selecitonModel = selectionModel {
-                SelectionToolbar(selectionModel: selecitonModel)
-            } else {
-                SelectionToolbar(selectionModel: SelectionModel())
-            }
+            SelectionToolbar(selectionModel: selectionModel ?? SelectionModel())
         }
     }
 }
