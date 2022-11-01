@@ -27,12 +27,12 @@ struct SelectionToolbar: CustomizableToolbarContent {
     @Environment(\.manager) var manager
     @Environment(\.openWindow) var openWindow
 
-    @ObservedObject var selectionManager: SelectionModel
+    @ObservedObject var selectionModel: SelectionModel
 
     var body: some CustomizableToolbarContent {
         ToolbarItem(id: "wizard") {
             Button {
-                for file in selectionManager.selection {
+                for file in selectionModel.selection {
                     openWindow(id: Wizard.windowID, value: file.url)
                 }
             } label: {
@@ -40,11 +40,11 @@ struct SelectionToolbar: CustomizableToolbarContent {
             }
             .help("Move the selected items using the Rules Wizard")
             .keyboardShortcut(KeyboardShortcut(.return, modifiers: .command))
-            .disabled(!selectionManager.canMove)
+            .disabled(!selectionModel.canMove)
         }
         ToolbarItem(id: "preview") {
             Button {
-                guard let file = selectionManager.selection.first else {
+                guard let file = selectionModel.selection.first else {
                     return
                 }
                 QuickLookCoordinator.shared.show(url: file.url)
@@ -53,17 +53,17 @@ struct SelectionToolbar: CustomizableToolbarContent {
             }
             .help("Show items with Quick Look")
             .keyboardShortcut(.space, modifiers: [])
-            .disabled(!selectionManager.canPreview)
+            .disabled(!selectionModel.canPreview)
         }
         ToolbarItem(id: "delete") {
             Button {
-                try? selectionManager.trash()
+                try? selectionModel.trash()
             } label: {
                 Label("Delete", systemImage: "trash")
             }
             .help("Move the selected items to the Bin")
             .keyboardShortcut(.delete)
-            .disabled(!selectionManager.canTrash)
+            .disabled(!selectionModel.canTrash)
         }
     }
 

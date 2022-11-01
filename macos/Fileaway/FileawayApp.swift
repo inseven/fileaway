@@ -24,19 +24,6 @@ import UserNotifications
 import Diligence
 import FileawayCore
 
-struct FocusedSelectionKey : FocusedValueKey {
-    typealias Value = SelectionModel
-}
-
-extension FocusedValues {
-
-    var selection: FocusedSelectionKey.Value? {
-        get { self[FocusedSelectionKey.self] }
-        set { self[FocusedSelectionKey.self] = newValue }
-    }
-
-}
-
 @main
 struct FileawayApp: App {
 

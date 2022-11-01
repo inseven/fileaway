@@ -71,6 +71,8 @@
 		D8FC5334257BB6D2008FB609 /* MailboxRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5333257BB6D2008FB609 /* MailboxRow.swift */; };
 		D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5341257BB77C008FB609 /* SettingsView.swift */; };
 		D8FC534A257BB7A4008FB609 /* LocationsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5349257BB7A4008FB609 /* LocationsSettingsView.swift */; };
+		D8FE3ACF29114F6A00C6F7FE /* FocusedSelectionModelKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FE3ACE29114F6A00C6F7FE /* FocusedSelectionModelKey.swift */; };
+		D8FE3AD12911696300C6F7FE /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FE3AD02911696300C6F7FE /* View.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,6 +166,8 @@
 		D8FC5333257BB6D2008FB609 /* MailboxRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailboxRow.swift; sourceTree = "<group>"; };
 		D8FC5341257BB77C008FB609 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D8FC5349257BB7A4008FB609 /* LocationsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsSettingsView.swift; sourceTree = "<group>"; };
+		D8FE3ACE29114F6A00C6F7FE /* FocusedSelectionModelKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusedSelectionModelKey.swift; sourceTree = "<group>"; };
+		D8FE3AD02911696300C6F7FE /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -335,6 +339,7 @@
 				D85C9571257999130007AE1E /* FileManager.swift */,
 				D87DEFC3257848B7006CFE85 /* URL.swift */,
 				D80F72D726430E3C0010BB38 /* Data.swift */,
+				D8FE3AD02911696300C6F7FE /* View.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -369,6 +374,7 @@
 			isa = PBXGroup;
 			children = (
 				D8F8BE0B2588179E0010432F /* CloseKey.swift */,
+				D8FE3ACE29114F6A00C6F7FE /* FocusedSelectionModelKey.swift */,
 			);
 			path = Environment;
 			sourceTree = "<group>";
@@ -571,6 +577,7 @@
 				D83CDCE52620F97F0063C91C /* VariableTextField.swift in Sources */,
 				D8E7F9CE25999E7A00C7409B /* Rule.swift in Sources */,
 				D8B657E826421D5B009DE837 /* LocationMenuItems.swift in Sources */,
+				D8FE3ACF29114F6A00C6F7FE /* FocusedSelectionModelKey.swift in Sources */,
 				D829DDB425787C100066A807 /* Settings.swift in Sources */,
 				D87DEFBE257840B1006CFE85 /* Manager.swift in Sources */,
 				D8F8BE3C25881C650010432F /* Highlight.swift in Sources */,
@@ -586,6 +593,7 @@
 				D8D78A922580DD750088890F /* QuickLookPreview.swift in Sources */,
 				D88A0B3A29114BE100AD9EC9 /* Placeholder.swift in Sources */,
 				D8F8BE0C2588179E0010432F /* CloseKey.swift in Sources */,
+				D8FE3AD12911696300C6F7FE /* View.swift in Sources */,
 				D87DEFC4257848B7006CFE85 /* URL.swift in Sources */,
 				D82D01262657F66B00FD2974 /* VariableProvider.swift in Sources */,
 				D8B657EC2642D2C5009DE837 /* RulesSettingsView.swift in Sources */,

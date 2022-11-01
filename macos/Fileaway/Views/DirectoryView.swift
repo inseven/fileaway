@@ -32,15 +32,15 @@ struct DirectoryView: View {
 
     @ObservedObject var directoryObserver: DirectoryObserver
 
-    @StateObject var model: SelectionModel
+    @StateObject var selectionModel: SelectionModel
 
     init(directoryObserver: DirectoryObserver) {
         self.directoryObserver = directoryObserver
-        _model = StateObject(wrappedValue: SelectionModel(directory: directoryObserver))
+        _selectionModel = StateObject(wrappedValue: SelectionModel(directory: directoryObserver))
     }
 
     var body: some View {
-        List(selection: $model.selection) {
+        List(selection: $selectionModel.selection) {
             ForEach(directoryObserver.searchResults, id: \.self) { file in
                 FileRow(file: file)
             }
@@ -87,15 +87,13 @@ struct DirectoryView: View {
         // .onCutCommand(perform: manager.cut)
         .overlay(directoryObserver.searchResults.isEmpty ? Placeholder("No Items") : nil)
         .searchable(text: directoryObserver.filter)
-        .toolbar(id: "main") {
-            SelectionToolbar(selectionManager: model)
-        }
         .navigationTitle(directoryObserver.name)
+        .focusedValue(\.selectionModel, selectionModel)
         .onAppear {
-            model.start()
+            selectionModel.start()
         }
         .onDisappear {
-            model.stop()
+            selectionModel.stop()
         }
     }
 
