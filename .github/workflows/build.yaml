@@ -52,6 +52,5 @@ jobs:
     - name: Archive the binary
       uses: actions/upload-artifact@v3
       with:
-        name: Artifacts
         path: build/build-*.zip
         if-no-files-found: error
