@@ -37,14 +37,14 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
     @Published var variables: [VariableModel]
     var variablesBackChannel: BackChannel<VariableModel>?
 
-    @Published var destination: [ComponentState]
-    var destinationBackChannel: BackChannel<ComponentState>?
+    @Published var destination: [ComponentModel]
+    var destinationBackChannel: BackChannel<ComponentModel>?
 
     var description: String {
         self.name
     }
 
-    init(id: UUID, rootUrl: URL, name: String, variables: [VariableModel], destination: [ComponentState]) {
+    init(id: UUID, rootUrl: URL, name: String, variables: [VariableModel], destination: [ComponentModel]) {
         self.id = id
         self.rootUrl = rootUrl
         self.name = name
@@ -65,7 +65,7 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
                   rootUrl: rule.rootUrl,
                   name: String(rule.name),
                   variables: rule.variables.map { VariableModel($0) },
-                  destination: rule.destination.map { ComponentState($0, variable: nil) })
+                  destination: rule.destination.map { ComponentModel($0, variable: nil) })
     }
 
     init(_ rule: Rule, rootUrl: URL) {
@@ -74,7 +74,7 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         let variables = rule.configuration.variables.map { VariableModel($0) }
         self.variables = variables
         destination = rule.configuration.destination.map { component in
-            ComponentState(component, variable: variables.first { $0.name == component.value } )
+            ComponentModel(component, variable: variables.first { $0.name == component.value } )
         }
         self.rootUrl = rootUrl
         self.establishBackChannel()
@@ -94,11 +94,11 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         }
     }
 
-    func remove(component: ComponentState) {
+    func remove(component: ComponentModel) {
         destination.removeAll { $0 == component }
     }
 
-    func moveUp(component: ComponentState) {
+    func moveUp(component: ComponentModel) {
         guard let index = destination.firstIndex(of: component),
               index > 0 else {
             return
@@ -106,7 +106,7 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         destination.swapAt(index, index - 1)
     }
 
-    func moveDown(component: ComponentState) {
+    func moveDown(component: ComponentModel) {
         guard let index = destination.firstIndex(of: component),
               index < destination.count - 1 else {
             return
@@ -142,7 +142,7 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         variables.remove(atOffsets: variableOffsets)
     }
 
-    func name(for component: ComponentState, format: NameFormat = .long) -> String {
+    func name(for component: ComponentModel, format: NameFormat = .long) -> String {
         switch component.type {
         case .text:
             return component.value

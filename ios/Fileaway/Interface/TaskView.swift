@@ -61,14 +61,14 @@ struct DestinationFooter: View {
             if self.editMode?.wrappedValue == .active {
                 HStack {
                     Button(action: {
-                        self.task.destination.append(ComponentState(value: "Text", type: .text, variable: nil))
+                        self.task.destination.append(ComponentModel(value: "Text", type: .text, variable: nil))
                     }) {
                         Text("Text")
                     }
                     .buttonStyle(FilledButton())
                     ForEach(task.variables) { variable in
                         Button(action: {
-                            self.task.destination.append(ComponentState(value: variable.name, type: .variable, variable: variable))
+                            self.task.destination.append(ComponentModel(value: variable.name, type: .variable, variable: variable))
                         }) {
                             Text(String(describing: variable.name))
                         }

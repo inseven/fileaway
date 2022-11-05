@@ -47,8 +47,8 @@ class TaskState: ObservableObject, Identifiable, BackChannelable, CustomStringCo
     @Published var variables: [VariableModel]
     var variablesBackChannel: BackChannel<VariableModel>?
     
-    @Published var destination: [ComponentState]
-    var destinationBackChannel: BackChannel<ComponentState>?
+    @Published var destination: [ComponentModel]
+    var destinationBackChannel: BackChannel<ComponentModel>?
 
     var description: String {
         self.name
@@ -68,7 +68,7 @@ class TaskState: ObservableObject, Identifiable, BackChannelable, CustomStringCo
         }
     }
 
-    init(id: UUID, name: String, variables: [VariableModel], destination: [ComponentState]) {
+    init(id: UUID, name: String, variables: [VariableModel], destination: [ComponentModel]) {
         self.id = id
         self.name = name
         self.variables = variables
@@ -86,7 +86,7 @@ class TaskState: ObservableObject, Identifiable, BackChannelable, CustomStringCo
         self.init(id: UUID(),
                   name: String(taskState.name),
                   variables: taskState.variables.map { VariableModel($0) },
-                  destination: taskState.destination.map { ComponentState($0, variable: nil) })
+                  destination: taskState.destination.map { ComponentModel($0, variable: nil) })
     }
 
     init(task: Task) {
@@ -94,7 +94,7 @@ class TaskState: ObservableObject, Identifiable, BackChannelable, CustomStringCo
         let variables = task.configuration.variables.map { VariableModel($0) }
         self.variables = variables
         destination = task.configuration.destination.map { component in
-            ComponentState(component, variable: variables.first { $0.name == component.value } )
+            ComponentModel(component, variable: variables.first { $0.name == component.value } )
         }
     }
 
@@ -112,7 +112,7 @@ class TaskState: ObservableObject, Identifiable, BackChannelable, CustomStringCo
         variables.remove(atOffsets: variableOffsets)
     }
 
-    func name(for component: ComponentState, format: TaskStateNameFormat = .long) -> String {
+    func name(for component: ComponentModel, format: TaskStateNameFormat = .long) -> String {
         switch component.type {
         case .text:
             return component.value

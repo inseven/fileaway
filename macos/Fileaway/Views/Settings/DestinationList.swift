@@ -25,7 +25,7 @@ import FileawayCore
 struct ComponentView: View {
 
     @State var rule: RuleState
-    @ObservedObject var component: ComponentState
+    @ObservedObject var component: ComponentModel
 
     var body: some View {
         VStack {
@@ -66,7 +66,7 @@ struct ComponentView: View {
 struct DestinationList: View {
 
     @ObservedObject var rule: RuleState
-    @State var selection: ComponentState?
+    @State var selection: ComponentModel?
 
     var body: some View {
         VStack {
@@ -88,12 +88,12 @@ struct DestinationList: View {
 
                 ForEach(rule.variables) { variable in
                     Button(String(describing: variable.name)) {
-                        rule.destination.append(ComponentState(value: variable.name, type: .variable, variable: variable))
+                        rule.destination.append(ComponentModel(value: variable.name, type: .variable, variable: variable))
                     }
                 }
 
                 Button("Text") {
-                    rule.destination.append(ComponentState(value: "Text", type: .text, variable: nil))
+                    rule.destination.append(ComponentModel(value: "Text", type: .text, variable: nil))
                 }
 
                 ControlGroup {
