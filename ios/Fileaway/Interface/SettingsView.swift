@@ -59,46 +59,45 @@ struct VariableView: View {
 
 }
 
-struct ComponentItem: View {
-
-
-    @Environment(\.editMode) var editMode
-    @ObservedObject var task: TaskState
-    @State var component: ComponentState
-
-    var body: some View {
-        HStack {
-            if component.type == .text {
-                EditText("Component", text: $component.value).environment(\.editMode, editMode)
-            } else {
-                Text(task.name(for: component))
-                .foregroundColor(.secondary)
-            }
-        }
-        .environment(\.editMode, editMode)
-    }
-
-}
-
 struct SettingsView: View {
+
+    enum SheetType: Identifiable {
+
+        var id: Self { self }
+
+        case about
+    }
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @ObservedObject var settings: Settings
 
+    @State private var sheet: SheetType? = nil
+
     var body: some View {
         VStack {
             Form {
-                Section(header: Text("Destination".uppercased()), footer: Destination(url: $settings.destination)) {
-                    FilePicker(placeholder: "Select...", documentTypes: [.folder], url: $settings.destination).lineLimit(1)
+                Section {
+                    FilePicker(placeholder: "Select...", documentTypes: [.folder], url: $settings.destination)
+                        .lineLimit(1)
+                } header: {
+                    Text("Destination".uppercased())
+                } footer: {
+                    Destination(url: $settings.destination)
                 }
-                Section() {
+                Section {
                     NavigationLink(destination: TasksView(tasks: settings.tasks)) {
                         Text("Tasks")
                         Spacer()
                         Text("\(settings.tasks.count)").foregroundColor(.secondary)
                     }
                 }
-            }.listStyle(GroupedListStyle())
+                Section {
+                    Button("About Fileaway...") {
+                        sheet = .about
+                    }
+                    .foregroundColor(.primary)
+                }
+            }
         }
         .navigationBarTitle("Settings", displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {
@@ -106,6 +105,13 @@ struct SettingsView: View {
         }) {
             Text("Done").bold()
         })
+        .sheet(item: $sheet) { sheet in
+            switch sheet {
+            case .about:
+                AboutView()
+            }
+        }
     }
 
 }
+
