@@ -32,25 +32,6 @@ extension URL {
         }
     }
 
-    func matches(extensions: [String]?) -> Bool {
-        guard let extensions = extensions else {
-            return true
-        }
-        return extensions.contains(pathExtension)
-    }
-
-    var lastPathComponent: String {
-        (path as NSString).lastPathComponent
-    }
-
-    var deletingLastPathComponent: URL {
-        self.deletingLastPathComponent()
-    }
-
-    var pathExtension: String {
-        (path as NSString).pathExtension
-    }
-
     // TODO: review this?
     func relativePath(from base: URL) -> String? {
 
