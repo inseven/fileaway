@@ -23,30 +23,24 @@ import SwiftUI
 
 import FileawayCore
 
-extension Component {
+class ComponentState: ObservableObject, Identifiable, Hashable {
 
-    init(_ state: ComponentState) {
-        self.init(type: state.type, value: state.value)
-    }
-
-}
-
-class ComponentState: ObservableObject, Identifiable {
-
-    var id = UUID() // TODO: Why doesn't this work if it's a let.
+    let id: UUID
     @Published var value: String
     @Published var type: ComponentType
     var variable: VariableModel? = nil
 
     init(value: String, type: ComponentType, variable: VariableModel?) {
+        self.id = UUID()
         self.value = value
         self.type = type
         self.variable = variable
     }
 
     init(_ component: Component, variable: VariableModel?) {
-        value = component.value
-        type = component.type
+        self.id = UUID()
+        self.value = component.value
+        self.type = component.type
         self.variable = variable
     }
 
@@ -62,6 +56,22 @@ class ComponentState: ObservableObject, Identifiable {
             return
         }
         self.value = variable.name
+    }
+
+    static func == (lhs: ComponentState, rhs: ComponentState) -> Bool {
+        return lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+
+}
+
+extension Component {
+
+    init(_ state: ComponentState) {
+        self.init(type: state.type, value: state.value)
     }
 
 }
