@@ -43,6 +43,7 @@
 		D89265842498AC3A00297825 /* ActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89265832498AC3A00297825 /* ActionsViewController.swift */; };
 		D89265892498C58C00297825 /* MoveFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89265882498C58C00297825 /* MoveFileViewController.swift */; };
 		D89941012145E6AE00097F3D /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89941002145E6AE00097F3D /* StorageManager.swift */; };
+		D8A871D22916D56400B2932A /* ComponentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A871D12916D56400B2932A /* ComponentItem.swift */; };
 		D8CAE3EE249D3AD70047CA36 /* ErrorText.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CAE3ED249D3AD70047CA36 /* ErrorText.swift */; };
 		D8CAE3F0249D6E1D0047CA36 /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CAE3EF249D6E1D0047CA36 /* TaskList.swift */; };
 		D8CCB8062143672700AC445F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCB8052143672700AC445F /* AppDelegate.swift */; };
@@ -56,6 +57,8 @@
 		D8E4CA5B249CF8A600F5BC8E /* Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E4CA5A249CF8A600F5BC8E /* Selectable.swift */; };
 		D8E4CA5D249D061D00F5BC8E /* EditableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E4CA5C249D061D00F5BC8E /* EditableText.swift */; };
 		D8E4CA5F249D317D00F5BC8E /* FilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E4CA5E249D317D00F5BC8E /* FilledButton.swift */; };
+		D8FB857F2916D2430024F885 /* Diligence in Frameworks */ = {isa = PBXBuildFile; productRef = D8FB857E2916D2430024F885 /* Diligence */; };
+		D8FB85822916D31D0024F885 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB85812916D31D0024F885 /* AboutView.swift */; };
 		EEFF05A221AD1E5A0014C89B /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEFF05A121AD1E5A0014C89B /* UIViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -113,6 +116,7 @@
 		D89265832498AC3A00297825 /* ActionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsViewController.swift; sourceTree = "<group>"; };
 		D89265882498C58C00297825 /* MoveFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveFileViewController.swift; sourceTree = "<group>"; };
 		D89941002145E6AE00097F3D /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		D8A871D12916D56400B2932A /* ComponentItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentItem.swift; sourceTree = "<group>"; };
 		D8B0B3D425314771001EB2C2 /* Fileaway.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fileaway.entitlements; sourceTree = "<group>"; };
 		D8CAE3ED249D3AD70047CA36 /* ErrorText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorText.swift; sourceTree = "<group>"; };
 		D8CAE3EF249D6E1D0047CA36 /* TaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskList.swift; sourceTree = "<group>"; };
@@ -133,6 +137,7 @@
 		D8E4CA5A249CF8A600F5BC8E /* Selectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selectable.swift; sourceTree = "<group>"; };
 		D8E4CA5C249D061D00F5BC8E /* EditableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableText.swift; sourceTree = "<group>"; };
 		D8E4CA5E249D317D00F5BC8E /* FilledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledButton.swift; sourceTree = "<group>"; };
+		D8FB85812916D31D0024F885 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		EEFF05A121AD1E5A0014C89B /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,6 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D88B353D28B61247000C8910 /* FileawayCore in Frameworks */,
+				D8FB857F2916D2430024F885 /* Diligence in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,8 +171,10 @@
 		D81C5D8F249BDD3C0083BD6F /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				D8FB85812916D31D0024F885 /* AboutView.swift */,
 				D84319A6249AB8720014CFE9 /* ActionsView.swift */,
 				D84319AA249AB9280014CFE9 /* ActionView.swift */,
+				D8A871D12916D56400B2932A /* ComponentItem.swift */,
 				D86A8F14249C5F9800839D1A /* DestinationView.swift */,
 				D85D0A17249AE0A000D4B414 /* FakeDuplexView.swift */,
 				D84319AC249AB97A0014CFE9 /* FilePicker.swift */,
@@ -217,8 +225,8 @@
 				D8CCB8042143672700AC445F /* Fileaway */,
 				D8CCB8192143672700AC445F /* FileawayTests */,
 				D8CCB8242143672700AC445F /* FileawayUITests */,
-				D8CCB8032143672700AC445F /* Products */,
 				D8BCA522216F069B002A624D /* Frameworks */,
+				D8CCB8032143672700AC445F /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -315,6 +323,7 @@
 			name = Fileaway;
 			packageProductDependencies = (
 				D88B353C28B61247000C8910 /* FileawayCore */,
+				D8FB857E2916D2430024F885 /* Diligence */,
 			);
 			productName = Fileaway;
 			productReference = D8CCB8022143672700AC445F /* Fileaway.app */;
@@ -437,6 +446,7 @@
 				D858CE6024AB1F2F00F9BCB2 /* ActionGroup.swift in Sources */,
 				D84319A7249AB8720014CFE9 /* ActionsView.swift in Sources */,
 				D843199F249A85680014CFE9 /* FilePickerSheet.swift in Sources */,
+				D8FB85822916D31D0024F885 /* AboutView.swift in Sources */,
 				D81C5D97249BF2410083BD6F /* ComponentState.swift in Sources */,
 				D8E4CA5F249D317D00F5BC8E /* FilledButton.swift in Sources */,
 				D88F3D4C217048B400BFE0F9 /* TypeViewController.swift in Sources */,
@@ -444,6 +454,7 @@
 				D858CE6224AB1FF500F9BCB2 /* ActionButtonStyle.swift in Sources */,
 				D84319AF249AB9A40014CFE9 /* ActivityIndicator.swift in Sources */,
 				D84319B3249ABA9A0014CFE9 /* URL.swift in Sources */,
+				D8A871D22916D56400B2932A /* ComponentItem.swift in Sources */,
 				D89941012145E6AE00097F3D /* StorageManager.swift in Sources */,
 				D86A8F15249C5F9800839D1A /* DestinationView.swift in Sources */,
 				D88F3D54217070A400BFE0F9 /* DateTableViewCell.swift in Sources */,
@@ -830,6 +841,10 @@
 		D88B353C28B61247000C8910 /* FileawayCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FileawayCore;
+		};
+		D8FB857E2916D2430024F885 /* Diligence */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Diligence;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
