@@ -21,7 +21,7 @@
 import UIKit
 import FileawayCore
 
-protocol TypeViewControllerDelegate: class {
+protocol TypeViewControllerDelegate: AnyObject {
     func typeViewController(_ typeViewController: TypeViewController, didSelectIndex index: Int)
 }
 

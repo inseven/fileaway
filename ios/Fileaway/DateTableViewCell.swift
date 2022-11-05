@@ -22,7 +22,7 @@ import UIKit
 
 import FileawayCore
 
-protocol DateTableViewCellDelegate: class {
+protocol DateTableViewCellDelegate: AnyObject {
     func dateTableViewCellDidChange(_ dateTableViewCell: DateTableViewCell)
 }
 
