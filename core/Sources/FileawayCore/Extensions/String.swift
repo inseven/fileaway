@@ -23,11 +23,15 @@ import Foundation
 extension String {
 
     public var deletingPathExtension: String {
-        (self as NSString).deletingPathExtension
+        return (self as NSString).deletingPathExtension
     }
 
     public var tokens: [String] {
-        components(separatedBy: .whitespacesAndNewlines).filter { !$0.isEmpty }
+        return components(separatedBy: .whitespacesAndNewlines).filter { !$0.isEmpty }
+    }
+
+    public var lastPathComponent: String {
+        return (self as NSString).lastPathComponent
     }
 
 }

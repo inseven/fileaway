@@ -20,10 +20,21 @@
 
 import Foundation
 
-public extension URL {
+extension URL {
 
-    var displayName: String {
+    public var displayName: String {
         FileManager.default.displayName(atPath: self.path)
+    }
+
+    public var deletingLastPathComponent: URL {
+        self.deletingLastPathComponent()
+    }
+
+    public func matches(extensions: [String]?) -> Bool {
+        guard let extensions = extensions else {
+            return true
+        }
+        return extensions.contains(pathExtension)
     }
 
 }
