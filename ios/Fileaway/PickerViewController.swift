@@ -255,7 +255,7 @@ class PickerViewController: UITableViewController {
         if (indexPath.section == 0) {
             return 240.0
         }
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

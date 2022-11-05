@@ -21,7 +21,7 @@
 import UIKit
 import FileawayCore
 
-protocol TextTableViewCellDelegate: class {
+protocol TextTableViewCellDelegate: AnyObject {
     func textTableViewCellDidChange(_ textTableViewCell: TextTableViewCell)
 }
 
