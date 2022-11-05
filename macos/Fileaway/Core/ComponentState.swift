@@ -19,25 +19,28 @@
 // SOFTWARE.
 
 import Foundation
+import SwiftUI
 
 import FileawayCore
 
 class ComponentState: ObservableObject, Identifiable, Hashable {
 
-    var id = UUID()
+    let id: UUID
     @Published var value: String
     @Published var type: ComponentType
     var variable: VariableModel? = nil
 
     init(value: String, type: ComponentType, variable: VariableModel?) {
+        self.id = UUID()
         self.value = value
         self.type = type
         self.variable = variable
     }
 
     init(_ component: Component, variable: VariableModel?) {
-        value = component.value
-        type = component.type
+        self.id = UUID()
+        self.value = component.value
+        self.type = component.type
         self.variable = variable
     }
 
