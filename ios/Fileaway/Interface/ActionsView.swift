@@ -110,7 +110,7 @@ struct ActionsView: View {
         .navigationBarItems(leading: Button(action: {
             self.activeSheet = .settings
         }, label: {
-            Text("Settings")
+            Image(systemName: "gear")
         }))
     }
 
