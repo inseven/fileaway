@@ -22,7 +22,15 @@ import Foundation
 
 import FileawayCore
 
-class VariableState: ObservableObject, Identifiable, Hashable {
+extension Variable {
+
+    init(_ state: VariableModel) {
+        self.init(name: state.name, type: state.type)
+    }
+    
+}
+
+class VariableModel: ObservableObject, Identifiable {
 
     var id = UUID()
     @Published var name: String
@@ -33,31 +41,14 @@ class VariableState: ObservableObject, Identifiable, Hashable {
         self.type = variable.type
     }
 
-    public init(_ variableState: VariableState) {
-        id = UUID()
-        name = String(variableState.name)
-        type = variableState.type
+    public init(_ variable: VariableModel) {
+        id = variable.id
+        name = String(variable.name)
+        type = variable.type
     }
 
     public init(name: String, type: VariableType) {
         self.name = name
         self.type = type
     }
-
-    static func == (lhs: VariableState, rhs: VariableState) -> Bool {
-        return lhs.id == rhs.id
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-
-}
-
-extension Variable {
-
-    init(_ state: VariableState) {
-        self.init(name: state.name, type: state.type)
-    }
-
 }

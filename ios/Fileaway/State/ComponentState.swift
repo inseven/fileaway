@@ -36,21 +36,21 @@ class ComponentState: ObservableObject, Identifiable {
     var id = UUID() // TODO: Why doesn't this work if it's a let.
     @Published var value: String
     @Published var type: ComponentType
-    var variable: VariableState? = nil
+    var variable: VariableModel? = nil
 
-    init(value: String, type: ComponentType, variable: VariableState?) {
+    init(value: String, type: ComponentType, variable: VariableModel?) {
         self.value = value
         self.type = type
         self.variable = variable
     }
 
-    init(_ component: Component, variable: VariableState?) {
+    init(_ component: Component, variable: VariableModel?) {
         value = component.value
         type = component.type
         self.variable = variable
     }
 
-    init(_ component: ComponentState, variable: VariableState?) {
+    init(_ component: ComponentState, variable: VariableModel?) {
         id = component.id
         value = String(component.value)
         type = component.type
