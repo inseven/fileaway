@@ -20,33 +20,31 @@
 
 import Foundation
 
-import FileawayCore
+public class Rule: Identifiable, Hashable {
 
-class Rule: Identifiable, Hashable {
+    public var id = UUID()
 
-    var id = UUID()
+    public let rootUrl: URL
+    public let name: String
+    public let configuration: Configuration
 
-    let rootUrl: URL
-    let name: String
-    let configuration: Configuration
-
-    init(rootUrl: URL, name: String) {
+    public init(rootUrl: URL, name: String) {
         self.rootUrl = rootUrl
         self.name = name
         self.configuration = Configuration(variables: [], destination: [])
     }
 
-    init(rootUrl: URL, name: String, configuration: Configuration) {
+    public init(rootUrl: URL, name: String, configuration: Configuration) {
         self.rootUrl = rootUrl
         self.name = name
         self.configuration = configuration
     }
 
-    static func == (lhs: Rule, rhs: Rule) -> Bool {
+    public static func == (lhs: Rule, rhs: Rule) -> Bool {
         lhs.id == rhs.id
     }
 
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
 

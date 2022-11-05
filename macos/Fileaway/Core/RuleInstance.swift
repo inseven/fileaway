@@ -21,6 +21,8 @@
 import Combine
 import SwiftUI
 
+import FileawayCore
+
 class RuleInstance: ObservableObject {
 
     var rule: Rule
