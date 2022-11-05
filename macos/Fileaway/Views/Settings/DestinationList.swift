@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import FileawayCore
+
 struct ComponentView: View {
 
     @State var rule: RuleState

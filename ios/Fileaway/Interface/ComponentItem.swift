@@ -20,8 +20,9 @@
 
 import SwiftUI
 
-struct ComponentItem: View {
+import FileawayCore
 
+struct ComponentItem: View {
 
     @Environment(\.editMode) var editMode
     @ObservedObject var task: TaskState

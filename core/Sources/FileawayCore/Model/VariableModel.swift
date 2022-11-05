@@ -19,59 +19,43 @@
 // SOFTWARE.
 
 import Foundation
-import SwiftUI
 
-import FileawayCore
+public class VariableModel: ObservableObject, Identifiable, Hashable {
 
-class ComponentState: ObservableObject, Identifiable, Hashable {
+    public var id = UUID()
+    @Published public var name: String
+    @Published public var type: VariableType
 
-    let id: UUID
-    @Published var value: String
-    @Published var type: ComponentType
-    var variable: VariableModel? = nil
+    public init(_ variable: Variable) {
+        self.name = variable.name
+        self.type = variable.type
+    }
 
-    init(value: String, type: ComponentType, variable: VariableModel?) {
-        self.id = UUID()
-        self.value = value
+    public init(_ variableModel: VariableModel) {
+        id = UUID()
+        name = String(variableModel.name)
+        type = variableModel.type
+    }
+
+    public init(name: String, type: VariableType) {
+        self.name = name
         self.type = type
-        self.variable = variable
     }
 
-    init(_ component: Component, variable: VariableModel?) {
-        self.id = UUID()
-        self.value = component.value
-        self.type = component.type
-        self.variable = variable
-    }
-
-    init(_ component: ComponentState, variable: VariableModel?) {
-        id = component.id
-        value = String(component.value)
-        type = component.type
-        self.variable = variable
-    }
-
-    func update() {
-        guard let variable = self.variable else {
-            return
-        }
-        self.value = variable.name
-    }
-
-    static func == (lhs: ComponentState, rhs: ComponentState) -> Bool {
+    public static func == (lhs: VariableModel, rhs: VariableModel) -> Bool {
         return lhs.id == rhs.id
     }
 
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
 
 }
 
-extension Component {
+extension Variable {
 
-    init(_ state: ComponentState) {
-        self.init(type: state.type, value: state.value)
+    public init(_ state: VariableModel) {
+        self.init(name: state.name, type: state.type)
     }
 
 }
