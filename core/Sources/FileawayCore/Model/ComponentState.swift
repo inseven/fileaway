@@ -21,48 +21,46 @@
 import Foundation
 import SwiftUI
 
-import FileawayCore
+public class ComponentState: ObservableObject, Identifiable, Hashable {
 
-class ComponentState: ObservableObject, Identifiable, Hashable {
+    public let id: UUID
+    @Published public var value: String
+    @Published public var type: ComponentType
+    public var variable: VariableModel? = nil
 
-    let id: UUID
-    @Published var value: String
-    @Published var type: ComponentType
-    var variable: VariableModel? = nil
-
-    init(value: String, type: ComponentType, variable: VariableModel?) {
+    public init(value: String, type: ComponentType, variable: VariableModel?) {
         self.id = UUID()
         self.value = value
         self.type = type
         self.variable = variable
     }
 
-    init(_ component: Component, variable: VariableModel?) {
+    public init(_ component: Component, variable: VariableModel?) {
         self.id = UUID()
         self.value = component.value
         self.type = component.type
         self.variable = variable
     }
 
-    init(_ component: ComponentState, variable: VariableModel?) {
+    public init(_ component: ComponentState, variable: VariableModel?) {
         id = component.id
         value = String(component.value)
         type = component.type
         self.variable = variable
     }
 
-    func update() {
+    public func update() {
         guard let variable = self.variable else {
             return
         }
         self.value = variable.name
     }
 
-    static func == (lhs: ComponentState, rhs: ComponentState) -> Bool {
+    public static func == (lhs: ComponentState, rhs: ComponentState) -> Bool {
         return lhs.id == rhs.id
     }
 
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
 
@@ -70,7 +68,7 @@ class ComponentState: ObservableObject, Identifiable, Hashable {
 
 extension Component {
 
-    init(_ state: ComponentState) {
+    public init(_ state: ComponentState) {
         self.init(type: state.type, value: state.value)
     }
 
