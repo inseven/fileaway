@@ -136,9 +136,6 @@
 		D8B657ED2642D40F009DE837 /* LocationsEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsEditor.swift; sourceTree = "<group>"; };
 		D8B6D02F257DBB7D00C7E472 /* SelectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionModel.swift; sourceTree = "<group>"; };
 		D8B6D034257E71CD00C7E472 /* QuickLookCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickLookCoordinator.swift; sourceTree = "<group>"; };
-		D8BCF1972635062E00047E0A /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
-		D8BCF1982635064A00047E0A /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
-		D8BCF1992635067300047E0A /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		D8D275BC28B3862400200A7C /* diligence */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = diligence; path = ../diligence; sourceTree = "<group>"; };
 		D8D78A912580DD750088890F /* QuickLookPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickLookPreview.swift; sourceTree = "<group>"; };
 		D8E7F9A725999B1000C7409B /* RuleState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleState.swift; sourceTree = "<group>"; };
@@ -259,9 +256,6 @@
 			isa = PBXGroup;
 			children = (
 				D8D275BB28B3862400200A7C /* Packages */,
-				D8BCF1982635064A00047E0A /* Common.xcconfig */,
-				D8BCF1992635067300047E0A /* Debug.xcconfig */,
-				D8BCF1972635062E00047E0A /* Release.xcconfig */,
 				D8F90C6B25DAA6A400F0EFB8 /* interact */,
 				D87DEF7D25774F6C006CFE85 /* Fileaway */,
 				D87DEF9025774F6D006CFE85 /* FileawayTests */,
@@ -635,7 +629,6 @@
 /* Begin XCBuildConfiguration section */
 		D87DEF9F25774F6D006CFE85 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D8BCF1992635067300047E0A /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -700,7 +693,6 @@
 		};
 		D87DEFA025774F6D006CFE85 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D8BCF1972635062E00047E0A /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -765,7 +757,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = $BUILD_NUMBER;
+				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Fileaway/Preview Content\"";
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
@@ -776,7 +768,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.fileaway;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -793,7 +785,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = $BUILD_NUMBER;
+				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Fileaway/Preview Content\"";
 				DEVELOPMENT_TEAM = S4WXAUZQEV;
@@ -804,7 +796,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.fileaway;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Fileaway Developer ID Application";
