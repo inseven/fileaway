@@ -22,15 +22,18 @@ import Combine
 import Foundation
 import PDFKit
 
-class ReverseTask {
+public class FakeDuplexTask {
 
     private var task: AnyCancellable?
 
-    func reverse(url: URL, completion: @escaping (Result<Bool, Error>) -> Void) {
-        self.task = PDFDocument.open(url: url)
-            .map { $0.reverse() }
-            .map { $0.write(to: url) }
-            .eraseToAnyPublisher()
+    public init() {
+
+    }
+
+    public func perform(url1: URL, url2: URL, output: URL, completion: @escaping (Result<Bool, Error>) -> Void) {
+        task = Publishers.Zip(PDFDocument.open(url: url1), PDFDocument.open(url: url2).map { $0.reverse() })
+            .map { $0.interleave($1) }
+            .map { $0.write(to: output) }
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { result in
                 if case .failure(let error) = result {
@@ -38,7 +41,7 @@ class ReverseTask {
                 }
             }) { document in
                 completion(.success(true))
-        }
+            }
     }
 
 }

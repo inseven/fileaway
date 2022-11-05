@@ -12,7 +12,6 @@
 		D81C5D95249BE6F40083BD6F /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81C5D94249BE6F40083BD6F /* TaskView.swift */; };
 		D81C5D97249BF2410083BD6F /* ComponentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81C5D96249BF2410083BD6F /* ComponentState.swift */; };
 		D843199F249A85680014CFE9 /* FilePickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D843199E249A85680014CFE9 /* FilePickerSheet.swift */; };
-		D84319A1249AB1EE0014CFE9 /* PDFDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84319A0249AB1EE0014CFE9 /* PDFDocument.swift */; };
 		D84319A3249AB7FE0014CFE9 /* StoryboardIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84319A2249AB7FE0014CFE9 /* StoryboardIdentifier.swift */; };
 		D84319A5249AB83B0014CFE9 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84319A4249AB83B0014CFE9 /* String.swift */; };
 		D84319A7249AB8720014CFE9 /* ActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84319A6249AB8720014CFE9 /* ActionsView.swift */; };
@@ -26,10 +25,7 @@
 		D858CE6024AB1F2F00F9BCB2 /* ActionGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D858CE5F24AB1F2F00F9BCB2 /* ActionGroup.swift */; };
 		D858CE6224AB1FF500F9BCB2 /* ActionButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D858CE6124AB1FF500F9BCB2 /* ActionButtonStyle.swift */; };
 		D858CE6424AB201100F9BCB2 /* ActionMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D858CE6324AB201100F9BCB2 /* ActionMenu.swift */; };
-		D85D0A10249ADA6700D4B414 /* ReverseTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85D0A0F249ADA6700D4B414 /* ReverseTask.swift */; };
-		D85D0A12249ADAB400D4B414 /* MergeTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85D0A11249ADAB400D4B414 /* MergeTask.swift */; };
 		D85D0A14249ADCE900D4B414 /* MergeDocumentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85D0A13249ADCE900D4B414 /* MergeDocumentsView.swift */; };
-		D85D0A16249ADFDC00D4B414 /* FakeDuplexTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85D0A15249ADFDC00D4B414 /* FakeDuplexTask.swift */; };
 		D85D0A18249AE0A000D4B414 /* FakeDuplexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85D0A17249AE0A000D4B414 /* FakeDuplexView.swift */; };
 		D86A8F13249C12BB00839D1A /* VariableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86A8F12249C12BB00839D1A /* VariableModel.swift */; };
 		D86A8F15249C5F9800839D1A /* DestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86A8F14249C5F9800839D1A /* DestinationView.swift */; };
@@ -84,7 +80,6 @@
 		D81C5D94249BE6F40083BD6F /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 		D81C5D96249BF2410083BD6F /* ComponentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentState.swift; sourceTree = "<group>"; };
 		D843199E249A85680014CFE9 /* FilePickerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePickerSheet.swift; sourceTree = "<group>"; };
-		D84319A0249AB1EE0014CFE9 /* PDFDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFDocument.swift; sourceTree = "<group>"; };
 		D84319A2249AB7FE0014CFE9 /* StoryboardIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardIdentifier.swift; sourceTree = "<group>"; };
 		D84319A4249AB83B0014CFE9 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		D84319A6249AB8720014CFE9 /* ActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsView.swift; sourceTree = "<group>"; };
@@ -98,10 +93,7 @@
 		D858CE5F24AB1F2F00F9BCB2 /* ActionGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionGroup.swift; sourceTree = "<group>"; };
 		D858CE6124AB1FF500F9BCB2 /* ActionButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtonStyle.swift; sourceTree = "<group>"; };
 		D858CE6324AB201100F9BCB2 /* ActionMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionMenu.swift; sourceTree = "<group>"; };
-		D85D0A0F249ADA6700D4B414 /* ReverseTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseTask.swift; sourceTree = "<group>"; };
-		D85D0A11249ADAB400D4B414 /* MergeTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeTask.swift; sourceTree = "<group>"; };
 		D85D0A13249ADCE900D4B414 /* MergeDocumentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeDocumentsView.swift; sourceTree = "<group>"; };
-		D85D0A15249ADFDC00D4B414 /* FakeDuplexTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeDuplexTask.swift; sourceTree = "<group>"; };
 		D85D0A17249AE0A000D4B414 /* FakeDuplexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeDuplexView.swift; sourceTree = "<group>"; };
 		D866D66326197AC80025329E /* FileawayCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FileawayCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86A8F12249C12BB00839D1A /* VariableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableModel.swift; sourceTree = "<group>"; };
@@ -200,7 +192,6 @@
 		D89921B426199B40006A594F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				D84319A0249AB1EE0014CFE9 /* PDFDocument.swift */,
 				D84319A4249AB83B0014CFE9 /* String.swift */,
 				EEFF05A121AD1E5A0014C89B /* UIViewController.swift */,
 				D84319B2249ABA9A0014CFE9 /* URL.swift */,
@@ -246,11 +237,8 @@
 				D89265832498AC3A00297825 /* ActionsViewController.swift */,
 				D8CCB8052143672700AC445F /* AppDelegate.swift */,
 				D88F3D53217070A400BFE0F9 /* DateTableViewCell.swift */,
-				D85D0A15249ADFDC00D4B414 /* FakeDuplexTask.swift */,
-				D85D0A11249ADAB400D4B414 /* MergeTask.swift */,
 				D89265882498C58C00297825 /* MoveFileViewController.swift */,
 				D88F3D42216F847D00BFE0F9 /* PickerViewController.swift */,
-				D85D0A0F249ADA6700D4B414 /* ReverseTask.swift */,
 				D84319B0249ABA1E0014CFE9 /* Settings.swift */,
 				D89941002145E6AE00097F3D /* StorageManager.swift */,
 				D84319A2249AB7FE0014CFE9 /* StoryboardIdentifier.swift */,
@@ -471,16 +459,12 @@
 				D84319AB249AB9280014CFE9 /* ActionView.swift in Sources */,
 				D8CCB8062143672700AC445F /* AppDelegate.swift in Sources */,
 				D81C5D93249BE3710083BD6F /* TasksView.swift in Sources */,
-				D84319A1249AB1EE0014CFE9 /* PDFDocument.swift in Sources */,
 				D84319A9249AB8C70014CFE9 /* ReversePages.swift in Sources */,
-				D85D0A10249ADA6700D4B414 /* ReverseTask.swift in Sources */,
 				D8CAE3F0249D6E1D0047CA36 /* TaskList.swift in Sources */,
-				D85D0A12249ADAB400D4B414 /* MergeTask.swift in Sources */,
 				D84319AD249AB97A0014CFE9 /* FilePicker.swift in Sources */,
 				D85D0A18249AE0A000D4B414 /* FakeDuplexView.swift in Sources */,
 				D89265892498C58C00297825 /* MoveFileViewController.swift in Sources */,
 				D84319B1249ABA1E0014CFE9 /* Settings.swift in Sources */,
-				D85D0A16249ADFDC00D4B414 /* FakeDuplexTask.swift in Sources */,
 				D8E4CA5D249D061D00F5BC8E /* EditableText.swift in Sources */,
 				D84319A5249AB83B0014CFE9 /* String.swift in Sources */,
 				D858CE5E24AB1F1200F9BCB2 /* ActionButton.swift in Sources */,
