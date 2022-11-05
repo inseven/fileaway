@@ -32,7 +32,8 @@ BUILD_DIRECTORY="${ROOT_DIRECTORY}/build"
 TEMPORARY_DIRECTORY="${ROOT_DIRECTORY}/temp"
 
 KEYCHAIN_PATH="${TEMPORARY_DIRECTORY}/temporary.keychain"
-ARCHIVE_PATH="${BUILD_DIRECTORY}/Fileaway.xcarchive"
+ARCHIVE_PATH="${BUILD_DIRECTORY}/Fileaway-macOS.xcarchive"
+IOS_ARCHIVE_PATH="${BUILD_DIRECTORY}/Fileaway-iOS.xcarchive"
 ENV_PATH="${ROOT_DIRECTORY}/.env"
 
 RELEASE_SCRIPT_PATH="${SCRIPTS_DIRECTORY}/release.sh"
@@ -143,6 +144,7 @@ echo "$MACOS_DEVELOPER_INSTALLER_CERTIFICATE_PASSWORD" | build-tools import-base
 build-tools install-provisioning-profile "macos/Fileaway_Mac_App_Store_Profile.provisionprofile"
 
 # Build and test the iOS project.
+sudo xcode-select --switch "$IOS_XCODE_PATH"
 xcode_project \
     -scheme "Fileaway iOS" \
     -destination "$IPHONE_DESTINATION" \
@@ -150,8 +152,20 @@ xcode_project \
 
 # Build and archive the iOS project.
 sudo xcode-select --switch "$IOS_XCODE_PATH"
-build_scheme "Fileaway iOS" clean build
-
+xcode_project \
+    -scheme "Fileaway iOS" \
+    -config Release \
+    -archivePath "$IOS_ARCHIVE_PATH" \
+    -destination "generic/platform=iOS" \
+    OTHER_CODE_SIGN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\"" \
+    BUILD_NUMBER=$BUILD_NUMBER \
+    MARKETING_VERSION=$VERSION_NUMBER \
+    clean archive
+xcodebuild \
+    -archivePath "$IOS_ARCHIVE_PATH" \
+    -exportArchive \
+    -exportPath "$BUILD_DIRECTORY" \
+    -exportOptionsPlist "ios/ExportOptions.plist"
 
 # Build and archive the macOS project.
 sudo xcode-select --switch "$MACOS_XCODE_PATH"
