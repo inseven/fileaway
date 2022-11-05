@@ -65,7 +65,7 @@ done
 
 # iPhone to be used for smoke test builds and tests.
 # This doesn't specify the OS version to allow the build script to recover from minor build changes.
-IPHONE_DESTINATION="platform=iOS Simulator,name=iPhone 13 Pro"
+IPHONE_DESTINATION="platform=iOS Simulator,name=iPhone 14 Pro"
 
 # Generate a random string to secure the local keychain.
 export TEMPORARY_KEYCHAIN_PASSWORD=`openssl rand -base64 14`
@@ -103,11 +103,6 @@ pushd "core"
 swift test
 popd
 
-# iOS
-sudo xcode-select --switch "$IOS_XCODE_PATH"
-build_scheme "Fileaway iOS" clean build
-
-
 # Clean up the build directory.
 if [ -d "$BUILD_DIRECTORY" ] ; then
     rm -r "$BUILD_DIRECTORY"
@@ -137,7 +132,7 @@ function cleanup {
 trap cleanup EXIT
 
 # Determine the version and build number.
-VERSION_NUMBER=`changes --scope macOS version`
+VERSION_NUMBER=`changes version`
 BUILD_NUMBER=`build-tools generate-build-number`
 
 # Import the certificates into our dedicated keychain.
@@ -146,6 +141,11 @@ echo "$MACOS_DEVELOPER_INSTALLER_CERTIFICATE_PASSWORD" | build-tools import-base
 
 # Install the provisioning profiles.
 build-tools install-provisioning-profile "macos/Fileaway_Mac_App_Store_Profile.provisionprofile"
+
+# Build and archive the iOS project.
+sudo xcode-select --switch "$IOS_XCODE_PATH"
+build_scheme "Fileaway iOS" clean build
+
 
 # Build and archive the macOS project.
 sudo xcode-select --switch "$MACOS_XCODE_PATH"
@@ -189,7 +189,6 @@ if $RELEASE ; then
     echo -n "$APPLE_API_KEY" | base64 --decode -o ~/".appstoreconnect/private_keys/AuthKey_${APPLE_API_KEY_ID}.p8"
 
     changes \
-        --scope macOS \
         release \
         --skip-if-empty \
         --pre-release \
