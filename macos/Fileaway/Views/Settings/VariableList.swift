@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import FileawayCore
+
 struct VariableList: View {
 
     @ObservedObject var rule: RuleState
