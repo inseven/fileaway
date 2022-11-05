@@ -33,10 +33,10 @@ class VariableModel: ObservableObject, Identifiable, Hashable {
         self.type = variable.type
     }
 
-    public init(_ variableState: VariableModel) {
+    public init(_ variableModel: VariableModel) {
         id = UUID()
-        name = String(variableState.name)
-        type = variableState.type
+        name = String(variableModel.name)
+        type = variableModel.type
     }
 
     public init(name: String, type: VariableType) {
