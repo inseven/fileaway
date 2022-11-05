@@ -186,7 +186,16 @@ xcodebuild \
 
 APP_BASENAME="Fileaway.app"
 APP_PATH="$BUILD_DIRECTORY/$APP_BASENAME"
+IPA_PATH="$BUILD_DIRECTORY/Fileaway.ipa"
 PKG_PATH="$BUILD_DIRECTORY/Fileaway.pkg"
+
+# Validate the iOS build.
+xcrun altool --validate-app \
+    -f "${IPA_PATH}" \
+    --apiKey "$APPLE_API_KEY_ID" \
+    --apiIssuer "$APPLE_API_KEY_ISSUER_ID" \
+    --output-format json \
+    --type ios
 
 # Validate the macOS build.
 xcrun altool --validate-app \
@@ -215,6 +224,6 @@ if $RELEASE ; then
         --pre-release \
         --push \
         --exec "${RELEASE_SCRIPT_PATH}" \
-        "${PKG_PATH}" "${ZIP_PATH}"
+        "${IPA_PATH}" "${PKG_PATH}" "${ZIP_PATH}"
 
 fi
