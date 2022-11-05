@@ -22,7 +22,6 @@
 		D84319AF249AB9A40014CFE9 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84319AE249AB9A40014CFE9 /* ActivityIndicator.swift */; };
 		D84319B1249ABA1E0014CFE9 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84319B0249ABA1E0014CFE9 /* Settings.swift */; };
 		D84319B3249ABA9A0014CFE9 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84319B2249ABA9A0014CFE9 /* URL.swift */; };
-		D84319B5249AC1D60014CFE9 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84319B4249AC1D60014CFE9 /* Destination.swift */; };
 		D858CE5E24AB1F1200F9BCB2 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D858CE5D24AB1F1200F9BCB2 /* ActionButton.swift */; };
 		D858CE6024AB1F2F00F9BCB2 /* ActionGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D858CE5F24AB1F2F00F9BCB2 /* ActionGroup.swift */; };
 		D858CE6224AB1FF500F9BCB2 /* ActionButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D858CE6124AB1FF500F9BCB2 /* ActionButtonStyle.swift */; };
@@ -95,7 +94,6 @@
 		D84319AE249AB9A40014CFE9 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		D84319B0249ABA1E0014CFE9 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		D84319B2249ABA9A0014CFE9 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
-		D84319B4249AC1D60014CFE9 /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
 		D858CE5D24AB1F1200F9BCB2 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		D858CE5F24AB1F2F00F9BCB2 /* ActionGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionGroup.swift; sourceTree = "<group>"; };
 		D858CE6124AB1FF500F9BCB2 /* ActionButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtonStyle.swift; sourceTree = "<group>"; };
@@ -248,7 +246,6 @@
 				D89265832498AC3A00297825 /* ActionsViewController.swift */,
 				D8CCB8052143672700AC445F /* AppDelegate.swift */,
 				D88F3D53217070A400BFE0F9 /* DateTableViewCell.swift */,
-				D84319B4249AC1D60014CFE9 /* Destination.swift */,
 				D85D0A15249ADFDC00D4B414 /* FakeDuplexTask.swift */,
 				D85D0A11249ADAB400D4B414 /* MergeTask.swift */,
 				D89265882498C58C00297825 /* MoveFileViewController.swift */,
@@ -469,7 +466,6 @@
 				D8CCD293246EDC6A007EF2BB /* SettingsView.swift in Sources */,
 				D88F3D43216F847D00BFE0F9 /* PickerViewController.swift in Sources */,
 				D8E4CA57249CF76500F5BC8E /* EditSafeButton.swift in Sources */,
-				D84319B5249AC1D60014CFE9 /* Destination.swift in Sources */,
 				D88F3D4A216F961700BFE0F9 /* PreviewTableViewCell.swift in Sources */,
 				D8CAE3EE249D3AD70047CA36 /* ErrorText.swift in Sources */,
 				D84319AB249AB9280014CFE9 /* ActionView.swift in Sources */,

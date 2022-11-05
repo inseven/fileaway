@@ -36,9 +36,17 @@ struct ActionGroup<Content: View, Footer: View>: View {
         }
     }
 
-    @inlinable public init(footer: Footer? = nil, @ViewBuilder content: @escaping () -> Content) {
+    public init(footer: Footer, @ViewBuilder content: @escaping () -> Content) {
         self.footer = footer
         self.content = content
+    }
+
+}
+
+extension ActionGroup where Footer == EmptyView {
+
+    init(@ViewBuilder content: @escaping () -> Content) {
+        self.init(footer: EmptyView(), content: content)
     }
 
 }

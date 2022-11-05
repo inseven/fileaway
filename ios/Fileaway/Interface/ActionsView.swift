@@ -73,7 +73,7 @@ struct ActionsView: View {
         ScrollView {
         VStack {
             ActionMenu {
-                ActionGroup(footer: Destination(url: self.$settings.destination)) {
+                ActionGroup {
                     ActionButton("Move File", systemName: "folder") {
                         guard let delegate = self.delegate else {
                             return
@@ -82,7 +82,7 @@ struct ActionsView: View {
                     }
                     .buttonStyle(ActionButtonStyle(backgroundColor: .accentColor, foregroundColor: .white))
                 }
-                ActionGroup(footer: EmptyView()) {
+                ActionGroup {
                     ActionButton("Reverse Pages", systemName: "doc.on.doc") {
                         self.activeSheet = .reversePages
                     }
