@@ -32,7 +32,7 @@ BUILD_DIRECTORY="${ROOT_DIRECTORY}/build"
 TEMPORARY_DIRECTORY="${ROOT_DIRECTORY}/temp"
 
 KEYCHAIN_PATH="${TEMPORARY_DIRECTORY}/temporary.keychain"
-ARCHIVE_PATH="${BUILD_DIRECTORY}/Fileaway-macOS.xcarchive"
+MACOS_ARCHIVE_PATH="${BUILD_DIRECTORY}/Fileaway-macOS.xcarchive"
 IOS_ARCHIVE_PATH="${BUILD_DIRECTORY}/Fileaway-iOS.xcarchive"
 ENV_PATH="${ROOT_DIRECTORY}/.env"
 
@@ -173,13 +173,13 @@ sudo xcode-select --switch "$MACOS_XCODE_PATH"
 xcode_project \
     -scheme "Fileaway macOS" \
     -config Release \
-    -archivePath "$ARCHIVE_PATH" \
+    -archivePath "$MACOS_ARCHIVE_PATH" \
     OTHER_CODE_SIGN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\"" \
     CURRENT_PROJECT_VERSION=$BUILD_NUMBER \
     MARKETING_VERSION=$VERSION_NUMBER \
     clean archive
 xcodebuild \
-    -archivePath "$ARCHIVE_PATH" \
+    -archivePath "$MACOS_ARCHIVE_PATH" \
     -exportArchive \
     -exportPath "$BUILD_DIRECTORY" \
     -exportOptionsPlist "macos/ExportOptions.plist"
