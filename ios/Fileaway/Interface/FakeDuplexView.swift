@@ -19,9 +19,10 @@
 // SOFTWARE.
 
 import Foundation
-
 import MobileCoreServices
 import SwiftUI
+
+import FileawayCore
 
 struct FakeDuplexView: View {
 

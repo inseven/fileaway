@@ -21,6 +21,8 @@
 import MobileCoreServices
 import SwiftUI
 
+import FileawayCore
+
 struct ReversePages: View {
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>

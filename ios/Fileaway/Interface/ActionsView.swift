@@ -22,6 +22,8 @@ import Foundation
 import MobileCoreServices
 import SwiftUI
 
+import FileawayCore
+
 protocol ActionsViewDelegate: NSObject {
     func moveFileTapped()
 }

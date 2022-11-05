@@ -21,6 +21,8 @@
 import MobileCoreServices
 import SwiftUI
 
+import FileawayCore
+
 struct MergeDocumentsView: View {
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
