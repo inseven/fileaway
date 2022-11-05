@@ -34,8 +34,8 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
     let rootUrl: URL
     @Published var name: String
 
-    @Published var variables: [VariableState]
-    var variablesBackChannel: BackChannel<VariableState>?
+    @Published var variables: [VariableModel]
+    var variablesBackChannel: BackChannel<VariableModel>?
 
     @Published var destination: [ComponentState]
     var destinationBackChannel: BackChannel<ComponentState>?
@@ -44,7 +44,7 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         self.name
     }
 
-    init(id: UUID, rootUrl: URL, name: String, variables: [VariableState], destination: [ComponentState]) {
+    init(id: UUID, rootUrl: URL, name: String, variables: [VariableModel], destination: [ComponentState]) {
         self.id = id
         self.rootUrl = rootUrl
         self.name = name
@@ -64,14 +64,14 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         self.init(id: UUID(),
                   rootUrl: rule.rootUrl,
                   name: String(rule.name),
-                  variables: rule.variables.map { VariableState($0) },
+                  variables: rule.variables.map { VariableModel($0) },
                   destination: rule.destination.map { ComponentState($0, variable: nil) })
     }
 
     init(_ rule: Rule, rootUrl: URL) {
         id = rule.id
         name = rule.name
-        let variables = rule.configuration.variables.map { VariableState($0) }
+        let variables = rule.configuration.variables.map { VariableModel($0) }
         self.variables = variables
         destination = rule.configuration.destination.map { component in
             ComponentState(component, variable: variables.first { $0.name == component.value } )
@@ -114,7 +114,7 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         destination.swapAt(index, index + 1)
     }
 
-    func moveUp(variable: VariableState) {
+    func moveUp(variable: VariableModel) {
         guard let index = variables.firstIndex(of: variable),
               index > 0 else {
             return
@@ -122,7 +122,7 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         variables.swapAt(index, index - 1)
     }
 
-    func moveDown(variable: VariableState) {
+    func moveDown(variable: VariableModel) {
         guard let index = variables.firstIndex(of: variable),
               index < variables.count - 1 else {
             return
@@ -130,7 +130,7 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         variables.swapAt(index, index + 1)
     }
 
-    func remove(variable: VariableState) {
+    func remove(variable: VariableModel) {
         variables.removeAll { $0 == variable }
     }
 
@@ -178,7 +178,7 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
             name = "Variable \(index)"
             index = index + 1
         } while names.contains(name)
-        self.variables.append(VariableState(name: name, type: .string))
+        self.variables.append(VariableModel(name: name, type: .string))
     }
 
     static func == (lhs: RuleState, rhs: RuleState) -> Bool {

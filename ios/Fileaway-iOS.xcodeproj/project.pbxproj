@@ -32,7 +32,7 @@
 		D85D0A14249ADCE900D4B414 /* MergeDocumentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85D0A13249ADCE900D4B414 /* MergeDocumentsView.swift */; };
 		D85D0A16249ADFDC00D4B414 /* FakeDuplexTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85D0A15249ADFDC00D4B414 /* FakeDuplexTask.swift */; };
 		D85D0A18249AE0A000D4B414 /* FakeDuplexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85D0A17249AE0A000D4B414 /* FakeDuplexView.swift */; };
-		D86A8F13249C12BB00839D1A /* VariableState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86A8F12249C12BB00839D1A /* VariableState.swift */; };
+		D86A8F13249C12BB00839D1A /* VariableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86A8F12249C12BB00839D1A /* VariableModel.swift */; };
 		D86A8F15249C5F9800839D1A /* DestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86A8F14249C5F9800839D1A /* DestinationView.swift */; };
 		D88B353D28B61247000C8910 /* FileawayCore in Frameworks */ = {isa = PBXBuildFile; productRef = D88B353C28B61247000C8910 /* FileawayCore */; };
 		D88F3D43216F847D00BFE0F9 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88F3D42216F847D00BFE0F9 /* PickerViewController.swift */; };
@@ -103,7 +103,7 @@
 		D85D0A15249ADFDC00D4B414 /* FakeDuplexTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeDuplexTask.swift; sourceTree = "<group>"; };
 		D85D0A17249AE0A000D4B414 /* FakeDuplexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeDuplexView.swift; sourceTree = "<group>"; };
 		D866D66326197AC80025329E /* FileawayCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FileawayCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D86A8F12249C12BB00839D1A /* VariableState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableState.swift; sourceTree = "<group>"; };
+		D86A8F12249C12BB00839D1A /* VariableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableModel.swift; sourceTree = "<group>"; };
 		D86A8F14249C5F9800839D1A /* DestinationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationView.swift; sourceTree = "<group>"; };
 		D88F3D42216F847D00BFE0F9 /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		D88F3D49216F961700BFE0F9 /* PreviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewTableViewCell.swift; sourceTree = "<group>"; };
@@ -185,7 +185,7 @@
 			children = (
 				D81C5D96249BF2410083BD6F /* ComponentState.swift */,
 				D81C5D90249BE2A70083BD6F /* TaskState.swift */,
-				D86A8F12249C12BB00839D1A /* VariableState.swift */,
+				D86A8F12249C12BB00839D1A /* VariableModel.swift */,
 				D8CAE3EF249D6E1D0047CA36 /* TaskList.swift */,
 			);
 			path = State;
@@ -452,7 +452,7 @@
 				D81C5D91249BE2A70083BD6F /* TaskState.swift in Sources */,
 				D84319A3249AB7FE0014CFE9 /* StoryboardIdentifier.swift in Sources */,
 				D858CE6424AB201100F9BCB2 /* ActionMenu.swift in Sources */,
-				D86A8F13249C12BB00839D1A /* VariableState.swift in Sources */,
+				D86A8F13249C12BB00839D1A /* VariableModel.swift in Sources */,
 				D81C5D95249BE6F40083BD6F /* TaskView.swift in Sources */,
 				D89265842498AC3A00297825 /* ActionsViewController.swift in Sources */,
 				D8E4CA5B249CF8A600F5BC8E /* Selectable.swift in Sources */,

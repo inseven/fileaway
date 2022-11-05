@@ -44,8 +44,8 @@ class TaskState: ObservableObject, Identifiable, BackChannelable, CustomStringCo
     var id = UUID()
     @Published var name: String
 
-    @Published var variables: [VariableState]
-    var variablesBackChannel: BackChannel<VariableState>?
+    @Published var variables: [VariableModel]
+    var variablesBackChannel: BackChannel<VariableModel>?
     
     @Published var destination: [ComponentState]
     var destinationBackChannel: BackChannel<ComponentState>?
@@ -68,7 +68,7 @@ class TaskState: ObservableObject, Identifiable, BackChannelable, CustomStringCo
         }
     }
 
-    init(id: UUID, name: String, variables: [VariableState], destination: [ComponentState]) {
+    init(id: UUID, name: String, variables: [VariableModel], destination: [ComponentState]) {
         self.id = id
         self.name = name
         self.variables = variables
@@ -85,13 +85,13 @@ class TaskState: ObservableObject, Identifiable, BackChannelable, CustomStringCo
     convenience init(_ taskState: TaskState) {
         self.init(id: UUID(),
                   name: String(taskState.name),
-                  variables: taskState.variables.map { VariableState($0) },
+                  variables: taskState.variables.map { VariableModel($0) },
                   destination: taskState.destination.map { ComponentState($0, variable: nil) })
     }
 
     init(task: Task) {
         name = task.name
-        let variables = task.configuration.variables.map { VariableState($0) }
+        let variables = task.configuration.variables.map { VariableModel($0) }
         self.variables = variables
         destination = task.configuration.destination.map { component in
             ComponentState(component, variable: variables.first { $0.name == component.value } )
@@ -148,7 +148,7 @@ class TaskState: ObservableObject, Identifiable, BackChannelable, CustomStringCo
             name = "Variable \(index)"
             index = index + 1
         } while names.contains(name)
-        self.variables.append(VariableState(name: name, type: .string))
+        self.variables.append(VariableModel(name: name, type: .string))
     }
 
 }

@@ -123,7 +123,7 @@ class RuleSet: ObservableObject {
         let rule = RuleState(id: UUID(),
                              rootUrl: rootUrl,
                              name: name,
-                             variables: [VariableState(name: "Date", type: .date(hasDay: true))],
+                             variables: [VariableModel(name: "Date", type: .date(hasDay: true))],
                              destination: [
                                 ComponentState(value: "New Folder/", type: .text, variable: nil),
                                 ComponentState(value: "Date", type: .variable, variable: nil),

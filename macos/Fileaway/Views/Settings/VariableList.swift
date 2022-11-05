@@ -23,7 +23,7 @@ import SwiftUI
 struct VariableList: View {
 
     @ObservedObject var rule: RuleState
-    @State var selection: VariableState?
+    @State var selection: VariableModel?
 
     var body: some View {
         VStack {
