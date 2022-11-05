@@ -12,7 +12,7 @@ on:
 jobs:
   test:
 
-    name: Build macOS project
+    name: build
     runs-on: macos-ventura
 
     steps:
