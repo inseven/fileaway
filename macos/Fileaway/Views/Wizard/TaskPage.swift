@@ -21,6 +21,7 @@
 import Combine
 import SwiftUI
 
+import FileawayCore
 import Interact
 
 class TaskPageModel: ObservableObject {
