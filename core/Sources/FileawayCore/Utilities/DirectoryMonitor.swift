@@ -24,6 +24,7 @@ import Foundation
 import EonilFSEvents
 #endif
 
+// TODO: Move the extension filtering out of this class.
 public class DirectoryMonitor {
 
     let locations: [URL]

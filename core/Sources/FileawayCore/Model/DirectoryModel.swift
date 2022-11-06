@@ -35,9 +35,9 @@ public class DirectoryModel: ObservableObject, Identifiable, Hashable {
     }
 
     public let id: UUID = UUID()
-
     public let type: DirectoryType
     public let url: URL
+    public let ruleSet: RulesModel
 
     public var count: Int { self.files.count }
     public var name: String { url.displayName }
@@ -45,8 +45,6 @@ public class DirectoryModel: ObservableObject, Identifiable, Hashable {
     @Published private var files: Set<URL> = Set()
     @Published public var searchResults: [FileInfo] = []
     @Published public var filter = ""
-
-    public let ruleSet: RulesModel
 
     private let extensions = ["pdf"]
     private var fileProvider: DirectoryMonitor?
