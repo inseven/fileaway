@@ -22,6 +22,12 @@ import Foundation
 
 public struct FileDate {
 
+    public enum DateType {
+        case unknown
+        case filename
+        case creation
+    }
+
     public let date: Date
     public let type: DateType
 
