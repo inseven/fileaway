@@ -20,10 +20,12 @@
 
 import SwiftUI
 
+import FileawayCore
+
 struct RuleSheet: View {
 
     @Environment(\.presentationMode) var presentationMode
-    @State var rule: RuleState
+    @State var rule: RuleModel
 
     var body: some View {
         VStack {

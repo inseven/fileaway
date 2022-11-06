@@ -44,7 +44,7 @@ class RuleSet: ObservableObject {
     let url: URL
 
     @Published var rules: [Rule]
-    @Published var mutableRules: [RuleState]
+    @Published var mutableRules: [RuleModel]
 
     var rulesSubscription: Cancellable?
 
@@ -65,7 +65,7 @@ class RuleSet: ObservableObject {
         let rules = (try? Self.load(url: self.url)) ?? []
         self.rules = rules
         self.mutableRules = rules.map { rule in
-            RuleState(rule, rootUrl: url)
+            RuleModel(rule, rootUrl: url)
         }
         updateSubscription()
     }
@@ -106,7 +106,7 @@ class RuleSet: ObservableObject {
         return name
     }
 
-    func add(_ rule: RuleState) throws {
+    func add(_ rule: RuleModel) throws {
         guard !contains(ruleNamed: rule.name) else {
             throw RuleSetError.duplicateName
         }
@@ -118,9 +118,9 @@ class RuleSet: ObservableObject {
         try save()
     }
 
-    func new(preferredName: String) throws -> RuleState {
+    func new(preferredName: String) throws -> RuleModel {
         let name = uniqueRuleName(preferredName: preferredName)
-        let rule = RuleState(id: UUID(),
+        let rule = RuleModel(id: UUID(),
                              rootUrl: rootUrl,
                              name: name,
                              variables: [VariableModel(name: "Date", type: .date(hasDay: true))],
@@ -132,20 +132,20 @@ class RuleSet: ObservableObject {
         return rule
     }
 
-    private func duplicate(_ rule: RuleState, preferredName: String) throws -> RuleState {
+    private func duplicate(_ rule: RuleModel, preferredName: String) throws -> RuleModel {
         let name = uniqueRuleName(preferredName: preferredName)
-        let newRule = RuleState(rule)
+        let newRule = RuleModel(rule)
         newRule.name = name
         try add(newRule)
         return newRule
     }
 
-    func duplicate(ids: Set<RuleState.ID>) throws -> [RuleState] {
+    func duplicate(ids: Set<RuleModel.ID>) throws -> [RuleModel] {
         let rules = mutableRules.filter { ids.contains($0.id) }
         return try rules.map { try duplicate($0, preferredName: "Copy of " + $0.name) }
     }
 
-    func remove(ids: Set<RuleState.ID>) throws {
+    func remove(ids: Set<RuleModel.ID>) throws {
         mutableRules.removeAll { ids.contains($0.id) }
         rules.removeAll { ids.contains($0.id) }
         try save()

@@ -20,31 +20,28 @@
 
 import SwiftUI
 
-import FileawayCore
+public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible, Hashable {
 
-class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashable {
-
-    enum NameFormat {
+    public enum NameFormat {
         case long
         case short
     }
 
-    var id = UUID()
+    public let id: UUID
+    public let rootUrl: URL
 
-    let rootUrl: URL
-    @Published var name: String
+    @Published public var name: String
+    @Published public var variables: [VariableModel]
+    @Published public var destination: [ComponentModel]
 
-    @Published var variables: [VariableModel]
     var variablesBackChannel: BackChannel<VariableModel>?
-
-    @Published var destination: [ComponentModel]
     var destinationBackChannel: BackChannel<ComponentModel>?
 
-    var description: String {
-        self.name
+    public var description: String {
+        return self.name
     }
 
-    init(id: UUID, rootUrl: URL, name: String, variables: [VariableModel], destination: [ComponentModel]) {
+    public init(id: UUID, rootUrl: URL, name: String, variables: [VariableModel], destination: [ComponentModel]) {
         self.id = id
         self.rootUrl = rootUrl
         self.name = name
@@ -60,7 +57,7 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         self.establishBackChannel()
     }
 
-    convenience init(_ rule: RuleState) {
+    public convenience init(_ rule: RuleModel) {
         self.init(id: UUID(),
                   rootUrl: rule.rootUrl,
                   name: String(rule.name),
@@ -68,7 +65,7 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
                   destination: rule.destination.map { ComponentModel($0, variable: nil) })
     }
 
-    init(_ rule: Rule, rootUrl: URL) {
+    public init(_ rule: Rule, rootUrl: URL) {
         id = rule.id
         name = rule.name
         let variables = rule.configuration.variables.map { VariableModel($0) }
@@ -80,7 +77,7 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         self.establishBackChannel()
     }
 
-    func establishBackChannel() {
+    public func establishBackChannel() {
         variablesBackChannel = BackChannel(value: variables, publisher: $variables).bind {
             self.objectWillChange.send()
             DispatchQueue.main.async {
@@ -94,11 +91,11 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         }
     }
 
-    func remove(component: ComponentModel) {
+    public func remove(component: ComponentModel) {
         destination.removeAll { $0 == component }
     }
 
-    func moveUp(component: ComponentModel) {
+    public func moveUp(component: ComponentModel) {
         guard let index = destination.firstIndex(of: component),
               index > 0 else {
             return
@@ -106,7 +103,7 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         destination.swapAt(index, index - 1)
     }
 
-    func moveDown(component: ComponentModel) {
+    public func moveDown(component: ComponentModel) {
         guard let index = destination.firstIndex(of: component),
               index < destination.count - 1 else {
             return
@@ -114,7 +111,7 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         destination.swapAt(index, index + 1)
     }
 
-    func moveUp(variable: VariableModel) {
+    public func moveUp(variable: VariableModel) {
         guard let index = variables.firstIndex(of: variable),
               index > 0 else {
             return
@@ -122,7 +119,7 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         variables.swapAt(index, index - 1)
     }
 
-    func moveDown(variable: VariableModel) {
+    public func moveDown(variable: VariableModel) {
         guard let index = variables.firstIndex(of: variable),
               index < variables.count - 1 else {
             return
@@ -130,11 +127,11 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         variables.swapAt(index, index + 1)
     }
 
-    func remove(variable: VariableModel) {
+    public func remove(variable: VariableModel) {
         variables.removeAll { $0 == variable }
     }
 
-    func remove(variableOffsets: IndexSet) {
+    public func remove(variableOffsets: IndexSet) {
         let remove = variableOffsets.map { variables[$0] }
         for variable in remove {
             destination.removeAll { $0.type == .variable && $0.value == variable.name }
@@ -142,7 +139,7 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         variables.remove(atOffsets: variableOffsets)
     }
 
-    func name(for component: ComponentModel, format: NameFormat = .long) -> String {
+    public func name(for component: ComponentModel, format: NameFormat = .long) -> String {
         switch component.type {
         case .text:
             return component.value
@@ -165,12 +162,12 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         }
     }
 
-    func validate() -> Bool {
+    public func validate() -> Bool {
         let names = Set(variables.map { $0.name })
         return names.count == variables.count
     }
 
-    func createVariable() {
+    public func createVariable() {
         let names = Set(variables.map { $0.name })
         var index = 1
         var name = ""
@@ -181,11 +178,11 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
         self.variables.append(VariableModel(name: name, type: .string))
     }
 
-    static func == (lhs: RuleState, rhs: RuleState) -> Bool {
+    public static func == (lhs: RuleModel, rhs: RuleModel) -> Bool {
         lhs.id == rhs.id
     }
 
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
 
@@ -193,11 +190,11 @@ class RuleState: ObservableObject, Identifiable, CustomStringConvertible, Hashab
 
 extension Rule {
 
-    convenience init(_ state: RuleState) {
-        self.init(rootUrl: state.rootUrl,
-                  name: state.name,
-                  configuration: Configuration(variables: state.variables.map { Variable($0) },
-                                               destination: state.destination.map { Component($0) }))
+    public convenience init(_ ruleModel: RuleModel) {
+        self.init(rootUrl: ruleModel.rootUrl,
+                  name: ruleModel.name,
+                  configuration: Configuration(variables: ruleModel.variables.map { Variable($0) },
+                                               destination: ruleModel.destination.map { Component($0) }))
     }
 
 }

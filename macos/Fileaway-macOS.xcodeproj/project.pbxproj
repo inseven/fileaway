@@ -45,7 +45,6 @@
 		D8B6D035257E71CD00C7E472 /* QuickLookCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B6D034257E71CD00C7E472 /* QuickLookCoordinator.swift */; };
 		D8D275BE28B3865500200A7C /* Diligence in Frameworks */ = {isa = PBXBuildFile; productRef = D8D275BD28B3865500200A7C /* Diligence */; };
 		D8D78A922580DD750088890F /* QuickLookPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D78A912580DD750088890F /* QuickLookPreview.swift */; };
-		D8E7F9A825999B1000C7409B /* RuleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9A725999B1000C7409B /* RuleState.swift */; };
 		D8E7F9B125999C8800C7409B /* RulesEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9B025999C8800C7409B /* RulesEditor.swift */; };
 		D8E7F9DE2599AFE000C7409B /* RuleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9DD2599AFE000C7409B /* RuleDetailView.swift */; };
 		D8E7F9E32599B00A00C7409B /* DestinationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9E22599B00A00C7409B /* DestinationList.swift */; };
@@ -127,7 +126,6 @@
 		D8B6D034257E71CD00C7E472 /* QuickLookCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickLookCoordinator.swift; sourceTree = "<group>"; };
 		D8D275BC28B3862400200A7C /* diligence */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = diligence; path = ../diligence; sourceTree = "<group>"; };
 		D8D78A912580DD750088890F /* QuickLookPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickLookPreview.swift; sourceTree = "<group>"; };
-		D8E7F9A725999B1000C7409B /* RuleState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleState.swift; sourceTree = "<group>"; };
 		D8E7F9B025999C8800C7409B /* RulesEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesEditor.swift; sourceTree = "<group>"; };
 		D8E7F9DD2599AFE000C7409B /* RuleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleDetailView.swift; sourceTree = "<group>"; };
 		D8E7F9E22599B00A00C7409B /* DestinationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationList.swift; sourceTree = "<group>"; };
@@ -185,7 +183,6 @@
 				D87DEFBD257840B1006CFE85 /* Manager.swift */,
 				D8F8BDFF2586C6B90010432F /* RuleInstance.swift */,
 				D8005AC8258277290001BE2C /* RuleSet.swift */,
-				D8E7F9A725999B1000C7409B /* RuleState.swift */,
 				D829DDB325787C100066A807 /* Settings.swift */,
 				D8F8BE21258819860010432F /* StringInstance.swift */,
 				D8F8BE3125881BC50010432F /* VariableInstance.swift */,
@@ -554,7 +551,6 @@
 				D8B657EC2642D2C5009DE837 /* RulesSettingsView.swift in Sources */,
 				D8F8BE27258819C80010432F /* DateInstance.swift in Sources */,
 				D8E7F9DE2599AFE000C7409B /* RuleDetailView.swift in Sources */,
-				D8E7F9A825999B1000C7409B /* RuleState.swift in Sources */,
 				D8FC5334257BB6D2008FB609 /* MailboxRow.swift in Sources */,
 				D8B6D030257DBB7D00C7E472 /* SelectionModel.swift in Sources */,
 				D8B33E872645E445005DA5C2 /* MenuItem.swift in Sources */,

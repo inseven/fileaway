@@ -22,11 +22,13 @@ import SwiftUI
 
 import Interact
 
+import FileawayCore
+
 struct RulesEditor: View {
 
     enum SheetType: Identifiable {
 
-        case rule(rule: RuleState)
+        case rule(rule: RuleModel)
 
         var id: String {
             switch self {
@@ -43,11 +45,11 @@ struct RulesEditor: View {
     }
 
     @ObservedObject var ruleSet: RuleSet
-    @State var selection: Set<RuleState.ID> = Set()
+    @State var selection: Set<RuleModel.ID> = Set()
     @State var sheet: SheetType?
     @State var alert: AlertType?
 
-    @MainActor private func rules(for ids: Set<RuleState.ID>) -> Set<RuleState> {
+    @MainActor private func rules(for ids: Set<RuleModel.ID>) -> Set<RuleModel> {
         return Set(ruleSet.mutableRules.filter { ids.contains($0.id) })
     }
 
@@ -61,7 +63,7 @@ struct RulesEditor: View {
         }
     }
 
-    @MainActor private func edit(ids: Set<RuleState.ID>) {
+    @MainActor private func edit(ids: Set<RuleModel.ID>) {
         guard ids.count == 1,
               let rule = rules(for: ids).first
         else {
@@ -70,7 +72,7 @@ struct RulesEditor: View {
         sheet = .rule(rule: rule)
     }
 
-    @MainActor private func delete(ids: Set<RuleState.ID>) {
+    @MainActor private func delete(ids: Set<RuleModel.ID>) {
         do {
             try ruleSet.remove(ids: ids)
             selection = selection.filter { !ids.contains($0) }
@@ -79,7 +81,7 @@ struct RulesEditor: View {
         }
     }
 
-    @MainActor private func duplicate(ids: Set<RuleState.ID>) {
+    @MainActor private func duplicate(ids: Set<RuleModel.ID>) {
         do {
             let newRules = try ruleSet.duplicate(ids: ids)
             selection = Set(newRules.map({ $0.id }))
@@ -95,7 +97,7 @@ struct RulesEditor: View {
                     Text(rule.name)
                         .lineLimit(1)
                 }
-                .contextMenu(forSelectionType: RuleState.ID.self) { items in
+                .contextMenu(forSelectionType: RuleModel.ID.self) { items in
 
                     Button("Edit") {
                         edit(ids: items)

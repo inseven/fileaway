@@ -24,7 +24,7 @@ import FileawayCore
 
 struct ComponentView: View {
 
-    @State var rule: RuleState
+    @State var rule: RuleModel
     @ObservedObject var component: ComponentModel
 
     var body: some View {
@@ -65,7 +65,7 @@ struct ComponentView: View {
 
 struct DestinationList: View {
 
-    @ObservedObject var rule: RuleState
+    @ObservedObject var rule: RuleModel
     @State var selection: ComponentModel?
 
     var body: some View {
