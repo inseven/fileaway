@@ -26,7 +26,7 @@ import FileawayCore
 struct VariableView: View {
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @ObservedObject var task: TaskState
+    @ObservedObject var task: TaskModel
     @ObservedObject var variable: VariableModel
 
     var body: some View {

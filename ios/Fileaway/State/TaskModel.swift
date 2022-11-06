@@ -26,7 +26,7 @@ import FileawayCore
 
 extension Task {
 
-    init(_ state: TaskState) {
+    init(_ state: TaskModel) {
         self.init(name: state.name,
                   configuration: Configuration(variables: state.variables.map { Variable($0) },
                                                destination: state.destination.map { Component($0) }))
@@ -34,9 +34,9 @@ extension Task {
 
 }
 
-class TaskState: ObservableObject, Identifiable, BackChannelable, CustomStringConvertible {
+class TaskModel: ObservableObject, Identifiable, BackChannelable, CustomStringConvertible {
 
-    enum TaskStateNameFormat {
+    enum NameFormat {
         case long
         case short
     }
@@ -82,7 +82,7 @@ class TaskState: ObservableObject, Identifiable, BackChannelable, CustomStringCo
         }
     }
 
-    convenience init(_ taskState: TaskState) {
+    convenience init(_ taskState: TaskModel) {
         self.init(id: UUID(),
                   name: String(taskState.name),
                   variables: taskState.variables.map { VariableModel($0) },
@@ -112,7 +112,7 @@ class TaskState: ObservableObject, Identifiable, BackChannelable, CustomStringCo
         variables.remove(atOffsets: variableOffsets)
     }
 
-    func name(for component: ComponentModel, format: TaskStateNameFormat = .long) -> String {
+    func name(for component: ComponentModel, format: NameFormat = .long) -> String {
         switch component.type {
         case .text:
             return component.value

@@ -22,7 +22,7 @@ import SwiftUI
 
 struct DestinationView: View {
 
-    @ObservedObject var task: TaskState
+    @ObservedObject var task: TaskModel
 
     var body: some View {
         HStack {

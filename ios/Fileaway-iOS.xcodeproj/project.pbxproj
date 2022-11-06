@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D81C5D91249BE2A70083BD6F /* TaskState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81C5D90249BE2A70083BD6F /* TaskState.swift */; };
+		D81C5D91249BE2A70083BD6F /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81C5D90249BE2A70083BD6F /* TaskModel.swift */; };
 		D81C5D93249BE3710083BD6F /* TasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81C5D92249BE3710083BD6F /* TasksView.swift */; };
 		D81C5D95249BE6F40083BD6F /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81C5D94249BE6F40083BD6F /* TaskView.swift */; };
 		D843199F249A85680014CFE9 /* FilePickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D843199E249A85680014CFE9 /* FilePickerSheet.swift */; };
@@ -71,7 +71,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D81C5D90249BE2A70083BD6F /* TaskState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskState.swift; sourceTree = "<group>"; };
+		D81C5D90249BE2A70083BD6F /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		D81C5D92249BE3710083BD6F /* TasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksView.swift; sourceTree = "<group>"; };
 		D81C5D94249BE6F40083BD6F /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 		D843199E249A85680014CFE9 /* FilePickerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePickerSheet.swift; sourceTree = "<group>"; };
@@ -173,7 +173,7 @@
 		D81C5D98249BF2560083BD6F /* State */ = {
 			isa = PBXGroup;
 			children = (
-				D81C5D90249BE2A70083BD6F /* TaskState.swift */,
+				D81C5D90249BE2A70083BD6F /* TaskModel.swift */,
 				D8CAE3EF249D6E1D0047CA36 /* TaskList.swift */,
 			);
 			path = State;
@@ -433,7 +433,7 @@
 				D86A8F15249C5F9800839D1A /* DestinationView.swift in Sources */,
 				D88F3D54217070A400BFE0F9 /* DateTableViewCell.swift in Sources */,
 				EEFF05A221AD1E5A0014C89B /* UIViewController.swift in Sources */,
-				D81C5D91249BE2A70083BD6F /* TaskState.swift in Sources */,
+				D81C5D91249BE2A70083BD6F /* TaskModel.swift in Sources */,
 				D84319A3249AB7FE0014CFE9 /* StoryboardIdentifier.swift in Sources */,
 				D858CE6424AB201100F9BCB2 /* ActionMenu.swift in Sources */,
 				D81C5D95249BE6F40083BD6F /* TaskView.swift in Sources */,
