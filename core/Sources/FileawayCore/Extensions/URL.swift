@@ -19,6 +19,7 @@
 // SOFTWARE.
 
 import Foundation
+import SwiftUI
 
 extension URL {
 
@@ -36,5 +37,33 @@ extension URL {
         }
         return extensions.contains(pathExtension)
     }
+
+    // TODO: review this?
+    public func relativePath(from base: URL) -> String? {
+
+        guard self.isFileURL,
+              base.isFileURL else {
+            return nil
+        }
+
+        let destComponents = self.standardized.resolvingSymlinksInPath().pathComponents
+        let baseComponents = base.standardized.resolvingSymlinksInPath().pathComponents
+
+        var i = 0
+        while i < destComponents.count && i < baseComponents.count
+            && destComponents[i] == baseComponents[i] {
+                i += 1
+        }
+
+        var relComponents = Array(repeating: "..", count: baseComponents.count - i)
+        relComponents.append(contentsOf: destComponents[i...])
+        return relComponents.joined(separator: "/")
+    }
+
+}
+
+extension URL: Identifiable {
+
+    public var id: URL { self }
 
 }

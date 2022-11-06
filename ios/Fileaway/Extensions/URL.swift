@@ -24,20 +24,13 @@ import FileawayCore
 
 extension URL {
 
-    init(securityScopeBookmarkData: Data) throws {
-        var isStale = true
-        try self.init(resolvingBookmarkData: securityScopeBookmarkData,
-                      options: .withSecurityScope,
-                      bookmarkDataIsStale: &isStale)
-        if !startAccessingSecurityScopedResource() {
+    func prepareForSecureAccess() throws {
+        guard startAccessingSecurityScopedResource() else {
             throw FileawayError.accessError
         }
-    }
-
-    func securityScopeBookmarkData() throws -> Data {
-        try bookmarkData(options: .withSecurityScope,
-                             includingResourceValuesForKeys: nil,
-                             relativeTo: nil)
+        guard FileManager.default.isReadableFile(atPath: path) else {
+            throw FileawayError.pathError
+        }
     }
 
 }
