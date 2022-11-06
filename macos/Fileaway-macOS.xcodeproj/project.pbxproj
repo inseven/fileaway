@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D8037B122617F8CD00F41971 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = D8037B112617F8CD00F41971 /* Introspect */; };
-		D80F72D826430E3C0010BB38 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F72D726430E3C0010BB38 /* Data.swift */; };
 		D81B24112918267E0078D638 /* TaskPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81B24102918267E0078D638 /* TaskPageModel.swift */; };
-		D81B2413291828090078D638 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81B2412291828090078D638 /* UserDefaults.swift */; };
 		D821E939257A959D005D3205 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821E938257A959D005D3205 /* DateView.swift */; };
 		D821E946257AA5FC005D3205 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821E945257AA5FC005D3205 /* Sidebar.swift */; };
 		D821E94B257AB2C9005D3205 /* FileRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821E94A257AB2C9005D3205 /* FileRow.swift */; };
@@ -33,7 +31,6 @@
 		D87DEFAF2577E068006CFE85 /* EonilFSEvents in Frameworks */ = {isa = PBXBuildFile; productRef = D87DEFAE2577E068006CFE85 /* EonilFSEvents */; };
 		D87DEFB925783F66006CFE85 /* DirectoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEFB825783F66006CFE85 /* DirectoryView.swift */; };
 		D87DEFBE257840B1006CFE85 /* ApplicationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEFBD257840B1006CFE85 /* ApplicationModel.swift */; };
-		D87DEFC4257848B7006CFE85 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEFC3257848B7006CFE85 /* URL.swift */; };
 		D88B353B28B6113A000C8910 /* FileawayCore in Frameworks */ = {isa = PBXBuildFile; productRef = D88B353A28B6113A000C8910 /* FileawayCore */; };
 		D8B33E872645E445005DA5C2 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B33E862645E445005DA5C2 /* MenuItem.swift */; };
 		D8B657E826421D5B009DE837 /* LocationMenuItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B657E726421D5B009DE837 /* LocationMenuItems.swift */; };
@@ -77,9 +74,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D80F72D726430E3C0010BB38 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		D81B24102918267E0078D638 /* TaskPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPageModel.swift; sourceTree = "<group>"; };
-		D81B2412291828090078D638 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		D821E938257A959D005D3205 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
 		D821E945257AA5FC005D3205 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 		D821E94A257AB2C9005D3205 /* FileRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileRow.swift; sourceTree = "<group>"; };
@@ -109,7 +104,6 @@
 		D87DEF9E25774F6D006CFE85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D87DEFB825783F66006CFE85 /* DirectoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryView.swift; sourceTree = "<group>"; };
 		D87DEFBD257840B1006CFE85 /* ApplicationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationModel.swift; sourceTree = "<group>"; };
-		D87DEFC3257848B7006CFE85 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		D88B353928B61015000C8910 /* core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = core; path = ../core; sourceTree = "<group>"; };
 		D8B33E862645E445005DA5C2 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		D8B657E726421D5B009DE837 /* LocationMenuItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMenuItems.swift; sourceTree = "<group>"; };
@@ -249,7 +243,6 @@
 				D87DEF8225774F6D006CFE85 /* Assets.xcassets */,
 				D8005ABF258276160001BE2C /* Core */,
 				D8F8BE0A258817780010432F /* Environment */,
-				D87DEFC2257848A7006CFE85 /* Extensions */,
 				D87DEF8425774F6D006CFE85 /* Preview Content */,
 				D82D73D528B4C649006F49F1 /* Scenes */,
 				D85C95852579DD880007AE1E /* Toolbars */,
@@ -282,16 +275,6 @@
 				D87DEF9E25774F6D006CFE85 /* Info.plist */,
 			);
 			path = FileawayUITests;
-			sourceTree = "<group>";
-		};
-		D87DEFC2257848A7006CFE85 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				D80F72D726430E3C0010BB38 /* Data.swift */,
-				D87DEFC3257848B7006CFE85 /* URL.swift */,
-				D81B2412291828090078D638 /* UserDefaults.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		D8D275BB28B3862400200A7C /* Packages */ = {
@@ -493,7 +476,6 @@
 				D821E94B257AB2C9005D3205 /* FileRow.swift in Sources */,
 				D83CDCEA2620FF210063C91C /* RuleSheet.swift in Sources */,
 				D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */,
-				D80F72D826430E3C0010BB38 /* Data.swift in Sources */,
 				D8F8BE3725881C1A0010432F /* TaskPage.swift in Sources */,
 				D85C95812579CED30007AE1E /* SelectionToolbar.swift in Sources */,
 				D8F8BE002586C6B90010432F /* RuleInstance.swift in Sources */,
@@ -503,7 +485,6 @@
 				D82D01282657F69900FD2974 /* Observable.swift in Sources */,
 				D821E946257AA5FC005D3205 /* Sidebar.swift in Sources */,
 				D8F8BE12258818450010432F /* RulesWizard.swift in Sources */,
-				D81B2413291828090078D638 /* UserDefaults.swift in Sources */,
 				D82D01222657632C00FD2974 /* VariableDateView.swift in Sources */,
 				D87DEF7F25774F6C006CFE85 /* FileawayApp.swift in Sources */,
 				D87DEFB925783F66006CFE85 /* DirectoryView.swift in Sources */,
@@ -519,7 +500,6 @@
 				D8FC534A257BB7A4008FB609 /* LocationsSettingsView.swift in Sources */,
 				D8D78A922580DD750088890F /* QuickLookPreview.swift in Sources */,
 				D8F8BE0C2588179E0010432F /* CloseKey.swift in Sources */,
-				D87DEFC4257848B7006CFE85 /* URL.swift in Sources */,
 				D82D01262657F66B00FD2974 /* VariableProvider.swift in Sources */,
 				D8B657EC2642D2C5009DE837 /* RulesSettingsView.swift in Sources */,
 				D8F8BE27258819C80010432F /* DateInstance.swift in Sources */,

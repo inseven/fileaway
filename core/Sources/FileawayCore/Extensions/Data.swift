@@ -20,24 +20,14 @@
 
 import Foundation
 
-import FileawayCore
+extension Data {
 
-extension URL {
+#if os(macOS)
 
-    init(securityScopeBookmarkData: Data) throws {
-        var isStale = true
-        try self.init(resolvingBookmarkData: securityScopeBookmarkData,
-                      options: .withSecurityScope,
-                      bookmarkDataIsStale: &isStale)
-        if !startAccessingSecurityScopedResource() {
-            throw FileawayError.accessError
-        }
+    public func asSecurityScopeUrl() throws -> URL {
+        try URL(securityScopeBookmarkData: self)
     }
 
-    func securityScopeBookmarkData() throws -> Data {
-        try bookmarkData(options: .withSecurityScope,
-                             includingResourceValuesForKeys: nil,
-                             relativeTo: nil)
-    }
+#endif
 
 }
