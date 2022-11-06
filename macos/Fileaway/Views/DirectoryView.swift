@@ -30,11 +30,11 @@ struct DirectoryView: View {
 
     @Environment(\.openWindow) var openWindow
 
-    @ObservedObject var directoryObserver: DirectoryObserver
+    @ObservedObject var directoryObserver: DirectoryModel
 
     @StateObject var selectionModel: SelectionModel
 
-    init(directoryObserver: DirectoryObserver) {
+    init(directoryObserver: DirectoryModel) {
         self.directoryObserver = directoryObserver
         _selectionModel = StateObject(wrappedValue: SelectionModel(directory: directoryObserver))
     }
@@ -86,7 +86,7 @@ struct DirectoryView: View {
         // Drag-and-drop.
         // .onCutCommand(perform: manager.cut)
         .overlay(directoryObserver.searchResults.isEmpty ? Placeholder("No Items") : nil)
-        .searchable(text: directoryObserver.filter)
+        .searchable(text: $directoryObserver.filter)
         .navigationTitle(directoryObserver.name)
         .focusedValue(\.selectionModel, selectionModel)
         .onAppear {

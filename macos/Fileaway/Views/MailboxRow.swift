@@ -20,9 +20,11 @@
 
 import SwiftUI
 
+import FileawayCore
+
 struct MailboxRow: View {
 
-    @ObservedObject var directoryObserver: DirectoryObserver
+    @ObservedObject var directoryObserver: DirectoryModel
     var title: String
     var imageSystemName: String
 

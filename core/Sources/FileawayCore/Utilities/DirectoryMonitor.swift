@@ -20,15 +20,19 @@
 
 import Foundation
 
+#if os(macOS)
 import EonilFSEvents
+#endif
 
-class FileProvider {
+public class DirectoryMonitor {
 
     let locations: [URL]
     let extensions: [String]
     let handler: (Set<URL>) -> Void
-    let syncQueue = DispatchQueue.init(label: "FileProvider.syncQueue")
+    let syncQueue = DispatchQueue(label: "FileProvider.syncQueue")
     let targetQueue: DispatchQueue
+
+#if os(macOS)
     lazy var stream: EonilFSEventStream = {
         let stream = try! EonilFSEventStream(
             pathsToWatch: self.locations.map { $0.path },
@@ -61,30 +65,38 @@ class FileProvider {
         stream.setDispatchQueue(syncQueue)
         return stream
     }()
+#endif
 
     var files: Set<URL> = []
 
-    init(locations: [URL], extensions: [String], targetQueue: DispatchQueue, handler: @escaping (Set<URL>) -> Void) throws {
+    public init(locations: [URL],
+                extensions: [String],
+                targetQueue: DispatchQueue,
+                handler: @escaping (Set<URL>) -> Void) throws {
         self.locations = locations
         self.extensions = extensions
         self.targetQueue = targetQueue
         self.handler = handler
     }
 
-    func start() {
+    public func start() {
         dispatchPrecondition(condition: .notOnQueue(syncQueue))
         syncQueue.async {
+#if os(macOS)
             try! self.stream.start()
+#endif
             self.files = Set(FileManager.default.files(at: self.locations.first!, extensions: self.extensions))
             self.targetQueue_update()
         }
     }
 
-    func stop() {
+    public func stop() {
         dispatchPrecondition(condition: .notOnQueue(syncQueue))
+#if os(macOS)
         syncQueue.sync {
             self.stream.stop()
         }
+#endif
     }
 
     func targetQueue_update() {
