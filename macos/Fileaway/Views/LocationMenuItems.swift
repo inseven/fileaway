@@ -24,7 +24,7 @@ import FileawayCore
 
 struct LocationMenuItems: View {
 
-    var manager: Manager
+    var manager: ApplicationModel
     var directoryObserver: DirectoryModel
     var onError: (Error) -> Void
 

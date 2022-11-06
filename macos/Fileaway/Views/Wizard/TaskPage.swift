@@ -30,11 +30,11 @@ class TaskPageModel: ObservableObject {
     @Published var filteredRules: [Rule] = []
     @Published var selection: Rule.ID?
 
-    private var manager: Manager
+    private var manager: ApplicationModel
     private var cancellables: Set<AnyCancellable> = []
     private var queue = DispatchQueue(label: "queue")
 
-    init(manager: Manager) {
+    init(manager: ApplicationModel) {
         self.manager = manager
     }
 
@@ -73,7 +73,7 @@ struct TaskPage: View {
         case search
     }
 
-    var manager: Manager
+    var manager: ApplicationModel
     var url: URL
 
     @StateObject var model: TaskPageModel
@@ -82,7 +82,7 @@ struct TaskPage: View {
 
     @FocusState private var focus: FocusableField?
 
-    init(manager: Manager, url: URL) {
+    init(manager: ApplicationModel, url: URL) {
         self.manager = manager
         self.url = url
         _model = StateObject(wrappedValue: TaskPageModel(manager: manager))

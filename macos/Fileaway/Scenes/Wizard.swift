@@ -24,17 +24,17 @@ struct Wizard: Scene {
 
     static let windowID = "wizard-window"
 
-    private var manager: Manager
+    private var applicationModel: ApplicationModel
 
-    init(manager: Manager) {
-        self.manager = manager
+    init(applicationModel: ApplicationModel) {
+        self.applicationModel = applicationModel
     }
 
     var body: some Scene {
         WindowGroup(id: Self.windowID, for: URL.self) { $url in
             if let url = url {
                 RulesWizard(url: url)
-                    .environment(\.manager, manager)
+                    .environment(\.applicationModel, applicationModel)
             }
         }
     }

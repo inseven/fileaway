@@ -25,20 +25,20 @@ import SwiftUI
 
 import FileawayCore
 
-struct ManagerKey: EnvironmentKey {
-    static var defaultValue: Manager = Manager()
+struct ApplicationModelKey: EnvironmentKey {
+    static var defaultValue: ApplicationModel = ApplicationModel()
 }
 
 extension EnvironmentValues {
 
-    var manager: Manager {
-        get { self[ManagerKey.self] }
-        set { self[ManagerKey.self] = newValue }
+    var applicationModel: ApplicationModel {
+        get { self[ApplicationModelKey.self] }
+        set { self[ApplicationModelKey.self] = newValue }
     }
 
 }
 
-class Manager: ObservableObject {
+class ApplicationModel: ObservableObject {
 
     fileprivate var settings = Settings()
 

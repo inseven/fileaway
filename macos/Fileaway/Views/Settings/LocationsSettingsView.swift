@@ -22,7 +22,7 @@ import SwiftUI
 
 struct LocationsSettingsView: View {
 
-    @ObservedObject var manager: Manager
+    @ObservedObject var manager: ApplicationModel
 
     var body: some View {
         VStack {

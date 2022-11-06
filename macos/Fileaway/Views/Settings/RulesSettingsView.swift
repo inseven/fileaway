@@ -24,7 +24,7 @@ import Interact
 
 struct RulesSettingsView: View {
 
-    @ObservedObject var manager: Manager
+    @ObservedObject var manager: ApplicationModel
     @State var selection: UUID?
 
     var body: some View {

@@ -26,7 +26,7 @@ struct Sidebar: View {
         case error(error: Error)
     }
 
-    @ObservedObject var manager: Manager
+    @ObservedObject var manager: ApplicationModel
 
     @Binding var section: URL?
 
