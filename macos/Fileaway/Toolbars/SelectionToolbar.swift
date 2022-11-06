@@ -26,7 +26,7 @@ import FileawayCore
 
 struct SelectionToolbar: CustomizableToolbarContent {
 
-    @Environment(\.manager) var manager
+    @Environment(\.applicationModel) var manager
     @Environment(\.openWindow) var openWindow
 
     @ObservedObject var selectionModel: SelectionModel

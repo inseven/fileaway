@@ -27,7 +27,7 @@ import FileawayCore
 @main
 struct FileawayApp: App {
 
-    @StateObject var manager = Manager()
+    @StateObject var manager = ApplicationModel()
 
     @Environment(\.scenePhase) private var phase
 
@@ -49,7 +49,7 @@ struct FileawayApp: App {
         
         WindowGroup(id: "MainWindow") {
             ContentView(manager: manager)
-                .environment(\.manager, manager)
+                .environment(\.applicationModel, manager)
         }
         .commands {
             ToolbarCommands()

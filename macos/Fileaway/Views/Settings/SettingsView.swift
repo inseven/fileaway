@@ -26,7 +26,7 @@ struct SettingsView: View {
         case general
     }
 
-    @ObservedObject var manager: Manager
+    @ObservedObject var manager: ApplicationModel
 
     var body: some View {
         TabView {

@@ -32,7 +32,7 @@ struct LocationsEditor: View {
 
     var name: String
     var type: DirectoryModel.DirectoryType
-    @ObservedObject var manager: Manager
+    @ObservedObject var manager: ApplicationModel
 
     @State var selection: UUID?
     @State var alertType: AlertType?

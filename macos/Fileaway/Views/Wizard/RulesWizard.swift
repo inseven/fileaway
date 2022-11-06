@@ -22,7 +22,7 @@ import SwiftUI
 
 struct RulesWizard: View {
 
-    @Environment(\.manager) var manager
+    @Environment(\.applicationModel) var manager
     @State var url: URL
     @State var firstResponder: Bool = true
 

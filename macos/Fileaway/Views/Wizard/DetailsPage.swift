@@ -29,7 +29,7 @@ struct DetailsPage: View {
         case duplicate(duplicateUrl: URL)
     }
 
-    @Environment(\.manager) var manager
+    @Environment(\.applicationModel) var manager
     @Environment(\.close) var close
 
     var url: URL

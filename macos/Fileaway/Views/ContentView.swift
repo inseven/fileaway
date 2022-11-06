@@ -26,11 +26,11 @@ import FileawayCore
 
 struct ContentView: View {
 
-    @ObservedObject var manager: Manager
+    @ObservedObject var manager: ApplicationModel
     @State var section: URL?
     @FocusedValue(\.selectionModel) var selectionModel
 
-    init(manager: Manager) {
+    init(manager: ApplicationModel) {
         self.manager = manager
     }
 
