@@ -20,16 +20,31 @@
 
 import Foundation
 
-enum FileawayError: Error {
+public enum FileawayError: Error {
     case directoryNotFound
+    case fileOpenError
+    case duplicateRuleName
+    case accessError
+    case pathError
+    case bookmarkError
 }
 
 extension FileawayError: LocalizedError {
 
-    var errorDescription: String? {
+    public var errorDescription: String? {
         switch self {
         case .directoryNotFound:
             return "Directory not found."
+        case .fileOpenError:
+            return "File open error."
+        case .duplicateRuleName:
+            return "Name already exists in Rule Set."
+        case .accessError:
+            return "Failed access inbox url with security scope."
+        case .pathError:
+            return "Unable to read directory at path."
+        case .bookmarkError:
+            return "Unable to get bookmark url."
         }
     }
 

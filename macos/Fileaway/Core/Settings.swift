@@ -20,10 +20,6 @@
 
 import SwiftUI
 
-enum StorageManagerError: Error {
-    case accessError(_ message: String)
-}
-
 extension UserDefaults {
 
     func securityScopeUrls(forKey defaultName: String) throws -> [URL] {

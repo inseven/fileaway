@@ -21,21 +21,6 @@
 import Combine
 import SwiftUI
 
-public enum RuleSetError: Error {
-    case duplicateName
-}
-
-extension RuleSetError: LocalizedError {
-
-    public var errorDescription: String? {
-        switch self {
-        case .duplicateName:
-            return "Name already exists in Rule Set."
-        }
-    }
-
-}
-
 public class RulesModel: ObservableObject {
 
     public let rootUrl: URL
@@ -106,7 +91,7 @@ public class RulesModel: ObservableObject {
 
     public func add(_ rule: RuleModel) throws {
         guard !contains(ruleNamed: rule.name) else {
-            throw RuleSetError.duplicateName
+            throw FileawayError.duplicateRuleName
         }
         mutableRules.append(rule)
         var rules = Array(self.rules)

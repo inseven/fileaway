@@ -22,17 +22,13 @@ import Combine
 import Foundation
 import PDFKit
 
-enum PDFDocumentUtilitiesError: Error {
-    case failure
-}
-
 public extension PDFDocument {
 
     static func open(url: URL) -> Future<PDFDocument, Error> {
         return Future() { promise in
             DispatchQueue.global(qos: .userInteractive).async {
                 guard let document = PDFDocument(url: url) else {
-                    promise(.failure(PDFDocumentUtilitiesError.failure))
+                    promise(.failure(FileawayError.fileOpenError))
                     return
                 }
                 promise(.success(document))

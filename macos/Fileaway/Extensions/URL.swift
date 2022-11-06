@@ -20,6 +20,8 @@
 
 import Foundation
 
+import FileawayCore
+
 extension URL {
 
     init(securityScopeBookmarkData: Data) throws {
@@ -28,7 +30,7 @@ extension URL {
                       options: .withSecurityScope,
                       bookmarkDataIsStale: &isStale)
         if !startAccessingSecurityScopedResource() {
-            throw StorageManagerError.accessError("Failed access inbox url with security scope")
+            throw FileawayError.accessError
         }
     }
 

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		D8037B122617F8CD00F41971 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = D8037B112617F8CD00F41971 /* Introspect */; };
 		D80F72D826430E3C0010BB38 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F72D726430E3C0010BB38 /* Data.swift */; };
-		D80F72DA264311690010BB38 /* FileawayError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F72D9264311690010BB38 /* FileawayError.swift */; };
 		D821E939257A959D005D3205 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821E938257A959D005D3205 /* DateView.swift */; };
 		D821E93E257A960C005D3205 /* FileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821E93D257A960C005D3205 /* FileProvider.swift */; };
 		D821E946257AA5FC005D3205 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821E945257AA5FC005D3205 /* Sidebar.swift */; };
@@ -82,7 +81,6 @@
 
 /* Begin PBXFileReference section */
 		D80F72D726430E3C0010BB38 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
-		D80F72D9264311690010BB38 /* FileawayError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileawayError.swift; sourceTree = "<group>"; };
 		D821E938257A959D005D3205 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
 		D821E93D257A960C005D3205 /* FileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileProvider.swift; sourceTree = "<group>"; };
 		D821E945257AA5FC005D3205 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
@@ -177,7 +175,6 @@
 			isa = PBXGroup;
 			children = (
 				D8F8BE26258819C80010432F /* DateInstance.swift */,
-				D80F72D9264311690010BB38 /* FileawayError.swift */,
 				D87DEFBD257840B1006CFE85 /* Manager.swift */,
 				D8F8BDFF2586C6B90010432F /* RuleInstance.swift */,
 				D829DDB325787C100066A807 /* Settings.swift */,
@@ -508,7 +505,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D821E939257A959D005D3205 /* DateView.swift in Sources */,
-				D80F72DA264311690010BB38 /* FileawayError.swift in Sources */,
 				D87DEF8125774F6C006CFE85 /* ContentView.swift in Sources */,
 				D8E7F9E32599B00A00C7409B /* DestinationList.swift in Sources */,
 				D821E94B257AB2C9005D3205 /* FileRow.swift in Sources */,
