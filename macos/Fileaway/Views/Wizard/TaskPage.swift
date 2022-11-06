@@ -24,49 +24,6 @@ import SwiftUI
 import FileawayCore
 import Interact
 
-class TaskPageModel: ObservableObject {
-
-    @Published var filter: String = ""
-    @Published var filteredRules: [Rule] = []
-    @Published var selection: Rule.ID?
-
-    private var manager: ApplicationModel
-    private var cancellables: Set<AnyCancellable> = []
-    private var queue = DispatchQueue(label: "queue")
-
-    init(manager: ApplicationModel) {
-        self.manager = manager
-    }
-
-    @MainActor func start() {
-
-        manager
-            .$allRules
-            .combineLatest($filter)
-            .receive(on: queue)
-            .map { rules, filter in
-                guard !filter.isEmpty else {
-                    return rules
-                }
-                return rules.filter { item in
-                    [item.rootUrl.displayName, item.name].joined(separator: " ").localizedSearchMatches(string: filter)
-                }
-            }
-            .map { $0.sorted { lhs, rhs in lhs.name.lexicographicallyPrecedes(rhs.name) } }
-            .receive(on: DispatchQueue.main)
-            .sink { rules in
-                self.filteredRules = rules
-                self.selection = rules.first?.id
-            }
-            .store(in: &cancellables)
-    }
-
-    @MainActor func stop() {
-        cancellables.removeAll()
-    }
-
-}
-
 struct TaskPage: View {
 
     enum FocusableField: Hashable {

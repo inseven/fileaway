@@ -24,7 +24,17 @@ import FileawayCore
 
 struct DetailsPage: View {
 
-    enum AlertType {
+    enum AlertType: Identifiable {
+
+        public var id: String {
+            switch self {
+            case .error(let error):
+                return "error:\(error)"
+            case .duplicate(let duplicateUrl):
+                return "duplicate:\(duplicateUrl)"
+            }
+        }
+
         case error(error: Error)
         case duplicate(duplicateUrl: URL)
     }
@@ -106,17 +116,4 @@ struct DetailsPage: View {
         }
     }
 
-}
-
-extension DetailsPage.AlertType: Identifiable {
-
-    public var id: String {
-        switch self {
-        case .error(let error):
-            return "error:\(error)"
-        case .duplicate(let duplicateUrl):
-            return "duplicate:\(duplicateUrl)"
-        }
-    }
-    
 }
