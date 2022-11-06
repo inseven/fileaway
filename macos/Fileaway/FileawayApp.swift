@@ -56,7 +56,7 @@ struct FileawayApp: App {
             SidebarCommands()
         }
 
-        Wizard(manager: manager)
+        Wizard(applicationModel: manager)
 
         SwiftUI.Settings {
             SettingsView(manager: manager)
