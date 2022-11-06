@@ -26,6 +26,7 @@ let package = Package(
             name: "FileawayCore",
             dependencies: [
                 .product(name: "Diligence", package: "diligence"),
+                .product(name: "Interact", package: "interact"),
             ],
             resources: [
                 .process("Licenses"),
