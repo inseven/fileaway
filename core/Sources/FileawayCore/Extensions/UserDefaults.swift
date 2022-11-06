@@ -20,10 +20,17 @@
 
 import Foundation
 
-extension Data {
+extension UserDefaults {
 
-    func asSecurityScopeUrl() throws -> URL {
-        try URL(securityScopeBookmarkData: self)
+#if os(macOS)
+
+    public func securityScopeUrls(forKey defaultName: String) throws -> [URL] {
+        guard let urls = UserDefaults.standard.array(forKey: defaultName) as? [Data] else {
+            return []
+        }
+        return try urls.map { try $0.asSecurityScopeUrl() }
     }
+
+#endif
 
 }
