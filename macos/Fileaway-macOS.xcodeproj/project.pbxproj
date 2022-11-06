@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		D8037B122617F8CD00F41971 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = D8037B112617F8CD00F41971 /* Introspect */; };
 		D80F72D826430E3C0010BB38 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F72D726430E3C0010BB38 /* Data.swift */; };
+		D81B24112918267E0078D638 /* TaskPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81B24102918267E0078D638 /* TaskPageModel.swift */; };
+		D81B2413291828090078D638 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81B2412291828090078D638 /* UserDefaults.swift */; };
 		D821E939257A959D005D3205 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821E938257A959D005D3205 /* DateView.swift */; };
 		D821E946257AA5FC005D3205 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821E945257AA5FC005D3205 /* Sidebar.swift */; };
 		D821E94B257AB2C9005D3205 /* FileRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821E94A257AB2C9005D3205 /* FileRow.swift */; };
@@ -76,6 +78,8 @@
 
 /* Begin PBXFileReference section */
 		D80F72D726430E3C0010BB38 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		D81B24102918267E0078D638 /* TaskPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPageModel.swift; sourceTree = "<group>"; };
+		D81B2412291828090078D638 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		D821E938257A959D005D3205 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
 		D821E945257AA5FC005D3205 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 		D821E94A257AB2C9005D3205 /* FileRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileRow.swift; sourceTree = "<group>"; };
@@ -283,8 +287,9 @@
 		D87DEFC2257848A7006CFE85 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				D87DEFC3257848B7006CFE85 /* URL.swift */,
 				D80F72D726430E3C0010BB38 /* Data.swift */,
+				D87DEFC3257848B7006CFE85 /* URL.swift */,
+				D81B2412291828090078D638 /* UserDefaults.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -329,6 +334,7 @@
 				D8F8BE1C2588192F0010432F /* DetailsPage.swift */,
 				D8F8BE11258818450010432F /* RulesWizard.swift */,
 				D8F8BE3625881C1A0010432F /* TaskPage.swift */,
+				D81B24102918267E0078D638 /* TaskPageModel.swift */,
 			);
 			path = Wizard;
 			sourceTree = "<group>";
@@ -497,6 +503,7 @@
 				D82D01282657F69900FD2974 /* Observable.swift in Sources */,
 				D821E946257AA5FC005D3205 /* Sidebar.swift in Sources */,
 				D8F8BE12258818450010432F /* RulesWizard.swift in Sources */,
+				D81B2413291828090078D638 /* UserDefaults.swift in Sources */,
 				D82D01222657632C00FD2974 /* VariableDateView.swift in Sources */,
 				D87DEF7F25774F6C006CFE85 /* FileawayApp.swift in Sources */,
 				D87DEFB925783F66006CFE85 /* DirectoryView.swift in Sources */,
@@ -504,6 +511,7 @@
 				D8B657E826421D5B009DE837 /* LocationMenuItems.swift in Sources */,
 				D829DDB425787C100066A807 /* Settings.swift in Sources */,
 				D87DEFBE257840B1006CFE85 /* ApplicationModel.swift in Sources */,
+				D81B24112918267E0078D638 /* TaskPageModel.swift in Sources */,
 				D82D012A2657F6D500FD2974 /* TextProvider.swift in Sources */,
 				D82D01242657637700FD2974 /* VariableStringView.swift in Sources */,
 				D8E7F9EB2599B05300C7409B /* VariableList.swift in Sources */,

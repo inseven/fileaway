@@ -100,7 +100,6 @@ public class SelectionModel: ObservableObject {
     public func open() {
         urls.forEach { url in
             openURL(url)
-//            NSWorkspace.shared.open(url)
         }
     }
 
