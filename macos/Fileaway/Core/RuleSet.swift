@@ -125,9 +125,9 @@ class RuleSet: ObservableObject {
                              name: name,
                              variables: [VariableModel(name: "Date", type: .date(hasDay: true))],
                              destination: [
-                                ComponentState(value: "New Folder/", type: .text, variable: nil),
-                                ComponentState(value: "Date", type: .variable, variable: nil),
-                                ComponentState(value: " Description", type: .text, variable: nil)])
+                                ComponentModel(value: "New Folder/", type: .text, variable: nil),
+                                ComponentModel(value: "Date", type: .variable, variable: nil),
+                                ComponentModel(value: " Description", type: .text, variable: nil)])
         try add(rule)
         return rule
     }

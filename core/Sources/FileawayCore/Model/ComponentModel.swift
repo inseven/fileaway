@@ -21,7 +21,7 @@
 import Foundation
 import SwiftUI
 
-public class ComponentState: ObservableObject, Identifiable, Hashable {
+public class ComponentModel: ObservableObject, Identifiable, Hashable {
 
     public let id: UUID
     @Published public var value: String
@@ -42,10 +42,10 @@ public class ComponentState: ObservableObject, Identifiable, Hashable {
         self.variable = variable
     }
 
-    public init(_ component: ComponentState, variable: VariableModel?) {
-        id = component.id
-        value = String(component.value)
-        type = component.type
+    public init(_ componentModel: ComponentModel, variable: VariableModel?) {
+        id = componentModel.id
+        value = String(componentModel.value)
+        type = componentModel.type
         self.variable = variable
     }
 
@@ -56,7 +56,7 @@ public class ComponentState: ObservableObject, Identifiable, Hashable {
         self.value = variable.name
     }
 
-    public static func == (lhs: ComponentState, rhs: ComponentState) -> Bool {
+    public static func == (lhs: ComponentModel, rhs: ComponentModel) -> Bool {
         return lhs.id == rhs.id
     }
 
@@ -68,7 +68,7 @@ public class ComponentState: ObservableObject, Identifiable, Hashable {
 
 extension Component {
 
-    public init(_ state: ComponentState) {
+    public init(_ state: ComponentModel) {
         self.init(type: state.type, value: state.value)
     }
 

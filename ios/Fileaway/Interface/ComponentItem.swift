@@ -26,7 +26,7 @@ struct ComponentItem: View {
 
     @Environment(\.editMode) var editMode
     @ObservedObject var task: TaskState
-    @State var component: ComponentState
+    @State var component: ComponentModel
 
     var body: some View {
         HStack {
