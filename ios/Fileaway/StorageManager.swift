@@ -20,19 +20,16 @@
 
 import Foundation
 
-enum StorageManagerError: Error {
-    case pathError(_ message: String)
-    case accessError(_ message: String)
-}
+import FileawayCore
 
 extension URL {
 
     func prepareForSecureAccess() throws {
         guard startAccessingSecurityScopedResource() else {
-            throw StorageManagerError.accessError("Unable to access security scoped resource")
+            throw FileawayError.accessError
         }
         guard FileManager.default.isReadableFile(atPath: path) else {
-            throw StorageManagerError.accessError("Unable to read directory at path")
+            throw FileawayError.pathError
         }
     }
 
@@ -61,14 +58,14 @@ class StorageManager {
         try url.prepareForSecureAccess()
         let bookmarkData = try url.bookmarkData(options: .suitableForBookmarkFile, includingResourceValuesForKeys: nil, relativeTo: nil)
         guard let bookmarkUrl = bookmarkUrl() else {
-            throw StorageManagerError.pathError("Unable to get bookmark url")
+            throw FileawayError.bookmarkError
         }
         try URL.writeBookmarkData(bookmarkData, to: bookmarkUrl)
     }
 
     static func rootUrl() throws -> URL {
         guard let bookmarkUrl = bookmarkUrl() else {
-            throw StorageManagerError.pathError("Unable to get bookmark url")
+            throw FileawayError.bookmarkError
         }
 
         let bookmarkData = try URL.bookmarkData(withContentsOf: bookmarkUrl)
