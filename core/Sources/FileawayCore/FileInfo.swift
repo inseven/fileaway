@@ -44,7 +44,7 @@ public class FileInfo: Identifiable, Hashable {
     
     public let url: URL
     public let name: String
-    public var date: FileDate
+    public let date: FileDate
     public let directoryUrl: URL
 
     public init(url: URL) {
