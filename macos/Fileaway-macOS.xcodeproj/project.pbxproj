@@ -54,7 +54,6 @@
 		D8F8BE3225881BC50010432F /* VariableInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BE3125881BC50010432F /* VariableInstance.swift */; };
 		D8F8BE3725881C1A0010432F /* TaskPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BE3625881C1A0010432F /* TaskPage.swift */; };
 		D8F90C7325DAA72700F0EFB8 /* Interact in Frameworks */ = {isa = PBXBuildFile; productRef = D8F90C7225DAA72700F0EFB8 /* Interact */; };
-		D8FC5334257BB6D2008FB609 /* MailboxRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5333257BB6D2008FB609 /* MailboxRow.swift */; };
 		D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5341257BB77C008FB609 /* SettingsView.swift */; };
 		D8FC534A257BB7A4008FB609 /* LocationsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5349257BB7A4008FB609 /* LocationsSettingsView.swift */; };
 /* End PBXBuildFile section */
@@ -130,7 +129,6 @@
 		D8F8BE3125881BC50010432F /* VariableInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableInstance.swift; sourceTree = "<group>"; };
 		D8F8BE3625881C1A0010432F /* TaskPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPage.swift; sourceTree = "<group>"; };
 		D8F90C6B25DAA6A400F0EFB8 /* interact */ = {isa = PBXFileReference; lastKnownFileType = folder; name = interact; path = ../interact; sourceTree = "<group>"; };
-		D8FC5333257BB6D2008FB609 /* MailboxRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailboxRow.swift; sourceTree = "<group>"; };
 		D8FC5341257BB77C008FB609 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D8FC5349257BB7A4008FB609 /* LocationsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsSettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -186,7 +184,6 @@
 				D87DEFB825783F66006CFE85 /* DirectoryView.swift */,
 				D821E94A257AB2C9005D3205 /* FileRow.swift */,
 				D8B657E726421D5B009DE837 /* LocationMenuItems.swift */,
-				D8FC5333257BB6D2008FB609 /* MailboxRow.swift */,
 				D8B33E862645E445005DA5C2 /* MenuItem.swift */,
 				D82D01272657F69900FD2974 /* Observable.swift */,
 				D8D78A912580DD750088890F /* QuickLookPreview.swift */,
@@ -524,7 +521,6 @@
 				D8B657EC2642D2C5009DE837 /* RulesSettingsView.swift in Sources */,
 				D8F8BE27258819C80010432F /* DateInstance.swift in Sources */,
 				D8E7F9DE2599AFE000C7409B /* RuleDetailView.swift in Sources */,
-				D8FC5334257BB6D2008FB609 /* MailboxRow.swift in Sources */,
 				D8B33E872645E445005DA5C2 /* MenuItem.swift in Sources */,
 				D8F8BE1D2588192F0010432F /* DetailsPage.swift in Sources */,
 				D8B657EE2642D40F009DE837 /* LocationsEditor.swift in Sources */,
