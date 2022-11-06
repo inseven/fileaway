@@ -21,9 +21,7 @@
 import Combine
 import SwiftUI
 
-import FileawayCore
-
-enum RuleSetError: Error {
+public enum RuleSetError: Error {
     case duplicateName
 }
 
@@ -38,17 +36,17 @@ extension RuleSetError: LocalizedError {
 
 }
 
-class RuleSet: ObservableObject {
+public class RulesModel: ObservableObject {
 
-    let rootUrl: URL
-    let url: URL
+    public let rootUrl: URL
+    public let url: URL
 
-    @Published var rules: [Rule]
-    @Published var mutableRules: [RuleModel]
+    @Published public var rules: [Rule]
+    @Published public var mutableRules: [RuleModel]
 
     var rulesSubscription: Cancellable?
 
-    static func load(url: URL) throws -> [Rule] {
+    public static func load(url: URL) throws -> [Rule] {
         let rootUrl = url.deletingLastPathComponent()
         let data = try Data(contentsOf: url)
         let decoder = JSONDecoder()
@@ -59,7 +57,7 @@ class RuleSet: ObservableObject {
         return rules
     }
 
-    init(url: URL) {
+    public init(url: URL) {
         self.rootUrl = url
         self.url = url.appendingPathComponent("file-actions.json")
         let rules = (try? Self.load(url: self.url)) ?? []
@@ -71,7 +69,7 @@ class RuleSet: ObservableObject {
     }
 
     // TODO: Consider removing this.
-    func updateSubscription() {
+    public func updateSubscription() {
         let changes = self.mutableRules.map { $0.objectWillChange }
         rulesSubscription = Publishers.MergeMany(changes).receive(on: DispatchQueue.main).sink { _ in
             self.objectWillChange.send()
@@ -86,7 +84,7 @@ class RuleSet: ObservableObject {
      limitation due to the way the rules file is stored (with the name as the key into a dictionary), but it probably
      makes sense to prevent users from creating identically named rules.
      */
-    func contains(ruleNamed name: String) -> Bool {
+    public func contains(ruleNamed name: String) -> Bool {
         let names = Set(mutableRules.map { $0.name })
         return names.contains(name)
     }
@@ -96,7 +94,7 @@ class RuleSet: ObservableObject {
      name in the case that the preferred name is not found to be unique. This is intended to match the behaviour of
      duplication in Finder.
      */
-    fileprivate func uniqueRuleName(preferredName: String) -> String {
+    private func uniqueRuleName(preferredName: String) -> String {
         var name = preferredName
         var index = 2
         while contains(ruleNamed: name) {
@@ -106,7 +104,7 @@ class RuleSet: ObservableObject {
         return name
     }
 
-    func add(_ rule: RuleModel) throws {
+    public func add(_ rule: RuleModel) throws {
         guard !contains(ruleNamed: rule.name) else {
             throw RuleSetError.duplicateName
         }
@@ -118,7 +116,7 @@ class RuleSet: ObservableObject {
         try save()
     }
 
-    func new(preferredName: String) throws -> RuleModel {
+    public func new(preferredName: String) throws -> RuleModel {
         let name = uniqueRuleName(preferredName: preferredName)
         let rule = RuleModel(id: UUID(),
                              rootUrl: rootUrl,
@@ -140,12 +138,12 @@ class RuleSet: ObservableObject {
         return newRule
     }
 
-    func duplicate(ids: Set<RuleModel.ID>) throws -> [RuleModel] {
+    public func duplicate(ids: Set<RuleModel.ID>) throws -> [RuleModel] {
         let rules = mutableRules.filter { ids.contains($0.id) }
         return try rules.map { try duplicate($0, preferredName: "Copy of " + $0.name) }
     }
 
-    func remove(ids: Set<RuleModel.ID>) throws {
+    public func remove(ids: Set<RuleModel.ID>) throws {
         mutableRules.removeAll { ids.contains($0.id) }
         rules.removeAll { ids.contains($0.id) }
         try save()
