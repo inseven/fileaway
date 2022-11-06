@@ -184,6 +184,17 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		D8A871D3291739ED00B2932A /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D89265832498AC3A00297825 /* ActionsViewController.swift */,
+				D89265882498C58C00297825 /* MoveFileViewController.swift */,
+				D88F3D42216F847D00BFE0F9 /* PickerViewController.swift */,
+				D88F3D4B217048B400BFE0F9 /* TypeViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
 		D8BCA522216F069B002A624D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,15 +229,11 @@
 			isa = PBXGroup;
 			children = (
 				D8CCB8112143672700AC445F /* Info.plist */,
-				D89265832498AC3A00297825 /* ActionsViewController.swift */,
 				D8CCB8052143672700AC445F /* AppDelegate.swift */,
 				D88F3D53217070A400BFE0F9 /* DateTableViewCell.swift */,
-				D89265882498C58C00297825 /* MoveFileViewController.swift */,
-				D88F3D42216F847D00BFE0F9 /* PickerViewController.swift */,
 				D84319B0249ABA1E0014CFE9 /* Settings.swift */,
 				D89941002145E6AE00097F3D /* StorageManager.swift */,
 				D84319A2249AB7FE0014CFE9 /* StoryboardIdentifier.swift */,
-				D88F3D4B217048B400BFE0F9 /* TypeViewController.swift */,
 				D8CCB80C2143672700AC445F /* Assets.xcassets */,
 				D8E4CA55249CF73000F5BC8E /* Components */,
 				D89921B426199B40006A594F /* Extensions */,
@@ -234,6 +241,7 @@
 				D8CCB80E2143672700AC445F /* LaunchScreen.storyboard */,
 				D8CCB8092143672700AC445F /* Main.storyboard */,
 				D81C5D98249BF2560083BD6F /* State */,
+				D8A871D3291739ED00B2932A /* View Controllers */,
 			);
 			path = Fileaway;
 			sourceTree = "<group>";

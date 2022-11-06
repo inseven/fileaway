@@ -72,16 +72,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationController.modalPresentationStyle = .formSheet
         rootViewController.present(navigationController, animated: true, completion: nil)
         return true
-
-//        // Example code showing how the move operation can be performed once a root has been set.
-//        if let rootUrl = try? StorageManager.rootUrl() {
-//            do {
-//                try FileManager.default.copyItem(at: url, to: rootUrl.appendingPathComponent("Adobe").appendingPathComponent("Example.pdf"))
-//            } catch let error {
-//                print(error)
-//            }
-//        }
-//        return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
