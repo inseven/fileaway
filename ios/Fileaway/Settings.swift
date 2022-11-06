@@ -37,17 +37,17 @@ class Settings: ObservableObject {
             }
             if let configurationUrl = try? StorageManager.configurationUrl() {
                 let manager = Manager(configurationUrl: configurationUrl)
-                tasks = TaskList(manager.tasks)
+                tasks = TasksModel(manager.tasks)
                 self.manager = manager
             } else {
-                tasks = TaskList()
+                tasks = TasksModel()
             }
         }
     }
 
     var taskObserver: Cancellable?
 
-    @Published var tasks = TaskList() {
+    @Published var tasks = TasksModel() {
         willSet {
             taskObserver?.cancel()
         }

@@ -21,45 +21,44 @@
 import Combine
 import Foundation
 
-import FileawayCore
+public class TasksModel: ObservableObject, BackChannelable {
 
-class TaskList: ObservableObject, BackChannelable {
+    @Published public var tasks: [TaskModel]
 
-    @Published var tasks: [TaskModel]
     var tasksBackChannel: BackChannel<TaskModel>?
 
-    init() {
+    public init() {
         self.tasks = []
     }
 
-    var count: Int {
+    public var count: Int {
         return tasks.count
     }
 
-    init(_ tasks: [Task]) {
+    public init(_ tasks: [Task]) {
         self.tasks = tasks.map { TaskModel(task: $0) }
     }
 
-    func establishBackChannel() {
+    public func establishBackChannel() {
         tasksBackChannel = BackChannel(value: tasks, publisher: $tasks).bind {
             self.objectWillChange.send()
         }
     }
 
-    func validate(task: TaskModel) -> Bool {
+    public func validate(task: TaskModel) -> Bool {
         return self.tasks.filter { $0.id != task.id && $0.name == task.name }.count < 1
     }
 
-    func validate() -> Bool {
+    public func validate() -> Bool {
         let names = Set(tasks.map { $0.name })
         return names.count == tasks.count
     }
 
-    func validateChildren() -> Bool {
+    public func validateChildren() -> Bool {
         return self.tasks.map { $0.validate() }.reduce(false, { $0 || $1 })
     }
 
-    func onChange(completion: @escaping () -> Void) -> Cancellable {
+    public func onChange(completion: @escaping () -> Void) -> Cancellable {
         return $tasks.sink { _ in
             DispatchQueue.main.async {
                 completion()
@@ -67,7 +66,7 @@ class TaskList: ObservableObject, BackChannelable {
         }
     }
 
-    func update(task: TaskModel) {
+    public func update(task: TaskModel) {
         guard
             let index = self.tasks.firstIndex(where: { $0.id == task.id }),
             let range = Range(NSRange(location: index, length: 1))else {
@@ -77,7 +76,7 @@ class TaskList: ObservableObject, BackChannelable {
         assert(validate() && validateChildren())
     }
 
-    func createTask() {
+    public func createTask() {
         let names = Set(tasks.map { $0.name })
         var index = 1
         var name = ""

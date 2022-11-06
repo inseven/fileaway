@@ -35,7 +35,6 @@
 		D89941012145E6AE00097F3D /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89941002145E6AE00097F3D /* StorageManager.swift */; };
 		D8A871D22916D56400B2932A /* ComponentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A871D12916D56400B2932A /* ComponentItem.swift */; };
 		D8CAE3EE249D3AD70047CA36 /* ErrorText.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CAE3ED249D3AD70047CA36 /* ErrorText.swift */; };
-		D8CAE3F0249D6E1D0047CA36 /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CAE3EF249D6E1D0047CA36 /* TaskList.swift */; };
 		D8CCB8062143672700AC445F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCB8052143672700AC445F /* AppDelegate.swift */; };
 		D8CCB80B2143672700AC445F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8CCB8092143672700AC445F /* Main.storyboard */; };
 		D8CCB80D2143672700AC445F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8CCB80C2143672700AC445F /* Assets.xcassets */; };
@@ -99,7 +98,6 @@
 		D8A871D12916D56400B2932A /* ComponentItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentItem.swift; sourceTree = "<group>"; };
 		D8B0B3D425314771001EB2C2 /* Fileaway.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fileaway.entitlements; sourceTree = "<group>"; };
 		D8CAE3ED249D3AD70047CA36 /* ErrorText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorText.swift; sourceTree = "<group>"; };
-		D8CAE3EF249D6E1D0047CA36 /* TaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskList.swift; sourceTree = "<group>"; };
 		D8CCB8022143672700AC445F /* Fileaway.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fileaway.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8CCB8052143672700AC445F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8CCB80A2143672700AC445F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -168,14 +166,6 @@
 			path = Interface;
 			sourceTree = "<group>";
 		};
-		D81C5D98249BF2560083BD6F /* State */ = {
-			isa = PBXGroup;
-			children = (
-				D8CAE3EF249D6E1D0047CA36 /* TaskList.swift */,
-			);
-			path = State;
-			sourceTree = "<group>";
-		};
 		D89921B426199B40006A594F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,7 +230,6 @@
 				D81C5D8F249BDD3C0083BD6F /* Interface */,
 				D8CCB80E2143672700AC445F /* LaunchScreen.storyboard */,
 				D8CCB8092143672700AC445F /* Main.storyboard */,
-				D81C5D98249BF2560083BD6F /* State */,
 				D8A871D3291739ED00B2932A /* View Controllers */,
 			);
 			path = Fileaway;
@@ -452,7 +441,6 @@
 				D8CCB8062143672700AC445F /* AppDelegate.swift in Sources */,
 				D81C5D93249BE3710083BD6F /* TasksView.swift in Sources */,
 				D84319A9249AB8C70014CFE9 /* ReversePages.swift in Sources */,
-				D8CAE3F0249D6E1D0047CA36 /* TaskList.swift in Sources */,
 				D84319AD249AB97A0014CFE9 /* FilePicker.swift in Sources */,
 				D85D0A18249AE0A000D4B414 /* FakeDuplexView.swift in Sources */,
 				D89265892498C58C00297825 /* MoveFileViewController.swift in Sources */,
