@@ -25,7 +25,7 @@
 		D83CDCE52620F97F0063C91C /* VariableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83CDCE42620F97F0063C91C /* VariableTextField.swift */; };
 		D83CDCEA2620FF210063C91C /* RuleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83CDCE92620FF210063C91C /* RuleSheet.swift */; };
 		D85C9572257999130007AE1E /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C9571257999130007AE1E /* FileManager.swift */; };
-		D85C95812579CED30007AE1E /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C95802579CED30007AE1E /* Toolbar.swift */; };
+		D85C95812579CED30007AE1E /* SelectionToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C95802579CED30007AE1E /* SelectionToolbar.swift */; };
 		D87DEF7F25774F6C006CFE85 /* FileawayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEF7E25774F6C006CFE85 /* FileawayApp.swift */; };
 		D87DEF8125774F6C006CFE85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEF8025774F6C006CFE85 /* ContentView.swift */; };
 		D87DEF8325774F6D006CFE85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D87DEF8225774F6D006CFE85 /* Assets.xcassets */; };
@@ -38,7 +38,6 @@
 		D87DEFBE257840B1006CFE85 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEFBD257840B1006CFE85 /* Manager.swift */; };
 		D87DEFC4257848B7006CFE85 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEFC3257848B7006CFE85 /* URL.swift */; };
 		D88B353B28B6113A000C8910 /* FileawayCore in Frameworks */ = {isa = PBXBuildFile; productRef = D88B353A28B6113A000C8910 /* FileawayCore */; };
-		D88DF5FB258463310068404E /* LazyFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88DF5FA258463310068404E /* LazyFilter.swift */; };
 		D8B33E872645E445005DA5C2 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B33E862645E445005DA5C2 /* MenuItem.swift */; };
 		D8B657E826421D5B009DE837 /* LocationMenuItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B657E726421D5B009DE837 /* LocationMenuItems.swift */; };
 		D8B657EA26421ECF009DE837 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B657E926421ECF009DE837 /* Alert.swift */; };
@@ -61,7 +60,6 @@
 		D8F8BE27258819C80010432F /* DateInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BE26258819C80010432F /* DateInstance.swift */; };
 		D8F8BE3225881BC50010432F /* VariableInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BE3125881BC50010432F /* VariableInstance.swift */; };
 		D8F8BE3725881C1A0010432F /* TaskPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BE3625881C1A0010432F /* TaskPage.swift */; };
-		D8F8BE4125881CEC0010432F /* TrackerInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BE4025881CEC0010432F /* TrackerInput.swift */; };
 		D8F90C7325DAA72700F0EFB8 /* Interact in Frameworks */ = {isa = PBXBuildFile; productRef = D8F90C7225DAA72700F0EFB8 /* Interact */; };
 		D8FC5334257BB6D2008FB609 /* MailboxRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5333257BB6D2008FB609 /* MailboxRow.swift */; };
 		D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FC5341257BB77C008FB609 /* SettingsView.swift */; };
@@ -105,7 +103,7 @@
 		D83CDCE42620F97F0063C91C /* VariableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableTextField.swift; sourceTree = "<group>"; };
 		D83CDCE92620FF210063C91C /* RuleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleSheet.swift; sourceTree = "<group>"; };
 		D85C9571257999130007AE1E /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
-		D85C95802579CED30007AE1E /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
+		D85C95802579CED30007AE1E /* SelectionToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionToolbar.swift; sourceTree = "<group>"; };
 		D876A3B32654873E006D19FB /* FileawayCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FileawayCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87DEF7B25774F6C006CFE85 /* Fileaway.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fileaway.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87DEF7E25774F6C006CFE85 /* FileawayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileawayApp.swift; sourceTree = "<group>"; };
@@ -125,7 +123,6 @@
 		D87DEFBD257840B1006CFE85 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		D87DEFC3257848B7006CFE85 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		D88B353928B61015000C8910 /* core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = core; path = ../core; sourceTree = "<group>"; };
-		D88DF5FA258463310068404E /* LazyFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyFilter.swift; sourceTree = "<group>"; };
 		D8B33E862645E445005DA5C2 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		D8B657E726421D5B009DE837 /* LocationMenuItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMenuItems.swift; sourceTree = "<group>"; };
 		D8B657E926421ECF009DE837 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
@@ -148,7 +145,6 @@
 		D8F8BE26258819C80010432F /* DateInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInstance.swift; sourceTree = "<group>"; };
 		D8F8BE3125881BC50010432F /* VariableInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableInstance.swift; sourceTree = "<group>"; };
 		D8F8BE3625881C1A0010432F /* TaskPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPage.swift; sourceTree = "<group>"; };
-		D8F8BE4025881CEC0010432F /* TrackerInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerInput.swift; sourceTree = "<group>"; };
 		D8F90C6B25DAA6A400F0EFB8 /* interact */ = {isa = PBXFileReference; lastKnownFileType = folder; name = interact; path = ../interact; sourceTree = "<group>"; };
 		D8FC5333257BB6D2008FB609 /* MailboxRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailboxRow.swift; sourceTree = "<group>"; };
 		D8FC5341257BB77C008FB609 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -234,13 +230,12 @@
 			path = Scenes;
 			sourceTree = "<group>";
 		};
-		D85C95852579DD880007AE1E /* Modifiers */ = {
+		D85C95852579DD880007AE1E /* Toolbars */ = {
 			isa = PBXGroup;
 			children = (
-				D85C95802579CED30007AE1E /* Toolbar.swift */,
-				D8F8BE4025881CEC0010432F /* TrackerInput.swift */,
+				D85C95802579CED30007AE1E /* SelectionToolbar.swift */,
 			);
-			path = Modifiers;
+			path = Toolbars;
 			sourceTree = "<group>";
 		};
 		D87DEF7225774F6C006CFE85 = {
@@ -276,9 +271,9 @@
 				D8005ABF258276160001BE2C /* Core */,
 				D8F8BE0A258817780010432F /* Environment */,
 				D87DEFC2257848A7006CFE85 /* Extensions */,
-				D85C95852579DD880007AE1E /* Modifiers */,
 				D87DEF8425774F6D006CFE85 /* Preview Content */,
 				D82D73D528B4C649006F49F1 /* Scenes */,
+				D85C95852579DD880007AE1E /* Toolbars */,
 				D8FC5340257BB72F008FB609 /* Utilities */,
 				D821E937257A9591005D3205 /* Views */,
 			);
@@ -381,7 +376,6 @@
 			children = (
 				D87DEFB325780BA4006CFE85 /* DirectoryObserver.swift */,
 				D821E93D257A960C005D3205 /* FileProvider.swift */,
-				D88DF5FA258463310068404E /* LazyFilter.swift */,
 				D8B6D034257E71CD00C7E472 /* QuickLookCoordinator.swift */,
 				D8B6D02F257DBB7D00C7E472 /* SelectionModel.swift */,
 			);
@@ -537,15 +531,13 @@
 				D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */,
 				D80F72D826430E3C0010BB38 /* Data.swift in Sources */,
 				D8F8BE3725881C1A0010432F /* TaskPage.swift in Sources */,
-				D85C95812579CED30007AE1E /* Toolbar.swift in Sources */,
+				D85C95812579CED30007AE1E /* SelectionToolbar.swift in Sources */,
 				D8F8BE002586C6B90010432F /* RuleInstance.swift in Sources */,
 				D8E7F9B125999C8800C7409B /* RulesEditor.swift in Sources */,
 				D8F8BE22258819860010432F /* StringInstance.swift in Sources */,
 				D8F8BE3225881BC50010432F /* VariableInstance.swift in Sources */,
 				D82D01282657F69900FD2974 /* Observable.swift in Sources */,
 				D821E946257AA5FC005D3205 /* Sidebar.swift in Sources */,
-				D8F8BE4125881CEC0010432F /* TrackerInput.swift in Sources */,
-				D88DF5FB258463310068404E /* LazyFilter.swift in Sources */,
 				D821E93E257A960C005D3205 /* FileProvider.swift in Sources */,
 				D8F8BE12258818450010432F /* RulesWizard.swift in Sources */,
 				D82D01222657632C00FD2974 /* VariableDateView.swift in Sources */,
