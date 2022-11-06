@@ -166,13 +166,6 @@
 			path = Interface;
 			sourceTree = "<group>";
 		};
-		D81C5D98249BF2560083BD6F /* State */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = State;
-			sourceTree = "<group>";
-		};
 		D89921B426199B40006A594F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,7 +230,6 @@
 				D81C5D8F249BDD3C0083BD6F /* Interface */,
 				D8CCB80E2143672700AC445F /* LaunchScreen.storyboard */,
 				D8CCB8092143672700AC445F /* Main.storyboard */,
-				D81C5D98249BF2560083BD6F /* State */,
 				D8A871D3291739ED00B2932A /* View Controllers */,
 			);
 			path = Fileaway;
