@@ -20,10 +20,12 @@
 
 import SwiftUI
 
-extension Alert {
+extension View {
 
-    init(error: Error) {
-        self.init(title: Text("Error"), message: Text(error.localizedDescription))
+    public func searchable() -> some View {
+        return self
+            .searchable(text: Binding.constant(""))
+            .disabled(true)
     }
 
 }

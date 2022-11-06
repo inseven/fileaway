@@ -18,14 +18,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-extension View {
+extension FileManager {
 
-    func searchable() -> some View {
-        return self
-            .searchable(text: Binding.constant(""))
-            .disabled(true)
+    public func files(at url: URL, extensions: [String]) -> [URL] {
+        var files: [URL] = []
+        if let enumerator = enumerator(at: url,
+                                       includingPropertiesForKeys: [.isRegularFileKey],
+                                       options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
+            for case let fileURL as URL in enumerator {
+                guard fileURL.matches(extensions: extensions) else {
+                    continue
+                }
+
+                do {
+                    let fileAttributes = try fileURL.resourceValues(forKeys:[.isRegularFileKey])
+                    if fileAttributes.isRegularFile! {
+                        files.append(fileURL)
+                    }
+                } catch { print(error, fileURL) }
+            }
+        }
+        return files
     }
 
 }
