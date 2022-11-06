@@ -22,7 +22,7 @@ import Foundation
 
 public class FileInfo: Identifiable, Hashable {
 
-    static func filenameDate(url: URL) -> FileDate? {
+    private static func filenameDate(url: URL) -> FileDate? {
         guard let date = DateFinder.dateInstances(from: url.displayName.deletingPathExtension).map({ $0.date }).first else {
             return nil
         }
@@ -36,7 +36,7 @@ public class FileInfo: Identifiable, Hashable {
         return FileDate(date: date, type: .creation)
     }
 
-    static func unknownDate() -> FileDate {
+    private static func unknownDate() -> FileDate {
         return FileDate(date: Date.distantPast, type: .unknown)
     }
 
