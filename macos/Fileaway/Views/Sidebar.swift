@@ -40,11 +40,11 @@ struct Sidebar: View {
                     NavigationLink(value: inbox.url) {
                         Label(inbox.name, systemImage: "tray")
                     }
-//                    .contextMenu {
-//                        LocationMenuItems(manager: manager, directoryObserver: inbox) { error in
-//                            alertType = .error(error: error)
-//                        }
-//                    }
+                    .contextMenu {
+                        LocationMenuItems(manager: manager, directoryObserver: inbox) { error in
+                            alertType = .error(error: error)
+                        }
+                    }
                 }
             }
             Section(header: Text("Archives")) {
@@ -52,11 +52,11 @@ struct Sidebar: View {
                     NavigationLink(value: archive.url) {
                         Label(archive.name, systemImage: "archivebox")
                     }
-//                    .contextMenu {
-//                        LocationMenuItems(manager: manager, directoryObserver: archive) { error in
-//                            alertType = .error(error: error)
-//                        }
-//                    }
+                    .contextMenu {
+                        LocationMenuItems(manager: manager, directoryObserver: archive) { error in
+                            alertType = .error(error: error)
+                        }
+                    }
                 }
             }
         }
