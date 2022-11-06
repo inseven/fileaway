@@ -36,9 +36,6 @@ struct RulesWizard: View {
                 TaskPage(manager: manager, url: url)
             }
             .frame(width: 300)
-//            PageView {
-//                TaskPage(manager: manager, url: url)
-//            }
         }
         .padding()
         .navigationTitle(url.displayName)
