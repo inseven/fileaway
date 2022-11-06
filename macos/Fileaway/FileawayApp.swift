@@ -27,7 +27,7 @@ import FileawayCore
 @main
 struct FileawayApp: App {
 
-    @StateObject var manager = ApplicationModel()
+    @StateObject var applicationModel = ApplicationModel()
 
     @Environment(\.scenePhase) private var phase
 
@@ -48,18 +48,18 @@ struct FileawayApp: App {
     var body: some Scene {
         
         WindowGroup(id: "MainWindow") {
-            ContentView(manager: manager)
-                .environment(\.applicationModel, manager)
+            ContentView(applicationModel: applicationModel)
+                .environment(\.applicationModel, applicationModel)
         }
         .commands {
             ToolbarCommands()
             SidebarCommands()
         }
 
-        Wizard(applicationModel: manager)
+        Wizard(applicationModel: applicationModel)
 
         SwiftUI.Settings {
-            SettingsView(manager: manager)
+            SettingsView(manager: applicationModel)
         }
 
         About(repository: Legal.repository, copyright: Legal.copyright) {

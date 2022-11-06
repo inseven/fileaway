@@ -26,20 +26,20 @@ import FileawayCore
 
 struct ContentView: View {
 
-    @ObservedObject var manager: ApplicationModel
+    @ObservedObject var applicationModel: ApplicationModel
     @State var section: URL?
     @FocusedValue(\.selectionModel) var selectionModel
 
-    init(manager: ApplicationModel) {
-        self.manager = manager
+    init(applicationModel: ApplicationModel) {
+        self.applicationModel = applicationModel
     }
 
     var body: some View {
         NavigationSplitView {
-            Sidebar(manager: manager, section: $section)
+            Sidebar(manager: applicationModel, section: $section)
         } detail: {
             if let section = section,
-               let directory = manager.directories.first(where: { $0.url == section })  {
+               let directory = applicationModel.directories.first(where: { $0.url == section })  {
                 DirectoryView(directoryObserver: directory)
             } else {
                 Placeholder("No Directory Selected")
