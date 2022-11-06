@@ -35,28 +35,28 @@ struct Sidebar: View {
 
     var body: some View {
         List(selection: $section) {
-            Section(header: Text("Inboxes")) {
+            Section("Inboxes") {
                 ForEach(manager.directories(type: .inbox)) { inbox in
                     NavigationLink(value: inbox.url) {
                         Label(inbox.name, systemImage: "tray")
                     }
-//                    .contextMenu {
-//                        LocationMenuItems(manager: manager, directoryObserver: inbox) { error in
-//                            alertType = .error(error: error)
-//                        }
-//                    }
+                    .contextMenu {
+                        LocationMenuItems(manager: manager, directoryObserver: inbox) { error in
+                            alertType = .error(error: error)
+                        }
+                    }
                 }
             }
-            Section(header: Text("Archives")) {
+            Section("Archives") {
                 ForEach(manager.directories(type: .archive)) { archive in
                     NavigationLink(value: archive.url) {
                         Label(archive.name, systemImage: "archivebox")
                     }
-//                    .contextMenu {
-//                        LocationMenuItems(manager: manager, directoryObserver: archive) { error in
-//                            alertType = .error(error: error)
-//                        }
-//                    }
+                    .contextMenu {
+                        LocationMenuItems(manager: manager, directoryObserver: archive) { error in
+                            alertType = .error(error: error)
+                        }
+                    }
                 }
             }
         }
