@@ -43,10 +43,10 @@ class Manager: ObservableObject {
     fileprivate var settings = Settings()
 
     @Published var locations: [URL] = []
-    @Published var directories: [DirectoryObserver] = []
+    @Published var directories: [DirectoryModel] = []
     @Published var allRules: [Rule] = []
 
-    var countObservers: [DirectoryObserver.ID: Cancellable] = [:]
+    var countObservers: [DirectoryModel.ID: Cancellable] = [:]
 
     var countSubscription: Cancellable?
     var rulesSubscription: Cancellable?
@@ -99,7 +99,7 @@ class Manager: ObservableObject {
         update()
     }
 
-    func directories(type: DirectoryObserver.DirectoryType) -> [DirectoryObserver] {
+    func directories(type: DirectoryModel.DirectoryType) -> [DirectoryModel] {
         self.directories.filter { directoryObserver in
             directoryObserver.type == type
         }.sorted { lhs, rhs in
@@ -107,16 +107,16 @@ class Manager: ObservableObject {
         }
     }
 
-    func addDirectoryObserver(type: DirectoryObserver.DirectoryType, url: URL) {
+    func addDirectoryObserver(type: DirectoryModel.DirectoryType, url: URL) {
         dispatchPrecondition(condition: .onQueue(.main))
-        let directoryObserver = DirectoryObserver(type: type, url: url)
+        let directoryObserver = DirectoryModel(type: type, url: url)
         directories.append(directoryObserver)
         directoryObserver.start()
         updateCountSubscription()
         updateRuleSetSubscription()
     }
 
-    func removeDirectoryObserver(directoryObserver: DirectoryObserver) throws {
+    func removeDirectoryObserver(directoryObserver: DirectoryModel) throws {
         dispatchPrecondition(condition: .onQueue(.main))
         guard directories.contains(directoryObserver) else {
             throw FileawayError.directoryNotFound
@@ -128,7 +128,7 @@ class Manager: ObservableObject {
         updateRuleSetSubscription()
     }
 
-    func addLocation(type: DirectoryObserver.DirectoryType, url: URL) throws {
+    func addLocation(type: DirectoryModel.DirectoryType, url: URL) throws {
         dispatchPrecondition(condition: .onQueue(.main))
         let _ = try url.securityScopeBookmarkData() // Check that we can access the location.
         addDirectoryObserver(type: type, url: url)

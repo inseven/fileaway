@@ -18,37 +18,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
-import Quartz
+import SwiftUI
 
-class QuickLookCoordinator: NSObject, QLPreviewPanelDataSource {
+public struct FocusedSelectionModelKey : FocusedValueKey {
+    public typealias Value = SelectionModel
+}
 
-    static var shared: QuickLookCoordinator = {
-        QuickLookCoordinator()
-    }()
+extension FocusedValues {
 
-    var url: URL?
-
-    func previewPanel(_ panel: QLPreviewPanel!, previewItemAt index: Int) -> QLPreviewItem! {
-        return url! as QLPreviewItem
+    public var selectionModel: FocusedSelectionModelKey.Value? {
+        get { self[FocusedSelectionModelKey.self] }
+        set { self[FocusedSelectionModelKey.self] = newValue }
     }
 
-    func numberOfPreviewItems(in controller: QLPreviewPanel) -> Int {
-        return 1
-    }
-
-    func show(url: URL?) {
-        self.url = url
-        guard let panel = QLPreviewPanel.shared() else {
-            return
-        }
-        if self.url != nil {
-            panel.center()
-            panel.dataSource = self
-            panel.updateController()
-            panel.makeKeyAndOrderFront(nil)
-        } else {
-            panel.orderOut(nil)
-        }
-    }
 }

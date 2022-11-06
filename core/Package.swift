@@ -17,6 +17,8 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "./../diligence"),
+        .package(path: "./../interact"),
+        .package(url: "https://github.com/eonil/FSEvents.git", branch: "master"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -25,6 +27,8 @@ let package = Package(
             name: "FileawayCore",
             dependencies: [
                 .product(name: "Diligence", package: "diligence"),
+                .product(name: "Interact", package: "interact"),
+                .product(name: "EonilFSEvents", package: "FSEvents", condition: .when(platforms: [.macOS])),
             ],
             resources: [
                 .process("Licenses"),

@@ -21,20 +21,20 @@
 import Combine
 import SwiftUI
 
-import FileawayCore
+public class SelectionModel: ObservableObject {
 
-class SelectionModel: ObservableObject {
+    @Environment(\.openURL) var openURL
 
-    @Published var selection: Set<FileInfo> = []
+    @Published public var selection: Set<FileInfo> = []
 
-    private let directory: DirectoryObserver?
+    private let directory: DirectoryModel?
     private var cancellables: Set<AnyCancellable> = []
 
-    init(directory: DirectoryObserver? = nil) {
+    public init(directory: DirectoryModel? = nil) {
         self.directory = directory
     }
 
-    @MainActor func start() {
+    @MainActor public func start() {
 
         guard let directory = directory else {
             return
@@ -56,48 +56,51 @@ class SelectionModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    @MainActor func stop() {
+    @MainActor public func stop() {
         cancellables.removeAll()
     }
 
-    var urls: [URL] {
+    public var urls: [URL] {
         selection.map { $0.url }
     }
 
-    var canPreview: Bool {
+    public var canPreview: Bool {
         return !selection.isEmpty
     }
 
-    func preview() {
+#if os(macOS)
+    public func preview() {
         guard let url = selection.first?.url else {
             return
         }
         QuickLookCoordinator.shared.show(url: url)
     }
+#endif
 
-    var canCut: Bool {
+    public var canCut: Bool {
         return !selection.isEmpty
     }
 
-    func cut() -> [NSItemProvider] {
+    public func cut() -> [NSItemProvider] {
         urls.map { NSItemProvider(object: $0 as NSURL) }
     }
 
-    var canTrash: Bool {
+    public var canTrash: Bool {
         return !selection.isEmpty
     }
 
-    func trash() throws {
+    public func trash() throws {
         try urls.forEach { try FileManager.default.trashItem(at: $0, resultingItemURL: nil) }
     }
 
-    var canMove: Bool {
+    public var canMove: Bool {
         return !selection.isEmpty
     }
 
-    func open() {
+    public func open() {
         urls.forEach { url in
-            NSWorkspace.shared.open(url)
+            openURL(url)
+//            NSWorkspace.shared.open(url)
         }
     }
 

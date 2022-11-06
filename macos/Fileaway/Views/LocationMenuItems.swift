@@ -20,10 +20,12 @@
 
 import SwiftUI
 
+import FileawayCore
+
 struct LocationMenuItems: View {
 
     var manager: Manager
-    var directoryObserver: DirectoryObserver
+    var directoryObserver: DirectoryModel
     var onError: (Error) -> Void
 
     var body: some View {

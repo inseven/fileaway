@@ -22,6 +22,8 @@ import SwiftUI
 
 import Interact
 
+import FileawayCore
+
 struct LocationsEditor: View {
 
     enum AlertType {
@@ -29,13 +31,13 @@ struct LocationsEditor: View {
     }
 
     var name: String
-    var type: DirectoryObserver.DirectoryType
+    var type: DirectoryModel.DirectoryType
     @ObservedObject var manager: Manager
 
     @State var selection: UUID?
     @State var alertType: AlertType?
 
-    func addLocation(type: DirectoryObserver.DirectoryType, url: URL) {
+    func addLocation(type: DirectoryModel.DirectoryType, url: URL) {
         dispatchPrecondition(condition: .onQueue(.main))
         do {
             try manager.addLocation(type: type, url: url)
