@@ -22,7 +22,7 @@ import Foundation
 
 extension FileManager {
 
-    func files(at url: URL, extensions: [String]) -> [URL] {
+    public func files(at url: URL, extensions: [String]) -> [URL] {
         var files: [URL] = []
         if let enumerator = enumerator(at: url,
                                        includingPropertiesForKeys: [.isRegularFileKey],
