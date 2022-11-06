@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import FileawayCore
+
 struct Sidebar: View {
 
     enum AlertType {

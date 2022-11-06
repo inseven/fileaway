@@ -12,7 +12,6 @@
 		D821E939257A959D005D3205 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821E938257A959D005D3205 /* DateView.swift */; };
 		D821E946257AA5FC005D3205 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821E945257AA5FC005D3205 /* Sidebar.swift */; };
 		D821E94B257AB2C9005D3205 /* FileRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821E94A257AB2C9005D3205 /* FileRow.swift */; };
-		D829DDB425787C100066A807 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D829DDB325787C100066A807 /* Settings.swift */; };
 		D82D01222657632C00FD2974 /* VariableDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D01212657632C00FD2974 /* VariableDateView.swift */; };
 		D82D01242657637700FD2974 /* VariableStringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D01232657637700FD2974 /* VariableStringView.swift */; };
 		D82D01262657F66B00FD2974 /* VariableProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D01252657F66B00FD2974 /* VariableProvider.swift */; };
@@ -30,7 +29,6 @@
 		D87DEF9D25774F6D006CFE85 /* Document_FinderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEF9C25774F6D006CFE85 /* Document_FinderUITests.swift */; };
 		D87DEFAF2577E068006CFE85 /* EonilFSEvents in Frameworks */ = {isa = PBXBuildFile; productRef = D87DEFAE2577E068006CFE85 /* EonilFSEvents */; };
 		D87DEFB925783F66006CFE85 /* DirectoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEFB825783F66006CFE85 /* DirectoryView.swift */; };
-		D87DEFBE257840B1006CFE85 /* ApplicationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEFBD257840B1006CFE85 /* ApplicationModel.swift */; };
 		D88B353B28B6113A000C8910 /* FileawayCore in Frameworks */ = {isa = PBXBuildFile; productRef = D88B353A28B6113A000C8910 /* FileawayCore */; };
 		D8B33E872645E445005DA5C2 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B33E862645E445005DA5C2 /* MenuItem.swift */; };
 		D8B657E826421D5B009DE837 /* LocationMenuItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B657E726421D5B009DE837 /* LocationMenuItems.swift */; };
@@ -78,7 +76,6 @@
 		D821E938257A959D005D3205 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
 		D821E945257AA5FC005D3205 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 		D821E94A257AB2C9005D3205 /* FileRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileRow.swift; sourceTree = "<group>"; };
-		D829DDB325787C100066A807 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		D82D01212657632C00FD2974 /* VariableDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableDateView.swift; sourceTree = "<group>"; };
 		D82D01232657637700FD2974 /* VariableStringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableStringView.swift; sourceTree = "<group>"; };
 		D82D01252657F66B00FD2974 /* VariableProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableProvider.swift; sourceTree = "<group>"; };
@@ -103,7 +100,6 @@
 		D87DEF9C25774F6D006CFE85 /* Document_FinderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document_FinderUITests.swift; sourceTree = "<group>"; };
 		D87DEF9E25774F6D006CFE85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D87DEFB825783F66006CFE85 /* DirectoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryView.swift; sourceTree = "<group>"; };
-		D87DEFBD257840B1006CFE85 /* ApplicationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationModel.swift; sourceTree = "<group>"; };
 		D88B353928B61015000C8910 /* core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = core; path = ../core; sourceTree = "<group>"; };
 		D8B33E862645E445005DA5C2 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		D8B657E726421D5B009DE837 /* LocationMenuItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMenuItems.swift; sourceTree = "<group>"; };
@@ -163,9 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				D8F8BE26258819C80010432F /* DateInstance.swift */,
-				D87DEFBD257840B1006CFE85 /* ApplicationModel.swift */,
 				D8F8BDFF2586C6B90010432F /* RuleInstance.swift */,
-				D829DDB325787C100066A807 /* Settings.swift */,
 				D8F8BE21258819860010432F /* StringInstance.swift */,
 				D8F8BE3125881BC50010432F /* VariableInstance.swift */,
 			);
@@ -490,8 +484,6 @@
 				D87DEFB925783F66006CFE85 /* DirectoryView.swift in Sources */,
 				D83CDCE52620F97F0063C91C /* VariableTextField.swift in Sources */,
 				D8B657E826421D5B009DE837 /* LocationMenuItems.swift in Sources */,
-				D829DDB425787C100066A807 /* Settings.swift in Sources */,
-				D87DEFBE257840B1006CFE85 /* ApplicationModel.swift in Sources */,
 				D81B24112918267E0078D638 /* TaskPageModel.swift in Sources */,
 				D82D012A2657F6D500FD2974 /* TextProvider.swift in Sources */,
 				D82D01242657637700FD2974 /* VariableStringView.swift in Sources */,

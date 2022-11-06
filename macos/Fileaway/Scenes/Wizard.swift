@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import FileawayCore
+
 struct Wizard: Scene {
 
     static let windowID = "wizard-window"

@@ -23,39 +23,36 @@ import Combine
 import Foundation
 import SwiftUI
 
-import FileawayCore
-
-struct ApplicationModelKey: EnvironmentKey {
-    static var defaultValue: ApplicationModel = ApplicationModel()
+public struct ApplicationModelKey: EnvironmentKey {
+    public static var defaultValue: ApplicationModel = ApplicationModel()
 }
 
 extension EnvironmentValues {
 
-    var applicationModel: ApplicationModel {
+    public var applicationModel: ApplicationModel {
         get { self[ApplicationModelKey.self] }
         set { self[ApplicationModelKey.self] = newValue }
     }
 
 }
 
-class ApplicationModel: ObservableObject {
+public class ApplicationModel: ObservableObject {
 
-    fileprivate var settings = Settings()
+    private var settings = Settings()
 
-    @Published var locations: [URL] = []
-    @Published var directories: [DirectoryModel] = []
-    @Published var allRules: [Rule] = []
+    @Published public var locations: [URL] = []
+    @Published public var directories: [DirectoryModel] = []
+    @Published public var allRules: [Rule] = []
 
-    var countObservers: [DirectoryModel.ID: Cancellable] = [:]
+    private var countObservers: [DirectoryModel.ID: Cancellable] = [:]
+    private var countSubscription: Cancellable?
+    private var rulesSubscription: Cancellable?
 
-    var countSubscription: Cancellable?
-    var rulesSubscription: Cancellable?
-
-    init() {
+    public init() {
         self.start()
     }
 
-    func start() {
+    public func start() {
         dispatchPrecondition(condition: .onQueue(.main))
         for url in settings.inboxUrls {
             addDirectoryObserver(type: .inbox, url: url)
@@ -99,7 +96,7 @@ class ApplicationModel: ObservableObject {
         update()
     }
 
-    func directories(type: DirectoryModel.DirectoryType) -> [DirectoryModel] {
+    public func directories(type: DirectoryModel.DirectoryType) -> [DirectoryModel] {
         self.directories.filter { directoryObserver in
             directoryObserver.type == type
         }.sorted { lhs, rhs in
@@ -107,7 +104,7 @@ class ApplicationModel: ObservableObject {
         }
     }
 
-    func addDirectoryObserver(type: DirectoryModel.DirectoryType, url: URL) {
+    public func addDirectoryObserver(type: DirectoryModel.DirectoryType, url: URL) {
         dispatchPrecondition(condition: .onQueue(.main))
         let directoryObserver = DirectoryModel(type: type, url: url)
         directories.append(directoryObserver)
@@ -116,7 +113,7 @@ class ApplicationModel: ObservableObject {
         updateRuleSetSubscription()
     }
 
-    func removeDirectoryObserver(directoryObserver: DirectoryModel) throws {
+    public func removeDirectoryObserver(directoryObserver: DirectoryModel) throws {
         dispatchPrecondition(condition: .onQueue(.main))
         guard directories.contains(directoryObserver) else {
             throw FileawayError.directoryNotFound
@@ -128,7 +125,7 @@ class ApplicationModel: ObservableObject {
         updateRuleSetSubscription()
     }
 
-    func addLocation(type: DirectoryModel.DirectoryType, url: URL) throws {
+    public func addLocation(type: DirectoryModel.DirectoryType, url: URL) throws {
         dispatchPrecondition(condition: .onQueue(.main))
         let _ = try url.securityScopeBookmarkData() // Check that we can access the location.
         addDirectoryObserver(type: type, url: url)
