@@ -20,9 +20,11 @@
 
 import SwiftUI
 
+import FileawayCore
+
 struct RuleDetailView: View {
 
-    @ObservedObject var rule: RuleState
+    @ObservedObject var rule: RuleModel
 
     var body: some View {
         VStack(alignment: .leading) {
