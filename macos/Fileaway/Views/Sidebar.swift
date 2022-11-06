@@ -35,7 +35,7 @@ struct Sidebar: View {
 
     var body: some View {
         List(selection: $section) {
-            Section(header: Text("Inboxes")) {
+            Section("Inboxes") {
                 ForEach(manager.directories(type: .inbox)) { inbox in
                     NavigationLink(value: inbox.url) {
                         Label(inbox.name, systemImage: "tray")
@@ -47,7 +47,7 @@ struct Sidebar: View {
                     }
                 }
             }
-            Section(header: Text("Archives")) {
+            Section("Archives") {
                 ForEach(manager.directories(type: .archive)) { archive in
                     NavigationLink(value: archive.url) {
                         Label(archive.name, systemImage: "archivebox")
