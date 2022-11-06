@@ -25,7 +25,7 @@ import FileawayCore
 
 struct TasksView: View {
 
-    @ObservedObject var tasks: TaskList
+    @ObservedObject var tasks: TasksModel
 
     var body: some View {
         VStack {

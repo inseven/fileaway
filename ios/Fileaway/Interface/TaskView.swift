@@ -111,7 +111,7 @@ class Container<T>: ObservableObject, BackChannelable where T: ObservableObject 
 struct TaskView: View {
 
     @State private var editMode = EditMode.inactive
-    @ObservedObject var tasks: TaskList
+    @ObservedObject var tasks: TasksModel
     @ObservedObject var editingTask: TaskModel
     var originalTask: TaskModel
 
