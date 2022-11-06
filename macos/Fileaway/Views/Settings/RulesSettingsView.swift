@@ -24,14 +24,14 @@ import Interact
 
 struct RulesSettingsView: View {
 
-    @ObservedObject var applicationModel: ApplicationModel
+    @ObservedObject var manager: ApplicationModel
     @State var selection: UUID?
 
     var body: some View {
         HStack {
             VStack {
                 List(selection: $selection) {
-                    ForEach(applicationModel.directories(type: .archive)) { directory in
+                    ForEach(manager.directories(type: .archive)) { directory in
                         HStack {
                             IconView(url: directory.url, size: CGSize(width: 16, height: 16))
                             Text(directory.name)
@@ -40,7 +40,7 @@ struct RulesSettingsView: View {
                 }
             }
             GroupBox {
-                if let ruleSet = applicationModel.directories.first { $0.id == selection }?.ruleSet {
+                if let ruleSet = manager.directories.first { $0.id == selection }?.ruleSet {
                     RulesEditor(ruleSet: ruleSet)
                         .padding(4)
                 } else {

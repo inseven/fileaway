@@ -22,12 +22,12 @@ import SwiftUI
 
 struct LocationsSettingsView: View {
 
-    @ObservedObject var applicationModel: ApplicationModel
+    @ObservedObject var manager: ApplicationModel
 
     var body: some View {
         VStack {
-            LocationsEditor(name: "Inboxes", type: .inbox, applicationModel: applicationModel)
-            LocationsEditor(name: "Archives", type: .archive, applicationModel: applicationModel)
+            LocationsEditor(name: "Inboxes", type: .inbox, manager: manager)
+            LocationsEditor(name: "Archives", type: .archive, manager: manager)
         }
     }
 

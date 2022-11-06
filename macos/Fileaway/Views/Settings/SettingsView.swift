@@ -26,16 +26,16 @@ struct SettingsView: View {
         case general
     }
 
-    @ObservedObject var applicationModel: ApplicationModel
+    @ObservedObject var manager: ApplicationModel
 
     var body: some View {
         TabView {
-            LocationsSettingsView(applicationModel: applicationModel)
+            LocationsSettingsView(manager: manager)
                 .tabItem {
                     Label("Locations", systemImage: "folder")
                 }
                 .tag(Tabs.general)
-            RulesSettingsView(applicationModel: applicationModel)
+            RulesSettingsView(manager: manager)
                 .tabItem {
                     Label("Rules", systemImage: "tray.and.arrow.down")
                 }

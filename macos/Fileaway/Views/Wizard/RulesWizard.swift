@@ -22,6 +22,7 @@ import SwiftUI
 
 struct RulesWizard: View {
 
+    @Environment(\.applicationModel) var manager
     @State var url: URL
     @State var firstResponder: Bool = true
 
@@ -32,7 +33,7 @@ struct RulesWizard: View {
                     NSWorkspace.shared.open(url)
                 }
             HStack {
-                TaskPage(url: url)
+                TaskPage(manager: manager, url: url)
             }
             .frame(width: 300)
         }
