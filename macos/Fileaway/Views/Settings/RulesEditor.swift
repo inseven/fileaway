@@ -44,7 +44,7 @@ struct RulesEditor: View {
         case error(error: Error)
     }
 
-    @ObservedObject var ruleSet: RuleSet
+    @ObservedObject var ruleSet: RulesModel
     @State var selection: Set<RuleModel.ID> = Set()
     @State var sheet: SheetType?
     @State var alert: AlertType?

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D8005AC9258277290001BE2C /* RuleSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8005AC8258277290001BE2C /* RuleSet.swift */; };
 		D8037B122617F8CD00F41971 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = D8037B112617F8CD00F41971 /* Introspect */; };
 		D80F72D826430E3C0010BB38 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F72D726430E3C0010BB38 /* Data.swift */; };
 		D80F72DA264311690010BB38 /* FileawayError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F72D9264311690010BB38 /* FileawayError.swift */; };
@@ -82,7 +81,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D8005AC8258277290001BE2C /* RuleSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleSet.swift; sourceTree = "<group>"; };
 		D80F72D726430E3C0010BB38 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		D80F72D9264311690010BB38 /* FileawayError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileawayError.swift; sourceTree = "<group>"; };
 		D821E938257A959D005D3205 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
@@ -182,7 +180,6 @@
 				D80F72D9264311690010BB38 /* FileawayError.swift */,
 				D87DEFBD257840B1006CFE85 /* Manager.swift */,
 				D8F8BDFF2586C6B90010432F /* RuleInstance.swift */,
-				D8005AC8258277290001BE2C /* RuleSet.swift */,
 				D829DDB325787C100066A807 /* Settings.swift */,
 				D8F8BE21258819860010432F /* StringInstance.swift */,
 				D8F8BE3125881BC50010432F /* VariableInstance.swift */,
@@ -543,7 +540,6 @@
 				D8E7F9EB2599B05300C7409B /* VariableList.swift in Sources */,
 				D82D73D728B4C659006F49F1 /* Wizard.swift in Sources */,
 				D8FC534A257BB7A4008FB609 /* LocationsSettingsView.swift in Sources */,
-				D8005AC9258277290001BE2C /* RuleSet.swift in Sources */,
 				D8D78A922580DD750088890F /* QuickLookPreview.swift in Sources */,
 				D8F8BE0C2588179E0010432F /* CloseKey.swift in Sources */,
 				D87DEFC4257848B7006CFE85 /* URL.swift in Sources */,
