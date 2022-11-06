@@ -57,18 +57,18 @@ public class Manager {
                 return task0.name < task1.name
         }
         return tasks
-    }
+           }
 
-    public func destinationUrl(_ task: Task, variableProvider: VariableProvider, rootUrl: URL? = nil) -> URL {
-        let destination = task.configuration.destination.reduce("") { (result, component) -> String in
-            switch component.type {
-            case .text:
-                return result.appending(component.value)
-            case .variable:
-                guard let value = variableProvider.variable(forKey: component.value) else {
-                    return result
-                }
-                return result.appending(value)
+           public func destinationUrl(_ task: Task, variableProvider: VariableProvider, rootUrl: URL? = nil) -> URL {
+               let destination = task.configuration.destination.reduce("") { (result, component) -> String in
+                   switch component.type {
+                   case .text:
+                       return result.appending(component.value)
+                   case .variable:
+                       guard let value = variableProvider.variable(forKey: component.value) else {
+                           return result
+                       }
+                       return result.appending(value)
             }
         }
         let actualRootUrl = rootUrl ?? self.rootUrl

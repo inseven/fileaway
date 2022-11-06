@@ -67,3 +67,27 @@ extension URL: Identifiable {
     public var id: URL { self }
 
 }
+
+#if os(macOS)
+
+extension URL {
+
+    public init(securityScopeBookmarkData: Data) throws {
+        var isStale = true
+        try self.init(resolvingBookmarkData: securityScopeBookmarkData,
+                      options: .withSecurityScope,
+                      bookmarkDataIsStale: &isStale)
+        if !startAccessingSecurityScopedResource() {
+            throw FileawayError.accessError
+        }
+    }
+
+    public func securityScopeBookmarkData() throws -> Data {
+        try bookmarkData(options: .withSecurityScope,
+                             includingResourceValuesForKeys: nil,
+                             relativeTo: nil)
+    }
+
+}
+
+#endif
