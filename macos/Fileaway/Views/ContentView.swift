@@ -36,7 +36,7 @@ struct ContentView: View {
 
     var body: some View {
         NavigationSplitView {
-            Sidebar(manager: applicationModel, section: $section)
+            Sidebar(applicationModel: applicationModel, section: $section)
         } detail: {
             if let section = section,
                let directory = applicationModel.directories.first(where: { $0.url == section })  {

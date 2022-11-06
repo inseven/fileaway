@@ -32,7 +32,7 @@ struct LocationsEditor: View {
 
     var name: String
     var type: DirectoryModel.DirectoryType
-    @ObservedObject var manager: ApplicationModel
+    @ObservedObject var applicationModel: ApplicationModel
 
     @State var selection: UUID?
     @State var alertType: AlertType?
@@ -40,7 +40,7 @@ struct LocationsEditor: View {
     func addLocation(type: DirectoryModel.DirectoryType, url: URL) {
         dispatchPrecondition(condition: .onQueue(.main))
         do {
-            try manager.addLocation(type: type, url: url)
+            try applicationModel.addLocation(type: type, url: url)
         } catch {
             alertType = .error(error: error)
         }
@@ -50,13 +50,13 @@ struct LocationsEditor: View {
         GroupBox(label: Text(name)) {
             HStack {
                 List(selection: $selection) {
-                    ForEach(manager.directories(type: type)) { directory in
+                    ForEach(applicationModel.directories(type: type)) { directory in
                         HStack {
                             IconView(url: directory.url, size: CGSize(width: 16, height: 16))
                             Text(directory.name)
                         }
                         .contextMenu {
-                            LocationMenuItems(manager: manager, directoryObserver: directory) { error in
+                            LocationMenuItems(applicationModel: applicationModel, directoryObserver: directory) { error in
                                 alertType = .error(error: error)
                             }
                         }
@@ -91,10 +91,10 @@ struct LocationsEditor: View {
                             .frame(width: 80)
                     }
                     Button {
-                        guard let directory = manager.directories.first(where: { $0.id == selection }) else {
+                        guard let directory = applicationModel.directories.first(where: { $0.id == selection }) else {
                             return
                         }
-                        try? manager.removeDirectoryObserver(directoryObserver: directory)
+                        try? applicationModel.removeDirectoryObserver(directoryObserver: directory)
                     } label: {
                         Text("Remove")
                             .frame(width: 80)

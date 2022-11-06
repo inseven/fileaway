@@ -26,21 +26,18 @@ import Interact
 
 class TaskPageModel: ObservableObject {
 
+    @Environment(\.applicationModel) var applicationModel
+
     @Published var filter: String = ""
     @Published var filteredRules: [Rule] = []
     @Published var selection: Rule.ID?
 
-    private var manager: ApplicationModel
     private var cancellables: Set<AnyCancellable> = []
     private var queue = DispatchQueue(label: "queue")
 
-    init(manager: ApplicationModel) {
-        self.manager = manager
-    }
-
     @MainActor func start() {
 
-        manager
+        applicationModel
             .$allRules
             .combineLatest($filter)
             .receive(on: queue)
@@ -73,19 +70,16 @@ struct TaskPage: View {
         case search
     }
 
-    var manager: ApplicationModel
     var url: URL
 
-    @StateObject var model: TaskPageModel
+    @Environment(\.applicationModel) var applicationModel
 
+    @StateObject var model = TaskPageModel()
     @State var activeRule: Rule? = nil
-
     @FocusState private var focus: FocusableField?
 
-    init(manager: ApplicationModel, url: URL) {
-        self.manager = manager
+    init(url: URL) {
         self.url = url
-        _model = StateObject(wrappedValue: TaskPageModel(manager: manager))
     }
 
     func binding(for rule: Rule) -> Binding<Bool> {

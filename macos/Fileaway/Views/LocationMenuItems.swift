@@ -24,7 +24,7 @@ import FileawayCore
 
 struct LocationMenuItems: View {
 
-    var manager: ApplicationModel
+    var applicationModel: ApplicationModel
     var directoryObserver: DirectoryModel
     var onError: (Error) -> Void
 
@@ -35,7 +35,7 @@ struct LocationMenuItems: View {
         Divider()
         Button("Remove") {
             do {
-                try manager.removeDirectoryObserver(directoryObserver: directoryObserver)
+                try applicationModel.removeDirectoryObserver(directoryObserver: directoryObserver)
             } catch {
                 self.onError(error)
             }

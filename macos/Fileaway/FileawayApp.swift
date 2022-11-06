@@ -59,7 +59,7 @@ struct FileawayApp: App {
         Wizard(applicationModel: applicationModel)
 
         SwiftUI.Settings {
-            SettingsView(manager: applicationModel)
+            SettingsView(applicationModel: applicationModel)
         }
 
         About(repository: Legal.repository, copyright: Legal.copyright) {

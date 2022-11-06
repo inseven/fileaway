@@ -26,7 +26,7 @@ struct Sidebar: View {
         case error(error: Error)
     }
 
-    @ObservedObject var manager: ApplicationModel
+    @ObservedObject var applicationModel: ApplicationModel
 
     @Binding var section: URL?
 
@@ -36,24 +36,24 @@ struct Sidebar: View {
     var body: some View {
         List(selection: $section) {
             Section("Inboxes") {
-                ForEach(manager.directories(type: .inbox)) { inbox in
+                ForEach(applicationModel.directories(type: .inbox)) { inbox in
                     NavigationLink(value: inbox.url) {
                         Label(inbox.name, systemImage: "tray")
                     }
                     .contextMenu {
-                        LocationMenuItems(manager: manager, directoryObserver: inbox) { error in
+                        LocationMenuItems(applicationModel: applicationModel, directoryObserver: inbox) { error in
                             alertType = .error(error: error)
                         }
                     }
                 }
             }
             Section("Archives") {
-                ForEach(manager.directories(type: .archive)) { archive in
+                ForEach(applicationModel.directories(type: .archive)) { archive in
                     NavigationLink(value: archive.url) {
                         Label(archive.name, systemImage: "archivebox")
                     }
                     .contextMenu {
-                        LocationMenuItems(manager: manager, directoryObserver: archive) { error in
+                        LocationMenuItems(applicationModel: applicationModel, directoryObserver: archive) { error in
                             alertType = .error(error: error)
                         }
                     }
