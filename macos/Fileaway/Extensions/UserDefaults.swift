@@ -18,29 +18,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-class Settings: ObservableObject {
+extension UserDefaults {
 
-    static let inboxUrls = "inbox-urls"
-    static let archiveUrls = "archive-urls"
-
-    @Published var inboxUrls: [URL] = []
-    @Published var archiveUrls: [URL] = []
-
-    init() {
-        inboxUrls = (try? UserDefaults.standard.securityScopeUrls(forKey: Self.inboxUrls)) ?? []
-        archiveUrls = (try? UserDefaults.standard.securityScopeUrls(forKey: Self.archiveUrls)) ?? []
-    }
-
-    func setInboxUrls(_ urls: [URL]) throws {
-        let bookmarks = try urls.map { try $0.securityScopeBookmarkData() }
-        UserDefaults.standard.set(bookmarks, forKey: Self.inboxUrls);
-    }
-
-    func setArchiveUrls(_ urls: [URL]) throws {
-        let bookmarks = try urls.map { try $0.securityScopeBookmarkData() }
-        UserDefaults.standard.set(bookmarks, forKey: Self.archiveUrls);
+    func securityScopeUrls(forKey defaultName: String) throws -> [URL] {
+        guard let urls = UserDefaults.standard.array(forKey: defaultName) as? [Data] else {
+            return []
+        }
+        return try urls.map { try $0.asSecurityScopeUrl() }
     }
 
 }
