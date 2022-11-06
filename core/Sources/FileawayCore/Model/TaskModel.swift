@@ -22,39 +22,27 @@ import Combine
 import Foundation
 import SwiftUI
 
-import FileawayCore
+public class TaskModel: ObservableObject, Identifiable, BackChannelable, CustomStringConvertible {
 
-extension Task {
-
-    init(_ state: TaskState) {
-        self.init(name: state.name,
-                  configuration: Configuration(variables: state.variables.map { Variable($0) },
-                                               destination: state.destination.map { Component($0) }))
-    }
-
-}
-
-class TaskState: ObservableObject, Identifiable, BackChannelable, CustomStringConvertible {
-
-    enum TaskStateNameFormat {
+    public enum NameFormat {
         case long
         case short
     }
 
-    var id = UUID()
-    @Published var name: String
+    public let id: UUID
 
-    @Published var variables: [VariableModel]
+    @Published public var name: String
+    @Published public var variables: [VariableModel]
+    @Published public var destination: [ComponentModel]
+
     var variablesBackChannel: BackChannel<VariableModel>?
-    
-    @Published var destination: [ComponentModel]
     var destinationBackChannel: BackChannel<ComponentModel>?
 
-    var description: String {
+    public var description: String {
         self.name
     }
 
-    func establishBackChannel() {
+    public func establishBackChannel() {
         variablesBackChannel = BackChannel(value: variables, publisher: $variables).bind {
             self.objectWillChange.send()
             DispatchQueue.main.async {
@@ -68,7 +56,7 @@ class TaskState: ObservableObject, Identifiable, BackChannelable, CustomStringCo
         }
     }
 
-    init(id: UUID, name: String, variables: [VariableModel], destination: [ComponentModel]) {
+    public init(id: UUID, name: String, variables: [VariableModel], destination: [ComponentModel]) {
         self.id = id
         self.name = name
         self.variables = variables
@@ -82,29 +70,31 @@ class TaskState: ObservableObject, Identifiable, BackChannelable, CustomStringCo
         }
     }
 
-    convenience init(_ taskState: TaskState) {
+    convenience public init(_ taskState: TaskModel) {
         self.init(id: UUID(),
                   name: String(taskState.name),
                   variables: taskState.variables.map { VariableModel($0) },
                   destination: taskState.destination.map { ComponentModel($0, variable: nil) })
     }
 
-    init(task: Task) {
-        name = task.name
+    public init(task: Task) {
+        self.id = UUID()
+        self.name = task.name
         let variables = task.configuration.variables.map { VariableModel($0) }
         self.variables = variables
-        destination = task.configuration.destination.map { component in
+        self.destination = task.configuration.destination.map { component in
             ComponentModel(component, variable: variables.first { $0.name == component.value } )
         }
     }
 
-    init(name: String) {
+    public init(name: String) {
+        self.id = UUID()
         self.name = name
         self.variables = []
         self.destination = []
     }
 
-    func remove(variableOffsets: IndexSet) {
+    public func remove(variableOffsets: IndexSet) {
         let remove = variableOffsets.map { variables[$0] }
         for variable in remove {
             destination.removeAll { $0.type == .variable && $0.value == variable.name }
@@ -112,7 +102,7 @@ class TaskState: ObservableObject, Identifiable, BackChannelable, CustomStringCo
         variables.remove(atOffsets: variableOffsets)
     }
 
-    func name(for component: ComponentModel, format: TaskStateNameFormat = .long) -> String {
+    public func name(for component: ComponentModel, format: NameFormat = .long) -> String {
         switch component.type {
         case .text:
             return component.value
@@ -135,12 +125,12 @@ class TaskState: ObservableObject, Identifiable, BackChannelable, CustomStringCo
         }
     }
 
-    func validate() -> Bool {
+    public func validate() -> Bool {
         let names = Set(variables.map { $0.name })
         return names.count == variables.count
     }
 
-    func createVariable() {
+    public func createVariable() {
         let names = Set(variables.map { $0.name })
         var index = 1
         var name = ""
@@ -149,6 +139,16 @@ class TaskState: ObservableObject, Identifiable, BackChannelable, CustomStringCo
             index = index + 1
         } while names.contains(name)
         self.variables.append(VariableModel(name: name, type: .string))
+    }
+
+}
+
+extension Task {
+
+    public init(_ state: TaskModel) {
+        self.init(name: state.name,
+                  configuration: Configuration(variables: state.variables.map { Variable($0) },
+                                               destination: state.destination.map { Component($0) }))
     }
 
 }

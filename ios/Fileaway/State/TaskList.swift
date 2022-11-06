@@ -25,8 +25,8 @@ import FileawayCore
 
 class TaskList: ObservableObject, BackChannelable {
 
-    @Published var tasks: [TaskState]
-    var tasksBackChannel: BackChannel<TaskState>?
+    @Published var tasks: [TaskModel]
+    var tasksBackChannel: BackChannel<TaskModel>?
 
     init() {
         self.tasks = []
@@ -37,7 +37,7 @@ class TaskList: ObservableObject, BackChannelable {
     }
 
     init(_ tasks: [Task]) {
-        self.tasks = tasks.map { TaskState(task: $0) }
+        self.tasks = tasks.map { TaskModel(task: $0) }
     }
 
     func establishBackChannel() {
@@ -46,7 +46,7 @@ class TaskList: ObservableObject, BackChannelable {
         }
     }
 
-    func validate(task: TaskState) -> Bool {
+    func validate(task: TaskModel) -> Bool {
         return self.tasks.filter { $0.id != task.id && $0.name == task.name }.count < 1
     }
 
@@ -67,7 +67,7 @@ class TaskList: ObservableObject, BackChannelable {
         }
     }
 
-    func update(task: TaskState) {
+    func update(task: TaskModel) {
         guard
             let index = self.tasks.firstIndex(where: { $0.id == task.id }),
             let range = Range(NSRange(location: index, length: 1))else {
@@ -85,7 +85,7 @@ class TaskList: ObservableObject, BackChannelable {
             name = "Task \(index)"
             index = index + 1
         } while names.contains(name)
-        let task = TaskState(id: UUID(),
+        let task = TaskModel(id: UUID(),
                              name: name,
                              variables: [VariableModel(name: "Date", type: .date(hasDay: true))],
                              destination: [

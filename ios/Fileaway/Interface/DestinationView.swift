@@ -20,9 +20,11 @@
 
 import SwiftUI
 
+import FileawayCore
+
 struct DestinationView: View {
 
-    @ObservedObject var task: TaskState
+    @ObservedObject var task: TaskModel
 
     var body: some View {
         HStack {

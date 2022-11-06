@@ -25,7 +25,7 @@ import FileawayCore
 struct ComponentItem: View {
 
     @Environment(\.editMode) var editMode
-    @ObservedObject var task: TaskState
+    @ObservedObject var task: TaskModel
     @State var component: ComponentModel
 
     var body: some View {

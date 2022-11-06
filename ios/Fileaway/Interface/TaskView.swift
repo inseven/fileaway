@@ -30,7 +30,7 @@ struct VariableRow : View {
     @Environment(\.editMode) var editMode
     @State var showSheet: Bool = false
 
-    @ObservedObject var task: TaskState
+    @ObservedObject var task: TaskModel
     @ObservedObject var variable: VariableModel
 
     var body: some View {
@@ -54,7 +54,7 @@ struct VariableRow : View {
 struct DestinationFooter: View {
 
     @Environment(\.editMode) var editMode
-    @ObservedObject var task: TaskState
+    @ObservedObject var task: TaskModel
 
     var body: some View {
         VStack {
@@ -112,8 +112,8 @@ struct TaskView: View {
 
     @State private var editMode = EditMode.inactive
     @ObservedObject var tasks: TaskList
-    @ObservedObject var editingTask: TaskState
-    var originalTask: TaskState
+    @ObservedObject var editingTask: TaskModel
+    var originalTask: TaskModel
 
     func edit() {
         self.editingTask.establishBackChannel()

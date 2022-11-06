@@ -21,6 +21,8 @@
 import Foundation
 import SwiftUI
 
+import FileawayCore
+
 struct TasksView: View {
 
     @ObservedObject var tasks: TaskList
@@ -30,7 +32,7 @@ struct TasksView: View {
             List {
                 Section() {
                     ForEach(tasks.tasks) { task in
-                        NavigationLink(destination: TaskView(tasks: self.tasks, editingTask: TaskState(task), originalTask: task)) {
+                        NavigationLink(destination: TaskView(tasks: self.tasks, editingTask: TaskModel(task), originalTask: task)) {
                             Text(task.name)
                         }
                     }
