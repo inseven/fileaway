@@ -22,6 +22,8 @@ import SwiftUI
 
 import Interact
 
+import FileawayCore
+
 struct ContentView: View {
 
     @ObservedObject var manager: Manager

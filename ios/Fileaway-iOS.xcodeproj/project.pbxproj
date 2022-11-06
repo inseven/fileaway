@@ -35,6 +35,7 @@
 		D89941012145E6AE00097F3D /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89941002145E6AE00097F3D /* StorageManager.swift */; };
 		D8A871D22916D56400B2932A /* ComponentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A871D12916D56400B2932A /* ComponentItem.swift */; };
 		D8A871D52917756F00B2932A /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A871D42917756F00B2932A /* URL.swift */; };
+		D8A871D72917F82C00B2932A /* Interact in Frameworks */ = {isa = PBXBuildFile; productRef = D8A871D62917F82C00B2932A /* Interact */; };
 		D8CAE3EE249D3AD70047CA36 /* ErrorText.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CAE3ED249D3AD70047CA36 /* ErrorText.swift */; };
 		D8CCB8062143672700AC445F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCB8052143672700AC445F /* AppDelegate.swift */; };
 		D8CCB80B2143672700AC445F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8CCB8092143672700AC445F /* Main.storyboard */; };
@@ -128,6 +129,7 @@
 			files = (
 				D88B353D28B61247000C8910 /* FileawayCore in Frameworks */,
 				D8FB857F2916D2430024F885 /* Diligence in Frameworks */,
+				D8A871D72917F82C00B2932A /* Interact in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +296,7 @@
 			packageProductDependencies = (
 				D88B353C28B61247000C8910 /* FileawayCore */,
 				D8FB857E2916D2430024F885 /* Diligence */,
+				D8A871D62917F82C00B2932A /* Interact */,
 			);
 			productName = Fileaway;
 			productReference = D8CCB8022143672700AC445F /* Fileaway.app */;
@@ -806,6 +809,10 @@
 		D88B353C28B61247000C8910 /* FileawayCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FileawayCore;
+		};
+		D8A871D62917F82C00B2932A /* Interact */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Interact;
 		};
 		D8FB857E2916D2430024F885 /* Diligence */ = {
 			isa = XCSwiftPackageProductDependency;

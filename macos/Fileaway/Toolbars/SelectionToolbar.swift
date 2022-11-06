@@ -22,6 +22,8 @@ import SwiftUI
 
 import Interact
 
+import FileawayCore
+
 struct SelectionToolbar: CustomizableToolbarContent {
 
     @Environment(\.manager) var manager
