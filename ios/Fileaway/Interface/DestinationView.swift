@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import FileawayCore
+
 struct DestinationView: View {
 
     @ObservedObject var task: TaskModel

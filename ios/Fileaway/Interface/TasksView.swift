@@ -21,6 +21,8 @@
 import Foundation
 import SwiftUI
 
+import FileawayCore
+
 struct TasksView: View {
 
     @ObservedObject var tasks: TaskList
