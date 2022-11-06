@@ -22,30 +22,37 @@ import Foundation
 
 public class DateFinder {
 
+    public struct Instance {
+
+        public let date: Date
+        public let range: NSRange
+
+    }
+
     static var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter
     }()
 
-    public static func dateInstances(from string: String) -> Array<DateInstance> {
+    public static func dateInstances(from string: String) -> Array<Instance> {
         let types: NSTextCheckingResult.CheckingType = [.date, .phoneNumber]
         let detector = try! NSDataDetector(types: types.rawValue)
         let matches = detector.matches(in: string, options: [], range: NSRange(location: 0, length: string.count))
-        let dateInstances: [[DateInstance]] = matches.compactMap { textCheckingResult in
+        let dateInstances: [[Instance]] = matches.compactMap { textCheckingResult in
             guard let date = textCheckingResult.date else {
                 return nil
             }
-            var results = [DateInstance(date: date, range: textCheckingResult.range)]
+            var results = [Instance(date: date, range: textCheckingResult.range)]
             if textCheckingResult.duration > 0 {
                 let end = date.addingTimeInterval(textCheckingResult.duration)
-                results.append(DateInstance(date: end, range: textCheckingResult.range))
+                results.append(Instance(date: end, range: textCheckingResult.range))
             }
             return results
         }
         let dates = dateInstances
             .flatMap { $0 }
-            .compactMap { DateInstance(date: Calendar.current.startOfDay(for: $0.date), range: $0.range) }
+            .compactMap { Instance(date: Calendar.current.startOfDay(for: $0.date), range: $0.range) }
         var uniqueDates: Set<Date> = []
         return dates.filter { dateInstance in
             guard !uniqueDates.contains(dateInstance.date) else {
