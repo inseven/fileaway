@@ -58,34 +58,20 @@ class StorageManager {
     }
 
     static func setRootUrl(_ url: URL) throws {
-#if targetEnvironment(macCatalyst)
-        try url.prepareForSecureAccess()
-        let bookmarkData = try url.bookmarkData(options: .withSecurityScope,
-                                                includingResourceValuesForKeys: nil,
-                                                relativeTo: nil)
-        UserDefaults.standard.set(bookmarkData, forKey: "root");
-#else
         try url.prepareForSecureAccess()
         let bookmarkData = try url.bookmarkData(options: .suitableForBookmarkFile, includingResourceValuesForKeys: nil, relativeTo: nil)
         guard let bookmarkUrl = bookmarkUrl() else {
             throw StorageManagerError.pathError("Unable to get bookmark url")
         }
         try URL.writeBookmarkData(bookmarkData, to: bookmarkUrl)
-#endif
     }
 
     static func rootUrl() throws -> URL {
-#if targetEnvironment(macCatalyst)
-        guard let bookmarkData = UserDefaults.standard.data(forKey: "root") else {
-            throw StorageManagerError.accessError("No data!")
-        }
-#else
         guard let bookmarkUrl = bookmarkUrl() else {
             throw StorageManagerError.pathError("Unable to get bookmark url")
         }
 
         let bookmarkData = try URL.bookmarkData(withContentsOf: bookmarkUrl)
-#endif
         var isStale = true
         let rootUrl = try URL(resolvingBookmarkData: bookmarkData, bookmarkDataIsStale: &isStale)
         try rootUrl.prepareForSecureAccess()
