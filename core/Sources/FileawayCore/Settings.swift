@@ -20,27 +20,34 @@
 
 import SwiftUI
 
-class Settings: ObservableObject {
+public class Settings: ObservableObject {
 
-    static let inboxUrls = "inbox-urls"
-    static let archiveUrls = "archive-urls"
+    private static let inboxUrls = "inbox-urls"
+    private static let archiveUrls = "archive-urls"
 
-    @Published var inboxUrls: [URL] = []
-    @Published var archiveUrls: [URL] = []
+    // TODO: These are never updated during the run of the app.
+    @Published public var inboxUrls: [URL] = []
+    @Published public var archiveUrls: [URL] = []
 
-    init() {
+    public init() {
+#if os(macOS)
         inboxUrls = (try? UserDefaults.standard.securityScopeUrls(forKey: Self.inboxUrls)) ?? []
         archiveUrls = (try? UserDefaults.standard.securityScopeUrls(forKey: Self.archiveUrls)) ?? []
+#endif
     }
 
-    func setInboxUrls(_ urls: [URL]) throws {
+    public func setInboxUrls(_ urls: [URL]) throws {
+#if os(macOS)
         let bookmarks = try urls.map { try $0.securityScopeBookmarkData() }
         UserDefaults.standard.set(bookmarks, forKey: Self.inboxUrls);
+#endif
     }
 
-    func setArchiveUrls(_ urls: [URL]) throws {
+    public func setArchiveUrls(_ urls: [URL]) throws {
+#if os(macOS)
         let bookmarks = try urls.map { try $0.securityScopeBookmarkData() }
         UserDefaults.standard.set(bookmarks, forKey: Self.archiveUrls);
+#endif
     }
 
 }
