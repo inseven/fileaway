@@ -22,6 +22,8 @@ import SwiftUI
 
 import Interact
 
+import FileawayCore
+
 struct RulesSettingsView: View {
 
     @ObservedObject var manager: ApplicationModel
