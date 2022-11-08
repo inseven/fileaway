@@ -20,19 +20,26 @@
 
 import SwiftUI
 
-import FileawayCore
-
-struct LocationMenuItems: View {
+public struct LocationMenuItems: View {
 
     var manager: ApplicationModel
     var directoryObserver: DirectoryModel
     var onError: (Error) -> Void
 
-    var body: some View {
+    public init(manager: ApplicationModel, directoryObserver: DirectoryModel, onError: @escaping (Error) -> Void) {
+        self.manager = manager
+        self.directoryObserver = directoryObserver
+        self.onError = onError
+    }
+
+    public var body: some View {
+#if os(macOS)
+        // TODO: Move these macOS specific commands into a separate file
         Button("Reveal in Finder") {
             NSWorkspace.shared.activateFileViewerSelecting([directoryObserver.url])
         }
         Divider()
+#endif
         Button("Remove") {
             do {
                 try manager.removeDirectoryObserver(directoryObserver: directoryObserver)
