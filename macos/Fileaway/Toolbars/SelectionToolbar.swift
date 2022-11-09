@@ -29,12 +29,12 @@ struct SelectionToolbar: CustomizableToolbarContent {
     @Environment(\.applicationModel) var manager
     @Environment(\.openWindow) var openWindow
 
-    @ObservedObject var selectionModel: SelectionModel
+    @ObservedObject var directoryViewModel: DirectoryViewModel
 
     var body: some CustomizableToolbarContent {
         ToolbarItem(id: "wizard") {
             Button {
-                for file in selectionModel.selection {
+                for file in directoryViewModel.selection {
                     openWindow(id: Wizard.windowID, value: file.url)
                 }
             } label: {
@@ -42,11 +42,11 @@ struct SelectionToolbar: CustomizableToolbarContent {
             }
             .help("Move the selected items using the Rules Wizard")
             .keyboardShortcut(KeyboardShortcut(.return, modifiers: .command))
-            .disabled(!selectionModel.canMove)
+            .disabled(!directoryViewModel.canShowRulesWizard)
         }
         ToolbarItem(id: "preview") {
             Button {
-                guard let file = selectionModel.selection.first else {
+                guard let file = directoryViewModel.selection.first else {
                     return
                 }
                 QuickLookCoordinator.shared.show(url: file.url)
@@ -55,17 +55,17 @@ struct SelectionToolbar: CustomizableToolbarContent {
             }
             .help("Show items with Quick Look")
             .keyboardShortcut(.space, modifiers: [])
-            .disabled(!selectionModel.canPreview)
+            .disabled(!directoryViewModel.canPreview)
         }
         ToolbarItem(id: "delete") {
             Button {
-                try? selectionModel.trash()
+                try? directoryViewModel.trash()
             } label: {
                 Label("Delete", systemImage: "trash")
             }
             .help("Move the selected items to the Bin")
             .keyboardShortcut(.delete)
-            .disabled(!selectionModel.canTrash)
+            .disabled(!directoryViewModel.canTrash)
         }
     }
 

@@ -56,7 +56,7 @@ struct LocationsEditor: View {
                             Text(directory.name)
                         }
                         .contextMenu {
-                            LocationMenuItems(manager: manager, directoryObserver: directory) { error in
+                            LocationMenuItems(url: directory.url) { error in
                                 alertType = .error(error: error)
                             }
                         }
@@ -94,7 +94,7 @@ struct LocationsEditor: View {
                         guard let directory = manager.directories.first(where: { $0.id == selection }) else {
                             return
                         }
-                        try? manager.removeDirectoryObserver(directoryObserver: directory)
+                        try? manager.removeLocation(url: directory.url)
                     } label: {
                         Text("Remove")
                             .frame(width: 80)

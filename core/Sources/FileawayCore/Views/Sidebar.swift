@@ -34,39 +34,37 @@ public struct Sidebar: View {
         case error(error: Error)
     }
 
-    @ObservedObject var manager: ApplicationModel
-
-    @Binding var section: URL?
+    @Environment(\.applicationModel) var applicationModel
+    @ObservedObject var sceneModel: SceneModel
 
     @State var firstResponder: Bool = false
     @State var alertType: AlertType?
 
-    public init(manager: ApplicationModel, section: Binding<URL?>) {
-        self.manager = manager
-        _section = section
+    public init(sceneModel: SceneModel) {
+        self.sceneModel = sceneModel
     }
 
     public var body: some View {
-        List(selection: $section) {
+        List(selection: $sceneModel.section) {
             Section("Inboxes") {
-                ForEach(manager.directories(type: .inbox)) { inbox in
+                ForEach(sceneModel.inboxes) { inbox in
                     NavigationLink(value: inbox.url) {
                         Label(inbox.name, systemImage: "tray")
                     }
                     .contextMenu {
-                        LocationMenuItems(manager: manager, directoryObserver: inbox) { error in
+                        LocationMenuItems(url: inbox.url) { error in
                             alertType = .error(error: error)
                         }
                     }
                 }
             }
             Section("Archives") {
-                ForEach(manager.directories(type: .archive)) { archive in
+                ForEach(sceneModel.archives) { archive in
                     NavigationLink(value: archive.url) {
                         Label(archive.name, systemImage: "archivebox")
                     }
                     .contextMenu {
-                        LocationMenuItems(manager: manager, directoryObserver: archive) { error in
+                        LocationMenuItems(url: archive.url) { error in
                             alertType = .error(error: error)
                         }
                     }

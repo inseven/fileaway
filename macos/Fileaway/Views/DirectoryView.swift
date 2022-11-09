@@ -30,18 +30,15 @@ struct DirectoryView: View {
 
     @Environment(\.openWindow) var openWindow
 
-    @ObservedObject var directoryObserver: DirectoryModel
+    @ObservedObject var directoryViewModel: DirectoryViewModel
 
-    @StateObject var selectionModel: SelectionModel
-
-    init(directoryObserver: DirectoryModel) {
-        self.directoryObserver = directoryObserver
-        _selectionModel = StateObject(wrappedValue: SelectionModel(directory: directoryObserver))
+    init(directoryViewModel: DirectoryViewModel) {
+        self.directoryViewModel = directoryViewModel
     }
 
     var body: some View {
-        List(selection: $selectionModel.selection) {
-            ForEach(directoryObserver.searchResults, id: \.self) { file in
+        List(selection: $directoryViewModel.selection) {
+            ForEach(directoryViewModel.files, id: \.self) { file in
                 FileRow(file: file)
             }
         }
@@ -85,16 +82,17 @@ struct DirectoryView: View {
         // Enter to open.
         // Drag-and-drop.
         // .onCutCommand(perform: manager.cut)
-        .overlay(directoryObserver.searchResults.isEmpty ? Placeholder("No Items") : nil)
-        .searchable(text: $directoryObserver.filter)
-        .navigationTitle(directoryObserver.name)
-        .focusedValue(\.selectionModel, selectionModel)
+        .overlay(directoryViewModel.files.isEmpty ? Placeholder("No Items") : nil)
+        .searchable(text: $directoryViewModel.filter)
+        .navigationTitle(directoryViewModel.name)
+        .focusedValue(\.directoryViewModel, directoryViewModel)
         .onAppear {
-            selectionModel.start()
+            directoryViewModel.start()
         }
         .onDisappear {
-            selectionModel.stop()
+            directoryViewModel.stop()
         }
+        .id(directoryViewModel.url)
     }
 
 }

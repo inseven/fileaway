@@ -20,15 +20,15 @@
 
 import SwiftUI
 
-public struct FocusedSelectionModelKey : FocusedValueKey {
-    public typealias Value = SelectionModel
+public struct FocusedDirectoryViewModelKey : FocusedValueKey {
+    public typealias Value = DirectoryViewModel
 }
 
 extension FocusedValues {
 
-    public var selectionModel: FocusedSelectionModelKey.Value? {
-        get { self[FocusedSelectionModelKey.self] }
-        set { self[FocusedSelectionModelKey.self] = newValue }
+    public var directoryViewModel: FocusedDirectoryViewModelKey.Value? {
+        get { self[FocusedDirectoryViewModelKey.self] }
+        set { self[FocusedDirectoryViewModelKey.self] = newValue }
     }
 
 }

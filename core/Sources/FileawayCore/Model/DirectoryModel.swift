@@ -44,7 +44,6 @@ public class DirectoryModel: ObservableObject, Identifiable, Hashable {
 
     @Published private var files: Set<URL> = Set()
     @Published public var searchResults: [FileInfo] = []
-    @Published public var filter = ""
 
     private let extensions = ["pdf"]
     private var fileProvider: DirectoryMonitor?
@@ -74,9 +73,8 @@ public class DirectoryModel: ObservableObject, Identifiable, Hashable {
         self.fileProvider?.start()
 
         $files
-            .combineLatest($filter)
             .receive(on: syncQueue)
-            .map { (files, filter) in
+            .map { files in
                 return files
                     .map { url in
                         if let fileInfo = self.cache.object(forKey: url as NSURL) {
@@ -85,14 +83,6 @@ public class DirectoryModel: ObservableObject, Identifiable, Hashable {
                         let fileInfo = FileInfo(url: url)
                         self.cache.setObject(fileInfo, forKey: url as NSURL)
                         return fileInfo
-                    }
-                    .filter { filter.isEmpty || $0.name.localizedSearchMatches(string: filter) }
-                    .sorted { fileInfo1, fileInfo2 -> Bool in
-                        let dateComparison = fileInfo1.date.date.compare(fileInfo2.date.date)
-                        if dateComparison != .orderedSame {
-                            return dateComparison == .orderedDescending
-                        }
-                        return fileInfo1.name.compare(fileInfo2.name) == .orderedAscending
                     }
             }
             .receive(on: DispatchQueue.main)
