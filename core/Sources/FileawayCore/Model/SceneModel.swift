@@ -27,7 +27,6 @@ public class SceneModel: ObservableObject {
 
     @Published public var section: URL?
 
-    // TODO: Not sure if these actually need to be public?
     @Published public var inboxes: [DirectoryViewModel] = []
     @Published public var archives: [DirectoryViewModel] = []
     @Published public var directoryViewModel: DirectoryViewModel? = nil
