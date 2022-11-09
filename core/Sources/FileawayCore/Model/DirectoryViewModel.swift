@@ -86,8 +86,6 @@ public class DirectoryViewModel: ObservableObject, Identifiable {
             }
             .store(in: &cancelables)
 
-        // TODO: Selection....
-
         // Remove missing files from the selection.
         $files
             .receive(on: DispatchQueue.main)
