@@ -55,11 +55,11 @@ struct LocationsEditor: View {
                             IconView(url: directory.url, size: CGSize(width: 16, height: 16))
                             Text(directory.name)
                         }
-                        .contextMenu {
-                            LocationMenuItems(manager: manager, directoryObserver: directory) { error in
-                                alertType = .error(error: error)
-                            }
-                        }
+//                        .contextMenu {
+//                            LocationMenuItems(manager: manager, directoryObserver: directory) { error in
+//                                alertType = .error(error: error)
+//                            }
+//                        }
                     }
                 }
                 .onDrop(of: [.fileURL], isTargeted: Binding.constant(false)) { itemProviders in

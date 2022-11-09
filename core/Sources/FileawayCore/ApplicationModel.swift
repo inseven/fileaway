@@ -43,7 +43,6 @@ public class ApplicationModel: ObservableObject {
 
     private var settings = Settings()
 
-    @Published public var locations: [URL] = []
     @Published public var directories: [DirectoryModel] = []
     @Published public var allRules: [Rule] = []
 

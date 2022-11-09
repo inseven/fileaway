@@ -27,10 +27,10 @@ public class SelectionModel: ObservableObject {
 
     @Published public var selection: Set<FileInfo> = []
 
-    private let directory: DirectoryModel?
+    private let directory: SceneDirectoryModel?
     private var cancellables: Set<AnyCancellable> = []
 
-    public init(directory: DirectoryModel? = nil) {
+    public init(directory: SceneDirectoryModel? = nil) {
         self.directory = directory
     }
 
@@ -42,7 +42,7 @@ public class SelectionModel: ObservableObject {
 
         // Remove missing files from the selection.
         directory
-            .$searchResults
+            .$files
             .receive(on: DispatchQueue.main)
             .map { files in
                 return Set(files.filter { self.selection.contains($0) })

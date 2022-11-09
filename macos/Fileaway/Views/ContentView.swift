@@ -18,6 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Combine
 import SwiftUI
 
 import Interact
@@ -27,19 +28,19 @@ import FileawayCore
 struct ContentView: View {
 
     @ObservedObject var applicationModel: ApplicationModel
-    @State var section: URL?
-    @FocusedValue(\.selectionModel) var selectionModel
+    @StateObject var sceneModel: SceneModel
+    @FocusedValue(\.selectionModel) var selectionModel  // TODO: This needs to move into the directory observer.
 
     init(applicationModel: ApplicationModel) {
         self.applicationModel = applicationModel
+        _sceneModel = StateObject(wrappedValue: SceneModel(applicationModel: applicationModel))
     }
 
     var body: some View {
         NavigationSplitView {
-            Sidebar(manager: applicationModel, section: $section)
+            Sidebar(sceneModel: sceneModel)
         } detail: {
-            if let section = section,
-               let directory = applicationModel.directories.first(where: { $0.url == section })  {
+            if let directory = sceneModel.directory {
                 DirectoryView(directoryObserver: directory)
             } else {
                 Placeholder("No Directory Selected")
@@ -48,6 +49,12 @@ struct ContentView: View {
         }
         .toolbar(id: "main") {
             SelectionToolbar(selectionModel: selectionModel ?? SelectionModel())
+        }
+        .onAppear {
+            sceneModel.start()
+        }
+        .onDisappear {
+            sceneModel.stop()
         }
     }
 }

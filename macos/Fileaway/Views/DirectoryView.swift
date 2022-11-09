@@ -30,18 +30,19 @@ struct DirectoryView: View {
 
     @Environment(\.openWindow) var openWindow
 
-    @ObservedObject var directoryObserver: DirectoryModel
+    @ObservedObject var directoryObserver: SceneDirectoryModel
 
+    // TODO: Move this into the SceneDirectoryModel
     @StateObject var selectionModel: SelectionModel
 
-    init(directoryObserver: DirectoryModel) {
+    init(directoryObserver: SceneDirectoryModel) {
         self.directoryObserver = directoryObserver
         _selectionModel = StateObject(wrappedValue: SelectionModel(directory: directoryObserver))
     }
 
     var body: some View {
         List(selection: $selectionModel.selection) {
-            ForEach(directoryObserver.searchResults, id: \.self) { file in
+            ForEach(directoryObserver.files, id: \.self) { file in
                 FileRow(file: file)
             }
         }
@@ -85,16 +86,19 @@ struct DirectoryView: View {
         // Enter to open.
         // Drag-and-drop.
         // .onCutCommand(perform: manager.cut)
-        .overlay(directoryObserver.searchResults.isEmpty ? Placeholder("No Items") : nil)
+        .overlay(directoryObserver.files.isEmpty ? Placeholder("No Items") : nil)
         .searchable(text: $directoryObserver.filter)
         .navigationTitle(directoryObserver.name)
         .focusedValue(\.selectionModel, selectionModel)
         .onAppear {
+            directoryObserver.start()
             selectionModel.start()
         }
         .onDisappear {
+            directoryObserver.stop()
             selectionModel.stop()
         }
+        .id(directoryObserver.url)
     }
 
 }

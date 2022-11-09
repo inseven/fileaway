@@ -23,10 +23,10 @@ import SwiftUI
 public struct LocationMenuItems: View {
 
     var manager: ApplicationModel
-    var directoryObserver: DirectoryModel
+    var directoryObserver: SceneDirectoryModel
     var onError: (Error) -> Void
 
-    public init(manager: ApplicationModel, directoryObserver: DirectoryModel, onError: @escaping (Error) -> Void) {
+    public init(manager: ApplicationModel, directoryObserver: SceneDirectoryModel, onError: @escaping (Error) -> Void) {
         self.manager = manager
         self.directoryObserver = directoryObserver
         self.onError = onError
@@ -41,11 +41,12 @@ public struct LocationMenuItems: View {
         Divider()
 #endif
         Button("Remove") {
-            do {
-                try manager.removeDirectoryObserver(directoryObserver: directoryObserver)
-            } catch {
-                self.onError(error)
-            }
+            // TODO: Remove by URL
+//            do {
+//                try manager.removeDirectoryObserver(directoryObserver: directoryObserver)
+//            } catch {
+//                self.onError(error)
+//            }
         }
     }
 
