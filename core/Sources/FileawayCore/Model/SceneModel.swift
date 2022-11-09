@@ -28,9 +28,9 @@ public class SceneModel: ObservableObject {
     @Published public var section: URL?
 
     // TODO: Not sure if these actually need to be public?
-    @Published public var inboxes: [SceneDirectoryModel] = []
-    @Published public var archives: [SceneDirectoryModel] = []
-    @Published public var directory: SceneDirectoryModel? = nil
+    @Published public var inboxes: [DirectoryViewModel] = []
+    @Published public var archives: [DirectoryViewModel] = []
+    @Published public var directory: DirectoryViewModel? = nil
 
     private var applicationModel: ApplicationModel
     private var cancelables: Set<AnyCancellable> = []
@@ -47,7 +47,7 @@ public class SceneModel: ObservableObject {
             .$directories
             .map { directories in
                 return directories.map {
-                    let model = SceneDirectoryModel(directoryModel: $0)
+                    let model = DirectoryViewModel(directoryModel: $0)
                     model.start()
                     return model
                 }

@@ -23,7 +23,7 @@ import SwiftUI
 
 import Interact
 
-public class SceneDirectoryModel: ObservableObject, Identifiable {
+public class DirectoryViewModel: ObservableObject, Identifiable {
 
     public var id: URL { self.url }
 
@@ -32,7 +32,7 @@ public class SceneDirectoryModel: ObservableObject, Identifiable {
 
     private var directoryModel: DirectoryModel
     private var cancelables: Set<AnyCancellable> = []
-    private let syncQueue = DispatchQueue.init(label: "SceneDirectoryModel.syncQueue")
+    private let syncQueue = DispatchQueue.init(label: "DirectoryViewModel.syncQueue")
 
     public var type: DirectoryModel.DirectoryType {
         return directoryModel.type

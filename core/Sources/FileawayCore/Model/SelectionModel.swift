@@ -27,10 +27,10 @@ public class SelectionModel: ObservableObject {
 
     @Published public var selection: Set<FileInfo> = []
 
-    private let directory: SceneDirectoryModel?
+    private let directory: DirectoryViewModel?
     private var cancellables: Set<AnyCancellable> = []
 
-    public init(directory: SceneDirectoryModel? = nil) {
+    public init(directory: DirectoryViewModel? = nil) {
         self.directory = directory
     }
 

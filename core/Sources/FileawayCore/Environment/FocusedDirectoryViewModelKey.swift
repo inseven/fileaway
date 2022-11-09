@@ -20,34 +20,15 @@
 
 import SwiftUI
 
-public struct LocationMenuItems: View {
+public struct FocusedDirectoryViewModelKey : FocusedValueKey {
+    public typealias Value = DirectoryViewModel
+}
 
-    var manager: ApplicationModel
-    var directoryObserver: DirectoryViewModel
-    var onError: (Error) -> Void
+extension FocusedValues {
 
-    public init(manager: ApplicationModel, directoryObserver: DirectoryViewModel, onError: @escaping (Error) -> Void) {
-        self.manager = manager
-        self.directoryObserver = directoryObserver
-        self.onError = onError
-    }
-
-    public var body: some View {
-#if os(macOS)
-        // TODO: Move these macOS specific commands into a separate file
-        Button("Reveal in Finder") {
-            NSWorkspace.shared.activateFileViewerSelecting([directoryObserver.url])
-        }
-        Divider()
-#endif
-        Button("Remove") {
-            // TODO: Remove by URL
-//            do {
-//                try manager.removeDirectoryObserver(directoryObserver: directoryObserver)
-//            } catch {
-//                self.onError(error)
-//            }
-        }
+    public var directoryViewModel: FocusedDirectoryViewModelKey.Value? {
+        get { self[FocusedDirectoryViewModelKey.self] }
+        set { self[FocusedDirectoryViewModelKey.self] = newValue }
     }
 
 }

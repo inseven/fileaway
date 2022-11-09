@@ -30,12 +30,12 @@ struct DirectoryView: View {
 
     @Environment(\.openWindow) var openWindow
 
-    @ObservedObject var directoryObserver: SceneDirectoryModel
+    @ObservedObject var directoryObserver: DirectoryViewModel
 
     // TODO: Move this into the SceneDirectoryModel
     @StateObject var selectionModel: SelectionModel
 
-    init(directoryObserver: SceneDirectoryModel) {
+    init(directoryObserver: DirectoryViewModel) {
         self.directoryObserver = directoryObserver
         _selectionModel = StateObject(wrappedValue: SelectionModel(directory: directoryObserver))
     }
