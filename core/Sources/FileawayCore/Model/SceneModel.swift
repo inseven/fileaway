@@ -38,7 +38,6 @@ public class SceneModel: ObservableObject {
         self.applicationModel = applicationModel
     }
 
-    // TODO: Sort by name?
     @MainActor public func start() {
 
         // Construct the directory observers.
@@ -53,12 +52,12 @@ public class SceneModel: ObservableObject {
             }
             .receive(on: DispatchQueue.main)
             .sink { models in
-                // TODO: Diff the new models and stop the old ones.
                 self.inboxes = models.filter { $0.type == .inbox }
                 self.archives = models.filter { $0.type == .archive }
             }
             .store(in: &cancelables)
 
+        // Select the correct directory when the section changes.
         $inboxes
             .combineLatest($archives, $section)
             .map { (inboxes, archives, section) in
