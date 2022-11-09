@@ -23,7 +23,7 @@ import Foundation
 
 import FileawayCore
 
-class Settings: ObservableObject {
+class LegacySettings: ObservableObject {
 
     @Published var destination: URL? {
         didSet {

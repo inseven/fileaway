@@ -48,7 +48,7 @@ extension View {
 struct ActionsView: View {
 
     weak var delegate: ActionsViewDelegate?
-    @ObservedObject var settings: Settings
+    @ObservedObject var settings: LegacySettings
     @State private var activeSheet: ActionSheet?
 
     func sheet(type: ActionSheet) -> some View {

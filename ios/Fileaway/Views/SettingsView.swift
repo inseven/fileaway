@@ -69,7 +69,7 @@ struct SettingsView: View {
     }
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @ObservedObject var settings: Settings
+    @ObservedObject var settings: LegacySettings
 
     @State private var sheet: SheetType? = nil
 
