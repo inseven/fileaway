@@ -51,11 +51,11 @@ public struct Sidebar: View {
                     NavigationLink(value: inbox.url) {
                         Label(inbox.name, systemImage: "tray")
                     }
-//                    .contextMenu {
-//                        LocationMenuItems(manager: applicationModel, directoryObserver: inbox) { error in
-//                            alertType = .error(error: error)
-//                        }
-//                    }
+                    .contextMenu {
+                        LocationMenuItems(directoryViewModel: inbox) { error in
+                            alertType = .error(error: error)
+                        }
+                    }
                 }
             }
             Section("Archives") {
@@ -63,11 +63,11 @@ public struct Sidebar: View {
                     NavigationLink(value: archive.url) {
                         Label(archive.name, systemImage: "archivebox")
                     }
-//                    .contextMenu {
-//                        LocationMenuItems(manager: applicationModel, directoryObserver: archive) { error in
-//                            alertType = .error(error: error)
-//                        }
-//                    }
+                    .contextMenu {
+                        LocationMenuItems(directoryViewModel: archive) { error in
+                            alertType = .error(error: error)
+                        }
+                    }
                 }
             }
         }

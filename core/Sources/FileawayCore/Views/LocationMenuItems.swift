@@ -22,13 +22,13 @@ import SwiftUI
 
 public struct LocationMenuItems: View {
 
-    var manager: ApplicationModel
-    var directoryObserver: DirectoryViewModel
+    @Environment(\.applicationModel) var applicationModel
+
+    var directoryViewModel: DirectoryViewModel
     var onError: (Error) -> Void
 
-    public init(manager: ApplicationModel, directoryObserver: DirectoryViewModel, onError: @escaping (Error) -> Void) {
-        self.manager = manager
-        self.directoryObserver = directoryObserver
+    public init(directoryViewModel: DirectoryViewModel, onError: @escaping (Error) -> Void) {
+        self.directoryViewModel = directoryViewModel
         self.onError = onError
     }
 
@@ -36,14 +36,14 @@ public struct LocationMenuItems: View {
 #if os(macOS)
         // TODO: Move these macOS specific commands into a separate file
         Button("Reveal in Finder") {
-            NSWorkspace.shared.activateFileViewerSelecting([directoryObserver.url])
+            NSWorkspace.shared.activateFileViewerSelecting([directoryViewModel.url])
         }
         Divider()
 #endif
         Button("Remove") {
             // TODO: Remove by URL
 //            do {
-//                try manager.removeDirectoryObserver(directoryObserver: directoryObserver)
+//                try applicationModel.removeDirectoryObserver(directoryViewModel: directoryViewModel)
 //            } catch {
 //                self.onError(error)
 //            }
