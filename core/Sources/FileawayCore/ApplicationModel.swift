@@ -109,6 +109,23 @@ public class ApplicationModel: ObservableObject {
         }
     }
 
+    public func addLocation(type: DirectoryModel.DirectoryType, url: URL) throws {
+#if os(macOS)
+        // TODO: Support iOS
+        dispatchPrecondition(condition: .onQueue(.main))
+        let _ = try url.securityScopeBookmarkData() // Check that we can access the location.
+        addDirectoryObserver(type: type, url: url)
+        try save()
+#endif
+    }
+
+    @MainActor public func removeLocation(url: URL) throws {
+        guard let directoryModel = directories.filter({ $0.url == url }).first else {
+            return
+        }
+        try removeDirectoryObserver(directoryObserver: directoryModel)
+    }
+
     private func addDirectoryObserver(type: DirectoryModel.DirectoryType, url: URL) {
         dispatchPrecondition(condition: .onQueue(.main))
         let directoryObserver = DirectoryModel(type: type, url: url)
@@ -118,8 +135,7 @@ public class ApplicationModel: ObservableObject {
         updateRuleSetSubscription()
     }
 
-    // TODO: If addDirectoryObserver doesn't need to be public, neither should this be.
-    public func removeDirectoryObserver(directoryObserver: DirectoryModel) throws {
+    private func removeDirectoryObserver(directoryObserver: DirectoryModel) throws {
         dispatchPrecondition(condition: .onQueue(.main))
         guard directories.contains(directoryObserver) else {
             throw FileawayError.directoryNotFound
@@ -129,16 +145,6 @@ public class ApplicationModel: ObservableObject {
         try save()
         updateCountSubscription()
         updateRuleSetSubscription()
-    }
-
-    public func addLocation(type: DirectoryModel.DirectoryType, url: URL) throws {
-#if os(macOS)
-        // TODO: Support iOS
-        dispatchPrecondition(condition: .onQueue(.main))
-        let _ = try url.securityScopeBookmarkData() // Check that we can access the location.
-        addDirectoryObserver(type: type, url: url)
-        try save()
-#endif
     }
 
     private func save() throws {

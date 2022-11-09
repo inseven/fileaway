@@ -41,12 +41,11 @@ public struct LocationMenuItems: View {
         Divider()
 #endif
         Button("Remove") {
-            // TODO: Remove by URL
-//            do {
-//                try applicationModel.removeDirectoryObserver(directoryViewModel: directoryViewModel)
-//            } catch {
-//                self.onError(error)
-//            }
+            do {
+                try applicationModel.removeLocation(url: directoryViewModel.url)
+            } catch {
+                self.onError(error)
+            }
         }
     }
 
