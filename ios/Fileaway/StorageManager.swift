@@ -38,12 +38,14 @@ class StorageManager {
     }
 
     static func configurationUrl() throws -> URL {
-        return try rootUrl().appendingPathComponent("file-actions.json")
+        return try rootUrl().appendingPathComponent("Rules.fileaway")
     }
 
     static func setRootUrl(_ url: URL) throws {
         try url.prepareForSecureAccess()
-        let bookmarkData = try url.bookmarkData(options: .suitableForBookmarkFile, includingResourceValuesForKeys: nil, relativeTo: nil)
+        let bookmarkData = try url.bookmarkData(options: .suitableForBookmarkFile,
+                                                includingResourceValuesForKeys: nil,
+                                                relativeTo: nil)
         guard let bookmarkUrl = bookmarkUrl() else {
             throw FileawayError.bookmarkError
         }

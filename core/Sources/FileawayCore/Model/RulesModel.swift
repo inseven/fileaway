@@ -44,8 +44,15 @@ public class RulesModel: ObservableObject {
 
     public init(url: URL) {
         self.rootUrl = url
-        self.url = url.appendingPathComponent("file-actions.json")
-        let rules = (try? Self.load(url: self.url)) ?? []
+        self.url = url.appendingPathComponent("Rules.fileaway")
+        let rules: [Rule]
+        do {
+            rules = try Self.load(url: self.url)
+        } catch {
+            // TODO: Propagate this error!
+            print("Failed to load rules with error \(error).")
+            rules = []
+        }
         self.rules = rules
         self.mutableRules = rules.map { rule in
             RuleModel(rule, rootUrl: url)
