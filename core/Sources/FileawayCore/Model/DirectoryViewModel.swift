@@ -27,30 +27,42 @@ public class DirectoryViewModel: ObservableObject, Identifiable {
 
     public var id: URL { self.url }
 
+    @Environment(\.openURL) var openURL
+    @Environment(\.openWindow) var openWindow
+
     @Published public var files: [FileInfo] = []
     @Published public var filter: String = ""
+    @Published public var selection: Set<FileInfo> = []
 
-    private var directoryModel: DirectoryModel
+    private var directoryModel: DirectoryModel? = nil
     private var cancelables: Set<AnyCancellable> = []
     private let syncQueue = DispatchQueue.init(label: "DirectoryViewModel.syncQueue")
 
     public var type: DirectoryModel.DirectoryType {
-        return directoryModel.type
+        return directoryModel?.type ?? .inbox
     }
 
     public var url: URL {
-        return directoryModel.url
+        return directoryModel?.url ?? URL(string: "foo:unknown")!
     }
 
     public var name: String {
-        return directoryModel.name
+        return directoryModel?.name ?? "Nothing to see here"
     }
 
-    public init(directoryModel: DirectoryModel) {
+    private var selectedUrls: [URL] {
+        selection.map { $0.url }
+    }
+
+    public init(directoryModel: DirectoryModel? = nil) {
         self.directoryModel = directoryModel
     }
 
     @MainActor public func start() {
+
+        guard let directoryModel = directoryModel else {
+            return
+        }
 
         // Filter the files.
         directoryModel
@@ -74,10 +86,70 @@ public class DirectoryViewModel: ObservableObject, Identifiable {
             }
             .store(in: &cancelables)
 
+        // TODO: Selection....
+
+        // Remove missing files from the selection.
+        $files
+            .receive(on: DispatchQueue.main)
+            .map { files in
+                return Set(files.filter { self.selection.contains($0) })
+            }
+            .sink { selection in
+                guard self.selection != selection else {
+                    return
+                }
+                self.selection = selection
+            }
+            .store(in: &cancelables)
+
+
     }
 
     @MainActor public func stop() {
         cancelables.removeAll()
+    }
+
+    public var canPreview: Bool {
+        return !selection.isEmpty
+    }
+
+#if os(macOS)
+    public func preview() {
+        guard let url = selection.first?.url else {
+            return
+        }
+        QuickLookCoordinator.shared.show(url: url)
+    }
+#endif
+
+    public var canCut: Bool {
+        return !selection.isEmpty
+    }
+
+    public func cut() -> [NSItemProvider] {
+        selectedUrls.map { NSItemProvider(object: $0 as NSURL) }
+    }
+
+    @MainActor public var canTrash: Bool {
+        return !selection.isEmpty
+    }
+
+    @MainActor public func trash() throws {
+        try selectedUrls.forEach { try FileManager.default.trashItem(at: $0, resultingItemURL: nil) }
+    }
+
+    @MainActor public var canShowRulesWizard: Bool {
+        return !selection.isEmpty
+    }
+
+    @MainActor public var canOpen: Bool {
+        return !selection.isEmpty
+    }
+
+    @MainActor public func open() {
+        for url in selectedUrls {
+            openURL(url)
+        }
     }
 
 }

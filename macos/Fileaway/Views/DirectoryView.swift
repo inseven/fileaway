@@ -32,16 +32,12 @@ struct DirectoryView: View {
 
     @ObservedObject var directoryViewModel: DirectoryViewModel
 
-    // TODO: Move this into the SceneDirectoryModel
-    @StateObject var selectionModel: SelectionModel
-
     init(directoryViewModel: DirectoryViewModel) {
         self.directoryViewModel = directoryViewModel
-        _selectionModel = StateObject(wrappedValue: SelectionModel(directory: directoryViewModel))
     }
 
     var body: some View {
-        List(selection: $selectionModel.selection) {
+        List(selection: $directoryViewModel.selection) {
             ForEach(directoryViewModel.files, id: \.self) { file in
                 FileRow(file: file)
             }
@@ -89,15 +85,12 @@ struct DirectoryView: View {
         .overlay(directoryViewModel.files.isEmpty ? Placeholder("No Items") : nil)
         .searchable(text: $directoryViewModel.filter)
         .navigationTitle(directoryViewModel.name)
-        .focusedValue(\.selectionModel, selectionModel)
         .focusedValue(\.directoryViewModel, directoryViewModel)
         .onAppear {
             directoryViewModel.start()
-            selectionModel.start()
         }
         .onDisappear {
             directoryViewModel.stop()
-            selectionModel.stop()
         }
         .id(directoryViewModel.url)
     }

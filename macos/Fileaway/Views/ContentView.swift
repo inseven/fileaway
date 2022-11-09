@@ -29,7 +29,7 @@ struct ContentView: View {
 
     @ObservedObject var applicationModel: ApplicationModel
     @StateObject var sceneModel: SceneModel
-    @FocusedValue(\.selectionModel) var selectionModel  // TODO: This needs to move into the directory observer.
+    @FocusedValue(\.directoryViewModel) var directoryViewModel
 
     init(applicationModel: ApplicationModel) {
         self.applicationModel = applicationModel
@@ -48,7 +48,8 @@ struct ContentView: View {
             }
         }
         .toolbar(id: "main") {
-            SelectionToolbar(selectionModel: selectionModel ?? SelectionModel())
+            // TODO: This nil handling should be done inside the scene model?
+            SelectionToolbar(directoryViewModel: directoryViewModel ?? DirectoryViewModel(directoryModel: nil))
         }
         .onAppear {
             sceneModel.start()
