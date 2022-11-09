@@ -55,11 +55,11 @@ struct LocationsEditor: View {
                             IconView(url: directory.url, size: CGSize(width: 16, height: 16))
                             Text(directory.name)
                         }
-//                        .contextMenu {
-//                            LocationMenuItems(manager: manager, directoryObserver: directory) { error in
-//                                alertType = .error(error: error)
-//                            }
-//                        }
+                        .contextMenu {
+                            LocationMenuItems(url: directory.url) { error in
+                                alertType = .error(error: error)
+                            }
+                        }
                     }
                 }
                 .onDrop(of: [.fileURL], isTargeted: Binding.constant(false)) { itemProviders in
@@ -94,7 +94,7 @@ struct LocationsEditor: View {
                         guard let directory = manager.directories.first(where: { $0.id == selection }) else {
                             return
                         }
-                        try? manager.removeDirectoryObserver(directoryObserver: directory)
+                        try? manager.removeLocation(url: directory.url)
                     } label: {
                         Text("Remove")
                             .frame(width: 80)

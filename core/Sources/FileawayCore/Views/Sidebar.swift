@@ -52,7 +52,7 @@ public struct Sidebar: View {
                         Label(inbox.name, systemImage: "tray")
                     }
                     .contextMenu {
-                        LocationMenuItems(directoryViewModel: inbox) { error in
+                        LocationMenuItems(url: inbox.url) { error in
                             alertType = .error(error: error)
                         }
                     }
@@ -64,7 +64,7 @@ public struct Sidebar: View {
                         Label(archive.name, systemImage: "archivebox")
                     }
                     .contextMenu {
-                        LocationMenuItems(directoryViewModel: archive) { error in
+                        LocationMenuItems(url: archive.url) { error in
                             alertType = .error(error: error)
                         }
                     }

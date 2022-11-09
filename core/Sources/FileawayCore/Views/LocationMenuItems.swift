@@ -24,11 +24,11 @@ public struct LocationMenuItems: View {
 
     @Environment(\.applicationModel) var applicationModel
 
-    var directoryViewModel: DirectoryViewModel
+    var url: URL
     var onError: (Error) -> Void
 
-    public init(directoryViewModel: DirectoryViewModel, onError: @escaping (Error) -> Void) {
-        self.directoryViewModel = directoryViewModel
+    public init(url: URL, onError: @escaping (Error) -> Void) {
+        self.url = url
         self.onError = onError
     }
 
@@ -36,13 +36,13 @@ public struct LocationMenuItems: View {
 #if os(macOS)
         // TODO: Move these macOS specific commands into a separate file
         Button("Reveal in Finder") {
-            NSWorkspace.shared.activateFileViewerSelecting([directoryViewModel.url])
+            NSWorkspace.shared.activateFileViewerSelecting([url])
         }
         Divider()
 #endif
         Button("Remove") {
             do {
-                try applicationModel.removeLocation(url: directoryViewModel.url)
+                try applicationModel.removeLocation(url: url)
             } catch {
                 self.onError(error)
             }
