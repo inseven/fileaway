@@ -20,11 +20,17 @@
 
 import SwiftUI
 
-import FileawayCore
+public struct Sidebar: View {
 
-struct Sidebar: View {
+    enum AlertType: Identifiable {
 
-    enum AlertType {
+        public var id: String {
+            switch self {
+            case .error(let error):
+                return "error-\(String(describing: error))"
+            }
+        }
+
         case error(error: Error)
     }
 
@@ -35,7 +41,12 @@ struct Sidebar: View {
     @State var firstResponder: Bool = false
     @State var alertType: AlertType?
 
-    var body: some View {
+    public init(manager: ApplicationModel, section: Binding<URL?>) {
+        self.manager = manager
+        _section = section
+    }
+
+    public var body: some View {
         List(selection: $section) {
             Section("Inboxes") {
                 ForEach(manager.directories(type: .inbox)) { inbox in
@@ -70,15 +81,4 @@ struct Sidebar: View {
         }
     }
     
-}
-
-extension Sidebar.AlertType: Identifiable {
-
-    public var id: String {
-        switch self {
-        case .error(let error):
-            return "error-\(String(describing: error))"
-        }
-    }
-
 }
