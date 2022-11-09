@@ -18,44 +18,44 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import AppKit
 import Combine
 import Foundation
 import SwiftUI
 
-import FileawayCore
+#if os(macOS)
+import AppKit
+#endif
 
-struct ApplicationModelKey: EnvironmentKey {
-    static var defaultValue: ApplicationModel = ApplicationModel()
+public struct ApplicationModelKey: EnvironmentKey {
+    public static var defaultValue: ApplicationModel = ApplicationModel()
 }
 
 extension EnvironmentValues {
 
-    var applicationModel: ApplicationModel {
+    public var applicationModel: ApplicationModel {
         get { self[ApplicationModelKey.self] }
         set { self[ApplicationModelKey.self] = newValue }
     }
 
 }
 
-class ApplicationModel: ObservableObject {
+public class ApplicationModel: ObservableObject {
 
-    fileprivate var settings = Settings()
+    private var settings = Settings()
 
-    @Published var locations: [URL] = []
-    @Published var directories: [DirectoryModel] = []
-    @Published var allRules: [Rule] = []
+    @Published public var locations: [URL] = []
+    @Published public var directories: [DirectoryModel] = []
+    @Published public var allRules: [Rule] = []
 
     var countObservers: [DirectoryModel.ID: Cancellable] = [:]
-
     var countSubscription: Cancellable?
     var rulesSubscription: Cancellable?
 
-    init() {
+    public init() {
         self.start()
     }
 
-    func start() {
+    public func start() {
         dispatchPrecondition(condition: .onQueue(.main))
         for url in settings.inboxUrls {
             addDirectoryObserver(type: .inbox, url: url)
@@ -65,7 +65,9 @@ class ApplicationModel: ObservableObject {
         }
     }
 
-    func updateCountSubscription() {
+    private func updateCountSubscription() {
+#if os(macOS)
+        // TODO: Icon badge for iOS
         dispatchPrecondition(condition: .onQueue(.main))
         let update: () -> Void = {
             dispatchPrecondition(condition: .onQueue(.main))
@@ -84,9 +86,10 @@ class ApplicationModel: ObservableObject {
             update()
         }
         update()
+#endif
     }
 
-    func updateRuleSetSubscription() {
+    private func updateRuleSetSubscription() {
         dispatchPrecondition(condition: .onQueue(.main))
         let update: () -> Void = {
             dispatchPrecondition(condition: .onQueue(.main))
@@ -99,7 +102,7 @@ class ApplicationModel: ObservableObject {
         update()
     }
 
-    func directories(type: DirectoryModel.DirectoryType) -> [DirectoryModel] {
+    public func directories(type: DirectoryModel.DirectoryType) -> [DirectoryModel] {
         self.directories.filter { directoryObserver in
             directoryObserver.type == type
         }.sorted { lhs, rhs in
@@ -107,7 +110,7 @@ class ApplicationModel: ObservableObject {
         }
     }
 
-    func addDirectoryObserver(type: DirectoryModel.DirectoryType, url: URL) {
+    private func addDirectoryObserver(type: DirectoryModel.DirectoryType, url: URL) {
         dispatchPrecondition(condition: .onQueue(.main))
         let directoryObserver = DirectoryModel(type: type, url: url)
         directories.append(directoryObserver)
@@ -116,7 +119,8 @@ class ApplicationModel: ObservableObject {
         updateRuleSetSubscription()
     }
 
-    func removeDirectoryObserver(directoryObserver: DirectoryModel) throws {
+    // TODO: If addDirectoryObserver doesn't need to be public, neither should this be.
+    public func removeDirectoryObserver(directoryObserver: DirectoryModel) throws {
         dispatchPrecondition(condition: .onQueue(.main))
         guard directories.contains(directoryObserver) else {
             throw FileawayError.directoryNotFound
@@ -128,14 +132,17 @@ class ApplicationModel: ObservableObject {
         updateRuleSetSubscription()
     }
 
-    func addLocation(type: DirectoryModel.DirectoryType, url: URL) throws {
+    public func addLocation(type: DirectoryModel.DirectoryType, url: URL) throws {
+#if os(macOS)
+        // TODO: Support iOS
         dispatchPrecondition(condition: .onQueue(.main))
         let _ = try url.securityScopeBookmarkData() // Check that we can access the location.
         addDirectoryObserver(type: type, url: url)
         try save()
+#endif
     }
 
-    func save() throws {
+    private func save() throws {
         try settings.setInboxUrls(self.directories(type: .inbox).map { $0.url })
         try settings.setArchiveUrls(self.directories(type: .archive).map { $0.url })
     }

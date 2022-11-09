@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import FileawayCore
+
 struct SettingsView: View {
 
     private enum Tabs: Hashable {

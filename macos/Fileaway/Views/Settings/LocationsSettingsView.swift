@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import FileawayCore
+
 struct LocationsSettingsView: View {
 
     @ObservedObject var manager: ApplicationModel
