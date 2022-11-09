@@ -30,19 +30,19 @@ struct DirectoryView: View {
 
     @Environment(\.openWindow) var openWindow
 
-    @ObservedObject var directoryObserver: DirectoryViewModel
+    @ObservedObject var directoryViewModel: DirectoryViewModel
 
     // TODO: Move this into the SceneDirectoryModel
     @StateObject var selectionModel: SelectionModel
 
-    init(directoryObserver: DirectoryViewModel) {
-        self.directoryObserver = directoryObserver
-        _selectionModel = StateObject(wrappedValue: SelectionModel(directory: directoryObserver))
+    init(directoryViewModel: DirectoryViewModel) {
+        self.directoryViewModel = directoryViewModel
+        _selectionModel = StateObject(wrappedValue: SelectionModel(directory: directoryViewModel))
     }
 
     var body: some View {
         List(selection: $selectionModel.selection) {
-            ForEach(directoryObserver.files, id: \.self) { file in
+            ForEach(directoryViewModel.files, id: \.self) { file in
                 FileRow(file: file)
             }
         }
@@ -86,19 +86,20 @@ struct DirectoryView: View {
         // Enter to open.
         // Drag-and-drop.
         // .onCutCommand(perform: manager.cut)
-        .overlay(directoryObserver.files.isEmpty ? Placeholder("No Items") : nil)
-        .searchable(text: $directoryObserver.filter)
-        .navigationTitle(directoryObserver.name)
+        .overlay(directoryViewModel.files.isEmpty ? Placeholder("No Items") : nil)
+        .searchable(text: $directoryViewModel.filter)
+        .navigationTitle(directoryViewModel.name)
         .focusedValue(\.selectionModel, selectionModel)
+        .focusedValue(\.directoryViewModel, directoryViewModel)
         .onAppear {
-            directoryObserver.start()
+            directoryViewModel.start()
             selectionModel.start()
         }
         .onDisappear {
-            directoryObserver.stop()
+            directoryViewModel.stop()
             selectionModel.stop()
         }
-        .id(directoryObserver.url)
+        .id(directoryViewModel.url)
     }
 
 }

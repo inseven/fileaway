@@ -30,7 +30,7 @@ public class SceneModel: ObservableObject {
     // TODO: Not sure if these actually need to be public?
     @Published public var inboxes: [DirectoryViewModel] = []
     @Published public var archives: [DirectoryViewModel] = []
-    @Published public var directory: DirectoryViewModel? = nil
+    @Published public var directoryViewModel: DirectoryViewModel? = nil
 
     private var applicationModel: ApplicationModel
     private var cancelables: Set<AnyCancellable> = []
@@ -66,8 +66,8 @@ public class SceneModel: ObservableObject {
                 return (inboxes + archives).first { $0.url == section }
             }
             .receive(on: DispatchQueue.main)
-            .sink { directory in
-                self.directory = directory
+            .sink { directoryViewModel in
+                self.directoryViewModel = directoryViewModel
             }
             .store(in: &cancelables)
 

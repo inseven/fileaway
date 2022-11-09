@@ -40,8 +40,8 @@ struct ContentView: View {
         NavigationSplitView {
             Sidebar(sceneModel: sceneModel)
         } detail: {
-            if let directory = sceneModel.directory {
-                DirectoryView(directoryObserver: directory)
+            if let directoryViewModel = sceneModel.directoryViewModel {
+                DirectoryView(directoryViewModel: directoryViewModel)
             } else {
                 Placeholder("No Directory Selected")
                     .searchable()
