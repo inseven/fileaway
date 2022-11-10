@@ -22,9 +22,9 @@ import Foundation
 
 public struct Task {
     public let name: String
-    public let configuration: Configuration
-    public init(name: String, configuration: Configuration) {
+    public let rule: Rule
+    public init(name: String, rule: Rule) {
         self.name = name
-        self.configuration = configuration
+        self.rule = rule
     }
 }

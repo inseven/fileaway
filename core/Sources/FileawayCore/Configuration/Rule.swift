@@ -20,7 +20,7 @@
 
 import Foundation
 
-public struct Configuration: Codable {
+public struct Rule: Codable {
 
     enum CodingKeys: CodingKey {
         case id
