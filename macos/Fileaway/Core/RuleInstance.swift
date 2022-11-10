@@ -33,7 +33,7 @@ class RuleInstance: ObservableObject {
 
     init(rule: Rule) {
         self.rule = rule
-        let variables = rule.configuration.variables.map { $0.instance() }
+        let variables = rule.variables.map { $0.instance() }
         self.variables = variables
         self.subscriptions = variables.map { $0 as! Observable }.map { $0.observe { self.objectWillChange.send() } }
     }
@@ -46,7 +46,7 @@ class RuleInstance: ObservableObject {
     }
 
     func destination(for url: URL) -> URL {
-        let destination = rule.configuration.destination.reduce("") { (result, component) -> String in
+        let destination = rule.destination.reduce("") { (result, component) -> String in
             switch component.type {
             case .text:
                 return result.appending(component.value)

@@ -139,13 +139,24 @@ public class RulesModel: ObservableObject {
     
 }
 
+extension Configuration {
+
+    public init(_ ruleModel: RuleModel) {
+        self.init(id: ruleModel.id,
+                  name: ruleModel.name,
+                  variables: ruleModel.variables.map { Variable($0) },
+                  destination: ruleModel.destination.map { Component($0) })
+    }
+
+}
+
 extension ConfigurationList {
 
     init(rules: [RuleModel]) {
         items = rules
-            .map { Rule($0) }
-            .reduce(into: [:]) { result, rule in
-                result[rule.name] = rule.configuration
+            .map { Configuration($0) }
+            .reduce(into: [:]) { result, configuration in
+                result[configuration.name] = configuration
             }
     }
 

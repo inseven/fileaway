@@ -22,24 +22,26 @@ import Foundation
 
 public class Rule: Identifiable, Hashable {
 
-    public var id: UUID {
-        return configuration.id
-    }
-
+    public let id: UUID
     public let rootUrl: URL
     public let name: String
-    public let configuration: Configuration
+    public let variables: [Variable]
+    public let destination: [Component]
 
     public init(id: UUID, rootUrl: URL, name: String) {
         self.rootUrl = rootUrl
+        self.id = UUID()
         self.name = name
-        self.configuration = Configuration()
+        self.variables = []
+        self.destination = []
     }
 
     public init(rootUrl: URL, name: String, configuration: Configuration) {
         self.rootUrl = rootUrl
+        self.id = configuration.id
         self.name = name
-        self.configuration = configuration
+        self.variables = configuration.variables
+        self.destination = configuration.destination
     }
 
     public static func == (lhs: Rule, rhs: Rule) -> Bool {

@@ -68,9 +68,9 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
     public init(_ rule: Rule) {
         id = rule.id
         name = rule.name
-        let variables = rule.configuration.variables.map { VariableModel($0) }
+        let variables = rule.variables.map { VariableModel($0) }
         self.variables = variables
-        destination = rule.configuration.destination.map { component in
+        destination = rule.destination.map { component in
             ComponentModel(component, variable: variables.first { $0.name == component.value } )
         }
         self.rootUrl = rule.rootUrl
