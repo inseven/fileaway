@@ -21,9 +21,11 @@
 import Combine
 import SwiftUI
 
+import Interact
+
 import FileawayCore
 
-class TaskPageModel: ObservableObject {
+class TaskPageModel: ObservableObject, Runnable {
 
     @Published var filter: String = ""
     @Published var filteredRules: [Rule] = []

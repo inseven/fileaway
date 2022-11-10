@@ -23,7 +23,7 @@ import SwiftUI
 
 import Interact
 
-public class SceneModel: ObservableObject {
+public class SceneModel: ObservableObject, Runnable {
 
     @Published public var section: URL?
 

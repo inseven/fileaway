@@ -23,7 +23,7 @@ import SwiftUI
 
 import Interact
 
-public class DirectoryViewModel: ObservableObject, Identifiable {
+public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
 
     public var id: URL { self.url }
 
