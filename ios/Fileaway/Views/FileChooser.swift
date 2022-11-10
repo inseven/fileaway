@@ -18,50 +18,47 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Foundation
 import MobileCoreServices
 import SwiftUI
-import UIKit
+
+import FilePicker
+
+import FileawayCore
+
 import UniformTypeIdentifiers
 
-struct FilePickerSheet: UIViewControllerRepresentable {
-    @Environment(\.presentationMode) var presentationMode
-    var documentTypes: [UTType]
+struct FileChooser: View {
+
+    let placeholder: String
+    let types: [UTType]
     @Binding var url: URL?
 
-    class Coordinator: NSObject, UINavigationControllerDelegate, UIDocumentPickerDelegate {
-        var parent: FilePickerSheet
+    init(_ placeholder: String, types: [UTType], url: Binding<URL?>) {
+        self.placeholder = placeholder
+        self.types = types
+        _url = url
+    }
 
-        init(_ parent: FilePickerSheet) {
-            self.parent = parent
-        }
-
-        func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+    var body: some View {
+        FilePicker(types: types, allowMultiple: false, asCopy: false) { urls in
             guard let url = urls.first else {
                 return
             }
             do {
                 try url.prepareForSecureAccess()
+                self.url = url
             } catch {
-                print("Failed to grant access")
-                return
+                print("Failed to prepare URL for secure access with error \(error).")
             }
-            parent.url = url
+        } label: {
+            if let url = url {
+                Text(url.displayName)
+                    .lineLimit(1)
+            } else {
+                Text(placeholder)
+            }
         }
-
-    }
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-
-    func makeUIViewController(context: UIViewControllerRepresentableContext<FilePickerSheet>) -> UIDocumentPickerViewController {
-        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: documentTypes)
-        documentPicker.delegate = context.coordinator
-        return documentPicker
-    }
-
-    func updateUIViewController(_ uiViewController: UIDocumentPickerViewController, context: UIViewControllerRepresentableContext<FilePickerSheet>) {
-
     }
 
 }

@@ -37,8 +37,8 @@ struct MergeDocumentsView: View {
             VStack {
                 Form {
                     Section(footer: Text(self.error != nil ? String(describing: error!) : "").foregroundColor(.red)) {
-                        FilePicker(placeholder: "Select file...", documentTypes: [.pdf], url: $url1).lineLimit(1)
-                        FilePicker(placeholder: "Select file...", documentTypes: [.pdf], url: $url2).lineLimit(1)
+                        FileChooser("Select file...", types: [.pdf], url: $url1)
+                        FileChooser("Select file...", types: [.pdf], url: $url2)
                     }
                 }
             }
