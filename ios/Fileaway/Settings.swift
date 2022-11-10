@@ -55,13 +55,13 @@ class LegacySettings: ObservableObject {
             tasks.establishBackChannel()
             taskObserver = tasks.onChange {
                 let tasks = self.tasks.tasks.map { Task($0) }
-                let configuration = tasks.reduce(into: [:]) { result, task in
-                    result[task.name] = task.configuration
+                let rules = tasks.map { task in
+                    return task.rule
                 }
                 do {
                     let encoder = JSONEncoder()
                     encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
-                    let data = try encoder.encode(configuration)
+                    let data = try encoder.encode(RuleList(rules: rules))
                     let configurationUrl = try StorageManager.configurationUrl()
                     try data.write(to: configurationUrl)
                     // TODO: Remove this hack to reload the manager.

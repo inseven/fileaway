@@ -35,7 +35,7 @@ public class RulesModel: ObservableObject {
         self.url = url.appendingPathComponent("Rules.fileaway")
         if FileManager.default.fileExists(atPath: self.url.path) {
             do {
-                self.mutableRules = try ConfigurationList(url: self.url).models(for: self.rootUrl)
+                self.mutableRules = try RuleList(url: self.url).models(for: self.rootUrl)
             } catch {
                 // TODO: Propagate this error!
                 print("Failed to load rules with error \(error).")
@@ -125,7 +125,7 @@ public class RulesModel: ObservableObject {
 
     private func save() throws {
         dispatchPrecondition(condition: .onQueue(.main))
-        let configurationList = ConfigurationList(rules: mutableRules)
+        let configurationList = RuleList(ruleModels: mutableRules)
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
         let data = try encoder.encode(configurationList)
@@ -134,7 +134,7 @@ public class RulesModel: ObservableObject {
     
 }
 
-extension Configuration {
+extension Rule {
 
     public init(_ ruleModel: RuleModel) {
         self.init(id: ruleModel.id,
@@ -145,15 +145,15 @@ extension Configuration {
 
 }
 
-extension ConfigurationList {
+extension RuleList {
 
-    init(rules: [RuleModel]) {
-        items = rules
-            .map { Configuration($0) }
+    init(ruleModels: [RuleModel]) {
+        rules = ruleModels
+            .map { Rule($0) }
     }
 
     func models(for rootUrl: URL) -> [RuleModel] {
-        return items
+        return rules
             .map { configuration -> RuleModel in
                 let variables = configuration.variables.map { VariableModel($0) }
                 return RuleModel(id: configuration.id,

@@ -59,14 +59,14 @@ class EditableSection: VariableProvider {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let variable = task.configuration.variables[indexPath.row]
+        let variable = task.rule.variables[indexPath.row]
         switch (variable.type) {
         case .string:
             let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.textCell.rawValue, for: indexPath)
             guard let textCell = cell as? TextTableViewCell else {
                 return cell
             }
-            textCell.variable = task.configuration.variables[indexPath.row]
+            textCell.variable = task.rule.variables[indexPath.row]
             textCell.textField.text = values[variable.name] as? String
             textCell.delegate = self
             return textCell
@@ -75,7 +75,7 @@ class EditableSection: VariableProvider {
             guard let dateCell = cell as? DateTableViewCell else {
                 return cell
             }
-            dateCell.variable = task.configuration.variables[indexPath.row]
+            dateCell.variable = task.rule.variables[indexPath.row]
             dateCell.datePicker.date = (values[variable.name] as? Date) ?? Date()
             dateCell.delegate = self
             return dateCell
@@ -84,7 +84,7 @@ class EditableSection: VariableProvider {
     }
 
     var count: Int {
-        return task.configuration.variables.count
+        return task.rule.variables.count
     }
 
 }

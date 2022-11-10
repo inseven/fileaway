@@ -80,9 +80,9 @@ public class TaskModel: ObservableObject, Identifiable, BackChannelable, CustomS
     public init(task: Task) {
         self.id = UUID()
         self.name = task.name
-        let variables = task.configuration.variables.map { VariableModel($0) }
+        let variables = task.rule.variables.map { VariableModel($0) }
         self.variables = variables
-        self.destination = task.configuration.destination.map { component in
+        self.destination = task.rule.destination.map { component in
             ComponentModel(component, variable: variables.first { $0.name == component.value } )
         }
     }
@@ -147,10 +147,10 @@ extension Task {
 
     public init(_ taskModel: TaskModel) {
         self.init(name: taskModel.name,
-                  configuration: Configuration(id: taskModel.id,
-                                               name: taskModel.name,
-                                               variables: taskModel.variables.map { Variable($0) },
-                                               destination: taskModel.destination.map { Component($0) }))
+                  rule: Rule(id: taskModel.id,
+                             name: taskModel.name,
+                             variables: taskModel.variables.map { Variable($0) },
+                             destination: taskModel.destination.map { Component($0) }))
     }
 
 }

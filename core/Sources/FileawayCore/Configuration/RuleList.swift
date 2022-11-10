@@ -20,32 +20,32 @@
 
 import Foundation
 
-public struct ConfigurationList: Codable {
+public struct RuleList: Codable {
 
-    let items: [Configuration]
+    let rules: [Rule]
 
     public init() {
-        self.items = []
+        self.rules = []
     }
 
-    public init(items: [Configuration]) {
-        self.items = items
+    public init(rules: [Rule]) {
+        self.rules = rules
     }
 
     public init(url: URL) throws {
         let data = try Data(contentsOf: url)
         let decoder = JSONDecoder()
-        self = try decoder.decode(ConfigurationList.self, from: data)
+        self = try decoder.decode(RuleList.self, from: data)
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.items = try container.decode([Configuration].self)
+        self.rules = try container.decode([Rule].self)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
-        try container.encode(items)
+        try container.encode(rules)
     }
 
 }
