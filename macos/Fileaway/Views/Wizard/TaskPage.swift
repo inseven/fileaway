@@ -114,12 +114,7 @@ struct TaskPage: View {
                 .disabled(activeRule == nil)
             }
         }
-        .onAppear {
-            model.start()
-        }
-        .onDisappear {
-            model.stop()
-        }
+        .runs(model)
     }
 
 }

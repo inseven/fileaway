@@ -51,11 +51,6 @@ struct ContentView: View {
             // TODO: This nil handling should be done inside the scene model?
             SelectionToolbar(directoryViewModel: directoryViewModel ?? DirectoryViewModel(directoryModel: nil))
         }
-        .onAppear {
-            sceneModel.start()
-        }
-        .onDisappear {
-            sceneModel.stop()
-        }
+        .runs(sceneModel)
     }
 }

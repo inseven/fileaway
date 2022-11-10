@@ -86,12 +86,7 @@ struct DirectoryView: View {
         .searchable(text: $directoryViewModel.filter)
         .navigationTitle(directoryViewModel.name)
         .focusedValue(\.directoryViewModel, directoryViewModel)
-        .onAppear {
-            directoryViewModel.start()
-        }
-        .onDisappear {
-            directoryViewModel.stop()
-        }
+        .runs(directoryViewModel)
         .id(directoryViewModel.url)
     }
 
