@@ -47,7 +47,7 @@ struct FileawayApp: App {
 
     var body: some Scene {
         
-        WindowGroup(id: "MainWindow") {
+        WindowGroup(id: "main") {
             ContentView(applicationModel: applicationModel)
                 .environment(\.applicationModel, applicationModel)
         }

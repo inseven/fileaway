@@ -65,7 +65,7 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
                   destination: rule.destination.map { ComponentModel($0, variable: nil) })
     }
 
-    public init(_ rule: Rule, rootUrl: URL) {
+    public init(_ rule: Rule) {
         id = rule.id
         name = rule.name
         let variables = rule.configuration.variables.map { VariableModel($0) }
@@ -73,7 +73,7 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
         destination = rule.configuration.destination.map { component in
             ComponentModel(component, variable: variables.first { $0.name == component.value } )
         }
-        self.rootUrl = rootUrl
+        self.rootUrl = rule.rootUrl
         self.establishBackChannel()
     }
 
@@ -195,6 +195,16 @@ extension Rule {
                   name: ruleModel.name,
                   configuration: Configuration(variables: ruleModel.variables.map { Variable($0) },
                                                destination: ruleModel.destination.map { Component($0) }))
+    }
+
+}
+
+extension Array where Element == Rule {
+
+    func model() -> [RuleModel] {
+        return map { rule in
+            return RuleModel(rule)
+        }
     }
 
 }
