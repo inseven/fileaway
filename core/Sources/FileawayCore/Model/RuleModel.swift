@@ -176,13 +176,3 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
     }
 
 }
-
-//extension Array where Element == Rule {
-//
-//    func model() -> [RuleModel] {
-//        return map { rule in
-//            return RuleModel(rule)
-//        }
-//    }
-//
-//}

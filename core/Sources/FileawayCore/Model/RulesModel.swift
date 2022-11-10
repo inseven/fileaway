@@ -117,7 +117,6 @@ public class RulesModel: ObservableObject {
 
     public func remove(ids: Set<RuleModel.ID>) throws {
         mutableRules.removeAll { ids.contains($0.id) }
-//        rules.removeAll { ids.contains($0.id) }
         try save()
     }
 
