@@ -31,37 +31,23 @@ public class RulesModel: ObservableObject {
 
     var rulesSubscription: Cancellable?
 
-    public static func load(url: URL) throws -> [Rule] {
-        let rootUrl = url.deletingLastPathComponent()
-        let data = try Data(contentsOf: url)
-        let decoder = JSONDecoder()
-        let configurations = try decoder.decode([String: Configuration].self, from: data)
-        let rules = configurations.map { (name, configuration) -> Rule in
-            return Rule(rootUrl: rootUrl, name: name, configuration: configuration)
-            }.sorted { $0.name < $1.name }
-        return rules
-    }
-
     public init(url: URL) {
         self.rootUrl = url
         self.url = url.appendingPathComponent("Rules.fileaway")
         let rules: [Rule]
         do {
-            rules = try Self.load(url: self.url)
+            rules = try ConfigurationList(url: self.url).rules(for: self.rootUrl)
         } catch {
             // TODO: Propagate this error!
             print("Failed to load rules with error \(error).")
             rules = []
         }
         self.rules = rules
-        self.mutableRules = rules.map { rule in
-            RuleModel(rule, rootUrl: url)
-        }
+        self.mutableRules = rules.model()
         updateSubscription()
     }
 
-    // TODO: Consider removing this.
-    public func updateSubscription() {
+    private func updateSubscription() {
         let changes = self.mutableRules.map { $0.objectWillChange }
         rulesSubscription = Publishers.MergeMany(changes).receive(on: DispatchQueue.main).sink { _ in
             self.objectWillChange.send()
@@ -143,14 +129,31 @@ public class RulesModel: ObservableObject {
 
     private func save() throws {
         dispatchPrecondition(condition: .onQueue(.main))
-        rules = mutableRules.map { Rule($0) }
-        let configuration = rules.reduce(into: [:]) { result, rule in
-            result[rule.name] = rule.configuration
-        }
+        let configurationList = ConfigurationList(rules: mutableRules)
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
-        let data = try encoder.encode(configuration)
+        let data = try encoder.encode(configurationList)
         try data.write(to: url)
     }
     
+}
+
+extension ConfigurationList {
+
+    init(rules: [RuleModel]) {
+        items = rules
+            .map { Rule($0) }
+            .reduce(into: [:]) { result, rule in
+                result[rule.name] = rule.configuration
+            }
+    }
+
+    func rules(for rootUrl: URL) -> [Rule] {
+        return items
+            .map { (name, configuration) -> Rule in
+                return Rule(rootUrl: rootUrl, name: name, configuration: configuration)
+            }
+            .sorted { $0.name < $1.name }
+    }
+
 }

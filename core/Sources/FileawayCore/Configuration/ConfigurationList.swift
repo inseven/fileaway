@@ -20,14 +20,28 @@
 
 import Foundation
 
-public struct Configuration: Codable {
+public struct ConfigurationList: Codable {
 
-    public let variables: [Variable]
-    public let destination: [Component]
+    var items: [String: Configuration]
 
-    public init(variables: [Variable] = [], destination: [Component] = []) {
-        self.variables = variables
-        self.destination = destination
+    public init() {
+        self.items = [:]
     }
-    
+
+    public init(url: URL) throws {
+        let data = try Data(contentsOf: url)
+        let decoder = JSONDecoder()
+        self = try decoder.decode(ConfigurationList.self, from: data)
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.items = try container.decode([String: Configuration].self)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(self.items)
+    }
+
 }
