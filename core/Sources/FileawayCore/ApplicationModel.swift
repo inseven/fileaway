@@ -110,12 +110,15 @@ public class ApplicationModel: ObservableObject {
     }
 
     public func addLocation(type: DirectoryModel.DirectoryType, url: URL) throws {
-#if os(macOS)
-        // TODO: Support iOS
         dispatchPrecondition(condition: .onQueue(.main))
+#if os(macOS)
         let _ = try url.securityScopeBookmarkData() // Check that we can access the location.
         addDirectoryObserver(type: type, url: url)
         try save()
+#else
+        precondition(url.startAccessingSecurityScopedResource())
+        precondition(FileManager.default.isReadableFile(atPath: url.path))
+        addDirectoryObserver(type: type, url: url)
 #endif
     }
 

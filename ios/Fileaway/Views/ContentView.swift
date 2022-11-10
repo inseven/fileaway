@@ -20,25 +20,45 @@
 
 import SwiftUI
 
-public struct Sidebar: View {
+import Interact
 
-    @Environment(\.applicationModel) var applicationModel
-    @ObservedObject var sceneModel: SceneModel
+import FileawayCore
 
-    public init(sceneModel: SceneModel) {
-        self.sceneModel = sceneModel
+struct ContentView: View {
+
+    @ObservedObject var applicationModel: ApplicationModel
+    @StateObject var sceneModel: SceneModel
+
+    init(applicationModel: ApplicationModel) {
+        self.applicationModel = applicationModel
+        _sceneModel = StateObject(wrappedValue: SceneModel(applicationModel: applicationModel))
     }
 
-    public var body: some View {
-        List(selection: $sceneModel.section) {
-            SidebarSection(sceneModel: sceneModel, title: "Inboxes", type: .inbox, systemImage: "tray")
-            SidebarSection(sceneModel: sceneModel, title: "Archives", type: .archive, systemImage: "archivebox")
+    var body: some View {
+
+        NavigationSplitView {
+            Sidebar(sceneModel: sceneModel)
+                .navigationTitle("Fileaway")
+                .toolbar {
+
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button {
+                            print("Show settings")
+                        } label: {
+                            Image(systemName: "gear")
+                        }
+                    }
+
+                }
+        } detail: {
+            if let directoryViewModel = sceneModel.directoryViewModel {
+                DirectoryView(directoryViewModel: directoryViewModel)
+            } else {
+                Placeholder("No Directory Selected")
+                    .searchable()
+            }
         }
-#if os(iOS)
-        .toolbar {
-            EditButton()
-        }
-#endif
+        .runs(sceneModel)
     }
-    
+
 }

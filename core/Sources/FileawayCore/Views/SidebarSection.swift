@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import FilePicker
+
 public struct SidebarSection: View {
 
     @Environment(\.applicationModel) private var applicationModel
@@ -63,6 +65,18 @@ public struct SidebarSection: View {
                     }
                 }
             }
+#if os(iOS)
+            if editMode?.wrappedValue.isEditing ?? false {
+                FilePicker(types: [.folder], allowMultiple: false, asCopy: false) { urls in
+                    guard let url = urls.first else {
+                        return
+                    }
+                    try! applicationModel.addLocation(type: type, url: url)
+                } label: {
+                    Text("Add...")
+                }
+            }
+#endif
         }
     }
 
