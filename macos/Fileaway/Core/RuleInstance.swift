@@ -25,13 +25,13 @@ import FileawayCore
 
 class RuleInstance: ObservableObject {
 
-    var rule: Rule
+    var rule: RuleModel
     var variables: [VariableInstance]
     var subscriptions: [Cancellable]?
 
     var name: String { rule.name }
 
-    init(rule: Rule) {
+    init(rule: RuleModel) {
         self.rule = rule
         let variables = rule.variables.map { $0.instance() }
         self.variables = variables

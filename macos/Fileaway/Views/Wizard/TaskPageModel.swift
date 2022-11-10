@@ -28,8 +28,8 @@ import FileawayCore
 class TaskPageModel: ObservableObject, Runnable {
 
     @Published var filter: String = ""
-    @Published var filteredRules: [Rule] = []
-    @Published var selection: Rule.ID?
+    @Published var filteredRules: [RuleModel] = []
+    @Published var selection: RuleModel.ID?
 
     private var manager: ApplicationModel
     private var cancellables: Set<AnyCancellable> = []
