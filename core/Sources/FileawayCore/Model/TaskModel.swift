@@ -145,10 +145,12 @@ public class TaskModel: ObservableObject, Identifiable, BackChannelable, CustomS
 
 extension Task {
 
-    public init(_ state: TaskModel) {
-        self.init(name: state.name,
-                  configuration: Configuration(variables: state.variables.map { Variable($0) },
-                                               destination: state.destination.map { Component($0) }))
+    public init(_ taskModel: TaskModel) {
+        self.init(name: taskModel.name,
+                  configuration: Configuration(id: taskModel.id,
+                                               name: taskModel.name,
+                                               variables: taskModel.variables.map { Variable($0) },
+                                               destination: taskModel.destination.map { Component($0) }))
     }
 
 }

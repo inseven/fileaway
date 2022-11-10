@@ -22,10 +22,14 @@ import Foundation
 
 public struct ConfigurationList: Codable {
 
-    var items: [String: Configuration]
+    let items: [Configuration]
 
     public init() {
-        self.items = [:]
+        self.items = []
+    }
+
+    public init(items: [Configuration]) {
+        self.items = items
     }
 
     public init(url: URL) throws {
@@ -36,12 +40,12 @@ public struct ConfigurationList: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        self.items = try container.decode([String: Configuration].self)
+        self.items = try container.decode([Configuration].self)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
-        try container.encode(self.items)
+        try container.encode(items)
     }
 
 }

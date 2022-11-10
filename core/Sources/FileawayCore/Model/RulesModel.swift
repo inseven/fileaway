@@ -26,7 +26,6 @@ public class RulesModel: ObservableObject {
     public let rootUrl: URL
     public let url: URL
 
-    @Published public var rules: [Rule]
     @Published public var mutableRules: [RuleModel]
 
     var rulesSubscription: Cancellable?
@@ -34,16 +33,17 @@ public class RulesModel: ObservableObject {
     public init(url: URL) {
         self.rootUrl = url
         self.url = url.appendingPathComponent("Rules.fileaway")
-        let rules: [Rule]
-        do {
-            rules = try ConfigurationList(url: self.url).rules(for: self.rootUrl)
-        } catch {
-            // TODO: Propagate this error!
-            print("Failed to load rules with error \(error).")
-            rules = []
+        if FileManager.default.fileExists(atPath: self.url.path) {
+            do {
+                self.mutableRules = try ConfigurationList(url: self.url).models(for: self.rootUrl)
+            } catch {
+                // TODO: Propagate this error!
+                print("Failed to load rules with error \(error).")
+                self.mutableRules = []
+            }
+        } else {
+            self.mutableRules = []
         }
-        self.rules = rules
-        self.mutableRules = rules.model()
         updateSubscription()
     }
 
@@ -87,9 +87,6 @@ public class RulesModel: ObservableObject {
             throw FileawayError.duplicateRuleName
         }
         mutableRules.append(rule)
-        var rules = Array(self.rules)
-        rules.append(Rule(rule))
-        self.rules = rules.sorted { $0.name < $1.name }
         updateSubscription()
         try save()
     }
@@ -123,7 +120,6 @@ public class RulesModel: ObservableObject {
 
     public func remove(ids: Set<RuleModel.ID>) throws {
         mutableRules.removeAll { ids.contains($0.id) }
-        rules.removeAll { ids.contains($0.id) }
         try save()
     }
 
@@ -138,20 +134,35 @@ public class RulesModel: ObservableObject {
     
 }
 
+extension Configuration {
+
+    public init(_ ruleModel: RuleModel) {
+        self.init(id: ruleModel.id,
+                  name: ruleModel.name,
+                  variables: ruleModel.variables.map { Variable($0) },
+                  destination: ruleModel.destination.map { Component($0) })
+    }
+
+}
+
 extension ConfigurationList {
 
     init(rules: [RuleModel]) {
         items = rules
-            .map { Rule($0) }
-            .reduce(into: [:]) { result, rule in
-                result[rule.name] = rule.configuration
-            }
+            .map { Configuration($0) }
     }
 
-    func rules(for rootUrl: URL) -> [Rule] {
+    func models(for rootUrl: URL) -> [RuleModel] {
         return items
-            .map { (name, configuration) -> Rule in
-                return Rule(rootUrl: rootUrl, name: name, configuration: configuration)
+            .map { configuration -> RuleModel in
+                let variables = configuration.variables.map { VariableModel($0) }
+                return RuleModel(id: configuration.id,
+                                 rootUrl: rootUrl,
+                                 name: configuration.name,
+                                 variables: variables,
+                                 destination: configuration.destination.map { component in
+                    ComponentModel(component, variable: variables.first { $0.name == component.value } )
+                })
             }
             .sorted { $0.name < $1.name }
     }

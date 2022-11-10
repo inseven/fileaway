@@ -44,7 +44,7 @@ public class ApplicationModel: ObservableObject {
     private var settings = Settings()
 
     @Published public var directories: [DirectoryModel] = []
-    @Published public var allRules: [Rule] = []
+    @Published public var allRules: [RuleModel] = []
 
     var countObservers: [DirectoryModel.ID: Cancellable] = [:]
     var countSubscription: Cancellable?
@@ -92,7 +92,7 @@ public class ApplicationModel: ObservableObject {
         dispatchPrecondition(condition: .onQueue(.main))
         let update: () -> Void = {
             dispatchPrecondition(condition: .onQueue(.main))
-            self.allRules = self.directories.map { $0.ruleSet.rules }.flatMap { $0 }
+            self.allRules = self.directories.map { $0.ruleSet.mutableRules }.flatMap { $0 }
         }
         let changes = self.directories.map { $0.ruleSet.objectWillChange }
         rulesSubscription = Publishers.MergeMany(changes).receive(on: DispatchQueue.main).sink { _ in

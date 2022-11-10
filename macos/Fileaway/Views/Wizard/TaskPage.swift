@@ -35,7 +35,7 @@ struct TaskPage: View {
 
     @StateObject var model: TaskPageModel
 
-    @State var activeRule: Rule? = nil
+    @State var activeRule: RuleModel? = nil
 
     @FocusState private var focus: FocusableField?
 
@@ -45,7 +45,7 @@ struct TaskPage: View {
         _model = StateObject(wrappedValue: TaskPageModel(manager: manager))
     }
 
-    func binding(for rule: Rule) -> Binding<Bool> {
+    func binding(for rule: RuleModel) -> Binding<Bool> {
         Binding {
             self.activeRule == rule
         } set: { value in

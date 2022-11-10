@@ -33,7 +33,7 @@ class DateInstance: VariableInstance, VariableProvider {
         return formatter.string(from: date)
     }
 
-    init(variable: Variable, initialValue: Date) {
+    init(variable: VariableModel, initialValue: Date) {
         _date = Published(initialValue: initialValue)
         super.init(variable: variable)
     }

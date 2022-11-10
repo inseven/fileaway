@@ -25,23 +25,22 @@ import FileawayCore
 class VariableInstance: Identifiable {
 
     public var id: UUID { variable.id }
-    var variable: Variable
+    var variable: VariableModel
     var name: String { variable.name }
 
-    init(variable: Variable) {
+    init(variable: VariableModel) {
         self.variable = variable
     }
 
 }
-
-extension Variable {
+extension VariableModel {
 
     func instance() -> VariableInstance {
         switch self.type {
         case .string:
             return StringInstance(variable: self, initialValue: "")
         case .date:
-            return DateInstance(variable:self, initialValue: Date())
+            return DateInstance(variable: self, initialValue: Date())
         }
     }
 
