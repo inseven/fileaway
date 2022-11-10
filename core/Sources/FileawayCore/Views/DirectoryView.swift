@@ -18,25 +18,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import AppKit
 import Combine
-import Quartz
 import SwiftUI
 
-import FileawayCore
 import Interact
 
-struct DirectoryView: View {
+public struct DirectoryView: View {
 
     @Environment(\.openWindow) var openWindow
 
     @ObservedObject var directoryViewModel: DirectoryViewModel
 
-    init(directoryViewModel: DirectoryViewModel) {
+    public init(directoryViewModel: DirectoryViewModel) {
         self.directoryViewModel = directoryViewModel
     }
 
-    var body: some View {
+    public var body: some View {
         List(selection: $directoryViewModel.selection) {
             ForEach(directoryViewModel.files, id: \.self) { file in
                 FileRow(file: file)
@@ -45,9 +42,11 @@ struct DirectoryView: View {
         .contextMenu(forSelectionType: FileInfo.self) { selection in
             if !selection.isEmpty, let file = selection.first {
 
+#if os(macOS)
                 Button("Apply Rules") {
                     for file in selection {
-                        openWindow(id: Wizard.windowID, value: file.url)
+                        // TODO: Use Wizard.windowID
+                        openWindow(id: "wizard-window", value: file.url)
                     }
                 }
                 Divider()
@@ -72,12 +71,15 @@ struct DirectoryView: View {
                     NSPasteboard.general.setString(file.name, forType: .string)
                 }
                 .disabled(selection.count != 1)
+#endif
 
             }
         } primaryAction: { selection in
+#if os(macOS)
             for file in selection {
                 NSWorkspace.shared.open(file.url)
             }
+#endif
         }
         // Enter to open.
         // Drag-and-drop.
@@ -85,6 +87,9 @@ struct DirectoryView: View {
         .overlay(directoryViewModel.files.isEmpty ? Placeholder("No Items") : nil)
         .searchable(text: $directoryViewModel.filter)
         .navigationTitle(directoryViewModel.name)
+#if os(iOS)
+        .navigationBarTitleDisplayMode(.inline)
+#endif
         .focusedValue(\.directoryViewModel, directoryViewModel)
         .runs(directoryViewModel)
         .id(directoryViewModel.url)
