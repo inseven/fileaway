@@ -20,7 +20,6 @@
 
 import SwiftUI
 
-import FileawayCore
 import Interact
 
 struct FileRow: View {

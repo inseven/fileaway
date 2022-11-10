@@ -20,9 +20,7 @@
 
 import SwiftUI
 
-import FileawayCore
-
-struct DateView: View {
+public struct DateView: View {
 
     static var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -30,9 +28,13 @@ struct DateView: View {
         return dateFormatter
     }()
 
-    let date: FileDate
+    private let date: FileDate
 
-    var description: String {
+    public init(date: FileDate) {
+        self.date = date
+    }
+
+    private var description: String {
         switch date.type {
         case .creation:
             return "File creation date"
@@ -43,7 +45,7 @@ struct DateView: View {
         }
     }
 
-    var body: some View {
+    public var body: some View {
         switch date.type {
         case .unknown:
             EmptyView()
