@@ -45,6 +45,7 @@ public class RulesModel: ObservableObject {
         self.rules = rules
         self.mutableRules = rules.model()
         updateSubscription()
+        try! save()
     }
 
     private func updateSubscription() {

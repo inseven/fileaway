@@ -193,7 +193,9 @@ extension Rule {
     public convenience init(_ ruleModel: RuleModel) {
         self.init(rootUrl: ruleModel.rootUrl,
                   name: ruleModel.name,
-                  configuration: Configuration(variables: ruleModel.variables.map { Variable($0) },
+                  configuration: Configuration(id: ruleModel.id,
+                                               name: ruleModel.name,
+                                               variables: ruleModel.variables.map { Variable($0) },
                                                destination: ruleModel.destination.map { Component($0) }))
     }
 

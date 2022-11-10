@@ -22,12 +22,54 @@ import Foundation
 
 public struct Configuration: Codable {
 
+    enum CodingKeys: CodingKey {
+        case id
+        case name
+        case variables
+        case destination
+    }
+
+    public let id: UUID
+    public let name: String
     public let variables: [Variable]
     public let destination: [Component]
 
-    public init(variables: [Variable] = [], destination: [Component] = []) {
+    public init() {
+        self.id = UUID()
+        self.name = ""
+        self.variables = []
+        self.destination = []
+    }
+
+    public init(id: UUID, name: String, variables: [Variable], destination: [Component]) {
+        self.id = id
+        self.name = name
         self.variables = variables
         self.destination = destination
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.id, forKey: .id)
+        try container.encode(self.name, forKey: .name)
+        try container.encode(self.variables, forKey: .variables)
+        try container.encode(self.destination, forKey: .destination)
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        if container.contains(.id) {
+            self.id = try container.decode(UUID.self, forKey: .id)
+        } else {
+            self.id = UUID()
+        }
+        if container.contains(.name) {
+            self.name = try container.decode(String.self, forKey: .name)
+        } else {
+            self.name = ""
+        }
+        self.variables = try container.decode([Variable].self, forKey: .variables)
+        self.destination = try container.decode([Component].self, forKey: .destination)
     }
     
 }
