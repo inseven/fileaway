@@ -129,19 +129,24 @@ public class RulesModel: ObservableObject {
 
     private func save() throws {
         dispatchPrecondition(condition: .onQueue(.main))
-        rules = mutableRules.map { Rule($0) }
-        let configuration = rules.reduce(into: [:]) { result, rule in
-            result[rule.name] = rule.configuration
-        }
+        let configurationList = ConfigurationList(rules: mutableRules)
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
-        let data = try encoder.encode(configuration)
+        let data = try encoder.encode(configurationList)
         try data.write(to: url)
     }
     
 }
 
 extension ConfigurationList {
+
+    init(rules: [RuleModel]) {
+        items = rules
+            .map { Rule($0) }
+            .reduce(into: [:]) { result, rule in
+                result[rule.name] = rule.configuration
+            }
+    }
 
     func rules(for rootUrl: URL) -> [Rule] {
         return items
