@@ -31,7 +31,7 @@ class StringInstance: VariableInstance, VariableProvider {
 
     @Published var string: String
 
-    init(variable: VariableModel, initialValue: String) {
+    init(variable: Variable, initialValue: String) {
         _string = Published(initialValue: initialValue)
         super.init(variable: variable)
     }

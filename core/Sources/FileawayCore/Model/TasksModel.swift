@@ -86,7 +86,7 @@ public class TasksModel: ObservableObject, BackChannelable {
         } while names.contains(name)
         let task = TaskModel(id: UUID(),
                              name: name,
-                             variables: [VariableModel(name: "Date", type: .date(hasDay: true))],
+                             variables: [Variable(name: "Date", type: .date(hasDay: true))],
                              destination: [
                                 ComponentModel(value: "New Folder/", type: .text, variable: nil),
                                 ComponentModel(value: "Date", type: .variable, variable: nil),
