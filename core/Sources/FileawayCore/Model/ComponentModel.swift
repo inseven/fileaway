@@ -26,23 +26,23 @@ public class ComponentModel: ObservableObject, Identifiable, Hashable {
     public let id: UUID
     @Published public var value: String
     @Published public var type: ComponentType
-    public var variable: VariableModel? = nil
+    public var variable: Variable? = nil
 
-    public init(value: String, type: ComponentType, variable: VariableModel?) {
+    public init(value: String, type: ComponentType, variable: Variable?) {
         self.id = UUID()
         self.value = value
         self.type = type
         self.variable = variable
     }
 
-    public init(_ component: Component, variable: VariableModel?) {
+    public init(_ component: Component, variable: Variable?) {
         self.id = UUID()
         self.value = component.value
         self.type = component.type
         self.variable = variable
     }
 
-    public init(_ componentModel: ComponentModel, variable: VariableModel?) {
+    public init(_ componentModel: ComponentModel, variable: Variable?) {
         id = componentModel.id
         value = String(componentModel.value)
         type = componentModel.type

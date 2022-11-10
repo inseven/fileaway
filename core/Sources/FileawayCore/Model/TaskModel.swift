@@ -32,10 +32,10 @@ public class TaskModel: ObservableObject, Identifiable, BackChannelable, CustomS
     public let id: UUID
 
     @Published public var name: String
-    @Published public var variables: [VariableModel]
+    @Published public var variables: [Variable]
     @Published public var destination: [ComponentModel]
 
-    var variablesBackChannel: BackChannel<VariableModel>?
+    var variablesBackChannel: BackChannel<Variable>?
     var destinationBackChannel: BackChannel<ComponentModel>?
 
     public var description: String {
@@ -56,7 +56,7 @@ public class TaskModel: ObservableObject, Identifiable, BackChannelable, CustomS
         }
     }
 
-    public init(id: UUID, name: String, variables: [VariableModel], destination: [ComponentModel]) {
+    public init(id: UUID, name: String, variables: [Variable], destination: [ComponentModel]) {
         self.id = id
         self.name = name
         self.variables = variables
@@ -73,14 +73,14 @@ public class TaskModel: ObservableObject, Identifiable, BackChannelable, CustomS
     convenience public init(_ taskState: TaskModel) {
         self.init(id: UUID(),
                   name: String(taskState.name),
-                  variables: taskState.variables.map { VariableModel($0) },
+                  variables: taskState.variables,
                   destination: taskState.destination.map { ComponentModel($0, variable: nil) })
     }
 
     public init(task: Task) {
         self.id = UUID()
         self.name = task.name
-        let variables = task.rule.variables.map { VariableModel($0) }
+        let variables = task.rule.variables
         self.variables = variables
         self.destination = task.rule.destination.map { component in
             ComponentModel(component, variable: variables.first { $0.name == component.value } )
@@ -138,7 +138,7 @@ public class TaskModel: ObservableObject, Identifiable, BackChannelable, CustomS
             name = "Variable \(index)"
             index = index + 1
         } while names.contains(name)
-        self.variables.append(VariableModel(name: name, type: .string))
+        self.variables.append(Variable(name: name, type: .string))
     }
 
 }
@@ -149,7 +149,7 @@ extension Task {
         self.init(name: taskModel.name,
                   rule: Rule(id: taskModel.id,
                              name: taskModel.name,
-                             variables: taskModel.variables.map { Variable($0) },
+                             variables: taskModel.variables,
                              destination: taskModel.destination.map { Component($0) }))
     }
 

@@ -18,24 +18,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
+import SwiftUI
 
-public struct Variable: Identifiable {
+public class Variable: ObservableObject, Identifiable, Codable, Hashable {
 
-    public var id = UUID()
+    struct DateParams: Codable {
+        let hasDay: Bool
 
-    public let name: String
-    public let type: VariableType
-
-    public init(name: String, type: VariableType) {
-        self.name = name
-        self.type = type
+        init(hasDay: Bool = true) {
+            self.hasDay = hasDay
+        }
     }
 
-}
-
-extension Variable: Codable {
-    
     enum CodingKeys: String, CodingKey {
         case name
         case type
@@ -47,11 +41,35 @@ extension Variable: Codable {
         case date
     }
 
-    struct DateParams: Codable {
-        let hasDay: Bool
+    public static func == (lhs: Variable, rhs: Variable) -> Bool {
+        return lhs.id == rhs.id
+    }
 
-        init(hasDay: Bool = true) {
-            self.hasDay = hasDay
+    public var id = UUID()
+
+    @Published public var name: String
+    @Published public var type: VariableType
+
+    public init(name: String, type: VariableType) {
+        self.name = name
+        self.type = type
+    }
+
+    required public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        let name = try container.decode(String.self, forKey: .name)
+        let type = try container.decode(RawType.self, forKey: .type)
+
+        switch type {
+        case .string:
+            self.name = name
+            self.type = .string
+        case .date:
+            let dateParams = try container.decodeIfPresent(DateParams.self, forKey: .dateParams)
+                ?? DateParams()
+            self.name = name
+            self.type = .date(hasDay: dateParams.hasDay)
         }
     }
 
@@ -69,19 +87,8 @@ extension Variable: Codable {
         }
     }
 
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-
-        let name = try container.decode(String.self, forKey: .name)
-        let type = try container.decode(RawType.self, forKey: .type)
-
-        switch type {
-        case .string:
-            self = Variable(name: name, type: .string)
-        case .date:
-            let dateParams = try container.decodeIfPresent(DateParams.self, forKey: .dateParams)
-                ?? DateParams()
-            self = Variable(name: name, type: .date(hasDay: dateParams.hasDay))
-        }
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
+
 }

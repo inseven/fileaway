@@ -31,7 +31,7 @@ struct VariableRow : View {
     @State var showSheet: Bool = false
 
     @ObservedObject var task: TaskModel
-    @ObservedObject var variable: VariableModel
+    @ObservedObject var variable: Variable
 
     var body: some View {
         HStack {

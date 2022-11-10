@@ -96,7 +96,7 @@ public class RulesModel: ObservableObject {
         let rule = RuleModel(id: UUID(),
                              rootUrl: rootUrl,
                              name: name,
-                             variables: [VariableModel(name: "Date", type: .date(hasDay: true))],
+                             variables: [Variable(name: "Date", type: .date(hasDay: true))],
                              destination: [
                                 ComponentModel(value: "New Folder/", type: .text, variable: nil),
                                 ComponentModel(value: "Date", type: .variable, variable: nil),
@@ -139,7 +139,7 @@ extension Rule {
     public init(_ ruleModel: RuleModel) {
         self.init(id: ruleModel.id,
                   name: ruleModel.name,
-                  variables: ruleModel.variables.map { Variable($0) },
+                  variables: ruleModel.variables,
                   destination: ruleModel.destination.map { Component($0) })
     }
 
@@ -155,13 +155,12 @@ extension RuleList {
     func models(for rootUrl: URL) -> [RuleModel] {
         return rules
             .map { configuration -> RuleModel in
-                let variables = configuration.variables.map { VariableModel($0) }
                 return RuleModel(id: configuration.id,
                                  rootUrl: rootUrl,
                                  name: configuration.name,
-                                 variables: variables,
+                                 variables: configuration.variables,
                                  destination: configuration.destination.map { component in
-                    ComponentModel(component, variable: variables.first { $0.name == component.value } )
+                    ComponentModel(component, variable: configuration.variables.first { $0.name == component.value } )
                 })
             }
             .sorted { $0.name < $1.name }
