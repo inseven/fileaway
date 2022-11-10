@@ -33,15 +33,18 @@ public class RulesModel: ObservableObject {
     public init(url: URL) {
         self.rootUrl = url
         self.url = url.appendingPathComponent("Rules.fileaway")
-        do {
-            self.mutableRules = try ConfigurationList(url: self.url).models(for: self.rootUrl)
-        } catch {
-            // TODO: Propagate this error!
-            print("Failed to load rules with error \(error).")
+        if FileManager.default.fileExists(atPath: self.url.path) {
+            do {
+                self.mutableRules = try ConfigurationList(url: self.url).models(for: self.rootUrl)
+            } catch {
+                // TODO: Propagate this error!
+                print("Failed to load rules with error \(error).")
+                self.mutableRules = []
+            }
+        } else {
             self.mutableRules = []
         }
         updateSubscription()
-        try! save()
     }
 
     private func updateSubscription() {
@@ -147,14 +150,11 @@ extension ConfigurationList {
     init(rules: [RuleModel]) {
         items = rules
             .map { Configuration($0) }
-            .reduce(into: [:]) { result, configuration in
-                result[configuration.name] = configuration
-            }
     }
 
     func models(for rootUrl: URL) -> [RuleModel] {
         return items
-            .map { (name, configuration) -> RuleModel in
+            .map { configuration -> RuleModel in
                 let variables = configuration.variables.map { VariableModel($0) }
                 return RuleModel(id: configuration.id,
                                  rootUrl: rootUrl,
