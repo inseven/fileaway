@@ -20,20 +20,50 @@
 
 import SwiftUI
 
-public struct Sidebar: View {
+public struct SidebarSection: View {
 
-    @Environment(\.applicationModel) var applicationModel
+    @Environment(\.applicationModel) private var applicationModel
+
+#if os(iOS)
+    @Environment(\.editMode) private var editMode
+#endif
+
     @ObservedObject var sceneModel: SceneModel
 
-    public init(sceneModel: SceneModel) {
+    private var title: String
+    private var type: DirectoryModel.DirectoryType
+    private var systemImage: String
+
+    // TODO: This is nasty
+    public var models: [DirectoryViewModel] {
+        switch type {
+        case .inbox:
+            return sceneModel.inboxes
+        case .archive:
+            return sceneModel.archives
+        }
+    }
+
+    public init(sceneModel: SceneModel, title: String, type: DirectoryModel.DirectoryType, systemImage: String) {
         self.sceneModel = sceneModel
+        self.title = title
+        self.type = type
+        self.systemImage = systemImage
     }
 
     public var body: some View {
-        List(selection: $sceneModel.section) {
-            SidebarSection(sceneModel: sceneModel, title: "Inboxes", type: .inbox, systemImage: "tray")
-            SidebarSection(sceneModel: sceneModel, title: "Archives", type: .archive, systemImage: "archivebox")
+        Section(title) {
+            ForEach(models) { inbox in
+                NavigationLink(value: inbox.url) {
+                    Label(inbox.name, systemImage: systemImage)
+                }
+                .contextMenu {
+                    LocationMenuItems(url: inbox.url) { error in
+                        // TODO: Report this error
+                    }
+                }
+            }
         }
     }
-    
+
 }
