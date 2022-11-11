@@ -57,12 +57,12 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
         self.establishBackChannel()
     }
 
-    public convenience init(_ rule: RuleModel) {
+    public convenience init(_ ruleModel: RuleModel) {
         self.init(id: UUID(),
-                  rootUrl: rule.rootUrl,
-                  name: String(rule.name),
-                  variables: rule.variables,
-                  destination: rule.destination.map { ComponentModel($0, variable: nil) })
+                  rootUrl: ruleModel.rootUrl,
+                  name: String(ruleModel.name),
+                  variables: ruleModel.variables,
+                  destination: ruleModel.destination.map { ComponentModel($0, variable: nil) })
         self.establishBackChannel()
     }
 

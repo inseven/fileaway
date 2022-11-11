@@ -82,11 +82,11 @@ public class RulesModel: ObservableObject {
         return name
     }
 
-    public func add(_ rule: RuleModel) throws {
-        guard !contains(ruleNamed: rule.name) else {
+    public func add(_ ruleModel: RuleModel) throws {
+        guard !contains(ruleNamed: ruleModel.name) else {
             throw FileawayError.duplicateRuleName
         }
-        mutableRules.append(rule)
+        mutableRules.append(ruleModel)
         updateSubscription()
         try save()
     }

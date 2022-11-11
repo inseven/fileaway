@@ -24,7 +24,7 @@ import FileawayCore
 
 struct ComponentView: View {
 
-    @State var rule: RuleModel
+    @State var ruleModel: RuleModel
     @ObservedObject var component: ComponentModel
 
     var body: some View {
@@ -39,16 +39,16 @@ struct ComponentView: View {
                         openPanel.canChooseDirectories = true
                         openPanel.canCreateDirectories = true
                         var isDirectory = ObjCBool(true)
-                        let currentDirectory = rule.rootUrl.appendingPathComponent(component.value)
+                        let currentDirectory = ruleModel.rootUrl.appendingPathComponent(component.value)
                         if FileManager.default.fileExists(atPath: currentDirectory.path,
                                                           isDirectory: &isDirectory) && isDirectory.boolValue {
                             openPanel.directoryURL = currentDirectory
                         } else {
-                            openPanel.directoryURL = rule.rootUrl
+                            openPanel.directoryURL = ruleModel.rootUrl
                         }
                         guard openPanel.runModal() == NSApplication.ModalResponse.OK,
                               let url = openPanel.url,
-                              let relativePath = url.relativePath(from: rule.rootUrl) else {
+                              let relativePath = url.relativePath(from: ruleModel.rootUrl) else {
                             return
                         }
                         component.value = relativePath + "/"
@@ -65,18 +65,18 @@ struct ComponentView: View {
 
 struct DestinationList: View {
 
-    @ObservedObject var rule: RuleModel
+    @ObservedObject var ruleModel: RuleModel
     @State var selection: ComponentModel?
 
     var body: some View {
         VStack {
             HStack {
-                List(rule.destination, id: \.self, selection: $selection) { component in
+                List(ruleModel.destination, id: \.self, selection: $selection) { component in
                     Text(component.value)
                 }
                 VStack {
                     if let component = selection {
-                        ComponentView(rule: rule, component: component)
+                        ComponentView(ruleModel: ruleModel, component: component)
                             .id(component)
                     } else {
                         Text("No Component Selected")
@@ -86,14 +86,14 @@ struct DestinationList: View {
             }
             HStack {
 
-                ForEach(rule.variables) { variable in
+                ForEach(ruleModel.variables) { variable in
                     Button(String(describing: variable.name)) {
-                        rule.destination.append(ComponentModel(value: variable.name, type: .variable, variable: variable))
+                        ruleModel.destination.append(ComponentModel(value: variable.name, type: .variable, variable: variable))
                     }
                 }
 
                 Button("Text") {
-                    rule.destination.append(ComponentModel(value: "Text", type: .text, variable: nil))
+                    ruleModel.destination.append(ComponentModel(value: "Text", type: .text, variable: nil))
                 }
 
                 ControlGroup {
@@ -102,7 +102,7 @@ struct DestinationList: View {
                         guard let component = selection else {
                             return
                         }
-                        rule.moveUp(component: component)
+                        ruleModel.moveUp(component: component)
                     } label: {
                         Image(systemName: "arrow.up")
                     }
@@ -112,7 +112,7 @@ struct DestinationList: View {
                         guard let component = selection else {
                             return
                         }
-                        rule.moveDown(component: component)
+                        ruleModel.moveDown(component: component)
                     } label: {
                         Image(systemName: "arrow.down")
                     }
@@ -124,7 +124,7 @@ struct DestinationList: View {
                     guard let component = selection else {
                         return
                     }
-                    rule.remove(component: component)
+                    ruleModel.remove(component: component)
                     selection = nil
                 } label: {
                     Image(systemName: "minus")

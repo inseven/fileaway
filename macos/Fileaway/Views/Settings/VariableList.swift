@@ -24,13 +24,13 @@ import FileawayCore
 
 struct VariableList: View {
 
-    @ObservedObject var rule: RuleModel
+    @ObservedObject var ruleModel: RuleModel
     @State var selection: Variable?
 
     var body: some View {
         VStack {
             HStack {
-                List(rule.variables, id: \.self, selection: $selection) { variable in
+                List(ruleModel.variables, id: \.self, selection: $selection) { variable in
                     Text("\(variable.name) (\(String(describing: variable.type)))")
                 }
                 VStack {
@@ -48,7 +48,7 @@ struct VariableList: View {
                 ControlGroup {
 
                     Button {
-                        rule.createVariable()
+                        ruleModel.createVariable()
                     } label: {
                         Image(systemName: "plus")
                     }
@@ -57,7 +57,7 @@ struct VariableList: View {
                         guard let variable = selection else {
                             return
                         }
-                        rule.remove(variable: variable)
+                        ruleModel.remove(variable: variable)
                         selection = nil
                     } label: {
                         Image(systemName: "minus")
@@ -72,7 +72,7 @@ struct VariableList: View {
                         guard let variable = selection else {
                             return
                         }
-                        rule.moveUp(variable: variable)
+                        ruleModel.moveUp(variable: variable)
                     } label: {
                         Image(systemName: "arrow.up")
                     }
@@ -82,7 +82,7 @@ struct VariableList: View {
                         guard let variable = selection else {
                             return
                         }
-                        rule.moveDown(variable: variable)
+                        ruleModel.moveDown(variable: variable)
                     } label: {
                         Image(systemName: "arrow.down")
                     }

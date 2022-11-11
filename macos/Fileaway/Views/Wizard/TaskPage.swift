@@ -35,7 +35,7 @@ struct TaskPage: View {
 
     @StateObject var model: TaskPageModel
 
-    @State var activeRule: RuleModel? = nil
+    @State var activeRuleModel: RuleModel? = nil
 
     @FocusState private var focus: FocusableField?
 
@@ -45,26 +45,26 @@ struct TaskPage: View {
         _model = StateObject(wrappedValue: TaskPageModel(manager: manager))
     }
 
-    func binding(for rule: RuleModel) -> Binding<Bool> {
+    func binding(for ruleModel: RuleModel) -> Binding<Bool> {
         Binding {
-            self.activeRule == rule
+            self.activeRuleModel == ruleModel
         } set: { value in
             if value {
-                self.activeRule = rule
-            } else if self.activeRule == rule {
-                self.activeRule = nil
+                self.activeRuleModel = ruleModel
+            } else if self.activeRuleModel == ruleModel {
+                self.activeRuleModel = nil
             }
         }
     }
 
     @MainActor func submit() {
-        activeRule = model.filteredRules.first(where: { $0.id == model.selection })
+        activeRuleModel = model.filteredRules.first(where: { $0.id == model.selection })
     }
 
     var body: some View {
         VStack(spacing: 0) {
-            if let activeRule = activeRule {
-                DetailsPage(url: url, rule: activeRule)
+            if let activeRule = activeRuleModel {
+                DetailsPage(url: url, ruleModel: activeRule)
             } else {
                 List(selection: $model.selection) {
                     ForEach(model.filteredRules) { rule in
@@ -109,9 +109,9 @@ struct TaskPage: View {
             }
             HStack {
                 Button("Back") {
-                    activeRule = nil
+                    activeRuleModel = nil
                 }
-                .disabled(activeRule == nil)
+                .disabled(activeRuleModel == nil)
             }
         }
         .runs(model)

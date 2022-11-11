@@ -25,11 +25,11 @@ import FileawayCore
 struct RuleSheet: View {
 
     @Environment(\.presentationMode) var presentationMode
-    @State var rule: RuleModel
+    @State var ruleModel: RuleModel
 
     var body: some View {
         VStack {
-            RuleDetailView(rule: rule)
+            RuleDetailView(ruleModel: ruleModel)
             HStack {
                 Spacer()
                 Button {
