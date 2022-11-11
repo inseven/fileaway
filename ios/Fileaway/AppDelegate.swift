@@ -25,7 +25,6 @@ import FileawayCore
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    public let settings = LegacySettings()
 
     static var shared: AppDelegate {
         UIApplication.shared.delegate as! AppDelegate

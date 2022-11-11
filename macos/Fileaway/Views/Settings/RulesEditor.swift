@@ -50,7 +50,7 @@ struct RulesEditor: View {
     @State var alert: AlertType?
 
     @MainActor private func rules(for ids: Set<RuleModel.ID>) -> Set<RuleModel> {
-        return Set(ruleSet.mutableRules.filter { ids.contains($0.id) })
+        return Set(ruleSet.ruleModels.filter { ids.contains($0.id) })
     }
 
     @MainActor private func add() {
@@ -93,7 +93,7 @@ struct RulesEditor: View {
     var body: some View {
         HStack {
             VStack {
-                List(ruleSet.mutableRules, selection: $selection) { rule in
+                List(ruleSet.ruleModels, selection: $selection) { rule in
                     Text(rule.name)
                         .lineLimit(1)
                 }

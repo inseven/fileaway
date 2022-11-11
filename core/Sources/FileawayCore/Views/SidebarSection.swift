@@ -60,9 +60,7 @@ public struct SidebarSection: View {
                     Label(inbox.name, systemImage: systemImage)
                 }
                 .contextMenu {
-                    LocationMenuItems(url: inbox.url) { error in
-                        // TODO: Report this error
-                    }
+                    LocationMenuItems(url: inbox.url)
                 }
             }
             .onDelete { indexSet in

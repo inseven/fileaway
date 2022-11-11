@@ -92,7 +92,7 @@ public class ApplicationModel: ObservableObject {
         dispatchPrecondition(condition: .onQueue(.main))
         let update: () -> Void = {
             dispatchPrecondition(condition: .onQueue(.main))
-            self.allRules = self.directories.map { $0.ruleSet.mutableRules }.flatMap { $0 }
+            self.allRules = self.directories.map { $0.ruleSet.ruleModels }.flatMap { $0 }
         }
         let changes = self.directories.map { $0.ruleSet.objectWillChange }
         rulesSubscription = Publishers.MergeMany(changes).receive(on: DispatchQueue.main).sink { _ in

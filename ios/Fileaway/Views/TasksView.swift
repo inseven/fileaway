@@ -28,28 +28,30 @@ struct TasksView: View {
     @ObservedObject var tasks: TasksModel
 
     var body: some View {
-        VStack {
-            List {
-                Section {
-                    ForEach(tasks.taskModels) { task in
-                        NavigationLink(destination: TaskView(tasks: self.tasks,
-                                                             editingTaskModel: TaskModel(task),
-                                                             originalTaskModel: task)) {
-                            Text(task.name)
+        NavigationStack {
+            VStack {
+                List {
+                    Section {
+                        ForEach(tasks.taskModels) { task in
+                            NavigationLink(destination: TaskView(tasks: self.tasks,
+                                                                 editingTaskModel: TaskModel(task),
+                                                                 originalTaskModel: task)) {
+                                Text(task.name)
+                            }
                         }
-                    }
-                    .onDelete {
-                        self.tasks.taskModels.remove(atOffsets: $0)
+                        .onDelete {
+                            self.tasks.taskModels.remove(atOffsets: $0)
+                        }
                     }
                 }
             }
+            .navigationBarItems(trailing: Button(action: {
+                self.tasks.createTask()
+            }) {
+                Text("Add")
+            })
+            .navigationBarTitle("Rules")
         }
-        .navigationBarItems(trailing: Button(action: {
-            self.tasks.createTask()
-        }) {
-            Text("Add")
-        })
-        .navigationBarTitle("Tasks")
     }
 
 }

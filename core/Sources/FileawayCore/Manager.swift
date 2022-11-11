@@ -31,7 +31,7 @@ public class Manager {
      * destinations.json file in the bundle otherwise.
      */
     func configurationUrl() -> URL {
-        return rootUrl.appendingPathComponent("Rules.fileaway")
+        return rootUrl.rulesUrl
     }
 
     public init(configurationUrl: URL) {

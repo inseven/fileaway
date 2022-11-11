@@ -35,12 +35,15 @@ public class SceneModel: ObservableObject, Runnable {
                 return "add-location-\(type.rawValue)"
             case .open(let file):
                 return "open-\(file.url.absoluteURL)"
+            case .editRules(let url):
+                return "edit-rules-\(url.absoluteURL)"
             }
         }
 
         case settings
         case addLocation(DirectoryModel.DirectoryType)
         case open(FileInfo)
+        case editRules(URL)
     }
 
     @Published public var section: URL?
@@ -96,6 +99,10 @@ public class SceneModel: ObservableObject, Runnable {
 
     @MainActor public func showSettings() {
         sheet = .settings
+    }
+
+    @MainActor public func editRules(for locationURL: URL) {
+        sheet = .editRules(locationURL)
     }
 
     @MainActor public func addLocation(type: DirectoryModel.DirectoryType) {

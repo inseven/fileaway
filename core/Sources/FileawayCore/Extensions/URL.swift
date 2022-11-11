@@ -31,6 +31,10 @@ extension URL {
         self.deletingLastPathComponent()
     }
 
+    public var rulesUrl: URL {
+        return appendingPathComponent("Rules.fileaway")
+    }
+
     public func matches(extensions: [String]?) -> Bool {
         guard let extensions = extensions else {
             return true
