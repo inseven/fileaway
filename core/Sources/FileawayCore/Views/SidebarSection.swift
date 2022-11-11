@@ -65,6 +65,13 @@ public struct SidebarSection: View {
                     }
                 }
             }
+            .onDelete { indexSet in
+                let urls = indexSet.map { models[$0].url }
+                for url in urls {
+                    // TODO: Handle the error here!
+                    try! applicationModel.removeLocation(url: url)
+                }
+            }
 #if os(iOS)
             if editMode?.wrappedValue.isEditing ?? false {
                 FilePicker(types: [.folder], allowMultiple: false, asCopy: false) { urls in
