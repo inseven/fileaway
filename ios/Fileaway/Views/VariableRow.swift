@@ -18,51 +18,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import MobileCoreServices
+import Combine
+import Foundation
 import SwiftUI
 
 import FileawayCore
 
-struct SettingsView: View {
+struct VariableRow : View {
 
-    enum SheetType: Identifiable {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.editMode) var editMode
+    @State var showSheet: Bool = false
 
-        var id: Self { self }
-
-        case about
-    }
-
-    @Environment(\.dismiss) private var dismiss
-
-    @State private var sheet: SheetType? = nil
+    @ObservedObject var task: TaskModel
+    @ObservedObject var variable: Variable
 
     var body: some View {
-        NavigationStack {
-            VStack {
-                Form {
-                    Section {
-                        Button("About Fileaway...") {
-                            sheet = .about
-                        }
-                        .foregroundColor(.primary)
-                    }
-                }
-            }
-            .navigationBarTitle("Settings", displayMode: .inline)
-            .navigationBarItems(trailing: Button(action: {
-                dismiss()
-            }) {
-                Text("Done")
-                    .bold()
-            })
-            .sheet(item: $sheet) { sheet in
-                switch sheet {
-                case .about:
-                    AboutView()
-                }
+        HStack {
+            Text(variable.name)
+            Spacer()
+            Text(String(describing: variable.type))
+                .foregroundColor(editMode?.wrappedValue == .active ? .accentColor : .secondary)
+        }
+        .sheet(isPresented: $showSheet) {
+            VariableView(task: self.task, variable: self.variable)
+        }
+        .onTapGesture {
+            if self.editMode?.wrappedValue == .active {
+                self.showSheet = true
             }
         }
     }
 
 }
-

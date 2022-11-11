@@ -25,11 +25,21 @@ import Interact
 
 public class SceneModel: ObservableObject, Runnable {
 
+    public enum SheetType: Identifiable {
+
+        public var id: Self {
+            return self
+        }
+
+        case settings
+    }
+
     @Published public var section: URL?
 
     @Published public var inboxes: [DirectoryViewModel] = []
     @Published public var archives: [DirectoryViewModel] = []
     @Published public var directoryViewModel: DirectoryViewModel? = nil
+    @Published public var sheet: SheetType?
 
     private var applicationModel: ApplicationModel
     private var cancelables: Set<AnyCancellable> = []
@@ -73,6 +83,10 @@ public class SceneModel: ObservableObject, Runnable {
 
     @MainActor public func stop() {
         cancelables.removeAll()
+    }
+
+    @MainActor public func showSettings() {
+        sheet = .settings
     }
 
 }

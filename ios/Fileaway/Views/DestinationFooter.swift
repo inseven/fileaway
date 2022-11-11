@@ -18,51 +18,41 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import MobileCoreServices
+import Combine
+import Foundation
 import SwiftUI
 
 import FileawayCore
 
-struct SettingsView: View {
+struct DestinationFooter: View {
 
-    enum SheetType: Identifiable {
-
-        var id: Self { self }
-
-        case about
-    }
-
-    @Environment(\.dismiss) private var dismiss
-
-    @State private var sheet: SheetType? = nil
+    @Environment(\.editMode) var editMode
+    @ObservedObject var task: TaskModel
 
     var body: some View {
-        NavigationStack {
-            VStack {
-                Form {
-                    Section {
-                        Button("About Fileaway...") {
-                            sheet = .about
+        VStack {
+            if self.editMode?.wrappedValue == .active {
+                HStack {
+                    Button(action: {
+                        self.task.destination.append(ComponentModel(value: "Text", type: .text, variable: nil))
+                    }) {
+                        Text("Text")
+                    }
+                    .buttonStyle(FilledButton())
+                    ForEach(task.variables) { variable in
+                        Button(action: {
+                            self.task.destination.append(ComponentModel(value: variable.name, type: .variable, variable: variable))
+                        }) {
+                            Text(String(describing: variable.name))
                         }
-                        .foregroundColor(.primary)
+                        .buttonStyle(FilledButton())
                     }
                 }
-            }
-            .navigationBarTitle("Settings", displayMode: .inline)
-            .navigationBarItems(trailing: Button(action: {
-                dismiss()
-            }) {
-                Text("Done")
-                    .bold()
-            })
-            .sheet(item: $sheet) { sheet in
-                switch sheet {
-                case .about:
-                    AboutView()
-                }
+                .padding()
+            } else {
+                DestinationView(task: task)
             }
         }
     }
 
 }
-
