@@ -56,9 +56,7 @@ struct LocationsEditor: View {
                             Text(directory.name)
                         }
                         .contextMenu {
-                            LocationMenuItems(url: directory.url) { error in
-                                alertType = .error(error: error)
-                            }
+                            LocationMenuItems(url: directory.url)
                         }
                     }
                 }

@@ -73,6 +73,8 @@ struct ContentView: View {
                 }
             case .open(let file):
                 WizardView(file: file)
+            case .editRules(let url):
+                TasksView(tasks: TasksModel(url: url))
             }
         }
         .runs(sceneModel)

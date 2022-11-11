@@ -22,14 +22,13 @@ import SwiftUI
 
 public struct LocationMenuItems: View {
 
-    @Environment(\.applicationModel) var applicationModel
+    @Environment(\.applicationModel) private var applicationModel
+    @EnvironmentObject private var sceneModel: SceneModel
 
-    var url: URL
-    var onError: (Error) -> Void
+    private var url: URL
 
-    public init(url: URL, onError: @escaping (Error) -> Void) {
+    public init(url: URL) {
         self.url = url
-        self.onError = onError
     }
 
     public var body: some View {
@@ -38,13 +37,20 @@ public struct LocationMenuItems: View {
         Button("Reveal in Finder") {
             NSWorkspace.shared.activateFileViewerSelecting([url])
         }
-        Divider()
+#else
+        Button {
+            sceneModel.editRules(for: url)
+        } label: {
+            Label("Edit Rules", systemImage: "tray.and.arrow.down")
+        }
 #endif
+        Divider()
         Button(role: .destructive) {
             do {
                 try applicationModel.removeLocation(url: url)
             } catch {
-                self.onError(error)
+                print("Failed to remove location with error \(error).")
+                // TODO: Handle this error in the application model or scene model.
             }
         } label: {
             Label("Delete", systemImage: "trash")

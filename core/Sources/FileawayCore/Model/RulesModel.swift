@@ -23,32 +23,32 @@ import SwiftUI
 
 public class RulesModel: ObservableObject {
 
-    public let rootUrl: URL
-    public let url: URL
+    private let rootUrl: URL
+    private let url: URL
 
-    @Published public var mutableRules: [RuleModel]
+    @Published public var ruleModels: [RuleModel]
 
     var rulesSubscription: Cancellable?
 
     public init(url: URL) {
         self.rootUrl = url
-        self.url = url.appendingPathComponent("Rules.fileaway")
+        self.url = url.rulesUrl
         if FileManager.default.fileExists(atPath: self.url.path) {
             do {
-                self.mutableRules = try RuleList(url: self.url).models(for: self.rootUrl)
+                self.ruleModels = try RuleList(url: self.url).models(for: self.rootUrl)
             } catch {
                 // TODO: Propagate this error!
                 print("Failed to load rules with error \(error).")
-                self.mutableRules = []
+                self.ruleModels = []
             }
         } else {
-            self.mutableRules = []
+            self.ruleModels = []
         }
         updateSubscription()
     }
 
     private func updateSubscription() {
-        let changes = self.mutableRules.map { $0.objectWillChange }
+        let changes = self.ruleModels.map { $0.objectWillChange }
         rulesSubscription = Publishers.MergeMany(changes).receive(on: DispatchQueue.main).sink { _ in
             self.objectWillChange.send()
             try? self.save()
@@ -63,7 +63,7 @@ public class RulesModel: ObservableObject {
      makes sense to prevent users from creating identically named rules.
      */
     public func contains(ruleNamed name: String) -> Bool {
-        let names = Set(mutableRules.map { $0.name })
+        let names = Set(ruleModels.map { $0.name })
         return names.contains(name)
     }
 
@@ -86,7 +86,7 @@ public class RulesModel: ObservableObject {
         guard !contains(ruleNamed: ruleModel.name) else {
             throw FileawayError.duplicateRuleName
         }
-        mutableRules.append(ruleModel)
+        ruleModels.append(ruleModel)
         updateSubscription()
         try save()
     }
@@ -114,18 +114,18 @@ public class RulesModel: ObservableObject {
     }
 
     public func duplicate(ids: Set<RuleModel.ID>) throws -> [RuleModel] {
-        let rules = mutableRules.filter { ids.contains($0.id) }
+        let rules = ruleModels.filter { ids.contains($0.id) }
         return try rules.map { try duplicate($0, preferredName: "Copy of " + $0.name) }
     }
 
     public func remove(ids: Set<RuleModel.ID>) throws {
-        mutableRules.removeAll { ids.contains($0.id) }
+        ruleModels.removeAll { ids.contains($0.id) }
         try save()
     }
 
     private func save() throws {
         dispatchPrecondition(condition: .onQueue(.main))
-        let configurationList = RuleList(ruleModels: mutableRules)
+        let configurationList = RuleList(ruleModels: ruleModels)
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
         let data = try encoder.encode(configurationList)

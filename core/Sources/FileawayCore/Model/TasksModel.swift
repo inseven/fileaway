@@ -23,20 +23,36 @@ import Foundation
 
 public class TasksModel: ObservableObject, BackChannelable {
 
+    public let rootUrl: URL
+    public let url: URL
+
     @Published public var taskModels: [TaskModel]
 
     var tasksBackChannel: BackChannel<TaskModel>?
-
-    public init() {
-        self.taskModels = []
-    }
 
     public var count: Int {
         return taskModels.count
     }
 
-    public init(_ rules: [Rule]) {
-        self.taskModels = rules.map { TaskModel(rule: $0) }
+    public init(url: URL) {
+        print("Load TasksModel with url \(url)")
+        self.rootUrl = url
+        self.url = url.rulesUrl
+        if FileManager.default.fileExists(atPath: self.url.path) {
+            do {
+                self.taskModels = try RuleList(url: self.url).rules.map { rule in
+                    return TaskModel(rule: rule)
+                }
+                print(taskModels)
+            } catch {
+                // TODO: Propagate this error!
+                print("Failed to load rules with error \(error).")
+                self.taskModels = []
+            }
+        } else {
+            self.taskModels = []
+        }
+        establishBackChannel()
     }
 
     public func establishBackChannel() {
