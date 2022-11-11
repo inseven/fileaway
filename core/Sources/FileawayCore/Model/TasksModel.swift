@@ -23,43 +23,43 @@ import Foundation
 
 public class TasksModel: ObservableObject, BackChannelable {
 
-    @Published public var tasks: [TaskModel]
+    @Published public var taskModels: [TaskModel]
 
     var tasksBackChannel: BackChannel<TaskModel>?
 
     public init() {
-        self.tasks = []
+        self.taskModels = []
     }
 
     public var count: Int {
-        return tasks.count
+        return taskModels.count
     }
 
-    public init(_ tasks: [Task]) {
-        self.tasks = tasks.map { TaskModel(task: $0) }
+    public init(_ rules: [Rule]) {
+        self.taskModels = rules.map { TaskModel(rule: $0) }
     }
 
     public func establishBackChannel() {
-        tasksBackChannel = BackChannel(value: tasks, publisher: $tasks).bind {
+        tasksBackChannel = BackChannel(value: taskModels, publisher: $taskModels).bind {
             self.objectWillChange.send()
         }
     }
 
-    public func validate(task: TaskModel) -> Bool {
-        return self.tasks.filter { $0.id != task.id && $0.name == task.name }.count < 1
+    public func validate(taskModel: TaskModel) -> Bool {
+        return self.taskModels.filter { $0.id != taskModel.id && $0.name == taskModel.name }.count < 1
     }
 
     public func validate() -> Bool {
-        let names = Set(tasks.map { $0.name })
-        return names.count == tasks.count
+        let names = Set(taskModels.map { $0.name })
+        return names.count == taskModels.count
     }
 
     public func validateChildren() -> Bool {
-        return self.tasks.map { $0.validate() }.reduce(false, { $0 || $1 })
+        return self.taskModels.map { $0.validate() }.reduce(false, { $0 || $1 })
     }
 
     public func onChange(completion: @escaping () -> Void) -> Cancellable {
-        return $tasks.sink { _ in
+        return $taskModels.sink { _ in
             DispatchQueue.main.async {
                 completion()
             }
@@ -68,16 +68,16 @@ public class TasksModel: ObservableObject, BackChannelable {
 
     public func update(task: TaskModel) {
         guard
-            let index = self.tasks.firstIndex(where: { $0.id == task.id }),
+            let index = self.taskModels.firstIndex(where: { $0.id == task.id }),
             let range = Range(NSRange(location: index, length: 1))else {
                 return
         }
-        self.tasks.replaceSubrange(range, with: [task])
+        self.taskModels.replaceSubrange(range, with: [task])
         assert(validate() && validateChildren())
     }
 
     public func createTask() {
-        let names = Set(tasks.map { $0.name })
+        let names = Set(taskModels.map { $0.name })
         var index = 1
         var name = ""
         repeat {
@@ -91,7 +91,7 @@ public class TasksModel: ObservableObject, BackChannelable {
                                 ComponentModel(value: "New Folder/", type: .text, variable: nil),
                                 ComponentModel(value: "Date", type: .variable, variable: nil),
                                 ComponentModel(value: " Description", type: .text, variable: nil)])
-        self.tasks.append(task)
+        self.taskModels.append(task)
     }
 
 }

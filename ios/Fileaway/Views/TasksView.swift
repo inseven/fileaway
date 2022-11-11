@@ -31,13 +31,15 @@ struct TasksView: View {
         VStack {
             List {
                 Section {
-                    ForEach(tasks.tasks) { task in
-                        NavigationLink(destination: TaskView(tasks: self.tasks, editingTask: TaskModel(task), originalTask: task)) {
+                    ForEach(tasks.taskModels) { task in
+                        NavigationLink(destination: TaskView(tasks: self.tasks,
+                                                             editingTaskModel: TaskModel(task),
+                                                             originalTaskModel: task)) {
                             Text(task.name)
                         }
                     }
                     .onDelete {
-                        self.tasks.tasks.remove(atOffsets: $0)
+                        self.tasks.taskModels.remove(atOffsets: $0)
                     }
                 }
             }

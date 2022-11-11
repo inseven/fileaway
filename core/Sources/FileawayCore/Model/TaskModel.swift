@@ -77,12 +77,12 @@ public class TaskModel: ObservableObject, Identifiable, BackChannelable, CustomS
                   destination: taskState.destination.map { ComponentModel($0, variable: nil) })
     }
 
-    public init(task: Task) {
-        self.id = UUID()
-        self.name = task.name
-        let variables = task.rule.variables
+    public init(rule: Rule) {
+        self.id = rule.id
+        self.name = rule.name
+        let variables = rule.variables
         self.variables = variables
-        self.destination = task.rule.destination.map { component in
+        self.destination = rule.destination.map { component in
             ComponentModel(component, variable: variables.first { $0.name == component.value } )
         }
     }
@@ -143,14 +143,13 @@ public class TaskModel: ObservableObject, Identifiable, BackChannelable, CustomS
 
 }
 
-extension Task {
+extension Rule {
 
     public init(_ taskModel: TaskModel) {
-        self.init(name: taskModel.name,
-                  rule: Rule(id: taskModel.id,
-                             name: taskModel.name,
-                             variables: taskModel.variables,
-                             destination: taskModel.destination.map { Component($0) }))
+        self.init(id: taskModel.id,
+                  name: taskModel.name,
+                  variables: taskModel.variables,
+                  destination: taskModel.destination.map { Component($0) })
     }
 
 }
