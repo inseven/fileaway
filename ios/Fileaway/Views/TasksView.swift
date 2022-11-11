@@ -44,13 +44,21 @@ struct TasksView: View {
                         }
                     }
                 }
+                .listStyle(.plain)
             }
-            .navigationBarItems(trailing: Button(action: {
-                self.tasks.createTask()
-            }) {
-                Text("Add")
-            })
+            .toolbar {
+
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        self.tasks.createTask()
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
+                
+            }
             .navigationBarTitle("Rules")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 

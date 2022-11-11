@@ -49,7 +49,7 @@ struct TaskView: View {
 
     var body: some View {
         return VStack {
-            List {
+            Form {
                 Section(footer: ErrorText(text: validate() ? nil : "Task names must be unique.")) {
                     EditText("Task", text: $editingTaskModel.name)
                 }
@@ -78,9 +78,9 @@ struct TaskView: View {
                 }
             }
             .environment(\.editMode, $editMode)
-            .listStyle(GroupedListStyle())
         }
         .navigationBarTitle(editingTaskModel.name)
+        .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(editMode == .active)
         .navigationBarItems(trailing: Button(action: {
             if (self.editMode == .active) {
