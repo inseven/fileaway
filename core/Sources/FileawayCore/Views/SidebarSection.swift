@@ -73,7 +73,7 @@ public struct SidebarSection: View {
                 }
             }
 #if os(iOS)
-            if editMode?.wrappedValue.isEditing ?? false {
+            if (editMode?.wrappedValue.isEditing ?? false) || models.isEmpty {
                 Button("Add...") {
                     sceneModel.addLocation(type: type)
                 }
