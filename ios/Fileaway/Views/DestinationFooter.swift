@@ -41,7 +41,8 @@ struct DestinationFooter: View {
                     .buttonStyle(FilledButton())
                     ForEach(task.variables) { variable in
                         Button(action: {
-                            self.task.destination.append(ComponentModel(value: variable.name, type: .variable, variable: variable))
+                            self.task.destination.append(ComponentModel(value: variable.name,
+                                                                        type: .variable, variable: variable))
                         }) {
                             Text(String(describing: variable.name))
                         }

@@ -30,17 +30,19 @@ struct TasksView: View {
     var body: some View {
         VStack {
             List {
-                Section() {
+                Section {
                     ForEach(tasks.tasks) { task in
                         NavigationLink(destination: TaskView(tasks: self.tasks, editingTask: TaskModel(task), originalTask: task)) {
                             Text(task.name)
                         }
                     }
-                    .onDelete { self.tasks.tasks.remove(atOffsets: $0) }
+                    .onDelete {
+                        self.tasks.tasks.remove(atOffsets: $0)
+                    }
                 }
             }
-            .listStyle(DefaultListStyle())
-        }.navigationBarItems(trailing: Button(action: {
+        }
+        .navigationBarItems(trailing: Button(action: {
             self.tasks.createTask()
         }) {
             Text("Add")
