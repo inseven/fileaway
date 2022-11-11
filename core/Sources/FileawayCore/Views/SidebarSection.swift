@@ -74,13 +74,8 @@ public struct SidebarSection: View {
             }
 #if os(iOS)
             if editMode?.wrappedValue.isEditing ?? false {
-                FilePicker(types: [.folder], allowMultiple: false, asCopy: false) { urls in
-                    guard let url = urls.first else {
-                        return
-                    }
-                    try! applicationModel.addLocation(type: type, url: url)
-                } label: {
-                    Text("Add...")
+                Button("Add...") {
+                    sceneModel.addLocation(type: type)
                 }
             }
 #endif

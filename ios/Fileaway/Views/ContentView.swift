@@ -21,6 +21,7 @@
 import SwiftUI
 
 import Interact
+import FilePicker
 
 import FileawayCore
 
@@ -62,6 +63,14 @@ struct ContentView: View {
             switch sheet {
             case .settings:
                 SettingsView()
+            case .addLocation(let type):
+                FilePickerUIRepresentable(types: [.folder], allowMultiple: false, asCopy: false) { urls in
+                    guard let url = urls.first else {
+                        return
+                    }
+                    // TODO: Handle the error here.
+                    try! applicationModel.addLocation(type: type, url: url)
+                }
             }
         }
         .runs(sceneModel)

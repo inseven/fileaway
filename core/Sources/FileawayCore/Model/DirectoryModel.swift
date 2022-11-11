@@ -25,9 +25,9 @@ import Interact
 
 public class DirectoryModel: ObservableObject, Identifiable, Hashable {
 
-    public enum DirectoryType {
-        case inbox
-        case archive
+    public enum DirectoryType: String {
+        case inbox = "inbox"
+        case archive = "archive"
     }
 
     public static func == (lhs: DirectoryModel, rhs: DirectoryModel) -> Bool {

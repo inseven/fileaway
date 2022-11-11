@@ -34,6 +34,7 @@ public struct Sidebar: View {
             SidebarSection(sceneModel: sceneModel, title: "Inboxes", type: .inbox, systemImage: "tray")
             SidebarSection(sceneModel: sceneModel, title: "Archives", type: .archive, systemImage: "archivebox")
         }
+        .headerProminence(.increased)
 #if os(iOS)
         .toolbar {
             EditButton()
