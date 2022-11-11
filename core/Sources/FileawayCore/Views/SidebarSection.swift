@@ -78,6 +78,7 @@ public struct SidebarSection: View {
             }
 #endif
         }
+        .collapsible(false)
     }
 
 }
