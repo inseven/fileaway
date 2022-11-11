@@ -18,10 +18,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import CryptoKit
 import Foundation
 import SwiftUI
 
 extension URL {
+
+    // Stable file URL that can be used to store the URL as bookmark data.
+    public var bookmarkURL: URL {
+        let identifier = Insecure.MD5.hash(data: self.absoluteString.data(using: .utf8) ?? Data()).map {
+            String(format: "%02hhx", $0)
+        }.joined()
+        let bookmarkURL = FileManager.default.libraryURL.appendingPathComponent(identifier)
+        return bookmarkURL
+    }
 
     public var displayName: String {
         FileManager.default.displayName(atPath: self.path)
@@ -63,6 +73,20 @@ extension URL {
         relComponents.append(contentsOf: destComponents[i...])
         return relComponents.joined(separator: "/")
     }
+
+    public func prepareForSecureAccess() throws {
+#if os(macOS)
+        let _ = try securityScopeBookmarkData()  // Check that we can access the location.
+#else
+        guard startAccessingSecurityScopedResource() else {
+            throw FileawayError.accessError
+        }
+        guard FileManager.default.isReadableFile(atPath: path) else {
+            throw FileawayError.pathError
+        }
+#endif
+    }
+
 
 }
 

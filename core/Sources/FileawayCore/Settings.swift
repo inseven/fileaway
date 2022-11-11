@@ -30,24 +30,16 @@ public class Settings: ObservableObject {
     @Published public var archiveUrls: [URL] = []
 
     public init() {
-#if os(macOS)
-        inboxUrls = (try? UserDefaults.standard.securityScopeUrls(forKey: Self.inboxUrls)) ?? []
-        archiveUrls = (try? UserDefaults.standard.securityScopeUrls(forKey: Self.archiveUrls)) ?? []
-#endif
+        inboxUrls = (try? UserDefaults.standard.securityScopeURLs(forKey: Self.inboxUrls)) ?? []
+        archiveUrls = (try? UserDefaults.standard.securityScopeURLs(forKey: Self.archiveUrls)) ?? []
     }
 
     public func setInboxUrls(_ urls: [URL]) throws {
-#if os(macOS)
-        let bookmarks = try urls.map { try $0.securityScopeBookmarkData() }
-        UserDefaults.standard.set(bookmarks, forKey: Self.inboxUrls);
-#endif
+        try UserDefaults.standard.setSecurityScopeURLs(urls, forKey: Self.inboxUrls)
     }
 
     public func setArchiveUrls(_ urls: [URL]) throws {
-#if os(macOS)
-        let bookmarks = try urls.map { try $0.securityScopeBookmarkData() }
-        UserDefaults.standard.set(bookmarks, forKey: Self.archiveUrls);
-#endif
+        try UserDefaults.standard.setSecurityScopeURLs(urls, forKey: Self.archiveUrls)
     }
 
 }

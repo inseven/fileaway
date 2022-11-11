@@ -27,6 +27,7 @@ public enum FileawayError: Error {
     case accessError
     case pathError
     case bookmarkError
+    case corruptSettings
 }
 
 extension FileawayError: LocalizedError {
@@ -45,6 +46,8 @@ extension FileawayError: LocalizedError {
             return "Unable to read directory at path."
         case .bookmarkError:
             return "Unable to get bookmark url."
+        case .corruptSettings:
+            return "Settings corrupt."
         }
     }
 
