@@ -39,6 +39,9 @@ public struct DirectoryView: View {
                 FileRow(file: file)
             }
         }
+#if os(iOS)
+        .listStyle(.plain)
+#endif
         .contextMenu(forSelectionType: FileInfo.self) { selection in
             if !selection.isEmpty, let file = selection.first {
 
