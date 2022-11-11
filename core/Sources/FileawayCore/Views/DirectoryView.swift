@@ -19,6 +19,7 @@
 // SOFTWARE.
 
 import Combine
+import QuickLook
 import SwiftUI
 
 import Interact
@@ -54,24 +55,34 @@ public struct DirectoryView: View {
                     }
                 }
                 Divider()
+#endif
                 Button("Open") {
                     sceneModel.open(selection)
                 }
+#if os(macOS)
                 Button("Reveal in Finder") {
                     sceneModel.reveal(selection)
                 }
+#endif
                 Divider()
-                Button("Quick Look") {
-                    QuickLookCoordinator.shared.show(url: file.url)
+                Button {
+                    directoryViewModel.showPreview(selecting: selection.first)
+                } label: {
+                    Label("Quick Look", systemImage: "eye")
                 }
                 .disabled(selection.count != 1)
                 Divider()
-                Button("Copy name") {
+                Button {
+#if os(macOS)
                     NSPasteboard.general.clearContents()
                     NSPasteboard.general.setString(file.name, forType: .string)
+#else
+                    UIPasteboard.general.string = file.name
+#endif
+                } label: {
+                    Label("Copy Name", systemImage: "list.clipboard")
                 }
                 .disabled(selection.count != 1)
-#endif
 
             }
         } primaryAction: { selection in
@@ -84,6 +95,7 @@ public struct DirectoryView: View {
         .overlay(directoryViewModel.files.isEmpty ? Placeholder("No Items") : nil)
         .searchable(text: $directoryViewModel.filter)
         .navigationTitle(directoryViewModel.name)
+        .quickLookPreview(directoryViewModel.previewUrl, in: directoryViewModel.previewUrls)
         .focusedValue(\.directoryViewModel, directoryViewModel)
         .runs(directoryViewModel)
         .id(directoryViewModel.url)

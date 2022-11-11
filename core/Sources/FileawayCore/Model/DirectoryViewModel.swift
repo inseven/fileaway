@@ -33,6 +33,34 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
     @Published public var files: [FileInfo] = []
     @Published public var filter: String = ""
     @Published public var selection: Set<FileInfo> = []
+    @Published public var previewUrls: [URL] = []
+
+    @Published private var isShowingPreview: Bool = false
+
+    // Synthesize a URL to be used for the QuickLook preview.
+    // We do this to allow us to dynamically update the selection whenever QuickLook updates the preview URL.
+    lazy public var previewUrl: Binding<URL?> = {
+        return Binding { [weak self] in
+            guard let self = self,
+                  self.isShowingPreview
+            else {
+                return nil
+            }
+            return self.selection.first?.url
+        } set: { [weak self] value in
+            guard let self = self else {
+                return
+            }
+            guard let url = value else {
+                self.isShowingPreview = false
+                return
+            }
+            guard let file = self.files.first(where: { $0.url == url }) else {
+                return
+            }
+            self.selection = [file]
+        }
+    }()
 
     private var directoryModel: DirectoryModel? = nil
     private var cancelables: Set<AnyCancellable> = []
@@ -80,9 +108,13 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
                         return fileInfo1.name.compare(fileInfo2.name) == .orderedAscending
                     }
             }
+            .map { files in
+                return (files, files.map { $0.url })
+            }
             .receive(on: DispatchQueue.main)
-            .sink { files in
+            .sink { files, previewUrls in
                 self.files = files
+                self.previewUrls = previewUrls
             }
             .store(in: &cancelables)
 
@@ -107,18 +139,17 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
         cancelables.removeAll()
     }
 
-    public var canPreview: Bool {
-        return !selection.isEmpty
+    @MainActor public var canPreview: Bool {
+        return selection.count == 1
     }
 
-#if os(macOS)
-    public func preview() {
-        guard let url = selection.first?.url else {
-            return
+
+    @MainActor public func showPreview(selecting file: FileInfo? = nil) {
+        if let file = file {
+            self.selection = [file]
         }
-        QuickLookCoordinator.shared.show(url: url)
+        isShowingPreview = true
     }
-#endif
 
     public var canCut: Bool {
         return !selection.isEmpty

@@ -46,10 +46,7 @@ struct SelectionToolbar: CustomizableToolbarContent {
         }
         ToolbarItem(id: "preview") {
             Button {
-                guard let file = directoryViewModel.selection.first else {
-                    return
-                }
-                QuickLookCoordinator.shared.show(url: file.url)
+                directoryViewModel.showPreview()
             } label: {
                 Label("Preview", systemImage: "eye")
             }
