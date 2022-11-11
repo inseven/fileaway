@@ -33,11 +33,14 @@ public class SceneModel: ObservableObject, Runnable {
                 return "settings"
             case .addLocation(let type):
                 return "add-location-\(type.rawValue)"
+            case .open(let file):
+                return "open-\(file.url.absoluteURL)"
             }
         }
 
         case settings
         case addLocation(DirectoryModel.DirectoryType)
+        case open(FileInfo)
     }
 
     @Published public var section: URL?
@@ -98,5 +101,26 @@ public class SceneModel: ObservableObject, Runnable {
     @MainActor public func addLocation(type: DirectoryModel.DirectoryType) {
         sheet = .addLocation(type)
     }
+
+    @MainActor public func open(_ files: Set<FileInfo>) {
+#if os(macOS)
+        for file in files {
+            NSWorkspace.shared.open(file.url)
+        }
+#else
+        guard let file = files.first else {
+            return
+        }
+        sheet = .open(file)
+#endif
+    }
+
+#if os(macOS)
+    @MainActor public func reveal(_ files: Set<FileInfo>) {
+        for file in files {
+            NSWorkspace.shared.activateFileViewerSelecting([file.url])
+        }
+    }
+#endif
 
 }

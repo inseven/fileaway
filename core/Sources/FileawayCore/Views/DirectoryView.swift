@@ -26,6 +26,7 @@ import Interact
 public struct DirectoryView: View {
 
     @Environment(\.openWindow) var openWindow
+    @EnvironmentObject var sceneModel: SceneModel
 
     @ObservedObject var directoryViewModel: DirectoryViewModel
 
@@ -54,14 +55,10 @@ public struct DirectoryView: View {
                 }
                 Divider()
                 Button("Open") {
-                    for file in selection {
-                        NSWorkspace.shared.open(file.url)
-                    }
+                    sceneModel.open(selection)
                 }
                 Button("Reveal in Finder") {
-                    for file in selection {
-                        NSWorkspace.shared.activateFileViewerSelecting([file.url])
-                    }
+                    sceneModel.reveal(selection)
                 }
                 Divider()
                 Button("Quick Look") {
@@ -78,11 +75,8 @@ public struct DirectoryView: View {
 
             }
         } primaryAction: { selection in
-#if os(macOS)
-            for file in selection {
-                NSWorkspace.shared.open(file.url)
-            }
-#endif
+            sceneModel.open(selection)
+
         }
         // Enter to open.
         // Drag-and-drop.

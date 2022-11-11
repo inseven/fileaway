@@ -71,9 +71,12 @@ struct ContentView: View {
                     // TODO: Handle the error here.
                     try! applicationModel.addLocation(type: type, url: url)
                 }
+            case .open(let file):
+                WizardView(file: file)
             }
         }
         .runs(sceneModel)
+        .environmentObject(sceneModel)
     }
 
 }
