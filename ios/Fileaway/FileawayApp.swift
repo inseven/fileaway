@@ -31,9 +31,8 @@ struct AnytimeApp: App {
 
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                ActionsView(settings: appDelegate.settings)
-            }
+            ContentView(applicationModel: applicationModel)
+                .environment(\.applicationModel, applicationModel)
         }
     }
 

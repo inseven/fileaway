@@ -18,6 +18,7 @@ let package = Package(
     dependencies: [
         .package(path: "./../diligence"),
         .package(path: "./../interact"),
+        .package(path: "./../FilePicker"),
         .package(url: "https://github.com/eonil/FSEvents.git", branch: "master"),
     ],
     targets: [
@@ -28,6 +29,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Diligence", package: "diligence"),
                 .product(name: "Interact", package: "interact"),
+                .product(name: "FilePicker", package: "FilePicker"),
                 .product(name: "EonilFSEvents", package: "FSEvents", condition: .when(platforms: [.macOS])),
             ],
             resources: [
