@@ -90,9 +90,6 @@ public struct DirectoryView: View {
         .overlay(directoryViewModel.files.isEmpty ? Placeholder("No Items") : nil)
         .searchable(text: $directoryViewModel.filter)
         .navigationTitle(directoryViewModel.name)
-#if os(iOS)
-        .navigationBarTitleDisplayMode(.inline)
-#endif
         .focusedValue(\.directoryViewModel, directoryViewModel)
         .runs(directoryViewModel)
         .id(directoryViewModel.url)
