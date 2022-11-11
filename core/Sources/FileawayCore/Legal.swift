@@ -29,9 +29,10 @@ public struct Legal {
     public static let copyright = "Copyright © 2018-2022 InSeven Limited"
 
     public static let actions = [
-        Action("InSeven Limited", url: URL(string: "https://inseven.co.uk")!),
+        Action("Website", url: URL(string: "https://fileaway.app")!),
         Action("Privacy", url: URL(string: "https://fileaway.app/privacy-policy")!),
         Action("GitHub", url: URL(string: "https://github.com/inseven/fileaway")!),
+        Action("InSeven Limited", url: URL(string: "https://inseven.co.uk")!),
     ]
 
     public static let acknowledgements = [
