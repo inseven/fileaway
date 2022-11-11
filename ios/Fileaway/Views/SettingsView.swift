@@ -76,16 +76,6 @@ struct SettingsView: View {
     var body: some View {
         VStack {
             Form {
-                Section("Destination") {
-                    FileChooser("Select...", types: [.folder], url: $settings.destination)
-                }
-                Section {
-                    NavigationLink(destination: TasksView(tasks: settings.tasks)) {
-                        Text("Tasks")
-                        Spacer()
-                        Text("\(settings.tasks.count)").foregroundColor(.secondary)
-                    }
-                }
                 Section {
                     Button("About Fileaway...") {
                         sheet = .about

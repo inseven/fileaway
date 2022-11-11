@@ -18,7 +18,6 @@
 		D858CE6424AB201100F9BCB2 /* ActionMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D858CE6324AB201100F9BCB2 /* ActionMenu.swift */; };
 		D86A8F15249C5F9800839D1A /* DestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86A8F14249C5F9800839D1A /* DestinationView.swift */; };
 		D86AA556291DB7E00078B2DA /* FilePicker in Frameworks */ = {isa = PBXBuildFile; productRef = D86AA555291DB7E00078B2DA /* FilePicker */; };
-		D86AA558291DB9DF0078B2DA /* FileChooser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86AA557291DB9DF0078B2DA /* FileChooser.swift */; };
 		D88B353D28B61247000C8910 /* FileawayCore in Frameworks */ = {isa = PBXBuildFile; productRef = D88B353C28B61247000C8910 /* FileawayCore */; };
 		D88F3D43216F847D00BFE0F9 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88F3D42216F847D00BFE0F9 /* PickerViewController.swift */; };
 		D88F3D4A216F961700BFE0F9 /* PreviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88F3D49216F961700BFE0F9 /* PreviewTableViewCell.swift */; };
@@ -79,7 +78,6 @@
 		D866D66326197AC80025329E /* FileawayCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FileawayCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86A8F14249C5F9800839D1A /* DestinationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationView.swift; sourceTree = "<group>"; };
 		D86AA554291DB7BF0078B2DA /* FilePicker */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = FilePicker; path = ../FilePicker; sourceTree = "<group>"; };
-		D86AA557291DB9DF0078B2DA /* FileChooser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileChooser.swift; sourceTree = "<group>"; };
 		D88F3D42216F847D00BFE0F9 /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		D88F3D49216F961700BFE0F9 /* PreviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewTableViewCell.swift; sourceTree = "<group>"; };
 		D88F3D4B217048B400BFE0F9 /* TypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeViewController.swift; sourceTree = "<group>"; };
@@ -150,7 +148,6 @@
 				D8A871D12916D56400B2932A /* ComponentItem.swift */,
 				D8D81EAF291DC70200870E6E /* ContentView.swift */,
 				D86A8F14249C5F9800839D1A /* DestinationView.swift */,
-				D86AA557291DB9DF0078B2DA /* FileChooser.swift */,
 				D8CCD292246EDC6A007EF2BB /* SettingsView.swift */,
 				D81C5D92249BE3710083BD6F /* TasksView.swift */,
 				D81C5D94249BE6F40083BD6F /* TaskView.swift */,
@@ -421,7 +418,6 @@
 				D8E4CA5F249D317D00F5BC8E /* FilledButton.swift in Sources */,
 				D88F3D4C217048B400BFE0F9 /* TypeViewController.swift in Sources */,
 				D88F3D4F2170689200BFE0F9 /* TextTableViewCell.swift in Sources */,
-				D86AA558291DB9DF0078B2DA /* FileChooser.swift in Sources */,
 				D858CE6224AB1FF500F9BCB2 /* ActionButtonStyle.swift in Sources */,
 				D84319AF249AB9A40014CFE9 /* ActivityIndicator.swift in Sources */,
 				D8A871D22916D56400B2932A /* ComponentItem.swift in Sources */,
