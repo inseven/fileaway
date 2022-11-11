@@ -20,9 +20,6 @@
 
 import SwiftUI
 
-import Interact
-import FilePicker
-
 import FileawayCore
 
 struct WizardView: View {
