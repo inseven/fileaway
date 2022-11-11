@@ -26,7 +26,6 @@ import FileawayCore
 @main
 struct AnytimeApp: App {
 
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject var applicationModel = ApplicationModel()
 
     var body: some Scene {

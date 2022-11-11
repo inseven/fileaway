@@ -22,6 +22,10 @@ import Foundation
 
 extension FileManager {
 
+    public var libraryURL: URL {
+        return urls(for: .libraryDirectory, in: .userDomainMask)[0]
+    }
+
     public func files(at url: URL, extensions: [String]) -> [URL] {
         var files: [URL] = []
         if let enumerator = enumerator(at: url,

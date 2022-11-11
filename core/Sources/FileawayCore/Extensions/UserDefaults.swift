@@ -18,19 +18,46 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import CryptoKit
 import Foundation
 
 extension UserDefaults {
 
+    public func securityScopeURLs(forKey defaultName: String) throws -> [URL] {
 #if os(macOS)
-
-    public func securityScopeUrls(forKey defaultName: String) throws -> [URL] {
         guard let urls = UserDefaults.standard.array(forKey: defaultName) as? [Data] else {
-            return []
+            throw FileawayError.corruptSettings
         }
         return try urls.map { try $0.asSecurityScopeUrl() }
+#else
+        guard let values = UserDefaults.standard.array(forKey: defaultName) as? [String] else {
+            throw FileawayError.corruptSettings
+        }
+        let urls = try values.map { value in
+            let originalURL = URL(string: value)!
+            let data = try URL.bookmarkData(withContentsOf: originalURL.bookmarkURL)
+            var isStale = true
+            let url = try URL(resolvingBookmarkData: data, bookmarkDataIsStale: &isStale)
+            try url.prepareForSecureAccess()
+            return url
+        }
+        return urls
+#endif
     }
 
+    public func setSecurityScopeURLs(_ urls: [URL], forKey defaultName: String) throws {
+#if os(macOS)
+        let bookmarks = try urls.map { try $0.securityScopeBookmarkData() }
+        UserDefaults.standard.set(bookmarks, forKey: defaultName)
+#else
+        for url in urls {
+            let data = try url.bookmarkData(options: .suitableForBookmarkFile,
+                                            includingResourceValuesForKeys: nil,
+                                            relativeTo: nil)
+            try URL.writeBookmarkData(data, to: url.bookmarkURL)
+        }
+        UserDefaults.standard.set(urls.map { $0.absoluteString }, forKey: defaultName)
 #endif
+    }
 
 }

@@ -24,13 +24,4 @@ import FileawayCore
 
 extension URL {
 
-    func prepareForSecureAccess() throws {
-        guard startAccessingSecurityScopedResource() else {
-            throw FileawayError.accessError
-        }
-        guard FileManager.default.isReadableFile(atPath: path) else {
-            throw FileawayError.pathError
-        }
-    }
-
 }

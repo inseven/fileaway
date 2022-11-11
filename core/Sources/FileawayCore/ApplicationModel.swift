@@ -111,15 +111,9 @@ public class ApplicationModel: ObservableObject {
 
     public func addLocation(type: DirectoryModel.DirectoryType, url: URL) throws {
         dispatchPrecondition(condition: .onQueue(.main))
-#if os(macOS)
-        let _ = try url.securityScopeBookmarkData() // Check that we can access the location.
+        try url.prepareForSecureAccess()
         addDirectoryObserver(type: type, url: url)
         try save()
-#else
-        precondition(url.startAccessingSecurityScopedResource())
-        precondition(FileManager.default.isReadableFile(atPath: url.path))
-        addDirectoryObserver(type: type, url: url)
-#endif
     }
 
     @MainActor public func removeLocation(url: URL) throws {
