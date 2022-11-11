@@ -43,7 +43,7 @@ struct ContentView: View {
 
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button {
-                            print("Show settings")
+                            sceneModel.showSettings()
                         } label: {
                             Image(systemName: "gear")
                         }
@@ -56,6 +56,12 @@ struct ContentView: View {
             } else {
                 Placeholder("No Directory Selected")
                     .searchable()
+            }
+        }
+        .sheet(item: $sceneModel.sheet) { sheet in
+            switch sheet {
+            case .settings:
+                SettingsView()
             }
         }
         .runs(sceneModel)

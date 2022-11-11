@@ -24,90 +24,6 @@ import SwiftUI
 
 import FileawayCore
 
-struct VariableRow : View {
-
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @Environment(\.editMode) var editMode
-    @State var showSheet: Bool = false
-
-    @ObservedObject var task: TaskModel
-    @ObservedObject var variable: Variable
-
-    var body: some View {
-        HStack {
-            Text(variable.name)
-            Spacer()
-            Text(String(describing: variable.type)).foregroundColor(editMode?.wrappedValue == .active ? .accentColor : .secondary)
-        }
-        .sheet(isPresented: $showSheet) {
-            VariableView(task: self.task, variable: self.variable)
-        }
-        .onTapGesture {
-            if self.editMode?.wrappedValue == .active {
-                self.showSheet = true
-            }
-        }
-    }
-
-}
-
-struct DestinationFooter: View {
-
-    @Environment(\.editMode) var editMode
-    @ObservedObject var task: TaskModel
-
-    var body: some View {
-        VStack {
-            if self.editMode?.wrappedValue == .active {
-                HStack {
-                    Button(action: {
-                        self.task.destination.append(ComponentModel(value: "Text", type: .text, variable: nil))
-                    }) {
-                        Text("Text")
-                    }
-                    .buttonStyle(FilledButton())
-                    ForEach(task.variables) { variable in
-                        Button(action: {
-                            self.task.destination.append(ComponentModel(value: variable.name, type: .variable, variable: variable))
-                        }) {
-                            Text(String(describing: variable.name))
-                        }
-                        .buttonStyle(FilledButton())
-                    }
-                }
-                .padding()
-            } else {
-                DestinationView(task: task)
-            }
-        }
-    }
-
-}
-
-class Container<T>: ObservableObject, BackChannelable where T: ObservableObject {
-
-    @ObservedObject var object: T;
-    var observer: Cancellable?
-
-    init(_ object: T) {
-        self.object = object
-    }
-
-    func establishBackChannel() {
-        if let backChannelable = object as? BackChannelable {
-            backChannelable.establishBackChannel()
-        }
-        observer = object.objectWillChange.sink { _ in
-            self.objectWillChange.send()
-        }
-    }
-
-    deinit {
-        observer?.cancel()
-    }
-
-}
-
 struct TaskView: View {
 
     @State private var editMode = EditMode.inactive
@@ -137,7 +53,8 @@ struct TaskView: View {
                 Section(footer: ErrorText(text: validate() ? nil : "Task names must be unique.")) {
                     EditText("Task", text: $editingTask.name)
                 }
-                Section(header: Text("Variables".uppercased()), footer: ErrorText(text: editingTask.validate() ? nil : "Variable names must be unique.")) {
+                Section(header: Text("Variables".uppercased()),
+                        footer: ErrorText(text: editingTask.validate() ? nil : "Variable names must be unique.")) {
                     ForEach(editingTask.variables) { variable in
                         VariableRow(task: self.editingTask, variable: variable)
                     }

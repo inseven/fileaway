@@ -18,51 +18,31 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import MobileCoreServices
+import Combine
 import SwiftUI
 
 import FileawayCore
 
-struct SettingsView: View {
+class Container<T>: ObservableObject, BackChannelable where T: ObservableObject {
 
-    enum SheetType: Identifiable {
+    @ObservedObject var object: T;
+    var observer: Cancellable?
 
-        var id: Self { self }
-
-        case about
+    init(_ object: T) {
+        self.object = object
     }
 
-    @Environment(\.dismiss) private var dismiss
-
-    @State private var sheet: SheetType? = nil
-
-    var body: some View {
-        NavigationStack {
-            VStack {
-                Form {
-                    Section {
-                        Button("About Fileaway...") {
-                            sheet = .about
-                        }
-                        .foregroundColor(.primary)
-                    }
-                }
-            }
-            .navigationBarTitle("Settings", displayMode: .inline)
-            .navigationBarItems(trailing: Button(action: {
-                dismiss()
-            }) {
-                Text("Done")
-                    .bold()
-            })
-            .sheet(item: $sheet) { sheet in
-                switch sheet {
-                case .about:
-                    AboutView()
-                }
-            }
+    func establishBackChannel() {
+        if let backChannelable = object as? BackChannelable {
+            backChannelable.establishBackChannel()
+        }
+        observer = object.objectWillChange.sink { _ in
+            self.objectWillChange.send()
         }
     }
 
-}
+    deinit {
+        observer?.cancel()
+    }
 
+}

@@ -23,46 +23,38 @@ import SwiftUI
 
 import FileawayCore
 
-struct SettingsView: View {
+struct VariableView: View {
 
-    enum SheetType: Identifiable {
-
-        var id: Self { self }
-
-        case about
-    }
-
-    @Environment(\.dismiss) private var dismiss
-
-    @State private var sheet: SheetType? = nil
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @ObservedObject var task: TaskModel
+    @ObservedObject var variable: Variable
 
     var body: some View {
-        NavigationStack {
+        NavigationView {
             VStack {
                 Form {
-                    Section {
-                        Button("About Fileaway...") {
-                            sheet = .about
+                    Section(footer: ErrorText(text: task.validate() ? nil : "Variable names must be unique.")) {
+                        TextField("Name", text: $variable.name)
+                    }
+                    Section(header: Text("Type".uppercased())) {
+                        ForEach(VariableType.allCases) { type in
+                            Selectable(isSelected: self.variable.type.id == type.id, action: {
+                                self.variable.type = type
+                            }) {
+                                Text(String(describing: type))
+                            }
                         }
-                        .foregroundColor(.primary)
                     }
                 }
             }
-            .navigationBarTitle("Settings", displayMode: .inline)
+            .navigationBarTitle("Edit Variable", displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {
-                dismiss()
+                self.presentationMode.wrappedValue.dismiss()
             }) {
-                Text("Done")
-                    .bold()
+                Text("Done").bold().disabled(!task.validate())
             })
-            .sheet(item: $sheet) { sheet in
-                switch sheet {
-                case .about:
-                    AboutView()
-                }
-            }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 
 }
-
