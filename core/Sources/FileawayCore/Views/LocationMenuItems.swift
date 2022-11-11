@@ -40,12 +40,14 @@ public struct LocationMenuItems: View {
         }
         Divider()
 #endif
-        Button("Remove") {
+        Button(role: .destructive) {
             do {
                 try applicationModel.removeLocation(url: url)
             } catch {
                 self.onError(error)
             }
+        } label: {
+            Label("Delete", systemImage: "trash")
         }
     }
 
