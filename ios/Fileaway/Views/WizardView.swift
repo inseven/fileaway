@@ -18,40 +18,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Combine
 import SwiftUI
-
-import Interact
 
 import FileawayCore
 
-struct ContentView: View {
+struct WizardView: View {
 
-    @ObservedObject var applicationModel: ApplicationModel
-    @StateObject var sceneModel: SceneModel
-    @FocusedValue(\.directoryViewModel) var directoryViewModel
-
-    init(applicationModel: ApplicationModel) {
-        self.applicationModel = applicationModel
-        _sceneModel = StateObject(wrappedValue: SceneModel(applicationModel: applicationModel))
-    }
+    let file: FileInfo
 
     var body: some View {
-        NavigationSplitView {
-            Sidebar(sceneModel: sceneModel)
-        } detail: {
-            if let directoryViewModel = sceneModel.directoryViewModel {
-                DirectoryView(directoryViewModel: directoryViewModel)
-            } else {
-                Placeholder("No Directory Selected")
-                    .searchable()
+        NavigationStack {
+            VStack {
+                Text(file.name)
             }
         }
-        .toolbar(id: "main") {
-            // TODO: This nil handling should be done inside the scene model?
-            SelectionToolbar(directoryViewModel: directoryViewModel ?? DirectoryViewModel(directoryModel: nil))
-        }
-        .runs(sceneModel)
-        .environmentObject(sceneModel)
     }
+
 }
