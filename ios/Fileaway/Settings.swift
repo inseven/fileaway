@@ -54,10 +54,7 @@ class LegacySettings: ObservableObject {
         didSet {
             tasks.establishBackChannel()
             taskObserver = tasks.onChange {
-                let tasks = self.tasks.tasks.map { Task($0) }
-                let rules = tasks.map { task in
-                    return task.rule
-                }
+                let rules = self.tasks.taskModels.map { Rule($0) }
                 do {
                     let encoder = JSONEncoder()
                     encoder.outputFormatting = [.prettyPrinted, .sortedKeys]

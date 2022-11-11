@@ -22,7 +22,7 @@ import Foundation
 
 public class Manager {
 
-    public var tasks: [Task] = []
+    public var tasks: [Rule] = []
 
     /**
      * Return the URL of the preferred configuration file.
@@ -47,20 +47,20 @@ public class Manager {
         return URL(fileURLWithPath: NSString(string: UserDefaults.standard.string(forKey: "root")!).expandingTildeInPath)
     }
 
-    static func load(_ url: URL) throws -> [Task] {
+    static func load(_ url: URL) throws -> [Rule] {
         let data = try Data(contentsOf: url)
         let decoder = JSONDecoder()
         let configurationList = try decoder.decode(RuleList.self, from: data)
-        let tasks = configurationList.rules.map { rule -> Task in
-            return Task(name: rule.name, rule: rule)
-        }.sorted { (task0, task1) -> Bool in
-            return task0.name < task1.name
-        }
+        let tasks = configurationList
+            .rules
+            .sorted { (task0, task1) -> Bool in
+                return task0.name < task1.name
+            }
         return tasks
     }
 
-    public func destinationUrl(_ task: Task, variableProvider: VariableProvider, rootUrl: URL? = nil) -> URL {
-        let destination = task.rule.destination.reduce("") { (result, component) -> String in
+    public func destinationUrl(_ rule: Rule, variableProvider: VariableProvider, rootUrl: URL? = nil) -> URL {
+        let destination = rule.destination.reduce("") { (result, component) -> String in
             switch component.type {
             case .text:
                 return result.appending(component.value)
