@@ -24,6 +24,8 @@ import Interact
 
 struct FileRow: View {
 
+    @EnvironmentObject var sceneModel: SceneModel
+
     struct LayoutMetrics {
         static let iconSize = CGSize(width: 48.0, height: 48.0)
     }
@@ -50,10 +52,13 @@ struct FileRow: View {
                         }
                     }
                     HStack {
-                        Text(file.directoryUrl.path)
-                            .lineLimit(1)
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
+                        if let rootURL = sceneModel.directoryViewModel?.url,
+                           let relativePath = file.directoryUrl.relativePath(from: rootURL) {
+                            Text(relativePath)
+                                .lineLimit(1)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
                         Spacer()
                     }
                 }
