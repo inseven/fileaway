@@ -28,12 +28,12 @@ struct RulesEditor: View {
 
     enum SheetType: Identifiable {
 
-        case rule(rule: RuleModel)
+        case rule(RuleModel)
 
         var id: String {
             switch self {
-            case .rule(let rule):
-                return "rule-\(rule.id)"
+            case .rule(let ruleModel):
+                return "rule-\(ruleModel.id)"
             }
         }
 
@@ -57,7 +57,7 @@ struct RulesEditor: View {
         do {
             let rule = try ruleSet.new(preferredName: "Rule")
             selection = [rule.id]
-            sheet = .rule(rule: rule)
+            sheet = .rule(rule)
         } catch {
             alert = .error(error: error)
         }
@@ -65,11 +65,11 @@ struct RulesEditor: View {
 
     @MainActor private func edit(ids: Set<RuleModel.ID>) {
         guard ids.count == 1,
-              let rule = rules(for: ids).first
+              let ruleModel = rules(for: ids).first
         else {
             return
         }
-        sheet = .rule(rule: rule)
+        sheet = .rule(ruleModel)
     }
 
     @MainActor private func delete(ids: Set<RuleModel.ID>) {
@@ -151,7 +151,7 @@ struct RulesEditor: View {
             .sheet(item: $sheet) { sheet in
                 switch sheet {
                 case .rule(let rule):
-                    RuleSheet(rule: rule)
+                    RuleSheet(ruleModel: rule)
                 }
             }
             .alert(item: $alert) { alert in

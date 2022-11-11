@@ -25,14 +25,14 @@ import FileawayCore
 
 class RuleInstance: ObservableObject {
 
-    var rule: RuleModel
+    var ruleModel: RuleModel
     var variables: [VariableInstance]
     var subscriptions: [Cancellable]?
 
-    var name: String { rule.name }
+    var name: String { ruleModel.name }
 
     init(rule: RuleModel) {
-        self.rule = rule
+        self.ruleModel = rule
         let variables = rule.variables.map { $0.instance() }
         self.variables = variables
         self.subscriptions = variables.map { $0 as! Observable }.map { $0.observe { self.objectWillChange.send() } }
@@ -46,7 +46,7 @@ class RuleInstance: ObservableObject {
     }
 
     func destination(for url: URL) -> URL {
-        let destination = rule.destination.reduce("") { (result, component) -> String in
+        let destination = ruleModel.destination.reduce("") { (result, component) -> String in
             switch component.type {
             case .text:
                 return result.appending(component.value)
@@ -57,7 +57,7 @@ class RuleInstance: ObservableObject {
                 return result.appending(variable.textRepresentation)
             }
         }
-        return self.rule.rootUrl.appendingPathComponent(destination).appendingPathExtension(url.pathExtension)
+        return self.ruleModel.rootUrl.appendingPathComponent(destination).appendingPathExtension(url.pathExtension)
     }
 
     func move(url: URL) throws {

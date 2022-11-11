@@ -48,9 +48,9 @@ struct DetailsPage: View {
     @State var date: Date = Date()
     @StateObject var dateExtractor: DateExtractor
 
-    init(url: URL, rule: RuleModel) {
+    init(url: URL, ruleModel: RuleModel) {
         self.url = url
-        _rule = StateObject(wrappedValue: RuleInstance(rule: rule))
+        _rule = StateObject(wrappedValue: RuleInstance(rule: ruleModel))
         _dateExtractor = StateObject(wrappedValue: DateExtractor(url: url))
     }
 

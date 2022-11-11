@@ -24,17 +24,17 @@ import FileawayCore
 
 struct RuleDetailView: View {
 
-    @ObservedObject var rule: RuleModel
+    @ObservedObject var ruleModel: RuleModel
 
     var body: some View {
         VStack(alignment: .leading) {
-            TextField("Title", text: $rule.name)
+            TextField("Title", text: $ruleModel.name)
             Text("Variables")
                 .font(.headline)
-            VariableList(rule: rule)
+            VariableList(ruleModel: ruleModel)
             Text("Destination")
                 .font(.headline)
-            DestinationList(rule: rule)
+            DestinationList(ruleModel: ruleModel)
             Spacer()
         }
         .padding()
