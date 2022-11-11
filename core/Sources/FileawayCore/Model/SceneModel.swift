@@ -27,11 +27,17 @@ public class SceneModel: ObservableObject, Runnable {
 
     public enum SheetType: Identifiable {
 
-        public var id: Self {
-            return self
+        public var id: String {
+            switch self {
+            case .settings:
+                return "settings"
+            case .addLocation(let type):
+                return "add-location-\(type.rawValue)"
+            }
         }
 
         case settings
+        case addLocation(DirectoryModel.DirectoryType)
     }
 
     @Published public var section: URL?
@@ -87,6 +93,10 @@ public class SceneModel: ObservableObject, Runnable {
 
     @MainActor public func showSettings() {
         sheet = .settings
+    }
+
+    @MainActor public func addLocation(type: DirectoryModel.DirectoryType) {
+        sheet = .addLocation(type)
     }
 
 }
