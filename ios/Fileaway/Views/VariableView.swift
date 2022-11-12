@@ -27,7 +27,7 @@ struct VariableView: View {
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @ObservedObject var task: TaskModel
-    @ObservedObject var variable: Variable
+    @ObservedObject var variable: VariableModel
 
     var body: some View {
         NavigationView {

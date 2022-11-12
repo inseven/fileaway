@@ -25,7 +25,7 @@ import FileawayCore
 struct VariableList: View {
 
     @ObservedObject var ruleModel: RuleModel
-    @State var selection: Variable?
+    @State var selection: VariableModel?
 
     var body: some View {
         VStack {

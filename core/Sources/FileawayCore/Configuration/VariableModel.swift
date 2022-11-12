@@ -20,7 +20,7 @@
 
 import SwiftUI
 
-public class Variable: ObservableObject, Identifiable, Codable, Hashable {
+public class VariableModel: ObservableObject, Identifiable, Codable, Hashable {
 
     struct DateParams: Codable {
         let hasDay: Bool
@@ -41,7 +41,7 @@ public class Variable: ObservableObject, Identifiable, Codable, Hashable {
         case date
     }
 
-    public static func == (lhs: Variable, rhs: Variable) -> Bool {
+    public static func == (lhs: VariableModel, rhs: VariableModel) -> Bool {
         return lhs.id == rhs.id
     }
 

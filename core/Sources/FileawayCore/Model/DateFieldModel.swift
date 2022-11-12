@@ -31,7 +31,7 @@ public class DateFieldModel: VariableFieldModel, Editable {
         return formatter.string(from: date)
     }
 
-    public init(variable: Variable, initialValue: Date) {
+    public init(variable: VariableModel, initialValue: Date) {
         _date = Published(initialValue: initialValue)
         super.init(variable: variable)
     }

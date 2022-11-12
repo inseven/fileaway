@@ -28,7 +28,7 @@ protocol TextTableViewCellDelegate: AnyObject {
 class TextTableViewCell: UITableViewCell {
 
     weak var delegate: TextTableViewCellDelegate?
-    var variable: Variable? {
+    var variable: VariableModel? {
         didSet {
             textField.placeholder = variable?.name
         }

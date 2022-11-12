@@ -29,7 +29,7 @@ public class StringFieldModel: VariableFieldModel, Editable {
 
     @Published public var string: String
 
-    public init(variable: Variable, initialValue: String) {
+    public init(variable: VariableModel, initialValue: String) {
         _string = Published(initialValue: initialValue)
         super.init(variable: variable)
     }

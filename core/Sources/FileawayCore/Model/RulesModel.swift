@@ -96,7 +96,7 @@ public class RulesModel: ObservableObject {
         let rule = RuleModel(id: UUID(),
                              rootUrl: rootUrl,
                              name: name,
-                             variables: [Variable(name: "Date", type: .date(hasDay: true))],
+                             variables: [VariableModel(name: "Date", type: .date(hasDay: true))],
                              destination: [
                                 ComponentModel(value: "New Folder/", type: .text, variable: nil),
                                 ComponentModel(value: "Date", type: .variable, variable: nil),

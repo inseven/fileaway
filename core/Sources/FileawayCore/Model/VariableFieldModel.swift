@@ -23,16 +23,16 @@ import Foundation
 public class VariableFieldModel: Identifiable {
 
     public var id: UUID { variable.id }
-    public var variable: Variable
+    public var variable: VariableModel
     public var name: String { variable.name }
 
-    public init(variable: Variable) {
+    public init(variable: VariableModel) {
         self.variable = variable
     }
 
 }
 
-extension Variable {
+extension VariableModel {
 
     public func instance() -> VariableFieldModel {
         switch self.type {

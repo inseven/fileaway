@@ -24,7 +24,7 @@ import FileawayCore
 
 struct VariableTextField: View {
 
-    @ObservedObject var variable: Variable
+    @ObservedObject var variable: VariableModel
     @State var variableType: VariableType = .string
 
     var body: some View {
