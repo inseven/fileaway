@@ -62,6 +62,14 @@ public struct SidebarSection: View {
                 .contextMenu {
                     LocationMenuItems(url: inbox.url)
                 }
+                .swipeActions(edge: .trailing) {
+                    Button(role: .destructive) {
+                        // TODO: Handle the error here!
+                        try! applicationModel.removeLocation(url: inbox.url)
+                    } label: {
+                        Text("Remove")
+                    }
+                }
             }
             .onDelete { indexSet in
                 let urls = indexSet.map { models[$0].url }
