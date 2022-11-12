@@ -18,14 +18,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
+import Combine
+import SwiftUI
 
-public protocol VariableProviderDelegate {
-    func variableProviderDidUpdate(variableProvider: VariableProvider)
-}
+public class DateModel: VariableModel, VariableProvider {
 
-public protocol VariableProvider {
-    func variable(forKey key: String) -> String?
-    var isComplete: Bool { get }
-    var delegate: VariableProviderDelegate? { get set }
+    @Published public var date: Date
+
+    public var textRepresentation: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyOyy-MM-dd"
+        return formatter.string(from: date)
+    }
+
+    public init(variable: Variable, initialValue: Date) {
+        _date = Published(initialValue: initialValue)
+        super.init(variable: variable)
+    }
+
+    public func observe(_ onChange: @escaping () -> Void) -> AnyCancellable {
+        self.objectWillChange.sink(receiveValue: onChange)
+    }
+
 }

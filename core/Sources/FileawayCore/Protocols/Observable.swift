@@ -20,6 +20,6 @@
 
 import Combine
 
-protocol Observable {
+public protocol Observable {
     func observe(_ onChange: @escaping () -> Void) -> AnyCancellable
 }

@@ -21,22 +21,20 @@
 import Combine
 import SwiftUI
 
-import FileawayCore
+public class StringModel: VariableModel, VariableProvider {
 
-class StringInstance: VariableInstance, VariableProvider {
-
-    var textRepresentation: String {
+    public var textRepresentation: String {
         return string
     }
 
-    @Published var string: String
+    @Published public var string: String
 
-    init(variable: Variable, initialValue: String) {
+    public init(variable: Variable, initialValue: String) {
         _string = Published(initialValue: initialValue)
         super.init(variable: variable)
     }
 
-    func observe(_ onChange: @escaping () -> Void) -> AnyCancellable {
+    public func observe(_ onChange: @escaping () -> Void) -> AnyCancellable {
         self.objectWillChange.sink(receiveValue: onChange)
     }
 

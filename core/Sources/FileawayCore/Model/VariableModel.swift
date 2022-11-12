@@ -20,6 +20,27 @@
 
 import Foundation
 
-protocol TextProvider {
-    var textRepresentation: String { get }
+public class VariableModel: Identifiable {
+
+    public var id: UUID { variable.id }
+    public var variable: Variable
+    public var name: String { variable.name }
+
+    public init(variable: Variable) {
+        self.variable = variable
+    }
+
+}
+
+extension Variable {
+
+    public func instance() -> VariableModel {
+        switch self.type {
+        case .string:
+            return StringModel(variable: self, initialValue: "")
+        case .date:
+            return DateModel(variable: self, initialValue: Date())
+        }
+    }
+
 }

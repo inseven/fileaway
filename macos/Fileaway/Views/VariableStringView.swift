@@ -20,9 +20,11 @@
 
 import SwiftUI
 
+import FileawayCore
+
 struct VariableStringView: View {
 
-    @StateObject var variable: StringInstance
+    @StateObject var variable: StringModel
     @State var string: String = ""
 
     var body: some View {

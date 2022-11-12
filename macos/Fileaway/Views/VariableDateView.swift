@@ -20,9 +20,11 @@
 
 import SwiftUI
 
+import FileawayCore
+
 struct VariableDateView: View {
 
-    @ObservedObject var variable: DateInstance
+    @ObservedObject var variable: DateModel
 
     enum PickerDate: Double {
         case today = 1
