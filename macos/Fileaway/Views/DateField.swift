@@ -22,7 +22,7 @@ import SwiftUI
 
 import FileawayCore
 
-struct VariableDateView: View {
+struct DateField: View {
 
     @ObservedObject var variable: DateFieldModel
 
