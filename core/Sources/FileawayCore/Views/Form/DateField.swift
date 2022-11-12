@@ -20,18 +20,16 @@
 
 import SwiftUI
 
-import FileawayCore
-
-struct DateField: View {
-
-    @ObservedObject var variable: DateFieldModel
+public struct DateField: View {
 
     enum PickerDate: Double {
         case today = 1
         case custom = 0
     }
 
+    @ObservedObject var variable: DateFieldModel
     @State var selection: Double = PickerDate.today.rawValue
+
     let creationDate: Date?
     let options: [Date]
 
@@ -41,7 +39,13 @@ struct DateField: View {
         return dateFormatter
     }()
 
-    var body: some View {
+    public init(variable: DateFieldModel, creationDate: Date?, options: [Date]) {
+        self.variable = variable
+        self.creationDate = creationDate
+        self.options = options
+    }
+
+    public var body: some View {
         VStack {
             Picker(variable.name, selection: $selection) {
                 Text("Today")

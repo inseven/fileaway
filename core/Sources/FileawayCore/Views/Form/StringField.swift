@@ -20,14 +20,16 @@
 
 import SwiftUI
 
-import FileawayCore
+public struct StringField: View {
 
-struct StringField: View {
-
-    @StateObject var variable: StringFieldModel
+    @ObservedObject var variable: StringFieldModel
     @State var string: String = ""
 
-    var body: some View {
+    public init(variable: StringFieldModel) {
+        self.variable = variable
+    }
+
+    public var body: some View {
         TextField(variable.name, text: $variable.string)
     }
 
