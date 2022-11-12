@@ -62,11 +62,11 @@ struct DetailsPage: View {
             Section("Details") {
                 ForEach(rule.variables) { variable in
                     if let variable = variable as? DateFieldModel {
-                        VariableDateView(variable: variable,
-                                         creationDate: FileInfo.creationDate(url: url)?.date,
-                                         options: dateExtractor.dates)
+                        DateField(variable: variable,
+                                  creationDate: FileInfo.creationDate(url: url)?.date,
+                                  options: dateExtractor.dates)
                     } else if let variable = variable as? StringFieldModel {
-                        VariableStringView(variable: variable)
+                        StringField(variable: variable)
                     } else {
                         Text("Unknown Variable Type")
                     }
@@ -107,8 +107,8 @@ struct DetailsPage: View {
                              message: Text("File exists at location."),
                              primaryButton: .default(Text("OK")),
                              secondaryButton: .default(Text("Reveal Duplicate"), action: {
-                                NSWorkspace.shared.activateFileViewerSelecting([duplicateUrl])
-                             }))
+                    NSWorkspace.shared.activateFileViewerSelecting([duplicateUrl])
+                }))
             }
         }
         .onAppear {

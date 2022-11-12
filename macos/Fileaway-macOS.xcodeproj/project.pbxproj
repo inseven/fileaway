@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		D8037B122617F8CD00F41971 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = D8037B112617F8CD00F41971 /* Introspect */; };
 		D81B24112918267E0078D638 /* TaskPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81B24102918267E0078D638 /* TaskPageModel.swift */; };
-		D82D01222657632C00FD2974 /* VariableDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D01212657632C00FD2974 /* VariableDateView.swift */; };
-		D82D01242657637700FD2974 /* VariableStringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D01232657637700FD2974 /* VariableStringView.swift */; };
+		D82D01222657632C00FD2974 /* DateField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D01212657632C00FD2974 /* DateField.swift */; };
+		D82D01242657637700FD2974 /* StringField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D01232657637700FD2974 /* StringField.swift */; };
 		D82D73D728B4C659006F49F1 /* Wizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D73D628B4C659006F49F1 /* Wizard.swift */; };
 		D83CDCE52620F97F0063C91C /* VariableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83CDCE42620F97F0063C91C /* VariableTextField.swift */; };
 		D83CDCEA2620FF210063C91C /* RuleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83CDCE92620FF210063C91C /* RuleSheet.swift */; };
@@ -59,8 +59,8 @@
 
 /* Begin PBXFileReference section */
 		D81B24102918267E0078D638 /* TaskPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPageModel.swift; sourceTree = "<group>"; };
-		D82D01212657632C00FD2974 /* VariableDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableDateView.swift; sourceTree = "<group>"; };
-		D82D01232657637700FD2974 /* VariableStringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableStringView.swift; sourceTree = "<group>"; };
+		D82D01212657632C00FD2974 /* DateField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateField.swift; sourceTree = "<group>"; };
+		D82D01232657637700FD2974 /* StringField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringField.swift; sourceTree = "<group>"; };
 		D82D73D628B4C659006F49F1 /* Wizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wizard.swift; sourceTree = "<group>"; };
 		D83CDCE42620F97F0063C91C /* VariableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableTextField.swift; sourceTree = "<group>"; };
 		D83CDCE92620FF210063C91C /* RuleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleSheet.swift; sourceTree = "<group>"; };
@@ -127,20 +127,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D8005ABF258276160001BE2C /* Core */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
 		D821E937257A9591005D3205 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				D87DEF8025774F6C006CFE85 /* ContentView.swift */,
 				D8D78A912580DD750088890F /* QuickLookPreview.swift */,
-				D82D01212657632C00FD2974 /* VariableDateView.swift */,
-				D82D01232657637700FD2974 /* VariableStringView.swift */,
+				D82D01212657632C00FD2974 /* DateField.swift */,
+				D82D01232657637700FD2974 /* StringField.swift */,
 				D8E7F9AF25999C5D00C7409B /* Settings */,
 				D8F8BE102588182C0010432F /* Wizard */,
 			);
@@ -193,7 +186,6 @@
 				D87DEF8725774F6D006CFE85 /* Info.plist */,
 				D87DEF7E25774F6C006CFE85 /* FileawayApp.swift */,
 				D87DEF8225774F6D006CFE85 /* Assets.xcassets */,
-				D8005ABF258276160001BE2C /* Core */,
 				D8F8BE0A258817780010432F /* Environment */,
 				D87DEF8425774F6D006CFE85 /* Preview Content */,
 				D82D73D528B4C649006F49F1 /* Scenes */,
@@ -430,11 +422,11 @@
 				D85C95812579CED30007AE1E /* SelectionToolbar.swift in Sources */,
 				D8E7F9B125999C8800C7409B /* RulesEditor.swift in Sources */,
 				D8F8BE12258818450010432F /* RulesWizard.swift in Sources */,
-				D82D01222657632C00FD2974 /* VariableDateView.swift in Sources */,
+				D82D01222657632C00FD2974 /* DateField.swift in Sources */,
 				D87DEF7F25774F6C006CFE85 /* FileawayApp.swift in Sources */,
 				D83CDCE52620F97F0063C91C /* VariableTextField.swift in Sources */,
 				D81B24112918267E0078D638 /* TaskPageModel.swift in Sources */,
-				D82D01242657637700FD2974 /* VariableStringView.swift in Sources */,
+				D82D01242657637700FD2974 /* StringField.swift in Sources */,
 				D8E7F9EB2599B05300C7409B /* VariableList.swift in Sources */,
 				D82D73D728B4C659006F49F1 /* Wizard.swift in Sources */,
 				D8FC534A257BB7A4008FB609 /* LocationsSettingsView.swift in Sources */,

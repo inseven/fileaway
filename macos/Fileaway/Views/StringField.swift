@@ -22,7 +22,7 @@ import SwiftUI
 
 import FileawayCore
 
-struct VariableStringView: View {
+struct StringField: View {
 
     @StateObject var variable: StringFieldModel
     @State var string: String = ""
