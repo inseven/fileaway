@@ -36,11 +36,11 @@ public class RuleInstance: ObservableObject {
         self.subscriptions = variables.map { $0 as! Observable }.map { $0.observe { self.objectWillChange.send() } }
     }
 
-    public func variable(for name: String) -> TextProvider? {
+    public func variable(for name: String) -> (any VariableProvider)? {
         guard let variable = variables.first(where: { $0.name == name }) else {
             return nil
         }
-        return variable as? TextProvider
+        return variable as? any VariableProvider
     }
 
     public func destination(for url: URL) -> URL {

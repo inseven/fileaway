@@ -20,6 +20,8 @@
 
 import SwiftUI
 
-public protocol VariableProvider: TextProvider, Observable, ObservableObject {
+public protocol VariableProvider: Observable, ObservableObject {
+
+    var textRepresentation: String { get }
 
 }
