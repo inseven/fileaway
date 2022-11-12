@@ -26,21 +26,21 @@ public class RuleInstance: ObservableObject {
     private var ruleModel: RuleModel
     private var subscriptions: [Cancellable]?
 
-    public var variables: [VariableModel]
+    public var variables: [VariableFieldModel]
     public var name: String { ruleModel.name }
 
     public init(rule: RuleModel) {
         self.ruleModel = rule
         let variables = rule.variables.map { $0.instance() }
         self.variables = variables
-        self.subscriptions = variables.map { $0 as! (any VariableProvider) }.map { $0.observe { self.objectWillChange.send() } }
+        self.subscriptions = variables.map { $0 as! (any Editable) }.map { $0.observe { self.objectWillChange.send() } }
     }
 
-    public func variable(for name: String) -> (any VariableProvider)? {
+    public func variable(for name: String) -> (any Editable)? {
         guard let variable = variables.first(where: { $0.name == name }) else {
             return nil
         }
-        return variable as? any VariableProvider
+        return variable as? any Editable
     }
 
     public func destination(for url: URL) -> URL {

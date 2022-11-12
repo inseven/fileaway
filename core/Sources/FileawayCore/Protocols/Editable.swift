@@ -21,21 +21,10 @@
 import Combine
 import SwiftUI
 
-public class StringModel: VariableModel, VariableProvider {
+public protocol Editable: ObservableObject {
 
-    public var textRepresentation: String {
-        return string
-    }
+    var textRepresentation: String { get }
 
-    @Published public var string: String
-
-    public init(variable: Variable, initialValue: String) {
-        _string = Published(initialValue: initialValue)
-        super.init(variable: variable)
-    }
-
-    public func observe(_ onChange: @escaping () -> Void) -> AnyCancellable {
-        self.objectWillChange.sink(receiveValue: onChange)
-    }
+    func observe(_ onChange: @escaping () -> Void) -> AnyCancellable
 
 }
