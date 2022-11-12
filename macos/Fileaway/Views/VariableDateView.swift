@@ -24,7 +24,7 @@ import FileawayCore
 
 struct VariableDateView: View {
 
-    @ObservedObject var variable: DateModel
+    @ObservedObject var variable: DateFieldModel
 
     enum PickerDate: Double {
         case today = 1

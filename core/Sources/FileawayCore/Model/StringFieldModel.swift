@@ -21,18 +21,16 @@
 import Combine
 import SwiftUI
 
-public class DateModel: VariableModel, VariableProvider {
-
-    @Published public var date: Date
+public class StringFieldModel: VariableFieldModel, Editable {
 
     public var textRepresentation: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyOyy-MM-dd"
-        return formatter.string(from: date)
+        return string
     }
 
-    public init(variable: Variable, initialValue: Date) {
-        _date = Published(initialValue: initialValue)
+    @Published public var string: String
+
+    public init(variable: Variable, initialValue: String) {
+        _string = Published(initialValue: initialValue)
         super.init(variable: variable)
     }
 

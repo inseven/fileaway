@@ -20,7 +20,7 @@
 
 import Foundation
 
-public class VariableModel: Identifiable {
+public class VariableFieldModel: Identifiable {
 
     public var id: UUID { variable.id }
     public var variable: Variable
@@ -34,12 +34,12 @@ public class VariableModel: Identifiable {
 
 extension Variable {
 
-    public func instance() -> VariableModel {
+    public func instance() -> VariableFieldModel {
         switch self.type {
         case .string:
-            return StringModel(variable: self, initialValue: "")
+            return StringFieldModel(variable: self, initialValue: "")
         case .date:
-            return DateModel(variable: self, initialValue: Date())
+            return DateFieldModel(variable: self, initialValue: Date())
         }
     }
 

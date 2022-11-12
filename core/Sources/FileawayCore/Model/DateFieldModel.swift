@@ -21,10 +21,23 @@
 import Combine
 import SwiftUI
 
-public protocol VariableProvider: ObservableObject {
+public class DateFieldModel: VariableFieldModel, Editable {
 
-    var textRepresentation: String { get }
+    @Published public var date: Date
 
-    func observe(_ onChange: @escaping () -> Void) -> AnyCancellable
+    public var textRepresentation: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyOyy-MM-dd"
+        return formatter.string(from: date)
+    }
+
+    public init(variable: Variable, initialValue: Date) {
+        _date = Published(initialValue: initialValue)
+        super.init(variable: variable)
+    }
+
+    public func observe(_ onChange: @escaping () -> Void) -> AnyCancellable {
+        self.objectWillChange.sink(receiveValue: onChange)
+    }
 
 }
