@@ -31,17 +31,17 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
     public let rootUrl: URL
 
     @Published public var name: String
-    @Published public var variables: [Variable]
+    @Published public var variables: [VariableModel]
     @Published public var destination: [ComponentModel]
 
-    var variablesBackChannel: BackChannel<Variable>?
+    var variablesBackChannel: BackChannel<VariableModel>?
     var destinationBackChannel: BackChannel<ComponentModel>?
 
     public var description: String {
         return self.name
     }
 
-    public init(id: UUID, rootUrl: URL, name: String, variables: [Variable], destination: [ComponentModel]) {
+    public init(id: UUID, rootUrl: URL, name: String, variables: [VariableModel], destination: [ComponentModel]) {
         self.id = id
         self.rootUrl = rootUrl
         self.name = name
@@ -100,7 +100,7 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
         destination.swapAt(index, index + 1)
     }
 
-    public func moveUp(variable: Variable) {
+    public func moveUp(variable: VariableModel) {
         guard let index = variables.firstIndex(of: variable),
               index > 0 else {
             return
@@ -108,7 +108,7 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
         variables.swapAt(index, index - 1)
     }
 
-    public func moveDown(variable: Variable) {
+    public func moveDown(variable: VariableModel) {
         guard let index = variables.firstIndex(of: variable),
               index < variables.count - 1 else {
             return
@@ -116,7 +116,7 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
         variables.swapAt(index, index + 1)
     }
 
-    public func remove(variable: Variable) {
+    public func remove(variable: VariableModel) {
         variables.removeAll { $0 == variable }
     }
 
@@ -164,7 +164,7 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
             name = "Variable \(index)"
             index = index + 1
         } while names.contains(name)
-        self.variables.append(Variable(name: name, type: .string))
+        self.variables.append(VariableModel(name: name, type: .string))
     }
 
     public static func == (lhs: RuleModel, rhs: RuleModel) -> Bool {

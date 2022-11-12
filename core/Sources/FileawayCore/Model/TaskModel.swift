@@ -32,10 +32,10 @@ public class TaskModel: ObservableObject, Identifiable, BackChannelable, CustomS
     public let id: UUID
 
     @Published public var name: String
-    @Published public var variables: [Variable]
+    @Published public var variables: [VariableModel]
     @Published public var destination: [ComponentModel]
 
-    var variablesBackChannel: BackChannel<Variable>?
+    var variablesBackChannel: BackChannel<VariableModel>?
     var destinationBackChannel: BackChannel<ComponentModel>?
 
     public var description: String {
@@ -56,7 +56,7 @@ public class TaskModel: ObservableObject, Identifiable, BackChannelable, CustomS
         }
     }
 
-    public init(id: UUID, name: String, variables: [Variable], destination: [ComponentModel]) {
+    public init(id: UUID, name: String, variables: [VariableModel], destination: [ComponentModel]) {
         self.id = id
         self.name = name
         self.variables = variables
@@ -138,7 +138,7 @@ public class TaskModel: ObservableObject, Identifiable, BackChannelable, CustomS
             name = "Variable \(index)"
             index = index + 1
         } while names.contains(name)
-        self.variables.append(Variable(name: name, type: .string))
+        self.variables.append(VariableModel(name: name, type: .string))
     }
 
 }

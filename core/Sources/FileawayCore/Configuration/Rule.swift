@@ -31,7 +31,7 @@ public struct Rule: Codable {
 
     public let id: UUID
     public let name: String
-    public let variables: [Variable]
+    public let variables: [VariableModel]
     public let destination: [Component]
 
     public init() {
@@ -41,7 +41,7 @@ public struct Rule: Codable {
         self.destination = []
     }
 
-    public init(id: UUID, name: String, variables: [Variable], destination: [Component]) {
+    public init(id: UUID, name: String, variables: [VariableModel], destination: [Component]) {
         self.id = id
         self.name = name
         self.variables = variables
@@ -68,7 +68,7 @@ public struct Rule: Codable {
         } else {
             self.name = ""
         }
-        self.variables = try container.decode([Variable].self, forKey: .variables)
+        self.variables = try container.decode([VariableModel].self, forKey: .variables)
         self.destination = try container.decode([Component].self, forKey: .destination)
     }
     
