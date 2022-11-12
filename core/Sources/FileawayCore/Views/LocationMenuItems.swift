@@ -53,7 +53,7 @@ public struct LocationMenuItems: View {
                 // TODO: Handle this error in the application model or scene model.
             }
         } label: {
-            Label("Delete", systemImage: "trash")
+            Label("Remove", systemImage: "trash")
         }
     }
 
