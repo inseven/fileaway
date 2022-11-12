@@ -18,31 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
+import SwiftUI
 
-import FileawayCore
-
-class VariableInstance: Identifiable {
-
-    public var id: UUID { variable.id }
-    var variable: Variable
-    var name: String { variable.name }
-
-    init(variable: Variable) {
-        self.variable = variable
-    }
-
-}
-
-extension Variable {
-
-    func instance() -> VariableInstance {
-        switch self.type {
-        case .string:
-            return StringInstance(variable: self, initialValue: "")
-        case .date:
-            return DateInstance(variable: self, initialValue: Date())
-        }
-    }
+public protocol VariableProvider: TextProvider, Observable, ObservableObject {
 
 }

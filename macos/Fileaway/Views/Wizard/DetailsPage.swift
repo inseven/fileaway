@@ -61,11 +61,11 @@ struct DetailsPage: View {
             }
             Section("Details") {
                 ForEach(rule.variables) { variable in
-                    if let variable = variable as? DateInstance {
+                    if let variable = variable as? DateModel {
                         VariableDateView(variable: variable,
                                          creationDate: FileInfo.creationDate(url: url)?.date,
                                          options: dateExtractor.dates)
-                    } else if let variable = variable as? StringInstance {
+                    } else if let variable = variable as? StringModel {
                         VariableStringView(variable: variable)
                     } else {
                         Text("Unknown Variable Type")

@@ -21,31 +21,29 @@
 import Combine
 import SwiftUI
 
-import FileawayCore
+public class RuleInstance: ObservableObject {
 
-class RuleInstance: ObservableObject {
+    private var ruleModel: RuleModel
+    private var subscriptions: [Cancellable]?
 
-    var ruleModel: RuleModel
-    var variables: [VariableInstance]
-    var subscriptions: [Cancellable]?
+    public var variables: [VariableModel]
+    public var name: String { ruleModel.name }
 
-    var name: String { ruleModel.name }
-
-    init(rule: RuleModel) {
+    public init(rule: RuleModel) {
         self.ruleModel = rule
         let variables = rule.variables.map { $0.instance() }
         self.variables = variables
         self.subscriptions = variables.map { $0 as! Observable }.map { $0.observe { self.objectWillChange.send() } }
     }
 
-    func variable(for name: String) -> TextProvider? {
+    public func variable(for name: String) -> TextProvider? {
         guard let variable = variables.first(where: { $0.name == name }) else {
             return nil
         }
         return variable as? TextProvider
     }
 
-    func destination(for url: URL) -> URL {
+    public func destination(for url: URL) -> URL {
         let destination = ruleModel.destination.reduce("") { (result, component) -> String in
             switch component.type {
             case .text:
@@ -60,7 +58,7 @@ class RuleInstance: ObservableObject {
         return self.ruleModel.rootUrl.appendingPathComponent(destination).appendingPathExtension(url.pathExtension)
     }
 
-    func move(url: URL) throws {
+    public func move(url: URL) throws {
         let destinationUrl = self.destination(for: url)
         let fileManager = FileManager.default
         try fileManager.createDirectory(at: destinationUrl.deletingLastPathComponent(),

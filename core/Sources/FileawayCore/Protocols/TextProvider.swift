@@ -18,28 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Combine
-import SwiftUI
+import Foundation
 
-import FileawayCore
-
-class DateInstance: VariableInstance, VariableProvider {
-
-    @Published var date: Date
-
-    var textRepresentation: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.string(from: date)
-    }
-
-    init(variable: Variable, initialValue: Date) {
-        _date = Published(initialValue: initialValue)
-        super.init(variable: variable)
-    }
-
-    func observe(_ onChange: @escaping () -> Void) -> AnyCancellable {
-        self.objectWillChange.sink(receiveValue: onChange)
-    }
-
+public protocol TextProvider {
+    var textRepresentation: String { get }
 }
