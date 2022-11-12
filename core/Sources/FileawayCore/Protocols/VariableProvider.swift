@@ -18,10 +18,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Combine
 import SwiftUI
 
-public protocol VariableProvider: Observable, ObservableObject {
+public protocol VariableProvider: ObservableObject {
 
     var textRepresentation: String { get }
+
+    func observe(_ onChange: @escaping () -> Void) -> AnyCancellable
 
 }

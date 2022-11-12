@@ -33,7 +33,7 @@ public class RuleInstance: ObservableObject {
         self.ruleModel = rule
         let variables = rule.variables.map { $0.instance() }
         self.variables = variables
-        self.subscriptions = variables.map { $0 as! Observable }.map { $0.observe { self.objectWillChange.send() } }
+        self.subscriptions = variables.map { $0 as! (any VariableProvider) }.map { $0.observe { self.objectWillChange.send() } }
     }
 
     public func variable(for name: String) -> (any VariableProvider)? {
