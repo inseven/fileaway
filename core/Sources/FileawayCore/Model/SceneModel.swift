@@ -58,6 +58,7 @@ public class SceneModel: ObservableObject, Runnable {
 
     public init(applicationModel: ApplicationModel) {
         self.applicationModel = applicationModel
+        self.section = applicationModel.directories.filter({ $0.type == .inbox }).first?.url
     }
 
     @MainActor public func start() {
@@ -67,9 +68,7 @@ public class SceneModel: ObservableObject, Runnable {
             .$directories
             .map { directories in
                 return directories.map {
-                    let model = DirectoryViewModel(directoryModel: $0)
-                    model.start()
-                    return model
+                    return DirectoryViewModel(directoryModel: $0)
                 }
             }
             .receive(on: DispatchQueue.main)
