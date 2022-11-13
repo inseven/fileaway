@@ -96,6 +96,7 @@ struct DetailsPage: View {
             }
         }
         .frame(minWidth: 0, maxWidth: .infinity)
+        .showsStackNavigationBar(rule.name)
         .alert(item: $alert) { alert in
             switch alert {
             case .error(let error):

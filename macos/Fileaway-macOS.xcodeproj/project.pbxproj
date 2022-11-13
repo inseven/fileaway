@@ -23,6 +23,9 @@
 		D88B353B28B6113A000C8910 /* FileawayCore in Frameworks */ = {isa = PBXBuildFile; productRef = D88B353A28B6113A000C8910 /* FileawayCore */; };
 		D8B657EC2642D2C5009DE837 /* RulesSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B657EB2642D2C5009DE837 /* RulesSettingsView.swift */; };
 		D8B657EE2642D40F009DE837 /* LocationsEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B657ED2642D40F009DE837 /* LocationsEditor.swift */; };
+		D8C4CC452920FBD80038B06E /* ShowsStackNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C4CC442920FBD80038B06E /* ShowsStackNavigationBar.swift */; };
+		D8C4CC472920FCE80038B06E /* OnKeyDownEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C4CC462920FCE80038B06E /* OnKeyDownEvent.swift */; };
+		D8C4CC4D292101680038B06E /* StackNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C4CC4C292101680038B06E /* StackNavigationBar.swift */; };
 		D8D275BE28B3865500200A7C /* Diligence in Frameworks */ = {isa = PBXBuildFile; productRef = D8D275BD28B3865500200A7C /* Diligence */; };
 		D8D78A922580DD750088890F /* QuickLookPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D78A912580DD750088890F /* QuickLookPreview.swift */; };
 		D8E7F9B125999C8800C7409B /* RulesEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E7F9B025999C8800C7409B /* RulesEditor.swift */; };
@@ -78,6 +81,9 @@
 		D88B353928B61015000C8910 /* core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = core; path = ../core; sourceTree = "<group>"; };
 		D8B657EB2642D2C5009DE837 /* RulesSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesSettingsView.swift; sourceTree = "<group>"; };
 		D8B657ED2642D40F009DE837 /* LocationsEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsEditor.swift; sourceTree = "<group>"; };
+		D8C4CC442920FBD80038B06E /* ShowsStackNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowsStackNavigationBar.swift; sourceTree = "<group>"; };
+		D8C4CC462920FCE80038B06E /* OnKeyDownEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnKeyDownEvent.swift; sourceTree = "<group>"; };
+		D8C4CC4C292101680038B06E /* StackNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackNavigationBar.swift; sourceTree = "<group>"; };
 		D8D275BC28B3862400200A7C /* diligence */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = diligence; path = ../diligence; sourceTree = "<group>"; };
 		D8D78A912580DD750088890F /* QuickLookPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickLookPreview.swift; sourceTree = "<group>"; };
 		D8E7F9B025999C8800C7409B /* RulesEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesEditor.swift; sourceTree = "<group>"; };
@@ -126,9 +132,9 @@
 		D821E937257A9591005D3205 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D87DEF8025774F6C006CFE85 /* ContentView.swift */,
-				D8D78A912580DD750088890F /* QuickLookPreview.swift */,
+				D8C4CC4A2921009C0038B06E /* Common */,
 				D8E7F9AF25999C5D00C7409B /* Settings */,
+				D8C4CC4B292100B60038B06E /* Viewer */,
 				D8F8BE102588182C0010432F /* Wizard */,
 			);
 			path = Views;
@@ -181,6 +187,8 @@
 				D87DEF7E25774F6C006CFE85 /* FileawayApp.swift */,
 				D87DEF8225774F6D006CFE85 /* Assets.xcassets */,
 				D8F8BE0A258817780010432F /* Environment */,
+				D8C4CC492920FF260038B06E /* Model */,
+				D8C4CC482920FD320038B06E /* Modifiers */,
 				D87DEF8425774F6D006CFE85 /* Preview Content */,
 				D82D73D528B4C649006F49F1 /* Scenes */,
 				D85C95852579DD880007AE1E /* Toolbars */,
@@ -213,6 +221,40 @@
 				D87DEF9E25774F6D006CFE85 /* Info.plist */,
 			);
 			path = FileawayUITests;
+			sourceTree = "<group>";
+		};
+		D8C4CC482920FD320038B06E /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				D8C4CC462920FCE80038B06E /* OnKeyDownEvent.swift */,
+				D8C4CC442920FBD80038B06E /* ShowsStackNavigationBar.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
+		D8C4CC492920FF260038B06E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D81B24102918267E0078D638 /* TaskPageModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D8C4CC4A2921009C0038B06E /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				D8D78A912580DD750088890F /* QuickLookPreview.swift */,
+				D8C4CC4C292101680038B06E /* StackNavigationBar.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		D8C4CC4B292100B60038B06E /* Viewer */ = {
+			isa = PBXGroup;
+			children = (
+				D87DEF8025774F6C006CFE85 /* ContentView.swift */,
+			);
+			path = Viewer;
 			sourceTree = "<group>";
 		};
 		D8D275BB28B3862400200A7C /* Packages */ = {
@@ -255,7 +297,6 @@
 				D8F8BE1C2588192F0010432F /* DetailsPage.swift */,
 				D8F8BE11258818450010432F /* RulesWizard.swift */,
 				D8F8BE3625881C1A0010432F /* TaskPage.swift */,
-				D81B24102918267E0078D638 /* TaskPageModel.swift */,
 			);
 			path = Wizard;
 			sourceTree = "<group>";
@@ -414,6 +455,7 @@
 				D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */,
 				D8F8BE3725881C1A0010432F /* TaskPage.swift in Sources */,
 				D85C95812579CED30007AE1E /* SelectionToolbar.swift in Sources */,
+				D8C4CC4D292101680038B06E /* StackNavigationBar.swift in Sources */,
 				D8E7F9B125999C8800C7409B /* RulesEditor.swift in Sources */,
 				D8F8BE12258818450010432F /* RulesWizard.swift in Sources */,
 				D87DEF7F25774F6C006CFE85 /* FileawayApp.swift in Sources */,
@@ -421,11 +463,13 @@
 				D81B24112918267E0078D638 /* TaskPageModel.swift in Sources */,
 				D8E7F9EB2599B05300C7409B /* VariableList.swift in Sources */,
 				D82D73D728B4C659006F49F1 /* Wizard.swift in Sources */,
+				D8C4CC452920FBD80038B06E /* ShowsStackNavigationBar.swift in Sources */,
 				D8FC534A257BB7A4008FB609 /* LocationsSettingsView.swift in Sources */,
 				D8D78A922580DD750088890F /* QuickLookPreview.swift in Sources */,
 				D8F8BE0C2588179E0010432F /* CloseKey.swift in Sources */,
 				D8B657EC2642D2C5009DE837 /* RulesSettingsView.swift in Sources */,
 				D8E7F9DE2599AFE000C7409B /* RuleDetailView.swift in Sources */,
+				D8C4CC472920FCE80038B06E /* OnKeyDownEvent.swift in Sources */,
 				D8F8BE1D2588192F0010432F /* DetailsPage.swift in Sources */,
 				D8B657EE2642D40F009DE837 /* LocationsEditor.swift in Sources */,
 			);
