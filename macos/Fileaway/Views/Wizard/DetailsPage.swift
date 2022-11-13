@@ -56,10 +56,7 @@ struct DetailsPage: View {
 
     var body: some View {
         Form {
-            Section("Rule") {
-                Text(rule.name)
-            }
-            Section("Details") {
+            Section {
                 ForEach(rule.variables) { variable in
                     if let variable = variable as? DateFieldModel {
                         DateField(variable: variable,
@@ -71,9 +68,10 @@ struct DetailsPage: View {
                         Text("Unknown Variable Type")
                     }
                 }
-            }
-            Section("Destination") {
+            } footer: {
                 Text(rule.destination(for: url).path)
+                    .horizontalSpace(.trailing)
+                    .textSelection(.enabled)
             }
         }
         .formStyle(.grouped)
