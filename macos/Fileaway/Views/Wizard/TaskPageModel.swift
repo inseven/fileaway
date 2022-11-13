@@ -47,17 +47,22 @@ class TaskPageModel: ObservableObject, Runnable {
             .receive(on: queue)
             .map { rules, filter in
                 guard !filter.isEmpty else {
-                    return rules
+                    return (rules, filter)
                 }
-                return rules.filter { item in
+                let filteredRules = rules.filter { item in
                     [item.rootUrl.displayName, item.name].joined(separator: " ").localizedSearchMatches(string: filter)
                 }
+                return (filteredRules, filter)
             }
-            .map { $0.sorted { lhs, rhs in lhs.name.lexicographicallyPrecedes(rhs.name) } }
+            .map { (filteredRules, filter) in
+                (filteredRules.sorted { lhs, rhs in lhs.name.lexicographicallyPrecedes(rhs.name) }, filter)
+            }
             .receive(on: DispatchQueue.main)
-            .sink { rules in
+            .sink { (rules, filter: String) in
                 self.filteredRules = rules
-                self.selection = rules.first?.id
+                if !filter.isEmpty || self.selection == nil {
+                    self.selection = rules.first?.id
+                }
             }
             .store(in: &cancellables)
     }
