@@ -20,9 +20,24 @@
 
 import SwiftUI
 
+import FileawayCore
+
+class RulesWizardModel: ObservableObject {
+
+    @Published var activeRuleModel: RuleModel? = nil
+
+    func pop() {
+        activeRuleModel = nil
+    }
+
+}
+
 struct RulesWizard: View {
 
     @Environment(\.applicationModel) var manager
+
+    @StateObject var rulesWizardModel = RulesWizardModel()
+
     @State var url: URL
     @State var firstResponder: Bool = true
 
@@ -32,14 +47,26 @@ struct RulesWizard: View {
                 .onTapGesture(count: 2) {
                     NSWorkspace.shared.open(url)
                 }
+                .background(.thinMaterial)
+                .cornerRadius(6.0)
+                .padding([.leading, .top, .bottom])
             HStack {
-                TaskPage(manager: manager, url: url)
+                VStack {
+                    if let activeRule = rulesWizardModel.activeRuleModel {
+                        DetailsPage(url: url, ruleModel: activeRule)
+                            .transition(.move(edge: .trailing))
+                    } else {
+                        TaskPage(manager: manager, activeRuleModel: $rulesWizardModel.activeRuleModel, url: url)
+                            .transition(.move(edge: .leading))
+                    }
+                }
+                .clipped()
             }
-            .frame(width: 300)
+            .frame(width: 340)
         }
-        .padding()
         .navigationTitle(url.displayName)
         .frame(minWidth: 800, minHeight: 600, idealHeight: 600)
+        .environmentObject(rulesWizardModel)
     }
 
 }
