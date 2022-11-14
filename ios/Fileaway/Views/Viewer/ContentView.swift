@@ -74,7 +74,7 @@ struct ContentView: View {
             case .move(let file):
                 WizardView(file: file)
             case .editRules(let url):
-                RulesView(tasks: TasksModel(url: url))
+                RulesView(rulesModel: RulesModel(url: url))
             }
         }
         .runs(sceneModel)

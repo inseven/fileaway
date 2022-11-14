@@ -58,7 +58,7 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
     }
 
     public convenience init(_ ruleModel: RuleModel) {
-        self.init(id: UUID(),
+        self.init(id: ruleModel.id,
                   rootUrl: ruleModel.rootUrl,
                   name: String(ruleModel.name),
                   variables: ruleModel.variables,
@@ -162,7 +162,7 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
 
     public func validate() -> Bool {
         let names = Set(variables.map { $0.name })
-        return names.count == variables.count
+        return names.count == variables.count && !name.isEmpty
     }
 
     public func createVariable() {

@@ -27,7 +27,7 @@ import FileawayCore
 struct RuleView: View {
 
     @State private var editMode = EditMode.inactive
-    @ObservedObject var tasks: TasksModel
+    @ObservedObject var rulesModel: RulesModel
     @ObservedObject var editingRuleModel: RuleModel
     var originalRuleModel: RuleModel
 
@@ -39,12 +39,12 @@ struct RuleView: View {
     func save() {
         // SwiftUI gets crashy if there's a first responder attached to a TextView when it's hidden.
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-        tasks.update(task: editingRuleModel)
+        rulesModel.replace(ruleModel: editingRuleModel)
         self.editMode = .inactive
     }
 
     func validate() -> Bool {
-        return tasks.validate(taskModel: editingRuleModel) && !editingRuleModel.name.isEmpty
+        return editingRuleModel.validate()
     }
 
     var body: some View {
