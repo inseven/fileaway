@@ -75,6 +75,12 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
         })
     }
 
+    public func reset(to ruleModel: RuleModel) {
+        name = String(ruleModel.name)
+        variables = ruleModel.variables
+        destination = ruleModel.destination
+    }
+
     public func establishBackChannel() {
         variablesBackChannel = BackChannel(value: variables, publisher: $variables).bind {
             self.objectWillChange.send()
