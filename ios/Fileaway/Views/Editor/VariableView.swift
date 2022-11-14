@@ -33,10 +33,12 @@ struct VariableView: View {
         NavigationView {
             VStack {
                 Form {
-                    Section(footer: ErrorText(text: task.validate() ? nil : "Variable names must be unique.")) {
+                    Section {
                         TextField("Name", text: $variable.name)
+                    } footer: {
+                        ErrorText(text: task.validate() ? nil : "Variable names must be unique.")
                     }
-                    Section(header: Text("Type".uppercased())) {
+                    Section("Type") {
                         ForEach(VariableType.allCases) { type in
                             Selectable(isSelected: self.variable.type.id == type.id, action: {
                                 self.variable.type = type
@@ -48,11 +50,19 @@ struct VariableView: View {
                 }
             }
             .navigationBarTitle("Edit Variable", displayMode: .inline)
-            .navigationBarItems(trailing: Button(action: {
-                self.presentationMode.wrappedValue.dismiss()
-            }) {
-                Text("Done").bold().disabled(!task.validate())
-            })
+            .toolbar {
+
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        self.presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Text("Done")
+                            .bold()
+                            .disabled(!task.validate())
+                    }
+                }
+
+            }
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
