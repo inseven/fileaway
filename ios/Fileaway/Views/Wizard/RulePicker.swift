@@ -39,7 +39,7 @@ struct RulePicker: View {
         List {
             ForEach(rulePickerModel.filteredRules) { rule in
                 NavigationLink {
-                    RuleFormView(url: rule.rootUrl, ruleModel: rule)
+                    RuleFormView(url: url, ruleModel: rule)
                 } label: {
                     Text(rule.name)
                 }
