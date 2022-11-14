@@ -27,7 +27,7 @@ import AppKit
 #endif
 
 public struct ApplicationModelKey: EnvironmentKey {
-    public static var defaultValue: ApplicationModel = ApplicationModel()
+    @MainActor public static var defaultValue: ApplicationModel = ApplicationModel()
 }
 
 extension EnvironmentValues {
@@ -50,11 +50,11 @@ public class ApplicationModel: ObservableObject {
     var countSubscription: Cancellable?
     var rulesSubscription: Cancellable?
 
-    public init() {
+    @MainActor public init() {
         self.start()
     }
 
-    public func start() {
+    @MainActor public func start() {
         dispatchPrecondition(condition: .onQueue(.main))
         for url in settings.inboxUrls {
             addDirectoryObserver(type: .inbox, url: url)
@@ -109,7 +109,7 @@ public class ApplicationModel: ObservableObject {
         }
     }
 
-    public func addLocation(type: DirectoryModel.DirectoryType, url: URL) throws {
+    @MainActor public func addLocation(type: DirectoryModel.DirectoryType, url: URL) throws {
         dispatchPrecondition(condition: .onQueue(.main))
         try url.prepareForSecureAccess()
         addDirectoryObserver(type: type, url: url)
@@ -123,7 +123,7 @@ public class ApplicationModel: ObservableObject {
         try removeDirectoryObserver(directoryObserver: directoryModel)
     }
 
-    private func addDirectoryObserver(type: DirectoryModel.DirectoryType, url: URL) {
+    @MainActor private func addDirectoryObserver(type: DirectoryModel.DirectoryType, url: URL) {
         dispatchPrecondition(condition: .onQueue(.main))
         let directoryObserver = DirectoryModel(type: type, url: url)
         directories.append(directoryObserver)
@@ -132,7 +132,7 @@ public class ApplicationModel: ObservableObject {
         updateRuleSetSubscription()
     }
 
-    private func removeDirectoryObserver(directoryObserver: DirectoryModel) throws {
+    @MainActor private func removeDirectoryObserver(directoryObserver: DirectoryModel) throws {
         dispatchPrecondition(condition: .onQueue(.main))
         guard directories.contains(directoryObserver) else {
             throw FileawayError.directoryNotFound
@@ -147,6 +147,12 @@ public class ApplicationModel: ObservableObject {
     private func save() throws {
         try settings.setInboxUrls(self.directories(type: .inbox).map { $0.url })
         try settings.setArchiveUrls(self.directories(type: .archive).map { $0.url })
+    }
+
+    @MainActor public func refresh() {
+        for directory in directories {
+            directory.refresh()
+        }
     }
 
 }

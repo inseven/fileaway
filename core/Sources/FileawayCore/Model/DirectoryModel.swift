@@ -46,8 +46,8 @@ public class DirectoryModel: ObservableObject, Identifiable, Hashable {
     @Published public var searchResults: [FileInfo] = []
 
     private let extensions = ["pdf"]
-    private var fileProvider: DirectoryMonitor?
-    private let syncQueue = DispatchQueue.init(label: "DirectoryObserver.syncQueue")
+    private var directoryMonitor: DirectoryMonitor?
+    private let syncQueue = DispatchQueue.init(label: "DirectoryModel.syncQueue")
     private var cache: NSCache<NSURL, FileInfo> = NSCache()
     private var cancelables: Set<AnyCancellable> = []
 
@@ -61,16 +61,13 @@ public class DirectoryModel: ObservableObject, Identifiable, Hashable {
         hasher.combine(id)
     }
 
-    public func start() {
-        // TODO: Thread safety.
-        dispatchPrecondition(condition: .onQueue(.main))
-        self.fileProvider = try! DirectoryMonitor(locations: [url],
-                                              extensions: extensions,
-                                              targetQueue: DispatchQueue.main,
-                                              handler: { urls in
-                                                self.files = urls
-                                              })
-        self.fileProvider?.start()
+    @MainActor public func start() {
+        self.directoryMonitor = try! DirectoryMonitor(locations: [url],
+                                                      extensions: extensions,
+                                                      targetQueue: DispatchQueue.main) { urls in
+            self.files = urls
+        }
+        self.directoryMonitor?.start()
 
         $files
             .receive(on: syncQueue)
@@ -92,15 +89,17 @@ public class DirectoryModel: ObservableObject, Identifiable, Hashable {
             .store(in: &cancelables)
     }
 
-    public func stop() {
-        // TODO: Thread safety.
-        dispatchPrecondition(condition: .onQueue(.main))
-        guard let fileProvider = fileProvider else {
+    @MainActor public func stop() {
+        guard let fileProvider = directoryMonitor else {
             return
         }
         fileProvider.stop()
 
         cancelables.removeAll()
+    }
+
+    @MainActor public func refresh() {
+        directoryMonitor?.refresh()
     }
 
 }

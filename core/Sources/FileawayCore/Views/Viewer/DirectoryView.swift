@@ -58,6 +58,18 @@ public struct DirectoryView: View {
                         }
                         .tint(.purple)
                     }
+                    .swipeActions(edge: .trailing) {
+                        Button(role: .destructive) {
+                            do {
+                                try directoryViewModel.trash(.file(file))
+                            } catch {
+                                // TODO: Handle this error in the directory model!
+                                print("Failed to delete file with error \(error).")
+                            }
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                    }
             }
         }
 #if os(iOS)

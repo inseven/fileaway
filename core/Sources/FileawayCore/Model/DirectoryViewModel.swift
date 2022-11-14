@@ -25,6 +25,11 @@ import Interact
 
 public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
 
+    public enum Scope {
+        case selection
+        case file(FileInfo)
+    }
+
     public var id: URL { self.url }
 
     @Environment(\.openURL) var openURL
@@ -152,8 +157,19 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
         return !selection.isEmpty
     }
 
-    @MainActor public func trash() throws {
-        try selectedUrls.forEach { try FileManager.default.trashItem(at: $0, resultingItemURL: nil) }
+    @MainActor private func files(for scope: Scope) -> Set<FileInfo> {
+        switch scope {
+        case .selection:
+            return selection
+        case .file(let file):
+            return [file]
+        }
+    }
+
+    @MainActor public func trash(_ scope: Scope) throws {
+        let urls = files(for: scope).map { $0.url }
+        try urls.forEach { try FileManager.default.trashItem(at: $0, resultingItemURL: nil) }
+        directoryModel?.refresh()
     }
 
     @MainActor public var canShowRulesWizard: Bool {
