@@ -30,7 +30,7 @@ struct DestinationView: View {
         HStack {
             ruleModel.destination.map {
                 Text(self.ruleModel.name(for: $0, format: .short))
-                    .foregroundColor($0.type == .variable ? .accentColor : .primary)
+                    .foregroundColor(self.ruleModel.color(for: $0))
                     .fontWeight($0.type == .variable ? .bold : .none)
             }
             .reduce( Text(""), + )

@@ -43,18 +43,12 @@ struct RuleView: View {
         self.editMode = .inactive
     }
 
-    func validate() -> Bool {
-        return editingRuleModel.validate()
-    }
-
     var body: some View {
         return VStack {
             Form {
 
                 Section {
                     EditText("Rule", text: $editingRuleModel.name)
-                } footer: {
-                    ErrorText(text: validate() ? nil : "Rule names must be unique.")
                 }
 
                 Section {
@@ -105,7 +99,7 @@ struct RuleView: View {
             if self.editMode == .active {
                 Text("Save")
                     .bold()
-                    .disabled(!validate() || !editingRuleModel.validate())
+                    .disabled(!editingRuleModel.validate())
             } else {
                 Text("Edit")
             }

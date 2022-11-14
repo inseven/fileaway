@@ -142,7 +142,7 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
         case .text:
             return component.value
         case .variable:
-            guard let variable = (variables.first { $0.name == component.value }) else {
+            guard let variable = variable(for: component) else {
                 return "\(component.value) (Missing)"
             }
             switch (variable.type, format) {
@@ -158,6 +158,20 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
                 return variable.name
             }
         }
+    }
+
+    public func variable(for component: ComponentModel) -> VariableModel? {
+        guard component.type == .variable else {
+            return nil
+        }
+        return variables.first { $0.name == component.value }
+    }
+
+    public func color(for component: ComponentModel) -> Color {
+        guard let variable = variable(for: component) else {
+            return .primary
+        }
+        return variable.color
     }
 
     public func validate() -> Bool {

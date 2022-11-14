@@ -48,6 +48,7 @@ struct DestinationFooter: View {
                             Text(String(describing: variable.name))
                         }
                         .buttonStyle(FilledButton())
+                        .tint(variable.color)
                     }
                 }
                 .padding()
