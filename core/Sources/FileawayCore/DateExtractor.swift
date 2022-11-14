@@ -21,7 +21,9 @@
 import PDFKit
 import SwiftUI
 
-public class DateExtractor: ObservableObject {
+import Interact
+
+public class DateExtractor: ObservableObject, Runnable {
 
     @Published public var dates: [Date] = []
 
@@ -32,8 +34,7 @@ public class DateExtractor: ObservableObject {
         self.url = url
     }
 
-    public func load() {
-        dispatchPrecondition(condition: .onQueue(.main))
+    @MainActor public func start() {
         guard uninitialized else {
             return
         }
@@ -47,6 +48,10 @@ public class DateExtractor: ObservableObject {
                 self.dates = dates
             }
         }
+    }
+
+    @MainActor public func stop() {
+
     }
 
 }
