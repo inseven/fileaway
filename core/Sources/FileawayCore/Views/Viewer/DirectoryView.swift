@@ -116,7 +116,7 @@ public struct DirectoryView: View {
         .overlay(directoryViewModel.files.isEmpty ? Placeholder("No Items") : nil)
         .searchable(text: $directoryViewModel.filter)
         .navigationTitle(directoryViewModel.name)
-        .quickLookPreview(directoryViewModel.previewUrl, in: directoryViewModel.previewUrls)
+        .quickLookPreview($directoryViewModel.previewUrl, in: directoryViewModel.previewUrls)
         .focusedValue(\.directoryViewModel, directoryViewModel)
         .runs(directoryViewModel)
         .id(directoryViewModel.url)

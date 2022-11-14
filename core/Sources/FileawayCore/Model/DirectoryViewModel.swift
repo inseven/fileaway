@@ -35,32 +35,7 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
     @Published public var selection: Set<FileInfo> = []
     @Published public var previewUrls: [URL] = []
 
-    @Published private var isShowingPreview: Bool = false
-
-    // Synthesize a URL to be used for the QuickLook preview.
-    // We do this to allow us to dynamically update the selection whenever QuickLook updates the preview URL.
-    lazy public var previewUrl: Binding<URL?> = {
-        return Binding { [weak self] in
-            guard let self = self,
-                  self.isShowingPreview
-            else {
-                return nil
-            }
-            return self.selection.first?.url
-        } set: { [weak self] value in
-            guard let self = self else {
-                return
-            }
-            guard let url = value else {
-                self.isShowingPreview = false
-                return
-            }
-            guard let file = self.files.first(where: { $0.url == url }) else {
-                return
-            }
-            self.selection = [file]
-        }
-    }()
+    @Published var previewUrl: URL? = nil
 
     private var directoryModel: DirectoryModel? = nil
     private var cancelables: Set<AnyCancellable> = []
@@ -132,6 +107,24 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
             }
             .store(in: &cancelables)
 
+        // Update the selection to match the preview URL.
+        directoryModel
+            .$searchResults
+            .combineLatest($previewUrl)
+            .receive(on: syncQueue)
+            .compactMap { (files, previewUrl) -> Set<FileInfo>? in
+                guard previewUrl != nil,
+                      let file = self.files.first(where: { $0.url == previewUrl })
+                else {
+                    return nil
+                }
+                return [file]
+            }
+            .receive(on: DispatchQueue.main)
+            .sink { selection in
+                self.selection = selection
+            }
+            .store(in: &cancelables)
 
     }
 
@@ -143,15 +136,11 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
         return selection.count == 1
     }
 
-
     @MainActor public func showPreview(selecting file: FileInfo? = nil) {
-        if let file = file {
-            self.selection = [file]
-        }
-        isShowingPreview = true
+        previewUrl = file?.url ?? selection.first?.url
     }
 
-    public var canCut: Bool {
+    @MainActor public var canCut: Bool {
         return !selection.isEmpty
     }
 
