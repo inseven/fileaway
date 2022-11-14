@@ -22,43 +22,39 @@ import SwiftUI
 
 import FileawayCore
 
-struct RulePicker: View {
+struct RuleFormView: View {
 
-    @Environment(\.dismiss) var dismiss
+    @ObservedObject var ruleModel: RuleModel
+    @StateObject var ruleFormModel: RuleFormModel
 
-    @StateObject var rulePickerModel: RulePickerModel
+    var url: URL
 
-    private let url: URL
+    @Environment(\.applicationModel) var manager
 
-    init(manager: ApplicationModel, url: URL) {
+    init(url: URL, ruleModel: RuleModel) {
         self.url = url
-        _rulePickerModel = StateObject(wrappedValue: RulePickerModel(manager: manager))
+        self.ruleModel = ruleModel
+        _ruleFormModel = StateObject(wrappedValue: RuleFormModel(ruleModel: ruleModel, url: url))
     }
 
     var body: some View {
-        List {
-            ForEach(rulePickerModel.filteredRules) { rule in
-                NavigationLink {
-                    RuleFormView(url: rule.rootUrl, ruleModel: rule)
-                } label: {
-                    Text(rule.name)
+        RuleForm(ruleFormModel, url: url)
+            .navigationTitle(ruleFormModel.name)
+            .toolbar {
+
+                FilePreviewHeader(url: url)
+
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Move") {
+                        do {
+                            try ruleFormModel.move()
+                        } catch {
+                            // TODO: Present this error to the user.
+                            print("Failed to move file with error \(error).")
+                        }
+                    }
                 }
             }
-        }
-        .searchable(text: $rulePickerModel.filter)
-        .navigationTitle("Select Rule")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-
-            FilePreviewHeader(url: url)
-
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button("Cancel") {
-                    dismiss()
-                }
-            }
-        }
-        .runs(rulePickerModel)
     }
 
 }

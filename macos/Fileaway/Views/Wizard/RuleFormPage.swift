@@ -39,17 +39,13 @@ struct RuleFormPage: View {
         case duplicate(duplicateUrl: URL)
     }
 
-    @Environment(\.applicationModel) var manager
     @Environment(\.close) var close
 
     @ObservedObject var ruleModel: RuleModel
     @StateObject var ruleFormModel: RuleFormModel
 
-    @State var destination: URL? = nil
-
     var url: URL
     @State var alert: AlertType?
-    @State var date: Date = Date()
 
     init(url: URL, ruleModel: RuleModel) {
         self.url = url
