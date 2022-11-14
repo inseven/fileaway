@@ -30,7 +30,7 @@ public class DirectoryMonitor {
     let locations: [URL]
     let extensions: [String]
     let handler: (Set<URL>) -> Void
-    let syncQueue = DispatchQueue(label: "FileProvider.syncQueue")
+    let syncQueue = DispatchQueue(label: "DirectoryMonitor.syncQueue")
     let targetQueue: DispatchQueue
 
 #if os(macOS)
@@ -98,6 +98,14 @@ public class DirectoryMonitor {
             self.stream.stop()
         }
 #endif
+    }
+
+    public func refresh() {
+        dispatchPrecondition(condition: .notOnQueue(syncQueue))
+        syncQueue.async {
+            self.files = Set(FileManager.default.files(at: self.locations.first!, extensions: self.extensions))
+            self.targetQueue_update()
+        }
     }
 
     func targetQueue_update() {

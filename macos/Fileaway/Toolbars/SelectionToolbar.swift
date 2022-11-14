@@ -56,7 +56,7 @@ struct SelectionToolbar: CustomizableToolbarContent {
         }
         ToolbarItem(id: "delete") {
             Button {
-                try? directoryViewModel.trash()
+                try? directoryViewModel.trash(.selection)
             } label: {
                 Label("Delete", systemImage: "trash")
             }
