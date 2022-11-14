@@ -27,7 +27,7 @@ public class DateFieldModel: VariableFieldModel, Editable {
 
     public var textRepresentation: String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyOyy-MM-dd"
+        formatter.dateFormat = "yyyy-MM-dd"
         return formatter.string(from: date)
     }
 
