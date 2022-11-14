@@ -13,3 +13,6 @@
 [submodule "FilePicker"]
 	path = FilePicker
 	url = git@github.com:jbmorley/FilePicker.git
+[submodule "HashRainbow"]
+	path = HashRainbow
+	url = git@github.com:jbmorley/HashRainbow.git

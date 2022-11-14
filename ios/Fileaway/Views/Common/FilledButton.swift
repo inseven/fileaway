@@ -22,13 +22,17 @@ import SwiftUI
 
 struct FilledButton: ButtonStyle {
 
+    private struct LayoutMetrics {
+        static let cornerRadius = 8.0
+    }
+
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration
             .label
-            .font(.body)
+            .font(.footnote)
             .foregroundColor(configuration.isPressed ? .gray : .white)
-            .padding(12)
-            .background(Color.accentColor)
-            .cornerRadius(12)
+            .padding()
+            .background(.tint)
+            .cornerRadius(LayoutMetrics.cornerRadius)
     }
 }
