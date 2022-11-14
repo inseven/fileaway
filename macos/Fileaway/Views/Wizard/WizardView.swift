@@ -56,7 +56,7 @@ struct WizardView: View {
                         RuleFormPage(url: url, ruleModel: activeRule)
                             .transition(.move(edge: .trailing))
                     } else {
-                        RulesPage(manager: manager, activeRuleModel: $rulesWizardModel.activeRuleModel, url: url)
+                        RulePicker(manager: manager, activeRuleModel: $rulesWizardModel.activeRuleModel, url: url)
                             .transition(.move(edge: .leading))
                     }
                 }

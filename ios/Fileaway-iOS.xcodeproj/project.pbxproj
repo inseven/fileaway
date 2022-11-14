@@ -30,6 +30,7 @@
 		D8E4CA5B249CF8A600F5BC8E /* Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E4CA5A249CF8A600F5BC8E /* Selectable.swift */; };
 		D8E4CA5D249D061D00F5BC8E /* EditableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E4CA5C249D061D00F5BC8E /* EditableText.swift */; };
 		D8E4CA5F249D317D00F5BC8E /* FilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E4CA5E249D317D00F5BC8E /* FilledButton.swift */; };
+		D8F763DA292259960051D740 /* RulePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F763D9292259960051D740 /* RulePicker.swift */; };
 		D8FB857F2916D2430024F885 /* Diligence in Frameworks */ = {isa = PBXBuildFile; productRef = D8FB857E2916D2430024F885 /* Diligence */; };
 		D8FB85822916D31D0024F885 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB85812916D31D0024F885 /* AboutView.swift */; };
 /* End PBXBuildFile section */
@@ -81,6 +82,7 @@
 		D8E4CA5A249CF8A600F5BC8E /* Selectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selectable.swift; sourceTree = "<group>"; };
 		D8E4CA5C249D061D00F5BC8E /* EditableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableText.swift; sourceTree = "<group>"; };
 		D8E4CA5E249D317D00F5BC8E /* FilledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledButton.swift; sourceTree = "<group>"; };
+		D8F763D9292259960051D740 /* RulePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulePicker.swift; sourceTree = "<group>"; };
 		D8FB85812916D31D0024F885 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -221,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				D855329F291E5FB400C21E12 /* WizardView.swift */,
+				D8F763D9292259960051D740 /* RulePicker.swift */,
 			);
 			path = Wizard;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				D8E4CA5B249CF8A600F5BC8E /* Selectable.swift in Sources */,
 				D8CCD293246EDC6A007EF2BB /* SettingsView.swift in Sources */,
 				D8E4CA57249CF76500F5BC8E /* EditSafeButton.swift in Sources */,
+				D8F763DA292259960051D740 /* RulePicker.swift in Sources */,
 				D8CAE3EE249D3AD70047CA36 /* ErrorText.swift in Sources */,
 				D81C5D93249BE3710083BD6F /* RulesView.swift in Sources */,
 				D8E4CA5D249D061D00F5BC8E /* EditableText.swift in Sources */,
