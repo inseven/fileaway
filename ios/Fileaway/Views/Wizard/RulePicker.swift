@@ -30,9 +30,9 @@ struct RulePicker: View {
 
     private let url: URL
 
-    init(manager: ApplicationModel, url: URL) {
+    init(applicationModel: ApplicationModel, url: URL) {
         self.url = url
-        _rulePickerModel = StateObject(wrappedValue: RulePickerModel(manager: manager))
+        _rulePickerModel = StateObject(wrappedValue: RulePickerModel(applicationModel: applicationModel))
     }
 
     var body: some View {

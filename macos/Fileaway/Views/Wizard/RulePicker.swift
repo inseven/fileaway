@@ -39,10 +39,10 @@ struct RulePicker: View {
 
     @FocusState private var focus: FocusableField?
 
-    init(manager: ApplicationModel, activeRuleModel: Binding<RuleModel?>, url: URL) {
+    init(applicationModel: ApplicationModel, activeRuleModel: Binding<RuleModel?>, url: URL) {
         _activeRuleModel = activeRuleModel
         self.url = url
-        _rulePickerModel = StateObject(wrappedValue: RulePickerModel(manager: manager))
+        _rulePickerModel = StateObject(wrappedValue: RulePickerModel(applicationModel: applicationModel))
     }
 
     @MainActor func submit() {

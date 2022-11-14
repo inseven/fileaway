@@ -29,17 +29,17 @@ public class RulePickerModel: ObservableObject, Runnable {
     @Published public var filteredRules: [RuleModel] = []
     @Published public var selection: RuleModel.ID?
 
-    private var manager: ApplicationModel
+    private var applicationModel: ApplicationModel
     private var cancellables: Set<AnyCancellable> = []
     private var queue = DispatchQueue(label: "queue")
 
-    public init(manager: ApplicationModel) {
-        self.manager = manager
+    public init(applicationModel: ApplicationModel) {
+        self.applicationModel = applicationModel
     }
 
     @MainActor public func start() {
 
-        manager
+        applicationModel
             .$allRules
             .combineLatest($filter)
             .receive(on: queue)

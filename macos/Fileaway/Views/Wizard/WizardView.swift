@@ -34,7 +34,7 @@ class RulesWizardModel: ObservableObject {
 
 struct WizardView: View {
 
-    @Environment(\.applicationModel) var manager
+    @Environment(\.applicationModel) var applicationModel
 
     @StateObject var rulesWizardModel = RulesWizardModel()
 
@@ -56,7 +56,9 @@ struct WizardView: View {
                         RuleFormPage(url: url, ruleModel: activeRule)
                             .transition(.move(edge: .trailing))
                     } else {
-                        RulePicker(manager: manager, activeRuleModel: $rulesWizardModel.activeRuleModel, url: url)
+                        RulePicker(applicationModel: applicationModel,
+                                   activeRuleModel: $rulesWizardModel.activeRuleModel,
+                                   url: url)
                             .transition(.move(edge: .leading))
                     }
                 }
