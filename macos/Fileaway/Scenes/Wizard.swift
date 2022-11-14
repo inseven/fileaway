@@ -35,7 +35,7 @@ struct Wizard: Scene {
     var body: some Scene {
         WindowGroup(id: Self.windowID, for: URL.self) { $url in
             if let url = url {
-                RulesWizard(url: url)
+                WizardView(url: url)
                     .environment(\.applicationModel, applicationModel)
             }
         }

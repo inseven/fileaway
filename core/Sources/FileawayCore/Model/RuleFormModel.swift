@@ -21,29 +21,21 @@
 import Combine
 import SwiftUI
 
-public class RuleInstance: ObservableObject {
+import Interact
 
-    private var ruleModel: RuleModel
-    private var subscriptions: [Cancellable]?
+public class RuleFormModel: ObservableObject, Runnable {
 
-    public var variables: [VariableFieldModel]
-    public var name: String { ruleModel.name }
+    private let ruleModel: RuleModel
+    private let url: URL
+    @Published public var variableFieldModels: [VariableFieldModel]
 
-    public init(rule: RuleModel) {
-        self.ruleModel = rule
-        let variables = rule.variables.map { $0.instance() }
-        self.variables = variables
-        self.subscriptions = variables.map { $0 as! (any Editable) }.map { $0.observe { self.objectWillChange.send() } }
+    private var subscriptions: [Cancellable] = []
+
+    @MainActor public var name: String {
+        return ruleModel.name
     }
 
-    public func variable(for name: String) -> (any Editable)? {
-        guard let variable = variables.first(where: { $0.name == name }) else {
-            return nil
-        }
-        return variable as? any Editable
-    }
-
-    public func destination(for url: URL) -> URL {
+    @MainActor public var destinationURL: URL {
         let destination = ruleModel.destination.reduce("") { (result, component) -> String in
             switch component.type {
             case .text:
@@ -58,8 +50,38 @@ public class RuleInstance: ObservableObject {
         return self.ruleModel.rootUrl.appendingPathComponent(destination).appendingPathExtension(url.pathExtension)
     }
 
-    public func move(url: URL) throws {
-        let destinationUrl = self.destination(for: url)
+    public init(ruleModel: RuleModel, url: URL) {
+        self.ruleModel = ruleModel
+        self.url = url
+        self.variableFieldModels = ruleModel.variables.map { $0.instance() }
+    }
+
+    @MainActor public func start() {
+        subscriptions = variableFieldModels
+            .map { $0 as! (any Editable) }
+            .map { $0.observe { [weak self] in
+                dispatchPrecondition(condition: .onQueue(.main))
+                guard let self = self else {
+                    return
+                }
+                self.objectWillChange.send()
+            } }
+    }
+
+    @MainActor public func stop() {
+        subscriptions.removeAll()
+    }
+
+    public func variable(for name: String) -> (any Editable)? {
+        guard let variable = variableFieldModels.first(where: { $0.name == name }) else {
+            return nil
+        }
+        return variable as? any Editable
+    }
+
+    // TODO: Handle this error within the model.
+    @MainActor public func move() throws {
+        let destinationUrl = self.destinationURL
         let fileManager = FileManager.default
         try fileManager.createDirectory(at: destinationUrl.deletingLastPathComponent(),
                                         withIntermediateDirectories: true,

@@ -32,7 +32,7 @@ class RulesWizardModel: ObservableObject {
 
 }
 
-struct RulesWizard: View {
+struct WizardView: View {
 
     @Environment(\.applicationModel) var manager
 
@@ -53,10 +53,10 @@ struct RulesWizard: View {
             HStack {
                 VStack {
                     if let activeRule = rulesWizardModel.activeRuleModel {
-                        DetailsPage(url: url, ruleModel: activeRule)
+                        RuleFormPage(url: url, ruleModel: activeRule)
                             .transition(.move(edge: .trailing))
                     } else {
-                        TaskPage(manager: manager, activeRuleModel: $rulesWizardModel.activeRuleModel, url: url)
+                        RulesPage(manager: manager, activeRuleModel: $rulesWizardModel.activeRuleModel, url: url)
                             .transition(.move(edge: .leading))
                     }
                 }

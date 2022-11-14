@@ -25,7 +25,7 @@ import SwiftUI
 import FileawayCore
 import Interact
 
-struct TaskPage: View {
+struct RulesPage: View {
 
     enum FocusableField: Hashable {
         case search
