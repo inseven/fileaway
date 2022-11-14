@@ -34,8 +34,8 @@ struct RulesView: View {
                     Section {
                         ForEach(tasks.taskModels) { task in
                             NavigationLink(destination: RuleView(tasks: self.tasks,
-                                                                 editingTaskModel: TaskModel(task),
-                                                                 originalTaskModel: task)) {
+                                                                 editingRuleModel: RuleModel(task),
+                                                                 originalRuleModel: task)) {
                                 Text(task.name)
                             }
                         }

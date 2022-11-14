@@ -25,7 +25,7 @@ import FileawayCore
 struct ComponentItem: View {
 
     @Environment(\.editMode) var editMode
-    @ObservedObject var task: TaskModel
+    @ObservedObject var ruleModel: RuleModel
     @State var component: ComponentModel
 
     var body: some View {
@@ -33,7 +33,7 @@ struct ComponentItem: View {
             if component.type == .text {
                 EditText("Component", text: $component.value).environment(\.editMode, editMode)
             } else {
-                Text(task.name(for: component))
+                Text(ruleModel.name(for: component))
                 .foregroundColor(.secondary)
             }
         }

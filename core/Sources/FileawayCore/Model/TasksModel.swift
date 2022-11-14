@@ -26,9 +26,9 @@ public class TasksModel: ObservableObject, BackChannelable {
     public let rootUrl: URL
     public let url: URL
 
-    @Published public var taskModels: [TaskModel]
+    @Published public var taskModels: [RuleModel]
 
-    var tasksBackChannel: BackChannel<TaskModel>?
+    var tasksBackChannel: BackChannel<RuleModel>?
 
     public var count: Int {
         return taskModels.count
@@ -41,9 +41,8 @@ public class TasksModel: ObservableObject, BackChannelable {
         if FileManager.default.fileExists(atPath: self.url.path) {
             do {
                 self.taskModels = try RuleList(url: self.url).rules.map { rule in
-                    return TaskModel(rule: rule)
+                    return RuleModel(rootUrl: url, rule: rule)
                 }
-                print(taskModels)
             } catch {
                 // TODO: Propagate this error!
                 print("Failed to load rules with error \(error).")
@@ -61,7 +60,7 @@ public class TasksModel: ObservableObject, BackChannelable {
         }
     }
 
-    public func validate(taskModel: TaskModel) -> Bool {
+    public func validate(taskModel: RuleModel) -> Bool {
         return self.taskModels.filter { $0.id != taskModel.id && $0.name == taskModel.name }.count < 1
     }
 
@@ -82,7 +81,7 @@ public class TasksModel: ObservableObject, BackChannelable {
         }
     }
 
-    public func update(task: TaskModel) {
+    public func update(task: RuleModel) {
         guard
             let index = self.taskModels.firstIndex(where: { $0.id == task.id }),
             let range = Range(NSRange(location: index, length: 1))else {
@@ -100,7 +99,8 @@ public class TasksModel: ObservableObject, BackChannelable {
             name = "Task \(index)"
             index = index + 1
         } while names.contains(name)
-        let task = TaskModel(id: UUID(),
+        let task = RuleModel(id: UUID(),
+                             rootUrl: rootUrl,
                              name: name,
                              variables: [VariableModel(name: "Date", type: .date(hasDay: true))],
                              destination: [

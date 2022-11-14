@@ -26,7 +26,7 @@ import FileawayCore
 struct VariableView: View {
 
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @ObservedObject var task: TaskModel
+    @ObservedObject var ruleModel: RuleModel
     @ObservedObject var variable: VariableModel
 
     var body: some View {
@@ -36,7 +36,7 @@ struct VariableView: View {
                     Section {
                         TextField("Name", text: $variable.name)
                     } footer: {
-                        ErrorText(text: task.validate() ? nil : "Variable names must be unique.")
+                        ErrorText(text: ruleModel.validate() ? nil : "Variable names must be unique.")
                     }
                     Section("Type") {
                         ForEach(VariableType.allCases) { type in
@@ -58,7 +58,7 @@ struct VariableView: View {
                     } label: {
                         Text("Done")
                             .bold()
-                            .disabled(!task.validate())
+                            .disabled(!ruleModel.validate())
                     }
                 }
 
