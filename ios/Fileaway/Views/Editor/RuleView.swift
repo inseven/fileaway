@@ -28,58 +28,58 @@ struct RuleView: View {
 
     @State private var editMode = EditMode.inactive
     @ObservedObject var tasks: TasksModel
-    @ObservedObject var editingTaskModel: TaskModel
-    var originalTaskModel: TaskModel
+    @ObservedObject var editingRuleModel: RuleModel
+    var originalRuleModel: RuleModel
 
     func edit() {
-        self.editingTaskModel.establishBackChannel()
+        self.editingRuleModel.establishBackChannel()
         self.editMode = .active
     }
 
     func save() {
         // SwiftUI gets crashy if there's a first responder attached to a TextView when it's hidden.
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-        tasks.update(task: editingTaskModel)
+        tasks.update(task: editingRuleModel)
         self.editMode = .inactive
     }
 
     func validate() -> Bool {
-        return tasks.validate(taskModel: editingTaskModel) && !editingTaskModel.name.isEmpty
+        return tasks.validate(taskModel: editingRuleModel) && !editingRuleModel.name.isEmpty
     }
 
     var body: some View {
         return VStack {
             Form {
-                Section(footer: ErrorText(text: validate() ? nil : "Task names must be unique.")) {
-                    EditText("Task", text: $editingTaskModel.name)
+                Section(footer: ErrorText(text: validate() ? nil : "Rule names must be unique.")) {
+                    EditText("Rule", text: $editingRuleModel.name)
                 }
                 Section(header: Text("Variables".uppercased()),
-                        footer: ErrorText(text: editingTaskModel.validate() ? nil : "Variable names must be unique.")) {
-                    ForEach(editingTaskModel.variables) { variable in
-                        VariableRow(task: self.editingTaskModel, variable: variable)
+                        footer: ErrorText(text: editingRuleModel.validate() ? nil : "Variable names must be unique.")) {
+                    ForEach(editingRuleModel.variables) { variable in
+                        VariableRow(ruleModel: self.editingRuleModel, variable: variable)
                     }
-                    .onDelete { self.editingTaskModel.remove(variableOffsets: $0) }
+                    .onDelete { self.editingRuleModel.remove(variableOffsets: $0) }
                     if self.editMode == .active {
                         EditSafeButton(action: {
-                            self.editingTaskModel.createVariable()
+                            self.editingRuleModel.createVariable()
                         }) {
                             Text("New variable...")
                         }
                     }
                 }
-                Section(header: Text("Destination".uppercased()), footer: DestinationFooter(task: editingTaskModel)) {
-                    ForEach(editingTaskModel.destination) { component in
-                        ComponentItem(task: self.editingTaskModel, component: component)
+                Section(header: Text("Destination".uppercased()), footer: DestinationFooter(ruleModel: editingRuleModel)) {
+                    ForEach(editingRuleModel.destination) { component in
+                        ComponentItem(ruleModel: self.editingRuleModel, component: component)
                     }
                     .onMove { (fromOffsets, toOffset) in
-                        self.editingTaskModel.destination.move(fromOffsets: fromOffsets, toOffset: toOffset)
+                        self.editingRuleModel.destination.move(fromOffsets: fromOffsets, toOffset: toOffset)
                     }
-                    .onDelete { self.editingTaskModel.destination.remove(atOffsets: $0) }
+                    .onDelete { self.editingRuleModel.destination.remove(atOffsets: $0) }
                 }
             }
             .environment(\.editMode, $editMode)
         }
-        .navigationBarTitle(editingTaskModel.name)
+        .navigationBarTitle(editingRuleModel.name)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(editMode == .active)
         .navigationBarItems(trailing: Button(action: {
@@ -92,7 +92,7 @@ struct RuleView: View {
             if self.editMode == .active {
                 Text("Save")
                     .bold()
-                    .disabled(!validate() || !editingTaskModel.validate())
+                    .disabled(!validate() || !editingRuleModel.validate())
             } else {
                 Text("Edit")
             }

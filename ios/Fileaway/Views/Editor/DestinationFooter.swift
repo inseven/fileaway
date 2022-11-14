@@ -27,23 +27,24 @@ import FileawayCore
 struct DestinationFooter: View {
 
     @Environment(\.editMode) var editMode
-    @ObservedObject var task: TaskModel
+    @ObservedObject var ruleModel: RuleModel
 
     var body: some View {
         VStack {
             if self.editMode?.wrappedValue == .active {
                 HStack {
                     Button {
-                        self.task.destination.append(ComponentModel(value: "Text", type: .text, variable: nil))
+                        self.ruleModel.destination.append(ComponentModel(value: "Text", type: .text, variable: nil))
                     } label: {
                         Text("Text")
                     }
                     .buttonStyle(FilledButton())
-                    ForEach(task.variables) { variable in
-                        Button(action: {
-                            self.task.destination.append(ComponentModel(value: variable.name,
-                                                                        type: .variable, variable: variable))
-                        }) {
+                    ForEach(ruleModel.variables) { variable in
+                        Button {
+                            self.ruleModel.destination.append(ComponentModel(value: variable.name,
+                                                                             type: .variable,
+                                                                             variable: variable))
+                        } label: {
                             Text(String(describing: variable.name))
                         }
                         .buttonStyle(FilledButton())
@@ -51,7 +52,7 @@ struct DestinationFooter: View {
                 }
                 .padding()
             } else {
-                DestinationView(task: task)
+                DestinationView(ruleModel: ruleModel)
             }
         }
     }

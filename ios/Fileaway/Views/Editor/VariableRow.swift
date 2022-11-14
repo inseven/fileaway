@@ -29,7 +29,7 @@ struct VariableRow : View {
     @Environment(\.editMode) var editMode
     @State var showSheet: Bool = false
 
-    @ObservedObject var task: TaskModel
+    @ObservedObject var ruleModel: RuleModel
     @ObservedObject var variable: VariableModel
 
     var body: some View {
@@ -40,7 +40,7 @@ struct VariableRow : View {
                 .foregroundColor(editMode?.wrappedValue == .active ? .accentColor : .secondary)
         }
         .sheet(isPresented: $showSheet) {
-            VariableView(task: self.task, variable: self.variable)
+            VariableView(ruleModel: self.ruleModel, variable: self.variable)
         }
         .onTapGesture {
             if self.editMode?.wrappedValue == .active {

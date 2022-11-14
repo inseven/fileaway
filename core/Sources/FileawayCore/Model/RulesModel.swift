@@ -154,14 +154,8 @@ extension RuleList {
 
     func models(for rootUrl: URL) -> [RuleModel] {
         return rules
-            .map { configuration -> RuleModel in
-                return RuleModel(id: configuration.id,
-                                 rootUrl: rootUrl,
-                                 name: configuration.name,
-                                 variables: configuration.variables,
-                                 destination: configuration.destination.map { component in
-                    ComponentModel(component, variable: configuration.variables.first { $0.name == component.value } )
-                })
+            .map { rule in
+                return RuleModel(rootUrl: rootUrl, rule: rule)
             }
             .sorted { $0.name < $1.name }
     }

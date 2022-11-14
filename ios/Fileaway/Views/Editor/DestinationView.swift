@@ -24,12 +24,12 @@ import FileawayCore
 
 struct DestinationView: View {
 
-    @ObservedObject var task: TaskModel
+    @ObservedObject var ruleModel: RuleModel
 
     var body: some View {
         HStack {
-            task.destination.map {
-                Text(self.task.name(for: $0, format: .short))
+            ruleModel.destination.map {
+                Text(self.ruleModel.name(for: $0, format: .short))
                     .foregroundColor($0.type == .variable ? .accentColor : .primary)
                     .fontWeight($0.type == .variable ? .bold : .none)
             }

@@ -63,7 +63,16 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
                   name: String(ruleModel.name),
                   variables: ruleModel.variables,
                   destination: ruleModel.destination.map { ComponentModel($0, variable: nil) })
-        self.establishBackChannel()
+    }
+
+    public convenience init(rootUrl: URL, rule: Rule) {
+        self.init(id: rule.id,
+                  rootUrl: rootUrl,
+                  name: rule.name,
+                  variables: rule.variables,
+                  destination: rule.destination.map { component in
+            ComponentModel(component, variable: rule.variables.first { $0.name == component.value } )
+        })
     }
 
     public func establishBackChannel() {
