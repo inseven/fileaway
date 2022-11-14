@@ -50,11 +50,14 @@ struct RuleView: View {
     var body: some View {
         return VStack {
             Form {
-                Section(footer: ErrorText(text: validate() ? nil : "Rule names must be unique.")) {
+
+                Section {
                     EditText("Rule", text: $editingRuleModel.name)
+                } footer: {
+                    ErrorText(text: validate() ? nil : "Rule names must be unique.")
                 }
-                Section(header: Text("Variables".uppercased()),
-                        footer: ErrorText(text: editingRuleModel.validate() ? nil : "Variable names must be unique.")) {
+
+                Section {
                     ForEach(editingRuleModel.variables) { variable in
                         VariableRow(ruleModel: self.editingRuleModel, variable: variable)
                     }
@@ -66,8 +69,13 @@ struct RuleView: View {
                             Text("New variable...")
                         }
                     }
+                } header: {
+                    Text("Variables")
+                } footer: {
+                    ErrorText(text: editingRuleModel.validate() ? nil : "Variable names must be unique.")
                 }
-                Section(header: Text("Destination".uppercased()), footer: DestinationFooter(ruleModel: editingRuleModel)) {
+
+                Section {
                     ForEach(editingRuleModel.destination) { component in
                         ComponentItem(ruleModel: self.editingRuleModel, component: component)
                     }
@@ -75,7 +83,12 @@ struct RuleView: View {
                         self.editingRuleModel.destination.move(fromOffsets: fromOffsets, toOffset: toOffset)
                     }
                     .onDelete { self.editingRuleModel.destination.remove(atOffsets: $0) }
+                } header: {
+                    Text("Destination")
+                } footer: {
+                    DestinationFooter(ruleModel: editingRuleModel)
                 }
+
             }
             .environment(\.editMode, $editMode)
         }
