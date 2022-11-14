@@ -25,22 +25,22 @@ import FileawayCore
 
 struct RulesView: View {
 
-    @ObservedObject var tasks: TasksModel
+    @ObservedObject var rulesModel: RulesModel
 
     var body: some View {
         NavigationStack {
             VStack {
                 List {
                     Section {
-                        ForEach(tasks.taskModels) { task in
-                            NavigationLink(destination: RuleView(tasks: self.tasks,
-                                                                 editingRuleModel: RuleModel(task),
-                                                                 originalRuleModel: task)) {
-                                Text(task.name)
+                        ForEach(rulesModel.ruleModels) { ruleModel in
+                            NavigationLink(destination: RuleView(rulesModel: self.rulesModel,
+                                                                 editingRuleModel: RuleModel(ruleModel),
+                                                                 originalRuleModel: ruleModel)) {
+                                Text(ruleModel.name)
                             }
                         }
                         .onDelete {
-                            self.tasks.taskModels.remove(atOffsets: $0)
+                            self.rulesModel.ruleModels.remove(atOffsets: $0)
                         }
                     }
                 }
@@ -50,7 +50,7 @@ struct RulesView: View {
 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        self.tasks.createTask()
+                        self.rulesModel.createRule()
                     } label: {
                         Image(systemName: "plus")
                     }
