@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D81C5D93249BE3710083BD6F /* TasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81C5D92249BE3710083BD6F /* TasksView.swift */; };
-		D81C5D95249BE6F40083BD6F /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81C5D94249BE6F40083BD6F /* TaskView.swift */; };
+		D81C5D93249BE3710083BD6F /* RulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81C5D92249BE3710083BD6F /* RulesView.swift */; };
+		D81C5D95249BE6F40083BD6F /* RuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81C5D94249BE6F40083BD6F /* RuleView.swift */; };
 		D85532A0291E5FB400C21E12 /* WizardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D855329F291E5FB400C21E12 /* WizardView.swift */; };
 		D86A8F15249C5F9800839D1A /* DestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86A8F14249C5F9800839D1A /* DestinationView.swift */; };
 		D86AA556291DB7E00078B2DA /* FilePicker in Frameworks */ = {isa = PBXBuildFile; productRef = D86AA555291DB7E00078B2DA /* FilePicker */; };
@@ -52,8 +52,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D81C5D92249BE3710083BD6F /* TasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksView.swift; sourceTree = "<group>"; };
-		D81C5D94249BE6F40083BD6F /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
+		D81C5D92249BE3710083BD6F /* RulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesView.swift; sourceTree = "<group>"; };
+		D81C5D94249BE6F40083BD6F /* RuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleView.swift; sourceTree = "<group>"; };
 		D855329F291E5FB400C21E12 /* WizardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardView.swift; sourceTree = "<group>"; };
 		D866D66326197AC80025329E /* FileawayCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FileawayCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86A8F14249C5F9800839D1A /* DestinationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationView.swift; sourceTree = "<group>"; };
@@ -209,8 +209,8 @@
 				D8A871D12916D56400B2932A /* ComponentItem.swift */,
 				D8D81EB3291DD1BE00870E6E /* DestinationFooter.swift */,
 				D86A8F14249C5F9800839D1A /* DestinationView.swift */,
-				D81C5D92249BE3710083BD6F /* TasksView.swift */,
-				D81C5D94249BE6F40083BD6F /* TaskView.swift */,
+				D81C5D92249BE3710083BD6F /* RulesView.swift */,
+				D81C5D94249BE6F40083BD6F /* RuleView.swift */,
 				D8D81EB8291DD23800870E6E /* VariableRow.swift */,
 				D8D81EB1291DD07800870E6E /* VariableView.swift */,
 			);
@@ -403,12 +403,12 @@
 				D8D81EB0291DC70200870E6E /* ContentView.swift in Sources */,
 				D86A8F15249C5F9800839D1A /* DestinationView.swift in Sources */,
 				D8C15DBA291A498F002DB14D /* FileawayApp.swift in Sources */,
-				D81C5D95249BE6F40083BD6F /* TaskView.swift in Sources */,
+				D81C5D95249BE6F40083BD6F /* RuleView.swift in Sources */,
 				D8E4CA5B249CF8A600F5BC8E /* Selectable.swift in Sources */,
 				D8CCD293246EDC6A007EF2BB /* SettingsView.swift in Sources */,
 				D8E4CA57249CF76500F5BC8E /* EditSafeButton.swift in Sources */,
 				D8CAE3EE249D3AD70047CA36 /* ErrorText.swift in Sources */,
-				D81C5D93249BE3710083BD6F /* TasksView.swift in Sources */,
+				D81C5D93249BE3710083BD6F /* RulesView.swift in Sources */,
 				D8E4CA5D249D061D00F5BC8E /* EditableText.swift in Sources */,
 				D8D81EB9291DD23800870E6E /* VariableRow.swift in Sources */,
 			);

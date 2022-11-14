@@ -26,7 +26,6 @@ import FileawayCore
 
 struct VariableRow : View {
 
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.editMode) var editMode
     @State var showSheet: Bool = false
 
