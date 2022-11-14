@@ -26,14 +26,14 @@ import FileawayCore
 
 struct RulesSettingsView: View {
 
-    @ObservedObject var manager: ApplicationModel
+    @ObservedObject var applicationModel: ApplicationModel
     @State var selection: UUID?
 
     var body: some View {
         HStack {
             VStack {
                 List(selection: $selection) {
-                    ForEach(manager.directories(type: .archive)) { directory in
+                    ForEach(applicationModel.directories(type: .archive)) { directory in
                         HStack {
                             IconView(url: directory.url, size: CGSize(width: 16, height: 16))
                             Text(directory.name)
@@ -42,7 +42,7 @@ struct RulesSettingsView: View {
                 }
             }
             GroupBox {
-                if let ruleSet = manager.directories.first { $0.id == selection }?.ruleSet {
+                if let ruleSet = applicationModel.directories.first { $0.id == selection }?.ruleSet {
                     RulesEditor(ruleSet: ruleSet)
                         .padding(4)
                 } else {

@@ -30,7 +30,7 @@ struct WizardView: View {
 
     var body: some View {
         NavigationStack {
-            RulePicker(manager: applicationModel, url: file.url)
+            RulePicker(applicationModel: applicationModel, url: file.url)
         }
     }
 
