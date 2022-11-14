@@ -33,9 +33,9 @@ struct DestinationFooter: View {
         VStack {
             if self.editMode?.wrappedValue == .active {
                 HStack {
-                    Button(action: {
+                    Button {
                         self.task.destination.append(ComponentModel(value: "Text", type: .text, variable: nil))
-                    }) {
+                    } label: {
                         Text("Text")
                     }
                     .buttonStyle(FilledButton())

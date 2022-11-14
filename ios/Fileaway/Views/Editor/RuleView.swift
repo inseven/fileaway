@@ -24,7 +24,7 @@ import SwiftUI
 
 import FileawayCore
 
-struct TaskView: View {
+struct RuleView: View {
 
     @State private var editMode = EditMode.inactive
     @ObservedObject var tasks: TasksModel
@@ -90,7 +90,9 @@ struct TaskView: View {
             }
         }) {
             if self.editMode == .active {
-                Text("Save").bold().disabled(!validate() || !editingTaskModel.validate())
+                Text("Save")
+                    .bold()
+                    .disabled(!validate() || !editingTaskModel.validate())
             } else {
                 Text("Edit")
             }
