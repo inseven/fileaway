@@ -25,35 +25,33 @@ import SwiftUI
 import FileawayCore
 import Interact
 
-struct RulesPage: View {
+struct RulePicker: View {
 
     enum FocusableField: Hashable {
         case search
     }
 
-    var manager: ApplicationModel
-    var url: URL
+    private let url: URL
 
-    @StateObject var model: RulesPageModel
+    @StateObject var rulePickerModel: RulePickerModel
 
     @Binding var activeRuleModel: RuleModel?
 
     @FocusState private var focus: FocusableField?
 
     init(manager: ApplicationModel, activeRuleModel: Binding<RuleModel?>, url: URL) {
-        self.manager = manager
         _activeRuleModel = activeRuleModel
         self.url = url
-        _model = StateObject(wrappedValue: RulesPageModel(manager: manager))
+        _rulePickerModel = StateObject(wrappedValue: RulePickerModel(manager: manager))
     }
 
     @MainActor func submit() {
-        activeRuleModel = model.filteredRules.first(where: { $0.id == model.selection })
+        activeRuleModel = rulePickerModel.filteredRules.first { $0.id == rulePickerModel.selection }
     }
 
     var body: some View {
         VStack(spacing: 0) {
-            TextField("Search", text: $model.filter)
+            TextField("Search", text: $rulePickerModel.filter)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .focused($focus, equals: .search)
                 .onSubmit {
@@ -62,8 +60,8 @@ struct RulesPage: View {
                     }
                 }
                 .padding([.bottom, .leading, .trailing])
-            List(selection: $model.selection) {
-                ForEach(model.filteredRules) { rule in
+            List(selection: $rulePickerModel.selection) {
+                ForEach(rulePickerModel.filteredRules) { rule in
                     HStack {
                         VStack(alignment: .leading) {
                             Text(rule.name)
@@ -77,7 +75,7 @@ struct RulesPage: View {
                     .contentShape(Rectangle())
                     .onTapGesture {
                         withAnimation {
-                            model.selection = rule.id
+                            rulePickerModel.selection = rule.id
                             activeRuleModel = rule
                         }
                     }
@@ -86,24 +84,26 @@ struct RulesPage: View {
             .scrollContentBackground(.hidden)
         }
         .onKeyDownEvent(kVK_UpArrow) {
-            guard let index = model.filteredRules.firstIndex(where: { $0.id == model.selection }) else {
+            guard let index = rulePickerModel.filteredRules.firstIndex(where: { $0.id == rulePickerModel.selection })
+            else {
                 return
             }
             let previousIndex = index - 1
             guard previousIndex >= 0 else {
                 return
             }
-            model.selection = model.filteredRules[previousIndex].id
+            rulePickerModel.selection = rulePickerModel.filteredRules[previousIndex].id
         }
         .onKeyDownEvent(kVK_DownArrow) {
-            guard let index = model.filteredRules.firstIndex(where: { $0.id == model.selection }) else {
+            guard let index = rulePickerModel.filteredRules.firstIndex(where: { $0.id == rulePickerModel.selection })
+            else {
                 return
             }
             let nextIndex = index + 1
-            guard nextIndex < model.filteredRules.count else {
+            guard nextIndex < rulePickerModel.filteredRules.count else {
                 return
             }
-            model.selection = model.filteredRules[nextIndex].id
+            rulePickerModel.selection = rulePickerModel.filteredRules[nextIndex].id
         }
         .onKeyDownEvent(kVK_Return) {
             withAnimation {
@@ -116,7 +116,7 @@ struct RulesPage: View {
                 focus = .search
             }
         }
-        .runs(model)
+        .runs(rulePickerModel)
     }
 
 

@@ -22,16 +22,42 @@ import SwiftUI
 
 import FileawayCore
 
-struct WizardView: View {
+struct RulePicker: View {
 
-    @Environment(\.applicationModel) var applicationModel
+    @Environment(\.dismiss) var dismiss
 
-    let file: FileInfo
+    @StateObject var rulePickerModel: RulePickerModel
+
+    private let url: URL
+
+    init(manager: ApplicationModel, url: URL) {
+        self.url = url
+        _rulePickerModel = StateObject(wrappedValue: RulePickerModel(manager: manager))
+    }
 
     var body: some View {
-        NavigationStack {
-            RulePicker(manager: applicationModel, url: file.url)
+        List {
+            ForEach(rulePickerModel.filteredRules) { rule in
+                NavigationLink {
+                    EmptyView()
+                        .navigationTitle(rule.name)
+                } label: {
+                    Text(rule.name)
+                }
+            }
         }
+        .searchable(text: $rulePickerModel.filter)
+        .navigationTitle("Select Rule")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button("Cancel") {
+                    dismiss()
+                }
+            }
+        }
+        .runs(rulePickerModel)
     }
 
 }

@@ -23,23 +23,21 @@ import SwiftUI
 
 import Interact
 
-import FileawayCore
+public class RulePickerModel: ObservableObject, Runnable {
 
-class RulesPageModel: ObservableObject, Runnable {
-
-    @Published var filter: String = ""
-    @Published var filteredRules: [RuleModel] = []
-    @Published var selection: RuleModel.ID?
+    @Published public var filter: String = ""
+    @Published public var filteredRules: [RuleModel] = []
+    @Published public var selection: RuleModel.ID?
 
     private var manager: ApplicationModel
     private var cancellables: Set<AnyCancellable> = []
     private var queue = DispatchQueue(label: "queue")
 
-    init(manager: ApplicationModel) {
+    public init(manager: ApplicationModel) {
         self.manager = manager
     }
 
-    @MainActor func start() {
+    @MainActor public func start() {
 
         manager
             .$allRules
@@ -67,7 +65,7 @@ class RulesPageModel: ObservableObject, Runnable {
             .store(in: &cancellables)
     }
 
-    @MainActor func stop() {
+    @MainActor public func stop() {
         cancellables.removeAll()
     }
 
