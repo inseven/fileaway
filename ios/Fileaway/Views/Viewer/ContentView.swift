@@ -39,7 +39,7 @@ struct ContentView: View {
 
         NavigationSplitView {
             Sidebar(sceneModel: sceneModel)
-                .navigationTitle("Fileaway")
+                .navigationTitle("Folders")
                 .toolbar {
 
                     ToolbarItem(placement: .navigationBarLeading) {
@@ -71,7 +71,7 @@ struct ContentView: View {
                     // TODO: Handle the error here.
                     try! applicationModel.addLocation(type: type, url: url)
                 }
-            case .open(let file):
+            case .move(let file):
                 WizardView(file: file)
             case .editRules(let url):
                 RulesView(tasks: TasksModel(url: url))

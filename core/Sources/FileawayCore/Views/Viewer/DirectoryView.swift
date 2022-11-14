@@ -35,10 +35,29 @@ public struct DirectoryView: View {
         self.directoryViewModel = directoryViewModel
     }
 
+    @MainActor func move(_ files: Set<FileInfo>) {
+#if os(macOS)
+        for file in files {
+            // TODO: Use Wizard.windowID
+            openWindow(id: "wizard-window", value: file.url)
+        }
+#else
+        sceneModel.move(files)
+#endif
+    }
+
     public var body: some View {
         List(selection: $directoryViewModel.selection) {
             ForEach(directoryViewModel.files, id: \.self) { file in
                 FileRow(file: file)
+                    .swipeActions(edge: .leading) {
+                        Button {
+                            move([file])
+                        } label: {
+                            Label("Move", systemImage: "tray.and.arrow.down")
+                        }
+                        .tint(.purple)
+                    }
             }
         }
 #if os(iOS)
@@ -47,24 +66,23 @@ public struct DirectoryView: View {
         .contextMenu(forSelectionType: FileInfo.self) { selection in
             if !selection.isEmpty, let file = selection.first {
 
-#if os(macOS)
-                Button("Apply Rules") {
-                    for file in selection {
-                        // TODO: Use Wizard.windowID
-                        openWindow(id: "wizard-window", value: file.url)
-                    }
+                Button {
+                    move(selection)
+                } label: {
+                    Label("Move", systemImage: "tray.and.arrow.down")
                 }
                 Divider()
-#endif
+
+#if os(macOS)
                 Button("Open") {
                     sceneModel.open(selection)
                 }
-#if os(macOS)
                 Button("Reveal in Finder") {
                     sceneModel.reveal(selection)
                 }
-#endif
                 Divider()
+#endif
+
                 Button {
                     directoryViewModel.showPreview(selecting: selection.first)
                 } label: {
@@ -86,8 +104,11 @@ public struct DirectoryView: View {
 
             }
         } primaryAction: { selection in
+#if os(macOS)
             sceneModel.open(selection)
-
+#else
+            directoryViewModel.showPreview(selecting: selection.first)
+#endif
         }
         // Enter to open.
         // Drag-and-drop.

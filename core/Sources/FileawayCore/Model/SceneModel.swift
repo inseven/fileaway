@@ -33,7 +33,7 @@ public class SceneModel: ObservableObject, Runnable {
                 return "settings"
             case .addLocation(let type):
                 return "add-location-\(type.rawValue)"
-            case .open(let file):
+            case .move(let file):
                 return "open-\(file.url.absoluteURL)"
             case .editRules(let url):
                 return "edit-rules-\(url.absoluteURL)"
@@ -42,7 +42,7 @@ public class SceneModel: ObservableObject, Runnable {
 
         case settings
         case addLocation(DirectoryModel.DirectoryType)
-        case open(FileInfo)
+        case move(FileInfo)
         case editRules(URL)
     }
 
@@ -114,10 +114,18 @@ public class SceneModel: ObservableObject, Runnable {
             NSWorkspace.shared.open(file.url)
         }
 #else
+        assertionFailure("Unsupported")
+#endif
+    }
+
+    @MainActor public func move(_ files: Set<FileInfo>) {
+#if os(macOS)
+        assertionFailure("Unsupported")
+#else
         guard let file = files.first else {
             return
         }
-        sheet = .open(file)
+        sheet = .move(file)
 #endif
     }
 

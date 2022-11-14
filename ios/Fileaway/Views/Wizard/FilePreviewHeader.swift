@@ -22,43 +22,24 @@ import SwiftUI
 
 import FileawayCore
 
-struct RulePicker: View {
+struct FilePreviewHeader: ToolbarContent {
 
-    @Environment(\.dismiss) var dismiss
-
-    @StateObject var rulePickerModel: RulePickerModel
+    @State private var previewURL: URL?
 
     private let url: URL
 
-    init(manager: ApplicationModel, url: URL) {
+    init(url: URL) {
         self.url = url
-        _rulePickerModel = StateObject(wrappedValue: RulePickerModel(manager: manager))
     }
 
-    var body: some View {
-        List {
-            ForEach(rulePickerModel.filteredRules) { rule in
-                NavigationLink {
-                    RuleFormView(url: rule.rootUrl, ruleModel: rule)
-                } label: {
-                    Text(rule.name)
-                }
+    var body: some ToolbarContent {
+        ToolbarItem(placement: .principal) {
+            Button("Preview") {
+                previewURL = url
             }
+            .buttonStyle(.borderedProminent)
+            .quickLookPreview($previewURL)
         }
-        .searchable(text: $rulePickerModel.filter)
-        .navigationTitle("Select Rule")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-
-            FilePreviewHeader(url: url)
-
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button("Cancel") {
-                    dismiss()
-                }
-            }
-        }
-        .runs(rulePickerModel)
     }
 
 }

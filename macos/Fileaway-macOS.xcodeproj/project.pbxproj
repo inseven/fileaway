@@ -185,7 +185,6 @@
 				D87DEF7E25774F6C006CFE85 /* FileawayApp.swift */,
 				D87DEF8225774F6D006CFE85 /* Assets.xcassets */,
 				D8F8BE0A258817780010432F /* Environment */,
-				D8C4CC492920FF260038B06E /* Model */,
 				D8C4CC482920FD320038B06E /* Modifiers */,
 				D87DEF8425774F6D006CFE85 /* Preview Content */,
 				D82D73D528B4C649006F49F1 /* Scenes */,
@@ -228,13 +227,6 @@
 				D8C4CC442920FBD80038B06E /* ShowsStackNavigationBar.swift */,
 			);
 			path = Modifiers;
-			sourceTree = "<group>";
-		};
-		D8C4CC492920FF260038B06E /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		D8C4CC4A2921009C0038B06E /* Common */ = {
