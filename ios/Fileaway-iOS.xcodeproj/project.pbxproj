@@ -116,17 +116,12 @@
 		D81C5D8F249BDD3C0083BD6F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D8FB85812916D31D0024F885 /* AboutView.swift */,
-				D8A871D12916D56400B2932A /* ComponentItem.swift */,
-				D8D81EAF291DC70200870E6E /* ContentView.swift */,
-				D8D81EB3291DD1BE00870E6E /* DestinationFooter.swift */,
-				D86A8F14249C5F9800839D1A /* DestinationView.swift */,
-				D8CCD292246EDC6A007EF2BB /* SettingsView.swift */,
-				D81C5D92249BE3710083BD6F /* TasksView.swift */,
-				D81C5D94249BE6F40083BD6F /* TaskView.swift */,
-				D8D81EB8291DD23800870E6E /* VariableRow.swift */,
-				D8D81EB1291DD07800870E6E /* VariableView.swift */,
-				D855329F291E5FB400C21E12 /* WizardView.swift */,
+				D8F763D7292255CD0051D740 /* About */,
+				D8F763D8292255FE0051D740 /* Common */,
+				D8F763D42922553F0051D740 /* Editor */,
+				D8F763D6292255A30051D740 /* Settings */,
+				D8F763D3292255200051D740 /* Viewer */,
+				D8F763D5292255780051D740 /* Wizard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -176,7 +171,6 @@
 				D8CCB8112143672700AC445F /* Info.plist */,
 				D8C15DB9291A498F002DB14D /* FileawayApp.swift */,
 				D8CCB80C2143672700AC445F /* Assets.xcassets */,
-				D8E4CA55249CF73000F5BC8E /* Components */,
 				D8CCB80E2143672700AC445F /* LaunchScreen.storyboard */,
 				D81C5D8F249BDD3C0083BD6F /* Views */,
 			);
@@ -201,7 +195,53 @@
 			path = FileawayUITests;
 			sourceTree = "<group>";
 		};
-		D8E4CA55249CF73000F5BC8E /* Components */ = {
+		D8F763D3292255200051D740 /* Viewer */ = {
+			isa = PBXGroup;
+			children = (
+				D8D81EAF291DC70200870E6E /* ContentView.swift */,
+			);
+			path = Viewer;
+			sourceTree = "<group>";
+		};
+		D8F763D42922553F0051D740 /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				D8A871D12916D56400B2932A /* ComponentItem.swift */,
+				D8D81EB3291DD1BE00870E6E /* DestinationFooter.swift */,
+				D86A8F14249C5F9800839D1A /* DestinationView.swift */,
+				D81C5D92249BE3710083BD6F /* TasksView.swift */,
+				D81C5D94249BE6F40083BD6F /* TaskView.swift */,
+				D8D81EB8291DD23800870E6E /* VariableRow.swift */,
+				D8D81EB1291DD07800870E6E /* VariableView.swift */,
+			);
+			path = Editor;
+			sourceTree = "<group>";
+		};
+		D8F763D5292255780051D740 /* Wizard */ = {
+			isa = PBXGroup;
+			children = (
+				D855329F291E5FB400C21E12 /* WizardView.swift */,
+			);
+			path = Wizard;
+			sourceTree = "<group>";
+		};
+		D8F763D6292255A30051D740 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				D8CCD292246EDC6A007EF2BB /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		D8F763D7292255CD0051D740 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				D8FB85812916D31D0024F885 /* AboutView.swift */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
+		D8F763D8292255FE0051D740 /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				D8E4CA5C249D061D00F5BC8E /* EditableText.swift */,
@@ -210,7 +250,7 @@
 				D8E4CA5E249D317D00F5BC8E /* FilledButton.swift */,
 				D8E4CA5A249CF8A600F5BC8E /* Selectable.swift */,
 			);
-			path = Components;
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

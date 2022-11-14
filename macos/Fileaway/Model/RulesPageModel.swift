@@ -25,7 +25,7 @@ import Interact
 
 import FileawayCore
 
-class TaskPageModel: ObservableObject, Runnable {
+class RulesPageModel: ObservableObject, Runnable {
 
     @Published var filter: String = ""
     @Published var filteredRules: [RuleModel] = []

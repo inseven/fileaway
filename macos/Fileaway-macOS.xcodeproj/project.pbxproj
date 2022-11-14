@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D8037B122617F8CD00F41971 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = D8037B112617F8CD00F41971 /* Introspect */; };
-		D81B24112918267E0078D638 /* TaskPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81B24102918267E0078D638 /* TaskPageModel.swift */; };
+		D81B24112918267E0078D638 /* RulesPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81B24102918267E0078D638 /* RulesPageModel.swift */; };
 		D82D73D728B4C659006F49F1 /* Wizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82D73D628B4C659006F49F1 /* Wizard.swift */; };
 		D83CDCE52620F97F0063C91C /* VariableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83CDCE42620F97F0063C91C /* VariableTextField.swift */; };
 		D83CDCEA2620FF210063C91C /* RuleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83CDCE92620FF210063C91C /* RuleSheet.swift */; };
@@ -59,7 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D81B24102918267E0078D638 /* TaskPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPageModel.swift; sourceTree = "<group>"; };
+		D81B24102918267E0078D638 /* RulesPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesPageModel.swift; sourceTree = "<group>"; };
 		D82D73D628B4C659006F49F1 /* Wizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wizard.swift; sourceTree = "<group>"; };
 		D83CDCE42620F97F0063C91C /* VariableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableTextField.swift; sourceTree = "<group>"; };
 		D83CDCE92620FF210063C91C /* RuleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleSheet.swift; sourceTree = "<group>"; };
@@ -235,7 +235,7 @@
 		D8C4CC492920FF260038B06E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D81B24102918267E0078D638 /* TaskPageModel.swift */,
+				D81B24102918267E0078D638 /* RulesPageModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -460,7 +460,7 @@
 				D8F8BE12258818450010432F /* WizardView.swift in Sources */,
 				D87DEF7F25774F6C006CFE85 /* FileawayApp.swift in Sources */,
 				D83CDCE52620F97F0063C91C /* VariableTextField.swift in Sources */,
-				D81B24112918267E0078D638 /* TaskPageModel.swift in Sources */,
+				D81B24112918267E0078D638 /* RulesPageModel.swift in Sources */,
 				D8E7F9EB2599B05300C7409B /* VariableList.swift in Sources */,
 				D82D73D728B4C659006F49F1 /* Wizard.swift in Sources */,
 				D8C4CC452920FBD80038B06E /* ShowsStackNavigationBar.swift in Sources */,

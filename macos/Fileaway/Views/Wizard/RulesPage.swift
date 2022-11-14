@@ -34,7 +34,7 @@ struct RulesPage: View {
     var manager: ApplicationModel
     var url: URL
 
-    @StateObject var model: TaskPageModel
+    @StateObject var model: RulesPageModel
 
     @Binding var activeRuleModel: RuleModel?
 
@@ -44,7 +44,7 @@ struct RulesPage: View {
         self.manager = manager
         _activeRuleModel = activeRuleModel
         self.url = url
-        _model = StateObject(wrappedValue: TaskPageModel(manager: manager))
+        _model = StateObject(wrappedValue: RulesPageModel(manager: manager))
     }
 
     @MainActor func submit() {
