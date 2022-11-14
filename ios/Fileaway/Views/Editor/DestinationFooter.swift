@@ -34,16 +34,23 @@ struct DestinationFooter: View {
             if self.editMode?.wrappedValue == .active {
                 HStack {
                     Button {
-                        self.ruleModel.destination.append(ComponentModel(value: "Text", type: .text, variable: nil))
+                        withAnimation {
+                            self.ruleModel.destination.append(ComponentModel(value: "Text",
+                                                                             type: .text,
+                                                                             variable: nil))
+                        }
                     } label: {
                         Text("Text")
                     }
                     .buttonStyle(FilledButton())
+                    .tint(.primary)
                     ForEach(ruleModel.variables) { variable in
                         Button {
-                            self.ruleModel.destination.append(ComponentModel(value: variable.name,
-                                                                             type: .variable,
-                                                                             variable: variable))
+                            withAnimation {
+                                self.ruleModel.destination.append(ComponentModel(value: variable.name,
+                                                                                 type: .variable,
+                                                                                 variable: variable))
+                            }
                         } label: {
                             Text(String(describing: variable.name))
                         }
@@ -51,7 +58,7 @@ struct DestinationFooter: View {
                         .tint(variable.color)
                     }
                 }
-                .padding()
+                .padding(.top)
             } else {
                 DestinationView(ruleModel: ruleModel)
             }

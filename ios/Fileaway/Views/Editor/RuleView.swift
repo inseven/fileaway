@@ -43,6 +43,12 @@ struct RuleView: View {
         self.editMode = .inactive
     }
 
+    func cancel() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        editingRuleModel.reset(to: originalRuleModel)
+        self.editMode = .inactive
+    }
+
     var body: some View {
         return VStack {
             Form {
@@ -89,21 +95,48 @@ struct RuleView: View {
         .navigationBarTitle(editingRuleModel.name)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(editMode == .active)
-        .navigationBarItems(trailing: Button(action: {
-            if (self.editMode == .active) {
-                self.save()
+        .toolbar {
+
+            if editMode == .active {
+
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        withAnimation {
+                            self.cancel()
+                        }
+                    } label: {
+                        Text("Cancel")
+                    }
+                }
+
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        withAnimation {
+                            self.save()
+                        }
+                    } label: {
+                        Text("Save")
+                            .bold()
+                            .disabled(!editingRuleModel.validate())
+                    }
+                }
+
             } else {
-                self.edit()
+
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        withAnimation {
+                            self.edit()
+                        }
+                    } label: {
+                        Text("Edit")
+                    }
+                }
+
             }
-        }) {
-            if self.editMode == .active {
-                Text("Save")
-                    .bold()
-                    .disabled(!editingRuleModel.validate())
-            } else {
-                Text("Edit")
-            }
-        })
+
+        }
+
     }
 
 }

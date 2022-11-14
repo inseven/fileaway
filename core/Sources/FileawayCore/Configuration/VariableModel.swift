@@ -53,7 +53,7 @@ public class VariableModel: ObservableObject, Identifiable, Codable, Hashable {
     @Published public var type: VariableType
 
     public var color: Color {
-        return HashRainbow.colorForString(name, colors: HashRainbow.RainbowColors)
+        return HashRainbow.colorForString(name, colors: HashRainbow.NeonColors)
     }
 
     public init(name: String, type: VariableType) {
