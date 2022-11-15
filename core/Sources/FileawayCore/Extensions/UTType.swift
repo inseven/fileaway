@@ -21,5 +21,8 @@
 import UniformTypeIdentifiers
 
 extension UTType {
-    static let rulesDocument = UTType(exportedAs: "uk.co.inseven.fileaway.rules")
+
+    public static let rules = UTType(exportedAs: "uk.co.inseven.fileaway.rules")
+    public static var component = UTType(exportedAs: "uk.co.inseven.fileaway.component")
+
 }

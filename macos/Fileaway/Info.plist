@@ -50,7 +50,7 @@
 			<key>UTTypeIcons</key>
 			<dict/>
 			<key>UTTypeIdentifier</key>
-			<string>uk.co.inseven.fileaway.types.component</string>
+			<string>uk.co.inseven.fileaway.component</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
