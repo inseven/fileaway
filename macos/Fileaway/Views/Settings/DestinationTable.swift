@@ -53,34 +53,12 @@ struct DestinationTable: View {
                 } rows: {
                     ForEach(ruleModel.destination) { componentModel in
                         TableRow(componentModel)
-                            .itemProvider {
-                                NSItemProvider(object: componentModel.id.uuidString as NSString)
-                            }
+                            .itemProvider(componentModel.id, as: .component)
                     }
-                    .onInsert(of: [UTType.text]) { index, providers in
-                        guard let provider = providers.first else {
-                            return
-                        }
-                        _ = provider.loadObject(ofClass: String.self) { (object, error) in
-                            guard let object = object else {
-                                return
-                            }
-                            guard let id = UUID(uuidString: object) else {
-                                // TODO: Which thread??
-                                print("Unable to load data!")
-                                return
-                            }
-                            guard let fromIndex = self.ruleModel.destination.firstIndex(where: { $0.id == id }) else {
-                                return
-                            }
-                            self.ruleModel.destination.move(fromOffsets: IndexSet(integer: fromIndex), toOffset: index)
-                        }
-
-//                        guard let id = UUID(uuidString: )
-//                        print(providers)
+                    .onInsert(ComponentModel.ID.self, as: .component) { index, ids in
+                        self.ruleModel.destination.move(ids: ids, toOffset: index)
                     }
                 }
-
                 .frame(minWidth: 500, minHeight: 200)
 
                 VStack {
