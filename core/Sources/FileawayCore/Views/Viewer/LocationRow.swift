@@ -20,13 +20,30 @@
 
 import SwiftUI
 
-extension Array where Element: Identifiable {
+import FilePicker
 
-    mutating func move(ids: [Element.ID], toOffset offset: Int) {
-        let indexes = ids.compactMap { id in
-            return firstIndex(where: { $0.id == id })
+struct LocationRow: View {
+
+    @Environment(\.applicationModel) private var applicationModel
+    @ObservedObject var directoryViewModel: DirectoryViewModel
+
+    var body: some View {
+        NavigationLink(value: directoryViewModel.url) {
+            Label(directoryViewModel.name, systemImage: directoryViewModel.systemImage)
+                .badge(directoryViewModel.type == .inbox ? directoryViewModel.files.count : 0)
         }
-        move(fromOffsets: IndexSet(indexes), toOffset: offset)
+        .contextMenu {
+            LocationMenuItems(url: directoryViewModel.url)
+        }
+        .swipeActions(edge: .trailing) {
+            Button(role: .destructive) {
+                // TODO: Handle the error here!
+                try! applicationModel.removeLocation(url: directoryViewModel.url)
+            } label: {
+                Text("Remove")
+            }
+        }
+
     }
 
 }

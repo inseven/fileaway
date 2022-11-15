@@ -36,7 +36,6 @@
 		D8F252522923BF5B00CC30AF /* NSItemProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F252512923BF5B00CC30AF /* NSItemProvider.swift */; };
 		D8F252562923BFA700CC30AF /* DynamicTableRowContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F252552923BFA700CC30AF /* DynamicTableRowContent.swift */; };
 		D8F252582923BFF600CC30AF /* TableRowContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F252572923BFF600CC30AF /* TableRowContent.swift */; };
-		D8F2525A2923C3CA00CC30AF /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F252592923C3CA00CC30AF /* Array.swift */; };
 		D8F2525C2923C6FA00CC30AF /* VariableTypePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F2525B2923C6FA00CC30AF /* VariableTypePicker.swift */; };
 		D8F8BE0C2588179E0010432F /* CloseKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BE0B2588179E0010432F /* CloseKey.swift */; };
 		D8F8BE12258818450010432F /* WizardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BE11258818450010432F /* WizardView.swift */; };
@@ -100,7 +99,6 @@
 		D8F252512923BF5B00CC30AF /* NSItemProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSItemProvider.swift; sourceTree = "<group>"; };
 		D8F252552923BFA700CC30AF /* DynamicTableRowContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicTableRowContent.swift; sourceTree = "<group>"; };
 		D8F252572923BFF600CC30AF /* TableRowContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableRowContent.swift; sourceTree = "<group>"; };
-		D8F252592923C3CA00CC30AF /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		D8F2525B2923C6FA00CC30AF /* VariableTypePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableTypePicker.swift; sourceTree = "<group>"; };
 		D8F8BE0B2588179E0010432F /* CloseKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseKey.swift; sourceTree = "<group>"; };
 		D8F8BE11258818450010432F /* WizardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardView.swift; sourceTree = "<group>"; };
@@ -293,7 +291,6 @@
 		D8F252502923BF4B00CC30AF /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				D8F252592923C3CA00CC30AF /* Array.swift */,
 				D8F252552923BFA700CC30AF /* DynamicTableRowContent.swift */,
 				D8F252512923BF5B00CC30AF /* NSItemProvider.swift */,
 				D8F252572923BFF600CC30AF /* TableRowContent.swift */,
@@ -487,7 +484,6 @@
 				D82D73D728B4C659006F49F1 /* Wizard.swift in Sources */,
 				D8C4CC452920FBD80038B06E /* ShowsStackNavigationBar.swift in Sources */,
 				D8F252562923BFA700CC30AF /* DynamicTableRowContent.swift in Sources */,
-				D8F2525A2923C3CA00CC30AF /* Array.swift in Sources */,
 				D8FC534A257BB7A4008FB609 /* LocationsSettingsView.swift in Sources */,
 				D8D78A922580DD750088890F /* QuickLookPreview.swift in Sources */,
 				D8F8BE0C2588179E0010432F /* CloseKey.swift in Sources */,

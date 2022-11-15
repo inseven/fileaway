@@ -130,7 +130,6 @@ public struct DirectoryView: View {
         .navigationTitle(directoryViewModel.name)
         .quickLookPreview($directoryViewModel.previewUrl, in: directoryViewModel.previewUrls)
         .focusedValue(\.directoryViewModel, directoryViewModel)
-        .runs(directoryViewModel)
         .id(directoryViewModel.url)
     }
 

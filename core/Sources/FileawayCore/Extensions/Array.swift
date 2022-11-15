@@ -20,26 +20,38 @@
 
 import SwiftUI
 
-public struct Sidebar: View {
+extension Array where Element: Identifiable {
 
-    @Environment(\.applicationModel) var applicationModel
-    @ObservedObject var sceneModel: SceneModel
-
-    public init(sceneModel: SceneModel) {
-        self.sceneModel = sceneModel
+    public mutating func move(ids: [Element.ID], toOffset offset: Int) {
+        let indexes = ids.compactMap { id in
+            return firstIndex(where: { $0.id == id })
+        }
+        move(fromOffsets: IndexSet(indexes), toOffset: offset)
     }
 
-    public var body: some View {
-        List(selection: $sceneModel.section) {
-            LocationSection(sceneModel: sceneModel, title: "Inboxes", type: .inbox)
-            LocationSection(sceneModel: sceneModel, title: "Archives", type: .archive)
+    public func applying(_ other: [Element], onInsert: (Element) -> Void, onRemove: (Element) -> Void) -> [Element] {
+
+        let enumeratedIds = enumerated().reduce(into: [Element.ID: Int]()) {
+            $0[$1.1.id] = $1.0
         }
-        .headerProminence(.increased)
-#if os(iOS)
-        .toolbar {
-            EditButton()
+        var result: [Element] = []
+        for element in other {
+            if let current = enumeratedIds[element.id] {
+                result.append(self[current])
+            } else {
+                result.append(element)
+                onInsert(element)
+            }
         }
-#endif
+        let ids = Set(self.map { $0.id })
+        let otherIds = Set(other.map { $0.id })
+        let removals = ids.subtracting(otherIds)
+        for removal in removals {
+            let index = enumeratedIds[removal]!
+            onRemove(self[index])
+        }
+
+        return result
     }
-    
+
 }

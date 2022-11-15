@@ -22,7 +22,7 @@ import SwiftUI
 
 import FilePicker
 
-public struct SidebarSection: View {
+public struct LocationSection: View {
 
     @Environment(\.applicationModel) private var applicationModel
 
@@ -34,7 +34,6 @@ public struct SidebarSection: View {
 
     private var title: String
     private var type: DirectoryModel.DirectoryType
-    private var systemImage: String
 
     // TODO: This is nasty
     public var models: [DirectoryViewModel] {
@@ -46,30 +45,16 @@ public struct SidebarSection: View {
         }
     }
 
-    public init(sceneModel: SceneModel, title: String, type: DirectoryModel.DirectoryType, systemImage: String) {
+    public init(sceneModel: SceneModel, title: String, type: DirectoryModel.DirectoryType) {
         self.sceneModel = sceneModel
         self.title = title
         self.type = type
-        self.systemImage = systemImage
     }
 
     public var body: some View {
         Section(title) {
-            ForEach(models) { inbox in
-                NavigationLink(value: inbox.url) {
-                    Label(inbox.name, systemImage: systemImage)
-                }
-                .contextMenu {
-                    LocationMenuItems(url: inbox.url)
-                }
-                .swipeActions(edge: .trailing) {
-                    Button(role: .destructive) {
-                        // TODO: Handle the error here!
-                        try! applicationModel.removeLocation(url: inbox.url)
-                    } label: {
-                        Text("Remove")
-                    }
-                }
+            ForEach(models) { directoryViewModel in
+                LocationRow(directoryViewModel: directoryViewModel)
             }
             .onDelete { indexSet in
                 let urls = indexSet.map { models[$0].url }

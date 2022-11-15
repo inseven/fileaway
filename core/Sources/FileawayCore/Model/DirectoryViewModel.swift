@@ -50,6 +50,15 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
         return directoryModel?.type ?? .inbox
     }
 
+    public var systemImage: String {
+        switch type {
+        case .inbox:
+            return "tray"
+        case .archive:
+            return "archivebox"
+        }
+    }
+
     public var url: URL {
         return directoryModel?.url ?? URL(string: "foo:unknown")!
     }
