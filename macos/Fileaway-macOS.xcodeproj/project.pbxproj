@@ -33,6 +33,7 @@
 		D8F252402922E5A600CC30AF /* ComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F2523F2922E5A600CC30AF /* ComponentView.swift */; };
 		D8F252442922E62400CC30AF /* VariableNameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F252432922E62400CC30AF /* VariableNameTextField.swift */; };
 		D8F252482922E6D700CC30AF /* VariableTypePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F252472922E6D700CC30AF /* VariableTypePicker.swift */; };
+		D8F2524F2923A7DE00CC30AF /* ComponentValueTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F2524E2923A7DE00CC30AF /* ComponentValueTextField.swift */; };
 		D8F8BE0C2588179E0010432F /* CloseKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BE0B2588179E0010432F /* CloseKey.swift */; };
 		D8F8BE12258818450010432F /* WizardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BE11258818450010432F /* WizardView.swift */; };
 		D8F8BE1D2588192F0010432F /* RuleFormPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F8BE1C2588192F0010432F /* RuleFormPage.swift */; };
@@ -92,6 +93,7 @@
 		D8F2523F2922E5A600CC30AF /* ComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentView.swift; sourceTree = "<group>"; };
 		D8F252432922E62400CC30AF /* VariableNameTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableNameTextField.swift; sourceTree = "<group>"; };
 		D8F252472922E6D700CC30AF /* VariableTypePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VariableTypePicker.swift; path = ../../../../../../Downloads/VariableTypePicker.swift; sourceTree = "<group>"; };
+		D8F2524E2923A7DE00CC30AF /* ComponentValueTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentValueTextField.swift; sourceTree = "<group>"; };
 		D8F8BE0B2588179E0010432F /* CloseKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseKey.swift; sourceTree = "<group>"; };
 		D8F8BE11258818450010432F /* WizardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardView.swift; sourceTree = "<group>"; };
 		D8F8BE1C2588192F0010432F /* RuleFormPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleFormPage.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 		D8E7F9AF25999C5D00C7409B /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				D8F2524E2923A7DE00CC30AF /* ComponentValueTextField.swift */,
 				D8F2523F2922E5A600CC30AF /* ComponentView.swift */,
 				D8E7F9E22599B00A00C7409B /* DestinationTable.swift */,
 				D8B657ED2642D40F009DE837 /* LocationsEditor.swift */,
@@ -271,8 +274,8 @@
 				D83CDCE92620FF210063C91C /* RuleSheet.swift */,
 				D8B657EB2642D2C5009DE837 /* RulesSettingsView.swift */,
 				D8FC5341257BB77C008FB609 /* SettingsView.swift */,
-				D8E7F9EA2599B05300C7409B /* VariablesTable.swift */,
 				D8F252432922E62400CC30AF /* VariableNameTextField.swift */,
+				D8E7F9EA2599B05300C7409B /* VariablesTable.swift */,
 				D8F252472922E6D700CC30AF /* VariableTypePicker.swift */,
 			);
 			path = Settings;
@@ -449,6 +452,7 @@
 				D8E7F9E32599B00A00C7409B /* DestinationTable.swift in Sources */,
 				D83CDCEA2620FF210063C91C /* RuleSheet.swift in Sources */,
 				D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */,
+				D8F2524F2923A7DE00CC30AF /* ComponentValueTextField.swift in Sources */,
 				D8F252402922E5A600CC30AF /* ComponentView.swift in Sources */,
 				D8F8BE3725881C1A0010432F /* RulePicker.swift in Sources */,
 				D8F252442922E62400CC30AF /* VariableNameTextField.swift in Sources */,

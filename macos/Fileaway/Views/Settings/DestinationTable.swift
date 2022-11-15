@@ -23,22 +23,6 @@ import SwiftUI
 import FileawayCore
 import UniformTypeIdentifiers
 
-struct ComponentValueTextField: View {
-
-    @ObservedObject private var componentModel: ComponentModel
-
-    init(componentModel: ComponentModel) {
-        self.componentModel = componentModel
-    }
-
-    var body: some View {
-        TextField("", text: $componentModel.value)
-    }
-
-}
-
-
-
 struct DestinationTable: View {
 
     @ObservedObject var ruleModel: RuleModel
