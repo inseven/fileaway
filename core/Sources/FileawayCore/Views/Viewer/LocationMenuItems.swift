@@ -33,18 +33,11 @@ public struct LocationMenuItems: View {
 
     public var body: some View {
 #if os(macOS)
-        // TODO: Move these macOS specific commands into a separate file
         Button("Reveal in Finder") {
             NSWorkspace.shared.activateFileViewerSelecting([url])
         }
-#else
-        Button {
-            sceneModel.editRules(for: url)
-        } label: {
-            Label("Edit Rules", systemImage: "tray.and.arrow.down")
-        }
-#endif
         Divider()
+#endif
         Button(role: .destructive) {
             do {
                 try applicationModel.removeLocation(url: url)

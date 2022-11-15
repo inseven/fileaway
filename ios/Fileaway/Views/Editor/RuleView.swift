@@ -95,6 +95,7 @@ struct RuleView: View {
         .navigationBarTitle(editingRuleModel.name)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(editMode == .active)
+        .interactiveDismissDisabled(editMode == .active)
         .toolbar {
 
             if editMode == .active {

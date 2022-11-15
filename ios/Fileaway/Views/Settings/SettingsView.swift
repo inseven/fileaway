@@ -32,20 +32,28 @@ struct SettingsView: View {
         case about
     }
 
+    @ObservedObject var applicationModel: ApplicationModel
     @Environment(\.dismiss) private var dismiss
 
     @State private var sheet: SheetType? = nil
 
     var body: some View {
         NavigationStack {
-            VStack {
-                Form {
-                    Section {
-                        Button("About Fileaway...") {
-                            sheet = .about
+            Form {
+                Section("Rules") {
+                    ForEach(applicationModel.directories(type: .archive)) { directory in
+                        NavigationLink {
+                            RulesView(rulesModel: directory.ruleSet)
+                        } label: {
+                            Text(directory.name)
                         }
-                        .foregroundColor(.primary)
                     }
+                }
+                Section {
+                    Button("About Fileaway...") {
+                        sheet = .about
+                    }
+                    .foregroundColor(.primary)
                 }
             }
             .navigationBarTitle("Settings", displayMode: .inline)

@@ -44,7 +44,6 @@ struct RulesView: View {
                         }
                     }
                 }
-                .listStyle(.plain)
             }
             .toolbar {
 
