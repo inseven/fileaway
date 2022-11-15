@@ -62,7 +62,7 @@ struct ContentView: View {
         .sheet(item: $sceneModel.sheet) { sheet in
             switch sheet {
             case .settings:
-                SettingsView()
+                SettingsView(applicationModel: applicationModel)
             case .addLocation(let type):
                 FilePickerUIRepresentable(types: [.folder], allowMultiple: false, asCopy: false) { urls in
                     guard let url = urls.first else {
