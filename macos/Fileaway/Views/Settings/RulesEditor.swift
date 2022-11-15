@@ -44,18 +44,18 @@ struct RulesEditor: View {
         case error(error: Error)
     }
 
-    @ObservedObject var ruleSet: RulesModel
+    @ObservedObject var rulesModel: RulesModel
     @State var selection: Set<RuleModel.ID> = Set()
     @State var sheet: SheetType?
     @State var alert: AlertType?
 
     @MainActor private func rules(for ids: Set<RuleModel.ID>) -> Set<RuleModel> {
-        return Set(ruleSet.ruleModels.filter { ids.contains($0.id) })
+        return Set(rulesModel.ruleModels.filter { ids.contains($0.id) })
     }
 
     @MainActor private func add() {
         do {
-            let rule = try ruleSet.new(preferredName: "Rule")
+            let rule = try rulesModel.new(preferredName: "Rule")
             selection = [rule.id]
             sheet = .rule(rule)
         } catch {
@@ -74,7 +74,7 @@ struct RulesEditor: View {
 
     @MainActor private func delete(ids: Set<RuleModel.ID>) {
         do {
-            try ruleSet.remove(ids: ids)
+            try rulesModel.remove(ids: ids)
             selection = selection.filter { !ids.contains($0) }
         } catch {
             alert = .error(error: error)
@@ -83,7 +83,7 @@ struct RulesEditor: View {
 
     @MainActor private func duplicate(ids: Set<RuleModel.ID>) {
         do {
-            let newRules = try ruleSet.duplicate(ids: ids)
+            let newRules = try rulesModel.duplicate(ids: ids)
             selection = Set(newRules.map({ $0.id }))
         } catch {
             alert = .duplicationFailure(error: error)
@@ -93,7 +93,7 @@ struct RulesEditor: View {
     var body: some View {
         HStack {
             VStack {
-                List(ruleSet.ruleModels, selection: $selection) { rule in
+                List(rulesModel.ruleModels, selection: $selection) { rule in
                     Text(rule.name)
                         .lineLimit(1)
                 }

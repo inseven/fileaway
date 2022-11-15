@@ -32,35 +32,10 @@ struct DestinationFooter: View {
     var body: some View {
         VStack {
             if self.editMode?.wrappedValue == .active {
-                HStack {
-                    Button {
-                        withAnimation {
-                            self.ruleModel.destination.append(ComponentModel(value: "Text",
-                                                                             type: .text,
-                                                                             variable: nil))
-                        }
-                    } label: {
-                        Text("Text")
-                    }
-                    .buttonStyle(FilledButton())
-                    .tint(.primary)
-                    ForEach(ruleModel.variables) { variable in
-                        Button {
-                            withAnimation {
-                                self.ruleModel.destination.append(ComponentModel(value: variable.name,
-                                                                                 type: .variable,
-                                                                                 variable: variable))
-                            }
-                        } label: {
-                            Text(String(describing: variable.name))
-                        }
-                        .buttonStyle(FilledButton())
-                        .tint(variable.color)
-                    }
-                }
-                .padding(.top)
+                VariablePicker(ruleModel: ruleModel)
+                    .padding(.top)
             } else {
-                DestinationView(ruleModel: ruleModel)
+                DestinationPreview(ruleModel: ruleModel)
             }
         }
     }

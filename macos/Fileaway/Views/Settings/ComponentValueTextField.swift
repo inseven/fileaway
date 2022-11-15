@@ -18,11 +18,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import UniformTypeIdentifiers
+import SwiftUI
 
-extension UTType {
+import FileawayCore
 
-    public static let rules = UTType(exportedAs: "uk.co.inseven.fileaway.rules")
-    public static var component = UTType(exportedAs: "uk.co.inseven.fileaway.component")
+struct ComponentValueTextField: View {
+
+    @ObservedObject private var componentModel: ComponentModel
+
+    init(componentModel: ComponentModel) {
+        self.componentModel = componentModel
+    }
+
+    var body: some View {
+        TextField("", text: $componentModel.value)
+    }
 
 }

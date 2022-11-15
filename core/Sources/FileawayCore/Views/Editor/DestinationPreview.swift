@@ -20,13 +20,17 @@
 
 import SwiftUI
 
-import FileawayCore
+import Interact
 
-struct DestinationView: View {
+public struct DestinationPreview: View {
 
-    @ObservedObject var ruleModel: RuleModel
+    @ObservedObject private var ruleModel: RuleModel
 
-    var body: some View {
+    public init(ruleModel: RuleModel) {
+        self.ruleModel = ruleModel
+    }
+
+    public var body: some View {
         HStack {
             ruleModel.destination.map {
                 Text(self.ruleModel.name(for: $0, format: .short))
@@ -34,6 +38,7 @@ struct DestinationView: View {
                     .fontWeight($0.type == .variable ? .bold : .none)
             }
             .reduce( Text(""), + )
+            Spacer()
         }
     }
 

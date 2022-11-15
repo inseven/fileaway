@@ -18,11 +18,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import UniformTypeIdentifiers
+import SwiftUI
 
-extension UTType {
+struct FilledButtonStyle: ButtonStyle {
 
-    public static let rules = UTType(exportedAs: "uk.co.inseven.fileaway.rules")
-    public static var component = UTType(exportedAs: "uk.co.inseven.fileaway.component")
+    private struct LayoutMetrics {
+        static let padding = 4.0
+        static let trailingPadding = 8.0
+        static let interItemSpcing = 2.0
+    }
+
+    func makeBody(configuration: Self.Configuration) -> some View {
+        HStack(spacing: LayoutMetrics.interItemSpcing) {
+            Image(systemName: "plus.circle")
+            configuration
+                .label
+        }
+        .font(.footnote)
+        .foregroundColor(configuration.isPressed ? .gray : .white)
+        .padding([.leading, .top, .bottom], LayoutMetrics.padding)
+        .padding([.trailing], LayoutMetrics.trailingPadding)
+        .background(Capsule()
+            .fill(.tint))
+    }
+    
+}
+
+extension ButtonStyle where Self == FilledButtonStyle {
+
+    static var filled: Self {
+        return FilledButtonStyle()
+    }
 
 }

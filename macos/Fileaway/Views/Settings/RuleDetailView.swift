@@ -31,10 +31,10 @@ struct RuleDetailView: View {
             TextField("Title", text: $ruleModel.name)
             Text("Variables")
                 .font(.headline)
-            VariableList(ruleModel: ruleModel)
+            VariablesTable(ruleModel: ruleModel)
             Text("Destination")
                 .font(.headline)
-            DestinationList(ruleModel: ruleModel)
+            DestinationTable(ruleModel: ruleModel)
             Spacer()
         }
         .padding()

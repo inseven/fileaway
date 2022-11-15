@@ -18,11 +18,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import SwiftUI
 import UniformTypeIdentifiers
 
-extension UTType {
+extension DynamicTableRowContent {
 
-    public static let rules = UTType(exportedAs: "uk.co.inseven.fileaway.rules")
-    public static var component = UTType(exportedAs: "uk.co.inseven.fileaway.component")
+    func onInsert<T: Codable>(_ itemProviderTransferable: T.Type, as type: UTType,
+                  perform action: @escaping (Int, [T]) -> Void) -> ModifiedContent<Self, OnInsertTableRowModifier> {
+        return onInsert(of: [type]) { index, providers in
+            providers.loadObjects(ofClass: T.self, forType: type) { objects in
+                dispatchPrecondition(condition: .onQueue(.main))
+                action(index, objects)
+            }
+        }
+    }
 
 }

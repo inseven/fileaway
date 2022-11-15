@@ -18,11 +18,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import SwiftUI
 import UniformTypeIdentifiers
 
-extension UTType {
+extension TableRowContent {
 
-    public static let rules = UTType(exportedAs: "uk.co.inseven.fileaway.rules")
-    public static var component = UTType(exportedAs: "uk.co.inseven.fileaway.component")
-
+    public func itemProvider(_ object: Codable, as type: UTType) -> ModifiedContent<Self, ItemProviderTableRowModifier> {
+        return self.itemProvider {
+            NSItemProvider(object: object, type: type)
+        }
+    }
 }

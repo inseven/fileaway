@@ -18,11 +18,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import UniformTypeIdentifiers
+import SwiftUI
 
-extension UTType {
+extension Array where Element: Identifiable {
 
-    public static let rules = UTType(exportedAs: "uk.co.inseven.fileaway.rules")
-    public static var component = UTType(exportedAs: "uk.co.inseven.fileaway.component")
+    mutating func move(ids: [Element.ID], toOffset offset: Int) {
+        let indexes = ids.compactMap { id in
+            return firstIndex(where: { $0.id == id })
+        }
+        move(fromOffsets: IndexSet(indexes), toOffset: offset)
+    }
 
 }

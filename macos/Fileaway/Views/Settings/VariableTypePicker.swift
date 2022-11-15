@@ -18,11 +18,28 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import UniformTypeIdentifiers
+import SwiftUI
 
-extension UTType {
+import FileawayCore
 
-    public static let rules = UTType(exportedAs: "uk.co.inseven.fileaway.rules")
-    public static var component = UTType(exportedAs: "uk.co.inseven.fileaway.component")
+struct VariableTypePicker: View {
+
+    @ObservedObject private var variableModel: VariableModel
+
+    init(variableModel: VariableModel) {
+        self.variableModel = variableModel
+    }
+
+    var body: some View {
+        Picker(selection: $variableModel.type) {
+            ForEach(VariableType.allCases) { type in
+                Text(String(describing: type))
+                    .tag(type)
+            }
+        } label: {
+            EmptyView()
+        }
+
+    }
 
 }

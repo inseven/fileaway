@@ -43,7 +43,7 @@ struct RulesSettingsView: View {
             }
             GroupBox {
                 if let ruleSet = applicationModel.directories.first { $0.id == selection }?.ruleSet {
-                    RulesEditor(ruleSet: ruleSet)
+                    RulesEditor(rulesModel: ruleSet)
                         .padding(4)
                 } else {
                     VStack {
