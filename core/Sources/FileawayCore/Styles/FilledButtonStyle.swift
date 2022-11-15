@@ -18,26 +18,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Combine
-import Foundation
 import SwiftUI
 
-import FileawayCore
+struct FilledButtonStyle: ButtonStyle {
 
-struct DestinationFooter: View {
+    private struct LayoutMetrics {
+        static let padding = 4.0
+        static let trailingPadding = 8.0
+        static let interItemSpcing = 2.0
+    }
 
-    @Environment(\.editMode) var editMode
-    @ObservedObject var ruleModel: RuleModel
-
-    var body: some View {
-        VStack {
-            if self.editMode?.wrappedValue == .active {
-                VariablePicker(ruleModel: ruleModel)
-                    .padding(.top)
-            } else {
-                DestinationPreview(ruleModel: ruleModel)
-            }
+    func makeBody(configuration: Self.Configuration) -> some View {
+        HStack(spacing: LayoutMetrics.interItemSpcing) {
+            Image(systemName: "plus.circle")
+            configuration
+                .label
         }
+        .font(.footnote)
+        .foregroundColor(configuration.isPressed ? .gray : .white)
+        .padding([.leading, .top, .bottom], LayoutMetrics.padding)
+        .padding([.trailing], LayoutMetrics.trailingPadding)
+        .background(Capsule()
+            .fill(.tint))
+    }
+    
+}
+
+extension ButtonStyle where Self == FilledButtonStyle {
+
+    static var filled: Self {
+        return FilledButtonStyle()
     }
 
 }

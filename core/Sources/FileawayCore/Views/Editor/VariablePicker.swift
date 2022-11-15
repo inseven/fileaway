@@ -18,25 +18,48 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Combine
+import Foundation
 import SwiftUI
 
-import FileawayCore
+public struct VariablePicker: View {
 
-struct VariableTextField: View {
+    @ObservedObject private var ruleModel: RuleModel
 
-    @ObservedObject var variable: VariableModel
-    @State var variableType: VariableType = .string
-
-    var body: some View {
-        VStack {
-            TextField("Name", text: $variable.name)
-            Picker(selection: $variable.type, label: Text("Type")) {
-                ForEach(VariableType.allCases, id: \.self) { type in
-                    Text(String(describing: type))
-                }
-            }
-            Spacer()
-        }
+    public init(ruleModel: RuleModel) {
+        self.ruleModel = ruleModel
     }
 
+    public var body: some View {
+        HStack {
+
+            Button {
+                withAnimation {
+                    self.ruleModel.destination.append(ComponentModel(value: "Text", type: .text, variable: nil))
+                }
+            } label: {
+                Text("Text")
+            }
+            .buttonStyle(.filled)
+            .tint(.primary)
+
+            ForEach(ruleModel.variables) { variable in
+                Button {
+                    withAnimation {
+                        self.ruleModel.destination.append(ComponentModel(value: variable.name,
+                                                                         type: .variable,
+                                                                         variable: variable))
+                    }
+                } label: {
+                    Text(String(describing: variable.name))
+                }
+                .buttonStyle(.filled)
+                .tint(variable.color)
+            }
+
+            Spacer()
+            
+        }
+
+    }
 }

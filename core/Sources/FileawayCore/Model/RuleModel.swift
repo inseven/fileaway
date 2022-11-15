@@ -95,40 +95,8 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
         }
     }
 
-    public func remove(component: ComponentModel) {
-        destination.removeAll { $0 == component }
-    }
-
-    public func moveUp(component: ComponentModel) {
-        guard let index = destination.firstIndex(of: component),
-              index > 0 else {
-            return
-        }
-        destination.swapAt(index, index - 1)
-    }
-
-    public func moveDown(component: ComponentModel) {
-        guard let index = destination.firstIndex(of: component),
-              index < destination.count - 1 else {
-            return
-        }
-        destination.swapAt(index, index + 1)
-    }
-
-    public func moveUp(variable: VariableModel) {
-        guard let index = variables.firstIndex(of: variable),
-              index > 0 else {
-            return
-        }
-        variables.swapAt(index, index - 1)
-    }
-
-    public func moveDown(variable: VariableModel) {
-        guard let index = variables.firstIndex(of: variable),
-              index < variables.count - 1 else {
-            return
-        }
-        variables.swapAt(index, index + 1)
+    public func remove(componentModel: ComponentModel) {
+        destination.removeAll { $0 == componentModel }
     }
 
     public func remove(variable: VariableModel) {

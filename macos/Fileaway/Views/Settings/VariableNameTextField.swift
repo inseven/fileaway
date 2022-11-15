@@ -20,26 +20,18 @@
 
 import SwiftUI
 
-struct FilledButton: ButtonStyle {
+import FileawayCore
 
-    private struct LayoutMetrics {
-        static let padding = 4.0
-        static let trailingPadding = 8.0
-        static let interItemSpcing = 2.0
+struct VariableNameTextField: View {
+
+    @ObservedObject private var variableModel: VariableModel
+
+    init(variableModel: VariableModel) {
+        self.variableModel = variableModel
     }
 
-    func makeBody(configuration: Self.Configuration) -> some View {
-        HStack(spacing: LayoutMetrics.interItemSpcing) {
-            Image(systemName: "plus.circle")
-            configuration
-                .label
-        }
-        .font(.footnote)
-        .foregroundColor(configuration.isPressed ? .gray : .white)
-        .padding([.leading, .top, .bottom], LayoutMetrics.padding)
-        .padding([.trailing], LayoutMetrics.trailingPadding)
-        .background(Capsule()
-            .fill(.tint))
+    var body: some View {
+        TextField("", text: $variableModel.name)
     }
-    
+
 }
