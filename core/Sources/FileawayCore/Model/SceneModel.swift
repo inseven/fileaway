@@ -72,9 +72,22 @@ public class SceneModel: ObservableObject, Runnable {
                 }
             }
             .receive(on: DispatchQueue.main)
-            .sink { models in
-                self.inboxes = models.filter { $0.type == .inbox }
-                self.archives = models.filter { $0.type == .archive }
+            .sink { (models: [DirectoryViewModel]) in
+
+                let newInboxes = models.filter { $0.type == .inbox }
+                self.inboxes = self.inboxes.applying(newInboxes) { directoryViewModel in
+                    directoryViewModel.start()
+                } onRemove: { directoryViewModel in
+                    directoryViewModel.stop()
+                }
+
+                let newArchives = models.filter { $0.type == .archive }
+                self.archives = self.archives.applying(newArchives) { directoryViewModel in
+                    directoryViewModel.start()
+                } onRemove: { directoryViewModel in
+                    directoryViewModel.stop()
+                }
+
             }
             .store(in: &cancelables)
 
