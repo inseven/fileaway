@@ -39,7 +39,7 @@ struct FileRow: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-//                IconView(url: file.url, size: LayoutMetrics.iconSize)
+                IconView(url: file.url, size: LayoutMetrics.iconSize)
                 VStack(spacing: 0) {
                     HStack {
                         Text(file.name)
