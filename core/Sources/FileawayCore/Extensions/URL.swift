@@ -33,10 +33,6 @@ extension URL {
         return bookmarkURL
     }
 
-    public var displayName: String {
-        FileManager.default.displayName(atPath: self.path)
-    }
-
     public var deletingLastPathComponent: URL {
         self.deletingLastPathComponent()
     }
