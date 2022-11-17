@@ -122,10 +122,11 @@ public struct DirectoryView: View {
             directoryViewModel.showPreview(selecting: selection.first)
 #endif
         }
-        // Enter to open.
-        // Drag-and-drop.
-        // .onCutCommand(perform: manager.cut)
-        .overlay(directoryViewModel.files.isEmpty ? Placeholder("No Items") : nil)
+        // TODO: Enter to open
+        // TODO: Drag-and-drop
+        // TODO: .onCutCommand(perform: manager.cut)
+        .placeholderOverlay(directoryViewModel.files.isEmpty, text: "No Files")
+        .progressOverlay(directoryViewModel.isLoading)
         .searchable(text: $directoryViewModel.filter)
         .navigationTitle(directoryViewModel.name)
         .quickLookPreview($directoryViewModel.previewUrl, in: directoryViewModel.previewUrls)

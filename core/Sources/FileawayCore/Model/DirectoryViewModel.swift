@@ -39,6 +39,7 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
     @Published public var filter: String = ""
     @Published public var selection: Set<FileInfo> = []
     @Published public var previewUrls: [URL] = []
+    @Published public var isLoading: Bool = true
 
     @Published var previewUrl: URL? = nil
 
@@ -83,11 +84,11 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
 
         // Filter the files.
         directoryModel
-            .$searchResults
-            .combineLatest($filter)
+            .$files
+            .combineLatest($filter, directoryModel.$isLoading)
             .receive(on: syncQueue)
-            .map { (files, filter) in
-                return files
+            .map { files, filter, isLoading in
+                let files = files
                     .filter { filter.isEmpty || $0.name.localizedSearchMatches(string: filter) }
                     .sorted { fileInfo1, fileInfo2 -> Bool in
                         let dateComparison = fileInfo1.date.date.compare(fileInfo2.date.date)
@@ -96,14 +97,16 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
                         }
                         return fileInfo1.name.compare(fileInfo2.name) == .orderedAscending
                     }
+                return (files, isLoading)
             }
-            .map { files in
-                return (files, files.map { $0.url })
+            .map { files, isLoading in
+                return (files, files.map { $0.url }, isLoading)
             }
             .receive(on: DispatchQueue.main)
-            .sink { files, previewUrls in
+            .sink { files, previewUrls, isLoading in
                 self.files = files
                 self.previewUrls = previewUrls
+                self.isLoading = isLoading
             }
             .store(in: &cancelables)
 
@@ -123,7 +126,7 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
 
         // Update the selection to match the preview URL.
         directoryModel
-            .$searchResults
+            .$files
             .combineLatest($previewUrl)
             .receive(on: syncQueue)
             .compactMap { (files, previewUrl) -> Set<FileInfo>? in

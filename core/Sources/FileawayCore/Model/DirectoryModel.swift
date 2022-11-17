@@ -39,17 +39,16 @@ public class DirectoryModel: ObservableObject, Identifiable, Hashable {
     public let url: URL
     public let ruleSet: RulesModel
 
-    public var count: Int { self.files.count }
+    public var count: Int { files.count }
     public var name: String { url.displayName }
 
-    @Published private var files: Set<URL> = Set()
-    @Published public var searchResults: [FileInfo] = []
+    @Published public var files: [FileInfo] = []
+    @Published public var isLoading: Bool = true
 
     private let extensions = ["pdf"]
     private var directoryMonitor: DirectoryMonitor?
     private let syncQueue = DispatchQueue.init(label: "DirectoryModel.syncQueue")
     private var cache: NSCache<NSURL, FileInfo> = NSCache()
-    private var cancelables: Set<AnyCancellable> = []
 
     public init(type: DirectoryType, url: URL) {
         self.type = type
@@ -64,38 +63,30 @@ public class DirectoryModel: ObservableObject, Identifiable, Hashable {
     @MainActor public func start() {
         self.directoryMonitor = try! DirectoryMonitor(locations: [url],
                                                       extensions: extensions,
-                                                      targetQueue: DispatchQueue.main) { urls in
-            self.files = urls
-        }
-        self.directoryMonitor?.start()
-
-        $files
-            .receive(on: syncQueue)
-            .map { files in
-                return files
-                    .map { url in
-                        if let fileInfo = self.cache.object(forKey: url as NSURL) {
-                            return fileInfo
-                        }
-                        let fileInfo = FileInfo(url: url)
-                        self.cache.setObject(fileInfo, forKey: url as NSURL)
+                                                      targetQueue: syncQueue) { urls in
+            let files = urls
+                .map { url in
+                    if let fileInfo = self.cache.object(forKey: url as NSURL) {
                         return fileInfo
                     }
+                    let fileInfo = FileInfo(url: url)
+                    self.cache.setObject(fileInfo, forKey: url as NSURL)
+                    return fileInfo
+                }
+            DispatchQueue.main.sync {
+                self.files = files
+                self.isLoading = false
             }
-            .receive(on: DispatchQueue.main)
-            .sink { files in
-                self.searchResults = files
-            }
-            .store(in: &cancelables)
+        }
+        self.directoryMonitor?.start()
     }
 
     @MainActor public func stop() {
-        guard let fileProvider = directoryMonitor else {
+        guard let directoryMonitor = directoryMonitor else {
             return
         }
-        fileProvider.stop()
-
-        cancelables.removeAll()
+        directoryMonitor.stop()
+        self.directoryMonitor = nil
     }
 
     @MainActor public func refresh() {
