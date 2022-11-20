@@ -20,9 +20,44 @@
 
 import UniformTypeIdentifiers
 
-extension UTType {
-
+extension UTType: Identifiable {
+    
     public static let rules = UTType(exportedAs: "uk.co.inseven.fileaway.rules")
     public static var component = UTType(exportedAs: "uk.co.inseven.fileaway.component")
 
+    public static var doc = UTType(filenameExtension: "doc")!
+    public static var docx = UTType(filenameExtension: "docx")!
+    public static var numbers = UTType(filenameExtension: "numbers")!
+    public static var pages = UTType(filenameExtension: "pages")!
+    public static var xls = UTType(filenameExtension: "xls")!
+    public static var xlsx = UTType(filenameExtension: "xlsx")!
+
+
+    public var id: String { self.identifier }
+
+    public var localizedDisplayName: String {
+        if let localizedDescription = localizedDescription {
+            return localizedDescription
+        }
+        if let preferredFilenameExtension = preferredFilenameExtension {
+            return preferredFilenameExtension
+        }
+        if let preferedMIMEType = preferredMIMEType {
+            return preferedMIMEType
+        }
+        return "Unknown Type"
+    }
+
+    public func conforms(to types: Set<UTType>) -> Bool {
+        if types.contains(self) {
+            return true
+        }
+        for type in supertypes {
+            if types.contains(type) {
+                return true
+            }
+        }
+        return false
+    }
+    
 }

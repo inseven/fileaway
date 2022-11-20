@@ -26,16 +26,12 @@ extension FileManager {
         return urls(for: .libraryDirectory, in: .userDomainMask)[0]
     }
 
-    public func files(at url: URL, extensions: [String]) -> [URL] {
+    public func files(at url: URL) -> [URL] {
         var files: [URL] = []
         if let enumerator = enumerator(at: url,
                                        includingPropertiesForKeys: [.isRegularFileKey],
                                        options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
             for case let fileURL as URL in enumerator {
-                guard fileURL.matches(extensions: extensions) else {
-                    continue
-                }
-
                 do {
                     let fileAttributes = try fileURL.resourceValues(forKeys:[.isRegularFileKey])
                     if fileAttributes.isRegularFile! {

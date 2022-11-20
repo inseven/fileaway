@@ -20,6 +20,7 @@
 
 import Combine
 import SwiftUI
+import UniformTypeIdentifiers
 
 import Interact
 
@@ -45,15 +46,18 @@ public class DirectoryModel: ObservableObject, Identifiable, Hashable {
     @Published public var files: [FileInfo] = []
     @Published public var isLoading: Bool = true
 
-    private let extensions = ["pdf"]
-    private var directoryMonitor: DirectoryMonitor?
+    private let settings: Settings
     private let syncQueue = DispatchQueue.init(label: "DirectoryModel.syncQueue")
+    private var directoryMonitor: DirectoryMonitor
     private var cache: NSCache<NSURL, FileInfo> = NSCache()
+    private var cancelables: Set<AnyCancellable> = []
 
-    public init(type: DirectoryType, url: URL) {
+    public init(settings: Settings, type: DirectoryType, url: URL) {
+        self.settings = settings
         self.type = type
         self.url = url
         self.ruleSet = RulesModel(url: url)
+        self.directoryMonitor = DirectoryMonitor(locations: [url])
     }
 
     public func hash(into hasher: inout Hasher) {
@@ -61,36 +65,49 @@ public class DirectoryModel: ObservableObject, Identifiable, Hashable {
     }
 
     @MainActor public func start() {
-        self.directoryMonitor = try! DirectoryMonitor(locations: [url],
-                                                      extensions: extensions,
-                                                      targetQueue: syncQueue) { urls in
-            let files = urls
-                .map { url in
-                    if let fileInfo = self.cache.object(forKey: url as NSURL) {
+
+        directoryMonitor.start()
+
+        directoryMonitor
+            .$files
+            .compactMap { $0 }  // nil is a marker that the data is loading
+            .combineLatest(settings.$types)
+            .receive(on: syncQueue)
+            .map { files, types in
+                let files = files
+                    .compactMap { url -> FileInfo? in
+
+                        // Filter by file type.
+                        guard let type = UTType(filenameExtension: url.pathExtension), type.conforms(to: types) else {
+                            return nil
+                        }
+
+                        // Load file info from the cache if we have it, updating if not.
+                        if let fileInfo = self.cache.object(forKey: url as NSURL) {
+                            return fileInfo
+                        }
+                        let fileInfo = FileInfo(url: url)
+                        self.cache.setObject(fileInfo, forKey: url as NSURL)
+
                         return fileInfo
                     }
-                    let fileInfo = FileInfo(url: url)
-                    self.cache.setObject(fileInfo, forKey: url as NSURL)
-                    return fileInfo
-                }
-            DispatchQueue.main.sync {
+                return files
+            }
+            .receive(on: DispatchQueue.main)
+            .sink { files in
                 self.files = files
                 self.isLoading = false
             }
-        }
-        self.directoryMonitor?.start()
+            .store(in: &cancelables)
     }
 
     @MainActor public func stop() {
-        guard let directoryMonitor = directoryMonitor else {
-            return
-        }
         directoryMonitor.stop()
-        self.directoryMonitor = nil
+        cancelables.removeAll()
     }
 
     @MainActor public func refresh() {
-        directoryMonitor?.refresh()
+        directoryMonitor.refresh()
     }
 
 }

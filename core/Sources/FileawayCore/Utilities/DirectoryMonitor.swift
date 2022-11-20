@@ -24,14 +24,12 @@ import Foundation
 import EonilFSEvents
 #endif
 
-// TODO: Move the extension filtering out of this class.
-public class DirectoryMonitor {
+public class DirectoryMonitor: ObservableObject {
 
     let locations: [URL]
-    let extensions: [String]
-    let handler: (Set<URL>) -> Void
     let syncQueue = DispatchQueue(label: "DirectoryMonitor.syncQueue")
-    let targetQueue: DispatchQueue
+
+    @MainActor @Published var files: Set<URL>? = nil
 
 #if os(macOS)
     lazy var stream: EonilFSEventStream = {
@@ -42,25 +40,24 @@ public class DirectoryMonitor {
             flags: [.fileEvents],
             handler: { event in
                 let url = URL(fileURLWithPath: event.path)
-                guard let flag = event.flag,
-                      self.extensions.contains(url.pathExtension) else {
+                guard let flag = event.flag else {
                     return
                 }
-                if flag.contains(.itemRemoved) {
-                    self.files.remove(url)
-                    self.targetQueue_update()
-                } else if flag.contains(.itemRenamed) {
-                    if FileManager.default.fileExists(atPath: event.path) {
-                        self.files.insert(url)
+                Task { @MainActor in
+                    precondition(self.files != nil)
+                    if flag.contains(.itemRemoved) {
+                        self.files?.remove(url)
+                    } else if flag.contains(.itemRenamed) {
+                        if FileManager.default.fileExists(atPath: event.path) {
+                            self.files?.insert(url)
+                        } else {
+                            self.files?.remove(url)
+                        }
+                    } else if flag.contains(.itemCreated) {
+                        self.files?.insert(url)
                     } else {
-                        self.files.remove(url)
+                        print("Unhandled event \(event)")
                     }
-                    self.targetQueue_update()
-                } else if flag.contains(.itemCreated) {
-                    self.files.insert(url)
-                    self.targetQueue_update()
-                } else {
-                    print("Unhandled event \(event)")
                 }
             })
         stream.setDispatchQueue(syncQueue)
@@ -68,16 +65,8 @@ public class DirectoryMonitor {
     }()
 #endif
 
-    var files: Set<URL> = []
-
-    public init(locations: [URL],
-                extensions: [String],
-                targetQueue: DispatchQueue,
-                handler: @escaping (Set<URL>) -> Void) throws {
+    public init(locations: [URL]) {
         self.locations = locations
-        self.extensions = extensions
-        self.targetQueue = targetQueue
-        self.handler = handler
     }
 
     public func start() {
@@ -86,8 +75,10 @@ public class DirectoryMonitor {
 #if os(macOS)
             try! self.stream.start()
 #endif
-            self.files = Set(FileManager.default.files(at: self.locations.first!, extensions: self.extensions))
-            self.targetQueue_update()
+            let files = Set(FileManager.default.files(at: self.locations.first!))
+            Task { @MainActor in
+                self.files = files
+            }
         }
     }
 
@@ -103,16 +94,10 @@ public class DirectoryMonitor {
     public func refresh() {
         dispatchPrecondition(condition: .notOnQueue(syncQueue))
         syncQueue.async {
-            self.files = Set(FileManager.default.files(at: self.locations.first!, extensions: self.extensions))
-            self.targetQueue_update()
-        }
-    }
-
-    func targetQueue_update() {
-        dispatchPrecondition(condition: .onQueue(syncQueue))
-        let files = Set(self.files)
-        targetQueue.async {
-            self.handler(files)
+            let files = Set(FileManager.default.files(at: self.locations.first!))
+            Task { @MainActor in
+                self.files = files
+            }
         }
     }
 

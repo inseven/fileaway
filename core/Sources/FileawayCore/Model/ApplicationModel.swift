@@ -41,7 +41,7 @@ extension EnvironmentValues {
 
 public class ApplicationModel: ObservableObject {
 
-    private var settings = Settings()
+    public let settings = Settings()
 
     @Published public var directories: [DirectoryModel] = []
     @Published public var allRules: [RuleModel] = []
@@ -125,7 +125,7 @@ public class ApplicationModel: ObservableObject {
 
     @MainActor private func addDirectoryObserver(type: DirectoryModel.DirectoryType, url: URL) {
         dispatchPrecondition(condition: .onQueue(.main))
-        let directoryObserver = DirectoryModel(type: type, url: url)
+        let directoryObserver = DirectoryModel(settings: settings, type: type, url: url)
         directories.append(directoryObserver)
         directoryObserver.start()
         updateCountSubscription()

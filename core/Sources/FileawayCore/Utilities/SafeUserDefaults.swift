@@ -18,31 +18,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-import FileawayCore
+class SafeUserDefaults<Key: RawRepresentable<String>> {
 
-struct SettingsView: View {
+    let defaults: UserDefaults
 
-    @ObservedObject var applicationModel: ApplicationModel
-    
-    var body: some View {
-        TabView {
-            GeneralSettingsView()
-                .tabItem {
-                    Label("General", systemImage: "gear")
-                }
-            LocationsSettingsView(applicationModel: applicationModel)
-                .tabItem {
-                    Label("Folders", systemImage: "folder")
-                }
-            RulesSettingsView(applicationModel: applicationModel)
-                .tabItem {
-                    Label("Rules", systemImage: "tray.and.arrow.down")
-                }
-        }
-        .padding()
-        .frame(minWidth: 400, maxWidth: .infinity, minHeight: 460, maxHeight: .infinity)
+    init(defaults: UserDefaults) {
+        self.defaults = defaults
     }
 
+    public func setCodable(_ codable: Codable, for key: Key) throws {
+        try defaults.setCodable(codable, forKey: key.rawValue)
+    }
+
+    public func codable<T: Codable>(_ type: T.Type, for key: Key) throws -> T? {
+        return try defaults.codable(T.self, forKey: key.rawValue)
+    }
+
+    public func setSecurityScopeURLs(_ urls: [URL], for key: Key) throws {
+        return try defaults.setSecurityScopeURLs(urls, forKey: key.rawValue)
+    }
+
+    public func securityScopeURLs(for key: Key) throws -> [URL] {
+        return try defaults.securityScopeURLs(forKey: key.rawValue)
+    }
 }

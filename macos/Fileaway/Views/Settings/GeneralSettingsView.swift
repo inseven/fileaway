@@ -22,27 +22,12 @@ import SwiftUI
 
 import FileawayCore
 
-struct SettingsView: View {
+struct GeneralSettingsView: View {
 
-    @ObservedObject var applicationModel: ApplicationModel
-    
+    @Environment(\.applicationModel) var applicationModel: ApplicationModel
+
     var body: some View {
-        TabView {
-            GeneralSettingsView()
-                .tabItem {
-                    Label("General", systemImage: "gear")
-                }
-            LocationsSettingsView(applicationModel: applicationModel)
-                .tabItem {
-                    Label("Folders", systemImage: "folder")
-                }
-            RulesSettingsView(applicationModel: applicationModel)
-                .tabItem {
-                    Label("Rules", systemImage: "tray.and.arrow.down")
-                }
-        }
-        .padding()
-        .frame(minWidth: 400, maxWidth: .infinity, minHeight: 460, maxHeight: .infinity)
+        FileTypePickerView(settings: applicationModel.settings)
     }
 
 }
