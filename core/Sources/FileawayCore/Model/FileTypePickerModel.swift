@@ -30,14 +30,14 @@ public class FileTypePickerModel: ObservableObject, Runnable {
     @Published public var selection: Set<UTType.ID> = []
     @Published public var input: String = ""
 
-    private var settings: FileawayCore.Settings
+    private var settings: Settings
     private var cancellables: Set<AnyCancellable> = []
 
     @MainActor public var canSubmit: Bool {
         return !self.input.isEmpty
     }
 
-    public init(settings: FileawayCore.Settings) {
+    public init(settings: Settings) {
         self.settings = settings
     }
 
