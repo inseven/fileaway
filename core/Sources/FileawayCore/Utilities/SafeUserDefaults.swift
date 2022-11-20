@@ -20,27 +20,27 @@
 
 import Foundation
 
-extension FileManager {
+class SafeUserDefaults<Key: RawRepresentable<String>> {
 
-    public var libraryURL: URL {
-        return urls(for: .libraryDirectory, in: .userDomainMask)[0]
+    let defaults: UserDefaults
+
+    init(defaults: UserDefaults) {
+        self.defaults = defaults
     }
 
-    public func files(at url: URL) -> [URL] {
-        var files: [URL] = []
-        if let enumerator = enumerator(at: url,
-                                       includingPropertiesForKeys: [.isRegularFileKey],
-                                       options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
-            for case let fileURL as URL in enumerator {
-                do {
-                    let fileAttributes = try fileURL.resourceValues(forKeys:[.isRegularFileKey])
-                    if fileAttributes.isRegularFile! {
-                        files.append(fileURL)
-                    }
-                } catch { print(error, fileURL) }
-            }
-        }
-        return files
+    public func setCodable(_ codable: Codable, for key: Key) throws {
+        try defaults.setCodable(codable, forKey: key.rawValue)
     }
 
+    public func codable<T: Codable>(_ type: T.Type, for key: Key) throws -> T? {
+        return try defaults.codable(T.self, forKey: key.rawValue)
+    }
+
+    public func setSecurityScopeURLs(_ urls: [URL], for key: Key) throws {
+        return try defaults.setSecurityScopeURLs(urls, forKey: key.rawValue)
+    }
+
+    public func securityScopeURLs(for key: Key) throws -> [URL] {
+        return try defaults.securityScopeURLs(forKey: key.rawValue)
+    }
 }

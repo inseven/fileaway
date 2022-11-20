@@ -60,4 +60,19 @@ extension UserDefaults {
 #endif
     }
 
+    public func setCodable(_ codable: Codable, forKey defaultName: String) throws {
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(codable) {
+            set(encoded, forKey: defaultName)
+        }
+    }
+
+    public func codable<T: Codable>(_ type: T.Type, forKey defaultName: String) throws -> T? {
+        guard let object = object(forKey: defaultName) as? Data else {
+            return nil
+        }
+        let decoder = JSONDecoder()
+        return try decoder.decode(T.self, from: object)
+    }
+
 }

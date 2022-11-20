@@ -18,25 +18,82 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Combine
 import SwiftUI
+import UniformTypeIdentifiers
+
+import Interact
 
 import FileawayCore
 
-struct SettingsView: View {
+struct GeneralSettingsView: View {
 
-    private enum Tabs: Hashable {
-        case general
+    @ObservedObject var settings: FileawayCore.Settings
+    @StateObject var fileTypePickerModel: FileTypePickerModel
+
+    init(settings: FileawayCore.Settings) {
+        self.settings = settings
+        _fileTypePickerModel = StateObject(wrappedValue: FileTypePickerModel(settings: settings))
     }
+
+    var body: some View {
+        GroupBox("File Types") {
+            VStack {
+                List(selection: $fileTypePickerModel.selection) {
+                    ForEach(fileTypePickerModel.types) { type in
+                        HStack {
+                            Text(type.localizedDisplayName)
+                            Spacer()
+                            if let preferredFilenameExtension = type.preferredFilenameExtension {
+                                Text(preferredFilenameExtension)
+                                    .foregroundColor(.secondary)
+                            } else if let preferredMIMEType = type.preferredMIMEType {
+                                Text(preferredMIMEType)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                        .lineLimit(1)
+                    }
+                }
+                .contextMenu(forSelectionType: UTType.ID.self) { selection in
+                    Button("Remove") {
+                        fileTypePickerModel.remove(selection)
+                    }
+                }
+                .onDeleteCommand {
+                    fileTypePickerModel.remove(fileTypePickerModel.selection)
+                }
+                HStack {
+                    TextField("File Extension", text: $fileTypePickerModel.input)
+                        .onSubmit {
+                            fileTypePickerModel.submit()
+                        }
+                    Button("Add") {
+                        fileTypePickerModel.submit()
+                    }
+                    .disabled(!fileTypePickerModel.canSubmit)
+                }
+            }
+        }
+        .runs(fileTypePickerModel)
+    }
+
+}
+
+struct SettingsView: View {
 
     @ObservedObject var applicationModel: ApplicationModel
 
     var body: some View {
         TabView {
+            GeneralSettingsView(settings: applicationModel.settings)
+            .tabItem {
+                Label("General", systemImage: "gear")
+            }
             LocationsSettingsView(applicationModel: applicationModel)
                 .tabItem {
-                    Label("Locations", systemImage: "folder")
+                    Label("Folders", systemImage: "folder")
                 }
-                .tag(Tabs.general)
             RulesSettingsView(applicationModel: applicationModel)
                 .tabItem {
                     Label("Rules", systemImage: "tray.and.arrow.down")

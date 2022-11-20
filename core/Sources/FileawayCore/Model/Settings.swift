@@ -19,27 +19,52 @@
 // SOFTWARE.
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 public class Settings: ObservableObject {
 
-    private static let inboxUrls = "inbox-urls"
-    private static let archiveUrls = "archive-urls"
+    enum Key: String {
+        case inboxUrls = "inbox-urls"
+        case archiveUrls = "archive-urls"
+        case fileTypes = "file-types"
+    }
+
+    private static let defaultFileTypes: Set<UTType> = [
+        .commaSeparatedText,
+        .doc,
+        .docx,
+        .numbers,
+        .pages,
+        .pdf,
+        .rtf,
+        .xls,
+        .xlsx,
+    ]
 
     // TODO: These are never updated during the run of the app.
     @Published public var inboxUrls: [URL] = []
     @Published public var archiveUrls: [URL] = []
 
+    @Published public var types: Set<UTType> = [] {
+        didSet {
+            try? defaults.setCodable(types, for: .fileTypes)
+        }
+    }
+
+    private let defaults: SafeUserDefaults<Key> = SafeUserDefaults(defaults: UserDefaults.standard)
+
     public init() {
-        inboxUrls = (try? UserDefaults.standard.securityScopeURLs(forKey: Self.inboxUrls)) ?? []
-        archiveUrls = (try? UserDefaults.standard.securityScopeURLs(forKey: Self.archiveUrls)) ?? []
+        inboxUrls = (try? defaults.securityScopeURLs(for: .inboxUrls)) ?? []
+        archiveUrls = (try? defaults.securityScopeURLs(for: .archiveUrls)) ?? []
+        types = (try? defaults.codable(Set<UTType>.self, for: .fileTypes)) ?? Self.defaultFileTypes
     }
 
     public func setInboxUrls(_ urls: [URL]) throws {
-        try UserDefaults.standard.setSecurityScopeURLs(urls, forKey: Self.inboxUrls)
+        try defaults.setSecurityScopeURLs(urls, for: .inboxUrls)
     }
 
     public func setArchiveUrls(_ urls: [URL]) throws {
-        try UserDefaults.standard.setSecurityScopeURLs(urls, forKey: Self.archiveUrls)
+        try defaults.setSecurityScopeURLs(urls, for: .archiveUrls)
     }
 
 }
