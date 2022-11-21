@@ -122,6 +122,9 @@ public struct DirectoryView: View {
             directoryViewModel.showPreview(selecting: selection.first)
 #endif
         }
+        .refreshable {
+            self.directoryViewModel.refresh()
+        }
         // TODO: Enter to open
         // TODO: Drag-and-drop
         // TODO: .onCutCommand(perform: manager.cut)
