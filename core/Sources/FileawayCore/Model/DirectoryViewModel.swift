@@ -149,6 +149,13 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
         cancelables.removeAll()
     }
 
+    @MainActor public func refresh() {
+        guard let directoryModel = directoryModel else {
+            return
+        }
+        directoryModel.refresh()
+    }
+
     @MainActor public var canPreview: Bool {
         return selection.count == 1
     }
