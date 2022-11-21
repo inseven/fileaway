@@ -54,7 +54,7 @@ public class SceneModel: ObservableObject, Runnable {
     @Published public var sheet: SheetType?
 
     private var applicationModel: ApplicationModel
-    private var cancelables: Set<AnyCancellable> = []
+    private var cancellables: Set<AnyCancellable> = []
 
     public init(applicationModel: ApplicationModel) {
         self.applicationModel = applicationModel
@@ -89,7 +89,7 @@ public class SceneModel: ObservableObject, Runnable {
                 }
 
             }
-            .store(in: &cancelables)
+            .store(in: &cancellables)
 
         // Select the correct directory when the section changes.
         $inboxes
@@ -101,12 +101,12 @@ public class SceneModel: ObservableObject, Runnable {
             .sink { directoryViewModel in
                 self.directoryViewModel = directoryViewModel
             }
-            .store(in: &cancelables)
+            .store(in: &cancellables)
 
     }
 
     @MainActor public func stop() {
-        cancelables.removeAll()
+        cancellables.removeAll()
     }
 
     @MainActor public func showSettings() {
