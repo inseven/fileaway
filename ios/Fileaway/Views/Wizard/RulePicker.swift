@@ -41,7 +41,13 @@ struct RulePicker: View {
                 NavigationLink {
                     RuleFormView(url: url, ruleModel: rule)
                 } label: {
-                    Text(rule.name)
+                    VStack {
+                        Text(rule.name)
+                            .horizontalSpace(.trailing)
+                        Text(rule.rootUrl.displayName)
+                            .foregroundColor(.secondary)
+                            .horizontalSpace(.trailing)
+                    }
                 }
             }
         }
