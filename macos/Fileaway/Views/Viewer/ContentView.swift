@@ -43,7 +43,7 @@ struct ContentView: View {
             if let directoryViewModel = sceneModel.directoryViewModel {
                 DirectoryView(directoryViewModel: directoryViewModel)
             } else {
-                Placeholder("No Directory Selected")
+                PlaceholderView("No Directory Selected")
                     .searchable()
             }
         }
