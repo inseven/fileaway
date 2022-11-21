@@ -44,7 +44,7 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
     @Published var previewUrl: URL? = nil
 
     private var directoryModel: DirectoryModel? = nil
-    private var cancelables: Set<AnyCancellable> = []
+    private var cancellables: Set<AnyCancellable> = []
     private let syncQueue = DispatchQueue.init(label: "DirectoryViewModel.syncQueue")
 
     public var type: DirectoryModel.DirectoryType {
@@ -108,7 +108,7 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
                 self.previewUrls = previewUrls
                 self.isLoading = isLoading
             }
-            .store(in: &cancelables)
+            .store(in: &cancellables)
 
         // Remove missing files from the selection.
         $files
@@ -122,7 +122,7 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
                 }
                 self.selection = selection
             }
-            .store(in: &cancelables)
+            .store(in: &cancellables)
 
         // Update the selection to match the preview URL.
         directoryModel
@@ -141,12 +141,12 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
             .sink { selection in
                 self.selection = selection
             }
-            .store(in: &cancelables)
+            .store(in: &cancellables)
 
     }
 
     @MainActor public func stop() {
-        cancelables.removeAll()
+        cancellables.removeAll()
     }
 
     @MainActor public func refresh() {

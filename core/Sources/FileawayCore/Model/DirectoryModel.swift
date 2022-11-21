@@ -50,7 +50,7 @@ public class DirectoryModel: ObservableObject, Identifiable, Hashable {
     private let syncQueue = DispatchQueue.init(label: "DirectoryModel.syncQueue")
     private var directoryMonitor: DirectoryMonitor
     private var cache: NSCache<NSURL, FileInfo> = NSCache()
-    private var cancelables: Set<AnyCancellable> = []
+    private var cancellables: Set<AnyCancellable> = []
 
     public init(settings: Settings, type: DirectoryType, url: URL) {
         self.settings = settings
@@ -98,12 +98,12 @@ public class DirectoryModel: ObservableObject, Identifiable, Hashable {
                 self.files = files
                 self.isLoading = false
             }
-            .store(in: &cancelables)
+            .store(in: &cancellables)
     }
 
     @MainActor public func stop() {
         directoryMonitor.stop()
-        cancelables.removeAll()
+        cancellables.removeAll()
     }
 
     @MainActor public func refresh() {
