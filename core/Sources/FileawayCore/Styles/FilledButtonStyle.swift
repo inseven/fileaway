@@ -23,23 +23,14 @@ import SwiftUI
 struct FilledButtonStyle: ButtonStyle {
 
     private struct LayoutMetrics {
-        static let padding = 4.0
-        static let trailingPadding = 8.0
         static let interItemSpcing = 2.0
     }
 
     func makeBody(configuration: Self.Configuration) -> some View {
-        HStack(spacing: LayoutMetrics.interItemSpcing) {
-            Image(systemName: "plus.circle")
-            configuration
-                .label
-        }
-        .font(.footnote)
-        .foregroundColor(configuration.isPressed ? .gray : .white)
-        .padding([.leading, .top, .bottom], LayoutMetrics.padding)
-        .padding([.trailing], LayoutMetrics.trailingPadding)
-        .background(Capsule()
-            .fill(.tint))
+        configuration
+            .label
+            .font(.body)
+            .tokenAppearance()
     }
     
 }

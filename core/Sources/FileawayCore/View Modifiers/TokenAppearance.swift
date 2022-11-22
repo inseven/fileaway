@@ -20,25 +20,33 @@
 
 import SwiftUI
 
-import FileawayCore
+public struct TokenAppearance: ViewModifier {
 
-struct ComponentItem: View {
+    struct LayoutMetrics {
+        static let horizontalPadding = 8.0
+        static let verticalPadding = 4.0
+        static let cornerRadius = 4.0
+    }
 
-    @Environment(\.editMode) var editMode
-    @ObservedObject var ruleModel: RuleModel
-    @State var component: ComponentModel
+    public init() {
 
-    var body: some View {
-        HStack {
-            if component.type == .text {
-                EditText("Component", text: $component.value).environment(\.editMode, editMode)
-            } else {
-                Text(ruleModel.name(for: component))
-                    .tokenAppearance()
-                    .tint(component.variable!.color)
-            }
-        }
-        .environment(\.editMode, editMode)
+    }
+
+    public func body(content: Content) -> some View {
+        content
+            .foregroundColor(.white)
+            .padding([.leading, .trailing], LayoutMetrics.horizontalPadding)
+            .padding([.top, .bottom], LayoutMetrics.verticalPadding)
+            .background(RoundedRectangle(cornerRadius: LayoutMetrics.cornerRadius)
+                .fill(.tint))
+    }
+
+}
+
+extension View {
+
+    public func tokenAppearance() -> some View {
+        return modifier(TokenAppearance())
     }
 
 }
