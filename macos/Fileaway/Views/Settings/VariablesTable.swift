@@ -25,12 +25,7 @@ import FileawayCore
 struct VariablesTable: View {
 
     @ObservedObject var ruleModel: RuleModel
-    @State var selection: VariableModel.ID?
-
-    private var selectedVariableModel: VariableModel? {
-        return ruleModel.variables
-            .first{ $0.id == selection }
-    }
+    @State var selection: Set<VariableModel.ID> = []
 
     var body: some View {
         VStack {
@@ -49,6 +44,9 @@ struct VariablesTable: View {
                         VariableTypePicker(variableModel: variableModel)
                     }
                 }
+                .onDeleteCommand {
+                    ruleModel.remove(variableIds: selection)
+                }
                 .frame(minWidth: 500, minHeight: 200)
 
                 VStack {
@@ -60,16 +58,12 @@ struct VariablesTable: View {
                                 .frame(width: 80)
                         }
                         Button {
-                            guard let variable = selectedVariableModel else {
-                                return
-                            }
-                            ruleModel.remove(variable: variable)
-                            selection = nil
+                            ruleModel.remove(variableIds: selection)
                         } label: {
                             Text("Remove")
                                 .frame(width: 80)
                         }
-                        .disabled(selection == nil)
+                        .disabled(selection.isEmpty)
                         Spacer()
                     }
                 }

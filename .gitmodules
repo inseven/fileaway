@@ -16,3 +16,6 @@
 [submodule "HashRainbow"]
 	path = HashRainbow
 	url = git@github.com:jbmorley/HashRainbow.git
+[submodule "DIFlowLayout"]
+	path = DIFlowLayout
+	url = git@github.com:jbmorley/DIFlowLayout.git

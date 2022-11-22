@@ -48,6 +48,7 @@ public struct Legal {
     ]
 
     public static let licenses = [
+        License("DIFlowLayout", author: "Daniel Inoa", filename: "diflowlayout-license", bundle: .module),
         License("EonilFSEvents", author: "Hoon H., Eonil", filename: "eonilfsevents-license", bundle: .module),
         License("Fileaway", author: "InSeven Limited", filename: "fileaway-license", bundle: .module),
         License("FilePicker", author: "Mark Renaud", filename: "filepicker-license", bundle: .module),
