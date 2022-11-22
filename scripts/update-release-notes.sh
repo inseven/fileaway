@@ -36,4 +36,4 @@ source "${SCRIPTS_DIRECTORY}/environment.sh"
 
 cd "$ROOT_DIRECTORY"
 
-changes notes --scope macOS --pre-release --all --released --template "$RELEASE_NOTES_TEMPLATE_PATH" > "$RELEASE_NOTES_PATH"
+changes notes --pre-release --all --released --template "$RELEASE_NOTES_TEMPLATE_PATH" > "$RELEASE_NOTES_PATH"
