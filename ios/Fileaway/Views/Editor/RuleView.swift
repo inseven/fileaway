@@ -63,10 +63,12 @@ struct RuleView: View {
                     }
                     .onDelete { self.editingRuleModel.remove(variableOffsets: $0) }
                     if self.editMode == .active {
-                        EditSafeButton(action: {
-                            self.editingRuleModel.createVariable()
-                        }) {
-                            Text("New variable...")
+                        Button {
+                            withAnimation {
+                                self.editingRuleModel.createVariable()
+                            }
+                        } label: {
+                            Text("New Variable...")
                         }
                     }
                 } header: {

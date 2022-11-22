@@ -91,14 +91,14 @@ public class RulesModel: ObservableObject {
         try save()
     }
 
-    public func new(preferredName: String) throws -> RuleModel {
-        let name = uniqueRuleName(preferredName: preferredName)
+    public func new() throws -> RuleModel {
+        let name = uniqueRuleName(preferredName: "Rule")
         let rule = RuleModel(id: UUID(),
                              rootUrl: rootUrl,
                              name: name,
                              variables: [VariableModel(name: "Date", type: .date(hasDay: true))],
                              destination: [
-                                ComponentModel(value: "New Folder/", type: .text, variable: nil),
+                                ComponentModel(value: "Paperwork/", type: .text, variable: nil),
                                 ComponentModel(value: "Date", type: .variable, variable: nil),
                                 ComponentModel(value: " Description", type: .text, variable: nil)])
         try add(rule)
@@ -119,27 +119,6 @@ public class RulesModel: ObservableObject {
     @MainActor private func validateChildren() -> Bool {
         return self.ruleModels.map { $0.validate() }.reduce(false, { $0 || $1 })
     }
-
-    @MainActor public func createRule() {
-        let names = Set(ruleModels.map { $0.name })
-        var index = 1
-        var name = ""
-        repeat {
-            name = "Task \(index)"
-            index = index + 1
-        } while names.contains(name)
-        let task = RuleModel(id: UUID(),
-                             rootUrl: rootUrl,
-                             name: name,
-                             variables: [VariableModel(name: "Date", type: .date(hasDay: true))],
-                             destination: [
-                                ComponentModel(value: "New Folder/", type: .text, variable: nil),
-                                ComponentModel(value: "Date", type: .variable, variable: nil),
-                                ComponentModel(value: " Description", type: .text, variable: nil)])
-        self.ruleModels.append(task)
-        try! save()
-    }
-
 
     private func duplicate(_ rule: RuleModel, preferredName: String) throws -> RuleModel {
         let name = uniqueRuleName(preferredName: preferredName)
