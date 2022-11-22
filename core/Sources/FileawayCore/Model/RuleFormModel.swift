@@ -98,8 +98,8 @@ public class RuleFormModel: ObservableObject, Runnable {
 
     // TODO: Handle this error within the model.
     @MainActor public func move() throws {
-        try applicationModel.move(url, to: destinationURL)
         applicationModel.storeRecentRule(ruleModel)
+        try applicationModel.move(url, to: destinationURL)
     }
 
 }
