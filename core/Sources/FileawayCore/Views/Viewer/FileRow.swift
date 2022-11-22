@@ -49,6 +49,8 @@ struct FileRow: View {
                         if let date = file.date {
                             DateView(date: date)
                                 .foregroundColor(.secondary)
+                                .lineLimit(1)
+                                .layoutPriority(1)
                         }
                     }
                     HStack {
