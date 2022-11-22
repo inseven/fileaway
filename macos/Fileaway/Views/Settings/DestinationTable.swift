@@ -73,7 +73,6 @@ struct DestinationTable: View {
                         Text("Remove")
                             .frame(width: 80)
                     }
-                    .buttonStyle(.token)
                     .disabled(selection == nil)
                     Spacer()
                 }
