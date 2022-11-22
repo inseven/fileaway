@@ -24,7 +24,7 @@ public struct DateView: View {
 
     static var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
+        dateFormatter.dateStyle = .short
         return dateFormatter
     }()
 
@@ -52,6 +52,7 @@ public struct DateView: View {
         default:
             Text(Self.dateFormatter.string(from: date.date))
                 .help(description)
+                .font(.callout)
         }
     }
 
