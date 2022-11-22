@@ -45,9 +45,9 @@ public class Settings: ObservableObject {
     @Published public var inboxUrls: [URL] = []
     @Published public var archiveUrls: [URL] = []
 
-    @Published public var types: Set<UTType> = [] {
+    @Published public var fileTypes: Set<UTType> = [] {
         didSet {
-            try? defaults.setCodable(types, for: .fileTypes)
+            try? defaults.setCodable(fileTypes, for: .fileTypes)
         }
     }
 
@@ -56,7 +56,7 @@ public class Settings: ObservableObject {
     public init() {
         inboxUrls = (try? defaults.securityScopeURLs(for: .inboxUrls)) ?? []
         archiveUrls = (try? defaults.securityScopeURLs(for: .archiveUrls)) ?? []
-        types = (try? defaults.codable(Set<UTType>.self, for: .fileTypes)) ?? Self.defaultFileTypes
+        fileTypes = (try? defaults.codable(Set<UTType>.self, for: .fileTypes)) ?? Self.defaultFileTypes
     }
 
     public func setInboxUrls(_ urls: [URL]) throws {

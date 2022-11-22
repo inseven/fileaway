@@ -71,7 +71,7 @@ public class DirectoryModel: ObservableObject, Identifiable, Hashable {
         directoryMonitor
             .$files
             .compactMap { $0 }  // nil is a marker that the data is loading
-            .combineLatest(settings.$types)
+            .combineLatest(settings.$fileTypes)
             .receive(on: syncQueue)
             .map { files, types in
                 let files = files

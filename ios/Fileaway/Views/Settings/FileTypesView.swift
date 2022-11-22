@@ -18,16 +18,56 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import MobileCoreServices
 import SwiftUI
+import UniformTypeIdentifiers
 
 import FileawayCore
 
-struct GeneralSettingsView: View {
+struct FileTypesView: View {
 
-    @Environment(\.applicationModel) var applicationModel: ApplicationModel
+    enum SheetType: Identifiable {
+
+        var id: Self { self }
+
+        case add
+    }
+
+    @StateObject var model: FileTypesViewModel
+    @State var sheet: SheetType?
+
+    init(settings: Settings) {
+        _model = StateObject(wrappedValue: FileTypesViewModel(settings: settings))
+    }
 
     var body: some View {
-        FileTypesView(settings: applicationModel.settings)
+        List {
+            ForEach(model.fileTypes) { fileType in
+                LabeledContent(fileType.localizedDisplayName, value: fileType.preferredFilenameExtension ?? "")
+            }
+            .onDelete { indexSet in
+                model.remove(indexSet)
+            }
+        }
+        .navigationTitle("File Types")
+        .toolbar {
+
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    sheet = .add
+                } label: {
+                    Label("Add File Type", systemImage: "plus")
+                }
+            }
+
+        }
+        .sheet(item: $sheet) { sheet in
+            switch sheet {
+            case .add:
+                AddFileTypeView(model: model)
+            }
+        }
+        .runs(model)
     }
 
 }

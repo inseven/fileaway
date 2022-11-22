@@ -33,6 +33,7 @@ struct SettingsView: View {
     }
 
     @ObservedObject var applicationModel: ApplicationModel
+    @ObservedObject var settings: Settings
     @Environment(\.dismiss) private var dismiss
 
     @State private var sheet: SheetType? = nil
@@ -40,12 +41,25 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             Form {
+                Section("General") {
+                    NavigationLink {
+                        FileTypesView(settings: settings)
+                    } label: {
+                        Text("File Types")
+                            .badge(settings.fileTypes.count)
+                    }
+                }
                 Section("Rules") {
-                    ForEach(applicationModel.directories(type: .archive)) { directory in
-                        NavigationLink {
-                            RulesView(rulesModel: directory.ruleSet)
-                        } label: {
-                            Text(directory.name)
+                    if applicationModel.directories(type: .archive).isEmpty {
+                        Text("None")
+                            .foregroundColor(.secondary)
+                    } else {
+                        ForEach(applicationModel.directories(type: .archive)) { directory in
+                            NavigationLink {
+                                RulesView(rulesModel: directory.ruleSet)
+                            } label: {
+                                Text(directory.name)
+                            }
                         }
                     }
                 }

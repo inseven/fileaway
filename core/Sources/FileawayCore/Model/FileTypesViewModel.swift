@@ -24,17 +24,18 @@ import UniformTypeIdentifiers
 
 import Interact
 
-public class FileTypePickerModel: ObservableObject, Runnable {
+public class FileTypesViewModel: ObservableObject, Runnable {
 
-    @Published public var types: [UTType] = []
+    @Published public var fileTypes: [UTType] = []
     @Published public var selection: Set<UTType.ID> = []
-    @Published public var input: String = ""
+    @Published public var newFilenameExtension: String = ""
+    @Published public var proposedFileType: UTType? = nil
 
     private var settings: Settings
     private var cancellables: Set<AnyCancellable> = []
 
     @MainActor public var canSubmit: Bool {
-        return !self.input.isEmpty
+        return !self.newFilenameExtension.isEmpty
     }
 
     public init(settings: Settings) {
@@ -44,7 +45,7 @@ public class FileTypePickerModel: ObservableObject, Runnable {
     @MainActor public func start() {
 
         settings
-            .$types
+            .$fileTypes
             .map { types in
                 return Array(types)
                     .sorted { lhs, rhs in
@@ -53,10 +54,16 @@ public class FileTypePickerModel: ObservableObject, Runnable {
             }
             .receive(on: DispatchQueue.main)
             .sink { types in
-                self.types = types
+                self.fileTypes = types
             }
             .store(in: &cancellables)
 
+        $newFilenameExtension
+            .receive(on: DispatchQueue.main)
+            .sink { newFilenameExtension in
+                self.proposedFileType = UTType(filenameExtension: newFilenameExtension)
+            }
+            .store(in: &cancellables)
     }
 
     @MainActor public func stop() {
@@ -64,20 +71,25 @@ public class FileTypePickerModel: ObservableObject, Runnable {
     }
 
     @MainActor public func submit() {
-        guard let type = UTType(filenameExtension: input) else {
-            // TODO: Print unknown type??
-            print("Unknown type '\(input)'.")
+        guard let proposedFileType = proposedFileType else {
             return
         }
-        self.settings.types.insert(type)
-        input = ""
+        self.settings.fileTypes.insert(proposedFileType)
+        newFilenameExtension = ""
     }
 
     @MainActor public func remove(_ ids: Set<UTType.ID>) {
-        self.settings.types = self.settings.types.filter { !ids.contains($0.id) }
+        self.settings.fileTypes = self.settings.fileTypes.filter { !ids.contains($0.id) }
         for id in ids {
             selection.remove(id)
         }
+    }
+
+    @MainActor public func remove(_ indexSet: IndexSet) {
+        let ids = indexSet.map { index in
+            return self.fileTypes[index].id
+        }
+        self.remove(Set(ids))
     }
 
 }

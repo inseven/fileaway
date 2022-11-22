@@ -26,19 +26,19 @@ import Interact
 
 import FileawayCore
 
-struct FileTypePickerView: View {
+struct FileTypesView: View {
 
-    @StateObject var fileTypePickerModel: FileTypePickerModel
+    @StateObject var model: FileTypesViewModel
 
     init(settings: FileawayCore.Settings) {
-        _fileTypePickerModel = StateObject(wrappedValue: FileTypePickerModel(settings: settings))
+        _model = StateObject(wrappedValue: FileTypesViewModel(settings: settings))
     }
 
     var body: some View {
         GroupBox("File Types") {
             VStack {
-                List(selection: $fileTypePickerModel.selection) {
-                    ForEach(fileTypePickerModel.types) { type in
+                List(selection: $model.selection) {
+                    ForEach(model.fileTypes) { type in
                         HStack {
                             Text(type.localizedDisplayName)
                             Spacer()
@@ -55,25 +55,25 @@ struct FileTypePickerView: View {
                 }
                 .contextMenu(forSelectionType: UTType.ID.self) { selection in
                     Button("Remove") {
-                        fileTypePickerModel.remove(selection)
+                        model.remove(selection)
                     }
                 }
                 .onDeleteCommand {
-                    fileTypePickerModel.remove(fileTypePickerModel.selection)
+                    model.remove(model.selection)
                 }
                 HStack {
-                    TextField("File Extension", text: $fileTypePickerModel.input)
+                    TextField("File Extension", text: $model.newFilenameExtension)
                         .onSubmit {
-                            fileTypePickerModel.submit()
+                            model.submit()
                         }
                     Button("Add") {
-                        fileTypePickerModel.submit()
+                        model.submit()
                     }
-                    .disabled(!fileTypePickerModel.canSubmit)
+                    .disabled(!model.canSubmit)
                 }
             }
         }
-        .runs(fileTypePickerModel)
+        .runs(model)
     }
 
 }
