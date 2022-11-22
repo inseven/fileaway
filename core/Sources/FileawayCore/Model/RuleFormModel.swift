@@ -25,6 +25,7 @@ import Interact
 
 public class RuleFormModel: ObservableObject, Runnable {
 
+    private let applicationModel: ApplicationModel
     private let ruleModel: RuleModel
     private let url: URL
     @Published public var variableFieldModels: [VariableFieldModel]
@@ -50,7 +51,8 @@ public class RuleFormModel: ObservableObject, Runnable {
         return self.ruleModel.rootUrl.appendingPathComponent(destination).appendingPathExtension(url.pathExtension)
     }
 
-    public init(ruleModel: RuleModel, url: URL) {
+    public init(applicationModel: ApplicationModel, ruleModel: RuleModel, url: URL) {
+        self.applicationModel = applicationModel
         self.ruleModel = ruleModel
         self.url = url
         self.variableFieldModels = ruleModel.variables.map { $0.instance() }
@@ -96,12 +98,7 @@ public class RuleFormModel: ObservableObject, Runnable {
 
     // TODO: Handle this error within the model.
     @MainActor public func move() throws {
-        let destinationUrl = self.destinationURL
-        let fileManager = FileManager.default
-        try fileManager.createDirectory(at: destinationUrl.deletingLastPathComponent(),
-                                        withIntermediateDirectories: true,
-                                        attributes: [:])
-        try fileManager.moveItem(at: url, to: destinationUrl)
+        try applicationModel.move(url, to: destinationURL)
     }
 
 }

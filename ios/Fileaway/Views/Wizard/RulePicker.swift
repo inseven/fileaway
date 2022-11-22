@@ -25,6 +25,7 @@ import FileawayCore
 struct RulePicker: View {
 
     @Environment(\.dismiss) var dismiss
+    @Environment(\.applicationModel) var applicationModel
 
     @StateObject var rulePickerModel: RulePickerModel
 
@@ -39,7 +40,7 @@ struct RulePicker: View {
         List {
             ForEach(rulePickerModel.filteredRules) { rule in
                 NavigationLink {
-                    RuleFormView(url: url, ruleModel: rule)
+                    RuleFormView(applicationModel: applicationModel, url: url, ruleModel: rule)
                 } label: {
                     VStack {
                         Text(rule.name)

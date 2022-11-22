@@ -110,4 +110,12 @@ public class DirectoryModel: ObservableObject, Identifiable, Hashable {
         directoryMonitor.refresh()
     }
 
+    @MainActor public func add(_ url: URL) {
+        directoryMonitor.add(url)
+    }
+
+    @MainActor public func remove(_ url: URL) {
+        directoryMonitor.remove(url)
+    }
+
 }

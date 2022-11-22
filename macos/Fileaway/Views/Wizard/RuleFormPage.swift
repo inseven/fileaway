@@ -47,10 +47,12 @@ struct RuleFormPage: View {
     var url: URL
     @State var alert: AlertType?
 
-    init(url: URL, ruleModel: RuleModel) {
+    init(applicationModel: ApplicationModel, url: URL, ruleModel: RuleModel) {
         self.url = url
         self.ruleModel = ruleModel
-        _ruleFormModel = StateObject(wrappedValue: RuleFormModel(ruleModel: ruleModel, url: url))
+        _ruleFormModel = StateObject(wrappedValue: RuleFormModel(applicationModel: applicationModel,
+                                                                 ruleModel: ruleModel,
+                                                                 url: url))
     }
 
     var body: some View {

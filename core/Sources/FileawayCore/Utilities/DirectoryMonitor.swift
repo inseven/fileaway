@@ -101,4 +101,12 @@ public class DirectoryMonitor: ObservableObject {
         }
     }
 
+    @MainActor public func add(_ url: URL) {
+        self.files?.insert(url)
+    }
+
+    @MainActor public func remove(_ url: URL) {
+        self.files?.remove(url)
+    }
+
 }
