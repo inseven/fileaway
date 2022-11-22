@@ -22,50 +22,30 @@ import SwiftUI
 
 import FileawayCore
 
-struct RulePicker: View {
+struct RulePickerRow: View {
 
-    @Environment(\.dismiss) var dismiss
     @Environment(\.applicationModel) var applicationModel
 
-    @StateObject var rulePickerModel: RulePickerModel
-
     private let url: URL
+    private let ruleModel: RuleModel
 
-    init(applicationModel: ApplicationModel, url: URL) {
+    init(url: URL, ruleModel: RuleModel) {
         self.url = url
-        _rulePickerModel = StateObject(wrappedValue: RulePickerModel(applicationModel: applicationModel))
+        self.ruleModel = ruleModel
     }
 
     var body: some View {
-        List {
-            if !rulePickerModel.recentRules.isEmpty {
-                Section("Recent") {
-                    ForEach(rulePickerModel.recentRules) { ruleModel in
-                        RulePickerRow(url: url, ruleModel: ruleModel)
-                    }
-
-                }
-            }
-            Section("All Rules") {
-                ForEach(rulePickerModel.filteredRules) { ruleModel in
-                    RulePickerRow(url: url, ruleModel: ruleModel)
-                }
+        NavigationLink {
+            RuleFormView(applicationModel: applicationModel, url: url, ruleModel: ruleModel)
+        } label: {
+            VStack {
+                Text(ruleModel.name)
+                    .horizontalSpace(.trailing)
+                Text(ruleModel.rootUrl.displayName)
+                    .foregroundColor(.secondary)
+                    .horizontalSpace(.trailing)
             }
         }
-        .searchable(text: $rulePickerModel.filter)
-        .navigationTitle("Select Rule")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-
-            FilePreviewHeader(url: url)
-
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button("Cancel") {
-                    dismiss()
-                }
-            }
-        }
-        .runs(rulePickerModel)
     }
 
 }

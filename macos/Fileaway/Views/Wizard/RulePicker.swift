@@ -61,22 +61,28 @@ struct RulePicker: View {
                 }
                 .padding([.bottom, .leading, .trailing])
             List(selection: $rulePickerModel.selection) {
-                ForEach(rulePickerModel.filteredRules) { rule in
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(rule.name)
-                            Text(rule.rootUrl.displayName)
-                                .foregroundColor(.secondary)
+                Section() {
+
+                }
+                if !rulePickerModel.recentRules.isEmpty {
+                    Section("Recent") {
+                        ForEach(rulePickerModel.recentRules) { ruleModel in
+                            RulePickerRow(ruleModel: ruleModel) {
+                                withAnimation {
+                                    rulePickerModel.selection = ruleModel.id
+                                    activeRuleModel = ruleModel
+                                }
+                            }
                         }
-                        Spacer()
-                        Image(systemName: "chevron.forward")
                     }
-                    .padding()
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        withAnimation {
-                            rulePickerModel.selection = rule.id
-                            activeRuleModel = rule
+                }
+                Section("All Rules") {
+                    ForEach(rulePickerModel.filteredRules) { ruleModel in
+                        RulePickerRow(ruleModel: ruleModel) {
+                            withAnimation {
+                                rulePickerModel.selection = ruleModel.id
+                                activeRuleModel = ruleModel
+                            }
                         }
                     }
                 }
