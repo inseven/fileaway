@@ -41,10 +41,7 @@ struct DestinationTable: View {
                 Table(selection: $selection) {
                     TableColumn("Component") { componentModel in
                         if componentModel.type == .text {
-                            HStack {
-                                ComponentValueTextField(componentModel: componentModel)
-                                SetFolderButton(ruleModel: ruleModel, componentModel: componentModel)
-                            }
+                            ComponentValueTextField(componentModel: componentModel)
                         } else {
                             Text(ruleModel.name(for: componentModel))
                                 .tokenAppearance()
@@ -52,12 +49,12 @@ struct DestinationTable: View {
                         }
                     }
                 } rows: {
-                    ForEach(ruleModel.destination) { componentModel in
+                    ForEach(ruleModel.filename) { componentModel in
                         TableRow(componentModel)
                             .itemProvider(componentModel.id, as: .component)
                     }
                     .onInsert(ComponentModel.ID.self, as: .component) { index, ids in
-                        self.ruleModel.destination.move(ids: ids, toOffset: index)
+                        self.ruleModel.filename.move(ids: ids, toOffset: index)
                     }
                 }
                 .frame(minWidth: 500, minHeight: 200)

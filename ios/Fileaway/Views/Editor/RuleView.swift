@@ -77,16 +77,20 @@ struct RuleView: View {
                     ErrorText(text: editingRuleModel.validate() ? nil : "Variable names must be unique.")
                 }
 
+                Section("Destination") {
+                    ComponentItem(ruleModel: self.editingRuleModel, component: self.editingRuleModel.folder)
+                }
+
                 Section {
-                    ForEach(editingRuleModel.destination) { component in
+                    ForEach(editingRuleModel.filename) { component in
                         ComponentItem(ruleModel: self.editingRuleModel, component: component)
                     }
                     .onMove { (fromOffsets, toOffset) in
-                        self.editingRuleModel.destination.move(fromOffsets: fromOffsets, toOffset: toOffset)
+                        self.editingRuleModel.filename.move(fromOffsets: fromOffsets, toOffset: toOffset)
                     }
-                    .onDelete { self.editingRuleModel.destination.remove(atOffsets: $0) }
+                    .onDelete { self.editingRuleModel.filename.remove(atOffsets: $0) }
                 } header: {
-                    Text("Destination")
+                    Text("Filename")
                 } footer: {
                     DestinationFooter(ruleModel: editingRuleModel)
                 }
