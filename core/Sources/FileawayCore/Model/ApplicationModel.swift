@@ -182,13 +182,11 @@ public class ApplicationModel: ObservableObject {
         let destinationDirectoryModels = directories.filter { directoryModel in
             directoryModel.url.isParent(of: destinationURL)
         }
-        print("sourceDirectoryModels = \(sourceDirectoryModels)")
-        print("destinationDirectoryModels = \(destinationDirectoryModels)")
         for directoryModel in sourceDirectoryModels {
-            directoryModel.refresh()
+            directoryModel.remove(sourceURL)
         }
         for directoryModel in destinationDirectoryModels {
-            directoryModel.refresh()
+            directoryModel.add(destinationURL)
         }
     }
 
