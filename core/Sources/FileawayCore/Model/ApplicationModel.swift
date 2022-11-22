@@ -62,11 +62,19 @@ public class ApplicationModel: ObservableObject {
         for url in settings.archiveUrls {
             addDirectoryObserver(type: .archive, url: url)
         }
+
+#if os(iOS)
+        // We only need to request notification permission on iOS; macOS lets us badge the app icon without this.
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.badge]) { success, error in
+            print("Notification permission!")
+        }
+#endif
+
     }
 
     private func updateCountSubscription() {
-#if os(macOS)
-        // TODO: Icon badge for iOS
+
         dispatchPrecondition(condition: .onQueue(.main))
         let update: () -> Void = {
             dispatchPrecondition(condition: .onQueue(.main))
@@ -74,18 +82,23 @@ public class ApplicationModel: ObservableObject {
                 .filter { $0.type == .inbox }
                 .map { $0.count }
                 .reduce(0) { result, count in result + count }
+#if os(macOS)
             if count == 0 {
                 NSApplication.shared.dockTile.badgeLabel = nil
             } else {
                 NSApplication.shared.dockTile.badgeLabel = String(describing: count)
             }
+#else
+            UIApplication.shared.applicationIconBadgeNumber = count
+#endif
         }
+
         let directoryChanges = self.directories.map { $0.objectWillChange }
         countSubscription = Publishers.MergeMany(directoryChanges).receive(on: DispatchQueue.main).sink { _ in
             update()
         }
         update()
-#endif
+
     }
 
     private func updateRuleSetSubscription() {
