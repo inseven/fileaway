@@ -28,7 +28,7 @@ public class ComponentModel: ObservableObject, Identifiable, Hashable {
     @Published public var type: ComponentType
     public var variable: VariableModel? = nil
 
-    public init(value: String, type: ComponentType, variable: VariableModel?) {
+    public init(value: String, type: ComponentType, variable: VariableModel? = nil) {
         self.id = UUID()
         self.value = value
         self.type = type

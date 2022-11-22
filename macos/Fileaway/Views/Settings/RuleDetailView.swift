@@ -34,8 +34,15 @@ struct RuleDetailView: View {
             VariablesTable(ruleModel: ruleModel)
             Text("Destination")
                 .font(.headline)
+            HStack {
+                TextField("", text: $ruleModel.folder.value)
+                SetFolderButton(ruleModel: ruleModel, componentModel: ruleModel.folder)
+            }
+            Text("Filename")
+                .font(.headline)
             DestinationTable(ruleModel: ruleModel)
             Spacer()
+                .layoutPriority(1)
         }
         .padding()
     }

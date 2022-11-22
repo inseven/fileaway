@@ -47,7 +47,7 @@ struct VariablesTable: View {
                 .onDeleteCommand {
                     ruleModel.remove(variableIds: selection)
                 }
-                .frame(minWidth: 500, minHeight: 200)
+                .frame(minWidth: 500, minHeight: 160)
 
                 VStack {
                     VStack {

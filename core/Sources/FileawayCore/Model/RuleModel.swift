@@ -41,6 +41,28 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
         return self.name
     }
 
+    public var folder: ComponentModel {
+        get {
+            return destination.first ?? ComponentModel(value: "", type: .text)
+        }
+        set {
+            if destination.isEmpty {
+                destination.append(newValue)
+            } else {
+                destination[0] = newValue
+            }
+        }
+    }
+
+    public var filename: [ComponentModel] {
+        get {
+            return Array(destination[1...])
+        }
+        set {
+            destination = [destination[0]] + newValue
+        }
+    }
+
     public init(id: UUID, rootUrl: URL, name: String, variables: [VariableModel], destination: [ComponentModel]) {
         self.id = id
         self.rootUrl = rootUrl
