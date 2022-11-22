@@ -26,8 +26,10 @@ class URLTests: XCTestCase {
 
     func testRelativePath() {
         let parentURL = URL(string: "file:///Documents/Paperwork/")!
-        let childURL = URL(string: "file:///Documents/Paperwork/Accommodation/2022-11-22 House Correspondence.pdf")!
+        let childURL = URL(string: "file:///Documents/Paperwork/Accommodation/2022-11-22%20House%20Correspondence.pdf")!
+
         XCTAssertEqual(childURL.relativePath(from: parentURL), "Accommodation/2022-11-22 House Correspondence.pdf")
+
     }
 
 }
