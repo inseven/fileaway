@@ -66,9 +66,7 @@ public class ApplicationModel: ObservableObject {
 #if os(iOS)
         // We only need to request notification permission on iOS; macOS lets us badge the app icon without this.
         let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.badge]) { success, error in
-            print("Notification permission!")
-        }
+        center.requestAuthorization(options: [.badge]) { success, error in }
 #endif
 
     }
