@@ -49,7 +49,7 @@ struct RulesView: View {
 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        self.rulesModel.createRule()
+                        _ = try! self.rulesModel.new()
                     } label: {
                         Image(systemName: "plus")
                     }

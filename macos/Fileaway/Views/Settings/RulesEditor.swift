@@ -55,7 +55,7 @@ struct RulesEditor: View {
 
     @MainActor private func add() {
         do {
-            let rule = try rulesModel.new(preferredName: "Rule")
+            let rule = try rulesModel.new()
             selection = [rule.id]
             sheet = .rule(rule)
         } catch {
