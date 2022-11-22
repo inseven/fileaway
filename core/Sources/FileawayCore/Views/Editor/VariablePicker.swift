@@ -22,7 +22,14 @@ import Combine
 import Foundation
 import SwiftUI
 
+import DIFlowLayout
+
 public struct VariablePicker: View {
+
+    private struct LayoutMetrics {
+        static let horizontalSpacing = 8.0
+        static let verticalSpacing = 8.0
+    }
 
     @ObservedObject private var ruleModel: RuleModel
 
@@ -31,7 +38,7 @@ public struct VariablePicker: View {
     }
 
     public var body: some View {
-        HStack {
+        DIFlowLayout(horizontalSpacing: LayoutMetrics.horizontalSpacing, verticalSpacing: LayoutMetrics.verticalSpacing) {
 
             Button {
                 withAnimation {

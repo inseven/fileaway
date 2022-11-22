@@ -111,6 +111,10 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
         variables.remove(atOffsets: variableOffsets)
     }
 
+    public func remove(variableIds: Set<VariableModel.ID>) {
+        variables.removeAll { variableIds.contains($0.id) }
+    }
+
     public func name(for component: ComponentModel, format: NameFormat = .long) -> String {
         switch component.type {
         case .text:
