@@ -19,9 +19,9 @@
 // SOFTWARE.
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 import FileawayCore
-import UniformTypeIdentifiers
 
 struct DestinationTable: View {
 
@@ -47,7 +47,8 @@ struct DestinationTable: View {
                             }
                         } else {
                             Text(ruleModel.name(for: componentModel))
-                                .foregroundColor(.secondary)
+                                .tokenAppearance()
+                                .tint(componentModel.variable!.color)
                         }
                     }
                 } rows: {
@@ -60,24 +61,22 @@ struct DestinationTable: View {
                     }
                 }
                 .frame(minWidth: 500, minHeight: 200)
-
+                
                 VStack {
-                    VStack {
-                        Button {
-                            guard let componentModel = selectedComponentModel else {
-                                return
-                            }
-                            ruleModel.remove(componentModel: componentModel)
-                            selection = nil
-                        } label: {
-                            Text("Remove")
-                                .frame(width: 80)
+                    Button {
+                        guard let componentModel = selectedComponentModel else {
+                            return
                         }
-                        .disabled(selection == nil)
-                        Spacer()
+                        ruleModel.remove(componentModel: componentModel)
+                        selection = nil
+                    } label: {
+                        Text("Remove")
+                            .frame(width: 80)
                     }
+                    .disabled(selection == nil)
+                    Spacer()
                 }
-
+                
             }
 
             DestinationPreview(ruleModel: ruleModel)
