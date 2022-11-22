@@ -47,9 +47,8 @@ public struct RuleForm: View {
                     }
                 }
             } footer: {
-                Text(ruleFormModel.destinationURL.path)
+                Text(ruleFormModel.attributedRelativeDestinationPath(font: .standardizedFooter))
                     .horizontalSpace(.trailing)
-                    .textSelection(.enabled)
             }
         }
         .formStyle(.grouped)
