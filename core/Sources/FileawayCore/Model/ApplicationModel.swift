@@ -166,4 +166,30 @@ public class ApplicationModel: ObservableObject {
         }
     }
 
+    @MainActor public func move(_ sourceURL: URL, to destinationURL: URL) throws {
+
+        // Move the file.
+        let fileManager = FileManager.default
+        try fileManager.createDirectory(at: destinationURL.deletingLastPathComponent(),
+                                        withIntermediateDirectories: true,
+                                        attributes: [:])
+        try fileManager.moveItem(at: sourceURL, to: destinationURL)
+
+        // Update directory models.
+        let sourceDirectoryModels = directories.filter { directoryModel in
+            directoryModel.url.isParent(of: sourceURL)
+        }
+        let destinationDirectoryModels = directories.filter { directoryModel in
+            directoryModel.url.isParent(of: destinationURL)
+        }
+        print("sourceDirectoryModels = \(sourceDirectoryModels)")
+        print("destinationDirectoryModels = \(destinationDirectoryModels)")
+        for directoryModel in sourceDirectoryModels {
+            directoryModel.refresh()
+        }
+        for directoryModel in destinationDirectoryModels {
+            directoryModel.refresh()
+        }
+    }
+
 }

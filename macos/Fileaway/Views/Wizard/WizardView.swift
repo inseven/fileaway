@@ -53,7 +53,7 @@ struct WizardView: View {
             HStack {
                 VStack {
                     if let activeRule = rulesWizardModel.activeRuleModel {
-                        RuleFormPage(url: url, ruleModel: activeRule)
+                        RuleFormPage(applicationModel: applicationModel, url: url, ruleModel: activeRule)
                             .transition(.move(edge: .trailing))
                     } else {
                         RulePicker(applicationModel: applicationModel,

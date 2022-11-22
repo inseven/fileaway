@@ -70,6 +70,10 @@ extension URL {
         return relComponents.joined(separator: "/")
     }
 
+    public func isParent(of url: URL) -> Bool {
+        return url.path.hasPrefix(path + "/")
+    }
+
     public func prepareForSecureAccess() throws {
 #if os(macOS)
         let _ = try securityScopeBookmarkData()  // Check that we can access the location.
