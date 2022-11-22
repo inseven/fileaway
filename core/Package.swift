@@ -21,6 +21,7 @@ let package = Package(
         .package(path: "./../interact"),
         .package(path: "./../FilePicker"),
         .package(url: "https://github.com/eonil/FSEvents.git", branch: "master"),
+        .package(url: "https://github.com/apple/swift-collections.git", .upToNextMajor(from: "1.0.3"))
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -28,6 +29,7 @@ let package = Package(
         .target(
             name: "FileawayCore",
             dependencies: [
+                .product(name: "Collections", package: "swift-collections"),
                 .product(name: "Diligence", package: "diligence"),
                 .product(name: "HashRainbow", package: "hashrainbow"),
                 .product(name: "Interact", package: "interact"),

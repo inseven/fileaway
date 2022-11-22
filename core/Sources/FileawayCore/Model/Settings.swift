@@ -21,12 +21,15 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
+import Collections
+
 public class Settings: ObservableObject {
 
     enum Key: String {
         case inboxUrls = "inbox-urls"
         case archiveUrls = "archive-urls"
         case fileTypes = "file-types"
+        case recentRuleIds = "recent-rule-ids"
     }
 
     private static let defaultFileTypes: Set<UTType> = [
@@ -51,12 +54,19 @@ public class Settings: ObservableObject {
         }
     }
 
+    @Published public var recentRuleIds: OrderedSet<RuleModel.ID> = [] {
+        didSet {
+            try? defaults.setCodable(recentRuleIds, for: .recentRuleIds)
+        }
+    }
+
     private let defaults: SafeUserDefaults<Key> = SafeUserDefaults(defaults: UserDefaults.standard)
 
     public init() {
         inboxUrls = (try? defaults.securityScopeURLs(for: .inboxUrls)) ?? []
         archiveUrls = (try? defaults.securityScopeURLs(for: .archiveUrls)) ?? []
         fileTypes = (try? defaults.codable(Set<UTType>.self, for: .fileTypes)) ?? Self.defaultFileTypes
+        recentRuleIds = (try? defaults.codable(OrderedSet<RuleModel.ID>.self, for: .recentRuleIds)) ?? []
     }
 
     public func setInboxUrls(_ urls: [URL]) throws {

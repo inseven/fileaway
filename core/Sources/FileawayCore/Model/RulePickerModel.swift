@@ -27,6 +27,7 @@ public class RulePickerModel: ObservableObject, Runnable {
 
     @Published public var filter: String = ""
     @Published public var filteredRules: [RuleModel] = []
+    @Published public var recentRules: [RuleModel] = []
     @Published public var selection: RuleModel.ID?
 
     private var applicationModel: ApplicationModel
@@ -63,6 +64,28 @@ public class RulePickerModel: ObservableObject, Runnable {
                 }
             }
             .store(in: &cancellables)
+
+        applicationModel.settings
+            .$recentRuleIds
+            .combineLatest(applicationModel.$allRules)
+            .receive(on: queue)
+            .map { recentRuleIds, allRules in
+                let rules = allRules.filter { ruleModel in
+                    recentRuleIds.contains(ruleModel.id)
+                }.reduce(into: [RuleModel.ID:RuleModel]()) { partialResult, ruleModel in
+                    partialResult[ruleModel.id] = ruleModel
+                }
+                let recentRules = recentRuleIds.compactMap { id in
+                    return rules[id]
+                }
+                return recentRules
+            }
+            .receive(on: DispatchQueue.main)
+            .sink { recentRules in
+                self.recentRules = recentRules
+            }
+            .store(in: &cancellables)
+
     }
 
     @MainActor public func stop() {

@@ -166,6 +166,10 @@ public class ApplicationModel: ObservableObject {
         }
     }
 
+    @MainActor public func storeRecentRule(_ ruleModel: RuleModel) {
+        settings.recentRuleIds.insert(ruleModel.id, at: 0)
+    }
+
     @MainActor public func move(_ sourceURL: URL, to destinationURL: URL) throws {
 
         // Move the file.

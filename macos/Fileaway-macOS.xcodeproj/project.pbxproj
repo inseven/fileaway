@@ -13,6 +13,7 @@
 		D8384908292AE96800EA2595 /* FileTypesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8384907292AE96800EA2595 /* FileTypesView.swift */; };
 		D83CDCEA2620FF210063C91C /* RuleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83CDCE92620FF210063C91C /* RuleSheet.swift */; };
 		D85C95812579CED30007AE1E /* SelectionToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C95802579CED30007AE1E /* SelectionToolbar.swift */; };
+		D8648714292D4CBE007CD688 /* RulePickerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8648713292D4CBE007CD688 /* RulePickerRow.swift */; };
 		D87DEF7F25774F6C006CFE85 /* FileawayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEF7E25774F6C006CFE85 /* FileawayApp.swift */; };
 		D87DEF8125774F6C006CFE85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DEF8025774F6C006CFE85 /* ContentView.swift */; };
 		D87DEF8325774F6D006CFE85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D87DEF8225774F6D006CFE85 /* Assets.xcassets */; };
@@ -71,6 +72,7 @@
 		D8384907292AE96800EA2595 /* FileTypesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTypesView.swift; sourceTree = "<group>"; };
 		D83CDCE92620FF210063C91C /* RuleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleSheet.swift; sourceTree = "<group>"; };
 		D85C95802579CED30007AE1E /* SelectionToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionToolbar.swift; sourceTree = "<group>"; };
+		D8648713292D4CBE007CD688 /* RulePickerRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulePickerRow.swift; sourceTree = "<group>"; };
 		D876A3B32654873E006D19FB /* FileawayCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FileawayCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87DEF7B25774F6C006CFE85 /* Fileaway.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fileaway.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87DEF7E25774F6C006CFE85 /* FileawayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileawayApp.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 			children = (
 				D8F8BE1C2588192F0010432F /* RuleFormPage.swift */,
 				D8F8BE3625881C1A0010432F /* RulePicker.swift */,
+				D8648713292D4CBE007CD688 /* RulePickerRow.swift */,
 				D8F8BE11258818450010432F /* WizardView.swift */,
 			);
 			path = Wizard;
@@ -474,6 +477,7 @@
 				D87DEF8125774F6C006CFE85 /* ContentView.swift in Sources */,
 				D8F252582923BFF600CC30AF /* TableRowContent.swift in Sources */,
 				D8E7F9E32599B00A00C7409B /* DestinationTable.swift in Sources */,
+				D8648714292D4CBE007CD688 /* RulePickerRow.swift in Sources */,
 				D83CDCEA2620FF210063C91C /* RuleSheet.swift in Sources */,
 				D8FC5342257BB77C008FB609 /* SettingsView.swift in Sources */,
 				D8F2524F2923A7DE00CC30AF /* ComponentValueTextField.swift in Sources */,
