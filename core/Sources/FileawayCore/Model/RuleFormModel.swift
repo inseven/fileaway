@@ -56,6 +56,21 @@ public class RuleFormModel: ObservableObject, Runnable {
         self.variableFieldModels = ruleModel.variables.map { $0.instance() }
     }
 
+    @MainActor public func attributedRelativeDestinationPath(font: Font) -> AttributedString {
+
+        var regular = AttributeContainer()
+        regular.font = font
+
+        var bold = AttributeContainer()
+        bold.font = font.bold()
+
+        var result = AttributedString()
+        result.append(AttributedString(ruleModel.rootUrl.displayName, attributes: bold))
+        result.append(AttributedString("/", attributes: regular))
+        result.append(AttributedString(destinationURL.relativePath(from: ruleModel.rootUrl)!, attributes: regular))
+        return result
+    }
+
     @MainActor public func start() {
         subscriptions = variableFieldModels
             .map { $0 as! (any Editable) }

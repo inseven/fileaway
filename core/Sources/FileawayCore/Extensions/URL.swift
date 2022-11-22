@@ -56,8 +56,8 @@ extension URL {
             return nil
         }
 
-        let destComponents = self.standardized.resolvingSymlinksInPath().pathComponents
-        let baseComponents = base.standardized.resolvingSymlinksInPath().pathComponents
+        let destComponents = self.pathComponents
+        let baseComponents = base.pathComponents
 
         var i = 0
         while i < destComponents.count && i < baseComponents.count
