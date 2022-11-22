@@ -9,7 +9,9 @@
 /* Begin PBXBuildFile section */
 		D81C5D93249BE3710083BD6F /* RulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81C5D92249BE3710083BD6F /* RulesView.swift */; };
 		D81C5D95249BE6F40083BD6F /* RuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81C5D94249BE6F40083BD6F /* RuleView.swift */; };
+		D85067FA292B8DE80017865A /* FileTypesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85067F9292B8DE80017865A /* FileTypesView.swift */; };
 		D85532A0291E5FB400C21E12 /* WizardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D855329F291E5FB400C21E12 /* WizardView.swift */; };
+		D864870D292CB99C007CD688 /* AddFileTypesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864870C292CB99C007CD688 /* AddFileTypesView.swift */; };
 		D86AA556291DB7E00078B2DA /* FilePicker in Frameworks */ = {isa = PBXBuildFile; productRef = D86AA555291DB7E00078B2DA /* FilePicker */; };
 		D88B353D28B61247000C8910 /* FileawayCore in Frameworks */ = {isa = PBXBuildFile; productRef = D88B353C28B61247000C8910 /* FileawayCore */; };
 		D8A871D22916D56400B2932A /* ComponentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A871D12916D56400B2932A /* ComponentItem.swift */; };
@@ -55,7 +57,9 @@
 /* Begin PBXFileReference section */
 		D81C5D92249BE3710083BD6F /* RulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesView.swift; sourceTree = "<group>"; };
 		D81C5D94249BE6F40083BD6F /* RuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleView.swift; sourceTree = "<group>"; };
+		D85067F9292B8DE80017865A /* FileTypesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTypesView.swift; sourceTree = "<group>"; };
 		D855329F291E5FB400C21E12 /* WizardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardView.swift; sourceTree = "<group>"; };
+		D864870C292CB99C007CD688 /* AddFileTypesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFileTypesView.swift; sourceTree = "<group>"; };
 		D866D66326197AC80025329E /* FileawayCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FileawayCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86AA554291DB7BF0078B2DA /* FilePicker */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = FilePicker; path = ../FilePicker; sourceTree = "<group>"; };
 		D8A871D12916D56400B2932A /* ComponentItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentItem.swift; sourceTree = "<group>"; };
@@ -232,6 +236,8 @@
 		D8F763D6292255A30051D740 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				D864870C292CB99C007CD688 /* AddFileTypesView.swift */,
+				D85067F9292B8DE80017865A /* FileTypesView.swift */,
 				D8CCD292246EDC6A007EF2BB /* SettingsView.swift */,
 			);
 			path = Settings;
@@ -411,9 +417,11 @@
 				D8CCD293246EDC6A007EF2BB /* SettingsView.swift in Sources */,
 				D8E4CA57249CF76500F5BC8E /* EditSafeButton.swift in Sources */,
 				D8F763DA292259960051D740 /* RulePicker.swift in Sources */,
+				D85067FA292B8DE80017865A /* FileTypesView.swift in Sources */,
 				D8CAE3EE249D3AD70047CA36 /* ErrorText.swift in Sources */,
 				D81C5D93249BE3710083BD6F /* RulesView.swift in Sources */,
 				D8E4CA5D249D061D00F5BC8E /* EditableText.swift in Sources */,
+				D864870D292CB99C007CD688 /* AddFileTypesView.swift in Sources */,
 				D8D81EB9291DD23800870E6E /* VariableRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
