@@ -25,12 +25,26 @@ import FileawayCore
 struct WizardView: View {
 
     @Environment(\.applicationModel) var applicationModel
+    @Environment(\.dismiss) var dismiss
+
+    @StateObject var wizardModel = WizardModel()
 
     let file: FileInfo
+
+    init(file: FileInfo) {
+        self.file = file
+    }
 
     var body: some View {
         NavigationStack {
             RulePicker(applicationModel: applicationModel, url: file.url)
+        }
+        .environmentObject(wizardModel)
+        .onChange(of: wizardModel.isComplete) { isComplete in
+            guard isComplete else {
+                return
+            }
+            dismiss()
         }
     }
 

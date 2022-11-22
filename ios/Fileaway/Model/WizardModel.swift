@@ -22,41 +22,12 @@ import SwiftUI
 
 import FileawayCore
 
-struct RuleFormView: View {
+class WizardModel: ObservableObject {
 
-    @ObservedObject var ruleModel: RuleModel
-    @StateObject var ruleFormModel: RuleFormModel
-    @EnvironmentObject var wizardModel: WizardModel
+    @MainActor @Published var isComplete: Bool = false
 
-    var url: URL
-
-    @Environment(\.applicationModel) var manager
-
-    init(url: URL, ruleModel: RuleModel) {
-        self.url = url
-        self.ruleModel = ruleModel
-        _ruleFormModel = StateObject(wrappedValue: RuleFormModel(ruleModel: ruleModel, url: url))
-    }
-
-    var body: some View {
-        RuleForm(ruleFormModel, url: url)
-            .navigationTitle(ruleFormModel.name)
-            .toolbar {
-
-                FilePreviewHeader(url: url)
-
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Move") {
-                        do {
-                            try ruleFormModel.move()
-                            wizardModel.complete()
-                        } catch {
-                            // TODO: Present this error to the user.
-                            print("Failed to move file with error \(error).")
-                        }
-                    }
-                }
-            }
+    @MainActor func complete() {
+        self.isComplete = true
     }
 
 }

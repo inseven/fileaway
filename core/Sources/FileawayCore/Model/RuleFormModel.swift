@@ -72,7 +72,7 @@ public class RuleFormModel: ObservableObject, Runnable {
         subscriptions.removeAll()
     }
 
-    public func variable(for name: String) -> (any Editable)? {
+    @MainActor public func variable(for name: String) -> (any Editable)? {
         guard let variable = variableFieldModels.first(where: { $0.name == name }) else {
             return nil
         }
