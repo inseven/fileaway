@@ -65,7 +65,7 @@ public struct LocationSection: View {
             }
 #if os(iOS)
             if (editMode?.wrappedValue.isEditing ?? false) || models.isEmpty {
-                Button("Add...") {
+                Button("Add Folder...") {
                     sceneModel.addLocation(type: type)
                 }
             }
