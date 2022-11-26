@@ -28,6 +28,7 @@ import FileawayCore
 struct FileawayApp: App {
 
     @StateObject var applicationModel = ApplicationModel()
+    @FocusedValue(\.directoryViewModel) var directoryViewModel
 
     @Environment(\.scenePhase) private var phase
 
@@ -54,7 +55,9 @@ struct FileawayApp: App {
         .commands {
             ToolbarCommands()
             SidebarCommands()
+            FileCommands(directoryViewModel: directoryViewModel)
         }
+
 
         Wizard(applicationModel: applicationModel)
 

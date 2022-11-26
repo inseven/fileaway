@@ -32,7 +32,6 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
 
     public var id: URL { self.url }
 
-    @Environment(\.openURL) var openURL
     @Environment(\.openWindow) var openWindow
 
     @Published public var files: [FileInfo] = []
@@ -201,7 +200,7 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
 
     @MainActor public func open() {
         for url in selectedUrls {
-            openURL(url)
+            Application.open(url)
         }
     }
 
