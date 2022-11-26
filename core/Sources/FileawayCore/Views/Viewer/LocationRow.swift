@@ -24,7 +24,7 @@ import FilePicker
 
 struct LocationRow: View {
 
-    @Environment(\.applicationModel) private var applicationModel
+    @EnvironmentObject private var applicationModel: ApplicationModel
     @ObservedObject var directoryViewModel: DirectoryViewModel
 
     var body: some View {

@@ -31,7 +31,7 @@ struct AnytimeApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView(applicationModel: applicationModel)
-                .environment(\.applicationModel, applicationModel)
+                .environmentObject(applicationModel)
         }
     }
 

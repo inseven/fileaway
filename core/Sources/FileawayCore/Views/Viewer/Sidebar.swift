@@ -22,7 +22,7 @@ import SwiftUI
 
 public struct Sidebar: View {
 
-    @Environment(\.applicationModel) var applicationModel
+    @EnvironmentObject private var applicationModel: ApplicationModel
     @ObservedObject var sceneModel: SceneModel
 
     public init(sceneModel: SceneModel) {

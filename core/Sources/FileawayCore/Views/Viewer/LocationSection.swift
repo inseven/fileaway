@@ -24,7 +24,7 @@ import FilePicker
 
 public struct LocationSection: View {
 
-    @Environment(\.applicationModel) private var applicationModel
+    @EnvironmentObject private var applicationModel: ApplicationModel
 
 #if os(iOS)
     @Environment(\.editMode) private var editMode

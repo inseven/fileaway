@@ -25,8 +25,8 @@ import FileawayCore
 struct RulePicker: View {
 
     @Environment(\.dismiss) var dismiss
-    @Environment(\.applicationModel) var applicationModel
 
+    @EnvironmentObject private var applicationModel: ApplicationModel
     @StateObject var rulePickerModel: RulePickerModel
 
     private let url: URL
