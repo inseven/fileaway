@@ -49,7 +49,7 @@ struct FileawayApp: App {
         
         WindowGroup(id: "main") {
             ContentView(applicationModel: applicationModel)
-                .environment(\.applicationModel, applicationModel)
+                .environmentObject(applicationModel)
         }
         .commands {
             ToolbarCommands()

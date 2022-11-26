@@ -24,7 +24,7 @@ import FileawayCore
 
 struct GeneralSettingsView: View {
 
-    @Environment(\.applicationModel) var applicationModel: ApplicationModel
+    @EnvironmentObject private var applicationModel: ApplicationModel
 
     var body: some View {
         FileTypesView(settings: applicationModel.settings)

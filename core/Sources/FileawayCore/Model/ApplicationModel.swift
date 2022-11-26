@@ -26,19 +26,6 @@ import SwiftUI
 import AppKit
 #endif
 
-public struct ApplicationModelKey: EnvironmentKey {
-    @MainActor public static var defaultValue: ApplicationModel = ApplicationModel()
-}
-
-extension EnvironmentValues {
-
-    public var applicationModel: ApplicationModel {
-        get { self[ApplicationModelKey.self] }
-        set { self[ApplicationModelKey.self] = newValue }
-    }
-
-}
-
 public class ApplicationModel: ObservableObject {
 
     public let settings = Settings()

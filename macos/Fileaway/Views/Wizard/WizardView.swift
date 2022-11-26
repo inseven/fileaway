@@ -34,7 +34,7 @@ class RulesWizardModel: ObservableObject {
 
 struct WizardView: View {
 
-    @Environment(\.applicationModel) var applicationModel
+    @EnvironmentObject private var applicationModel: ApplicationModel
 
     @StateObject var rulesWizardModel = RulesWizardModel()
 

@@ -36,7 +36,7 @@ struct Wizard: Scene {
         WindowGroup(id: Self.windowID, for: URL.self) { $url in
             if let url = url {
                 WizardView(url: url)
-                    .environment(\.applicationModel, applicationModel)
+                    .environmentObject(applicationModel)
             }
         }
     }

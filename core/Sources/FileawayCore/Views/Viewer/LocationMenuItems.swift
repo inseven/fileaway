@@ -22,7 +22,7 @@ import SwiftUI
 
 public struct LocationMenuItems: View {
 
-    @Environment(\.applicationModel) private var applicationModel
+    @EnvironmentObject private var applicationModel: ApplicationModel
     @EnvironmentObject private var sceneModel: SceneModel
 
     private var url: URL

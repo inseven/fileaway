@@ -24,9 +24,9 @@ import FileawayCore
 
 struct WizardView: View {
 
-    @Environment(\.applicationModel) var applicationModel
     @Environment(\.dismiss) var dismiss
 
+    @EnvironmentObject private var applicationModel: ApplicationModel
     @StateObject var wizardModel = WizardModel()
 
     let file: FileInfo
