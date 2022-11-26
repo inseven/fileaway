@@ -18,10 +18,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Combine
 import Foundation
 
 #if os(macOS)
 import EonilFSEvents
+#else
+import UIKit
 #endif
 
 public class DirectoryMonitor: ObservableObject {
@@ -29,9 +32,12 @@ public class DirectoryMonitor: ObservableObject {
     let locations: [URL]
     let syncQueue = DispatchQueue(label: "DirectoryMonitor.syncQueue")
 
+    var cancellables: Set<AnyCancellable> = []
+
     @MainActor @Published var files: Set<URL>? = nil
 
 #if os(macOS)
+
     lazy var stream: EonilFSEventStream = {
         let stream = try! EonilFSEventStream(
             pathsToWatch: self.locations.map { $0.path },
@@ -63,7 +69,9 @@ public class DirectoryMonitor: ObservableObject {
         stream.setDispatchQueue(syncQueue)
         return stream
     }()
+
 #endif
+
 
     public init(locations: [URL]) {
         self.locations = locations
@@ -71,6 +79,17 @@ public class DirectoryMonitor: ObservableObject {
 
     public func start() {
         dispatchPrecondition(condition: .notOnQueue(syncQueue))
+
+#if os(iOS)
+        NotificationCenter.default
+            .publisher(for: UIApplication.willEnterForegroundNotification)
+            .sink { foreground in
+                print("Refreshing monitor for \(self.locations).")
+                self.refresh()
+            }
+            .store(in: &cancellables)
+#endif
+
         syncQueue.async {
 #if os(macOS)
             try! self.stream.start()
@@ -89,6 +108,7 @@ public class DirectoryMonitor: ObservableObject {
             self.stream.stop()
         }
 #endif
+        cancellables.removeAll()
     }
 
     public func refresh() {
