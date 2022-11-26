@@ -69,7 +69,7 @@ public class Settings: ObservableObject {
         archiveUrls = (try? defaults.securityScopeURLs(for: .archiveUrls)) ?? []
         fileTypes = (try? defaults.codable(Set<UTType>.self, for: .fileTypes)) ?? Self.defaultFileTypes
         recentRuleIds = (try? defaults.codable(OrderedSet<RuleModel.ID>.self, for: .recentRuleIds)) ?? []
-        recentRuleIds.removeSubrange(Settings.maximumRecentRuleCount...)
+        recentRuleIds.truncate(Settings.maximumRecentRuleCount)
     }
 
     public func setInboxUrls(_ urls: [URL]) throws {
