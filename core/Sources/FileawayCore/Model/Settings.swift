@@ -25,6 +25,8 @@ import Collections
 
 public class Settings: ObservableObject {
 
+    static let maximumRecentRuleCount = 3
+
     enum Key: String {
         case inboxUrls = "inbox-urls"
         case archiveUrls = "archive-urls"
@@ -67,6 +69,7 @@ public class Settings: ObservableObject {
         archiveUrls = (try? defaults.securityScopeURLs(for: .archiveUrls)) ?? []
         fileTypes = (try? defaults.codable(Set<UTType>.self, for: .fileTypes)) ?? Self.defaultFileTypes
         recentRuleIds = (try? defaults.codable(OrderedSet<RuleModel.ID>.self, for: .recentRuleIds)) ?? []
+        recentRuleIds.removeSubrange(Settings.maximumRecentRuleCount...)
     }
 
     public func setInboxUrls(_ urls: [URL]) throws {

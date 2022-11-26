@@ -168,6 +168,7 @@ public class ApplicationModel: ObservableObject {
 
     @MainActor public func storeRecentRule(_ ruleModel: RuleModel) {
         settings.recentRuleIds.insert(ruleModel.id, at: 0)
+        settings.recentRuleIds.removeSubrange(Settings.maximumRecentRuleCount...)
     }
 
     @MainActor public func move(_ sourceURL: URL, to destinationURL: URL) throws {
