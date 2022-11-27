@@ -26,9 +26,6 @@ import Interact
 
 public struct DirectoryView: View {
 
-    @Environment(\.openWindow) var openWindow
-    @State var isEditing: Bool = false
-
 #if os(iOS)
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
 #endif
@@ -36,19 +33,10 @@ public struct DirectoryView: View {
     @EnvironmentObject var sceneModel: SceneModel
     @ObservedObject var directoryViewModel: DirectoryViewModel
 
+    @State var isEditing: Bool = false
+
     public init(directoryViewModel: DirectoryViewModel) {
         self.directoryViewModel = directoryViewModel
-    }
-
-    @MainActor func move(_ files: Set<FileInfo>) {
-#if os(macOS)
-        for file in files {
-            // TODO: Use Wizard.windowID
-            openWindow(id: "wizard-window", value: file.url)
-        }
-#else
-        sceneModel.move(files)
-#endif
     }
 
     var selection: Binding<Set<FileInfo>> {
@@ -70,7 +58,7 @@ public struct DirectoryView: View {
                 FileRow(file: file)
                     .swipeActions(edge: .leading) {
                         Button {
-                            move([file])
+                            sceneModel.move([file])
                         } label: {
                             Label("Move", systemImage: "tray.and.arrow.down")
                         }
@@ -78,12 +66,7 @@ public struct DirectoryView: View {
                     }
                     .swipeActions(edge: .trailing) {
                         Button(role: .destructive) {
-                            do {
-                                try directoryViewModel.trash(.file(file))
-                            } catch {
-                                // TODO: Handle this error in the directory model!
-                                print("Failed to delete file with error \(error).")
-                            }
+                            directoryViewModel.trash(.file(file))
                         } label: {
                             Label("Delete", systemImage: "trash")
                         }
@@ -97,7 +80,7 @@ public struct DirectoryView: View {
             if !selection.isEmpty, let file = selection.first {
 
                 Button {
-                    move(selection)
+                    sceneModel.move(selection)
                 } label: {
                     Label("Move", systemImage: "tray.and.arrow.down")
                 }
@@ -121,12 +104,7 @@ public struct DirectoryView: View {
                 .disabled(selection.count != 1)
                 Divider()
                 Button {
-#if os(macOS)
-                    NSPasteboard.general.clearContents()
-                    NSPasteboard.general.setString(file.name, forType: .string)
-#else
-                    UIPasteboard.general.string = file.name
-#endif
+                    Application.setClipboard(file.name)
                 } label: {
                     Label("Copy Name", systemImage: "list.clipboard")
                 }
@@ -140,20 +118,24 @@ public struct DirectoryView: View {
             directoryViewModel.showPreview(selecting: selection.first)
 #endif
         }
+#if os(iOS)
+        .toolbar {
+            if isEditing {
+                CompactSelectionToolbar(directoryViewModel: directoryViewModel)
+            }
+        }
+#endif
         .refreshable {
             self.directoryViewModel.refresh()
         }
         .editable($isEditing)
-        // TODO: Enter to open
-        // TODO: Drag-and-drop
-        // TODO: .onCutCommand(perform: manager.cut)
         .placeholderOverlay(directoryViewModel.files.isEmpty, text: "No Files")
         .progressOverlay(directoryViewModel.isLoading)
         .searchable(text: $directoryViewModel.filter)
-        .navigationTitle(directoryViewModel.name)
         .quickLookPreview($directoryViewModel.previewUrl, in: directoryViewModel.previewUrls)
         .focusedValue(\.directoryViewModel, directoryViewModel)
         .id(directoryViewModel.url)
+        .navigationTitle(directoryViewModel.name)
     }
 
 }

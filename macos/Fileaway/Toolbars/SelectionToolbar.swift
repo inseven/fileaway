@@ -26,23 +26,25 @@ import FileawayCore
 
 struct SelectionToolbar: CustomizableToolbarContent {
 
-    @Environment(\.openWindow) var openWindow
-
     @EnvironmentObject private var applicationModel: ApplicationModel
+    @EnvironmentObject var sceneModel: SceneModel
+
     @ObservedObject var directoryViewModel: DirectoryViewModel
+
+    init(directoryViewModel: DirectoryViewModel?) {
+        _directoryViewModel = ObservedObject(initialValue: directoryViewModel ?? DirectoryViewModel(directoryModel: nil))
+    }
 
     var body: some CustomizableToolbarContent {
         ToolbarItem(id: "wizard") {
             Button {
-                for file in directoryViewModel.selection {
-                    openWindow(id: Wizard.windowID, value: file.url)
-                }
+                sceneModel.move(directoryViewModel.selection)
             } label: {
-                Label("Apply Rules", systemImage: "tray.and.arrow.down")
+                Label("Move", systemImage: "tray.and.arrow.down")
             }
             .help("Move the selected items using the Rules Wizard")
             .keyboardShortcut(KeyboardShortcut(.return, modifiers: .command))
-            .disabled(!directoryViewModel.canShowRulesWizard)
+            .disabled(!directoryViewModel.canMove)
         }
         ToolbarItem(id: "preview") {
             Button {
@@ -56,7 +58,7 @@ struct SelectionToolbar: CustomizableToolbarContent {
         }
         ToolbarItem(id: "delete") {
             Button {
-                try? directoryViewModel.trash(.selection)
+                directoryViewModel.trash(.selection)
             } label: {
                 Label("Delete", systemImage: "trash")
             }

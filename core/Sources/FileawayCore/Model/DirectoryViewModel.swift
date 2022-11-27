@@ -32,8 +32,6 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
 
     public var id: URL { self.url }
 
-    @Environment(\.openWindow) var openWindow
-
     @Published public var files: [FileInfo] = []
     @Published public var filter: String = ""
     @Published public var selection: Set<FileInfo> = []
@@ -184,14 +182,23 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
         }
     }
 
-    @MainActor public func trash(_ scope: Scope) throws {
-        let urls = files(for: scope).map { $0.url }
-        try urls.forEach { try FileManager.default.trashItem(at: $0, resultingItemURL: nil) }
-        directoryModel?.refresh()
+    @MainActor public func trash(_ scope: Scope) {
+        do {
+            let urls = files(for: scope).map { $0.url }
+            try urls.forEach { try FileManager.default.trashItem(at: $0, resultingItemURL: nil) }
+            directoryModel?.refresh()
+        } catch {
+            // TODO: Handle this error in the directory model!
+            print("Failed to delete file with error \(error).")
+        }
     }
 
-    @MainActor public var canShowRulesWizard: Bool {
+    @MainActor public var canMove: Bool {
+#if os(macOS)
         return !selection.isEmpty
+#else
+        return selection.count == 1
+#endif
     }
 
     @MainActor public var canOpen: Bool {

@@ -26,7 +26,7 @@ import Interact
 
 public class DirectoryModel: ObservableObject, Identifiable, Hashable {
 
-    public enum DirectoryType: String {
+    public enum DirectoryType: String, Equatable {
         case inbox = "inbox"
         case archive = "archive"
     }
