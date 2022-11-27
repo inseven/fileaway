@@ -64,6 +64,7 @@ struct FileawayApp: App {
 
         SwiftUI.Settings {
             SettingsView(applicationModel: applicationModel)
+                .environmentObject(applicationModel)
         }
 
         About(repository: Legal.repository, copyright: Legal.copyright) {
