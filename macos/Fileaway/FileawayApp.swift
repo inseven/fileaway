@@ -56,6 +56,7 @@ struct FileawayApp: App {
             ToolbarCommands()
             SidebarCommands()
             FileCommands(directoryViewModel: directoryViewModel)
+            FolderCommands(applicationModel: applicationModel)
         }
 
 

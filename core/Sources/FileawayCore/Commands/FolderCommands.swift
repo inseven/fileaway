@@ -18,41 +18,35 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Combine
 import SwiftUI
 
-import Interact
+public struct FolderCommands: Commands {
 
-import FileawayCore
+    @ObservedObject private var applicationModel: ApplicationModel
+    @FocusedObject private var sceneModel: SceneModel?
 
-struct ContentView: View {
-
-    @ObservedObject var applicationModel: ApplicationModel
-    @StateObject var sceneModel: SceneModel
-    @FocusedValue(\.directoryViewModel) var directoryViewModel
-
-    init(applicationModel: ApplicationModel) {
+    public init(applicationModel: ApplicationModel) {
         self.applicationModel = applicationModel
-        _sceneModel = StateObject(wrappedValue: SceneModel(applicationModel: applicationModel))
     }
 
-    var body: some View {
-        NavigationSplitView {
-            Sidebar(sceneModel: sceneModel)
-        } detail: {
-            if let directoryViewModel = sceneModel.directoryViewModel {
-                DirectoryView(directoryViewModel: directoryViewModel)
-            } else {
-                PlaceholderView("No Directory Selected")
-                    .searchable()
+    @MainActor public var body: some Commands {
+        CommandMenu("Folder") {
+            ForEach(Array(applicationModel.directories(type: .inbox).enumerated()), id: \.element.id) { index, folder in
+                Button(folder.name) {
+                    sceneModel?.section = folder.url
+                }
+                .keyboardShortcut(index + 1, modifiers: .command)
+                .disabled(sceneModel == nil)
+            }
+            Divider()
+            ForEach(Array(applicationModel.directories(type: .archive).enumerated()), id: \.element.id) { index, folder in
+                Button(folder.name) {
+                    sceneModel?.section = folder.url
+                }
+                .keyboardShortcut(applicationModel.directories(type: .inbox).count + index + 1, modifiers: .command)
+                .disabled(sceneModel == nil)
             }
         }
-        .toolbar(id: "main") {
-            // TODO: This nil handling should be done inside the scene model?
-            SelectionToolbar(directoryViewModel: directoryViewModel ?? DirectoryViewModel(directoryModel: nil))
-        }
-        .runs(sceneModel)
-        .environmentObject(sceneModel)
-        .focusedSceneObject(sceneModel)
     }
+
 }

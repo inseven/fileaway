@@ -33,6 +33,9 @@ struct AnytimeApp: App {
             ContentView(applicationModel: applicationModel)
                 .environmentObject(applicationModel)
         }
+        .commands {
+            FolderCommands(applicationModel: applicationModel)
+        }
     }
 
 }

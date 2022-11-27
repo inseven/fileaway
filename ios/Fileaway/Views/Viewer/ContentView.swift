@@ -79,6 +79,7 @@ struct ContentView: View {
         }
         .runs(sceneModel)
         .environmentObject(sceneModel)
+        .focusedSceneObject(sceneModel)
     }
 
 }
