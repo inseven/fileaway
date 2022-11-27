@@ -18,23 +18,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftUI
+import CoreGraphics
 
-public struct RuleForm: View {
+extension CGSize {
 
-    @ObservedObject private var ruleFormModel: RuleFormModel
-    private let url: URL
-
-    public init(_ ruleFormModel: RuleFormModel, url: URL) {
-        self.ruleFormModel = ruleFormModel
-        self.url = url
-    }
-
-    public var body: some View {
-        Form {
-            RuleFormSection(ruleFormModel, url: url)
-        }
-        .formStyle(.grouped)
-    }
+    static let navigationBarIcon = CGSize(width: 32.0, height: 32.0)
 
 }

@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import Interact
+
 import FileawayCore
 
 struct RulePicker: View {
@@ -27,7 +29,9 @@ struct RulePicker: View {
     @Environment(\.dismiss) var dismiss
 
     @EnvironmentObject private var applicationModel: ApplicationModel
+
     @StateObject var rulePickerModel: RulePickerModel
+    @State private var isHeaderVisible: Bool = true
 
     private let url: URL
 
@@ -38,12 +42,13 @@ struct RulePicker: View {
 
     var body: some View {
         List {
+            DocumentPreviewHeader($isHeaderVisible, url: url)
+
             if !rulePickerModel.recentRules.isEmpty {
                 Section("Recent") {
                     ForEach(rulePickerModel.recentRules) { ruleModel in
                         RulePickerRow(url: url, ruleModel: ruleModel)
                     }
-
                 }
             }
             Section("All Rules") {
@@ -57,13 +62,14 @@ struct RulePicker: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
 
-            FilePreviewHeader(url: url)
-
             ToolbarItem(placement: .navigationBarLeading) {
                 Button("Cancel") {
                     dismiss()
                 }
             }
+        }
+        .conditionalTitle(!isHeaderVisible) {
+            DocumentPreviewButton(url: url, size: .navigationBarIcon)
         }
         .runs(rulePickerModel)
     }

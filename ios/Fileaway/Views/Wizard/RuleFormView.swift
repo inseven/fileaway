@@ -24,9 +24,12 @@ import FileawayCore
 
 struct RuleFormView: View {
 
-    @ObservedObject var ruleModel: RuleModel
-    @StateObject var ruleFormModel: RuleFormModel
     @EnvironmentObject var wizardModel: WizardModel
+
+    @ObservedObject var ruleModel: RuleModel
+
+    @StateObject var ruleFormModel: RuleFormModel
+    @State private var isHeaderVisible: Bool = true
 
     var url: URL
 
@@ -39,24 +42,27 @@ struct RuleFormView: View {
     }
 
     var body: some View {
-        RuleForm(ruleFormModel, url: url)
-            .navigationTitle(ruleFormModel.name)
-            .toolbar {
-
-                FilePreviewHeader(url: url)
-
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Move") {
-                        do {
-                            try ruleFormModel.move()
-                            wizardModel.complete()
-                        } catch {
-                            // TODO: Present this error to the user.
-                            print("Failed to move file with error \(error).")
-                        }
+        Form {
+            DocumentPreviewHeader($isHeaderVisible, url: url)
+            RuleFormSection(ruleFormModel, url: url)
+        }
+        .navigationTitle(ruleFormModel.name)
+        .conditionalTitle(!isHeaderVisible) {
+            DocumentPreviewButton(url: url, size: .navigationBarIcon)
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Move") {
+                    do {
+                        try ruleFormModel.move()
+                        wizardModel.complete()
+                    } catch {
+                        // TODO: Present this error to the user.
+                        print("Failed to move file with error \(error).")
                     }
                 }
             }
+        }
     }
 
 }

@@ -20,21 +20,29 @@
 
 import SwiftUI
 
-public struct RuleForm: View {
+import Interact
 
-    @ObservedObject private var ruleFormModel: RuleFormModel
+import FileawayCore
+
+struct DocumentPreviewHeader: View {
+
+    @Binding private var isVisible: Bool
     private let url: URL
 
-    public init(_ ruleFormModel: RuleFormModel, url: URL) {
-        self.ruleFormModel = ruleFormModel
+    init(_ isVisible: Binding<Bool>, url: URL) {
+        _isVisible = isVisible
         self.url = url
     }
 
-    public var body: some View {
-        Form {
-            RuleFormSection(ruleFormModel, url: url)
+    var body: some View {
+        ConditionalHeader($isVisible) {
+            DocumentPreviewButton(url: url, size: .init(width: 240, height: 240))
+                .horizontalSpace(.both)
+            Text(url.displayName)
+                .font(.body)
+                .fontWeight(.bold)
+                .multilineTextAlignment(.center)
         }
-        .formStyle(.grouped)
     }
 
 }
