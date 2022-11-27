@@ -20,26 +20,29 @@
 
 import SwiftUI
 
+import Interact
+
 import FileawayCore
 
-struct FilePreviewHeader: ToolbarContent {
+public struct DocumentPreviewButton: View {
 
     @State private var previewURL: URL?
 
     private let url: URL
+    private let size: CGSize
 
-    init(url: URL) {
+    init(url: URL, size: CGSize) {
         self.url = url
+        self.size = size
     }
 
-    var body: some ToolbarContent {
-        ToolbarItem(placement: .principal) {
-            Button("Preview") {
-                previewURL = url
-            }
-            .buttonStyle(.borderedProminent)
-            .quickLookPreview($previewURL)
+    public var body: some View {
+        Button() {
+            previewURL = url
+        } label: {
+            IconView(url: url, size: size)
         }
+        .quickLookPreview($previewURL)
     }
 
 }

@@ -20,21 +20,45 @@
 
 import SwiftUI
 
-public struct RuleForm: View {
+import Interact
+
+extension String: Identifiable {
+
+    public var id: Self { self }
+
+}
+
+public struct RuleFormSection: View {
 
     @ObservedObject private var ruleFormModel: RuleFormModel
     private let url: URL
+    @StateObject private var dateExtractor: DateExtractor
 
     public init(_ ruleFormModel: RuleFormModel, url: URL) {
         self.ruleFormModel = ruleFormModel
         self.url = url
+        _dateExtractor = StateObject(wrappedValue: DateExtractor(url: url))
     }
 
     public var body: some View {
-        Form {
-            RuleFormSection(ruleFormModel, url: url)
+        Section {
+            ForEach(ruleFormModel.variableFieldModels) { variable in
+                if let variable = variable as? DateFieldModel {
+                    DateField(variable: variable,
+                              creationDate: FileInfo.creationDate(url: url)?.date,
+                              options: dateExtractor.dates)
+                } else if let variable = variable as? StringFieldModel {
+                    StringField(variable: variable)
+                } else {
+                    Text("Unknown Variable Type")
+                }
+            }
+        } footer: {
+            Text(ruleFormModel.attributedRelativeDestinationPath(font: .standardizedFooter))
+                .horizontalSpace(.trailing)
         }
-        .formStyle(.grouped)
+        .runs(ruleFormModel)
+        .runs(dateExtractor)
     }
 
 }
