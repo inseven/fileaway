@@ -56,7 +56,7 @@ struct LocationsEditor: View {
                             Text(directory.name)
                         }
                         .contextMenu {
-                            LocationMenuItems(url: directory.url)
+                            LocationMenuCommands(url: directory.url)
                         }
                     }
                 }

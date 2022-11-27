@@ -30,4 +30,12 @@ public struct Application {
 #endif
     }
 
+    static func reveal(_ url: URL) {
+#if os(macOS)
+        NSWorkspace.shared.activateFileViewerSelecting([url])
+#else
+        assertionFailure("Unsupported")
+#endif
+    }
+
 }
