@@ -99,7 +99,7 @@ public class ApplicationModel: ObservableObject {
         update()
     }
 
-    public func directories(type: DirectoryModel.DirectoryType) -> [DirectoryModel] {
+    @MainActor public func directories(type: DirectoryModel.DirectoryType) -> [DirectoryModel] {
         self.directories.filter { directoryObserver in
             directoryObserver.type == type
         }.sorted { lhs, rhs in
@@ -142,7 +142,7 @@ public class ApplicationModel: ObservableObject {
         updateRuleSetSubscription()
     }
 
-    private func save() throws {
+    @MainActor private func save() throws {
         try settings.setInboxUrls(self.directories(type: .inbox).map { $0.url })
         try settings.setArchiveUrls(self.directories(type: .archive).map { $0.url })
     }

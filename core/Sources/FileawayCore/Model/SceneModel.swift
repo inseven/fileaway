@@ -25,7 +25,7 @@ import Interact
 
 public class SceneModel: ObservableObject, Runnable {
 
-    public enum SheetType: Identifiable {
+    public enum ActionType: Identifiable, Equatable {
 
         public var id: String {
             switch self {
@@ -33,8 +33,11 @@ public class SceneModel: ObservableObject, Runnable {
                 return "settings"
             case .addLocation(let type):
                 return "add-location-\(type.rawValue)"
-            case .move(let file):
-                return "open-\(file.url.absoluteURL)"
+            case .move(let files):
+                let identifier = files
+                    .map { $0.url.absoluteString }
+                    .joined(separator: "-")
+                return "open-\(identifier)"
             case .editRules(let url):
                 return "edit-rules-\(url.absoluteURL)"
             }
@@ -42,7 +45,7 @@ public class SceneModel: ObservableObject, Runnable {
 
         case settings
         case addLocation(DirectoryModel.DirectoryType)
-        case move(FileInfo)
+        case move(Set<FileInfo>)
         case editRules(URL)
     }
 
@@ -51,7 +54,7 @@ public class SceneModel: ObservableObject, Runnable {
     @Published public var inboxes: [DirectoryViewModel] = []
     @Published public var archives: [DirectoryViewModel] = []
     @Published public var directoryViewModel: DirectoryViewModel? = nil
-    @Published public var sheet: SheetType?
+    @Published public var action: ActionType?
 
     private var applicationModel: ApplicationModel
     private var cancellables: Set<AnyCancellable> = []
@@ -110,15 +113,15 @@ public class SceneModel: ObservableObject, Runnable {
     }
 
     @MainActor public func showSettings() {
-        sheet = .settings
+        action = .settings
     }
 
     @MainActor public func editRules(for locationURL: URL) {
-        sheet = .editRules(locationURL)
+        action = .editRules(locationURL)
     }
 
     @MainActor public func addLocation(type: DirectoryModel.DirectoryType) {
-        sheet = .addLocation(type)
+        action = .addLocation(type)
     }
 
     @MainActor public func open(_ files: Set<FileInfo>) {
@@ -132,14 +135,7 @@ public class SceneModel: ObservableObject, Runnable {
     }
 
     @MainActor public func move(_ files: Set<FileInfo>) {
-#if os(macOS)
-        assertionFailure("Unsupported")
-#else
-        guard let file = files.first else {
-            return
-        }
-        sheet = .move(file)
-#endif
+        action = .move(files)
     }
 
 #if os(macOS)

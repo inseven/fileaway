@@ -20,31 +20,43 @@
 
 import SwiftUI
 
-public struct Application {
+#if os(iOS)
 
-    static func open(_ url: URL) {
-#if os(macOS)
-            NSWorkspace.shared.open(url)
-#else
-            UIApplication.shared.open(url)
-#endif
-    }
+struct CompactSelectionToolbar: ToolbarContent {
 
-    static func reveal(_ url: URL) {
-#if os(macOS)
-        NSWorkspace.shared.activateFileViewerSelecting([url])
-#else
-        assertionFailure("Unsupported")
-#endif
-    }
+    @EnvironmentObject var sceneModel: SceneModel
 
-    static func setClipboard(_ value: String) {
-#if os(macOS)
-        NSPasteboard.general.clearContents()
-        NSPasteboard.general.setString(value, forType: .string)
-#else
-        UIPasteboard.general.string = value
-#endif
+    @ObservedObject var directoryViewModel: DirectoryViewModel
+
+    var body: some ToolbarContent {
+        ToolbarItem(placement: .bottomBar) {
+
+            HStack {
+
+                Button("Move") {
+                    sceneModel.move(directoryViewModel.selection)
+                }
+                .disabled(!directoryViewModel.canMove)
+
+                Spacer()
+
+                Button("Preview") {
+                    directoryViewModel.showPreview()
+                }
+                .disabled(!directoryViewModel.canPreview)
+
+                Spacer()
+
+                Button("Delete") {
+                    directoryViewModel.trash(.selection)
+                }
+                .disabled(!directoryViewModel.canTrash)
+            }
+            
+        }
+
     }
 
 }
+
+#endif

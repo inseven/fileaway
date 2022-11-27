@@ -27,9 +27,11 @@ import FileawayCore
 
 struct ContentView: View {
 
+    @Environment(\.openWindow) private var openWindow
+    @FocusedValue(\.directoryViewModel) var directoryViewModel
+
     @ObservedObject var applicationModel: ApplicationModel
     @StateObject var sceneModel: SceneModel
-    @FocusedValue(\.directoryViewModel) var directoryViewModel
 
     init(applicationModel: ApplicationModel) {
         self.applicationModel = applicationModel
@@ -48,11 +50,26 @@ struct ContentView: View {
             }
         }
         .toolbar(id: "main") {
-            // TODO: This nil handling should be done inside the scene model?
-            SelectionToolbar(directoryViewModel: directoryViewModel ?? DirectoryViewModel(directoryModel: nil))
+            SelectionToolbar(directoryViewModel: directoryViewModel)
         }
         .runs(sceneModel)
         .environmentObject(sceneModel)
         .focusedSceneObject(sceneModel)
+        .onChange(of: sceneModel.action) { action in
+            // macOS treats actions as a stream of operation requests.
+            // This allows us to open windows instead of presenting sheets as we do on iOS.
+            guard let action = action else {
+                return
+            }
+            switch action {
+            case .move(let files):
+                for file in files {
+                    openWindow(id: Wizard.windowID, value: file.url)
+                }
+            default:
+                assertionFailure("Unsupported scene action \(String(describing: action))")
+            }
+            sceneModel.action = nil
+        }
     }
 }

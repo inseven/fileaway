@@ -59,8 +59,8 @@ struct ContentView: View {
                     .searchable()
             }
         }
-        .sheet(item: $sceneModel.sheet) { sheet in
-            switch sheet {
+        .sheet(item: $sceneModel.action) { action in
+            switch action {
             case .settings:
                 SettingsView(applicationModel: applicationModel, settings: applicationModel.settings)
             case .addLocation(let type):
@@ -71,8 +71,8 @@ struct ContentView: View {
                     // TODO: Handle the error here.
                     try! applicationModel.addLocation(type: type, url: url)
                 }
-            case .move(let file):
-                WizardView(file: file)
+            case .move(let files):
+                WizardView(file: files.first!)
             case .editRules(let url):
                 RulesView(rulesModel: RulesModel(url: url))
             }
