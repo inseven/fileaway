@@ -18,41 +18,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Combine
 import SwiftUI
 
-import Interact
+struct KeyboardShortcut: ViewModifier {
 
-import FileawayCore
+    private var value: Int
+    private var modifiers: EventModifiers
 
-struct ContentView: View {
-
-    @ObservedObject var applicationModel: ApplicationModel
-    @StateObject var sceneModel: SceneModel
-    @FocusedValue(\.directoryViewModel) var directoryViewModel
-
-    init(applicationModel: ApplicationModel) {
-        self.applicationModel = applicationModel
-        _sceneModel = StateObject(wrappedValue: SceneModel(applicationModel: applicationModel))
+    init(value: Int, modifiers: EventModifiers) {
+        self.value = value
+        self.modifiers = modifiers
     }
 
-    var body: some View {
-        NavigationSplitView {
-            Sidebar(sceneModel: sceneModel)
-        } detail: {
-            if let directoryViewModel = sceneModel.directoryViewModel {
-                DirectoryView(directoryViewModel: directoryViewModel)
-            } else {
-                PlaceholderView("No Directory Selected")
-                    .searchable()
-            }
+    func body(content: Content) -> some View {
+        if value < 10 {
+            content.keyboardShortcut(KeyEquivalent(String(value).first!), modifiers: modifiers)
+        } else {
+            content
         }
-        .toolbar(id: "main") {
-            // TODO: This nil handling should be done inside the scene model?
-            SelectionToolbar(directoryViewModel: directoryViewModel ?? DirectoryViewModel(directoryModel: nil))
-        }
-        .runs(sceneModel)
-        .environmentObject(sceneModel)
-        .focusedSceneObject(sceneModel)
     }
+
+}
+
+extension View {
+
+    func keyboardShortcut(_ value: Int, modifiers: EventModifiers) -> some View {
+        modifier(KeyboardShortcut(value: value, modifiers: modifiers))
+    }
+
 }
