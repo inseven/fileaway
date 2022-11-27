@@ -27,8 +27,12 @@ import Interact
 public struct DirectoryView: View {
 
     @Environment(\.openWindow) var openWindow
-    @EnvironmentObject var sceneModel: SceneModel
 
+#if os(iOS)
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+#endif
+
+    @EnvironmentObject var sceneModel: SceneModel
     @ObservedObject var directoryViewModel: DirectoryViewModel
 
     public init(directoryViewModel: DirectoryViewModel) {
@@ -46,8 +50,21 @@ public struct DirectoryView: View {
 #endif
     }
 
+    var selection: Binding<Set<FileInfo>> {
+#if os(macOS)
+        return $directoryViewModel.selection
+#else
+        // Selection is disabled on iOS in compact size classes.
+        if horizontalSizeClass == .compact {
+            return Binding.constant(Set<FileInfo>())
+        } else {
+            return $directoryViewModel.selection
+        }
+#endif
+    }
+
     public var body: some View {
-        List(selection: $directoryViewModel.selection) {
+        List(selection: selection) {
             ForEach(directoryViewModel.files, id: \.self) { file in
                 FileRow(file: file)
                     .swipeActions(edge: .leading) {
