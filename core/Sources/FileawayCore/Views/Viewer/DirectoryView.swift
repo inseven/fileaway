@@ -27,6 +27,7 @@ import Interact
 public struct DirectoryView: View {
 
     @Environment(\.openWindow) var openWindow
+    @State var isEditing: Bool = false
 
 #if os(iOS)
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
@@ -55,7 +56,7 @@ public struct DirectoryView: View {
         return $directoryViewModel.selection
 #else
         // Selection is disabled on iOS in compact size classes.
-        if horizontalSizeClass == .compact {
+        if horizontalSizeClass == .compact && !isEditing {
             return Binding.constant(Set<FileInfo>())
         } else {
             return $directoryViewModel.selection
@@ -142,6 +143,7 @@ public struct DirectoryView: View {
         .refreshable {
             self.directoryViewModel.refresh()
         }
+        .editable($isEditing)
         // TODO: Enter to open
         // TODO: Drag-and-drop
         // TODO: .onCutCommand(perform: manager.cut)
