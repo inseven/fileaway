@@ -20,7 +20,7 @@
 
 import SwiftUI
 
-public struct LocationMenuItems: View {
+public struct LocationMenuCommands: View {
 
     @EnvironmentObject private var applicationModel: ApplicationModel
     @EnvironmentObject private var sceneModel: SceneModel
@@ -32,12 +32,10 @@ public struct LocationMenuItems: View {
     }
 
     public var body: some View {
-#if os(macOS)
         Button("Reveal in Finder") {
-            NSWorkspace.shared.activateFileViewerSelecting([url])
+            Application.reveal(url)
         }
         Divider()
-#endif
         Button(role: .destructive) {
             do {
                 try applicationModel.removeLocation(url: url)

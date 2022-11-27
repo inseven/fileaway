@@ -32,9 +32,11 @@ struct LocationRow: View {
             Label(directoryViewModel.name, systemImage: directoryViewModel.systemImage)
                 .badge(directoryViewModel.type == .inbox ? directoryViewModel.files.count : 0)
         }
+#if os(macOS)
         .contextMenu {
-            LocationMenuItems(url: directoryViewModel.url)
+            LocationMenuCommands(url: directoryViewModel.url)
         }
+#endif
         .swipeActions(edge: .trailing) {
             Button(role: .destructive) {
                 // TODO: Handle the error here!
