@@ -36,14 +36,12 @@ class RulesModelTests: XCTestCase {
         XCTAssertTrue(fileManager.fileExists(atPath: directoryURL.path, isDirectory: &isDirectory))
         XCTAssert(isDirectory.boolValue)
 
-        // Add a teardown block to delete any file at `fileURL`.
         addTeardownBlock {
             do {
                 let fileManager = FileManager.default
                 try fileManager.removeItem(at: directoryURL)
                 XCTAssertFalse(fileManager.fileExists(atPath: directoryURL.path))
             } catch {
-                // Treat any errors during file deletion as a test failure.
                 XCTFail("Failed to delete temporary directory with error \(error).")
             }
         }
