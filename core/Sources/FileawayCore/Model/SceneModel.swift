@@ -140,9 +140,7 @@ public class SceneModel: ObservableObject, Runnable {
 
 #if os(macOS)
     @MainActor public func reveal(_ files: Set<FileInfo>) {
-        for file in files {
-            NSWorkspace.shared.activateFileViewerSelecting([file.url])
-        }
+        NSWorkspace.shared.activateFileViewerSelecting(files.map { $0.url })
     }
 #endif
 
