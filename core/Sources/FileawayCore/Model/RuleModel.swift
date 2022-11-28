@@ -83,7 +83,7 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
         self.init(id: ruleModel.id,
                   rootUrl: ruleModel.archiveURL,
                   name: String(ruleModel.name),
-                  variables: ruleModel.variables,
+                  variables: ruleModel.variables.map { VariableModel($0) },
                   destination: ruleModel.destination.map { ComponentModel($0, variable: nil) })
     }
 
@@ -187,7 +187,7 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
         return names.count == variables.count && !name.isEmpty
     }
 
-    public func createVariable() {
+    public func createVariable() -> VariableModel {
         let names = Set(variables.map { $0.name })
         var index = 1
         var name = ""
@@ -195,7 +195,9 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
             name = "Variable \(index)"
             index = index + 1
         } while names.contains(name)
-        self.variables.append(VariableModel(name: name, type: .string))
+        let variable = VariableModel(name: name, type: .string)
+        self.variables.append(variable)
+        return variable
     }
 
     public static func == (lhs: RuleModel, rhs: RuleModel) -> Bool {
