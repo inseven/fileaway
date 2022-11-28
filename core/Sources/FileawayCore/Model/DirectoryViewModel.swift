@@ -211,4 +211,8 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
         }
     }
 
+    @MainActor public var canReveal: Bool {
+        return !selection.isEmpty
+    }
+
 }

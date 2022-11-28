@@ -23,6 +23,7 @@ import SwiftUI
 public struct FileCommands: Commands {
 
     @ObservedObject var directoryViewModel: DirectoryViewModel
+    @FocusedObject private var sceneModel: SceneModel?
 
     public init(directoryViewModel: DirectoryViewModel?) {
         _directoryViewModel = ObservedObject(initialValue: directoryViewModel ?? DirectoryViewModel())
@@ -30,11 +31,28 @@ public struct FileCommands: Commands {
 
     @MainActor public var body: some Commands {
         CommandGroup(after: .newItem) {
+
+            Divider()
+
+            Button("Move") {
+                sceneModel?.move(directoryViewModel.selection)
+            }
+            .keyboardShortcut(.return, modifiers: .command)
+            .disabled(!directoryViewModel.canMove)
+
+            Divider()
+
             Button("Open") {
                 directoryViewModel.open()
             }
             .keyboardShortcut("o")
             .disabled(!directoryViewModel.canOpen)
+
+            Button("Reveal in Finder") {
+                sceneModel?.reveal(directoryViewModel.selection)
+            }
+            .disabled(!directoryViewModel.canReveal)
+
         }
     }
 
