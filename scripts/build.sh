@@ -139,9 +139,9 @@ build-tools install-provisioning-profile "macos/Fileaway_Mac_App_Store_Profile.p
 # Build and test FileawayCore.
 pushd "core"
 sudo xcode-select --switch "$MACOS_XCODE_PATH"
-xcodebuild -scheme FileawayCore -destination "platform=macOS" clean build
+xcodebuild -scheme FileawayCore -destination "platform=macOS" clean build test
 sudo xcode-select --switch "$IOS_XCODE_PATH"
-xcodebuild -scheme FileawayCore -destination "$IPHONE_DESTINATION" clean build
+xcodebuild -scheme FileawayCore -destination "$IPHONE_DESTINATION" clean build test
 popd
 
 # Build, test and archive the iOS project.
