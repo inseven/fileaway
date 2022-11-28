@@ -49,7 +49,11 @@ public class SceneModel: ObservableObject, Runnable {
         case editRules(URL)
     }
 
-    @Published public var section: URL?
+    @MainActor @Published public var section: URL? {
+        didSet {
+            applicationModel.settings.selectedFolderURL = section
+        }
+    }
 
     @Published public var inboxes: [DirectoryViewModel] = []
     @Published public var archives: [DirectoryViewModel] = []
@@ -59,9 +63,9 @@ public class SceneModel: ObservableObject, Runnable {
     private var applicationModel: ApplicationModel
     private var cancellables: Set<AnyCancellable> = []
 
-    public init(applicationModel: ApplicationModel) {
+    @MainActor public init(applicationModel: ApplicationModel) {
         self.applicationModel = applicationModel
-        self.section = applicationModel.directories.filter({ $0.type == .inbox }).first?.url
+        self.section = applicationModel.settings.selectedFolderURL ?? applicationModel.directories.filter({ $0.type == .inbox }).first?.url
     }
 
     @MainActor public func start() {

@@ -43,10 +43,10 @@ public class ApplicationModel: ObservableObject {
 
     @MainActor public func start() {
         dispatchPrecondition(condition: .onQueue(.main))
-        for url in settings.inboxUrls {
+        for url in settings.inboxURLs {
             addDirectoryObserver(type: .inbox, url: url)
         }
-        for url in settings.archiveUrls {
+        for url in settings.archiveURLs {
             addDirectoryObserver(type: .archive, url: url)
         }
     }
