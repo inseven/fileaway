@@ -26,37 +26,14 @@ import XCTest
 //       https://github.com/inseven/fileaway/issues/500
 class RulesModelTests: XCTestCase {
 
-    func temporaryDirectoryURL() throws -> URL {
-
-        let fileManager = FileManager.default
-        let directoryURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(UUID().uuidString)
-        try fileManager.createDirectory(at: directoryURL, withIntermediateDirectories: true)
-
-        var isDirectory: ObjCBool = false
-        XCTAssertTrue(fileManager.fileExists(atPath: directoryURL.path, isDirectory: &isDirectory))
-        XCTAssert(isDirectory.boolValue)
-
-        addTeardownBlock {
-            do {
-                let fileManager = FileManager.default
-                try fileManager.removeItem(at: directoryURL)
-                XCTAssertFalse(fileManager.fileExists(atPath: directoryURL.path))
-            } catch {
-                XCTFail("Failed to delete temporary directory with error \(error).")
-            }
-        }
-
-        return directoryURL
-    }
-
     func emptyModel() throws -> RulesModel {
-        let archiveURL = try temporaryDirectoryURL()
+        let archiveURL = try createTemporaryDirectory()
         let rules = RulesModel(archiveURL: archiveURL)
         return rules
     }
 
     func testNewRule() throws {
-        let archiveURL = try temporaryDirectoryURL()
+        let archiveURL = try createTemporaryDirectory()
 
         let rules = RulesModel(archiveURL: archiveURL)
         XCTAssert(rules.ruleModels.isEmpty)

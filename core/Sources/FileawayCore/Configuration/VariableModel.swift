@@ -47,7 +47,7 @@ public class VariableModel: ObservableObject, Identifiable, Codable, Hashable {
         return lhs.id == rhs.id
     }
 
-    public var id = UUID()
+    public let id: UUID
 
     @Published public var name: String
     @Published public var type: VariableType
@@ -56,9 +56,16 @@ public class VariableModel: ObservableObject, Identifiable, Codable, Hashable {
         return HashRainbow.colorForString(name, colors: HashRainbow.NeonColors)
     }
 
-    public init(name: String, type: VariableType) {
+    public init(id: UUID = UUID(), name: String, type: VariableType) {
+        self.id = id
         self.name = name
         self.type = type
+    }
+
+    public convenience init(_ variableModel: VariableModel) {
+        self.init(id: variableModel.id,
+                  name: variableModel.name,
+                  type: variableModel.type)
     }
 
     required public init(from decoder: Decoder) throws {
@@ -66,6 +73,8 @@ public class VariableModel: ObservableObject, Identifiable, Codable, Hashable {
 
         let name = try container.decode(String.self, forKey: .name)
         let type = try container.decode(RawType.self, forKey: .type)
+
+        id = UUID()
 
         switch type {
         case .string:

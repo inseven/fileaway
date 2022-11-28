@@ -63,9 +63,9 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
         }
     }
 
-    public init(id: UUID, rootUrl: URL, name: String, variables: [VariableModel], destination: [ComponentModel]) {
+    public init(id: UUID, archiveURL: URL, name: String, variables: [VariableModel], destination: [ComponentModel]) {
         self.id = id
-        self.archiveURL = rootUrl
+        self.archiveURL = archiveURL
         self.name = name
         self.variables = variables
         self.destination = destination
@@ -81,15 +81,15 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
 
     public convenience init(_ ruleModel: RuleModel) {
         self.init(id: ruleModel.id,
-                  rootUrl: ruleModel.archiveURL,
+                  archiveURL: ruleModel.archiveURL,
                   name: String(ruleModel.name),
-                  variables: ruleModel.variables,
+                  variables: ruleModel.variables.map { VariableModel($0) },
                   destination: ruleModel.destination.map { ComponentModel($0, variable: nil) })
     }
 
     public convenience init(id: UUID, ruleModel: RuleModel) {
         self.init(id: id,
-                  rootUrl: ruleModel.archiveURL,
+                  archiveURL: ruleModel.archiveURL,
                   name: String(ruleModel.name),
                   variables: ruleModel.variables,
                   destination: ruleModel.destination.map { ComponentModel($0, variable: nil) })
@@ -97,7 +97,7 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
 
     public convenience init(rootUrl: URL, rule: Rule) {
         self.init(id: rule.id,
-                  rootUrl: rootUrl,
+                  archiveURL: rootUrl,
                   name: rule.name,
                   variables: rule.variables,
                   destination: rule.destination.map { component in
@@ -187,7 +187,7 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
         return names.count == variables.count && !name.isEmpty
     }
 
-    public func createVariable() {
+    public func createVariable() -> VariableModel {
         let names = Set(variables.map { $0.name })
         var index = 1
         var name = ""
@@ -195,7 +195,9 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
             name = "Variable \(index)"
             index = index + 1
         } while names.contains(name)
-        self.variables.append(VariableModel(name: name, type: .string))
+        let variable = VariableModel(name: name, type: .string)
+        self.variables.append(variable)
+        return variable
     }
 
     public static func == (lhs: RuleModel, rhs: RuleModel) -> Bool {

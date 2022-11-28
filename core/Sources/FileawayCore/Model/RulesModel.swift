@@ -94,7 +94,7 @@ public class RulesModel: ObservableObject {
     public func new() throws -> RuleModel {
         let name = uniqueRuleName(preferredName: "Rule")
         let rule = RuleModel(id: UUID(),
-                             rootUrl: archiveURL,
+                             archiveURL: archiveURL,
                              name: name,
                              variables: [VariableModel(name: "Date", type: .date(hasDay: true))],
                              destination: [

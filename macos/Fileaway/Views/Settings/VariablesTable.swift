@@ -52,7 +52,7 @@ struct VariablesTable: View {
                 VStack {
                     VStack {
                         Button {
-                            ruleModel.createVariable()
+                            _ = ruleModel.createVariable()
                         } label: {
                             Text("Add")
                                 .frame(width: 80)
