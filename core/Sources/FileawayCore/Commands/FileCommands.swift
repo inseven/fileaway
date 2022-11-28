@@ -48,10 +48,12 @@ public struct FileCommands: Commands {
             .keyboardShortcut("o")
             .disabled(!directoryViewModel.canOpen)
 
+#if os(macOS)
             Button("Reveal in Finder") {
                 sceneModel?.reveal(directoryViewModel.selection)
             }
             .disabled(!directoryViewModel.canReveal)
+#endif
 
         }
     }
