@@ -28,6 +28,12 @@ struct AnytimeApp: App {
 
     @StateObject var applicationModel = ApplicationModel()
 
+    init() {
+        // We only need to request notification permission on iOS; macOS lets us badge the app icon without this.
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.badge]) { success, error in }
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView(applicationModel: applicationModel)
