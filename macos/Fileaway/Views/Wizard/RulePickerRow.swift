@@ -39,7 +39,7 @@ struct RulePickerRow: View {
         HStack {
             VStack(alignment: .leading) {
                 Text(ruleModel.name)
-                Text(ruleModel.rootUrl.displayName)
+                Text(ruleModel.archiveURL.displayName)
                     .foregroundColor(.secondary)
             }
             Spacer()

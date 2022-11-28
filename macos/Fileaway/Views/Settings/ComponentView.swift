@@ -39,16 +39,16 @@ struct SetFolderButton: View {
             openPanel.canChooseDirectories = true
             openPanel.canCreateDirectories = true
             var isDirectory = ObjCBool(true)
-            let currentDirectory = ruleModel.rootUrl.appendingPathComponent(componentModel.value)
+            let currentDirectory = ruleModel.archiveURL.appendingPathComponent(componentModel.value)
             if FileManager.default.fileExists(atPath: currentDirectory.path,
                                               isDirectory: &isDirectory) && isDirectory.boolValue {
                 openPanel.directoryURL = currentDirectory
             } else {
-                openPanel.directoryURL = ruleModel.rootUrl
+                openPanel.directoryURL = ruleModel.archiveURL
             }
             guard openPanel.runModal() == NSApplication.ModalResponse.OK,
                   let url = openPanel.url,
-                  let relativePath = url.relativePath(from: ruleModel.rootUrl) else {
+                  let relativePath = url.relativePath(from: ruleModel.archiveURL) else {
                 return
             }
             componentModel.value = relativePath + "/"

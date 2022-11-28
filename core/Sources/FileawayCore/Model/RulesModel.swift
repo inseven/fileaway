@@ -23,19 +23,19 @@ import SwiftUI
 
 public class RulesModel: ObservableObject {
 
-    private let rootUrl: URL
-    private let url: URL
+    private let archiveURL: URL
+    private let fileURL: URL
 
     @Published public var ruleModels: [RuleModel]
 
     var rulesSubscription: Cancellable?
 
     public init(archiveURL: URL) {
-        self.rootUrl = archiveURL
-        self.url = archiveURL.rulesUrl
-        if FileManager.default.fileExists(atPath: self.url.path) {
+        self.archiveURL = archiveURL
+        self.fileURL = archiveURL.rulesUrl
+        if FileManager.default.fileExists(atPath: self.fileURL.path) {
             do {
-                self.ruleModels = try RuleList(url: self.url).models(for: self.rootUrl)
+                self.ruleModels = try RuleList(url: self.fileURL).models(for: self.archiveURL)
             } catch {
                 // TODO: Propagate this error!
                 print("Failed to load rules with error \(error).")
@@ -94,7 +94,7 @@ public class RulesModel: ObservableObject {
     public func new() throws -> RuleModel {
         let name = uniqueRuleName(preferredName: "Rule")
         let rule = RuleModel(id: UUID(),
-                             rootUrl: rootUrl,
+                             rootUrl: archiveURL,
                              name: name,
                              variables: [VariableModel(name: "Date", type: .date(hasDay: true))],
                              destination: [
@@ -144,35 +144,7 @@ public class RulesModel: ObservableObject {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
         let data = try encoder.encode(configurationList)
-        try data.write(to: url)
+        try data.write(to: fileURL)
     }
     
-}
-
-extension Rule {
-
-    public init(_ ruleModel: RuleModel) {
-        self.init(id: ruleModel.id,
-                  name: ruleModel.name,
-                  variables: ruleModel.variables,
-                  destination: ruleModel.destination.map { Component($0) })
-    }
-
-}
-
-extension RuleList {
-
-    init(ruleModels: [RuleModel]) {
-        rules = ruleModels
-            .map { Rule($0) }
-    }
-
-    func models(for rootUrl: URL) -> [RuleModel] {
-        return rules
-            .map { rule in
-                return RuleModel(rootUrl: rootUrl, rule: rule)
-            }
-            .sorted { $0.name < $1.name }
-    }
-
 }

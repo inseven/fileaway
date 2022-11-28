@@ -48,7 +48,7 @@ public class RuleFormModel: ObservableObject, Runnable {
                 return result.appending(variable.textRepresentation)
             }
         }
-        return self.ruleModel.rootUrl.appendingPathComponent(destination).appendingPathExtension(url.pathExtension)
+        return self.ruleModel.archiveURL.appendingPathComponent(destination).appendingPathExtension(url.pathExtension)
     }
 
     public init(applicationModel: ApplicationModel, ruleModel: RuleModel, url: URL) {
@@ -67,9 +67,9 @@ public class RuleFormModel: ObservableObject, Runnable {
         bold.font = font.bold()
 
         var result = AttributedString()
-        result.append(AttributedString(ruleModel.rootUrl.displayName, attributes: bold))
+        result.append(AttributedString(ruleModel.archiveURL.displayName, attributes: bold))
         result.append(AttributedString("/", attributes: regular))
-        result.append(AttributedString(destinationURL.relativePath(from: ruleModel.rootUrl)!, attributes: regular))
+        result.append(AttributedString(destinationURL.relativePath(from: ruleModel.archiveURL)!, attributes: regular))
         return result
     }
 
