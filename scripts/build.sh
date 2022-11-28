@@ -165,11 +165,8 @@ xcodebuild \
     -exportPath "$BUILD_DIRECTORY" \
     -exportOptionsPlist "ios/ExportOptions.plist"
 
-# Build, test and archive the macOS project.
+# Build and archive the macOS project.
 sudo xcode-select --switch "$MACOS_XCODE_PATH"
-# xcode_project \
-#     -scheme "Fileaway macOS" \
-#     clean build build-for-testing test
 xcode_project \
     -scheme "Fileaway macOS" \
     -config Release \
