@@ -28,7 +28,7 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
     }
 
     public let id: UUID
-    public let rootUrl: URL
+    public let archiveURL: URL
 
     @Published public var name: String
     @Published public var variables: [VariableModel]
@@ -65,7 +65,7 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
 
     public init(id: UUID, rootUrl: URL, name: String, variables: [VariableModel], destination: [ComponentModel]) {
         self.id = id
-        self.rootUrl = rootUrl
+        self.archiveURL = rootUrl
         self.name = name
         self.variables = variables
         self.destination = destination
@@ -81,7 +81,7 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
 
     public convenience init(_ ruleModel: RuleModel) {
         self.init(id: ruleModel.id,
-                  rootUrl: ruleModel.rootUrl,
+                  rootUrl: ruleModel.archiveURL,
                   name: String(ruleModel.name),
                   variables: ruleModel.variables,
                   destination: ruleModel.destination.map { ComponentModel($0, variable: nil) })
@@ -89,7 +89,7 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
 
     public convenience init(id: UUID, ruleModel: RuleModel) {
         self.init(id: id,
-                  rootUrl: ruleModel.rootUrl,
+                  rootUrl: ruleModel.archiveURL,
                   name: String(ruleModel.name),
                   variables: ruleModel.variables,
                   destination: ruleModel.destination.map { ComponentModel($0, variable: nil) })

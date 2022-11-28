@@ -41,7 +41,7 @@ struct RulePickerRow: View {
             VStack {
                 Text(ruleModel.name)
                     .horizontalSpace(.trailing)
-                Text(ruleModel.rootUrl.displayName)
+                Text(ruleModel.archiveURL.displayName)
                     .foregroundColor(.secondary)
                     .horizontalSpace(.trailing)
             }

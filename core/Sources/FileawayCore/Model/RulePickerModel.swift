@@ -49,7 +49,7 @@ public class RulePickerModel: ObservableObject, Runnable {
                     return (rules, filter)
                 }
                 let filteredRules = rules.filter { item in
-                    [item.rootUrl.displayName, item.name].joined(separator: " ").localizedSearchMatches(string: filter)
+                    [item.archiveURL.displayName, item.name].joined(separator: " ").localizedSearchMatches(string: filter)
                 }
                 return (filteredRules, filter)
             }

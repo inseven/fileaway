@@ -62,7 +62,7 @@ class RulesModelTests: XCTestCase {
         XCTAssert(rules.ruleModels.isEmpty)
 
         let rule = try rules.new()
-        XCTAssertEqual(rule.rootUrl, archiveURL)
+        XCTAssertEqual(rule.archiveURL, archiveURL)
         XCTAssertEqual(rule.name, "Rule")
         XCTAssertEqual(rules.ruleModels.count, 1)
     }
@@ -81,7 +81,7 @@ class RulesModelTests: XCTestCase {
         }
 
         XCTAssertNotEqual(rule2.id, rule1.id)
-        XCTAssertEqual(rule2.rootUrl, rule1.rootUrl)
+        XCTAssertEqual(rule2.archiveURL, rule1.archiveURL)
         XCTAssertEqual(rule2.name, "Copy of Rule")
         XCTAssertEqual(rule2.variables, rule1.variables)
         XCTAssertEqual(rule2.destination, rule1.destination)
