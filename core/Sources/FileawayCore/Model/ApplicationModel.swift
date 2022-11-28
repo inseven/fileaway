@@ -49,13 +49,6 @@ public class ApplicationModel: ObservableObject {
         for url in settings.archiveUrls {
             addDirectoryObserver(type: .archive, url: url)
         }
-
-#if os(iOS)
-        // We only need to request notification permission on iOS; macOS lets us badge the app icon without this.
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.badge]) { success, error in }
-#endif
-
     }
 
     private func updateCountSubscription() {
