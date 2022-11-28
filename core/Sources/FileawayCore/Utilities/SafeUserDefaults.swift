@@ -22,10 +22,26 @@ import Foundation
 
 class SafeUserDefaults<Key: RawRepresentable<String>> {
 
-    let defaults: UserDefaults
+    private let defaults: UserDefaults
 
     init(defaults: UserDefaults) {
         self.defaults = defaults
+    }
+
+    public func removeObject(for key: Key) {
+        defaults.removeObject(forKey: key.rawValue)
+    }
+
+    public func set(_ value: Any?, for key: Key) {
+        defaults.set(value, forKey: key.rawValue)
+    }
+    
+    public func url(for key: Key) -> URL? {
+        return defaults.url(forKey: key.rawValue)
+    }
+
+    public func string(for key: Key) -> String? {
+        return defaults.string(forKey: key.rawValue)
     }
 
     public func setCodable(_ codable: Codable, for key: Key) throws {

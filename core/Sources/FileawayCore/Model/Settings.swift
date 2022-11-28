@@ -32,6 +32,7 @@ public class Settings: ObservableObject {
         case archiveUrls = "archive-urls"
         case fileTypes = "file-types"
         case recentRuleIds = "recent-rule-ids"
+        case selectedFolderURL = "selected-folder-url"
     }
 
     private static let defaultFileTypes: Set<UTType> = [
@@ -47,8 +48,8 @@ public class Settings: ObservableObject {
     ]
 
     // TODO: These are never updated during the run of the app.
-    @Published public var inboxUrls: [URL] = []
-    @Published public var archiveUrls: [URL] = []
+    @Published public var inboxURLs: [URL] = []
+    @Published public var archiveURLs: [URL] = []
 
     @Published public var fileTypes: Set<UTType> = [] {
         didSet {
@@ -62,14 +63,29 @@ public class Settings: ObservableObject {
         }
     }
 
+    @Published public var selectedFolderURL: URL? {
+        didSet {
+            guard let selectedFolderURL = selectedFolderURL else {
+                defaults.removeObject(for: .selectedFolderURL)
+                return
+            }
+            defaults.set(selectedFolderURL.absoluteString, for: .selectedFolderURL)
+        }
+    }
+
     private let defaults: SafeUserDefaults<Key> = SafeUserDefaults(defaults: UserDefaults.standard)
 
     public init() {
-        inboxUrls = (try? defaults.securityScopeURLs(for: .inboxUrls)) ?? []
-        archiveUrls = (try? defaults.securityScopeURLs(for: .archiveUrls)) ?? []
+        inboxURLs = (try? defaults.securityScopeURLs(for: .inboxUrls)) ?? []
+        archiveURLs = (try? defaults.securityScopeURLs(for: .archiveUrls)) ?? []
         fileTypes = (try? defaults.codable(Set<UTType>.self, for: .fileTypes)) ?? Self.defaultFileTypes
         recentRuleIds = (try? defaults.codable(OrderedSet<RuleModel.ID>.self, for: .recentRuleIds)) ?? []
         recentRuleIds.truncate(Settings.maximumRecentRuleCount)
+
+        if let selectedFolderString = defaults.string(for: .selectedFolderURL) {
+            selectedFolderURL = URL(string: selectedFolderString)
+        }
+
     }
 
     public func setInboxUrls(_ urls: [URL]) throws {
