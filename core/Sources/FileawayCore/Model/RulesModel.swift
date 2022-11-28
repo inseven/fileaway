@@ -148,31 +148,3 @@ public class RulesModel: ObservableObject {
     }
     
 }
-
-extension Rule {
-
-    public init(_ ruleModel: RuleModel) {
-        self.init(id: ruleModel.id,
-                  name: ruleModel.name,
-                  variables: ruleModel.variables,
-                  destination: ruleModel.destination.map { Component($0) })
-    }
-
-}
-
-extension RuleList {
-
-    init(ruleModels: [RuleModel]) {
-        rules = ruleModels
-            .map { Rule($0) }
-    }
-
-    func models(for rootUrl: URL) -> [RuleModel] {
-        return rules
-            .map { rule in
-                return RuleModel(rootUrl: rootUrl, rule: rule)
-            }
-            .sorted { $0.name < $1.name }
-    }
-
-}
