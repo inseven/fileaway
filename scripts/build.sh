@@ -96,14 +96,6 @@ cd "$ROOT_DIRECTORY"
 # List the available schemes.
 xcode_project -list
 
-# Smoke test builds.
-
-# FileawayCore
-sudo xcode-select --switch "$MACOS_XCODE_PATH"
-pushd "core"
-swift test
-popd
-
 # Clean up the build directory.
 if [ -d "$BUILD_DIRECTORY" ] ; then
     rm -r "$BUILD_DIRECTORY"
@@ -144,15 +136,20 @@ echo "$MACOS_DEVELOPER_INSTALLER_CERTIFICATE_PASSWORD" | build-tools import-base
 build-tools install-provisioning-profile "ios/Fileaway_App_Store_Profile.mobileprovision"
 build-tools install-provisioning-profile "macos/Fileaway_Mac_App_Store_Profile.provisionprofile"
 
-# Build and test the iOS project.
+# Build and test FileawayCore.
+pushd "core"
+sudo xcode-select --switch "$MACOS_XCODE_PATH"
+xcodebuild -scheme FileawayCore -destination "platform=macOS" clean build test
+sudo xcode-select --switch "$IOS_XCODE_PATH"
+xcodebuild -scheme FileawayCore -destination "$IPHONE_DESTINATION" clean build test
+popd
+
+# Build, test and archive the iOS project.
 sudo xcode-select --switch "$IOS_XCODE_PATH"
 xcode_project \
     -scheme "Fileaway iOS" \
     -destination "$IPHONE_DESTINATION" \
     clean build build-for-testing test
-
-# Build and archive the iOS project.
-sudo xcode-select --switch "$IOS_XCODE_PATH"
 xcode_project \
     -scheme "Fileaway iOS" \
     -config Release \
