@@ -24,7 +24,7 @@ import XCTest
 
 class RuleFormModelTests: XCTestCase {
 
-    func testLongDateDeswatination() async throws {
+    func testLongDateDestination() async throws {
 
         let inboxURL = try createTemporaryDirectory()
         let archiveURL = try createTemporaryDirectory()
@@ -58,7 +58,7 @@ class RuleFormModelTests: XCTestCase {
             return
         }
 
-        dateFieldModel.date = Date(timeIntervalSince1970: 38880000)
+        dateFieldModel.date = Calendar.current.date(1971, 3, 27)!
 
         let destinationURL = await MainActor.run {
             return ruleFormModel.destinationURL
@@ -101,7 +101,7 @@ class RuleFormModelTests: XCTestCase {
             return
         }
 
-        dateFieldModel.date = Date(timeIntervalSince1970: 38880000)
+        dateFieldModel.date = Calendar.current.date(1971, 3, 27)!
 
         let destinationURL = await MainActor.run {
             return ruleFormModel.destinationURL
