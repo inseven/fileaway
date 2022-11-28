@@ -25,14 +25,17 @@ public class DateFieldModel: VariableFieldModel, Editable {
 
     @Published public var date: Date
 
+    let dateFormat: String
+
     public var textRepresentation: String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = dateFormat
         return formatter.string(from: date)
     }
 
-    public init(variable: VariableModel, initialValue: Date) {
+    public init(variable: VariableModel, initialValue: Date, dateFormat: String) {
         _date = Published(initialValue: initialValue)
+        self.dateFormat = dateFormat
         super.init(variable: variable)
     }
 

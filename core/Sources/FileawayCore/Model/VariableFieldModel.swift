@@ -38,8 +38,12 @@ extension VariableModel {
         switch self.type {
         case .string:
             return StringFieldModel(variable: self, initialValue: "")
-        case .date:
-            return DateFieldModel(variable: self, initialValue: Date())
+        case .date(let hasDay):
+            if hasDay {
+                return DateFieldModel(variable: self, initialValue: Date(), dateFormat: "yyyy-MM-dd")
+            } else {
+                return DateFieldModel(variable: self, initialValue: Date(), dateFormat: "yyyy-MM")
+            }
         }
     }
 
