@@ -30,9 +30,9 @@ public class RulesModel: ObservableObject {
 
     var rulesSubscription: Cancellable?
 
-    public init(url: URL) {
-        self.rootUrl = url
-        self.url = url.rulesUrl
+    public init(archiveURL: URL) {
+        self.rootUrl = archiveURL
+        self.url = archiveURL.rulesUrl
         if FileManager.default.fileExists(atPath: self.url.path) {
             do {
                 self.ruleModels = try RuleList(url: self.url).models(for: self.rootUrl)
@@ -120,12 +120,12 @@ public class RulesModel: ObservableObject {
         return self.ruleModels.map { $0.validate() }.reduce(false, { $0 || $1 })
     }
 
-    private func duplicate(_ rule: RuleModel, preferredName: String) throws -> RuleModel {
+    private func duplicate(_ ruleModel: RuleModel, preferredName: String) throws -> RuleModel {
         let name = uniqueRuleName(preferredName: preferredName)
-        let newRule = RuleModel(rule)
-        newRule.name = name
-        try add(newRule)
-        return newRule
+        let newRuleModel = RuleModel(id: UUID(), ruleModel: ruleModel)
+        newRuleModel.name = name
+        try add(newRuleModel)
+        return newRuleModel
     }
 
     public func duplicate(ids: Set<RuleModel.ID>) throws -> [RuleModel] {

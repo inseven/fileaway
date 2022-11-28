@@ -62,6 +62,16 @@
                ReferencedContainer = "container:macos/Fileaway-macOS.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FileawayCoreTests"
+               BuildableName = "FileawayCoreTests"
+               BlueprintName = "FileawayCoreTests"
+               ReferencedContainer = "container:core">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

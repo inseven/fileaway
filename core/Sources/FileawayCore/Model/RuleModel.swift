@@ -87,6 +87,14 @@ public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible,
                   destination: ruleModel.destination.map { ComponentModel($0, variable: nil) })
     }
 
+    public convenience init(id: UUID, ruleModel: RuleModel) {
+        self.init(id: id,
+                  rootUrl: ruleModel.rootUrl,
+                  name: String(ruleModel.name),
+                  variables: ruleModel.variables,
+                  destination: ruleModel.destination.map { ComponentModel($0, variable: nil) })
+    }
+
     public convenience init(rootUrl: URL, rule: Rule) {
         self.init(id: rule.id,
                   rootUrl: rootUrl,

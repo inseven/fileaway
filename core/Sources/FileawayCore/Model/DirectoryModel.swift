@@ -56,7 +56,7 @@ public class DirectoryModel: ObservableObject, Identifiable, Hashable {
         self.settings = settings
         self.type = type
         self.url = url
-        self.ruleSet = RulesModel(url: url)
+        self.ruleSet = RulesModel(archiveURL: url)
         self.directoryMonitor = DirectoryMonitor(locations: [url])
     }
 
