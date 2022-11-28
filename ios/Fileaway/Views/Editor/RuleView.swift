@@ -65,7 +65,7 @@ struct RuleView: View {
                     if self.editMode == .active {
                         Button {
                             withAnimation {
-                                self.editingRuleModel.createVariable()
+                                _ = self.editingRuleModel.createVariable()
                             }
                         } label: {
                             Text("New Variable...")
