@@ -26,12 +26,12 @@ class RuleModelTests: XCTestCase {
 
     func testDeepCopy() throws {
 
-        let rootURL = try createTemporaryDirectory()
+        let archiveURL = try createTemporaryDirectory()
         let rule1 = RuleModel(id: UUID(),
-                             rootUrl: rootURL,
-                             name: "Rule",
-                             variables: [],
-                             destination: [])
+                              archiveURL: archiveURL,
+                              name: "Rule",
+                              variables: [],
+                              destination: [])
         _ = rule1.createVariable()
         XCTAssertEqual(rule1.variables.count, 1)
         XCTAssertEqual(rule1.variables[0].name, "Variable 1")
