@@ -61,7 +61,10 @@ class RuleModelTests: XCTestCase {
         XCTAssertEqual(rule1.variables[0].type, .string)
         XCTAssertNotEqual(rule1.variables[0].type, rule2.variables[0].type)
 
-        // Components.
+        // Destination.
+
+        // TODO: Test RuleModel.destination deep copy behaviour #510
+        //       https://github.com/inseven/fileaway/issues/510
         
     }
 
