@@ -42,13 +42,13 @@ public struct RuleFormSection: View {
 
     public var body: some View {
         Section {
-            ForEach(ruleFormModel.variableFieldModels) { variable in
-                if let variable = variable as? DateFieldModel {
-                    DateField(variable: variable,
+            ForEach(ruleFormModel.variableFieldModels) { variableFieldModel in
+                if let dateFieldModel = variableFieldModel as? DateFieldModel {
+                    DateField(dateFieldModel: dateFieldModel,
                               creationDate: FileInfo.creationDate(url: url)?.date,
                               options: dateExtractor.dates)
-                } else if let variable = variable as? StringFieldModel {
-                    StringField(variable: variable)
+                } else if let stringFieldModel = variableFieldModel as? StringFieldModel {
+                    StringField(stringFieldModel: stringFieldModel)
                 } else {
                     Text("Unknown Variable Type")
                 }

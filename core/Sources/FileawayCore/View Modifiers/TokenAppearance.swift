@@ -34,11 +34,11 @@ public struct TokenAppearance: ViewModifier {
 
     public func body(content: Content) -> some View {
         content
-            .foregroundColor(.white)
+            .foregroundStyle(.tint)
             .padding([.leading, .trailing], LayoutMetrics.horizontalPadding)
             .padding([.top, .bottom], LayoutMetrics.verticalPadding)
             .background(RoundedRectangle(cornerRadius: LayoutMetrics.cornerRadius)
-                .fill(.tint))
+                .fill(.tint.opacity(0.1)))
     }
 
 }

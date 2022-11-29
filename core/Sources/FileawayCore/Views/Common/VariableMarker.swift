@@ -20,25 +20,18 @@
 
 import SwiftUI
 
-import FileawayCore
+public struct VariableMarker: View {
 
-struct ComponentItem: View {
+    private let variable: VariableModel
 
-    @Environment(\.editMode) var editMode
-    @ObservedObject var ruleModel: RuleModel
-    @State var component: ComponentModel
+    public init(variable: VariableModel) {
+        self.variable = variable
+    }
 
-    var body: some View {
-        HStack {
-            if component.type == .text {
-                EditText("Component", text: $component.value).environment(\.editMode, editMode)
-            } else {
-                Text(ruleModel.name(for: component))
-                    .tokenAppearance()
-                    .tint(component.variable?.color ?? .black)
-            }
-        }
-        .environment(\.editMode, editMode)
+    public var body: some View {
+        Image(systemName: "circle.fill")
+            .imageScale(.large)
+            .foregroundColor(variable.color.opacity(0.8))
     }
 
 }

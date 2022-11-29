@@ -24,6 +24,24 @@ import HashRainbow
 
 public class VariableModel: ObservableObject, Identifiable, Codable, Hashable {
 
+    // Colors generated from a base color of #FC5BA0.
+    // https://mycolor.space/
+    // https://coolors.co
+    // https://www.uicolor.io
+
+    static let colors: [Color] = [
+        Color(red: 0.99, green: 0.36, blue: 0.63),
+        Color(red: 0.76, green: 0.40, blue: 0.81),
+        Color(red: 0.36, green: 0.47, blue: 0.89),
+        Color(red: 0.00, green: 0.50, blue: 0.83),
+        Color(red: 0.00, green: 0.49, blue: 0.66),
+        Color(red: 0.00, green: 0.45, blue: 0.43),
+        Color(red: 0.97, green: 0.82, blue: 0.54),
+        Color(red: 0.89, green: 0.94, blue: 0.61),
+        Color(red: 0.53, green: 0.71, blue: 0.65),
+        Color(red: 0.36, green: 0.35, blue: 0.25),
+    ]
+
     struct DateParams: Codable {
         let hasDay: Bool
 
@@ -53,7 +71,7 @@ public class VariableModel: ObservableObject, Identifiable, Codable, Hashable {
     @Published public var type: VariableType
 
     public var color: Color {
-        return HashRainbow.colorForString(name, colors: HashRainbow.NeonColors)
+        return HashRainbow.colorForString(name, colors: Self.colors)
     }
 
     public init(id: UUID = UUID(), name: String, type: VariableType) {

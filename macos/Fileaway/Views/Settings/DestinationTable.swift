@@ -43,7 +43,7 @@ struct DestinationTable: View {
                         } else {
                             Text(ruleModel.name(for: componentModel))
                                 .tokenAppearance()
-                                .tint(componentModel.variable!.color)
+                                .accentColor(componentModel.variable!.color)
                         }
                     }
                 } rows: {
@@ -55,7 +55,6 @@ struct DestinationTable: View {
                         self.ruleModel.filename.move(ids: ids, toOffset: index)
                     }
                 }
-//                .frame(minWidth: 500, minHeight: 200)
                 VStack {
                     Button {
                         guard let componentModel = selectedComponentModel else {
