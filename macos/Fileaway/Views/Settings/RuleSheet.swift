@@ -41,7 +41,7 @@ struct RuleSheet: View {
             .padding()
         }
         .background(Color.windowBackgroundColor)
-        .frame(minWidth: 600, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
+        .frame(width: 800, height: 700)
     }
 
 }
