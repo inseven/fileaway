@@ -132,7 +132,7 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
             .compactMap { (files, previewUrl) -> Set<FileInfo>? in
 #if os(macOS)
                 guard previewUrl != nil else {
-                    return
+                    return nil
                 }
 #endif
                 guard let file = self.files.first(where: { $0.url == previewUrl })
