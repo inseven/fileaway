@@ -22,15 +22,27 @@ import SwiftUI
 
 public struct StringField: View {
 
-    @ObservedObject var variable: StringFieldModel
+    @ObservedObject var stringFieldModel: StringFieldModel
     @State var string: String = ""
 
-    public init(variable: StringFieldModel) {
-        self.variable = variable
+    public init(stringFieldModel: StringFieldModel) {
+        self.stringFieldModel = stringFieldModel
     }
 
     public var body: some View {
-        TextField(variable.name, text: $variable.string)
+#if os(macOS)
+        TextField(text: $stringFieldModel.string) {
+            HStack {
+                VariableMarker(variable: stringFieldModel.variable)
+                Text(stringFieldModel.name)
+            }
+        }
+#else
+        HStack {
+            VariableMarker(variable: stringFieldModel.variable)
+            TextField(stringFieldModel.name, text: $stringFieldModel.string)
+        }
+#endif
     }
 
 }

@@ -27,7 +27,7 @@ public struct DateField: View {
         case custom = 0
     }
 
-    @ObservedObject var variable: DateFieldModel
+    @ObservedObject var dateFieldModel: DateFieldModel
     @State var selection: Double = PickerDate.today.rawValue
 
     let creationDate: Date?
@@ -39,15 +39,15 @@ public struct DateField: View {
         return dateFormatter
     }()
 
-    public init(variable: DateFieldModel, creationDate: Date?, options: [Date]) {
-        self.variable = variable
+    public init(dateFieldModel: DateFieldModel, creationDate: Date?, options: [Date]) {
+        self.dateFieldModel = dateFieldModel
         self.creationDate = creationDate
         self.options = options
     }
 
     public var body: some View {
         VStack {
-            Picker(variable.name, selection: $selection) {
+            Picker(selection: $selection) {
                 Text("Today")
                     .tag(PickerDate.today.rawValue)
                 if let creationDate = creationDate {
@@ -65,22 +65,27 @@ public struct DateField: View {
                             .tag(date.timeIntervalSince1970 as Double)
                     }
                 }
+            } label: {
+                HStack {
+                    VariableMarker(variable: dateFieldModel.variable)
+                    Text(dateFieldModel.name)
+                }
             }
             if selection == PickerDate.custom.rawValue {
-                DatePicker("", selection: $variable.date, displayedComponents: [.date])
+                DatePicker("", selection: $dateFieldModel.date, displayedComponents: [.date])
             }
         }
         .onChange(of: selection) { selection in
             guard let tag = PickerDate(rawValue: selection) else {
                 let date = Date(timeIntervalSince1970: selection)
-                $variable.date.wrappedValue = date
+                $dateFieldModel.date.wrappedValue = date
                 return
             }
             switch tag {
             case .custom:
                 break
             case .today:
-                $variable.date.wrappedValue = Date()
+                $dateFieldModel.date.wrappedValue = Date()
             }
         }
     }

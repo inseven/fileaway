@@ -32,9 +32,7 @@ struct VariablesTable: View {
             HStack {
                 Table(ruleModel.variables, selection: $selection) {
                     TableColumn("") { variable in
-                        Image(systemName: "circle.fill")
-                            .imageScale(.large)
-                            .foregroundColor(variable.color)
+                        VariableMarker(variable: variable)
                     }
                     .width(20)
                     TableColumn("Name") { variableModel in

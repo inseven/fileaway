@@ -34,9 +34,7 @@ struct VariableRow : View {
 
     var body: some View {
         HStack {
-            Image(systemName: "circle.fill")
-                .imageScale(.large)
-                .foregroundColor(variable.color)
+            VariableMarker(variable: variable)
             Text(variable.name)
             Spacer()
             Text(String(describing: variable.type))
