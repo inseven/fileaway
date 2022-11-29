@@ -122,13 +122,20 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
             .store(in: &cancellables)
 
         // Update the selection to match the preview URL.
+        // Unfortunately the `quickLookPreview` current item binding doesn't seem to be updated on iOS when paging
+        // through the items meaning that our selection can't be correctly updated. Given this, on iOS we allow the
+        // nil item binding (indicating that the quick look preview has been dismissed) to clear the selection.
         directoryModel
             .$files
             .combineLatest($previewUrl)
             .receive(on: syncQueue)
             .compactMap { (files, previewUrl) -> Set<FileInfo>? in
-                guard previewUrl != nil,
-                      let file = self.files.first(where: { $0.url == previewUrl })
+#if os(macOS)
+                guard previewUrl != nil else {
+                    return
+                }
+#endif
+                guard let file = self.files.first(where: { $0.url == previewUrl })
                 else {
                     return nil
                 }
