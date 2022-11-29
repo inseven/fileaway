@@ -77,7 +77,7 @@ struct RuleView: View {
                     ErrorText(text: editingRuleModel.validate() ? nil : "Variable names must be unique.")
                 }
 
-                Section("Destination") {
+                Section("Folder") {
                     ComponentItem(ruleModel: self.editingRuleModel, component: self.editingRuleModel.folder)
                 }
 
@@ -92,7 +92,9 @@ struct RuleView: View {
                 } header: {
                     Text("Filename")
                 } footer: {
-                    DestinationFooter(ruleModel: editingRuleModel)
+                    if editMode == .active {
+                        VariablePicker(ruleModel: editingRuleModel)
+                    }
                 }
 
             }

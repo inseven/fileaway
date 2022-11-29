@@ -35,9 +35,7 @@ struct DestinationTable: View {
 
     var body: some View {
         VStack {
-
             HStack {
-
                 Table(selection: $selection) {
                     TableColumn("Component") { componentModel in
                         if componentModel.type == .text {
@@ -57,8 +55,7 @@ struct DestinationTable: View {
                         self.ruleModel.filename.move(ids: ids, toOffset: index)
                     }
                 }
-                .frame(minWidth: 500, minHeight: 200)
-                
+//                .frame(minWidth: 500, minHeight: 200)
                 VStack {
                     Button {
                         guard let componentModel = selectedComponentModel else {
@@ -76,8 +73,8 @@ struct DestinationTable: View {
                 
             }
 
-            DestinationPreview(ruleModel: ruleModel)
             VariablePicker(ruleModel: ruleModel)
+                .padding(.top)
 
         }
     }

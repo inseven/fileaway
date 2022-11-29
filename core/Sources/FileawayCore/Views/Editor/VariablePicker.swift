@@ -63,9 +63,6 @@ public struct VariablePicker: View {
                 .buttonStyle(.filled)
                 .tint(variable.color)
             }
-
-            Spacer()
-            
         }
 
     }

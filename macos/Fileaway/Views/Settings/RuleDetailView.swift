@@ -29,20 +29,18 @@ struct RuleDetailView: View {
     var body: some View {
         VStack(alignment: .leading) {
             TextField("Title", text: $ruleModel.name)
-            Text("Variables")
-                .font(.headline)
-            VariablesTable(ruleModel: ruleModel)
-            Text("Destination")
-                .font(.headline)
-            HStack {
-                TextField("", text: $ruleModel.folder.value)
-                SetFolderButton(ruleModel: ruleModel, componentModel: ruleModel.folder)
+            GroupBox("Variables") {
+                VariablesTable(ruleModel: ruleModel)
             }
-            Text("Filename")
-                .font(.headline)
-            DestinationTable(ruleModel: ruleModel)
-            Spacer()
-                .layoutPriority(1)
+            GroupBox("Folder") {
+                HStack {
+                    TextField("", text: $ruleModel.folder.value)
+                    SetFolderButton(ruleModel: ruleModel, componentModel: ruleModel.folder)
+                }
+            }
+            GroupBox("Filename") {
+                DestinationTable(ruleModel: ruleModel)
+            }
         }
         .padding()
     }
