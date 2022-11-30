@@ -107,7 +107,6 @@ public class DirectoryMonitor: ObservableObject {
         self.locations = locations
     }
 
-    // TODO: This should always be run on the main actor otherwise the assertion above _WILL_ fail.
     @MainActor public func start() {
 
 #if os(iOS)
@@ -125,7 +124,12 @@ public class DirectoryMonitor: ObservableObject {
             try! self.stream.start()
 #endif
             let files = Set(FileManager.default.files(at: self.locations.first!))
-            Task { @MainActor in
+
+            // This code previously used `Task { @MainActor in }` to call back to the main thread (it seemed to be a
+            // the correct pairing of API since the `files` is annotated with `@MainActor`), but curiously this caused
+            // deadlock when running unit tests on iOS (not macOS). That tells me I don't fully understand the `Task`
+            // APIs yet as I can't see why calling this from an async block on `syncQueue` should behave differently.
+            DispatchQueue.main.async {
                 self.files = files
             }
         }
@@ -143,11 +147,14 @@ public class DirectoryMonitor: ObservableObject {
         cancellables.removeAll()
     }
 
-    public func refresh() {
-        dispatchPrecondition(condition: .notOnQueue(syncQueue))
+    @MainActor public func refresh() {
         syncQueue.async {
             let files = Set(FileManager.default.files(at: self.locations.first!))
-            Task { @MainActor in
+            // This code previously used `Task { @MainActor in }` to call back to the main thread (it seemed to be a
+            // the correct pairing of API since the `files` is annotated with `@MainActor`), but curiously this caused
+            // deadlock when running unit tests on iOS (not macOS). That tells me I don't fully understand the `Task`
+            // APIs yet as I can't see why calling this from an async block on `syncQueue` should behave differently.
+            DispatchQueue.main.async {
                 self.files = files
             }
         }

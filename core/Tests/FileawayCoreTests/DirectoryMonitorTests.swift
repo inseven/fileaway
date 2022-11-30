@@ -39,8 +39,12 @@ class DirectoryMonitorTests: XCTestCase {
 
         try await MainActor.run {
             try perform()
-
-            // TODO: I _think_ iOS requires us to perform an explicit refresh for this to work.
+#if os(iOS)
+            // Directory monitoring isn't automatic on iOS and requires external / manual updates.
+            // This is achieved either by an explict user-triggered refresh operation, or a foregrounding of the app.
+            // In these tests, we simulate an explicit refresh operation.
+            directoryMonitor.refresh()
+#endif
         }
 
         let files = try wait(for: publisher, count: snapshots.count, timeout: 10)
@@ -55,6 +59,10 @@ class DirectoryMonitorTests: XCTestCase {
         fileManager.createFile(at: fileURL)
 
         let directoryMonitor = DirectoryMonitor(locations: [rootURL])
+
+        // Initial state.
+        let value = try wait(for: directoryMonitor.$files.collect(1).first())
+        XCTAssertEqual(value, [nil])
 
         // Start the directory monitor.
         try await expect([[fileURL]], directoryMonitor: directoryMonitor) {
