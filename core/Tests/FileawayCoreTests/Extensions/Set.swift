@@ -20,28 +20,12 @@
 
 import Foundation
 
-extension FileManager {
+extension Set where Element == URL {
 
-    public var libraryURL: URL {
-        return urls(for: .libraryDirectory, in: .userDomainMask)[0]
-    }
-
-    // TODO: Does this include folders?
-    public func files(at url: URL) -> [URL] {
-        var files: [URL] = []
-        if let enumerator = enumerator(at: url,
-                                       includingPropertiesForKeys: [.isRegularFileKey],
-                                       options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
-            for case let fileURL as URL in enumerator {
-                do {
-                    let fileAttributes = try fileURL.resourceValues(forKeys:[.isRegularFileKey])
-                    if fileAttributes.isRegularFile! {
-                        files.append(fileURL)
-                    }
-                } catch { print(error, fileURL) }
-            }
-        }
-        return files
+    func standardizingFileURLs() -> Self {
+        return Set(map { url in
+            return url.standardizedFileURL
+        })
     }
 
 }

@@ -39,33 +39,63 @@ public class DirectoryMonitor: ObservableObject {
 #if os(macOS)
 
     lazy var stream: EonilFSEventStream = {
-        let stream = try! EonilFSEventStream(
-            pathsToWatch: self.locations.map { $0.path },
-            sinceWhen: .now,
-            latency: 0,
-            flags: [.fileEvents],
-            handler: { event in
-                let url = URL(fileURLWithPath: event.path)
-                guard let flag = event.flag else {
-                    return
-                }
-                Task { @MainActor in
-                    precondition(self.files != nil)
-                    if flag.contains(.itemRemoved) {
-                        self.files?.remove(url)
-                    } else if flag.contains(.itemRenamed) {
-                        if FileManager.default.fileExists(atPath: event.path) {
+        let stream = try! EonilFSEventStream(pathsToWatch: self.locations.map { $0.path },
+                                             sinceWhen: .now,
+                                             latency: 0.3,
+                                             flags: [.fileEvents],
+                                             handler: { event in
+
+            guard let flag = event.flag else {
+                return
+            }
+
+            // Check to see if the event path is a directory and, if so, deal with the directory contents.
+            var isDirectory: ObjCBool = false
+            _ = FileManager.default.fileExists(atPath: event.path, isDirectory: &isDirectory)
+            let urls: Set<URL>
+            if isDirectory.boolValue {
+                urls = Set(FileManager.default.files(at: URL(fileURLWithPath: event.path)))
+            } else {
+                urls = [URL(fileURLWithPath: event.path)]
+            }
+
+            // Determine the operation.
+            let isCreate: Bool
+            if flag.contains(.itemCreated) || flag.contains(.itemRemoved) || flag.contains(.itemRenamed) {
+                // While it might seem counter-intuitive, we explicitly check the file system to determine the type of
+                // operation. This allows us to effectively ignore transient creation operations as they'll always
+                // become removal operations that are then ignored as the files in question aren't in the active set.
+                isCreate = FileManager.default.fileExists(atPath: event.path)
+                print("itemRenamed (\(isCreate))")
+            } else if flag.contains(.historyDone) {
+                // Silently ignore known flags.
+                return
+            } else {
+                // Ignore all other operations.
+                print("Unhandled file event \(event).")
+                return
+            }
+
+            Task { @MainActor in
+                precondition(self.files != nil)
+
+                if isCreate {
+                    print("Insert \(urls)")
+                    for url in urls {
+                        if !(self.files?.contains(url) ?? false) {
                             self.files?.insert(url)
-                        } else {
+                        }
+                    }
+                } else {
+                    print("Remove \(urls)")
+                    for url in urls {
+                        if (self.files?.contains(url) ?? false) {
                             self.files?.remove(url)
                         }
-                    } else if flag.contains(.itemCreated) {
-                        self.files?.insert(url)
-                    } else {
-                        print("Unhandled event \(event)")
                     }
                 }
-            })
+            }
+        })
         stream.setDispatchQueue(syncQueue)
         return stream
     }()
@@ -77,8 +107,8 @@ public class DirectoryMonitor: ObservableObject {
         self.locations = locations
     }
 
-    public func start() {
-        dispatchPrecondition(condition: .notOnQueue(syncQueue))
+    // TODO: This should always be run on the main actor otherwise the assertion above _WILL_ fail.
+    @MainActor public func start() {
 
 #if os(iOS)
         NotificationCenter.default
@@ -99,6 +129,8 @@ public class DirectoryMonitor: ObservableObject {
                 self.files = files
             }
         }
+
+
     }
 
     public func stop() {

@@ -18,30 +18,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
+import XCTest
 
-extension FileManager {
+@testable import FileawayCore
 
-    public var libraryURL: URL {
-        return urls(for: .libraryDirectory, in: .userDomainMask)[0]
-    }
+// TODO: Ensure the directory monitor ignores duplicates.
+// TODO: How do we deal with files that have changed; we should probably include the mtime too since this is used
+//       to determine whether we fetch the updates.
 
-    // TODO: Does this include folders?
-    public func files(at url: URL) -> [URL] {
-        var files: [URL] = []
-        if let enumerator = enumerator(at: url,
-                                       includingPropertiesForKeys: [.isRegularFileKey],
-                                       options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
-            for case let fileURL as URL in enumerator {
-                do {
-                    let fileAttributes = try fileURL.resourceValues(forKeys:[.isRegularFileKey])
-                    if fileAttributes.isRegularFile! {
-                        files.append(fileURL)
-                    }
-                } catch { print(error, fileURL) }
-            }
-        }
-        return files
-    }
+class DirectoryViewModelTests: XCTestCase {
 
 }

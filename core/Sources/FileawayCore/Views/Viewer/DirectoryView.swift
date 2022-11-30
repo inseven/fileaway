@@ -54,7 +54,7 @@ public struct DirectoryView: View {
 
     public var body: some View {
         List(selection: selection) {
-            ForEach(directoryViewModel.files, id: \.self) { file in
+            ForEach(directoryViewModel.files.values, id: \.self) { file in
                 FileRow(file: file)
                     .swipeActions(edge: .leading) {
                         Button {
