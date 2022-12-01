@@ -39,12 +39,13 @@ public class DirectoryMonitor: ObservableObject {
 #if os(macOS)
 
     lazy var stream: EonilFSEventStream = {
+        // TODO: DirectoryMonitor instances leak if not explicitly stopped #518
+        //       https://github.com/inseven/fileaway/issues/518
         let stream = try! EonilFSEventStream(pathsToWatch: self.locations.map { $0.path },
                                              sinceWhen: .now,
                                              latency: 0.3,
                                              flags: [.fileEvents],
                                              handler: { event in
-
             guard let flag = event.flag else {
                 return
             }
