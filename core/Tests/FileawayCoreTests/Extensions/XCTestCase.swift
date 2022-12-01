@@ -50,7 +50,8 @@ extension XCTestCase {
     func wait<T: Publisher>(for publisher: T,
                             timeout: TimeInterval = 10,
                             file: StaticString = #file,
-                            line: UInt = #line) throws -> T.Output {
+                            line: UInt = #line,
+                            perform action: (() throws -> Void)? = nil) throws -> T.Output {
 
         var result: Result<T.Output, Error>?
         let expectation = expectation(description: "Awaiting publisher")
@@ -70,6 +71,9 @@ extension XCTestCase {
             }
         )
 
+        // Perform any requested operation after we've created the subscription to ensure that changes aren't missed.
+        try action?()
+
         wait(for: [expectation], timeout: timeout)
         cancellable.cancel()
 
@@ -85,8 +89,9 @@ extension XCTestCase {
                             count: Int,
                             timeout: TimeInterval = 10,
                             file: StaticString = #file,
-                            line: UInt = #line) throws -> Publishers.First<Publishers.CollectByCount<T>>.Output {
-        return try wait(for: publisher.collect(count).first(), timeout: timeout, file: file, line: line)
+                            line: UInt = #line,
+                            perform action: (() throws -> Void)? = nil) throws -> Publishers.First<Publishers.CollectByCount<T>>.Output {
+        return try wait(for: publisher.collect(count).first(), timeout: timeout, file: file, line: line, perform: action)
     }
 
 }

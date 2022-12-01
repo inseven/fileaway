@@ -32,35 +32,85 @@ class DirectoryMonitorTests: XCTestCase {
                 directoryMonitor: DirectoryMonitor,
                 file: StaticString = #file,
                 line: UInt = #line,
-                perform: @MainActor @escaping () throws -> Void) async throws {
+                perform action: @MainActor @escaping () throws -> Void) async throws {
 
         let publisher = directoryMonitor
             .$files
             .dropFirst()
             .map { $0?.standardizingFileURLs() }
 
-        // Perform the block of changes after a delay to ensure we've already subscribed to the publisher.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            try? perform()
-#if os(iOS)
-            // Directory monitoring isn't automatic on iOS and requires external / manual updates.
-            // This is achieved either by an explict user-triggered refresh operation, or a foregrounding of the app.
-            // In these tests, we simulate an explicit refresh operation.
-            directoryMonitor.refresh()
-#endif
+        let files = try wait(for: publisher, count: snapshots.count, timeout: 10, file: file, line: line) {
+            DispatchQueue.main.sync {
+                try? action()
+                directoryMonitor.refresh()
+            }
         }
-
-        let files = try wait(for: publisher, count: snapshots.count, timeout: 10, file: file, line: line)
         XCTAssertEqual(files, snapshots, file: file, line: line)
     }
 
-    func testSoakBasicFileOperations() async throws {
-        for _ in 0...100 {
-            try await testBasicFileOperations()
+    var fileManager: FileManager {
+        return FileManager.default
+    }
+
+    func startedDirectoryMonitor(locations: [URL]) async throws -> DirectoryMonitor {
+
+        let directoryMonitor = DirectoryMonitor(locations: locations)
+
+        let publisher = directoryMonitor
+            .$files
+            .dropFirst()
+            .collect(1)
+            .first()
+
+        _ = try wait(for: publisher, timeout: 3) {
+            DispatchQueue.main.sync {
+                directoryMonitor.start()
+            }
+        }
+
+        // TODO: This doesn't seem to actually stop the monitor in a timely fashion. Why?
+        addTeardownBlock {
+            directoryMonitor.stop()
+        }
+
+        return directoryMonitor
+    }
+
+    func testStartEmpty() async throws {
+
+        let rootURL = try createTemporaryDirectory()
+        let directoryMonitor = DirectoryMonitor(locations: [rootURL])
+
+        try await expect([[]], directoryMonitor: directoryMonitor) {
+            directoryMonitor.start()
+        }
+
+    }
+
+    func testCreateFile() async throws {
+        let rootURL = try createTemporaryDirectory()
+        let directoryMonitor = try await startedDirectoryMonitor(locations: [rootURL])
+
+        let fileURL = rootURL.appending(component: "file.pdf")
+        try await expect([[fileURL]], directoryMonitor: directoryMonitor) {
+            FileManager.default.createFile(at: fileURL)
         }
     }
 
-    func testBasicFileOperations() async throws {
+    func testRemoveFile() async throws {
+        let rootURL = try createTemporaryDirectory()
+
+        let fileURL = rootURL.appending(component: "file.pdf")
+        fileManager.createFile(at: fileURL)
+
+        let directoryMonitor = try await startedDirectoryMonitor(locations: [rootURL])
+
+        try await expect([[]], directoryMonitor: directoryMonitor) {
+            try FileManager.default.removeItem(at: fileURL)
+        }
+    }
+
+    func testSequentialBasicFileOperations() async throws {
 
         let fileManager = FileManager.default
         let rootURL = try createTemporaryDirectory()
@@ -108,6 +158,17 @@ class DirectoryMonitorTests: XCTestCase {
 
         // TODO: Delete directory containing files?
 
+
+        // Explicitly stop the directory monitor.
+        // TODO: We probably have a retain cycle as this shouldn't be necessary
+        directoryMonitor.stop()
+
+    }
+
+    func testSoakSequentialBasicFileOperations() async throws {
+        for _ in 0...1000 {
+            try await testSequentialBasicFileOperations()
+        }
     }
 
 }

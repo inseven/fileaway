@@ -139,6 +139,12 @@ public class DirectoryMonitor: ObservableObject {
         cancellables.removeAll()
     }
 
+    // TODO: Is this guaranteed to be threadsafe?
+    deinit {
+        self.stream.stop()
+        cancellables.removeAll()
+    }
+
     @MainActor public func refresh() {
         syncQueue.async {
             self.syncQueue_refresh()
