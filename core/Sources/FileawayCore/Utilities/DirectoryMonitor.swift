@@ -110,7 +110,6 @@ public class DirectoryMonitor: ObservableObject {
         NotificationCenter.default
             .publisher(for: UIApplication.willEnterForegroundNotification)
             .sink { foreground in
-                print("Refreshing monitor for \(self.locations).")
                 self.refresh()
             }
             .store(in: &cancellables)
