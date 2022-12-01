@@ -123,19 +123,7 @@ public class DirectoryMonitor: ObservableObject {
 #if os(macOS)
             try! self.stream.start()
 #endif
-            let files = Set(FileManager.default.files(at: self.locations.first!))
-
-            // This code previously used `Task { @MainActor in }` to call back to the main thread (it seemed to be a
-            // the correct pairing of API since the `files` is annotated with `@MainActor`), but curiously this caused
-            // deadlock when running unit tests on iOS (not macOS). That tells me I don't fully understand the `Task`
-            // APIs yet as I can't see why calling this from an async block on `syncQueue` should behave differently.
-            DispatchQueue.main.sync {
-                // Ensure we don't trigger an unnecessary redraw if the files haven't changed.
-                guard self.files != files else {
-                    return
-                }
-                self.files = files
-            }
+            self.syncQueue_refresh()
         }
 
 
@@ -153,18 +141,7 @@ public class DirectoryMonitor: ObservableObject {
 
     @MainActor public func refresh() {
         syncQueue.async {
-            let files = Set(FileManager.default.files(at: self.locations.first!))
-            // This code previously used `Task { @MainActor in }` to call back to the main thread (it seemed to be a
-            // the correct pairing of API since the `files` is annotated with `@MainActor`), but curiously this caused
-            // deadlock when running unit tests on iOS (not macOS). That tells me I don't fully understand the `Task`
-            // APIs yet as I can't see why calling this from an async block on `syncQueue` should behave differently.
-            DispatchQueue.main.sync {
-                // Ensure we don't trigger an unnecessary redraw if the files haven't changed.
-                guard self.files != files else {
-                    return
-                }
-                self.files = files
-            }
+            self.syncQueue_refresh()
         }
     }
 
@@ -174,6 +151,18 @@ public class DirectoryMonitor: ObservableObject {
 
     @MainActor public func remove(_ url: URL) {
         self.files?.remove(url)
+    }
+
+    private func syncQueue_refresh() {
+        dispatchPrecondition(condition: .onQueue(syncQueue))
+        let files = Set(FileManager.default.files(at: self.locations.first!))
+        DispatchQueue.main.sync {
+            // Ensure we don't trigger an unnecessary redraw if the files haven't changed.
+            guard self.files != files else {
+                return
+            }
+            self.files = files
+        }
     }
 
 }
