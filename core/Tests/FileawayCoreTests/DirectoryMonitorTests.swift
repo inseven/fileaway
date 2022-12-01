@@ -28,6 +28,7 @@ import XCTest
 
 class DirectoryMonitorTests: XCTestCase {
 
+    // TODO: This shouldn't be escaping?
     func expect(_ snapshots: [Set<URL>?],
                 directoryMonitor: DirectoryMonitor,
                 file: StaticString = #file,
@@ -82,6 +83,27 @@ class DirectoryMonitorTests: XCTestCase {
         let directoryMonitor = DirectoryMonitor(locations: [rootURL])
 
         try await expect([[]], directoryMonitor: directoryMonitor) {
+            directoryMonitor.start()
+        }
+
+    }
+
+    func testStartNonEmpty() async throws {
+
+        let rootURL = try createTemporaryDirectory()
+        let directoryMonitor = DirectoryMonitor(locations: [rootURL])
+
+        let directoryURL = rootURL.appending(component: "Directory")
+        try fileManager.createDirectory(at: directoryURL, withIntermediateDirectories: false)
+
+        let urls = [
+            rootURL.appending(component: "file.txt"),
+            directoryURL.appending(component: "file2.txt"),
+            directoryURL.appending(component: "file3.txt"),
+        ]
+        fileManager.createFiles(at: urls)
+
+        try await expect([Set(urls)], directoryMonitor: directoryMonitor) {
             directoryMonitor.start()
         }
 

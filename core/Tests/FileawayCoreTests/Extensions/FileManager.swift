@@ -26,4 +26,10 @@ extension FileManager {
         createFile(atPath: url.path, contents: contents)
     }
 
+    func createFiles(at urls: [URL], contents: Data? = nil) {
+        for url in urls {
+            createFile(atPath: url.path, contents: contents)
+        }
+    }
+
 }
