@@ -76,7 +76,7 @@ public class DirectoryMonitor: ObservableObject {
                 return
             }
 
-            Task { @MainActor in
+            DispatchQueue.main.sync {
                 precondition(self.files != nil)
 
                 if isCreate {
@@ -129,7 +129,11 @@ public class DirectoryMonitor: ObservableObject {
             // the correct pairing of API since the `files` is annotated with `@MainActor`), but curiously this caused
             // deadlock when running unit tests on iOS (not macOS). That tells me I don't fully understand the `Task`
             // APIs yet as I can't see why calling this from an async block on `syncQueue` should behave differently.
-            DispatchQueue.main.async {
+            DispatchQueue.main.sync {
+                // Ensure we don't trigger an unnecessary redraw if the files haven't changed.
+                guard self.files != files else {
+                    return
+                }
                 self.files = files
             }
         }
@@ -154,7 +158,11 @@ public class DirectoryMonitor: ObservableObject {
             // the correct pairing of API since the `files` is annotated with `@MainActor`), but curiously this caused
             // deadlock when running unit tests on iOS (not macOS). That tells me I don't fully understand the `Task`
             // APIs yet as I can't see why calling this from an async block on `syncQueue` should behave differently.
-            DispatchQueue.main.async {
+            DispatchQueue.main.sync {
+                // Ensure we don't trigger an unnecessary redraw if the files haven't changed.
+                guard self.files != files else {
+                    return
+                }
                 self.files = files
             }
         }

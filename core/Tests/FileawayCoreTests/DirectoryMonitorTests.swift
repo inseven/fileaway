@@ -30,15 +30,18 @@ class DirectoryMonitorTests: XCTestCase {
 
     func expect(_ snapshots: [Set<URL>?],
                 directoryMonitor: DirectoryMonitor,
-                perform: @MainActor () throws -> Void) async throws {
+                file: StaticString = #file,
+                line: UInt = #line,
+                perform: @MainActor @escaping () throws -> Void) async throws {
 
         let publisher = directoryMonitor
             .$files
             .dropFirst()
             .map { $0?.standardizingFileURLs() }
 
-        try await MainActor.run {
-            try perform()
+        // Perform the block of changes after a delay to ensure we've already subscribed to the publisher.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            try? perform()
 #if os(iOS)
             // Directory monitoring isn't automatic on iOS and requires external / manual updates.
             // This is achieved either by an explict user-triggered refresh operation, or a foregrounding of the app.
@@ -47,11 +50,17 @@ class DirectoryMonitorTests: XCTestCase {
 #endif
         }
 
-        let files = try wait(for: publisher, count: snapshots.count, timeout: 10)
-        XCTAssertEqual(files, snapshots)
+        let files = try wait(for: publisher, count: snapshots.count, timeout: 10, file: file, line: line)
+        XCTAssertEqual(files, snapshots, file: file, line: line)
     }
 
-    func testSelectionUpdatesWhenFileRemoved() async throws {
+    func testSoakBasicFileOperations() async throws {
+        for _ in 0...100 {
+            try await testBasicFileOperations()
+        }
+    }
+
+    func testBasicFileOperations() async throws {
 
         let fileManager = FileManager.default
         let rootURL = try createTemporaryDirectory()
@@ -59,10 +68,6 @@ class DirectoryMonitorTests: XCTestCase {
         fileManager.createFile(at: fileURL)
 
         let directoryMonitor = DirectoryMonitor(locations: [rootURL])
-
-        // Initial state.
-        let value = try wait(for: directoryMonitor.$files.collect(1).first())
-        XCTAssertEqual(value, [nil])
 
         // Start the directory monitor.
         try await expect([[fileURL]], directoryMonitor: directoryMonitor) {
