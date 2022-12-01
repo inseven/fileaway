@@ -67,7 +67,6 @@ public class DirectoryMonitor: ObservableObject {
                 // operation. This allows us to effectively ignore transient creation operations as they'll always
                 // become removal operations that are then ignored as the files in question aren't in the active set.
                 isCreate = FileManager.default.fileExists(atPath: event.path)
-                print("itemRenamed (\(isCreate))")
             } else if flag.contains(.historyDone) {
                 // Silently ignore known flags.
                 return
@@ -81,14 +80,12 @@ public class DirectoryMonitor: ObservableObject {
                 precondition(self.files != nil)
 
                 if isCreate {
-                    print("Insert \(urls)")
                     for url in urls {
                         if !(self.files?.contains(url) ?? false) {
                             self.files?.insert(url)
                         }
                     }
                 } else {
-                    print("Remove \(urls)")
                     for url in urls {
                         if (self.files?.contains(url) ?? false) {
                             self.files?.remove(url)
