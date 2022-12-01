@@ -141,7 +141,9 @@ public class DirectoryMonitor: ObservableObject {
 
     // TODO: Is this guaranteed to be threadsafe?
     deinit {
+#if os(macOS)
         self.stream.stop()
+#endif
         cancellables.removeAll()
     }
 

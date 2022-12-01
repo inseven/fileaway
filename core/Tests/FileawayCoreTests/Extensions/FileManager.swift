@@ -22,14 +22,17 @@ import Foundation
 
 extension FileManager {
 
-    func createFile(at url: URL, contents: Data? = nil) {
-        createFile(atPath: url.path, contents: contents)
+    func createFile(at url: URL, contents: Data? = nil) -> Bool {
+        return createFile(atPath: url.path, contents: contents)
     }
 
-    func createFiles(at urls: [URL], contents: Data? = nil) {
+    func createFiles(at urls: [URL], contents: Data? = nil) -> Bool {
         for url in urls {
-            createFile(atPath: url.path, contents: contents)
+            guard createFile(atPath: url.path, contents: contents) else {
+                return false
+            }
         }
+        return true
     }
 
 }

@@ -29,7 +29,7 @@ import XCTest
 class DirectoryMonitorTests: XCTestCase {
 
     // TODO: This shouldn't be escaping?
-    func expect(_ snapshots: [Set<URL>?],
+    func expect(_ contents: [Set<URL>?],
                 directoryMonitor: DirectoryMonitor,
                 file: StaticString = #file,
                 line: UInt = #line,
@@ -40,13 +40,13 @@ class DirectoryMonitorTests: XCTestCase {
             .dropFirst()
             .map { $0?.standardizingFileURLs() }
 
-        let files = try wait(for: publisher, count: snapshots.count, timeout: 10, file: file, line: line) {
+        let files = try wait(for: publisher, count: contents.count, timeout: 10, file: file, line: line) {
             DispatchQueue.main.sync {
                 try? action()
                 directoryMonitor.refresh()
             }
         }
-        XCTAssertEqual(files, snapshots, file: file, line: line)
+        XCTAssertEqual(files, contents, file: file, line: line)
     }
 
     var fileManager: FileManager {
@@ -101,7 +101,7 @@ class DirectoryMonitorTests: XCTestCase {
             directoryURL.appending(component: "file2.txt"),
             directoryURL.appending(component: "file3.txt"),
         ]
-        fileManager.createFiles(at: urls)
+        createFiles(at: urls)
 
         try await expect([Set(urls)], directoryMonitor: directoryMonitor) {
             directoryMonitor.start()
@@ -110,12 +110,14 @@ class DirectoryMonitorTests: XCTestCase {
     }
 
     func testCreateFile() async throws {
+
         let rootURL = try createTemporaryDirectory()
+
         let directoryMonitor = try await startedDirectoryMonitor(locations: [rootURL])
 
         let fileURL = rootURL.appending(component: "file.pdf")
         try await expect([[fileURL]], directoryMonitor: directoryMonitor) {
-            FileManager.default.createFile(at: fileURL)
+            self.createFiles(at: [fileURL])
         }
     }
 
@@ -123,7 +125,7 @@ class DirectoryMonitorTests: XCTestCase {
         let rootURL = try createTemporaryDirectory()
 
         let fileURL = rootURL.appending(component: "file.pdf")
-        fileManager.createFile(at: fileURL)
+        createFiles(at: [fileURL])
 
         let directoryMonitor = try await startedDirectoryMonitor(locations: [rootURL])
 
@@ -132,12 +134,41 @@ class DirectoryMonitorTests: XCTestCase {
         }
     }
 
+    func createFiles(at urls: [URL], file: StaticString = #file, line: UInt = #line) {
+        XCTAssertTrue(fileManager.createFiles(at: urls), file: file, line: line)
+    }
+
+    func testMoveNonEmptyDirectory() async throws {
+        let rootURL = try createTemporaryDirectory()
+
+        let directoryName = "External Directory"
+        let externalDirectoryURL = try createTemporaryDirectory().appending(component: directoryName)
+        let fileNames = [
+            "file.txt",
+            "file1.txt",
+            "file2.txt",
+        ]
+        try fileManager.createDirectory(at: externalDirectoryURL, withIntermediateDirectories: false)
+        createFiles(at: fileNames.map { externalDirectoryURL.appending(component: $0) })
+
+        let directoryURL = rootURL.appending(component: directoryName)
+        let expectedURLs = fileNames.map { directoryURL.appending(component: $0) }
+
+        let directoryMonitor = try await startedDirectoryMonitor(locations: [rootURL])
+
+        try await expect([Set(expectedURLs)], directoryMonitor: directoryMonitor) {
+            // TODO: This shouldn't need to be self.
+            try self.fileManager.moveItem(at: externalDirectoryURL, to: directoryURL)
+        }
+
+    }
+
     func testSequentialBasicFileOperations() async throws {
 
         let fileManager = FileManager.default
         let rootURL = try createTemporaryDirectory()
         let fileURL = rootURL.appending(component: "file.pdf")
-        fileManager.createFile(at: fileURL)
+        createFiles(at: [fileURL])
 
         let directoryMonitor = DirectoryMonitor(locations: [rootURL])
 
@@ -149,7 +180,7 @@ class DirectoryMonitorTests: XCTestCase {
         // Create a file.
         let file2URL = rootURL.appending(component: "file2.pdf")
         try await expect([[fileURL, file2URL]], directoryMonitor: directoryMonitor) {
-            fileManager.createFile(at: file2URL)
+            self.createFiles(at: [file2URL])
         }
 
         // Delete a file.
@@ -162,14 +193,14 @@ class DirectoryMonitorTests: XCTestCase {
         let file3URL = subdirectoryURL.appending(component: "file.pdf")
         try await expect([[file2URL, file3URL]], directoryMonitor: directoryMonitor) {
             try fileManager.createDirectory(at: subdirectoryURL, withIntermediateDirectories: false)
-            fileManager.createFile(at: file3URL)
+            self.createFiles(at: [file3URL])
         }
 
         // Move a directory containing files.
         let externalDirectoryURL = try createTemporaryDirectory().appending(component: "External Directory")
         try fileManager.createDirectory(at: externalDirectoryURL, withIntermediateDirectories: false)
         let file4URL = externalDirectoryURL.appending(component: "child.pdf")
-        fileManager.createFile(at: file4URL)
+        createFiles(at: [file4URL])
         let externalDirectoryDestinationURL = rootURL.appending(component: "External Directory")
         try await expect([[file2URL, file3URL, externalDirectoryDestinationURL.appending(component: "child.pdf")]],
                                   directoryMonitor: directoryMonitor) {
