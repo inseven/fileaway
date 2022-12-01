@@ -69,9 +69,8 @@ class DirectoryMonitorTests: XCTestCase {
             }
         }
 
-        // TODO: This doesn't seem to actually stop the monitor in a timely fashion. Why?
         addTeardownBlock {
-            directoryMonitor.stop()
+            await directoryMonitor.stop()
         }
 
         return directoryMonitor
@@ -207,14 +206,10 @@ class DirectoryMonitorTests: XCTestCase {
             try fileManager.moveItem(at: externalDirectoryURL, to: externalDirectoryDestinationURL)
         }
 
-        // TODO: Move directory containing multiple files.
-
-        // TODO: Delete directory containing files?
-
-
-        // Explicitly stop the directory monitor.
-        // TODO: We probably have a retain cycle as this shouldn't be necessary
-        directoryMonitor.stop()
+        // Since this test is run in a tight loop by `testSoakSequentialBasicFileOperations`, the teardown usually
+        // responsible for stopping `DirectoryMonitor` instances isn't called in a timely fashion and we run out of
+        // file handles unless we call it explicitly here.
+        await directoryMonitor.stop()
 
     }
 

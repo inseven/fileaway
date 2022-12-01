@@ -125,20 +125,12 @@ public class DirectoryMonitor: ObservableObject {
 
     }
 
-    public func stop() {
+    @MainActor public func stop() {
         dispatchPrecondition(condition: .notOnQueue(syncQueue))
 #if os(macOS)
         syncQueue.sync {
             self.stream.stop()
         }
-#endif
-        cancellables.removeAll()
-    }
-
-    // TODO: Is this guaranteed to be threadsafe?
-    deinit {
-#if os(macOS)
-        self.stream.stop()
 #endif
         cancellables.removeAll()
     }
