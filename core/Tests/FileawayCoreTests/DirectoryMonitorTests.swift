@@ -72,7 +72,8 @@ class DirectoryMonitorTests: XCTestCase {
             }
         }
 
-        // TODO: Stop seems to be blocking indefinitely sometimes?
+        // TODO: DirectoryMonitor instances leak if not explicitly stopped #518
+        //       https://github.com/inseven/fileaway/issues/518
 //        addTeardownBlock {
 //            await directoryMonitor.stop()
 //        }
