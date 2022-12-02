@@ -50,16 +50,6 @@ public class DirectoryMonitor: ObservableObject {
                 return
             }
 
-            // Check to see if the event path is a directory and, if so, deal with the directory contents.
-            var isDirectory: ObjCBool = false
-            _ = FileManager.default.fileExists(atPath: event.path, isDirectory: &isDirectory)
-            let urls: Set<URL>
-            if isDirectory.boolValue {
-                urls = Set(FileManager.default.files(at: URL(fileURLWithPath: event.path)))
-            } else {
-                urls = [URL(fileURLWithPath: event.path)]
-            }
-
             // Determine the operation.
             let isCreate: Bool
             if flag.contains(.itemCreated) || flag.contains(.itemRemoved) || flag.contains(.itemRenamed) {
@@ -76,6 +66,18 @@ public class DirectoryMonitor: ObservableObject {
                 return
             }
 
+            // Check to see if the event path is a directory and, if so, deal with the directory contents.
+            var isDirectory: ObjCBool = false
+            _ = FileManager.default.fileExists(atPath: event.path, isDirectory: &isDirectory)
+            let urls: Set<URL>
+            if isDirectory.boolValue && isCreate {
+                urls = Set(FileManager.default.files(at: URL(fileURLWithPath: event.path)))
+            } else {
+                urls = [URL(fileURLWithPath: event.path)]
+            }
+
+            print("State: isCreate = \(isCreate), urls=\(urls)")
+
             DispatchQueue.main.sync {
                 precondition(self.files != nil)
                 guard let files = self.files else {
@@ -86,8 +88,11 @@ public class DirectoryMonitor: ObservableObject {
                         self.files = files.union(urls)
                     }
                 } else {
-                    if !files.intersection(urls).isEmpty {
-                        self.files = files.subtracting(urls)
+                    let removals = files.descendents(of: urls)
+                    if !files.intersection(removals).isEmpty {
+                        print("State: -> removing urls")
+                        self.files = files.subtracting(removals)
+                        print("State: self.files = \(self.files ?? [])")
                     }
                 }
             }

@@ -26,18 +26,20 @@ import XCTest
 // TODO: How do we deal with files that have changed; we should probably include the mtime too since this is used
 //       to determine whether we fetch the updates.
 
+// TODO: Perform should be allowed to fail and should fail the test with those results.
 class DirectoryMonitorTests: XCTestCase {
 
     // TODO: This shouldn't be escaping?
     func expect(_ contents: [Set<URL>?],
                 directoryMonitor: DirectoryMonitor,
+                drop dropCount: Int = 1,
                 file: StaticString = #file,
                 line: UInt = #line,
                 perform action: @MainActor @escaping () throws -> Void) async throws {
 
         let publisher = directoryMonitor
             .$files
-            .dropFirst()
+            .dropFirst(dropCount)
             .map { $0?.standardizingFileURLs() }
 
         let files = try wait(for: publisher, count: contents.count, timeout: 3, file: file, line: line) {
@@ -87,6 +89,49 @@ class DirectoryMonitorTests: XCTestCase {
         try await expect([[]], directoryMonitor: directoryMonitor) {
             directoryMonitor.start()
         }
+
+    }
+
+    func testRemoveChildren() {
+
+        XCTAssertTrue(URL(fileURLWithPath: "/a").isParent(of: URL(fileURLWithPath: "/a/b")))
+        XCTAssertFalse(URL(fileURLWithPath: "/a").isParent(of: URL(fileURLWithPath: "/abba/b")))
+
+        XCTAssertEqual(
+            Set([
+                URL(fileURLWithPath: "/a/b/c"),
+                URL(fileURLWithPath: "/a/b"),
+                URL(fileURLWithPath: "/a/b/d"),
+                URL(fileURLWithPath: "/e/random.txt"),
+            ]).removingURLsAndDescendents(of: Set([URL(fileURLWithPath: "/a")])),
+            Set([
+                URL(fileURLWithPath: "/e/random.txt"),
+            ]))
+
+        XCTAssertEqual(
+            Set([
+                URL(fileURLWithPath: "/a"),
+                URL(fileURLWithPath: "/a/b/c"),
+                URL(fileURLWithPath: "/a/b"),
+                URL(fileURLWithPath: "/a/b/d"),
+                URL(fileURLWithPath: "/e/random.txt"),
+            ]).removingURLsAndDescendents(of: Set([URL(fileURLWithPath: "/a")])),
+            Set([
+                URL(fileURLWithPath: "/e/random.txt"),
+            ]))
+
+        XCTAssertEqual(
+            Set([
+                URL(fileURLWithPath: "/a"),
+                URL(fileURLWithPath: "/a/b/c"),
+                URL(fileURLWithPath: "/a/b"),
+                URL(fileURLWithPath: "/a/b/d"),
+                URL(fileURLWithPath: "/e/random.txt"),
+            ]).removingURLsAndDescendents(of: Set([
+                URL(fileURLWithPath: "/a"),
+                URL(fileURLWithPath: "/e")
+            ])),
+            Set([]))
 
     }
 
@@ -140,7 +185,7 @@ class DirectoryMonitorTests: XCTestCase {
         XCTAssertTrue(fileManager.createFiles(at: urls), file: file, line: line)
     }
 
-    func testMoveNonEmptyDirectory() async throws {
+    func testMoveInNonEmptyDirectory() async throws {
         let rootURL = try createTemporaryDirectory()
 
         let directoryName = "External Directory"
@@ -164,6 +209,89 @@ class DirectoryMonitorTests: XCTestCase {
         }
 
     }
+
+    func testRemoveNonEmptyDirectory() async throws {
+
+        let rootURL = try createTemporaryDirectory()
+        let directoryURL = rootURL.appending(component: "Directory")
+        try fileManager.createDirectory(at: directoryURL, withIntermediateDirectories: false)
+        let fileURLs = [
+            "file.txt",
+            "file1.txt",
+            "file2.txt",
+        ].map { directoryURL.appending(component: $0) }
+        createFiles(at: fileURLs)
+
+        let directoryMonitor = try await startedDirectoryMonitor(locations: [rootURL])
+
+        // This test differs on macOS and on iOS as the iOS tests use `DirectoryMonitor.refresh` to force through a
+        // change, while macOS relies on the directory monitor. Given this we expect a different number of updates
+        // before quiescence based on the platforms.
+#if os(macOS)
+        let dropCount = 3
+#else
+        let dropCount = 1
+#endif
+        try await expect([[]], directoryMonitor: directoryMonitor, drop: dropCount) {
+            try! self.fileManager.removeItem(at: directoryURL)
+        }
+
+    }
+
+    func testMoveOutNonEmptyDirectory() async throws {
+
+        let rootURL = try createTemporaryDirectory()
+        let directoryURL = rootURL.appending(component: "Directory")
+        try fileManager.createDirectory(at: directoryURL, withIntermediateDirectories: false)
+        let fileURLs = [
+            "file.txt",
+            "file1.txt",
+            "file2.txt",
+        ].map { directoryURL.appending(component: $0) }
+        createFiles(at: fileURLs)
+
+        let directoryMonitor = try await startedDirectoryMonitor(locations: [rootURL])
+
+        // This test differs on macOS and on iOS as the iOS tests use `DirectoryMonitor.refresh` to force through a
+        // change, while macOS relies on the directory monitor. Given this we expect a different number of updates
+        // before quiescence based on the platforms.
+#if os(macOS)
+        let dropCount = 3
+#else
+        let dropCount = 1
+#endif
+        let destinationURL = try createTemporaryDirectory()
+        try await expect([[]], directoryMonitor: directoryMonitor, drop: dropCount) {
+            try! self.fileManager.moveItem(at: directoryURL, to: destinationURL.appending(component: "Directory"))
+        }
+
+    }
+
+#if os(macOS)
+
+    func testTrashNonEmptyDirectory() async throws {
+        // `FileManager.trashItem` only results in a single file system event for directory (not events for it's
+        // children) meaning that we only ever expect a single update event for that directory.
+        // Entertainingly `FileManager.trashItem` fails on iOS.
+
+        let rootURL = try createTemporaryDirectory()
+        let directoryURL = rootURL.appending(component: "Directory")
+        try fileManager.createDirectory(at: directoryURL, withIntermediateDirectories: false)
+        let fileURLs = [
+            "file.txt",
+            "file1.txt",
+            "file2.txt",
+        ].map { directoryURL.appending(component: $0) }
+        createFiles(at: fileURLs)
+
+        let directoryMonitor = try await startedDirectoryMonitor(locations: [rootURL])
+        try await expect([[]], directoryMonitor: directoryMonitor, drop: 1) {
+            try! FileManager.default.trashItem(at: directoryURL, resultingItemURL: nil)
+        }
+
+    }
+
+#endif
 
     func testSequentialBasicFileOperations() async throws {
 
