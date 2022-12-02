@@ -37,8 +37,8 @@ public struct LocationSection: View {
 
     @Binding var directoryModels: [DirectoryModel]
 
-    public init(sceneModel: SceneModel,
-                title: String,
+    public init(_ title: String,
+                sceneModel: SceneModel,
                 directoryModels: Binding<Array<DirectoryModel>>) {
         self.sceneModel = sceneModel
         self.title = title
