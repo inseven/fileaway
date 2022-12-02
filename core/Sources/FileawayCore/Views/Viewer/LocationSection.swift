@@ -34,14 +34,17 @@ public struct LocationSection: View {
     @ObservedObject var sceneModel: SceneModel
 
     private var title: String
+    private var type: DirectoryModel.DirectoryType
 
     @Binding var directoryModels: [DirectoryModel]
 
     public init(_ title: String,
+                type: DirectoryModel.DirectoryType,
                 sceneModel: SceneModel,
                 directoryModels: Binding<Array<DirectoryModel>>) {
-        self.sceneModel = sceneModel
         self.title = title
+        self.type = type
+        self.sceneModel = sceneModel
         _directoryModels = directoryModels
     }
 
@@ -61,9 +64,9 @@ public struct LocationSection: View {
                 directoryModels.move(fromOffsets: fromOffsets, toOffset: toOffset)
             }
 #if os(iOS)
-            if (editMode?.wrappedValue.isEditing ?? false) || models.isEmpty {
+            if (editMode?.wrappedValue.isEditing ?? false) || directoryModels.isEmpty {
                 Button("Add Folder...") {
-                    sceneModel.addLocation(type: type)
+                    sceneModel.addLocation(type: .inbox)
                 }
             }
 #endif

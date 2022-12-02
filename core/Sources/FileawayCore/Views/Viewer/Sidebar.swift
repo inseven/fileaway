@@ -31,8 +31,14 @@ public struct Sidebar: View {
 
     public var body: some View {
         List(selection: $sceneModel.section) {
-            LocationSection("Inboxes", sceneModel: sceneModel, directoryModels: $applicationModel.inboxes)
-            LocationSection("Archives", sceneModel: sceneModel, directoryModels: $applicationModel.archives)
+            LocationSection("Inboxes",
+                            type: .inbox,
+                            sceneModel: sceneModel,
+                            directoryModels: $applicationModel.inboxes)
+            LocationSection("Archives",
+                            type: .archive,
+                            sceneModel: sceneModel,
+                            directoryModels: $applicationModel.archives)
         }
         .headerProminence(.increased)
 #if os(iOS)
