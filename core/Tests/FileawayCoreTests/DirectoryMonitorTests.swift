@@ -81,10 +81,6 @@ class DirectoryMonitorTests: XCTestCase {
         }
     }
 
-    func createFiles(at urls: [URL], file: StaticString = #file, line: UInt = #line) {
-        XCTAssertTrue(fileManager.createFiles(at: urls), file: file, line: line)
-    }
-
     func testMoveInNonEmptyDirectory() async throws {
         let rootURL = try createTemporaryDirectory()
 

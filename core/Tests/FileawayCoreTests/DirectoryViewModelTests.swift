@@ -20,10 +20,85 @@
 
 import XCTest
 
+import Collections
+
 @testable import FileawayCore
 
-// TODO: Add selection tests.
+extension OrderedDictionary where Key == URL, Value == FileInfo {
+
+    func standardizingFileURLs() -> Self {
+        var result = Self()
+        for (url, fileInfo) in self {
+            result[url.standardizedFileURL] = fileInfo.standardizingFileURL()
+        }
+        return result
+    }
+
+}
 
 class DirectoryViewModelTests: XCTestCase {
+
+    func testRemoveFileUpdatesSelection() async throws {
+        let rootURL = try createTemporaryDirectory()
+        let fileURL = rootURL.appending(component: "file.pdf")
+        createFiles(at: [fileURL])
+
+        let directoryModel = DirectoryModel(settings: Settings(), type: .inbox, url: rootURL)
+        let directoryViewModel = DirectoryViewModel(directoryModel: directoryModel)
+
+        let publisher = directoryViewModel
+            .$files
+            .dropFirst(1)
+            .map { $0.standardizingFileURLs() }
+
+        let result = try wait(for: publisher, count: 1, timeout: 3) {
+            DispatchQueue.main.sync {
+                directoryModel.start()
+                directoryViewModel.start()
+            }
+        }
+
+        let expectedURLs = [
+            fileURL,
+        ]
+        let expectedFileInfos = expectedURLs
+            .map { $0.standardizedFileURL }
+            .map { FileInfo(url: $0) }
+            .reduce(into: OrderedDictionary<URL, FileInfo>()) { partialResult, fileInfo in
+                partialResult[fileInfo.url] = fileInfo
+            }
+
+        XCTAssertEqual(result, [expectedFileInfos])
+        XCTAssertEqual(directoryViewModel.selection, [])
+
+        guard let fileInfo = result.first?.values.first else {
+            XCTFail("Failed to get first file.")
+            return
+        }
+
+        let selection = try wait(for: directoryViewModel.$selection.dropFirst(), count: 1, timeout: 3) {
+            DispatchQueue.main.sync {
+                directoryViewModel.selection = [fileInfo]
+            }
+        }
+
+        XCTAssertEqual(selection, [[fileInfo]])
+
+
+        let updatedSelection = try wait(for: directoryViewModel.$selection.dropFirst(), count: 1, timeout: 3) {
+            DispatchQueue.main.sync {
+                do {
+                    try self.fileManager.removeItem(at: fileInfo.url)
+#if os(iOS)
+                    directoryViewModel.refresh()
+#endif
+                } catch {
+                    XCTFail("Failed to perform update action with error \(error).")
+                }
+            }
+        }
+
+        XCTAssertEqual(updatedSelection, [[]])
+    }
 
 }

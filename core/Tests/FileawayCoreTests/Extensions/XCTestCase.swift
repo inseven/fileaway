@@ -21,10 +21,16 @@
 import Combine
 import XCTest
 
+@testable import FileawayCore
+
 extension XCTestCase {
 
     var fileManager: FileManager {
         return FileManager.default
+    }
+
+    func createFiles(at urls: [URL], file: StaticString = #file, line: UInt = #line) {
+        XCTAssertTrue(fileManager.createFiles(at: urls), file: file, line: line)
     }
 
     func createTemporaryDirectory() throws -> URL {

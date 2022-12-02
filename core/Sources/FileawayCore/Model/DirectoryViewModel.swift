@@ -110,7 +110,9 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
             }
             .receive(on: DispatchQueue.main)
             .sink { files, previewUrls, isLoading in
-                self.files = files
+                if self.files != files {
+                    self.files = files
+                }
                 self.previewUrls = previewUrls
                 self.isLoading = isLoading
             }
