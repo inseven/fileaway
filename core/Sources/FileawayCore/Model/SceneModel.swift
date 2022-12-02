@@ -65,31 +65,34 @@ public class SceneModel: ObservableObject, Runnable {
 
     @MainActor public init(applicationModel: ApplicationModel) {
         self.applicationModel = applicationModel
-        self.section = applicationModel.settings.selectedFolderURL ?? applicationModel.directories.filter({ $0.type == .inbox }).first?.url
+        self.section = applicationModel.settings.selectedFolderURL ?? inboxes.first?.url ?? archives.first?.url
     }
 
     @MainActor public func start() {
 
         // Construct the directory observers.
         applicationModel
-            .$directories
-            .map { directories in
-                return directories.map {
+            .$inboxes
+            .combineLatest(applicationModel.$archives)
+            .map { inboxes, archives in
+                let inboxViewModels = inboxes.map {
                     return DirectoryViewModel(directoryModel: $0)
                 }
+                let archiveViewModels = archives.map {
+                    return DirectoryViewModel(directoryModel: $0)
+                }
+                return (inboxViewModels, archiveViewModels)
             }
             .receive(on: DispatchQueue.main)
-            .sink { (models: [DirectoryViewModel]) in
+            .sink { (inboxViewModels: [DirectoryViewModel], archiveViewModels: [DirectoryViewModel]) in
 
-                let newInboxes = models.filter { $0.type == .inbox }
-                self.inboxes = self.inboxes.applying(newInboxes) { directoryViewModel in
+                self.inboxes = self.inboxes.applying(inboxViewModels) { directoryViewModel in
                     directoryViewModel.start()
                 } onRemove: { directoryViewModel in
                     directoryViewModel.stop()
                 }
 
-                let newArchives = models.filter { $0.type == .archive }
-                self.archives = self.archives.applying(newArchives) { directoryViewModel in
+                self.archives = self.archives.applying(archiveViewModels) { directoryViewModel in
                     directoryViewModel.start()
                 } onRemove: { directoryViewModel in
                     directoryViewModel.stop()

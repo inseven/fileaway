@@ -24,9 +24,9 @@ public struct Application {
 
     static func open(_ url: URL) {
 #if os(macOS)
-            NSWorkspace.shared.open(url)
+        NSWorkspace.shared.open(url)
 #else
-            UIApplication.shared.open(url)
+        UIApplication.shared.open(url)
 #endif
     }
 
@@ -44,6 +44,18 @@ public struct Application {
         NSPasteboard.general.setString(value, forType: .string)
 #else
         UIPasteboard.general.string = value
+#endif
+    }
+
+    static func setBadgeNumber(_ badgeNumber: Int) {
+#if os(macOS)
+        if badgeNumber == 0 {
+            NSApplication.shared.dockTile.badgeLabel = nil
+        } else {
+            NSApplication.shared.dockTile.badgeLabel = String(describing: badgeNumber)
+        }
+#else
+        UIApplication.shared.applicationIconBadgeNumber = badgeNumber
 #endif
     }
 

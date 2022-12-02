@@ -19,6 +19,7 @@
 // SOFTWARE.
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 import FilePicker
 
@@ -35,38 +36,37 @@ public struct LocationSection: View {
     private var title: String
     private var type: DirectoryModel.DirectoryType
 
-    // TODO: This is nasty
-    public var models: [DirectoryViewModel] {
-        switch type {
-        case .inbox:
-            return sceneModel.inboxes
-        case .archive:
-            return sceneModel.archives
-        }
-    }
+    @Binding var directoryModels: [DirectoryModel]
 
-    public init(sceneModel: SceneModel, title: String, type: DirectoryModel.DirectoryType) {
-        self.sceneModel = sceneModel
+    public init(_ title: String,
+                type: DirectoryModel.DirectoryType,
+                sceneModel: SceneModel,
+                directoryModels: Binding<Array<DirectoryModel>>) {
         self.title = title
         self.type = type
+        self.sceneModel = sceneModel
+        _directoryModels = directoryModels
     }
 
     public var body: some View {
         Section(title) {
-            ForEach(models) { directoryViewModel in
-                LocationRow(directoryViewModel: directoryViewModel)
+            ForEach(directoryModels) { directoryModel in
+                LocationRow(directoryModel: directoryModel)
             }
             .onDelete { indexSet in
-                let urls = indexSet.map { models[$0].url }
+                let urls = indexSet.map { directoryModels[$0].url }
                 for url in urls {
                     // TODO: Handle the error here!
                     try! applicationModel.removeLocation(url: url)
                 }
             }
+            .onMove { (fromOffsets, toOffset) in
+                directoryModels.move(fromOffsets: fromOffsets, toOffset: toOffset)
+            }
 #if os(iOS)
-            if (editMode?.wrappedValue.isEditing ?? false) || models.isEmpty {
+            if (editMode?.wrappedValue.isEditing ?? false) || directoryModels.isEmpty {
                 Button("Add Folder...") {
-                    sceneModel.addLocation(type: type)
+                    sceneModel.addLocation(type: .inbox)
                 }
             }
 #endif

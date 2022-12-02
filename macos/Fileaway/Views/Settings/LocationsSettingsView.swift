@@ -28,8 +28,14 @@ struct LocationsSettingsView: View {
 
     var body: some View {
         VStack {
-            LocationsEditor(name: "Inboxes", type: .inbox, applicationModel: applicationModel)
-            LocationsEditor(name: "Archives", type: .archive, applicationModel: applicationModel)
+            LocationsEditor(applicationModel: applicationModel,
+                            name: "Inboxes",
+                            type: .inbox,
+                            directories: $applicationModel.inboxes)
+            LocationsEditor(applicationModel: applicationModel,
+                            name: "Archives",
+                            type: .archive,
+                            directories: $applicationModel.archives)
         }
     }
 

@@ -52,6 +52,15 @@ public class DirectoryModel: ObservableObject, Identifiable, Hashable {
     private var cache: NSCache<NSURL, FileInfo> = NSCache()
     private var cancellables: Set<AnyCancellable> = []
 
+    public var systemImage: String {
+        switch type {
+        case .inbox:
+            return "tray"
+        case .archive:
+            return "archivebox"
+        }
+    }
+
     public init(settings: Settings, type: DirectoryType, url: URL) {
         self.settings = settings
         self.type = type

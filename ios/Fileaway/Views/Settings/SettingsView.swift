@@ -50,11 +50,11 @@ struct SettingsView: View {
                     }
                 }
                 Section("Rules") {
-                    if applicationModel.directories(type: .archive).isEmpty {
+                    if applicationModel.archives.isEmpty {
                         Text("None")
                             .foregroundColor(.secondary)
                     } else {
-                        ForEach(applicationModel.directories(type: .archive)) { directory in
+                        ForEach(applicationModel.archives) { directory in
                             NavigationLink {
                                 RulesView(rulesModel: directory.ruleSet)
                             } label: {

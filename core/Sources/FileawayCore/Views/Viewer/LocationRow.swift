@@ -25,22 +25,22 @@ import FilePicker
 struct LocationRow: View {
 
     @EnvironmentObject private var applicationModel: ApplicationModel
-    @ObservedObject var directoryViewModel: DirectoryViewModel
+    @ObservedObject var directoryModel: DirectoryModel
 
     var body: some View {
-        NavigationLink(value: directoryViewModel.url) {
-            Label(directoryViewModel.name, systemImage: directoryViewModel.systemImage)
-                .badge(directoryViewModel.type == .inbox ? directoryViewModel.files.count : 0)
+        NavigationLink(value: directoryModel.url) {
+            Label(directoryModel.name, systemImage: directoryModel.systemImage)
+                .badge(directoryModel.type == .inbox ? directoryModel.files.count : 0)  // TODO: Move into the model?
         }
 #if os(macOS)
         .contextMenu {
-            LocationMenuCommands(url: directoryViewModel.url)
+            LocationMenuCommands(url: directoryModel.url)
         }
 #endif
         .swipeActions(edge: .trailing) {
             Button(role: .destructive) {
                 // TODO: Handle the error here!
-                try! applicationModel.removeLocation(url: directoryViewModel.url)
+                try! applicationModel.removeLocation(url: directoryModel.url)
             } label: {
                 Text("Remove")
             }

@@ -41,7 +41,7 @@ public class RulePickerModel: ObservableObject, Runnable {
     @MainActor public func start() {
 
         applicationModel
-            .$allRules
+            .$rules
             .combineLatest($filter)
             .receive(on: queue)
             .map { rules, filter in
@@ -67,7 +67,7 @@ public class RulePickerModel: ObservableObject, Runnable {
 
         applicationModel.settings
             .$recentRuleIds
-            .combineLatest(applicationModel.$allRules)
+            .combineLatest(applicationModel.$rules)
             .receive(on: queue)
             .map { recentRuleIds, allRules in
                 let rules = allRules.filter { ruleModel in

@@ -26,16 +26,41 @@ import SwiftUI
 import AppKit
 #endif
 
+extension Array where Element == DirectoryModel {
+
+    @MainActor func refresh() {
+        for directoryModel in self {
+            directoryModel.refresh()
+        }
+    }
+
+}
+
 public class ApplicationModel: ObservableObject {
 
     public let settings = Settings()
 
-    @Published public var directories: [DirectoryModel] = []
-    @Published public var allRules: [RuleModel] = []
+    @MainActor @Published public var inboxes: [DirectoryModel] = [] {
+        didSet {
+            try? settings.setInboxUrls(inboxes.map { $0.url })
+        }
+    }
+
+    @MainActor @Published public var archives: [DirectoryModel] = [] {
+        didSet {
+            try? settings.setArchiveUrls(archives.map { $0.url })
+        }
+    }
+
+    @Published public var rules: [RuleModel] = []
 
     var countObservers: [DirectoryModel.ID: Cancellable] = [:]
     var countSubscription: Cancellable?
     var rulesSubscription: Cancellable?
+
+    @MainActor private var directories: [DirectoryModel] {
+        return inboxes + archives
+    }
 
     @MainActor public init() {
         self.start()
@@ -51,60 +76,44 @@ public class ApplicationModel: ObservableObject {
         }
     }
 
-    private func updateCountSubscription() {
+    @MainActor private func updateCountSubscription() {
 
         dispatchPrecondition(condition: .onQueue(.main))
         let update: () -> Void = {
             dispatchPrecondition(condition: .onQueue(.main))
-            let count = self.directories
-                .filter { $0.type == .inbox }
+            let count = self
+                .inboxes
                 .map { $0.count }
                 .reduce(0) { result, count in result + count }
-#if os(macOS)
-            if count == 0 {
-                NSApplication.shared.dockTile.badgeLabel = nil
-            } else {
-                NSApplication.shared.dockTile.badgeLabel = String(describing: count)
-            }
-#else
-            UIApplication.shared.applicationIconBadgeNumber = count
-#endif
+            Application.setBadgeNumber(count)
         }
 
-        let directoryChanges = self.directories.map { $0.objectWillChange }
+        let directoryChanges = self
+            .inboxes
+            .map { $0.objectWillChange }
         countSubscription = Publishers.MergeMany(directoryChanges).receive(on: DispatchQueue.main).sink { _ in
             update()
         }
         update()
-
     }
 
-    private func updateRuleSetSubscription() {
+    @MainActor private func updateRuleSetSubscription() {
         dispatchPrecondition(condition: .onQueue(.main))
         let update: () -> Void = {
             dispatchPrecondition(condition: .onQueue(.main))
-            self.allRules = self.directories.map { $0.ruleSet.ruleModels }.flatMap { $0 }
+            self.rules = self.directories.map { $0.ruleSet.ruleModels }.flatMap { $0 }
         }
-        let changes = self.directories.map { $0.ruleSet.objectWillChange }
+        let changes = directories.map { $0.ruleSet.objectWillChange }
         rulesSubscription = Publishers.MergeMany(changes).receive(on: DispatchQueue.main).sink { _ in
             update()
         }
         update()
     }
 
-    @MainActor public func directories(type: DirectoryModel.DirectoryType) -> [DirectoryModel] {
-        self.directories.filter { directoryObserver in
-            directoryObserver.type == type
-        }.sorted { lhs, rhs in
-            return lhs.name.localizedStandardCompare(rhs.name) == .orderedAscending
-        }
-    }
-
     @MainActor public func addLocation(type: DirectoryModel.DirectoryType, url: URL) throws {
         dispatchPrecondition(condition: .onQueue(.main))
         try url.prepareForSecureAccess()
         addDirectoryObserver(type: type, url: url)
-        try save()
     }
 
     @MainActor public func removeLocation(url: URL) throws {
@@ -117,7 +126,12 @@ public class ApplicationModel: ObservableObject {
     @MainActor private func addDirectoryObserver(type: DirectoryModel.DirectoryType, url: URL) {
         dispatchPrecondition(condition: .onQueue(.main))
         let directoryObserver = DirectoryModel(settings: settings, type: type, url: url)
-        directories.append(directoryObserver)
+        switch type {
+        case .inbox:
+            inboxes.append(directoryObserver)
+        case .archive:
+            archives.append(directoryObserver)
+        }
         directoryObserver.start()
         updateCountSubscription()
         updateRuleSetSubscription()
@@ -129,21 +143,15 @@ public class ApplicationModel: ObservableObject {
             throw FileawayError.directoryNotFound
         }
         directoryObserver.stop()
-        directories.removeAll { $0.id == directoryObserver.id }
-        try save()
+        inboxes.removeAll { $0.id == directoryObserver.id }
+        archives.removeAll { $0.id == directoryObserver.id }
         updateCountSubscription()
         updateRuleSetSubscription()
     }
 
-    @MainActor private func save() throws {
-        try settings.setInboxUrls(self.directories(type: .inbox).map { $0.url })
-        try settings.setArchiveUrls(self.directories(type: .archive).map { $0.url })
-    }
-
     @MainActor public func refresh() {
-        for directory in directories {
-            directory.refresh()
-        }
+        inboxes.refresh()
+        archives.refresh()
     }
 
     @MainActor public func storeRecentRule(_ ruleModel: RuleModel) {
