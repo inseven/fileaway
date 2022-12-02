@@ -22,11 +22,7 @@ import XCTest
 
 @testable import FileawayCore
 
-// TODO: Ensure the directory monitor ignores duplicates.
-// TODO: How do we deal with files that have changed; we should probably include the mtime too since this is used
-//       to determine whether we fetch the updates.
-
-// TODO: Perform should be allowed to fail and should fail the test with those results.
+// TODO: Consider not escaping?
 class DirectoryMonitorTests: XCTestCase {
 
     // TODO: This shouldn't be escaping?
@@ -44,10 +40,14 @@ class DirectoryMonitorTests: XCTestCase {
 
         let files = try wait(for: publisher, count: contents.count, timeout: 3, file: file, line: line) {
             DispatchQueue.main.sync {
-                try? action()
+                do {
+                    try action()
 #if os(iOS)
-                directoryMonitor.refresh()
+                    directoryMonitor.refresh()
 #endif
+                } catch {
+                    XCTFail("Failed to perform update action with error \(error).", file: file, line: line)
+                }
             }
         }
         XCTAssertEqual(files, contents, file: file, line: line)
@@ -161,7 +161,6 @@ class DirectoryMonitorTests: XCTestCase {
         let directoryMonitor = try await startedDirectoryMonitor(locations: [rootURL])
 
         try await expect([Set(expectedURLs)], directoryMonitor: directoryMonitor) {
-            // TODO: This shouldn't need to be self.
             try self.fileManager.moveItem(at: externalDirectoryURL, to: directoryURL)
         }
 
@@ -190,7 +189,7 @@ class DirectoryMonitorTests: XCTestCase {
         let dropCount = 1
 #endif
         try await expect([[]], directoryMonitor: directoryMonitor, drop: dropCount) {
-            try! self.fileManager.removeItem(at: directoryURL)
+            try self.fileManager.removeItem(at: directoryURL)
         }
 
     }
@@ -219,7 +218,7 @@ class DirectoryMonitorTests: XCTestCase {
 #endif
         let destinationURL = try createTemporaryDirectory()
         try await expect([[]], directoryMonitor: directoryMonitor, drop: dropCount) {
-            try! self.fileManager.moveItem(at: directoryURL, to: destinationURL.appending(component: "Directory"))
+            try self.fileManager.moveItem(at: directoryURL, to: destinationURL.appending(component: "Directory"))
         }
 
     }
@@ -243,7 +242,7 @@ class DirectoryMonitorTests: XCTestCase {
 
         let directoryMonitor = try await startedDirectoryMonitor(locations: [rootURL])
         try await expect([[]], directoryMonitor: directoryMonitor, drop: 1) {
-            try! FileManager.default.trashItem(at: directoryURL, resultingItemURL: nil)
+            try FileManager.default.trashItem(at: directoryURL, resultingItemURL: nil)
         }
 
     }
