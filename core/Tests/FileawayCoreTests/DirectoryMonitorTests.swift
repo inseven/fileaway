@@ -165,9 +165,10 @@ class DirectoryMonitorTests: XCTestCase {
 #if os(macOS)
 
     func testTrashNonEmptyDirectory() async throws {
-        // `FileManager.trashItem` only results in a single file system event for directory (not events for it's
-        // children) meaning that we only ever expect a single update event for that directory.
-        // Entertainingly `FileManager.trashItem` fails on iOS.
+        // `FileManager.trashItem` sometimes only results in a single file system event for directory (not events for
+        // it's children) meaning that we need to wait for this test to reach our expectation instead of waiting for
+        // an explicit number of updates. Entertainingly `FileManager.trashItem` also fails on iOS, so we can't even
+        // test it there.
 
         let rootURL = try createTemporaryDirectory()
         let directoryURL = rootURL.appending(component: "Directory")
@@ -180,10 +181,28 @@ class DirectoryMonitorTests: XCTestCase {
         createFiles(at: fileURLs)
 
         let directoryMonitor = try await startedDirectoryMonitor(locations: [rootURL])
-        try await expect([[]], directoryMonitor: directoryMonitor, drop: 1) {
-            try FileManager.default.trashItem(at: directoryURL, resultingItemURL: nil)
+
+        let publisher = directoryMonitor
+            .$files
+            .drop { contents in
+                guard let contents = contents else {
+                    return true
+                }
+                return !contents.isEmpty
+            }
+            .first()
+
+        let results = try wait(for: publisher, count: 1, timeout: 3) {
+            DispatchQueue.main.sync {
+                do {
+                    try FileManager.default.trashItem(at: directoryURL, resultingItemURL: nil)
+                } catch {
+                    XCTFail("Failed to trash file with error \(error).")
+                }
+            }
         }
 
+        XCTAssertEqual(results, [[]])
     }
 
 #endif
