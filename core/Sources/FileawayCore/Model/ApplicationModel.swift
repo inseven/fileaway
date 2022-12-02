@@ -95,8 +95,6 @@ public class ApplicationModel: ObservableObject {
     @MainActor public func directories(type: DirectoryModel.DirectoryType) -> [DirectoryModel] {
         self.directories.filter { directoryObserver in
             directoryObserver.type == type
-        }.sorted { lhs, rhs in
-            return lhs.name.localizedStandardCompare(rhs.name) == .orderedAscending
         }
     }
 
