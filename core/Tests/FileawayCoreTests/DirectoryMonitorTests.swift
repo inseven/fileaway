@@ -22,7 +22,6 @@ import XCTest
 
 @testable import FileawayCore
 
-// TODO: Consider not escaping?
 class DirectoryMonitorTests: XCTestCase {
 
     func expect(_ contents: [Set<URL>?],
