@@ -88,7 +88,7 @@ public class DirectoryMonitor: ObservableObject {
                         self.files = files.union(urls)
                     }
                 } else {
-                    let removals = files.descendents(of: urls)
+                    let removals = files.urlAndDescendents(of: urls)
                     if !files.intersection(removals).isEmpty {
                         print("State: -> removing urls")
                         self.files = files.subtracting(removals)

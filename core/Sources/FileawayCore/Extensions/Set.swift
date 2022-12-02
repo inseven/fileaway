@@ -22,15 +22,14 @@ import Foundation
 
 extension Set where Element == URL {
 
-    // TODO: Name this appropriately.
-    func descendents(of url: URL) -> Set<URL> {
+    func urlAndDescendents(of url: URL) -> Set<URL> {
         return filter { url == $0 || url.isParent(of: $0) }
     }
 
-    func descendents(of urls: Set<URL>) -> Set<URL> {
+    func urlAndDescendents(of urls: Set<URL>) -> Set<URL> {
         return urls
             .map { url in
-                return descendents(of: url)
+                return urlAndDescendents(of: url)
             }
             .reduce(into: Set<URL>()) { partialResult, urls in
                 partialResult.formUnion(urls)
@@ -38,7 +37,7 @@ extension Set where Element == URL {
     }
 
     func removingURLsAndDescendents(of urls: Set<URL>) -> Set<URL> {
-        let removals = descendents(of: urls)
+        let removals = urlAndDescendents(of: urls)
         return subtracting(removals)
     }
 

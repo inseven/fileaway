@@ -104,7 +104,6 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
                     result[fileInfo.url] = fileInfo
                 }
 
-                // TODO: Consider using the ordered set here? This might be an unnecessary transform?
                 let previewURLs = Array(files.keys)
 
                 return (files, previewURLs, isLoading)

@@ -22,9 +22,7 @@ import XCTest
 
 @testable import FileawayCore
 
-// TODO: Ensure the directory monitor ignores duplicates.
-// TODO: How do we deal with files that have changed; we should probably include the mtime too since this is used
-//       to determine whether we fetch the updates.
+// TODO: Add selection tests.
 
 class DirectoryViewModelTests: XCTestCase {
 

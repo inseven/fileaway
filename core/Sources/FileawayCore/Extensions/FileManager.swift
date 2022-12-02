@@ -26,7 +26,6 @@ extension FileManager {
         return urls(for: .libraryDirectory, in: .userDomainMask)[0]
     }
 
-    // TODO: Does this include folders?
     public func files(at url: URL) -> [URL] {
         var files: [URL] = []
         if let enumerator = enumerator(at: url,
