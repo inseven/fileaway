@@ -25,7 +25,6 @@ import XCTest
 // TODO: Consider not escaping?
 class DirectoryMonitorTests: XCTestCase {
 
-    // TODO: This shouldn't be escaping?
     func expect(_ contents: [Set<URL>?],
                 directoryMonitor: DirectoryMonitor,
                 drop dropCount: Int = 1,
