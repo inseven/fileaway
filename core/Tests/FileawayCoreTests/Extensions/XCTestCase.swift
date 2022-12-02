@@ -23,6 +23,10 @@ import XCTest
 
 extension XCTestCase {
 
+    var fileManager: FileManager {
+        return FileManager.default
+    }
+
     func createTemporaryDirectory() throws -> URL {
 
         let fileManager = FileManager.default
@@ -92,6 +96,58 @@ extension XCTestCase {
                             line: UInt = #line,
                             perform action: (() throws -> Void)? = nil) throws -> Publishers.First<Publishers.CollectByCount<T>>.Output {
         return try wait(for: publisher.collect(count).first(), timeout: timeout, file: file, line: line, perform: action)
+    }
+
+    func expect(_ contents: [Set<URL>?],
+                directoryMonitor: DirectoryMonitor,
+                drop dropCount: Int = 1,
+                file: StaticString = #file,
+                line: UInt = #line,
+                perform action: @MainActor @escaping () throws -> Void) async throws {
+
+        let publisher = directoryMonitor
+            .$files
+            .dropFirst(dropCount)
+            .map { $0?.standardizingFileURLs() }
+
+        let files = try wait(for: publisher, count: contents.count, timeout: 3, file: file, line: line) {
+            DispatchQueue.main.sync {
+                do {
+                    try action()
+#if os(iOS)
+                    directoryMonitor.refresh()
+#endif
+                } catch {
+                    XCTFail("Failed to perform update action with error \(error).", file: file, line: line)
+                }
+            }
+        }
+        XCTAssertEqual(files, contents, file: file, line: line)
+    }
+
+    func startedDirectoryMonitor(locations: [URL]) async throws -> DirectoryMonitor {
+
+        let directoryMonitor = DirectoryMonitor(locations: locations)
+
+        let publisher = directoryMonitor
+            .$files
+            .dropFirst()
+            .collect(1)
+            .first()
+
+        _ = try wait(for: publisher, timeout: 3) {
+            DispatchQueue.main.sync {
+                directoryMonitor.start()
+            }
+        }
+
+        // TODO: DirectoryMonitor instances leak if not explicitly stopped #518
+        //       https://github.com/inseven/fileaway/issues/518
+//        addTeardownBlock {
+//            await directoryMonitor.stop()
+//        }
+
+        return directoryMonitor
     }
 
 }
