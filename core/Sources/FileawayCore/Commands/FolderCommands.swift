@@ -31,7 +31,7 @@ public struct FolderCommands: Commands {
 
     @MainActor public var body: some Commands {
         CommandMenu("Folder") {
-            ForEach(Array(applicationModel.directories(type: .inbox).enumerated()), id: \.element.id) { index, folder in
+            ForEach(Array(applicationModel.inboxes.enumerated()), id: \.element.id) { index, folder in
                 Button(folder.name) {
                     sceneModel?.section = folder.url
                 }
@@ -39,11 +39,11 @@ public struct FolderCommands: Commands {
                 .disabled(sceneModel == nil)
             }
             Divider()
-            ForEach(Array(applicationModel.directories(type: .archive).enumerated()), id: \.element.id) { index, folder in
+            ForEach(Array(applicationModel.archives.enumerated()), id: \.element.id) { index, folder in
                 Button(folder.name) {
                     sceneModel?.section = folder.url
                 }
-                .keyboardShortcut(applicationModel.directories(type: .inbox).count + index + 1, modifiers: .command)
+                .keyboardShortcut(applicationModel.inboxes.count + index + 1, modifiers: .command)
                 .disabled(sceneModel == nil)
             }
         }

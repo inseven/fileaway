@@ -33,7 +33,7 @@ struct RulesSettingsView: View {
         HStack {
             VStack {
                 List(selection: $selection) {
-                    ForEach(applicationModel.directories(type: .archive)) { directory in
+                    ForEach(applicationModel.archives) { directory in
                         HStack {
                             IconView(url: directory.url, size: CGSize(width: 16, height: 16))
                             Text(directory.name)
@@ -42,7 +42,7 @@ struct RulesSettingsView: View {
                 }
             }
             GroupBox {
-                if let ruleSet = applicationModel.directories.first { $0.id == selection }?.ruleSet {
+                if let ruleSet = applicationModel.archives.first { $0.id == selection }?.ruleSet {
                     RulesEditor(rulesModel: ruleSet)
                         .padding(4)
                 } else {

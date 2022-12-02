@@ -34,8 +34,20 @@ struct LocationsEditor: View {
     var type: DirectoryModel.DirectoryType
     @ObservedObject var applicationModel: ApplicationModel
 
+    @Binding var directories: [DirectoryModel]
+
     @State var selection: UUID?
     @State var alertType: AlertType?
+
+    init(applicationModel: ApplicationModel,
+         name: String,
+         type: DirectoryModel.DirectoryType,
+         directories: Binding<Array<DirectoryModel>>) {
+        self.name = name
+        self.type = type
+        self.applicationModel = applicationModel
+        _directories = directories
+    }
 
     func addLocation(type: DirectoryModel.DirectoryType, url: URL) {
         dispatchPrecondition(condition: .onQueue(.main))
@@ -50,7 +62,7 @@ struct LocationsEditor: View {
         GroupBox(label: Text(name)) {
             HStack {
                 List(selection: $selection) {
-                    ForEach(applicationModel.directories(type: type)) { directory in
+                    ForEach(directories) { directory in
                         HStack {
                             IconView(url: directory.url, size: CGSize(width: 16, height: 16))
                             Text(directory.name)
@@ -58,6 +70,9 @@ struct LocationsEditor: View {
                         .contextMenu {
                             LocationMenuCommands(url: directory.url)
                         }
+                    }
+                    .onMove { (fromOffsets, toOffset) in
+                        directories.move(fromOffsets: fromOffsets, toOffset: toOffset)
                     }
                 }
                 .onDrop(of: [.fileURL], isTargeted: Binding.constant(false)) { itemProviders in
@@ -89,7 +104,8 @@ struct LocationsEditor: View {
                             .frame(width: 80)
                     }
                     Button {
-                        guard let directory = applicationModel.directories.first(where: { $0.id == selection }) else {
+                        guard let directory = (applicationModel.inboxes + applicationModel.archives)
+                            .first(where: { $0.id == selection }) else {
                             return
                         }
                         try? applicationModel.removeLocation(url: directory.url)
