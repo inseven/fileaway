@@ -92,49 +92,6 @@ class DirectoryMonitorTests: XCTestCase {
 
     }
 
-    func testRemoveChildren() {
-
-        XCTAssertTrue(URL(fileURLWithPath: "/a").isParent(of: URL(fileURLWithPath: "/a/b")))
-        XCTAssertFalse(URL(fileURLWithPath: "/a").isParent(of: URL(fileURLWithPath: "/abba/b")))
-
-        XCTAssertEqual(
-            Set([
-                URL(fileURLWithPath: "/a/b/c"),
-                URL(fileURLWithPath: "/a/b"),
-                URL(fileURLWithPath: "/a/b/d"),
-                URL(fileURLWithPath: "/e/random.txt"),
-            ]).removingURLsAndDescendents(of: Set([URL(fileURLWithPath: "/a")])),
-            Set([
-                URL(fileURLWithPath: "/e/random.txt"),
-            ]))
-
-        XCTAssertEqual(
-            Set([
-                URL(fileURLWithPath: "/a"),
-                URL(fileURLWithPath: "/a/b/c"),
-                URL(fileURLWithPath: "/a/b"),
-                URL(fileURLWithPath: "/a/b/d"),
-                URL(fileURLWithPath: "/e/random.txt"),
-            ]).removingURLsAndDescendents(of: Set([URL(fileURLWithPath: "/a")])),
-            Set([
-                URL(fileURLWithPath: "/e/random.txt"),
-            ]))
-
-        XCTAssertEqual(
-            Set([
-                URL(fileURLWithPath: "/a"),
-                URL(fileURLWithPath: "/a/b/c"),
-                URL(fileURLWithPath: "/a/b"),
-                URL(fileURLWithPath: "/a/b/d"),
-                URL(fileURLWithPath: "/e/random.txt"),
-            ]).removingURLsAndDescendents(of: Set([
-                URL(fileURLWithPath: "/a"),
-                URL(fileURLWithPath: "/e")
-            ])),
-            Set([]))
-
-    }
-
     func testStartNonEmpty() async throws {
 
         let rootURL = try createTemporaryDirectory()

@@ -30,5 +30,10 @@ class URLTests: XCTestCase {
         XCTAssertEqual(childURL.relativePath(from: parentURL), "Accommodation/2022-11-22 House Correspondence.pdf")
     }
 
+    func testParent() {
+        XCTAssertTrue(URL(fileURLWithPath: "/a").isParent(of: URL(fileURLWithPath: "/a/b")))
+        XCTAssertFalse(URL(fileURLWithPath: "/a").isParent(of: URL(fileURLWithPath: "/abba/b")))
+    }
+
 }
 
