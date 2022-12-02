@@ -78,18 +78,16 @@ public class DirectoryMonitor: ObservableObject {
 
             DispatchQueue.main.sync {
                 precondition(self.files != nil)
-
+                guard let files = self.files else {
+                    return
+                }
                 if isCreate {
-                    for url in urls {
-                        if !(self.files?.contains(url) ?? false) {
-                            self.files?.insert(url)
-                        }
+                    if files.intersection(urls).count != urls.count {
+                        self.files = files.union(urls)
                     }
                 } else {
-                    for url in urls {
-                        if (self.files?.contains(url) ?? false) {
-                            self.files?.remove(url)
-                        }
+                    if !files.intersection(urls).isEmpty {
+                        self.files = files.subtracting(urls)
                     }
                 }
             }
