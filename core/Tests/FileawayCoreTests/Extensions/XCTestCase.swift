@@ -18,9 +18,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Combine
 import XCTest
 
+@testable import FileawayCore
+
 extension XCTestCase {
+
+    var fileManager: FileManager {
+        return FileManager.default
+    }
+
+    func createFiles(at urls: [URL], file: StaticString = #file, line: UInt = #line) {
+        XCTAssertTrue(fileManager.createFiles(at: urls), file: file, line: line)
+    }
 
     func createTemporaryDirectory() throws -> URL {
 
@@ -43,6 +54,106 @@ extension XCTestCase {
         }
 
         return directoryURL
+    }
+
+    // Based on https://www.swiftbysundell.com/articles/unit-testing-combine-based-swift-code/.
+    func wait<T: Publisher>(for publisher: T,
+                            timeout: TimeInterval = 10,
+                            file: StaticString = #file,
+                            line: UInt = #line,
+                            perform action: (() throws -> Void)? = nil) throws -> T.Output {
+
+        var result: Result<T.Output, Error>?
+        let expectation = expectation(description: "Awaiting publisher")
+
+        let cancellable = publisher.sink(
+            receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    result = .failure(error)
+                case .finished:
+                    break
+                }
+                expectation.fulfill()
+            },
+            receiveValue: { value in
+                result = .success(value)
+            }
+        )
+
+        // Perform any requested operation after we've created the subscription to ensure that changes aren't missed.
+        try action?()
+
+        wait(for: [expectation], timeout: timeout)
+        cancellable.cancel()
+
+        let unwrappedResult = try XCTUnwrap(result,
+                                            "Awaited publisher did not produce any output",
+                                            file: file,
+                                            line: line)
+
+        return try unwrappedResult.get()
+    }
+
+    func wait<T: Publisher>(for publisher: T,
+                            count: Int,
+                            timeout: TimeInterval = 10,
+                            file: StaticString = #file,
+                            line: UInt = #line,
+                            perform action: (() throws -> Void)? = nil) throws -> Publishers.First<Publishers.CollectByCount<T>>.Output {
+        return try wait(for: publisher.collect(count).first(), timeout: timeout, file: file, line: line, perform: action)
+    }
+
+    func expect(_ contents: [Set<URL>?],
+                directoryMonitor: DirectoryMonitor,
+                drop dropCount: Int = 1,
+                file: StaticString = #file,
+                line: UInt = #line,
+                perform action: @MainActor @escaping () throws -> Void) async throws {
+
+        let publisher = directoryMonitor
+            .$files
+            .dropFirst(dropCount)
+            .map { $0?.standardizingFileURLs() }
+
+        let files = try wait(for: publisher, count: contents.count, timeout: 3, file: file, line: line) {
+            DispatchQueue.main.sync {
+                do {
+                    try action()
+#if os(iOS)
+                    directoryMonitor.refresh()
+#endif
+                } catch {
+                    XCTFail("Failed to perform update action with error \(error).", file: file, line: line)
+                }
+            }
+        }
+        XCTAssertEqual(files, contents, file: file, line: line)
+    }
+
+    func startedDirectoryMonitor(locations: [URL]) async throws -> DirectoryMonitor {
+
+        let directoryMonitor = DirectoryMonitor(locations: locations)
+
+        let publisher = directoryMonitor
+            .$files
+            .dropFirst()
+            .collect(1)
+            .first()
+
+        _ = try wait(for: publisher, timeout: 3) {
+            DispatchQueue.main.sync {
+                directoryMonitor.start()
+            }
+        }
+
+        // TODO: DirectoryMonitor instances leak if not explicitly stopped #518
+        //       https://github.com/inseven/fileaway/issues/518
+//        addTeardownBlock {
+//            await directoryMonitor.stop()
+//        }
+
+        return directoryMonitor
     }
 
 }

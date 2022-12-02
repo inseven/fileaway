@@ -47,6 +47,13 @@ public class FileInfo: Identifiable, Hashable {
     public let date: FileDate
     public let directoryUrl: URL
 
+    public init(url: URL, name: String, date: FileDate, directoryUrl: URL) {
+        self.url = url
+        self.name = name
+        self.date = date
+        self.directoryUrl = directoryUrl
+    }
+
     public init(url: URL) {
         self.url = url
         let name = url.displayName.deletingPathExtension
@@ -62,6 +69,13 @@ public class FileInfo: Identifiable, Hashable {
 
     public func hash(into hasher: inout Hasher) {
         hasher.combine(url)
+    }
+
+    public func standardizingFileURL() -> FileInfo {
+        return FileInfo(url: url.standardizedFileURL,
+                        name: name,
+                        date: date,
+                        directoryUrl: directoryUrl)
     }
 
 }

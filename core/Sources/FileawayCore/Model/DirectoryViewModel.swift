@@ -21,6 +21,7 @@
 import Combine
 import SwiftUI
 
+import Collections
 import Interact
 
 public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
@@ -30,9 +31,9 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
         case file(FileInfo)
     }
 
-    public var id: URL { self.url }
+    @MainActor public var id: URL { self.url }
 
-    @Published public var files: [FileInfo] = []
+    @Published public var files: OrderedDictionary<URL, FileInfo> = [:]
     @Published public var filter: String = ""
     @Published public var selection: Set<FileInfo> = []
     @Published public var previewUrls: [URL] = []
@@ -57,15 +58,15 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
         }
     }
 
-    public var url: URL {
+    @MainActor public var url: URL {
         return directoryModel?.url ?? URL(string: "foo:unknown")!
     }
 
-    public var name: String {
+    @MainActor public var name: String {
         return directoryModel?.name ?? "Nothing to see here"
     }
 
-    private var selectedUrls: [URL] {
+    @MainActor private var selectedURLs: [URL] {
         selection.map { $0.url }
     }
 
@@ -84,7 +85,7 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
             .$files
             .combineLatest($filter, directoryModel.$isLoading)
             .receive(on: syncQueue)
-            .map { files, filter, isLoading in
+            .map { files, filter, isLoading -> ([FileInfo], Bool) in
                 let files = files
                     .filter { filter.isEmpty || $0.name.localizedSearchMatches(string: filter) }
                     .sorted { fileInfo1, fileInfo2 -> Bool in
@@ -96,12 +97,22 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
                     }
                 return (files, isLoading)
             }
-            .map { files, isLoading in
-                return (files, files.map { $0.url }, isLoading)
+            .map { files, isLoading -> (OrderedDictionary<URL, FileInfo>, [URL], Bool) in
+
+                // Reduce the files into an ordered dictionary.
+                let files = files.reduce(into: OrderedDictionary<URL, FileInfo>()) { result, fileInfo in
+                    result[fileInfo.url] = fileInfo
+                }
+
+                let previewURLs = Array(files.keys)
+
+                return (files, previewURLs, isLoading)
             }
             .receive(on: DispatchQueue.main)
             .sink { files, previewUrls, isLoading in
-                self.files = files
+                if self.files != files {
+                    self.files = files
+                }
                 self.previewUrls = previewUrls
                 self.isLoading = isLoading
             }
@@ -111,7 +122,8 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
         $files
             .receive(on: DispatchQueue.main)
             .map { files in
-                return Set(files.filter { self.selection.contains($0) })
+                let selection = self.selection.filter { files[$0.url] != nil }
+                return selection
             }
             .sink { selection in
                 guard self.selection != selection else {
@@ -122,15 +134,22 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
             .store(in: &cancellables)
 
         // Update the selection to match the preview URL.
+        // Unfortunately the `quickLookPreview` current item binding doesn't seem to be updated on iOS when paging
+        // through the items meaning that our selection can't be correctly updated. Given this, on iOS we allow the
+        // nil item binding (indicating that the quick look preview has been dismissed) to clear the selection.
         directoryModel
             .$files
             .combineLatest($previewUrl)
             .receive(on: syncQueue)
-            .compactMap { (files, previewUrl) -> Set<FileInfo>? in
-                guard previewUrl != nil,
-                      let file = self.files.first(where: { $0.url == previewUrl })
-                else {
+            .compactMap { (files, previewURL) -> Set<FileInfo>? in
+#if os(macOS)
+                guard previewURL != nil else {
                     return nil
+                }
+#endif
+                guard let previewURL = previewURL,
+                      let file = self.files[previewURL] else {
+                    return []
                 }
                 return [file]
             }
@@ -165,8 +184,8 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
         return !selection.isEmpty
     }
 
-    public func cut() -> [NSItemProvider] {
-        selectedUrls.map { NSItemProvider(object: $0 as NSURL) }
+    @MainActor public func cut() -> [NSItemProvider] {
+        selectedURLs.map { NSItemProvider(object: $0 as NSURL) }
     }
 
     @MainActor public var canTrash: Bool {
@@ -206,7 +225,7 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
     }
 
     @MainActor public func open() {
-        for url in selectedUrls {
+        for url in selectedURLs {
             Application.open(url)
         }
     }

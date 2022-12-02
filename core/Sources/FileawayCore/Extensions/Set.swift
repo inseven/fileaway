@@ -18,22 +18,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import XCTest
+import Foundation
 
-@testable import FileawayCore
+extension Set where Element == URL {
 
-class URLTests: XCTestCase {
-
-    func testRelativePath() {
-        let parentURL = URL(string: "file:///Documents/Paperwork/")!
-        let childURL = URL(string: "file:///Documents/Paperwork/Accommodation/2022-11-22%20House%20Correspondence.pdf")!
-        XCTAssertEqual(childURL.relativePath(from: parentURL), "Accommodation/2022-11-22 House Correspondence.pdf")
+    func urlAndDescendents(of url: URL) -> Set<URL> {
+        return filter { url == $0 || url.isParent(of: $0) }
     }
 
-    func testParent() {
-        XCTAssertTrue(URL(fileURLWithPath: "/a").isParent(of: URL(fileURLWithPath: "/a/b")))
-        XCTAssertFalse(URL(fileURLWithPath: "/a").isParent(of: URL(fileURLWithPath: "/abba/b")))
+    func urlAndDescendents(of urls: Set<URL>) -> Set<URL> {
+        return urls
+            .map { url in
+                return urlAndDescendents(of: url)
+            }
+            .reduce(into: Set<URL>()) { partialResult, urls in
+                partialResult.formUnion(urls)
+            }
+    }
+
+    func removingURLsAndDescendents(of urls: Set<URL>) -> Set<URL> {
+        let removals = urlAndDescendents(of: urls)
+        return subtracting(removals)
     }
 
 }
-

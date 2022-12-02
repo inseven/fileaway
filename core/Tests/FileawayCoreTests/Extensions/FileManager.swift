@@ -18,22 +18,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import XCTest
+import Foundation
 
-@testable import FileawayCore
+extension FileManager {
 
-class URLTests: XCTestCase {
-
-    func testRelativePath() {
-        let parentURL = URL(string: "file:///Documents/Paperwork/")!
-        let childURL = URL(string: "file:///Documents/Paperwork/Accommodation/2022-11-22%20House%20Correspondence.pdf")!
-        XCTAssertEqual(childURL.relativePath(from: parentURL), "Accommodation/2022-11-22 House Correspondence.pdf")
+    func createFile(at url: URL, contents: Data? = nil) -> Bool {
+        return createFile(atPath: url.path, contents: contents)
     }
 
-    func testParent() {
-        XCTAssertTrue(URL(fileURLWithPath: "/a").isParent(of: URL(fileURLWithPath: "/a/b")))
-        XCTAssertFalse(URL(fileURLWithPath: "/a").isParent(of: URL(fileURLWithPath: "/abba/b")))
+    func createFiles(at urls: [URL], contents: Data? = nil) -> Bool {
+        for url in urls {
+            guard createFile(atPath: url.path, contents: contents) else {
+                return false
+            }
+        }
+        return true
     }
 
 }
-
