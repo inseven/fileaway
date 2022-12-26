@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import Interact
+
 public struct LocationMenuCommands: View {
 
     @EnvironmentObject private var applicationModel: ApplicationModel
