@@ -22,9 +22,7 @@ import Combine
 import Foundation
 import SwiftUI
 
-#if os(macOS)
-import AppKit
-#endif
+import Interact
 
 extension Array where Element == DirectoryModel {
 
