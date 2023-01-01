@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2022 InSeven Limited
+// Copyright (c) 2018-2023 InSeven Limited
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,7 @@ public struct Legal {
 
     public static let repository = "inseven/fileaway"
 
-    public static let copyright = "Copyright © 2018-2022 InSeven Limited"
+    public static let copyright = "Copyright © 2018-2023 InSeven Limited"
 
     public static let actions = [
         Action("Website", url: URL(string: "https://fileaway.app")!),
