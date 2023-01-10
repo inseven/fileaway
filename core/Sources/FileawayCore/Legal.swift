@@ -21,6 +21,7 @@
 import Foundation
 
 import Diligence
+import Interact
 
 public struct Legal {
 
@@ -53,7 +54,7 @@ public struct Legal {
         License("Fileaway", author: "InSeven Limited", filename: "fileaway-license", bundle: .module),
         License("FilePicker", author: "Mark Renaud", filename: "filepicker-license", bundle: .module),
         License("HashRainbow", author: "Sarah Barbour", filename: "hashrainbow-license", bundle: .module),
-        License("Interact", author: "InSeven Limited", filename: "interact-license", bundle: .module),
+        License(Interact.Package.name, author: Interact.Package.author, url: Interact.Package.licenseURL),
         License("Introspect", author: "Timber Software", filename: "introspect-license", bundle: .module),
     ]
 
