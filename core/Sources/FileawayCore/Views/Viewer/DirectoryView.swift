@@ -71,6 +71,9 @@ public struct DirectoryView: View {
                             Label("Delete", systemImage: "trash")
                         }
                     }
+                    .itemProvider {
+                        NSItemProvider(object: file.url as NSURL)
+                    }
             }
         }
 #if os(iOS)
