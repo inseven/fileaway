@@ -42,7 +42,7 @@ struct RulesSettingsView: View {
                 }
             }
             GroupBox {
-                if let ruleSet = applicationModel.archives.first { $0.id == selection }?.ruleSet {
+                if let ruleSet = applicationModel.archives.first(where: { $0.id == selection })?.ruleSet {
                     RulesEditor(rulesModel: ruleSet)
                         .padding(4)
                 } else {
