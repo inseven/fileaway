@@ -46,12 +46,10 @@ struct FileRow: View {
                             .lineLimit(1)
                             .font(.headline)
                         Spacer()
-                        if let date = file.date {
-                            DateView(date: date)
-                                .foregroundColor(.secondary)
-                                .lineLimit(1)
-                                .layoutPriority(1)
-                        }
+                        DateView(date: file.date)
+                            .foregroundColor(.secondary)
+                            .lineLimit(1)
+                            .layoutPriority(1)
                     }
                     HStack {
                         if let rootURL = sceneModel.directoryViewModel?.url,

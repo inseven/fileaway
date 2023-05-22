@@ -36,7 +36,7 @@ struct DestinationTable: View {
     var body: some View {
         VStack {
             HStack {
-                Table(selection: $selection) {
+                Table(of: ComponentModel.self, selection: $selection) {
                     TableColumn("Component") { componentModel in
                         if componentModel.type == .text {
                             ComponentValueTextField(componentModel: componentModel)
