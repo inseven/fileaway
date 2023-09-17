@@ -186,6 +186,11 @@ APP_PATH="$BUILD_DIRECTORY/$APP_BASENAME"
 IPA_PATH="$BUILD_DIRECTORY/Fileaway.ipa"
 PKG_PATH="$BUILD_DIRECTORY/Fileaway.pkg"
 
+# Install the private key.
+mkdir -p ~/.appstoreconnect/private_keys/
+echo -n "$APPLE_API_KEY_BASE64" | base64 --decode -o ~/".appstoreconnect/private_keys/AuthKey_${APPLE_API_KEY_ID}.p8"
+
+
 # Validate the iOS build.
 xcrun altool --validate-app \
     -f "${IPA_PATH}" \
@@ -210,10 +215,6 @@ zip -r "${ZIP_BASENAME}" .
 popd
 
 if $RELEASE ; then
-
-    # Install the private key.
-    mkdir -p ~/.appstoreconnect/private_keys/
-    echo -n "$APPLE_API_KEY" | base64 --decode -o ~/".appstoreconnect/private_keys/AuthKey_${APPLE_API_KEY_ID}.p8"
 
     changes \
         release \
