@@ -30,7 +30,7 @@ set -x
 # Upload the iOS build.
 xcrun altool --upload-app \
     -f "$1" \
-    --primary-bundle-id "uk.co.inseven.fileaway" \
+    --primary-bundle-id "app.fileaway.apps.appstore" \
     --apiKey "$APPLE_API_KEY_ID" \
     --apiIssuer "$APPLE_API_KEY_ISSUER_ID" \
     --type ios
@@ -38,7 +38,7 @@ xcrun altool --upload-app \
 # Upload the macOS build.
 xcrun altool --upload-app \
     -f "$2" \
-    --primary-bundle-id "uk.co.inseven.fileaway" \
+    --primary-bundle-id "app.fileaway.apps.appstore" \
     --apiKey "$APPLE_API_KEY_ID" \
     --apiIssuer "$APPLE_API_KEY_ISSUER_ID" \
     --type macos
