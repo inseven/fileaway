@@ -354,7 +354,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
 				LastUpgradeCheck = 1240;
-				ORGANIZATIONNAME = "InSeven Limited";
+				ORGANIZATIONNAME = "Jason Morley";
 				TargetAttributes = {
 					D8CCB8012143672700AC445F = {
 						CreatedOnToolsVersion = 9.0;
