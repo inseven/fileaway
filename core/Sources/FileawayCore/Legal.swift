@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2023 InSeven Limited
+// Copyright (c) 2018-2024 Jason Morley
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,13 +27,12 @@ public struct Legal {
 
     public static let repository = "inseven/fileaway"
 
-    public static let copyright = "Copyright © 2018-2023 InSeven Limited"
+    public static let copyright = "Copyright © 2018-2024 Jason Morley"
 
     public static let actions = [
         Action("Website", url: URL(string: "https://fileaway.app")!),
         Action("Privacy", url: URL(string: "https://fileaway.app/privacy-policy")!),
         Action("GitHub", url: URL(string: "https://github.com/inseven/fileaway")!),
-        Action("InSeven Limited", url: URL(string: "https://inseven.co.uk")!),
     ]
 
     public static let acknowledgements = [
@@ -52,7 +51,7 @@ public struct Legal {
     public static let licenses = [
         License("DIFlowLayout", author: "Daniel Inoa", filename: "diflowlayout-license", bundle: .module),
         License("EonilFSEvents", author: "Hoon H., Eonil", filename: "eonilfsevents-license", bundle: .module),
-        License("Fileaway", author: "InSeven Limited", filename: "fileaway-license", bundle: .module),
+        License("Fileaway", author: "Jason Morley", filename: "fileaway-license", bundle: .module),
         License("FilePicker", author: "Mark Renaud", filename: "filepicker-license", bundle: .module),
         License("HashRainbow", author: "Sarah Barbour", filename: "hashrainbow-license", bundle: .module),
         License(Interact.Package.name, author: Interact.Package.author, url: Interact.Package.licenseURL),
