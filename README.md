@@ -1,6 +1,6 @@
 # Fileaway
 
-[![Build](https://github.com/jbmorley/fileaway/actions/workflows/build.yaml/badge.svg?branch=main)](https://github.com/jbmorley/fileaway/actions/workflows/build.yaml) [![update-release-notes](https://github.com/inseven/fileaway/actions/workflows/update-release-notes.yaml/badge.svg)](https://github.com/inseven/fileaway/actions/workflows/update-release-notes.yaml)
+[![Build](https://github.com/jbmorley/fileaway/actions/workflows/build.yaml/badge.svg?branch=main)](https://github.com/jbmorley/fileaway/actions/workflows/build.yaml)
 
 Document management app for iOS and macOS.
 
