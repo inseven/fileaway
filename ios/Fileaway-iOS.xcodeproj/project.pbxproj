@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -628,7 +628,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.fileaway;
+				PRODUCT_BUNDLE_IDENTIFIER = app.fileaway.apps.appstore;
 				PRODUCT_NAME = Fileaway;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -648,7 +648,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = S4WXAUZQEV;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = QS82QFHKWB;
 				INFOPLIST_FILE = Fileaway/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Fileaway;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
@@ -657,7 +657,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.fileaway;
+				PRODUCT_BUNDLE_IDENTIFIER = app.fileaway.apps.appstore;
 				PRODUCT_NAME = Fileaway;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Fileaway App Store Profile";
@@ -682,7 +682,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.FileawayTests;
+				PRODUCT_BUNDLE_IDENTIFIER = app.fileaway.apps.appstore.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -703,7 +703,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.FileawayTests;
+				PRODUCT_BUNDLE_IDENTIFIER = app.fileaway.apps.appstore.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -723,7 +723,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.FileawayUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = app.fileaway.apps.appstore.uitests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -743,7 +743,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.inseven.FileawayUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = app.fileaway.apps.appstore.uitests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

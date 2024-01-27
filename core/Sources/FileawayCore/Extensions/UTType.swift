@@ -22,8 +22,8 @@ import UniformTypeIdentifiers
 
 extension UTType: Identifiable {
     
-    public static let rules = UTType(exportedAs: "uk.co.inseven.fileaway.rules")
-    public static var component = UTType(exportedAs: "uk.co.inseven.fileaway.component")
+    public static let rules = UTType(exportedAs: "app.fileaway.types.rules")
+    public static var component = UTType(exportedAs: "app.fileaway.types.component")
 
     public static var doc = UTType(filenameExtension: "doc")!
     public static var docx = UTType(filenameExtension: "docx")!

@@ -23,7 +23,7 @@ import Foundation
 extension Bundle {
 
     public static var fileaway: Bundle {
-        return Bundle(identifier: "uk.co.inseven.FileawayCore")!
+        return Bundle(identifier: "app.fileaway.apps.appstore.core")!
     }
 
 }
