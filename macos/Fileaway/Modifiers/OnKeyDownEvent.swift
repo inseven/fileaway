@@ -58,7 +58,7 @@ struct OnKeyDownEvent: ViewModifier {
             .onDisappear {
                 disable()
             }
-            .onChange(of: isFocused) { newValue in
+            .onChange(of: isFocused) { _, newValue in
                 print("isFocused = \(newValue)")
             }
     }

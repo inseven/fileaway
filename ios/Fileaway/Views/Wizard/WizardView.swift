@@ -40,7 +40,7 @@ struct WizardView: View {
             RulePicker(applicationModel: applicationModel, url: file.url)
         }
         .environmentObject(wizardModel)
-        .onChange(of: wizardModel.isComplete) { isComplete in
+        .onChange(of: wizardModel.isComplete) { _, isComplete in
             guard isComplete else {
                 return
             }

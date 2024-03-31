@@ -132,7 +132,22 @@ public struct DirectoryView: View {
             self.directoryViewModel.refresh()
         }
         .editable($isEditing)
-        .placeholderOverlay(directoryViewModel.files.isEmpty, text: "No Files")
+        .overlay {
+            if directoryViewModel.files.isEmpty {
+                ContentUnavailableView {
+                    Label {
+                        Text("No Files")
+                    } icon: {
+                        Text("🎉")
+                            .font(.system(size: 52))
+                            .grayscale(1)
+                            .opacity(0.8)
+                    }
+                } description: {
+                    Text("New files will appear here automatically.")
+                }
+            }
+        }
         .progressOverlay(directoryViewModel.isLoading)
         .searchable(text: $directoryViewModel.filter)
         .quickLookPreview($directoryViewModel.previewUrl, in: directoryViewModel.previewUrls)
