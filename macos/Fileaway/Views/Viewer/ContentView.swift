@@ -55,7 +55,7 @@ struct ContentView: View {
         .runs(sceneModel)
         .environmentObject(sceneModel)
         .focusedSceneObject(sceneModel)
-        .onChange(of: sceneModel.action) { action in
+        .onChange(of: sceneModel.action) { _, action in
             // macOS treats actions as a stream of operation requests.
             // This allows us to open windows instead of presenting sheets as we do on iOS.
             guard let action = action else {

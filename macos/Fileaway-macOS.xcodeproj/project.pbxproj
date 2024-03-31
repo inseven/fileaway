@@ -680,6 +680,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.fileaway.apps.appstore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -709,6 +710,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.fileaway.apps.appstore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
