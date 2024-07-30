@@ -30,8 +30,8 @@ public struct Legal {
     public static let copyright = "Copyright © 2018-2024 Jason Morley"
 
     public static let actions = [
-        Action("Website", url: URL(string: "https://fileaway.app")!),
-        Action("Privacy", url: URL(string: "https://fileaway.app/privacy-policy")!),
+        Action("Website", url: URL(string: "https://fileaway.jbmorley.co.uk")!),
+        Action("Privacy", url: URL(string: "https://fileaway.jbmorley.co.uk/privacy-policy")!),
         Action("GitHub", url: URL(string: "https://github.com/inseven/fileaway")!),
     ]
 
