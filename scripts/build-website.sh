@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (c) 2018-2024 Jason Morley
+# Copyright (c) 2024 Jason Morley
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -27,15 +27,48 @@ set -u
 
 SCRIPTS_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-ROOT_DIRECTORY="$SCRIPTS_DIRECTORY/.."
-RELEASE_NOTES_TEMPLATE_PATH="$SCRIPTS_DIRECTORY/release-notes.markdown"
-RELEASE_NOTES_DIRECTORY="$ROOT_DIRECTORY/docs/releases"
-RELEASE_NOTES_PATH="$RELEASE_NOTES_DIRECTORY/index.markdown"
+ROOT_DIRECTORY="${SCRIPTS_DIRECTORY}/.."
+WEBSITE_DIRECTORY="${ROOT_DIRECTORY}/docs"
 
-source "$SCRIPTS_DIRECTORY/environment.sh"
+RELEASE_NOTES_TEMPLATE_PATH="${SCRIPTS_DIRECTORY}/release-notes.markdown"
+HISTORY_PATH="${SCRIPTS_DIRECTORY}/history.yaml"
+RELEASE_NOTES_DIRECTORY="${ROOT_DIRECTORY}/docs/release-notes"
+RELEASE_NOTES_PATH="${RELEASE_NOTES_DIRECTORY}/index.markdown"
 
+source "${SCRIPTS_DIRECTORY}/environment.sh"
 
-cd "$ROOT_DIRECTORY"
+# Process the command line arguments.
+POSITIONAL=()
+SERVE=false
+while [[ $# -gt 0 ]]
+do
+    key="$1"
+    case $key in
+        -s|--serve)
+        SERVE=true
+        shift
+        ;;
+        *)
+        POSITIONAL+=("$1")
+        shift
+        ;;
+    esac
+done
 
-mkdir -p "$RELEASE_NOTES_DIRECTORY"
-changes notes --pre-release --all --released --template "$RELEASE_NOTES_TEMPLATE_PATH" > "$RELEASE_NOTES_PATH"
+"$SCRIPTS_DIRECTORY/update-release-notes.sh"
+
+# Install the Jekyll dependencies.
+export GEM_HOME="${ROOT_DIRECTORY}/.local/ruby"
+mkdir -p "$GEM_HOME"
+export PATH="${GEM_HOME}/bin":$PATH
+gem install bundler
+cd "${WEBSITE_DIRECTORY}"
+bundle install
+
+# Build the website.
+cd "${WEBSITE_DIRECTORY}"
+if $SERVE ; then
+    bundle exec jekyll serve --watch
+else
+    bundle exec jekyll build
+fi

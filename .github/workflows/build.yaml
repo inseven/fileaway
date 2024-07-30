@@ -77,15 +77,33 @@ jobs:
     - name: Install dependencies
       run: scripts/install-dependencies.sh
 
-    - name: Update release notes
+    - name: Build website
       run: |
-        scripts/update-release-notes.sh
+        scripts/build-website.sh
+        chmod -v -R +rX "_site/"
 
-    - name: Commit documentation
-      uses: stefanzweifel/git-auto-commit-action@v5
-      id: auto-commit
-      with:
-        branch: documentation
-        create_branch: true
-        push_options: --force
-        commit_message: "docs: Update release notes"
+    - name: Upload Pages artifact
+      uses: actions/upload-pages-artifact@v3
+
+  website-deploy:
+
+    needs: website-build
+    if: ${{ github.ref == 'refs/heads/main' }}
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    # Specify runner + deployment step
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 # or the latest "vX.X.X" version tag for this action
