@@ -37,7 +37,6 @@
 		D8F763DC29225F720051D740 /* RuleFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F763DB29225F720051D740 /* RuleFormView.swift */; };
 		D8F763DE29226FD30051D740 /* DocumentPreviewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F763DD29226FD30051D740 /* DocumentPreviewButton.swift */; };
 		D8FB857F2916D2430024F885 /* Diligence in Frameworks */ = {isa = PBXBuildFile; productRef = D8FB857E2916D2430024F885 /* Diligence */; };
-		D8FB85822916D31D0024F885 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB85812916D31D0024F885 /* AboutView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,7 +91,6 @@
 		D8F763D9292259960051D740 /* RulePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulePicker.swift; sourceTree = "<group>"; };
 		D8F763DB29225F720051D740 /* RuleFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleFormView.swift; sourceTree = "<group>"; };
 		D8F763DD29226FD30051D740 /* DocumentPreviewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPreviewButton.swift; sourceTree = "<group>"; };
-		D8FB85812916D31D0024F885 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,7 +126,6 @@
 		D81C5D8F249BDD3C0083BD6F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D8F763D7292255CD0051D740 /* About */,
 				D8F763D8292255FE0051D740 /* Common */,
 				D8F763D42922553F0051D740 /* Editor */,
 				D8F763D6292255A30051D740 /* Settings */,
@@ -266,14 +263,6 @@
 				D8CCD292246EDC6A007EF2BB /* SettingsView.swift */,
 			);
 			path = Settings;
-			sourceTree = "<group>";
-		};
-		D8F763D7292255CD0051D740 /* About */ = {
-			isa = PBXGroup;
-			children = (
-				D8FB85812916D31D0024F885 /* AboutView.swift */,
-			);
-			path = About;
 			sourceTree = "<group>";
 		};
 		D8F763D8292255FE0051D740 /* Common */ = {
@@ -434,7 +423,6 @@
 				D8D81EB2291DD07800870E6E /* VariableView.swift in Sources */,
 				D850BD3329333E3800D81AAA /* DocumentPreviewHeader.swift in Sources */,
 				D850BD3629333FF300D81AAA /* CGSize.swift in Sources */,
-				D8FB85822916D31D0024F885 /* AboutView.swift in Sources */,
 				D85532A0291E5FB400C21E12 /* WizardView.swift in Sources */,
 				D8F763DE29226FD30051D740 /* DocumentPreviewButton.swift in Sources */,
 				D8A871D22916D56400B2932A /* ComponentItem.swift in Sources */,

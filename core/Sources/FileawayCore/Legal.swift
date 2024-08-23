@@ -25,20 +25,19 @@ import Interact
 
 public struct Legal {
 
-    public static let repository = "inseven/fileaway"
+    public static let contents = Contents(repository: "inseven/fileaway",
+                                          copyright: "Copyright © 2018-2024 Jason Morley") {
 
-    public static let copyright = "Copyright © 2018-2024 Jason Morley"
+        let subject = "Fileaway Support (\(Bundle.main.extendedVersion ?? "Unknown Version"))"
 
-    public static let actions = [
-        Action("Website", url: URL(string: "https://fileaway.jbmorley.co.uk")!),
-        Action("Privacy", url: URL(string: "https://fileaway.jbmorley.co.uk/privacy-policy")!),
-        Action("GitHub", url: URL(string: "https://github.com/inseven/fileaway")!),
-    ]
+        Action("Website", url: URL(string: "https://fileaway.jbmorley.co.uk")!)
+        Action("Privacy", url: URL(string: "https://fileaway.jbmorley.co.uk/privacy-policy")!)
+        Action("GitHub", url: URL(string: "https://github.com/inseven/fileaway")!)
 
-    public static let acknowledgements = [
+    } acknowledgements: {
         Acknowledgements("Developers") {
-            Credit("Jason Morley", url: URL(string: "https://jbmorley.co.uk"))
-        },
+            Credit("Jason Morley", url: URL(string: "https://jbmorley.co.uk/about"))
+        }
         Acknowledgements("Thanks") {
             Credit("Lukas Fittl")
             Credit("Michael Dales")
@@ -46,16 +45,14 @@ public struct Legal {
             Credit("Sarah Barbour")
             Credit("Terrence Talbot")
         }
-    ]
-
-    public static let licenses = [
-        License("DIFlowLayout", author: "Daniel Inoa", filename: "diflowlayout-license", bundle: .module),
-        License("EonilFSEvents", author: "Hoon H., Eonil", filename: "eonilfsevents-license", bundle: .module),
-        License("Fileaway", author: "Jason Morley", filename: "fileaway-license", bundle: .module),
-        License("FilePicker", author: "Mark Renaud", filename: "filepicker-license", bundle: .module),
-        License("HashRainbow", author: "Sarah Barbour", filename: "hashrainbow-license", bundle: .module),
-        License(Interact.Package.name, author: Interact.Package.author, url: Interact.Package.licenseURL),
-        License("Introspect", author: "Timber Software", filename: "introspect-license", bundle: .module),
-    ]
+    } licenses: {
+        (.interact)
+        License("DIFlowLayout", author: "Daniel Inoa", filename: "diflowlayout-license", bundle: .module)
+        License("EonilFSEvents", author: "Hoon H., Eonil", filename: "eonilfsevents-license", bundle: .module)
+        License("Fileaway", author: "Jason Morley", filename: "fileaway-license", bundle: .module)
+        License("FilePicker", author: "Mark Renaud", filename: "filepicker-license", bundle: .module)
+        License("HashRainbow", author: "Sarah Barbour", filename: "hashrainbow-license", bundle: .module)
+        License("Introspect", author: "Timber Software", filename: "introspect-license", bundle: .module)
+    }
 
 }
