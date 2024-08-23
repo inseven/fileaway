@@ -21,6 +21,8 @@
 import MobileCoreServices
 import SwiftUI
 
+import Diligence
+
 import FileawayCore
 
 struct SettingsView: View {
@@ -80,7 +82,7 @@ struct SettingsView: View {
             .sheet(item: $sheet) { sheet in
                 switch sheet {
                 case .about:
-                    AboutView()
+                    AboutView(Legal.contents)
                 }
             }
         }

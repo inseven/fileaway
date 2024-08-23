@@ -67,13 +67,7 @@ struct FileawayApp: App {
                 .environmentObject(applicationModel)
         }
 
-        About(repository: Legal.repository, copyright: Legal.copyright) {
-            Legal.actions
-        } acknowledgements: {
-            Legal.acknowledgements
-        } licenses: {
-            Legal.licenses
-        }
+        About(Legal.contents)
 
     }
 }
