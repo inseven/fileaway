@@ -64,10 +64,6 @@ do
     esac
 done
 
-# iPhone to be used for smoke test builds and tests.
-# This doesn't specify the OS version to allow the build script to recover from minor build changes.
-IPHONE_DESTINATION="platform=iOS Simulator,name=iPhone 15 Pro"
-
 # Generate a random string to secure the local keychain.
 export TEMPORARY_KEYCHAIN_PASSWORD=`openssl rand -base64 14`
 
@@ -141,14 +137,14 @@ pushd "core"
 sudo xcode-select --switch "$MACOS_XCODE_PATH"
 xcodebuild -scheme FileawayCore -destination "platform=macOS" clean build test
 sudo xcode-select --switch "$IOS_XCODE_PATH"
-xcodebuild -scheme FileawayCore -destination "$IPHONE_DESTINATION" clean build test
+xcodebuild -scheme FileawayCore -destination "$DEFAULT_IPHONE_DESTINATION" clean build test
 popd
 
 # Build, test and archive the iOS project.
 sudo xcode-select --switch "$IOS_XCODE_PATH"
 xcode_project \
     -scheme "Fileaway iOS" \
-    -destination "$IPHONE_DESTINATION" \
+    -destination "$DEFAULT_IPHONE_DESTINATION" \
     clean build build-for-testing test
 xcode_project \
     -scheme "Fileaway iOS" \
