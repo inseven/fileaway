@@ -203,6 +203,27 @@ xcrun altool --validate-app \
     --output-format json \
     --type ios
 
+# Notarize the macOS app.
+xcrun notarytool submit "$RELEASE_ZIP_PATH" \
+    --key "$API_KEY_PATH" \
+    --key-id "$APPLE_API_KEY_ID" \
+    --issuer "$APPLE_API_KEY_ISSUER_ID" \
+    --output-format json \
+    --wait | tee command-notarization-response.json
+NOTARIZATION_ID=`cat command-notarization-response.json | jq -r ".id"`
+NOTARIZATION_RESPONSE=`cat command-notarization-response.json | jq -r ".status"`
+
+xcrun notarytool log \
+    --key "$API_KEY_PATH" \
+    --key-id "$APPLE_API_KEY_ID" \
+    --issuer "$APPLE_API_KEY_ISSUER_ID" \
+    "$NOTARIZATION_ID" | tee "$BUILD_DIRECTORY/notarization-log.json"
+
+if [ "$NOTARIZATION_RESPONSE" != "Accepted" ] ; then
+    echo "Failed to notarize app."
+    exit 1
+fi
+
 # Archive the build directory.
 ZIP_BASENAME="build-${VERSION_NUMBER}-${BUILD_NUMBER}.zip"
 ZIP_PATH="${BUILD_DIRECTORY}/${ZIP_BASENAME}"
