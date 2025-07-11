@@ -184,7 +184,7 @@ RELEASE_BASENAME="Fileaway-$VERSION_NUMBER-$BUILD_NUMBER"
 RELEASE_ZIP_BASENAME="$RELEASE_BASENAME.zip"
 RELEASE_ZIP_PATH="$BUILD_DIRECTORY/$RELEASE_ZIP_BASENAME"
 pushd "$BUILD_DIRECTORY"
-/usr/bin/ditto -c -k --keepParent "Folders.app" "$RELEASE_ZIP_BASENAME"
+/usr/bin/ditto -c -k --keepParent "Fileaway.app" "$RELEASE_ZIP_BASENAME"
 rm -r "Fileaway.app"
 popd
 
