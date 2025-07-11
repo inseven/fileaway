@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D8037B122617F8CD00F41971 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = D8037B112617F8CD00F41971 /* Introspect */; };
-		D87DEFAF2577E068006CFE85 /* EonilFSEvents in Frameworks */ = {isa = PBXBuildFile; productRef = D87DEFAE2577E068006CFE85 /* EonilFSEvents */; };
 		D88B353B28B6113A000C8910 /* FileawayCore in Frameworks */ = {isa = PBXBuildFile; productRef = D88B353A28B6113A000C8910 /* FileawayCore */; };
+		D8A72D242E21B4C200401530 /* Glitter in Frameworks */ = {isa = PBXBuildFile; productRef = D8A72D232E21B4C200401530 /* Glitter */; };
 		D8D275BE28B3865500200A7C /* Diligence in Frameworks */ = {isa = PBXBuildFile; productRef = D8D275BD28B3865500200A7C /* Diligence */; };
 		D8F90C7325DAA72700F0EFB8 /* Interact in Frameworks */ = {isa = PBXBuildFile; productRef = D8F90C7225DAA72700F0EFB8 /* Interact */; };
 /* End PBXBuildFile section */
@@ -74,9 +74,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D87DEFAF2577E068006CFE85 /* EonilFSEvents in Frameworks */,
 				D8D275BE28B3865500200A7C /* Diligence in Frameworks */,
 				D8037B122617F8CD00F41971 /* Introspect in Frameworks */,
+				D8A72D242E21B4C200401530 /* Glitter in Frameworks */,
 				D8F90C7325DAA72700F0EFB8 /* Interact in Frameworks */,
 				D88B353B28B6113A000C8910 /* FileawayCore in Frameworks */,
 			);
@@ -157,11 +157,11 @@
 			);
 			name = Fileaway;
 			packageProductDependencies = (
-				D87DEFAE2577E068006CFE85 /* EonilFSEvents */,
 				D8F90C7225DAA72700F0EFB8 /* Interact */,
 				D8037B112617F8CD00F41971 /* Introspect */,
 				D8D275BD28B3865500200A7C /* Diligence */,
 				D88B353A28B6113A000C8910 /* FileawayCore */,
+				D8A72D232E21B4C200401530 /* Glitter */,
 			);
 			productName = "Document Finder";
 			productReference = D87DEF7B25774F6C006CFE85 /* Fileaway.app */;
@@ -235,8 +235,8 @@
 			);
 			mainGroup = D87DEF7225774F6C006CFE85;
 			packageReferences = (
-				D87DEFAD2577E068006CFE85 /* XCRemoteSwiftPackageReference "FSEvents" */,
 				D8037B102617F8CD00F41971 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				D8A72D222E21B4C200401530 /* XCRemoteSwiftPackageReference "glitter" */,
 			);
 			productRefGroup = D87DEF7C25774F6C006CFE85 /* Products */;
 			projectDirPath = "";
@@ -626,12 +626,12 @@
 				minimumVersion = 0.1.3;
 			};
 		};
-		D87DEFAD2577E068006CFE85 /* XCRemoteSwiftPackageReference "FSEvents" */ = {
+		D8A72D222E21B4C200401530 /* XCRemoteSwiftPackageReference "glitter" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/eonil/FSEvents";
+			repositoryURL = "https://github.com/inseven/glitter.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.7;
+				minimumVersion = 0.1.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -642,14 +642,14 @@
 			package = D8037B102617F8CD00F41971 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
 		};
-		D87DEFAE2577E068006CFE85 /* EonilFSEvents */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D87DEFAD2577E068006CFE85 /* XCRemoteSwiftPackageReference "FSEvents" */;
-			productName = EonilFSEvents;
-		};
 		D88B353A28B6113A000C8910 /* FileawayCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FileawayCore;
+		};
+		D8A72D232E21B4C200401530 /* Glitter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8A72D222E21B4C200401530 /* XCRemoteSwiftPackageReference "glitter" */;
+			productName = Glitter;
 		};
 		D8D275BD28B3865500200A7C /* Diligence */ = {
 			isa = XCSwiftPackageProductDependency;
