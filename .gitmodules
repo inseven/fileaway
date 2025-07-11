@@ -19,3 +19,6 @@
 [submodule "DIFlowLayout"]
 	path = dependencies/DIFlowLayout
 	url = git@github.com:jbmorley/DIFlowLayout.git
+[submodule "scripts/Sparkle"]
+	path = scripts/Sparkle
+	url = https://github.com/sparkle-project/Sparkle
