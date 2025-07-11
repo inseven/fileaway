@@ -178,10 +178,17 @@ xcodebuild \
     -exportPath "$BUILD_DIRECTORY" \
     -exportOptionsPlist "macos/ExportOptions.plist"
 
-APP_BASENAME="Fileaway.app"
-APP_PATH="$BUILD_DIRECTORY/$APP_BASENAME"
+# Apple recommends we use ditto to prepare zips for notarization.
+# https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow
+RELEASE_BASENAME="Fileaway-$VERSION_NUMBER-$BUILD_NUMBER"
+RELEASE_ZIP_BASENAME="$RELEASE_BASENAME.zip"
+RELEASE_ZIP_PATH="$BUILD_DIRECTORY/$RELEASE_ZIP_BASENAME"
+pushd "$BUILD_DIRECTORY"
+/usr/bin/ditto -c -k --keepParent "Folders.app" "$RELEASE_ZIP_BASENAME"
+rm -r "Fileaway.app"
+popd
+
 IPA_PATH="$BUILD_DIRECTORY/Fileaway.ipa"
-PKG_PATH="$BUILD_DIRECTORY/Fileaway.pkg"
 
 # Install the private key.
 mkdir -p ~/.appstoreconnect/private_keys/
@@ -195,14 +202,6 @@ xcrun altool --validate-app \
     --apiIssuer "$APPLE_API_KEY_ISSUER_ID" \
     --output-format json \
     --type ios
-
-# Validate the macOS build.
-xcrun altool --validate-app \
-    -f "${PKG_PATH}" \
-    --apiKey "$APPLE_API_KEY_ID" \
-    --apiIssuer "$APPLE_API_KEY_ISSUER_ID" \
-    --output-format json \
-    --type macos
 
 # Archive the build directory.
 ZIP_BASENAME="build-${VERSION_NUMBER}-${BUILD_NUMBER}.zip"
@@ -219,6 +218,6 @@ if $RELEASE ; then
         --pre-release \
         --push \
         --exec "${RELEASE_SCRIPT_PATH}" \
-        "${IPA_PATH}" "${PKG_PATH}" "${ZIP_PATH}"
+        "${IPA_PATH}" "${ZIP_PATH}"
 
 fi
