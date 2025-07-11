@@ -129,9 +129,9 @@ echo "$APPLE_DISTRIBUTION_CERTIFICATE_PASSWORD" | build-tools import-base64-cert
 echo "$MACOS_DEVELOPER_INSTALLER_CERTIFICATE_PASSWORD" | build-tools import-base64-certificate --password "$KEYCHAIN_PATH" "$MACOS_DEVELOPER_INSTALLER_CERTIFICATE"
 
 # Install the provisioning profiles.
-build-tools install-provisioning-profile "ios/Fileaway_App_Store_Profile.mobileprovision"
-build-tools install-provisioning-profile "macos/profiles/Fileaway_Mac_App_Store_Profile.provisionprofile"
-build-tools install-provisioning-profile "macos/profiles/Fileaway_Developer_ID_Profile.provisionprofile"
+build-tools install-provisioning-profile "profiles/Fileaway_App_Store_Profile.mobileprovision"
+build-tools install-provisioning-profile "profiles/Fileaway_Mac_App_Store_Profile.provisionprofile"
+build-tools install-provisioning-profile "profiles/Fileaway_Developer_ID_Profile.provisionprofile"
 
 # Build and test FileawayCore.
 pushd "core"
