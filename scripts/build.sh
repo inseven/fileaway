@@ -27,16 +27,20 @@ set -u
 
 SCRIPTS_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-ROOT_DIRECTORY="${SCRIPTS_DIRECTORY}/.."
-BUILD_DIRECTORY="${ROOT_DIRECTORY}/build"
-TEMPORARY_DIRECTORY="${ROOT_DIRECTORY}/temp"
+ROOT_DIRECTORY="$SCRIPTS_DIRECTORY/.."
+BUILD_DIRECTORY="$ROOT_DIRECTORY/build"
+ARCHIVES_DIRECTORY="$ROOT_DIRECTORY/archives"
+TEMPORARY_DIRECTORY="$ROOT_DIRECTORY/temp"
+SPARKLE_DIRECTORY="$SCRIPTS_DIRECTORY/Sparkle"
 
-KEYCHAIN_PATH="${TEMPORARY_DIRECTORY}/temporary.keychain"
-MACOS_ARCHIVE_PATH="${BUILD_DIRECTORY}/Fileaway-macOS.xcarchive"
-IOS_ARCHIVE_PATH="${BUILD_DIRECTORY}/Fileaway-iOS.xcarchive"
-ENV_PATH="${ROOT_DIRECTORY}/.env"
+KEYCHAIN_PATH="$TEMPORARY_DIRECTORY/temporary.keychain"
+MACOS_ARCHIVE_PATH="$BUILD_DIRECTORY/Fileaway-macOS.xcarchive"
+IOS_ARCHIVE_PATH="$BUILD_DIRECTORY/Fileaway-iOS.xcarchive"
+ENV_PATH="$ROOT_DIRECTORY/.env"
 
-RELEASE_SCRIPT_PATH="${SCRIPTS_DIRECTORY}/release.sh"
+RELEASE_SCRIPT_PATH="$SCRIPTS_DIRECTORY/release.sh"
+
+RELEASE_NOTES_TEMPLATE_PATH="$SCRIPTS_DIRECTORY/release-notes.html"
 
 IOS_XCODE_PATH=${IOS_XCODE_PATH:-/Applications/Xcode.app}
 MACOS_XCODE_PATH=${MACOS_XCODE_PATH:-/Applications/Xcode.app}
@@ -78,25 +82,22 @@ function xcode_project {
         -workspace Fileaway.xcworkspace "$@"
 }
 
-function build_scheme {
-    # Disable code signing for the build server.
-    xcode_project \
-        -scheme "$1" \
-        CODE_SIGN_IDENTITY="" \
-        CODE_SIGNING_REQUIRED=NO \
-        CODE_SIGNING_ALLOWED=NO "${@:2}"
-}
-
 cd "$ROOT_DIRECTORY"
 
 # List the available schemes.
 xcode_project -list
 
-# Clean up the build directory.
+# Clean up and recreate the output directories.
+
 if [ -d "$BUILD_DIRECTORY" ] ; then
     rm -r "$BUILD_DIRECTORY"
 fi
 mkdir -p "$BUILD_DIRECTORY"
+
+if [ -d "$ARCHIVES_DIRECTORY" ] ; then
+    rm -r "$ARCHIVES_DIRECTORY"
+fi
+mkdir -p "$ARCHIVES_DIRECTORY"
 
 # Create the a new keychain.
 if [ -d "$TEMPORARY_DIRECTORY" ] ; then
@@ -126,11 +127,12 @@ BUILD_NUMBER=`build-tools generate-build-number`
 
 # Import the certificates into our dedicated keychain.
 echo "$APPLE_DISTRIBUTION_CERTIFICATE_PASSWORD" | build-tools import-base64-certificate --password "$KEYCHAIN_PATH" "$APPLE_DISTRIBUTION_CERTIFICATE_BASE64"
-echo "$MACOS_DEVELOPER_INSTALLER_CERTIFICATE_PASSWORD" | build-tools import-base64-certificate --password "$KEYCHAIN_PATH" "$MACOS_DEVELOPER_INSTALLER_CERTIFICATE"
+echo "$DEVELOPER_ID_APPLICATION_CERTIFICATE_PASSWORD" | build-tools import-base64-certificate --password "$KEYCHAIN_PATH" "$DEVELOPER_ID_APPLICATION_CERTIFICATE_BASE64"
 
 # Install the provisioning profiles.
-build-tools install-provisioning-profile "ios/Fileaway_App_Store_Profile.mobileprovision"
-build-tools install-provisioning-profile "macos/Fileaway_Mac_App_Store_Profile.provisionprofile"
+build-tools install-provisioning-profile "profiles/Fileaway_App_Store_Profile.mobileprovision"
+build-tools install-provisioning-profile "profiles/Fileaway_Mac_App_Store_Profile.provisionprofile"
+build-tools install-provisioning-profile "profiles/Fileaway_Developer_ID_Profile.provisionprofile"
 
 # Build and test FileawayCore.
 pushd "core"
@@ -177,15 +179,22 @@ xcodebuild \
     -exportPath "$BUILD_DIRECTORY" \
     -exportOptionsPlist "macos/ExportOptions.plist"
 
-APP_BASENAME="Fileaway.app"
-APP_PATH="$BUILD_DIRECTORY/$APP_BASENAME"
+# Apple recommends we use ditto to prepare zips for notarization.
+# https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow
+RELEASE_BASENAME="Fileaway-$VERSION_NUMBER-$BUILD_NUMBER"
+RELEASE_ZIP_BASENAME="$RELEASE_BASENAME.zip"
+RELEASE_ZIP_PATH="$BUILD_DIRECTORY/$RELEASE_ZIP_BASENAME"
+pushd "$BUILD_DIRECTORY"
+/usr/bin/ditto -c -k --keepParent "Fileaway.app" "$RELEASE_ZIP_BASENAME"
+rm -r "Fileaway.app"
+popd
+
 IPA_PATH="$BUILD_DIRECTORY/Fileaway.ipa"
-PKG_PATH="$BUILD_DIRECTORY/Fileaway.pkg"
 
 # Install the private key.
 mkdir -p ~/.appstoreconnect/private_keys/
-echo -n "$APPLE_API_KEY_BASE64" | base64 --decode -o ~/".appstoreconnect/private_keys/AuthKey_${APPLE_API_KEY_ID}.p8"
-
+API_KEY_PATH=~/".appstoreconnect/private_keys/AuthKey_${APPLE_API_KEY_ID}.p8"
+echo -n "$APPLE_API_KEY_BASE64" | base64 --decode -o "$API_KEY_PATH"
 
 # Validate the iOS build.
 xcrun altool --validate-app \
@@ -195,19 +204,49 @@ xcrun altool --validate-app \
     --output-format json \
     --type ios
 
-# Validate the macOS build.
-xcrun altool --validate-app \
-    -f "${PKG_PATH}" \
-    --apiKey "$APPLE_API_KEY_ID" \
-    --apiIssuer "$APPLE_API_KEY_ISSUER_ID" \
+# Notarize the macOS app.
+xcrun notarytool submit "$RELEASE_ZIP_PATH" \
+    --key "$API_KEY_PATH" \
+    --key-id "$APPLE_API_KEY_ID" \
+    --issuer "$APPLE_API_KEY_ISSUER_ID" \
     --output-format json \
-    --type macos
+    --wait | tee command-notarization-response.json
+NOTARIZATION_ID=`cat command-notarization-response.json | jq -r ".id"`
+NOTARIZATION_RESPONSE=`cat command-notarization-response.json | jq -r ".status"`
+
+xcrun notarytool log \
+    --key "$API_KEY_PATH" \
+    --key-id "$APPLE_API_KEY_ID" \
+    --issuer "$APPLE_API_KEY_ISSUER_ID" \
+    "$NOTARIZATION_ID" | tee "$BUILD_DIRECTORY/notarization-log.json"
+
+if [ "$NOTARIZATION_RESPONSE" != "Accepted" ] ; then
+    echo "Failed to notarize app."
+    exit 1
+fi
+
+# Build Sparkle.
+cd "$SPARKLE_DIRECTORY"
+xcodebuild -project Sparkle.xcodeproj -scheme generate_appcast SYMROOT=`pwd`/.build
+GENERATE_APPCAST=`pwd`/.build/Debug/generate_appcast
+
+SPARKLE_PRIVATE_KEY_FILE="$TEMPORARY_DIRECTORY/private-key-file"
+echo -n "$SPARKLE_PRIVATE_KEY_BASE64" | base64 --decode -o "$SPARKLE_PRIVATE_KEY_FILE"
+
+# Generate the appcast.
+cd "$ROOT_DIRECTORY"
+cp "$RELEASE_ZIP_PATH" "$ARCHIVES_DIRECTORY"
+changes notes --all --template "$RELEASE_NOTES_TEMPLATE_PATH" >> "$ARCHIVES_DIRECTORY/$RELEASE_BASENAME.html"
+"$GENERATE_APPCAST" --ed-key-file "$SPARKLE_PRIVATE_KEY_FILE" "$ARCHIVES_DIRECTORY"
+APPCAST_PATH="$ARCHIVES_DIRECTORY/appcast.xml"
+cp "$APPCAST_PATH" "$BUILD_DIRECTORY"
 
 # Archive the build directory.
-ZIP_BASENAME="build-${VERSION_NUMBER}-${BUILD_NUMBER}.zip"
-ZIP_PATH="${BUILD_DIRECTORY}/${ZIP_BASENAME}"
-pushd "${BUILD_DIRECTORY}"
-zip -r "${ZIP_BASENAME}" .
+cd "$ROOT_DIRECTORY"
+ZIP_BASENAME="build-$VERSION_NUMBER-$BUILD_NUMBER.zip"
+ZIP_PATH="$BUILD_DIRECTORY/$ZIP_BASENAME"
+pushd "$BUILD_DIRECTORY"
+zip -r "$ZIP_BASENAME" .
 popd
 
 if $RELEASE ; then
@@ -215,9 +254,8 @@ if $RELEASE ; then
     changes \
         release \
         --skip-if-empty \
-        --pre-release \
         --push \
         --exec "${RELEASE_SCRIPT_PATH}" \
-        "${IPA_PATH}" "${PKG_PATH}" "${ZIP_PATH}"
+        "$IPA_PATH" "$RELEASE_ZIP_PATH" "$ZIP_PATH" $BUILD_DIRECTORY/appcast.xml"
 
 fi

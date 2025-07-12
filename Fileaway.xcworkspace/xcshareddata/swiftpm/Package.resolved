@@ -1,5 +1,5 @@
 {
-  "originHash" : "587d3bc6fb7adf6784a511535241d6ced76de66da0e8cadd5ec39b28857c202b",
+  "originHash" : "c960235b26424a82a4d9294a0343eea4bcf6a2b2fa869f4d0b13895d9e6f829c",
   "pins" : [
     {
       "identity" : "fsevents",
@@ -8,6 +8,15 @@
       "state" : {
         "branch" : "master",
         "revision" : "e6b7cdfa2754454e194a45ee6c2004d0f630fe88"
+      }
+    },
+    {
+      "identity" : "glitter",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/inseven/glitter.git",
+      "state" : {
+        "revision" : "24d4be7c71f69968e370b19f1502696c68d00bd9",
+        "version" : "0.1.1"
       }
     },
     {
@@ -20,12 +29,21 @@
       }
     },
     {
+      "identity" : "sparkle",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sparkle-project/Sparkle",
+      "state" : {
+        "revision" : "df074165274afaa39539c05d57b0832620775b11",
+        "version" : "2.7.1"
+      }
+    },
+    {
       "identity" : "swift-collections",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-collections.git",
       "state" : {
-        "revision" : "f504716c27d2e5d4144fa4794b12129301d17729",
-        "version" : "1.0.3"
+        "revision" : "c1805596154bb3a265fd91b8ac0c4433b4348fb0",
+        "version" : "1.2.0"
       }
     },
     {

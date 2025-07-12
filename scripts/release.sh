@@ -35,14 +35,6 @@ xcrun altool --upload-app \
     --apiIssuer "$APPLE_API_KEY_ISSUER_ID" \
     --type ios
 
-# Upload the macOS build.
-xcrun altool --upload-app \
-    -f "$2" \
-    --primary-bundle-id "app.fileaway.apps.appstore" \
-    --apiKey "$APPLE_API_KEY_ID" \
-    --apiIssuer "$APPLE_API_KEY_ISSUER_ID" \
-    --type macos
-
 # Actually make the release.
 FLAGS=()
 if $CHANGES_INITIAL_DEVELOPMENT ; then

@@ -22,7 +22,7 @@ let package = Package(
         .package(path: "./../dependencies/FilePicker"),
         .package(path: "./../dependencies/DIFlowLayout"),
         .package(url: "https://github.com/eonil/FSEvents.git", branch: "master"),
-        .package(url: "https://github.com/apple/swift-collections.git", .upToNextMajor(from: "1.0.3")),
+        .package(url: "https://github.com/apple/swift-collections", .upToNextMajor(from: "1.2.0")),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.

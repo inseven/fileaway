@@ -21,11 +21,15 @@
 import SwiftUI
 import UserNotifications
 
+import Glitter
+
 import Diligence
 import FileawayCore
 
 @main
 struct FileawayApp: App {
+
+    var updaterModel = UpdaterModel()
 
     @StateObject var applicationModel = ApplicationModel()
     @FocusedValue(\.directoryViewModel) var directoryViewModel
@@ -57,8 +61,8 @@ struct FileawayApp: App {
             SidebarCommands()
             FileCommands(directoryViewModel: directoryViewModel)
             FolderCommands(applicationModel: applicationModel)
+            UpdateCommands(updater: updaterModel.updaterController.updater)
         }
-
 
         Wizard(applicationModel: applicationModel)
 
