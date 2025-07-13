@@ -68,15 +68,10 @@ jobs:
       run: |
         git submodule update --init --depth 1 scripts/build-tools
         git submodule update --init --depth 1 scripts/changes
+        git submodule update --init --depth 1 docs/_theme
 
-    - name: Setup Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: "3.9"
-
-    - name: Install pipenv
-      run: |
-        python -m pip install --upgrade pipenv wheel
+    - name: Install the tool dependencies
+      uses: jdx/mise-action@v2
 
     - name: Install dependencies
       run: scripts/install-dependencies.sh
@@ -107,7 +102,7 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4 # or the latest "vX.X.X" version tag for this action
+        uses: actions/deploy-pages@v4
 
   sparkle-update:
     needs: appstore-build
