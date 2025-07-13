@@ -1,0 +1,7 @@
+:root {
+    --brand-color: #FB6666;
+}
+
+@media (prefers-color-scheme: dark) {
+        --brand-color: #FB6666;
+}
