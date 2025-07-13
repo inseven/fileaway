@@ -15,13 +15,12 @@ navigation:
     href: /releases
   - title: GitHub
     href: https://github.com/inseven/fileaway
-
+  - title: Donate
+    href: https://jbmorley.co.uk/support/
 
 footer:
   - title: Privacy Policy
     href: /privacy-policy
-  - title: Donate
-    href: https://jbmorley.co.uk/support/
   - title: More Software
     href: https://jbmorley.co.uk/software/
 
