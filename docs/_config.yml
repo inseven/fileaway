@@ -1,10 +1,29 @@
+theme: theme
 title: Fileaway
+author: Jason Morley
 email: support@jbmorley.co.uk
-description: ""
+description: Rules-based file management for macOS
 url: "https://fileaway.app"
 baseurl: ""
-twitter_username: jekyllrb
-github_username:  jekyll
+repository: https://github.com/inseven/fileaway
+copyright: 2018-2025 <a href="https://jbmorley.co.uk/about" target="_blank">Jason Morley</a>
+
+navigation:
+  - title: Fileaway
+    href: /
+  - title: Releases
+    href: /releases
+  - title: GitHub
+    href: https://github.com/inseven/fileaway
+
+
+footer:
+  - title: Privacy Policy
+    href: /privacy-policy
+  - title: Donate
+    href: https://jbmorley.co.uk/support/
+  - title: More Software
+    href: https://jbmorley.co.uk/software/
 
 plugins:
   - jekyll-feed
@@ -13,3 +32,7 @@ destination: ../_site
 defaults:
   - values:
       layout: "default"
+
+defaults:
+  - values:
+      layout: "page"

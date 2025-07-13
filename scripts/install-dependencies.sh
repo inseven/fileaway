@@ -25,13 +25,17 @@ set -o pipefail
 set -x
 set -u
 
-scripts_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-root_directory="${scripts_directory}/.."
-changes_directory="${scripts_directory}/changes"
+SCRIPTS_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+ROOT_DIRECTORY="$SCRIPTS_DIRECTORY/.."
+CHANGES_DIRECTORY="$SCRIPTS_DIRECTORY/changes"
+BUILD_TOOLS_DIRECTORY="$SCRIPTS_DIRECTORY/build-tools"
 
-environment_path="${scripts_directory}/environment.sh"
+source "$SCRIPTS_DIRECTORY/environment.sh"
 
-source "$environment_path"
+if [ -d "$LOCAL_TOOLS_PATH" ] ; then
+    rm -r "$LOCAL_TOOLS_PATH"
+fi
 
-# Install the Python dependencies
-PIPENV_PIPFILE="$changes_directory/Pipfile" pipenv install
+python -m pip install --target "$PYTHONUSERBASE" --upgrade pipenv wheel
+PIPENV_PIPFILE="$CHANGES_DIRECTORY/Pipfile" pipenv install
+PIPENV_PIPFILE="$BUILD_TOOLS_DIRECTORY/Pipfile" pipenv install
