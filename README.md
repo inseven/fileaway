@@ -6,7 +6,7 @@ Document management app for iOS and macOS.
 
 ![macOS screenshot](screenshots/macos.png)
 
-## Licensing
+## License
 
 Fileaway is licensed under the MIT License (see [LICENSE](LICENSE)). It depends on the following separately licensed third-party libraries and components:
 
