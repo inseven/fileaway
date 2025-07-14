@@ -22,6 +22,7 @@ import Foundation
 
 import Diligence
 import Interact
+import Glitter
 
 public struct Legal {
 
@@ -46,6 +47,7 @@ public struct Legal {
             Credit("Terrence Talbot")
         }
     } licenses: {
+        (.glitter)
         (.interact)
         License("DIFlowLayout", author: "Daniel Inoa", filename: "diflowlayout-license", bundle: .module)
         License("EonilFSEvents", author: "Hoon H., Eonil", filename: "eonilfsevents-license", bundle: .module)

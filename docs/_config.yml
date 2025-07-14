@@ -21,6 +21,8 @@ navigation:
 footer:
   - title: Privacy Policy
     href: /privacy-policy
+  - title: License
+    href: /license
   - title: More Software
     href: https://jbmorley.co.uk/software/
 
