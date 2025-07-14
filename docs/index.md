@@ -1,5 +1,4 @@
 ---
-layout: default
 ---
 
 <p class="header">
@@ -13,3 +12,8 @@ layout: default
         <a class="button no-rewrite" href="{{ site.env.DOWNLOAD_URL }}">Download</a>
     </div>
 </p>
+
+<picture>
+    <source srcset="/images/screenshot-default-dark@2x.png" media="(prefers-color-scheme: dark)">
+    <img src="/images/screenshot-default@2x.png" width="1237" />
+</picture>
