@@ -23,6 +23,10 @@ import Foundation
 import Diligence
 import Interact
 
+#if canImport(Glitter)
+import Glitter
+#endif
+
 public struct Legal {
 
     public static let contents = Contents(repository: "inseven/fileaway",
@@ -46,6 +50,9 @@ public struct Legal {
             Credit("Terrence Talbot")
         }
     } licenses: {
+#if canImport(Glitter)
+        (.glitter)
+#endif
         (.interact)
         License("DIFlowLayout", author: "Daniel Inoa", filename: "diflowlayout-license", bundle: .module)
         License("EonilFSEvents", author: "Hoon H., Eonil", filename: "eonilfsevents-license", bundle: .module)
