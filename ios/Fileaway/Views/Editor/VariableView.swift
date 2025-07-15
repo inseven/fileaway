@@ -25,7 +25,8 @@ import FileawayCore
 
 struct VariableView: View {
 
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) private var dismiss
+
     @ObservedObject var ruleModel: RuleModel
     @ObservedObject var variable: VariableModel
 
@@ -54,7 +55,7 @@ struct VariableView: View {
 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        self.presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     } label: {
                         Text("Done")
                             .bold()
