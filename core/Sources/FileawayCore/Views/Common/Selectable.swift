@@ -20,13 +20,19 @@
 
 import SwiftUI
 
-struct Selectable<Content: View>: View {
+public struct Selectable<Content: View>: View {
 
     let isSelected: Bool
     let action: () -> Void
     let content: () -> Content
 
-    var body: some View {
+    public init(isSelected: Bool, action: @escaping () -> Void, @ViewBuilder content: @escaping () -> Content) {
+        self.isSelected = isSelected
+        self.action = action
+        self.content = content
+    }
+
+    public var body: some View {
         HStack {
             Button(action: action) {
                 content()
@@ -38,12 +44,6 @@ struct Selectable<Content: View>: View {
                     .foregroundColor(.accentColor)
             }
         }
-    }
-
-    @inlinable public init(isSelected: Bool, action: @escaping () -> Void, @ViewBuilder content: @escaping () -> Content) {
-        self.isSelected = isSelected
-        self.action = action
-        self.content = content
     }
 
 }
