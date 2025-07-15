@@ -22,6 +22,6 @@ import CoreGraphics
 
 extension CGSize {
 
-    static let navigationBarIcon = CGSize(width: 32.0, height: 32.0)
+    public static let navigationBarIcon = CGSize(width: 32.0, height: 32.0)
 
 }
