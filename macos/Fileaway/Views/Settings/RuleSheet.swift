@@ -24,7 +24,8 @@ import FileawayCore
 
 struct RuleSheet: View {
 
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) private var dismiss
+
     @State var ruleModel: RuleModel
 
     var body: some View {
@@ -33,7 +34,7 @@ struct RuleSheet: View {
             HStack {
                 Spacer()
                 Button {
-                    presentationMode.wrappedValue.dismiss()
+                    dismiss()
                 } label: {
                     Text("Done")
                 }
