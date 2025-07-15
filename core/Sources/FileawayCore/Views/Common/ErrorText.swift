@@ -20,13 +20,16 @@
 
 import SwiftUI
 
-struct ErrorText: View {
+public struct ErrorText: View {
 
     var text: String?
 
-    var body: some View {
+    public init(text: String? = nil) {
+        self.text = text
+    }
+
+    public var body: some View {
         Text(text ?? "").foregroundColor(.red)
     }
 
 }
-
