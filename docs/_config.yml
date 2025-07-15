@@ -2,7 +2,7 @@ theme: theme
 title: Fileaway
 author: Jason Morley
 email: support@jbmorley.co.uk
-description: Rules-based file management for macOS
+description: Rules-based File Management for macOS
 url: "https://fileaway.app"
 baseurl: ""
 repository: https://github.com/inseven/fileaway
