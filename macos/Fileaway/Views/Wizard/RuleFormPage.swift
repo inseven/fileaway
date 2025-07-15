@@ -39,7 +39,7 @@ struct RuleFormPage: View {
         case duplicate(duplicateUrl: URL)
     }
 
-    @Environment(\.close) var close
+    @Environment(\.dismissWindow) private var dismissWindow
 
     @ObservedObject var ruleModel: RuleModel
     @StateObject var ruleFormModel: RuleFormModel
@@ -63,7 +63,7 @@ struct RuleFormPage: View {
                     Button {
                         do {
                             try ruleFormModel.move()
-                            close()
+                            dismissWindow()
                         } catch CocoaError.fileWriteFileExists {
                             alert = .duplicate(duplicateUrl: ruleFormModel.destinationURL)
                         } catch {
