@@ -2,7 +2,7 @@
 
 [![Build](https://github.com/jbmorley/fileaway/actions/workflows/build.yaml/badge.svg?branch=main)](https://github.com/jbmorley/fileaway/actions/workflows/build.yaml)
 
-Document management app for iOS and macOS.
+Rules-based file management for macOS.
 
 ![macOS screenshot](screenshots/macos.png)
 
