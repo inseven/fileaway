@@ -20,17 +20,17 @@
 
 import SwiftUI
 
-struct EditText: View {
+public struct EditText: View {
 
     var name: String
     @Binding var text: String
     @Environment(\.editMode) var editMode
 
-    var body: some View {
+    public var body: some View {
         TextField(name, text: $text).disabled(editMode != nil ? editMode!.wrappedValue != .active : false)
     }
 
-    init(_ name: String, text: Binding<String>) {
+    public init(_ name: String, text: Binding<String>) {
         self.name = name
         self._text = text
     }
