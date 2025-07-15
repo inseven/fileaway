@@ -13,30 +13,11 @@
 		D8FB857F2916D2430024F885 /* Diligence in Frameworks */ = {isa = PBXBuildFile; productRef = D8FB857E2916D2430024F885 /* Diligence */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		D8CCB8172143672700AC445F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D8CCB7FA2143672700AC445F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D8CCB8012143672700AC445F;
-			remoteInfo = Fileaway;
-		};
-		D8CCB8222143672700AC445F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D8CCB7FA2143672700AC445F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D8CCB8012143672700AC445F;
-			remoteInfo = Fileaway;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		D866D66326197AC80025329E /* FileawayCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FileawayCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86AA554291DB7BF0078B2DA /* FilePicker */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = FilePicker; path = ../FilePicker; sourceTree = "<group>"; };
 		D8B0B3D425314771001EB2C2 /* Fileaway.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fileaway.entitlements; sourceTree = "<group>"; };
 		D8CCB8022143672700AC445F /* Fileaway.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fileaway.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8CCB8162143672700AC445F /* FileawayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileawayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8CCB8212143672700AC445F /* FileawayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileawayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -47,26 +28,10 @@
 			);
 			target = D8CCB8012143672700AC445F /* Fileaway */;
 		};
-		D840BD522E26F47500C8B23A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				FileawayTests.swift,
-			);
-			target = D8CCB8152143672700AC445F /* FileawayTests */;
-		};
-		D840BD572E26F47700C8B23A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				FileawayUITests.swift,
-			);
-			target = D8CCB8202143672700AC445F /* FileawayUITests */;
-		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		D840BD342E26F47200C8B23A /* Fileaway */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (D840BD4D2E26F47200C8B23A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Fileaway; sourceTree = "<group>"; };
-		D840BD502E26F47500C8B23A /* FileawayTests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (D840BD522E26F47500C8B23A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = FileawayTests; sourceTree = "<group>"; };
-		D840BD552E26F47700C8B23A /* FileawayUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (D840BD572E26F47700C8B23A /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = FileawayUITests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,20 +43,6 @@
 				D88B353D28B61247000C8910 /* FileawayCore in Frameworks */,
 				D8FB857F2916D2430024F885 /* Diligence in Frameworks */,
 				D8A871D72917F82C00B2932A /* Interact in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D8CCB8132143672700AC445F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D8CCB81E2143672700AC445F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,8 +71,6 @@
 				D86AA553291DB7BF0078B2DA /* Packages */,
 				D8B0B3D425314771001EB2C2 /* Fileaway.entitlements */,
 				D840BD342E26F47200C8B23A /* Fileaway */,
-				D840BD502E26F47500C8B23A /* FileawayTests */,
-				D840BD552E26F47700C8B23A /* FileawayUITests */,
 				D8BCA522216F069B002A624D /* Frameworks */,
 				D8CCB8032143672700AC445F /* Products */,
 			);
@@ -131,8 +80,6 @@
 			isa = PBXGroup;
 			children = (
 				D8CCB8022143672700AC445F /* Fileaway.app */,
-				D8CCB8162143672700AC445F /* FileawayTests.xctest */,
-				D8CCB8212143672700AC445F /* FileawayUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -166,42 +113,6 @@
 			productReference = D8CCB8022143672700AC445F /* Fileaway.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D8CCB8152143672700AC445F /* FileawayTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D8CCB82D2143672700AC445F /* Build configuration list for PBXNativeTarget "FileawayTests" */;
-			buildPhases = (
-				D8CCB8122143672700AC445F /* Sources */,
-				D8CCB8132143672700AC445F /* Frameworks */,
-				D8CCB8142143672700AC445F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D8CCB8182143672700AC445F /* PBXTargetDependency */,
-			);
-			name = FileawayTests;
-			productName = FileawayTests;
-			productReference = D8CCB8162143672700AC445F /* FileawayTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		D8CCB8202143672700AC445F /* FileawayUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D8CCB8302143672700AC445F /* Build configuration list for PBXNativeTarget "FileawayUITests" */;
-			buildPhases = (
-				D8CCB81D2143672700AC445F /* Sources */,
-				D8CCB81E2143672700AC445F /* Frameworks */,
-				D8CCB81F2143672700AC445F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D8CCB8232143672700AC445F /* PBXTargetDependency */,
-			);
-			name = FileawayUITests;
-			productName = FileawayUITests;
-			productReference = D8CCB8212143672700AC445F /* FileawayUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -215,18 +126,6 @@
 					D8CCB8012143672700AC445F = {
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = "";
-					};
-					D8CCB8152143672700AC445F = {
-						CreatedOnToolsVersion = 9.0;
-						LastSwiftMigration = "";
-						ProvisioningStyle = Automatic;
-						TestTargetID = D8CCB8012143672700AC445F;
-					};
-					D8CCB8202143672700AC445F = {
-						CreatedOnToolsVersion = 9.0;
-						LastSwiftMigration = "";
-						ProvisioningStyle = Automatic;
-						TestTargetID = D8CCB8012143672700AC445F;
 					};
 				};
 			};
@@ -244,28 +143,12 @@
 			projectRoot = "";
 			targets = (
 				D8CCB8012143672700AC445F /* Fileaway */,
-				D8CCB8152143672700AC445F /* FileawayTests */,
-				D8CCB8202143672700AC445F /* FileawayUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		D8CCB8002143672700AC445F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D8CCB8142143672700AC445F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D8CCB81F2143672700AC445F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -282,34 +165,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D8CCB8122143672700AC445F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D8CCB81D2143672700AC445F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		D8CCB8182143672700AC445F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D8CCB8012143672700AC445F /* Fileaway */;
-			targetProxy = D8CCB8172143672700AC445F /* PBXContainerItemProxy */;
-		};
-		D8CCB8232143672700AC445F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D8CCB8012143672700AC445F /* Fileaway */;
-			targetProxy = D8CCB8222143672700AC445F /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		D8CCB8282143672700AC445F /* Debug */ = {
@@ -488,84 +344,6 @@
 			};
 			name = Release;
 		};
-		D8CCB82E2143672700AC445F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = S4WXAUZQEV;
-				INFOPLIST_FILE = FileawayTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = app.fileaway.apps.appstore.tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fileaway.app/Fileaway";
-			};
-			name = Debug;
-		};
-		D8CCB82F2143672700AC445F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = S4WXAUZQEV;
-				INFOPLIST_FILE = FileawayTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = app.fileaway.apps.appstore.tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fileaway.app/Fileaway";
-			};
-			name = Release;
-		};
-		D8CCB8312143672700AC445F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = S4WXAUZQEV;
-				INFOPLIST_FILE = FileawayUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = app.fileaway.apps.appstore.uitests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Fileaway;
-			};
-			name = Debug;
-		};
-		D8CCB8322143672700AC445F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = S4WXAUZQEV;
-				INFOPLIST_FILE = FileawayUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = app.fileaway.apps.appstore.uitests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Fileaway;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -583,24 +361,6 @@
 			buildConfigurations = (
 				D8CCB82B2143672700AC445F /* Debug */,
 				D8CCB82C2143672700AC445F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D8CCB82D2143672700AC445F /* Build configuration list for PBXNativeTarget "FileawayTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D8CCB82E2143672700AC445F /* Debug */,
-				D8CCB82F2143672700AC445F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D8CCB8302143672700AC445F /* Build configuration list for PBXNativeTarget "FileawayUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D8CCB8312143672700AC445F /* Debug */,
-				D8CCB8322143672700AC445F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
