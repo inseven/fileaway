@@ -139,7 +139,7 @@ build-tools install-provisioning-profile "profiles/Fileaway_Mac_App_Store_Profil
 build-tools install-provisioning-profile "profiles/Fileaway_Developer_ID_Profile.provisionprofile"
 
 # Build and test FileawayCore.
-pushd "core"
+pushd "FileawayCore"
 sudo xcode-select --switch "$MACOS_XCODE_PATH"
 xcodebuild -scheme FileawayCore -destination "platform=macOS" clean build test
 sudo xcode-select --switch "$IOS_XCODE_PATH"
