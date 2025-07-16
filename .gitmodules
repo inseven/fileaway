@@ -1,5 +1,5 @@
 [submodule "interact"]
-	path = dependencies/interact
+	path = macos/dependencies/interact
 	url = git@github.com:jbmorley/interact.git
 [submodule "scripts/changes"]
 	path = scripts/changes
@@ -8,16 +8,16 @@
 	path = scripts/build-tools
 	url = https://github.com/jbmorley/build-tools.git
 [submodule "diligence"]
-	path = dependencies/diligence
+	path = macos/dependencies/diligence
 	url = git@github.com:inseven/diligence.git
 [submodule "FilePicker"]
-	path = dependencies/FilePicker
+	path = macos/dependencies/FilePicker
 	url = git@github.com:jbmorley/FilePicker.git
 [submodule "HashRainbow"]
-	path = dependencies/HashRainbow
+	path = macos/dependencies/HashRainbow
 	url = git@github.com:jbmorley/HashRainbow.git
 [submodule "DIFlowLayout"]
-	path = dependencies/DIFlowLayout
+	path = macos/dependencies/DIFlowLayout
 	url = git@github.com:jbmorley/DIFlowLayout.git
 [submodule "scripts/Sparkle"]
 	path = scripts/Sparkle
