@@ -23,6 +23,10 @@ import SwiftUI
 
 import Interact
 
+#if os(iOS)
+import FilePicker
+#endif
+
 import FileawayCore
 
 struct ContentView: View {
@@ -41,6 +45,20 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView {
             Sidebar(sceneModel: sceneModel)
+#if os(iOS)
+                .navigationTitle("Folders")
+                .toolbar {
+
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button {
+                            sceneModel.showSettings()
+                        } label: {
+                            Image(systemName: "gear")
+                        }
+                    }
+
+                }
+#endif
         } detail: {
             if let directoryViewModel = sceneModel.directoryViewModel {
                 DirectoryView(directoryViewModel: directoryViewModel)
@@ -49,12 +67,36 @@ struct ContentView: View {
                     .searchable()
             }
         }
+#if os(macOS)
         .toolbar(id: "main") {
             SelectionToolbar(directoryViewModel: directoryViewModel)
         }
+#endif
+#if os(iOS)
+        .sheet(item: $sceneModel.action) { action in
+            switch action {
+            case .settings:
+                PhoneSettingsView(applicationModel: applicationModel, settings: applicationModel.settings)
+            case .addLocation(let type):
+                FilePickerUIRepresentable(types: [.folder], allowMultiple: false, asCopy: false) { urls in
+                    guard let url = urls.first else {
+                        return
+                    }
+                    // TODO: Handle the error here.
+                    try! applicationModel.addLocation(type: type, url: url)
+                }
+            case .move(let files):
+                PhoneWizardView(file: files.first!)
+            case .editRules(let url):
+                PhoneRulesView(rulesModel: RulesModel(archiveURL: url))
+            }
+        }
+
+#endif
         .runs(sceneModel)
         .environmentObject(sceneModel)
         .focusedSceneObject(sceneModel)
+#if os(macOS)
         .onChange(of: sceneModel.action) { _, action in
             // macOS treats actions as a stream of operation requests.
             // This allows us to open windows instead of presenting sheets as we do on iOS.
@@ -71,5 +113,6 @@ struct ContentView: View {
             }
             sceneModel.action = nil
         }
+#endif
     }
 }
