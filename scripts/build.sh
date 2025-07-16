@@ -155,11 +155,11 @@ popd
 # Build, test and archive the iOS project.
 sudo xcode-select --switch "$IOS_XCODE_PATH"
 # xcode_project \
-    # -scheme "Fileaway macOS" \
+    # -scheme "Fileaway" \
     # -destination "$DEFAULT_IPHONE_DESTINATION" \
     # clean build build-for-testing test
 xcode_project \
-    -scheme "Fileaway macOS" \
+    -scheme "Fileaway" \
     -config Release \
     -archivePath "$IOS_ARCHIVE_PATH" \
     -destination "generic/platform=iOS" \
@@ -176,7 +176,7 @@ xcodebuild \
 # Build and archive the macOS project.
 sudo xcode-select --switch "$MACOS_XCODE_PATH"
 xcode_project \
-    -scheme "Fileaway macOS" \
+    -scheme "Fileaway" \
     -config Release \
     -archivePath "$MACOS_ARCHIVE_PATH" \
     OTHER_CODE_SIGN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\"" \
