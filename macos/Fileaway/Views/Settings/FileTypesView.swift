@@ -26,7 +26,7 @@ import Interact
 
 import FileawayCore
 
-struct PhoneFileTypesView: View {
+struct FileTypesView: View {
 
     @StateObject var model: FileTypesViewModel
 
@@ -58,9 +58,11 @@ struct PhoneFileTypesView: View {
                         model.remove(selection)
                     }
                 }
+#if os(macOS)
                 .onDeleteCommand {
                     model.remove(model.selection)
                 }
+#endif
                 HStack {
                     TextField("File Extension", text: $model.newFilenameExtension)
                         .onSubmit {

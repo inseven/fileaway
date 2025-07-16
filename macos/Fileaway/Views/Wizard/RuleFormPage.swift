@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import Interact
+
 import FileawayCore
 
 struct RuleFormPage: View {
@@ -86,7 +88,7 @@ struct RuleFormPage: View {
                                  message: Text("File exists at location."),
                                  primaryButton: .default(Text("OK")),
                                  secondaryButton: .default(Text("Reveal Duplicate"), action: {
-                        NSWorkspace.shared.activateFileViewerSelecting([duplicateUrl])
+                        Application.reveal(duplicateUrl)
                     }))
                 }
             }

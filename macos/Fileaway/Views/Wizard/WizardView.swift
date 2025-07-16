@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import Interact
+
 import FileawayCore
 
 class RulesWizardModel: ObservableObject {
@@ -45,7 +47,7 @@ struct WizardView: View {
         HStack(spacing: 0) {
             QuickLookPreview(url: url)
                 .onTapGesture(count: 2) {
-                    NSWorkspace.shared.open(url)
+                    Application.open(url)
                 }
                 .background(.thinMaterial)
                 .cornerRadius(6.0)

@@ -90,6 +90,7 @@ struct LocationsEditor: View {
                 }
                 VStack {
                     Button {
+#if os(macOS)
                         let openPanel = NSOpenPanel()
                         openPanel.canChooseFiles = false
                         openPanel.canChooseDirectories = true
@@ -99,6 +100,7 @@ struct LocationsEditor: View {
                             return
                         }
                         addLocation(type: type, url: url)
+#endif
                     } label: {
                         Text("Add")
                             .frame(width: 80)

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		D8037B122617F8CD00F41971 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = D8037B112617F8CD00F41971 /* Introspect */; };
 		D88B353B28B6113A000C8910 /* FileawayCore in Frameworks */ = {isa = PBXBuildFile; productRef = D88B353A28B6113A000C8910 /* FileawayCore */; };
-		D8A72D242E21B4C200401530 /* Glitter in Frameworks */ = {isa = PBXBuildFile; productRef = D8A72D232E21B4C200401530 /* Glitter */; };
+		D8A72D242E21B4C200401530 /* Glitter in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = D8A72D232E21B4C200401530 /* Glitter */; };
 		D8D275BE28B3865500200A7C /* Diligence in Frameworks */ = {isa = PBXBuildFile; productRef = D8D275BD28B3865500200A7C /* Diligence */; };
 		D8F90C7325DAA72700F0EFB8 /* Interact in Frameworks */ = {isa = PBXBuildFile; productRef = D8F90C7225DAA72700F0EFB8 /* Interact */; };
 /* End PBXBuildFile section */
@@ -456,7 +456,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = app.fileaway.apps.appstore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -486,7 +489,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Fileaway Developer ID Application";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "Fileaway Mac App Store Profile";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
