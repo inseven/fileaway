@@ -28,6 +28,7 @@ set -u
 SCRIPTS_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 ROOT_DIRECTORY="$SCRIPTS_DIRECTORY/.."
+SOURCE_DIRECTORY="$ROOT_DIRECTORY/macos"
 BUILD_DIRECTORY="$ROOT_DIRECTORY/build"
 ARCHIVES_DIRECTORY="$ROOT_DIRECTORY/archives"
 TEMPORARY_DIRECTORY="$ROOT_DIRECTORY/temp"
@@ -87,15 +88,12 @@ if [ -f "$ENV_PATH" ] ; then
     source "$ENV_PATH"
 fi
 
-function xcode_project {
-    xcodebuild \
-        -workspace Fileaway.xcworkspace "$@"
-}
-
-cd "$ROOT_DIRECTORY"
+cd "$SOURCE_DIRECTORY"
 
 # List the available schemes.
-xcode_project -list
+xcodebuild \
+    -project Fileaway-macOS.xcodeproj \
+    -list
 
 # Clean up and recreate the output directories.
 
@@ -118,15 +116,11 @@ echo "$TEMPORARY_KEYCHAIN_PASSWORD" | build-tools create-keychain "$KEYCHAIN_PAT
 
 function cleanup {
 
-    # Cleanup the temporary files and keychain.
+    # Cleanup the temporary files, keychain and keys.
     cd "$ROOT_DIRECTORY"
     build-tools delete-keychain "$KEYCHAIN_PATH"
     rm -rf "$TEMPORARY_DIRECTORY"
-
-    # Clean up any private keys.
-    if [ -f ~/.appstoreconnect/private_keys ]; then
-        rm -r ~/.appstoreconnect/private_keys
-    fi
+    rm -rf ~/.appstoreconnect/private_keys
 }
 
 trap cleanup EXIT
@@ -154,12 +148,14 @@ popd
 
 # Build, test and archive the iOS project.
 sudo xcode-select --switch "$IOS_XCODE_PATH"
-# xcode_project \
-    # -scheme "Fileaway macOS" \
+# xcodebuild \
+    # -project Fileaway-macOS.xcodeproj \
+    # -scheme "Fileaway" \
     # -destination "$DEFAULT_IPHONE_DESTINATION" \
     # clean build build-for-testing test
-xcode_project \
-    -scheme "Fileaway macOS" \
+xcodebuild \
+    -project Fileaway-macOS.xcodeproj \
+    -scheme "Fileaway" \
     -config Release \
     -archivePath "$IOS_ARCHIVE_PATH" \
     -destination "generic/platform=iOS" \
@@ -171,12 +167,13 @@ xcodebuild \
     -archivePath "$IOS_ARCHIVE_PATH" \
     -exportArchive \
     -exportPath "$BUILD_DIRECTORY" \
-    -exportOptionsPlist "macos/ExportOptions_iOS.plist"
+    -exportOptionsPlist "ExportOptions_iOS.plist"
 
 # Build and archive the macOS project.
 sudo xcode-select --switch "$MACOS_XCODE_PATH"
-xcode_project \
-    -scheme "Fileaway macOS" \
+xcodebuild \
+    -project Fileaway-macOS.xcodeproj \
+    -scheme "Fileaway" \
     -config Release \
     -archivePath "$MACOS_ARCHIVE_PATH" \
     OTHER_CODE_SIGN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\"" \
@@ -184,10 +181,11 @@ xcode_project \
     MARKETING_VERSION=$VERSION_NUMBER \
     clean archive
 xcodebuild \
+    -project Fileaway-macOS.xcodeproj \
     -archivePath "$MACOS_ARCHIVE_PATH" \
     -exportArchive \
     -exportPath "$BUILD_DIRECTORY" \
-    -exportOptionsPlist "macos/ExportOptions_macOS.plist"
+    -exportOptionsPlist "ExportOptions_macOS.plist"
 
 # Apple recommends we use ditto to prepare zips for notarization.
 # https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow
