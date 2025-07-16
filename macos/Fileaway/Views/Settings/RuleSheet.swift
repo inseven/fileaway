@@ -29,20 +29,17 @@ struct RuleSheet: View {
     @State var ruleModel: RuleModel
 
     var body: some View {
-        VStack {
-            RuleDetailView(ruleModel: ruleModel)
-            HStack {
-                Spacer()
-                Button {
-                    dismiss()
-                } label: {
-                    Text("Done")
+        RuleDetailView(ruleModel: ruleModel)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Text("Done")
+                    }
                 }
             }
-            .padding()
-        }
-        .background(Color.windowBackgroundColor)
-        .frame(width: 800, height: 700)
+            .frame(width: 800, height: 700)
     }
 
 }
