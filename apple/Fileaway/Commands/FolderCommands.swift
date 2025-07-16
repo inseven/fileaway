@@ -20,30 +20,35 @@
 
 import SwiftUI
 
-struct KeyboardShortcut: ViewModifier {
+import FileawayCore
 
-    private var value: Int
-    private var modifiers: EventModifiers
+public struct FolderCommands: Commands {
 
-    init(value: Int, modifiers: EventModifiers) {
-        self.value = value
-        self.modifiers = modifiers
+    @ObservedObject private var applicationModel: ApplicationModel
+    @FocusedObject private var sceneModel: SceneModel?
+
+    public init(applicationModel: ApplicationModel) {
+        self.applicationModel = applicationModel
     }
 
-    func body(content: Content) -> some View {
-        if value < 10 {
-            content.keyboardShortcut(KeyEquivalent(String(value).first!), modifiers: modifiers)
-        } else {
-            content
+    @MainActor public var body: some Commands {
+        CommandMenu("Folder") {
+            ForEach(Array(applicationModel.inboxes.enumerated()), id: \.element.id) { index, folder in
+                Button(folder.name) {
+                    sceneModel?.section = folder.url
+                }
+                .keyboardShortcut(index + 1, modifiers: .command)
+                .disabled(sceneModel == nil)
+            }
+            Divider()
+            ForEach(Array(applicationModel.archives.enumerated()), id: \.element.id) { index, folder in
+                Button(folder.name) {
+                    sceneModel?.section = folder.url
+                }
+                .keyboardShortcut(applicationModel.inboxes.count + index + 1, modifiers: .command)
+                .disabled(sceneModel == nil)
+            }
         }
-    }
-
-}
-
-extension View {
-
-    func keyboardShortcut(_ value: Int, modifiers: EventModifiers) -> some View {
-        modifier(KeyboardShortcut(value: value, modifiers: modifiers))
     }
 
 }

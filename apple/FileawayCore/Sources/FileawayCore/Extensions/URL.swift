@@ -48,7 +48,6 @@ extension URL {
         return extensions.contains(pathExtension)
     }
 
-    // TODO: review this?
     public func relativePath(from base: URL) -> String? {
 
         guard self.isFileURL,
@@ -86,13 +85,6 @@ extension URL {
         }
 #endif
     }
-
-
-}
-
-extension URL: Identifiable {
-
-    public var id: URL { self }
 
 }
 

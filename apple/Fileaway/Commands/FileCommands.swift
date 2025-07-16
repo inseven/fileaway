@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import FileawayCore
+
 public struct FileCommands: Commands {
 
     @ObservedObject var directoryViewModel: DirectoryViewModel
