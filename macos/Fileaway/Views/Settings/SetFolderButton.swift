@@ -33,6 +33,7 @@ struct SetFolderButton: View {
     }
 
     var body: some View {
+#if os(macOS)
         Button {
             let openPanel = NSOpenPanel()
             openPanel.canChooseFiles = false
@@ -55,6 +56,9 @@ struct SetFolderButton: View {
         } label: {
             Image(systemName: "folder")
         }
+#else
+        Text("Implement Me!")
+#endif
     }
 
 }

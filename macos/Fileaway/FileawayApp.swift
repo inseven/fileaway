@@ -21,21 +21,25 @@
 import SwiftUI
 import UserNotifications
 
+#if canImport(Glitter)
 import Glitter
+#endif
 
 import Diligence
 import FileawayCore
 
 @main
 struct FileawayApp: App {
-
+    
+#if canImport(Sparkle)
     var updaterModel = UpdaterModel()
-
+#endif
+    
     @StateObject var applicationModel = ApplicationModel()
     @FocusedValue(\.directoryViewModel) var directoryViewModel
-
+    
     @Environment(\.scenePhase) private var phase
-
+    
     func enableNotifications() {
         UNUserNotificationCenter.current().requestAuthorization(options: .badge) { (granted, error) in
             if let error = error {
@@ -45,11 +49,11 @@ struct FileawayApp: App {
             print("User notification state \(granted)")
         }
     }
-
+    
     init() {
         self.enableNotifications()
     }
-
+    
     var body: some Scene {
         
         WindowGroup(id: "main") {
@@ -61,17 +65,23 @@ struct FileawayApp: App {
             SidebarCommands()
             FileCommands(directoryViewModel: directoryViewModel)
             FolderCommands(applicationModel: applicationModel)
+#if canImport(Glitter)
             UpdateCommands(updater: updaterModel.updaterController.updater)
+#endif
         }
-
+        
+#if os(macOS)
+        
         Wizard(applicationModel: applicationModel)
-
+        
         SwiftUI.Settings {
-            PhoneSettingsView(applicationModel: applicationModel)
+            SettingsView(applicationModel: applicationModel)
                 .environmentObject(applicationModel)
         }
-
+        
         About(Legal.contents)
-
+        
+#endif
+        
     }
 }

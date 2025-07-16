@@ -18,8 +18,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Quartz
 import SwiftUI
+
+#if os(macOS)
+
+import Quartz
 
 struct QuickLookPreview: NSViewRepresentable {
 
@@ -42,3 +45,17 @@ struct QuickLookPreview: NSViewRepresentable {
     typealias NSViewType = QLPreviewView
 
 }
+
+#else
+
+struct QuickLookPreview: View {
+
+    var url: URL
+
+    var body: some View {
+        Text(url.path)
+    }
+
+}
+
+#endif

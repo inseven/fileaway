@@ -22,7 +22,7 @@ import SwiftUI
 
 import FileawayCore
 
-struct PhoneSettingsView: View {
+struct SettingsView: View {
 
     @ObservedObject var applicationModel: ApplicationModel
     

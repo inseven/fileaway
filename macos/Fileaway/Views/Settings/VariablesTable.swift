@@ -42,9 +42,11 @@ struct VariablesTable: View {
                         VariableTypePicker(variableModel: variableModel)
                     }
                 }
+#if os(macOS)
                 .onDeleteCommand {
                     ruleModel.remove(variableIds: selection)
                 }
+#endif
 
                 VStack {
                     VStack {

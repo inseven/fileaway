@@ -18,6 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#if canImport(Sparkle)
+
 import Sparkle
 
 class UpdaterModel {
@@ -37,3 +39,5 @@ class UpdaterModel {
     }
 
 }
+
+#endif
