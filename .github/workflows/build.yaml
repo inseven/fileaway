@@ -41,7 +41,7 @@ jobs:
 
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         RELEASE: ${{ github.ref == 'refs/heads/main' }}
-        UPLOAD_TO_TESTFLIGHT: true
+        UPLOAD_TO_TESTFLIGHT: ${{ github.ref == 'refs/heads/main' }}
 
       run: |
         scripts/build.sh
