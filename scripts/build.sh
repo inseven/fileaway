@@ -59,7 +59,7 @@ do
     key="$1"
     case $key in
         -r|--release)
-        UPLOAD_TO_TESTFLIGHT=true
+        RELEASE=true
         shift
         ;;
         -t|--upload-to-testflight)
@@ -251,7 +251,7 @@ changes notes --all --template "$RELEASE_NOTES_TEMPLATE_PATH" >> "$ARCHIVES_DIRE
 APPCAST_PATH="$ARCHIVES_DIRECTORY/appcast.xml"
 cp "$APPCAST_PATH" "$BUILD_DIRECTORY"
 
-if $UPLOAD_TO_TESTFLIGHT  ; then
+if $UPLOAD_TO_TESTFLIGHT ; then
 
     # Upload the iOS build.
     xcrun altool --upload-app \
