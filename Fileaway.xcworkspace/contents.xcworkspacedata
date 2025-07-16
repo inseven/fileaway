@@ -4,7 +4,4 @@
    <FileRef
       location = "group:macos/Fileaway-macOS.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:ios/Fileaway-iOS.xcodeproj">
-   </FileRef>
 </Workspace>
