@@ -22,12 +22,6 @@ import SwiftUI
 
 import Interact
 
-extension String: Identifiable {
-
-    public var id: Self { self }
-
-}
-
 public struct RuleFormSection: View {
 
     @ObservedObject private var ruleFormModel: RuleFormModel
