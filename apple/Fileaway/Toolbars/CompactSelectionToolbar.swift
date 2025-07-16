@@ -22,6 +22,8 @@ import SwiftUI
 
 import FileawayCore
 
+#if os(iOS)
+
 public struct CompactSelectionToolbar: ToolbarContent {
 
     @EnvironmentObject var sceneModel: SceneModel
@@ -62,3 +64,5 @@ public struct CompactSelectionToolbar: ToolbarContent {
     }
 
 }
+
+#endif
