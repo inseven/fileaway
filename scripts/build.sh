@@ -171,7 +171,7 @@ xcodebuild \
     -archivePath "$IOS_ARCHIVE_PATH" \
     -exportArchive \
     -exportPath "$BUILD_DIRECTORY" \
-    -exportOptionsPlist "ios/ExportOptions_iOS.plist"
+    -exportOptionsPlist "macos/ExportOptions_iOS.plist"
 
 # Build and archive the macOS project.
 sudo xcode-select --switch "$MACOS_XCODE_PATH"
