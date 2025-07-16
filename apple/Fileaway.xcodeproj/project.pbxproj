@@ -36,7 +36,7 @@
 		D87DEF7B25774F6C006CFE85 /* Fileaway.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fileaway.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87DEF8D25774F6D006CFE85 /* FileawayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileawayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87DEF9825774F6D006CFE85 /* FileawayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileawayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D88B353928B61015000C8910 /* core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = core; sourceTree = "<group>"; };
+		D88B353928B61015000C8910 /* FileawayCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FileawayCore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -102,7 +102,7 @@
 		D87DEF7225774F6C006CFE85 = {
 			isa = PBXGroup;
 			children = (
-				D8D275BB28B3862400200A7C /* Packages */,
+				D88B353928B61015000C8910 /* FileawayCore */,
 				D895F6992E21AC5A007D7515 /* Fileaway */,
 				D895F6BF2E21AC84007D7515 /* FileawayTests */,
 				D895F6C42E21AC86007D7515 /* FileawayUITests */,
@@ -119,14 +119,6 @@
 				D87DEF9825774F6D006CFE85 /* FileawayUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		D8D275BB28B3862400200A7C /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				D88B353928B61015000C8910 /* core */,
-			);
-			name = Packages;
 			sourceTree = "<group>";
 		};
 		D8F90C5925D9CA0700F0EFB8 /* Frameworks */ = {
