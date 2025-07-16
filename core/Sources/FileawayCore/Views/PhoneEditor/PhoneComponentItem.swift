@@ -20,29 +20,29 @@
 
 import SwiftUI
 
-import Interact
+public struct PhoneComponentItem: View {
 
-import FileawayCore
+    @Environment(\.editMode) var editMode
 
-struct PhoneDocumentPreviewHeader: View {
+    @ObservedObject var ruleModel: RuleModel
+    @State var component: ComponentModel
 
-    @Binding private var isVisible: Bool
-    private let url: URL
-
-    init(_ isVisible: Binding<Bool>, url: URL) {
-        _isVisible = isVisible
-        self.url = url
+    public init(ruleModel: RuleModel, component: ComponentModel) {
+        self.ruleModel = ruleModel
+        self.component = component
     }
 
-    var body: some View {
-        ConditionalHeader($isVisible) {
-            PhoneDocumentPreviewButton(url: url, size: .init(width: 240, height: 240))
-                .horizontalSpace(.both)
-            Text(url.displayName)
-                .font(.body)
-                .fontWeight(.bold)
-                .multilineTextAlignment(.center)
+    public var body: some View {
+        HStack {
+            if component.type == .text {
+                EditText("Component", text: $component.value).environment(\.editMode, editMode)
+            } else {
+                Text(ruleModel.name(for: component))
+                    .tokenAppearance()
+                    .tint(component.variable?.color ?? .black)
+            }
         }
+        .environment(\.editMode, editMode)
     }
 
 }

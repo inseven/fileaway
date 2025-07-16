@@ -20,14 +20,28 @@
 
 import SwiftUI
 
-import FileawayCore
+import Interact
 
-class PhoneWizardModel: ObservableObject {
+public struct PhoneDocumentPreviewHeader: View {
 
-    @MainActor @Published var isComplete: Bool = false
+    @Binding private var isVisible: Bool
 
-    @MainActor func complete() {
-        self.isComplete = true
+    private let url: URL
+
+    public init(_ isVisible: Binding<Bool>, url: URL) {
+        _isVisible = isVisible
+        self.url = url
+    }
+
+    public var body: some View {
+        ConditionalHeader($isVisible) {
+            PhoneDocumentPreviewButton(url: url, size: .init(width: 240, height: 240))
+                .horizontalSpace(.both)
+            Text(url.displayName)
+                .font(.body)
+                .fontWeight(.bold)
+                .multilineTextAlignment(.center)
+        }
     }
 
 }

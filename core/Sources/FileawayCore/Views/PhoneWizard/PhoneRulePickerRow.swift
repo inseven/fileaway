@@ -20,29 +20,30 @@
 
 import SwiftUI
 
-import Interact
+public struct PhoneRulePickerRow: View {
 
-import FileawayCore
-
-public struct PhoneDocumentPreviewButton: View {
-
-    @State private var previewURL: URL?
+    @EnvironmentObject private var applicationModel: ApplicationModel
 
     private let url: URL
-    private let size: CGSize
+    private let ruleModel: RuleModel
 
-    init(url: URL, size: CGSize) {
+    public init(url: URL, ruleModel: RuleModel) {
         self.url = url
-        self.size = size
+        self.ruleModel = ruleModel
     }
 
     public var body: some View {
-        Button() {
-            previewURL = url
+        NavigationLink {
+            PhoneRuleFormView(applicationModel: applicationModel, url: url, ruleModel: ruleModel)
         } label: {
-            IconView(url: url, size: size)
+            VStack {
+                Text(ruleModel.name)
+                    .horizontalSpace(.trailing)
+                Text(ruleModel.archiveURL.displayName)
+                    .foregroundColor(.secondary)
+                    .horizontalSpace(.trailing)
+            }
         }
-        .quickLookPreview($previewURL)
     }
 
 }

@@ -21,13 +21,15 @@
 import Foundation
 import SwiftUI
 
-import FileawayCore
-
-struct PhoneRulesView: View {
+public struct PhoneRulesView: View {
 
     @ObservedObject var rulesModel: RulesModel
 
-    var body: some View {
+    public init(rulesModel: RulesModel) {
+        self.rulesModel = rulesModel
+    }
+
+    public var body: some View {
         NavigationStack {
             VStack {
                 List {

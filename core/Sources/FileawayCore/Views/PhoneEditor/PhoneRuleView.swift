@@ -22,34 +22,40 @@ import Combine
 import Foundation
 import SwiftUI
 
-import FileawayCore
-
-struct PhoneRuleView: View {
+public struct PhoneRuleView: View {
 
     @State private var editMode = EditMode.inactive
+
     @ObservedObject var rulesModel: RulesModel
     @ObservedObject var editingRuleModel: RuleModel
+
     var originalRuleModel: RuleModel
 
-    func edit() {
+    public init(rulesModel: RulesModel, editingRuleModel: RuleModel, originalRuleModel: RuleModel) {
+        self.rulesModel = rulesModel
+        self.editingRuleModel = editingRuleModel
+        self.originalRuleModel = originalRuleModel
+    }
+
+    public func edit() {
         self.editingRuleModel.establishBackChannel()
         self.editMode = .active
     }
 
-    func save() {
+    public func save() {
         // SwiftUI gets crashy if there's a first responder attached to a TextView when it's hidden.
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         rulesModel.replace(ruleModel: editingRuleModel)
         self.editMode = .inactive
     }
 
-    func cancel() {
+    public func cancel() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         editingRuleModel.reset(to: originalRuleModel)
         self.editMode = .inactive
     }
 
-    var body: some View {
+    public var body: some View {
         return VStack {
             Form {
 

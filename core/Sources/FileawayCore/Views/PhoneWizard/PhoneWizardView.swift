@@ -20,31 +20,29 @@
 
 import SwiftUI
 
-import FileawayCore
+public struct PhoneWizardView: View {
 
-struct PhoneRulePickerRow: View {
+    @Environment(\.dismiss) var dismiss
 
     @EnvironmentObject private var applicationModel: ApplicationModel
+    @StateObject var wizardModel = PhoneWizardModel()
 
-    private let url: URL
-    private let ruleModel: RuleModel
+    let file: FileInfo
 
-    init(url: URL, ruleModel: RuleModel) {
-        self.url = url
-        self.ruleModel = ruleModel
+    public init(file: FileInfo) {
+        self.file = file
     }
 
-    var body: some View {
-        NavigationLink {
-            PhoneRuleFormView(applicationModel: applicationModel, url: url, ruleModel: ruleModel)
-        } label: {
-            VStack {
-                Text(ruleModel.name)
-                    .horizontalSpace(.trailing)
-                Text(ruleModel.archiveURL.displayName)
-                    .foregroundColor(.secondary)
-                    .horizontalSpace(.trailing)
+    public var body: some View {
+        NavigationStack {
+            PhoneRulePicker(applicationModel: applicationModel, url: file.url)
+        }
+        .environmentObject(wizardModel)
+        .onChange(of: wizardModel.isComplete) { _, isComplete in
+            guard isComplete else {
+                return
             }
+            dismiss()
         }
     }
 

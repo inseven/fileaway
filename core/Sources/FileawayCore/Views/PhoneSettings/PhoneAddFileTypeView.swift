@@ -24,11 +24,9 @@ import UniformTypeIdentifiers
 
 import Interact
 
-import FileawayCore
+public struct PhoneAddFileTypeView: View {
 
-struct PhoneAddFileTypeView: View {
-
-    enum Focus: Hashable {
+    public enum Focus: Hashable {
         case add
     }
 
@@ -37,7 +35,11 @@ struct PhoneAddFileTypeView: View {
     @ObservedObject var model: FileTypesViewModel
     @FocusState private var focus: Focus?
 
-    var body: some View {
+    public init(model: FileTypesViewModel) {
+        self.model = model
+    }
+
+    public var body: some View {
         NavigationView {
             Form {
                 Section {

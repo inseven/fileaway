@@ -20,32 +20,15 @@
 
 import SwiftUI
 
-import FileawayCore
+public class PhoneWizardModel: ObservableObject {
 
-struct PhoneWizardView: View {
+    @MainActor @Published public var isComplete: Bool = false
 
-    @Environment(\.dismiss) var dismiss
-
-    @EnvironmentObject private var applicationModel: ApplicationModel
-    @StateObject var wizardModel = PhoneWizardModel()
-
-    let file: FileInfo
-
-    init(file: FileInfo) {
-        self.file = file
+    public init() {
     }
 
-    var body: some View {
-        NavigationStack {
-            PhoneRulePicker(applicationModel: applicationModel, url: file.url)
-        }
-        .environmentObject(wizardModel)
-        .onChange(of: wizardModel.isComplete) { _, isComplete in
-            guard isComplete else {
-                return
-            }
-            dismiss()
-        }
+    @MainActor public func complete() {
+        self.isComplete = true
     }
 
 }

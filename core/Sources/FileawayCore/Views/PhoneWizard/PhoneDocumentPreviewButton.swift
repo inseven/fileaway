@@ -20,25 +20,27 @@
 
 import SwiftUI
 
-import FileawayCore
+import Interact
 
-struct PhoneComponentItem: View {
+public struct PhoneDocumentPreviewButton: View {
 
-    @Environment(\.editMode) var editMode
-    @ObservedObject var ruleModel: RuleModel
-    @State var component: ComponentModel
+    @State private var previewURL: URL?
 
-    var body: some View {
-        HStack {
-            if component.type == .text {
-                EditText("Component", text: $component.value).environment(\.editMode, editMode)
-            } else {
-                Text(ruleModel.name(for: component))
-                    .tokenAppearance()
-                    .tint(component.variable?.color ?? .black)
-            }
+    private let url: URL
+    private let size: CGSize
+
+    public init(url: URL, size: CGSize) {
+        self.url = url
+        self.size = size
+    }
+
+    public var body: some View {
+        Button() {
+            previewURL = url
+        } label: {
+            IconView(url: url, size: size)
         }
-        .environment(\.editMode, editMode)
+        .quickLookPreview($previewURL)
     }
 
 }

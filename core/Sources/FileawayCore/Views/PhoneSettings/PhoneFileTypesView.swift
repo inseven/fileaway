@@ -22,9 +22,7 @@ import MobileCoreServices
 import SwiftUI
 import UniformTypeIdentifiers
 
-import FileawayCore
-
-struct PhoneFileTypesView: View {
+public struct PhoneFileTypesView: View {
 
     enum SheetType: Identifiable {
 
@@ -36,11 +34,11 @@ struct PhoneFileTypesView: View {
     @StateObject var model: FileTypesViewModel
     @State var sheet: SheetType?
 
-    init(settings: Settings) {
+    public init(settings: Settings) {
         _model = StateObject(wrappedValue: FileTypesViewModel(settings: settings))
     }
 
-    var body: some View {
+    public var body: some View {
         List {
             ForEach(model.fileTypes) { fileType in
                 LabeledContent(fileType.localizedDisplayName, value: fileType.preferredFilenameExtension ?? "")
