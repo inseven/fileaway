@@ -20,25 +20,30 @@
 
 import SwiftUI
 
-import FileawayCore
+public struct PhoneWizardView: View {
 
-struct PhoneComponentItem: View {
+    @Environment(\.dismiss) var dismiss
 
-    @Environment(\.editMode) var editMode
-    @ObservedObject var ruleModel: RuleModel
-    @State var component: ComponentModel
+    @EnvironmentObject private var applicationModel: ApplicationModel
+    @StateObject var wizardModel = PhoneWizardModel()
 
-    var body: some View {
-        HStack {
-            if component.type == .text {
-                EditText("Component", text: $component.value).environment(\.editMode, editMode)
-            } else {
-                Text(ruleModel.name(for: component))
-                    .tokenAppearance()
-                    .tint(component.variable?.color ?? .black)
-            }
+    let file: FileInfo
+
+    public init(file: FileInfo) {
+        self.file = file
+    }
+
+    public var body: some View {
+        NavigationStack {
+            PhoneRulePicker(applicationModel: applicationModel, url: file.url)
         }
-        .environment(\.editMode, editMode)
+        .environmentObject(wizardModel)
+        .onChange(of: wizardModel.isComplete) { _, isComplete in
+            guard isComplete else {
+                return
+            }
+            dismiss()
+        }
     }
 
 }

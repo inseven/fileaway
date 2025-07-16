@@ -18,34 +18,35 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#if os(iOS)
+
 import SwiftUI
 
-import FileawayCore
+public struct PhoneComponentItem: View {
 
-struct PhoneWizardView: View {
+    @Environment(\.editMode) var editMode
 
-    @Environment(\.dismiss) var dismiss
+    @ObservedObject var ruleModel: RuleModel
+    @State var component: ComponentModel
 
-    @EnvironmentObject private var applicationModel: ApplicationModel
-    @StateObject var wizardModel = PhoneWizardModel()
-
-    let file: FileInfo
-
-    init(file: FileInfo) {
-        self.file = file
+    public init(ruleModel: RuleModel, component: ComponentModel) {
+        self.ruleModel = ruleModel
+        self.component = component
     }
 
-    var body: some View {
-        NavigationStack {
-            PhoneRulePicker(applicationModel: applicationModel, url: file.url)
-        }
-        .environmentObject(wizardModel)
-        .onChange(of: wizardModel.isComplete) { _, isComplete in
-            guard isComplete else {
-                return
+    public var body: some View {
+        HStack {
+            if component.type == .text {
+                EditText("Component", text: $component.value).environment(\.editMode, editMode)
+            } else {
+                Text(ruleModel.name(for: component))
+                    .tokenAppearance()
+                    .tint(component.variable?.color ?? .black)
             }
-            dismiss()
         }
+        .environment(\.editMode, editMode)
     }
 
 }
+
+#endif

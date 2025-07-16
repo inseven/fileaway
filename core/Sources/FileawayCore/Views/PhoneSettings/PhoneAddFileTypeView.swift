@@ -18,17 +18,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import MobileCoreServices
 import SwiftUI
 import UniformTypeIdentifiers
 
 import Interact
 
-import FileawayCore
+public struct PhoneAddFileTypeView: View {
 
-struct PhoneAddFileTypeView: View {
-
-    enum Focus: Hashable {
+    public enum Focus: Hashable {
         case add
     }
 
@@ -37,13 +34,19 @@ struct PhoneAddFileTypeView: View {
     @ObservedObject var model: FileTypesViewModel
     @FocusState private var focus: Focus?
 
-    var body: some View {
+    public init(model: FileTypesViewModel) {
+        self.model = model
+    }
+
+    public var body: some View {
         NavigationView {
             Form {
                 Section {
                     TextField("File Extension", text: $model.newFilenameExtension)
                         .autocorrectionDisabled(true)
+#if os(iOS)
                         .textInputAutocapitalization(.never)
+#endif
                         .focused($focus, equals: .add)
                 }
                 Section {
@@ -61,10 +64,12 @@ struct PhoneAddFileTypeView: View {
             }
             .defaultFocus($focus, .add)
             .navigationTitle("Add File Type")
+#if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
+#endif
             .toolbar {
 
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
                         dismiss()
                     }

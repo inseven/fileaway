@@ -18,31 +18,35 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+
 import SwiftUI
 
 import Interact
 
-import FileawayCore
+public struct PhoneDocumentPreviewHeader: View {
 
-public struct PhoneDocumentPreviewButton: View {
-
-    @State private var previewURL: URL?
+    @Binding private var isVisible: Bool
 
     private let url: URL
-    private let size: CGSize
 
-    init(url: URL, size: CGSize) {
+    public init(_ isVisible: Binding<Bool>, url: URL) {
+        _isVisible = isVisible
         self.url = url
-        self.size = size
     }
 
     public var body: some View {
-        Button() {
-            previewURL = url
-        } label: {
-            IconView(url: url, size: size)
+#if os(iOS)
+        ConditionalHeader($isVisible) {
+            PhoneDocumentPreviewButton(url: url, size: .init(width: 240, height: 240))
+                .horizontalSpace(.both)
+            Text(url.displayName)
+                .font(.body)
+                .fontWeight(.bold)
+                .multilineTextAlignment(.center)
         }
-        .quickLookPreview($previewURL)
+#else
+            Text("Preview Header")
+#endif
     }
 
 }

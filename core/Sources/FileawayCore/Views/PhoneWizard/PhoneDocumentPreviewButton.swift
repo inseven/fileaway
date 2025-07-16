@@ -20,14 +20,27 @@
 
 import SwiftUI
 
-import FileawayCore
+import Interact
 
-class PhoneWizardModel: ObservableObject {
+public struct PhoneDocumentPreviewButton: View {
 
-    @MainActor @Published var isComplete: Bool = false
+    @State private var previewURL: URL?
 
-    @MainActor func complete() {
-        self.isComplete = true
+    private let url: URL
+    private let size: CGSize
+
+    public init(url: URL, size: CGSize) {
+        self.url = url
+        self.size = size
+    }
+
+    public var body: some View {
+        Button() {
+            previewURL = url
+        } label: {
+            IconView(url: url, size: size)
+        }
+        .quickLookPreview($previewURL)
     }
 
 }

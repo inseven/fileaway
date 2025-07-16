@@ -20,9 +20,7 @@
 
 import SwiftUI
 
-import FileawayCore
-
-struct PhoneRuleFormView: View {
+public struct PhoneRuleFormView: View {
 
     @EnvironmentObject var wizardModel: PhoneWizardModel
 
@@ -33,7 +31,7 @@ struct PhoneRuleFormView: View {
 
     var url: URL
 
-    init(applicationModel: ApplicationModel, url: URL, ruleModel: RuleModel) {
+    public init(applicationModel: ApplicationModel, url: URL, ruleModel: RuleModel) {
         self.url = url
         self.ruleModel = ruleModel
         _ruleFormModel = StateObject(wrappedValue: RuleFormModel(applicationModel: applicationModel,
@@ -41,7 +39,7 @@ struct PhoneRuleFormView: View {
                                                                  url: url))
     }
 
-    var body: some View {
+    public var body: some View {
         Form {
             PhoneDocumentPreviewHeader($isHeaderVisible, url: url)
             RuleFormSection(ruleFormModel, url: url)
@@ -51,7 +49,7 @@ struct PhoneRuleFormView: View {
             PhoneDocumentPreviewButton(url: url, size: .navigationBarIcon)
         }
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .confirmationAction) {
                 Button("Move") {
                     do {
                         try ruleFormModel.move()

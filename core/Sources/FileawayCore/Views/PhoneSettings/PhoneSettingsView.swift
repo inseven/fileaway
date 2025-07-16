@@ -18,14 +18,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import MobileCoreServices
+#if os(iOS)
+
 import SwiftUI
 
 import Diligence
 
-import FileawayCore
-
-struct PhoneSettingsView: View {
+public struct PhoneSettingsView: View {
 
     enum SheetType: Identifiable {
 
@@ -34,13 +33,19 @@ struct PhoneSettingsView: View {
         case about
     }
 
+    @Environment(\.dismiss) private var dismiss
+
     @ObservedObject var applicationModel: ApplicationModel
     @ObservedObject var settings: Settings
-    @Environment(\.dismiss) private var dismiss
 
     @State private var sheet: SheetType? = nil
 
-    var body: some View {
+    public init(applicationModel: ApplicationModel, settings: Settings) {
+        self.applicationModel = applicationModel
+        self.settings = settings
+    }
+
+    public var body: some View {
         NavigationStack {
             Form {
                 Section("General") {
@@ -90,3 +95,4 @@ struct PhoneSettingsView: View {
 
 }
 
+#endif

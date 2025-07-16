@@ -22,9 +22,7 @@ import SwiftUI
 
 import Interact
 
-import FileawayCore
-
-struct PhoneRulePicker: View {
+public struct PhoneRulePicker: View {
 
     @Environment(\.dismiss) var dismiss
 
@@ -35,12 +33,12 @@ struct PhoneRulePicker: View {
 
     private let url: URL
 
-    init(applicationModel: ApplicationModel, url: URL) {
+    public init(applicationModel: ApplicationModel, url: URL) {
         self.url = url
         _rulePickerModel = StateObject(wrappedValue: RulePickerModel(applicationModel: applicationModel))
     }
 
-    var body: some View {
+    public var body: some View {
         List {
             PhoneDocumentPreviewHeader($isHeaderVisible, url: url)
 
@@ -59,10 +57,12 @@ struct PhoneRulePicker: View {
         }
         .searchable(text: $rulePickerModel.filter)
         .navigationTitle("Select Rule")
+#if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+#endif
         .toolbar {
 
-            ToolbarItem(placement: .navigationBarLeading) {
+            ToolbarItem(placement: .cancellationAction) {
                 Button("Cancel") {
                     dismiss()
                 }
