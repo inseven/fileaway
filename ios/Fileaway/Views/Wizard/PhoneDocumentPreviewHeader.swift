@@ -20,29 +20,29 @@
 
 import SwiftUI
 
+import Interact
+
 import FileawayCore
 
-struct SettingsView: View {
+struct PhoneDocumentPreviewHeader: View {
 
-    @ObservedObject var applicationModel: ApplicationModel
-    
+    @Binding private var isVisible: Bool
+    private let url: URL
+
+    init(_ isVisible: Binding<Bool>, url: URL) {
+        _isVisible = isVisible
+        self.url = url
+    }
+
     var body: some View {
-        TabView {
-            GeneralSettingsView()
-                .tabItem {
-                    Label("General", systemImage: "gear")
-                }
-            LocationsSettingsView(applicationModel: applicationModel)
-                .tabItem {
-                    Label("Folders", systemImage: "folder")
-                }
-            RulesSettingsView(applicationModel: applicationModel)
-                .tabItem {
-                    Label("Rules", systemImage: "tray.and.arrow.down")
-                }
+        ConditionalHeader($isVisible) {
+            PhoneDocumentPreviewButton(url: url, size: .init(width: 240, height: 240))
+                .horizontalSpace(.both)
+            Text(url.displayName)
+                .font(.body)
+                .fontWeight(.bold)
+                .multilineTextAlignment(.center)
         }
-        .padding()
-        .frame(minWidth: 400, maxWidth: .infinity, minHeight: 460, maxHeight: .infinity)
     }
 
 }

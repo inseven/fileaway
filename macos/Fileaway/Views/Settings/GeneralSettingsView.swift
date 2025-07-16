@@ -27,7 +27,7 @@ struct GeneralSettingsView: View {
     @EnvironmentObject private var applicationModel: ApplicationModel
 
     var body: some View {
-        FileTypesView(settings: applicationModel.settings)
+        PhoneFileTypesView(settings: applicationModel.settings)
     }
 
 }

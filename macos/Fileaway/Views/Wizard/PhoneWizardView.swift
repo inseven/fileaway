@@ -32,7 +32,7 @@ class RulesWizardModel: ObservableObject {
 
 }
 
-struct WizardView: View {
+struct PhoneWizardView: View {
 
     @EnvironmentObject private var applicationModel: ApplicationModel
 

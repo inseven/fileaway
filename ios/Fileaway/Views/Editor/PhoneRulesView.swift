@@ -23,7 +23,7 @@ import SwiftUI
 
 import FileawayCore
 
-struct RulesView: View {
+struct PhoneRulesView: View {
 
     @ObservedObject var rulesModel: RulesModel
 
@@ -33,9 +33,9 @@ struct RulesView: View {
                 List {
                     Section {
                         ForEach(rulesModel.ruleModels) { ruleModel in
-                            NavigationLink(destination: RuleView(rulesModel: self.rulesModel,
-                                                                 editingRuleModel: RuleModel(ruleModel),
-                                                                 originalRuleModel: ruleModel)) {
+                            NavigationLink(destination: PhoneRuleView(rulesModel: self.rulesModel,
+                                                                      editingRuleModel: RuleModel(ruleModel),
+                                                                      originalRuleModel: ruleModel)) {
                                 Text(ruleModel.name)
                             }
                         }
@@ -54,7 +54,7 @@ struct RulesView: View {
                         Image(systemName: "plus")
                     }
                 }
-                
+
             }
             .navigationBarTitle("Rules")
             .navigationBarTitleDisplayMode(.inline)

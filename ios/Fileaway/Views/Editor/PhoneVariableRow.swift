@@ -18,33 +18,35 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Combine
+import Foundation
 import SwiftUI
 
 import FileawayCore
 
-struct WizardView: View {
+struct PhoneVariableRow : View {
 
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.editMode) var editMode
+    @State var showSheet: Bool = false
 
-    @EnvironmentObject private var applicationModel: ApplicationModel
-    @StateObject var wizardModel = WizardModel()
-
-    let file: FileInfo
-
-    init(file: FileInfo) {
-        self.file = file
-    }
+    @ObservedObject var ruleModel: RuleModel
+    @ObservedObject var variable: VariableModel
 
     var body: some View {
-        NavigationStack {
-            RulePicker(applicationModel: applicationModel, url: file.url)
+        HStack {
+            VariableMarker(variable: variable)
+            Text(variable.name)
+            Spacer()
+            Text(String(describing: variable.type))
+                .foregroundColor(editMode?.wrappedValue == .active ? .accentColor : .secondary)
         }
-        .environmentObject(wizardModel)
-        .onChange(of: wizardModel.isComplete) { _, isComplete in
-            guard isComplete else {
-                return
+        .sheet(isPresented: $showSheet) {
+            PhoneVariableView(ruleModel: self.ruleModel, variable: self.variable)
+        }
+        .onTapGesture {
+            if self.editMode?.wrappedValue == .active {
+                self.showSheet = true
             }
-            dismiss()
         }
     }
 

@@ -67,7 +67,7 @@ struct FileawayApp: App {
         Wizard(applicationModel: applicationModel)
 
         SwiftUI.Settings {
-            SettingsView(applicationModel: applicationModel)
+            PhoneSettingsView(applicationModel: applicationModel)
                 .environmentObject(applicationModel)
         }
 

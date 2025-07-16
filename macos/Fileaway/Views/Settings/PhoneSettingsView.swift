@@ -22,12 +22,27 @@ import SwiftUI
 
 import FileawayCore
 
-class WizardModel: ObservableObject {
+struct PhoneSettingsView: View {
 
-    @MainActor @Published var isComplete: Bool = false
-
-    @MainActor func complete() {
-        self.isComplete = true
+    @ObservedObject var applicationModel: ApplicationModel
+    
+    var body: some View {
+        TabView {
+            GeneralSettingsView()
+                .tabItem {
+                    Label("General", systemImage: "gear")
+                }
+            LocationsSettingsView(applicationModel: applicationModel)
+                .tabItem {
+                    Label("Folders", systemImage: "folder")
+                }
+            RulesSettingsView(applicationModel: applicationModel)
+                .tabItem {
+                    Label("Rules", systemImage: "tray.and.arrow.down")
+                }
+        }
+        .padding()
+        .frame(minWidth: 400, maxWidth: .infinity, minHeight: 460, maxHeight: .infinity)
     }
 
 }

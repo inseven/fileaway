@@ -26,7 +26,7 @@ import Interact
 
 import FileawayCore
 
-struct AddFileTypeView: View {
+struct PhoneAddFileTypeView: View {
 
     enum Focus: Hashable {
         case add
