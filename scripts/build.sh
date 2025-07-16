@@ -171,7 +171,7 @@ xcodebuild \
     -archivePath "$IOS_ARCHIVE_PATH" \
     -exportArchive \
     -exportPath "$BUILD_DIRECTORY" \
-    -exportOptionsPlist "ios/ExportOptions.plist"
+    -exportOptionsPlist "macos/ExportOptions_iOS.plist"
 
 # Build and archive the macOS project.
 sudo xcode-select --switch "$MACOS_XCODE_PATH"
@@ -187,7 +187,7 @@ xcodebuild \
     -archivePath "$MACOS_ARCHIVE_PATH" \
     -exportArchive \
     -exportPath "$BUILD_DIRECTORY" \
-    -exportOptionsPlist "macos/ExportOptions.plist"
+    -exportOptionsPlist "macos/ExportOptions_macOS.plist"
 
 # Apple recommends we use ditto to prepare zips for notarization.
 # https://developer.apple.com/documentation/security/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow
