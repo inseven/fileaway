@@ -38,4 +38,4 @@ source "$SCRIPTS_DIRECTORY/environment.sh"
 cd "$ROOT_DIRECTORY"
 
 mkdir -p "$RELEASE_NOTES_DIRECTORY"
-changes notes --pre-release --all --released --template "$RELEASE_NOTES_TEMPLATE_PATH" > "$RELEASE_NOTES_PATH"
+changes notes --all --released --template "$RELEASE_NOTES_TEMPLATE_PATH" > "$RELEASE_NOTES_PATH"
