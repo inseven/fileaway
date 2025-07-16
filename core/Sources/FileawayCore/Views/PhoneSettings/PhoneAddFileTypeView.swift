@@ -18,7 +18,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import MobileCoreServices
 import SwiftUI
 import UniformTypeIdentifiers
 
@@ -45,7 +44,9 @@ public struct PhoneAddFileTypeView: View {
                 Section {
                     TextField("File Extension", text: $model.newFilenameExtension)
                         .autocorrectionDisabled(true)
+#if os(iOS)
                         .textInputAutocapitalization(.never)
+#endif
                         .focused($focus, equals: .add)
                 }
                 Section {
@@ -63,10 +64,12 @@ public struct PhoneAddFileTypeView: View {
             }
             .defaultFocus($focus, .add)
             .navigationTitle("Add File Type")
+#if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
+#endif
             .toolbar {
 
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
                         dismiss()
                     }

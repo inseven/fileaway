@@ -57,10 +57,12 @@ public struct PhoneRulePicker: View {
         }
         .searchable(text: $rulePickerModel.filter)
         .navigationTitle("Select Rule")
+#if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+#endif
         .toolbar {
 
-            ToolbarItem(placement: .navigationBarLeading) {
+            ToolbarItem(placement: .cancellationAction) {
                 Button("Cancel") {
                     dismiss()
                 }

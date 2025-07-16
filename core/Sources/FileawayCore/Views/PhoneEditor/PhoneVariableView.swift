@@ -18,10 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import MobileCoreServices
 import SwiftUI
-
-import FileawayCore
 
 struct PhoneVariableView: View {
 
@@ -50,10 +47,12 @@ struct PhoneVariableView: View {
                     }
                 }
             }
+            #if os(iOS)
             .navigationBarTitle("Edit Variable", displayMode: .inline)
+            #endif
             .toolbar {
 
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .confirmationAction) {
                     Button {
                         dismiss()
                     } label: {
@@ -65,7 +64,9 @@ struct PhoneVariableView: View {
 
             }
         }
+#if os(iOS)
         .navigationViewStyle(StackNavigationViewStyle())
+#endif
     }
 
 }

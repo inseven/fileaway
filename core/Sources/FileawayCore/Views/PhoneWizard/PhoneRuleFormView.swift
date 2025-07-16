@@ -49,7 +49,7 @@ public struct PhoneRuleFormView: View {
             PhoneDocumentPreviewButton(url: url, size: .navigationBarIcon)
         }
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .confirmationAction) {
                 Button("Move") {
                     do {
                         try ruleFormModel.move()

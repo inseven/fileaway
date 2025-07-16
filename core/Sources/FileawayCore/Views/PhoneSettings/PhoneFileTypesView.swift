@@ -18,7 +18,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import MobileCoreServices
 import SwiftUI
 import UniformTypeIdentifiers
 
@@ -50,7 +49,7 @@ public struct PhoneFileTypesView: View {
         .navigationTitle("File Types")
         .toolbar {
 
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .confirmationAction) {
                 Button {
                     sheet = .add
                 } label: {

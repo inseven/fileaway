@@ -18,6 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#if os(iOS)
+
 import Combine
 import Foundation
 import SwiftUI
@@ -51,3 +53,5 @@ struct PhoneVariableRow : View {
     }
 
 }
+
+#endif

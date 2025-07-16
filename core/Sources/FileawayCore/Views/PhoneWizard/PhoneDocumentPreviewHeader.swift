@@ -18,6 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+
 import SwiftUI
 
 import Interact
@@ -34,6 +35,7 @@ public struct PhoneDocumentPreviewHeader: View {
     }
 
     public var body: some View {
+#if os(iOS)
         ConditionalHeader($isVisible) {
             PhoneDocumentPreviewButton(url: url, size: .init(width: 240, height: 240))
                 .horizontalSpace(.both)
@@ -42,6 +44,9 @@ public struct PhoneDocumentPreviewHeader: View {
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
         }
+#else
+            Text("Preview Header")
+#endif
     }
 
 }
