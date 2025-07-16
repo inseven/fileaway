@@ -92,7 +92,7 @@ cd "$SOURCE_DIRECTORY"
 
 # List the available schemes.
 xcodebuild \
-    -project Fileaway-macOS.xcodeproj \
+    -project Fileaway.xcodeproj \
     -list
 
 # Clean up and recreate the output directories.
@@ -149,12 +149,12 @@ popd
 # Build, test and archive the iOS project.
 sudo xcode-select --switch "$IOS_XCODE_PATH"
 # xcodebuild \
-    # -project Fileaway-macOS.xcodeproj \
+    # -project Fileaway.xcodeproj \
     # -scheme "Fileaway" \
     # -destination "$DEFAULT_IPHONE_DESTINATION" \
     # clean build build-for-testing test
 xcodebuild \
-    -project Fileaway-macOS.xcodeproj \
+    -project Fileaway.xcodeproj \
     -scheme "Fileaway" \
     -config Release \
     -archivePath "$IOS_ARCHIVE_PATH" \
@@ -172,7 +172,7 @@ xcodebuild \
 # Build and archive the macOS project.
 sudo xcode-select --switch "$MACOS_XCODE_PATH"
 xcodebuild \
-    -project Fileaway-macOS.xcodeproj \
+    -project Fileaway.xcodeproj \
     -scheme "Fileaway" \
     -config Release \
     -archivePath "$MACOS_ARCHIVE_PATH" \
@@ -181,7 +181,7 @@ xcodebuild \
     MARKETING_VERSION=$VERSION_NUMBER \
     clean archive
 xcodebuild \
-    -project Fileaway-macOS.xcodeproj \
+    -project Fileaway.xcodeproj \
     -archivePath "$MACOS_ARCHIVE_PATH" \
     -exportArchive \
     -exportPath "$BUILD_DIRECTORY" \
