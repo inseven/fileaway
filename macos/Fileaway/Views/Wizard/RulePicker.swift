@@ -18,7 +18,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Carbon
 import Combine
 import SwiftUI
 
@@ -60,6 +59,7 @@ struct RulePicker: View {
                     }
                 }
                 .padding([.bottom, .leading, .trailing])
+
             List(selection: $rulePickerModel.selection) {
                 Section() {
 
@@ -89,37 +89,23 @@ struct RulePicker: View {
             }
             .scrollContentBackground(.hidden)
         }
-        .onKeyDownEvent(kVK_UpArrow) {
-            guard let index = rulePickerModel.filteredRules.firstIndex(where: { $0.id == rulePickerModel.selection })
-            else {
-                return
-            }
-            let previousIndex = index - 1
-            guard previousIndex >= 0 else {
-                return
-            }
-            rulePickerModel.selection = rulePickerModel.filteredRules[previousIndex].id
+        .onKeyPress(.downArrow) {
+            rulePickerModel.selectNext()
+            return .handled
         }
-        .onKeyDownEvent(kVK_DownArrow) {
-            guard let index = rulePickerModel.filteredRules.firstIndex(where: { $0.id == rulePickerModel.selection })
-            else {
-                return
-            }
-            let nextIndex = index + 1
-            guard nextIndex < rulePickerModel.filteredRules.count else {
-                return
-            }
-            rulePickerModel.selection = rulePickerModel.filteredRules[nextIndex].id
+        .onKeyPress(.upArrow) {
+            rulePickerModel.selectPrevious()
+            return .handled
         }
-        .onKeyDownEvent(kVK_Return) {
+        .onKeyPress(.return) {
             withAnimation {
                 submit()
             }
+            return .handled
         }
         .showsStackNavigationBar("Select Rule")
         .defaultFocus($focus, .search)
         .runs(rulePickerModel)
     }
-
 
 }
