@@ -2,8 +2,6 @@
 title: License
 ---
 
-# License
-
 Fileaway is licensed under the MIT License (see [LICENSE]([LICENSE](https://github.com/inseven/fileaway/blob/main/LICENSE))). It depends on the following separately licensed third-party libraries and components:
 
 - [DIFlowLayout](https://github.com/danielinoa/DIFlowLayout), MIT License
