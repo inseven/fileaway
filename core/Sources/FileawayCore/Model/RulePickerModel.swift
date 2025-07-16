@@ -92,4 +92,28 @@ public class RulePickerModel: ObservableObject, Runnable {
         cancellables.removeAll()
     }
 
+    public func selectPrevious() {
+        guard let index = filteredRules.firstIndex(where: { $0.id == selection })
+        else {
+            return
+        }
+        let previousIndex = index - 1
+        guard previousIndex >= 0 else {
+            return
+        }
+        selection = filteredRules[previousIndex].id
+    }
+
+    public func selectNext() {
+        guard let index = filteredRules.firstIndex(where: { $0.id == selection })
+        else {
+            return
+        }
+        let nextIndex = index + 1
+        guard nextIndex < filteredRules.count else {
+            return
+        }
+        selection = filteredRules[nextIndex].id
+    }
+
 }
