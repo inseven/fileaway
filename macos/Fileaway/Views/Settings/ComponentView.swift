@@ -58,24 +58,3 @@ struct SetFolderButton: View {
     }
 
 }
-
-//struct ComponentView: View {
-//
-//    @State var ruleModel: RuleModel
-//    @ObservedObject var component: ComponentModel
-//
-//    var body: some View {
-//        VStack {
-//            switch component.type {
-//            case .text:
-//                VStack {
-//                    TextField("Contents", text: $component.value)
-//                    SetFolderButton(ruleModel: ruleModel, componentModel: component)
-//                }
-//            case .variable:
-//                Text("Variable")
-//            }
-//        }
-//    }
-//
-//}
