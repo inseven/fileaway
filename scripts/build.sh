@@ -89,7 +89,7 @@ fi
 
 function xcode_project {
     xcodebuild \
-        -workspace Fileaway.xcworkspace "$@"
+        -project macos/Fileaway.xcodeproj "$@"
 }
 
 cd "$ROOT_DIRECTORY"
