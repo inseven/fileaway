@@ -47,6 +47,7 @@ public struct Legal {
             Credit("Lukas Fittl")
             Credit("Michael Dales")
             Credit("Pascal Pfiffner")
+            Credit("Pavlos Vinieratos")
             Credit("Sarah Barbour")
             Credit("Terrence Talbot")
         }
