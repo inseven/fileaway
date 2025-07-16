@@ -18,56 +18,51 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import MobileCoreServices
 import SwiftUI
-import UniformTypeIdentifiers
 
 import FileawayCore
 
-struct FileTypesView: View {
+struct PhoneRuleFormView: View {
 
-    enum SheetType: Identifiable {
+    @EnvironmentObject var wizardModel: PhoneWizardModel
 
-        var id: Self { self }
+    @ObservedObject var ruleModel: RuleModel
 
-        case add
-    }
+    @StateObject var ruleFormModel: RuleFormModel
+    @State private var isHeaderVisible: Bool = true
 
-    @StateObject var model: FileTypesViewModel
-    @State var sheet: SheetType?
+    var url: URL
 
-    init(settings: Settings) {
-        _model = StateObject(wrappedValue: FileTypesViewModel(settings: settings))
+    init(applicationModel: ApplicationModel, url: URL, ruleModel: RuleModel) {
+        self.url = url
+        self.ruleModel = ruleModel
+        _ruleFormModel = StateObject(wrappedValue: RuleFormModel(applicationModel: applicationModel,
+                                                                 ruleModel: ruleModel,
+                                                                 url: url))
     }
 
     var body: some View {
-        List {
-            ForEach(model.fileTypes) { fileType in
-                LabeledContent(fileType.localizedDisplayName, value: fileType.preferredFilenameExtension ?? "")
-            }
-            .onDelete { indexSet in
-                model.remove(indexSet)
-            }
+        Form {
+            PhoneDocumentPreviewHeader($isHeaderVisible, url: url)
+            RuleFormSection(ruleFormModel, url: url)
         }
-        .navigationTitle("File Types")
+        .navigationTitle(ruleFormModel.name)
+        .conditionalTitle(!isHeaderVisible) {
+            PhoneDocumentPreviewButton(url: url, size: .navigationBarIcon)
+        }
         .toolbar {
-
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    sheet = .add
-                } label: {
-                    Label("Add File Type", systemImage: "plus")
+                Button("Move") {
+                    do {
+                        try ruleFormModel.move()
+                        wizardModel.complete()
+                    } catch {
+                        // TODO: Present this error to the user.
+                        print("Failed to move file with error \(error).")
+                    }
                 }
             }
-
         }
-        .sheet(item: $sheet) { sheet in
-            switch sheet {
-            case .add:
-                AddFileTypeView(model: model)
-            }
-        }
-        .runs(model)
     }
 
 }

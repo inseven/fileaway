@@ -18,34 +18,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Combine
-import Foundation
 import SwiftUI
 
 import FileawayCore
 
-struct VariableRow : View {
+struct PhoneRulePickerRow: View {
 
-    @Environment(\.editMode) var editMode
-    @State var showSheet: Bool = false
+    @EnvironmentObject private var applicationModel: ApplicationModel
 
-    @ObservedObject var ruleModel: RuleModel
-    @ObservedObject var variable: VariableModel
+    private let url: URL
+    private let ruleModel: RuleModel
+
+    init(url: URL, ruleModel: RuleModel) {
+        self.url = url
+        self.ruleModel = ruleModel
+    }
 
     var body: some View {
-        HStack {
-            VariableMarker(variable: variable)
-            Text(variable.name)
-            Spacer()
-            Text(String(describing: variable.type))
-                .foregroundColor(editMode?.wrappedValue == .active ? .accentColor : .secondary)
-        }
-        .sheet(isPresented: $showSheet) {
-            VariableView(ruleModel: self.ruleModel, variable: self.variable)
-        }
-        .onTapGesture {
-            if self.editMode?.wrappedValue == .active {
-                self.showSheet = true
+        NavigationLink {
+            PhoneRuleFormView(applicationModel: applicationModel, url: url, ruleModel: ruleModel)
+        } label: {
+            VStack {
+                Text(ruleModel.name)
+                    .horizontalSpace(.trailing)
+                Text(ruleModel.archiveURL.displayName)
+                    .foregroundColor(.secondary)
+                    .horizontalSpace(.trailing)
             }
         }
     }

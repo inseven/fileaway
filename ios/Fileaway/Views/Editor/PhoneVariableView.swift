@@ -23,7 +23,7 @@ import SwiftUI
 
 import FileawayCore
 
-struct VariableView: View {
+struct PhoneVariableView: View {
 
     @Environment(\.dismiss) private var dismiss
 

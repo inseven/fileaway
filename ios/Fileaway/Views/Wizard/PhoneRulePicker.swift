@@ -24,7 +24,7 @@ import Interact
 
 import FileawayCore
 
-struct RulePicker: View {
+struct PhoneRulePicker: View {
 
     @Environment(\.dismiss) var dismiss
 
@@ -42,18 +42,18 @@ struct RulePicker: View {
 
     var body: some View {
         List {
-            DocumentPreviewHeader($isHeaderVisible, url: url)
+            PhoneDocumentPreviewHeader($isHeaderVisible, url: url)
 
             if !rulePickerModel.recentRules.isEmpty {
                 Section("Recent") {
                     ForEach(rulePickerModel.recentRules) { ruleModel in
-                        RulePickerRow(url: url, ruleModel: ruleModel)
+                        PhoneRulePickerRow(url: url, ruleModel: ruleModel)
                     }
                 }
             }
             Section("All Rules") {
                 ForEach(rulePickerModel.filteredRules) { ruleModel in
-                    RulePickerRow(url: url, ruleModel: ruleModel)
+                    PhoneRulePickerRow(url: url, ruleModel: ruleModel)
                 }
             }
         }
@@ -69,7 +69,7 @@ struct RulePicker: View {
             }
         }
         .conditionalTitle(!isHeaderVisible) {
-            DocumentPreviewButton(url: url, size: .navigationBarIcon)
+            PhoneDocumentPreviewButton(url: url, size: .navigationBarIcon)
         }
         .runs(rulePickerModel)
     }

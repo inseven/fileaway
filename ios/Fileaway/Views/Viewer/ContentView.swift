@@ -62,7 +62,7 @@ struct ContentView: View {
         .sheet(item: $sceneModel.action) { action in
             switch action {
             case .settings:
-                SettingsView(applicationModel: applicationModel, settings: applicationModel.settings)
+                PhoneSettingsView(applicationModel: applicationModel, settings: applicationModel.settings)
             case .addLocation(let type):
                 FilePickerUIRepresentable(types: [.folder], allowMultiple: false, asCopy: false) { urls in
                     guard let url = urls.first else {
@@ -72,9 +72,9 @@ struct ContentView: View {
                     try! applicationModel.addLocation(type: type, url: url)
                 }
             case .move(let files):
-                WizardView(file: files.first!)
+                PhoneWizardView(file: files.first!)
             case .editRules(let url):
-                RulesView(rulesModel: RulesModel(archiveURL: url))
+                PhoneRulesView(rulesModel: RulesModel(archiveURL: url))
             }
         }
         .runs(sceneModel)

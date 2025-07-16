@@ -18,51 +18,56 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import MobileCoreServices
 import SwiftUI
+import UniformTypeIdentifiers
 
 import FileawayCore
 
-struct RuleFormView: View {
+struct PhoneFileTypesView: View {
 
-    @EnvironmentObject var wizardModel: WizardModel
+    enum SheetType: Identifiable {
 
-    @ObservedObject var ruleModel: RuleModel
+        var id: Self { self }
 
-    @StateObject var ruleFormModel: RuleFormModel
-    @State private var isHeaderVisible: Bool = true
+        case add
+    }
 
-    var url: URL
+    @StateObject var model: FileTypesViewModel
+    @State var sheet: SheetType?
 
-    init(applicationModel: ApplicationModel, url: URL, ruleModel: RuleModel) {
-        self.url = url
-        self.ruleModel = ruleModel
-        _ruleFormModel = StateObject(wrappedValue: RuleFormModel(applicationModel: applicationModel,
-                                                                 ruleModel: ruleModel,
-                                                                 url: url))
+    init(settings: Settings) {
+        _model = StateObject(wrappedValue: FileTypesViewModel(settings: settings))
     }
 
     var body: some View {
-        Form {
-            DocumentPreviewHeader($isHeaderVisible, url: url)
-            RuleFormSection(ruleFormModel, url: url)
-        }
-        .navigationTitle(ruleFormModel.name)
-        .conditionalTitle(!isHeaderVisible) {
-            DocumentPreviewButton(url: url, size: .navigationBarIcon)
-        }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Move") {
-                    do {
-                        try ruleFormModel.move()
-                        wizardModel.complete()
-                    } catch {
-                        // TODO: Present this error to the user.
-                        print("Failed to move file with error \(error).")
-                    }
-                }
+        List {
+            ForEach(model.fileTypes) { fileType in
+                LabeledContent(fileType.localizedDisplayName, value: fileType.preferredFilenameExtension ?? "")
+            }
+            .onDelete { indexSet in
+                model.remove(indexSet)
             }
         }
+        .navigationTitle("File Types")
+        .toolbar {
+
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    sheet = .add
+                } label: {
+                    Label("Add File Type", systemImage: "plus")
+                }
+            }
+
+        }
+        .sheet(item: $sheet) { sheet in
+            switch sheet {
+            case .add:
+                PhoneAddFileTypeView(model: model)
+            }
+        }
+        .runs(model)
     }
 
 }

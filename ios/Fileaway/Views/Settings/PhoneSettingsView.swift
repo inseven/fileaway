@@ -25,7 +25,7 @@ import Diligence
 
 import FileawayCore
 
-struct SettingsView: View {
+struct PhoneSettingsView: View {
 
     enum SheetType: Identifiable {
 
@@ -45,7 +45,7 @@ struct SettingsView: View {
             Form {
                 Section("General") {
                     NavigationLink {
-                        FileTypesView(settings: settings)
+                        PhoneFileTypesView(settings: settings)
                     } label: {
                         Text("File Types")
                             .badge(settings.fileTypes.count)
@@ -58,7 +58,7 @@ struct SettingsView: View {
                     } else {
                         ForEach(applicationModel.archives) { directory in
                             NavigationLink {
-                                RulesView(rulesModel: directory.ruleSet)
+                                PhoneRulesView(rulesModel: directory.ruleSet)
                             } label: {
                                 Text(directory.name)
                             }

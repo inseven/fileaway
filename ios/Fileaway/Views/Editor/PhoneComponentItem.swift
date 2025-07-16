@@ -20,13 +20,25 @@
 
 import SwiftUI
 
-struct ErrorText: View {
+import FileawayCore
 
-    var text: String?
+struct PhoneComponentItem: View {
+
+    @Environment(\.editMode) var editMode
+    @ObservedObject var ruleModel: RuleModel
+    @State var component: ComponentModel
 
     var body: some View {
-        Text(text ?? "").foregroundColor(.red)
+        HStack {
+            if component.type == .text {
+                EditText("Component", text: $component.value).environment(\.editMode, editMode)
+            } else {
+                Text(ruleModel.name(for: component))
+                    .tokenAppearance()
+                    .tint(component.variable?.color ?? .black)
+            }
+        }
+        .environment(\.editMode, editMode)
     }
 
 }
-

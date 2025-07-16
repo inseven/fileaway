@@ -26,7 +26,7 @@ import Interact
 
 import FileawayCore
 
-struct FileTypesView: View {
+struct PhoneFileTypesView: View {
 
     @StateObject var model: FileTypesViewModel
 

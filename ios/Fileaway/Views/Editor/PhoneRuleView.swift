@@ -24,7 +24,7 @@ import SwiftUI
 
 import FileawayCore
 
-struct RuleView: View {
+struct PhoneRuleView: View {
 
     @State private var editMode = EditMode.inactive
     @ObservedObject var rulesModel: RulesModel
@@ -59,7 +59,7 @@ struct RuleView: View {
 
                 Section {
                     ForEach(editingRuleModel.variables) { variable in
-                        VariableRow(ruleModel: self.editingRuleModel, variable: variable)
+                        PhoneVariableRow(ruleModel: self.editingRuleModel, variable: variable)
                     }
                     .onDelete { self.editingRuleModel.remove(variableOffsets: $0) }
                     if self.editMode == .active {
@@ -78,12 +78,12 @@ struct RuleView: View {
                 }
 
                 Section("Folder") {
-                    ComponentItem(ruleModel: self.editingRuleModel, component: self.editingRuleModel.folder)
+                    PhoneComponentItem(ruleModel: self.editingRuleModel, component: self.editingRuleModel.folder)
                 }
 
                 Section {
                     ForEach(editingRuleModel.filename) { component in
-                        ComponentItem(ruleModel: self.editingRuleModel, component: component)
+                        PhoneComponentItem(ruleModel: self.editingRuleModel, component: component)
                     }
                     .onMove { (fromOffsets, toOffset) in
                         self.editingRuleModel.filename.move(fromOffsets: fromOffsets, toOffset: toOffset)
