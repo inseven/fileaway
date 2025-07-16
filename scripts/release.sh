@@ -24,17 +24,6 @@ set -e
 set -o pipefail
 set -x
 
-# This script expects the iOS IPA to be passed as the first argument, the macOS PKG as the second argument, and any
-# additional files to be attached to the GitHub release to be passed as subsequent arguments.
-
-# Upload the iOS build.
-xcrun altool --upload-app \
-    -f "$1" \
-    --primary-bundle-id "app.fileaway.apps.appstore" \
-    --apiKey "$APPLE_API_KEY_ID" \
-    --apiIssuer "$APPLE_API_KEY_ISSUER_ID" \
-    --type ios
-
 # Actually make the release.
 FLAGS=()
 if $CHANGES_INITIAL_DEVELOPMENT ; then

@@ -53,12 +53,17 @@ which gh || (echo "GitHub cli (gh) not available on the path." && exit 1)
 # Process the command line arguments.
 POSITIONAL=()
 RELEASE=${RELEASE:-false}
+UPLOAD_TO_TESTFLIGHT=${UPLOAD_TO_TESTFLIGHT:-false}
 while [[ $# -gt 0 ]]
 do
     key="$1"
     case $key in
         -r|--release)
-        RELEASE=true
+        UPLOAD_TO_TESTFLIGHT=true
+        shift
+        ;;
+        -t|--upload-to-testflight)
+        UPLOAD_TO_TESTFLIGHT=true
         shift
         ;;
         *)
@@ -67,6 +72,11 @@ do
         ;;
     esac
 done
+
+# We always need to upload to TestFlight if we're attempting to make a release.
+if $RELEASE ; then
+    UPLOAD_TO_TESTFLIGHT=true
+fi
 
 # Generate a random string to secure the local keychain.
 export TEMPORARY_KEYCHAIN_PASSWORD=`openssl rand -base64 14`
@@ -144,12 +154,12 @@ popd
 
 # Build, test and archive the iOS project.
 sudo xcode-select --switch "$IOS_XCODE_PATH"
+# xcode_project \
+    # -scheme "Fileaway macOS" \
+    # -destination "$DEFAULT_IPHONE_DESTINATION" \
+    # clean build build-for-testing test
 xcode_project \
-    -scheme "Fileaway iOS" \
-    -destination "$DEFAULT_IPHONE_DESTINATION" \
-    clean build build-for-testing test
-xcode_project \
-    -scheme "Fileaway iOS" \
+    -scheme "Fileaway macOS" \
     -config Release \
     -archivePath "$IOS_ARCHIVE_PATH" \
     -destination "generic/platform=iOS" \
@@ -240,6 +250,18 @@ changes notes --all --template "$RELEASE_NOTES_TEMPLATE_PATH" >> "$ARCHIVES_DIRE
 "$GENERATE_APPCAST" --ed-key-file "$SPARKLE_PRIVATE_KEY_FILE" "$ARCHIVES_DIRECTORY"
 APPCAST_PATH="$ARCHIVES_DIRECTORY/appcast.xml"
 cp "$APPCAST_PATH" "$BUILD_DIRECTORY"
+
+if $UPLOAD_TO_TESTFLIGHT  ; then
+
+    # Upload the iOS build.
+    xcrun altool --upload-app \
+        -f "$IPA_PATH" \
+        --primary-bundle-id "app.fileaway.apps.appstore" \
+        --apiKey "$APPLE_API_KEY_ID" \
+        --apiIssuer "$APPLE_API_KEY_ISSUER_ID" \
+        --type ios
+
+fi
 
 # Archive the build directory.
 cd "$ROOT_DIRECTORY"
