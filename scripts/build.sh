@@ -87,15 +87,12 @@ if [ -f "$ENV_PATH" ] ; then
     source "$ENV_PATH"
 fi
 
-function xcode_project {
-    xcodebuild \
-        -project macos/Fileaway-macOS.xcodeproj "$@"
-}
-
 cd "$ROOT_DIRECTORY"
 
 # List the available schemes.
-xcode_project -list
+xcodebuild \
+    -project macos/Fileaway-macOS.xcodeproj \
+    -list
 
 # Clean up and recreate the output directories.
 
@@ -154,11 +151,13 @@ popd
 
 # Build, test and archive the iOS project.
 sudo xcode-select --switch "$IOS_XCODE_PATH"
-# xcode_project \
+# xcodebuild \
+    # -project macos/Fileaway-macOS.xcodeproj \
     # -scheme "Fileaway" \
     # -destination "$DEFAULT_IPHONE_DESTINATION" \
     # clean build build-for-testing test
-xcode_project \
+xcodebuild \
+    -project macos/Fileaway-macOS.xcodeproj \
     -scheme "Fileaway" \
     -config Release \
     -archivePath "$IOS_ARCHIVE_PATH" \
@@ -175,7 +174,8 @@ xcodebuild \
 
 # Build and archive the macOS project.
 sudo xcode-select --switch "$MACOS_XCODE_PATH"
-xcode_project \
+xcodebuild \
+    -project macos/Fileaway-macOS.xcodeproj \
     -scheme "Fileaway" \
     -config Release \
     -archivePath "$MACOS_ARCHIVE_PATH" \
@@ -184,6 +184,7 @@ xcode_project \
     MARKETING_VERSION=$VERSION_NUMBER \
     clean archive
 xcodebuild \
+    -project macos/Fileaway-macOS.xcodeproj \
     -archivePath "$MACOS_ARCHIVE_PATH" \
     -exportArchive \
     -exportPath "$BUILD_DIRECTORY" \
