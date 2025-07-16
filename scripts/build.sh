@@ -116,15 +116,11 @@ echo "$TEMPORARY_KEYCHAIN_PASSWORD" | build-tools create-keychain "$KEYCHAIN_PAT
 
 function cleanup {
 
-    # Cleanup the temporary files and keychain.
+    # Cleanup the temporary files, keychain and keys.
     cd "$ROOT_DIRECTORY"
     build-tools delete-keychain "$KEYCHAIN_PATH"
     rm -rf "$TEMPORARY_DIRECTORY"
-
-    # Clean up any private keys.
-    if [ -f ~/.appstoreconnect/private_keys ]; then
-        rm -r ~/.appstoreconnect/private_keys
-    fi
+    rm -rf ~/.appstoreconnect/private_keys
 }
 
 trap cleanup EXIT
