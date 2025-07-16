@@ -53,17 +53,17 @@ which gh || (echo "GitHub cli (gh) not available on the path." && exit 1)
 # Process the command line arguments.
 POSITIONAL=()
 RELEASE=${RELEASE:-false}
-UPLOAD_TO_TESTFIGHT=${UPLOAD_TO_TESTFIGHT:-false}
+UPLOAD_TO_TESTFLIGHT=${UPLOAD_TO_TESTFLIGHT:-false}
 while [[ $# -gt 0 ]]
 do
     key="$1"
     case $key in
         -r|--release)
-        UPLOAD_TO_TESTFIGHT=true
+        UPLOAD_TO_TESTFLIGHT=true
         shift
         ;;
         -t|--upload-to-testflight)
-        UPLOAD_TO_TESTFIGHT=true
+        UPLOAD_TO_TESTFLIGHT=true
         shift
         ;;
         *)
@@ -75,7 +75,7 @@ done
 
 # We always need to upload to TestFlight if we're attempting to make a release.
 if $RELEASE ; then
-    UPLOAD_TO_TESTFIGHT=true
+    UPLOAD_TO_TESTFLIGHT=true
 fi
 
 # Generate a random string to secure the local keychain.
@@ -251,7 +251,7 @@ changes notes --all --template "$RELEASE_NOTES_TEMPLATE_PATH" >> "$ARCHIVES_DIRE
 APPCAST_PATH="$ARCHIVES_DIRECTORY/appcast.xml"
 cp "$APPCAST_PATH" "$BUILD_DIRECTORY"
 
-if $UPLOAD_TO_TESTFIGHT  ; then
+if $UPLOAD_TO_TESTFLIGHT  ; then
 
     # Upload the iOS build.
     xcrun altool --upload-app \
