@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import FileawayCore
+
 public struct PhoneRuleFormView: View {
 
     @EnvironmentObject var wizardModel: PhoneWizardModel

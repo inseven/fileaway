@@ -39,7 +39,7 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
     @Published public var previewUrls: [URL] = []
     @Published public var isLoading: Bool = true
 
-    @Published var previewUrl: URL? = nil
+    @Published public var previewUrl: URL? = nil
 
     private var directoryModel: DirectoryModel? = nil
     private var cancellables: Set<AnyCancellable> = []

@@ -23,6 +23,8 @@ import UniformTypeIdentifiers
 
 import FilePicker
 
+import FileawayCore
+
 public struct LocationSection: View {
 
     @EnvironmentObject private var applicationModel: ApplicationModel

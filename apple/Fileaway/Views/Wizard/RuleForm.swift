@@ -20,40 +20,23 @@
 
 import SwiftUI
 
-public struct DateView: View {
+import FileawayCore
 
-    static var dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
-        return dateFormatter
-    }()
+public struct RuleForm: View {
 
-    private let date: FileDate
+    @ObservedObject private var ruleFormModel: RuleFormModel
+    private let url: URL
 
-    public init(date: FileDate) {
-        self.date = date
-    }
-
-    private var description: String {
-        switch date.type {
-        case .creation:
-            return "File creation date"
-        case .filename:
-            return "Date found in filename"
-        case .unknown:
-            return "Unknown"
-        }
+    public init(_ ruleFormModel: RuleFormModel, url: URL) {
+        self.ruleFormModel = ruleFormModel
+        self.url = url
     }
 
     public var body: some View {
-        switch date.type {
-        case .unknown:
-            EmptyView()
-        default:
-            Text(Self.dateFormatter.string(from: date.date))
-                .help(description)
-                .font(.callout)
+        Form {
+            RuleFormSection(ruleFormModel, url: url)
         }
+        .formStyle(.grouped)
     }
 
 }

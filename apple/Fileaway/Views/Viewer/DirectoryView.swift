@@ -24,6 +24,8 @@ import SwiftUI
 
 import Interact
 
+import FileawayCore
+
 public struct DirectoryView: View {
 
 #if os(iOS)

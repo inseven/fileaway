@@ -22,6 +22,8 @@ import SwiftUI
 
 import Interact
 
+import FileawayCore
+
 public struct RuleFormSection: View {
 
     @ObservedObject private var ruleFormModel: RuleFormModel

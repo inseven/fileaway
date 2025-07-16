@@ -19,33 +19,54 @@
 // SOFTWARE.
 
 import SwiftUI
+import UniformTypeIdentifiers
 
-public struct Sidebar: View {
+import FileawayCore
 
-    @EnvironmentObject private var applicationModel: ApplicationModel
-    @ObservedObject var sceneModel: SceneModel
+public struct PhoneFileTypesView: View {
 
-    public init(sceneModel: SceneModel) {
-        self.sceneModel = sceneModel
+    enum SheetType: Identifiable {
+
+        var id: Self { self }
+
+        case add
+    }
+
+    @StateObject var model: FileTypesViewModel
+    @State var sheet: SheetType?
+
+    public init(settings: FileawayCore.Settings) {
+        _model = StateObject(wrappedValue: FileTypesViewModel(settings: settings))
     }
 
     public var body: some View {
-        List(selection: $sceneModel.section) {
-            LocationSection("Inboxes",
-                            type: .inbox,
-                            sceneModel: sceneModel,
-                            directoryModels: $applicationModel.inboxes)
-            LocationSection("Archives",
-                            type: .archive,
-                            sceneModel: sceneModel,
-                            directoryModels: $applicationModel.archives)
+        List {
+            ForEach(model.fileTypes) { fileType in
+                LabeledContent(fileType.localizedDisplayName, value: fileType.preferredFilenameExtension ?? "")
+            }
+            .onDelete { indexSet in
+                model.remove(indexSet)
+            }
         }
-        .headerProminence(.increased)
-#if os(iOS)
+        .navigationTitle("File Types")
         .toolbar {
-            EditButton()
+
+            ToolbarItem(placement: .confirmationAction) {
+                Button {
+                    sheet = .add
+                } label: {
+                    Label("Add File Type", systemImage: "plus")
+                }
+            }
+
         }
-#endif
+        .sheet(item: $sheet) { sheet in
+            switch sheet {
+            case .add:
+                PhoneAddFileTypeView(model: model)
+            }
+        }
+        .runs(model)
     }
-    
+
 }

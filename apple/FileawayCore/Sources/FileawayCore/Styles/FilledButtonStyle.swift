@@ -20,13 +20,13 @@
 
 import SwiftUI
 
-struct FilledButtonStyle: ButtonStyle {
+public struct FilledButtonStyle: ButtonStyle {
 
     private struct LayoutMetrics {
         static let interItemSpcing = 2.0
     }
 
-    func makeBody(configuration: Self.Configuration) -> some View {
+    public func makeBody(configuration: Self.Configuration) -> some View {
         configuration
             .label
             .font(.body)
@@ -37,7 +37,7 @@ struct FilledButtonStyle: ButtonStyle {
 
 extension ButtonStyle where Self == FilledButtonStyle {
 
-    static var filled: Self {
+    public static var filled: Self {
         return FilledButtonStyle()
     }
 

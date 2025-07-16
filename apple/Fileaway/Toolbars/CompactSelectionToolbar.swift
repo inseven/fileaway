@@ -20,21 +20,45 @@
 
 import SwiftUI
 
-public struct RuleForm: View {
+import FileawayCore
 
-    @ObservedObject private var ruleFormModel: RuleFormModel
-    private let url: URL
+public struct CompactSelectionToolbar: ToolbarContent {
 
-    public init(_ ruleFormModel: RuleFormModel, url: URL) {
-        self.ruleFormModel = ruleFormModel
-        self.url = url
+    @EnvironmentObject var sceneModel: SceneModel
+
+    @ObservedObject var directoryViewModel: DirectoryViewModel
+
+    public init(directoryViewModel: DirectoryViewModel) {
+        self.directoryViewModel = directoryViewModel
     }
 
-    public var body: some View {
-        Form {
-            RuleFormSection(ruleFormModel, url: url)
+    public var body: some ToolbarContent {
+        ToolbarItem(placement: .bottomBar) {
+
+            HStack {
+
+                Button("Move") {
+                    sceneModel.move(directoryViewModel.selection)
+                }
+                .disabled(!directoryViewModel.canMove)
+
+                Spacer()
+
+                Button("Preview") {
+                    directoryViewModel.showPreview()
+                }
+                .disabled(!directoryViewModel.canPreview)
+
+                Spacer()
+
+                Button("Delete") {
+                    directoryViewModel.trash(.selection)
+                }
+                .disabled(!directoryViewModel.canTrash)
+            }
+            
         }
-        .formStyle(.grouped)
+
     }
 
 }

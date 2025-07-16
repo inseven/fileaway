@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import FileawayCore
+
 public struct DateField: View {
 
     enum PickerDate: Double {
@@ -75,7 +77,7 @@ public struct DateField: View {
                 DatePicker("", selection: $dateFieldModel.date, displayedComponents: [.date])
             }
         }
-        .onChange(of: selection) { selection in
+        .onChange(of: selection) { _, selection in
             guard let tag = PickerDate(rawValue: selection) else {
                 let date = Date(timeIntervalSince1970: selection)
                 $dateFieldModel.date.wrappedValue = date

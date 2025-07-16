@@ -20,18 +20,36 @@
 
 import SwiftUI
 
-public struct VariableMarker: View {
+import Interact
 
-    private let variable: VariableModel
+import FileawayCore
 
-    public init(variable: VariableModel) {
-        self.variable = variable
+public struct LocationMenuCommands: View {
+
+    @EnvironmentObject private var applicationModel: ApplicationModel
+    @EnvironmentObject private var sceneModel: SceneModel
+
+    private var url: URL
+
+    public init(url: URL) {
+        self.url = url
     }
 
     public var body: some View {
-        Image(systemName: "circle.fill")
-            .imageScale(.large)
-            .foregroundColor(variable.color.opacity(0.8))
+        Button("Reveal in Finder") {
+            Application.reveal(url)
+        }
+        Divider()
+        Button(role: .destructive) {
+            do {
+                try applicationModel.removeLocation(url: url)
+            } catch {
+                print("Failed to remove location with error \(error).")
+                // TODO: Handle this error in the application model or scene model.
+            }
+        } label: {
+            Label("Remove", systemImage: "trash")
+        }
     }
 
 }

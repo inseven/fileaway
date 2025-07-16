@@ -19,52 +19,35 @@
 // SOFTWARE.
 
 import SwiftUI
-import UniformTypeIdentifiers
 
-public struct PhoneFileTypesView: View {
+import FilePicker
 
-    enum SheetType: Identifiable {
+import FileawayCore
 
-        var id: Self { self }
+struct LocationRow: View {
 
-        case add
-    }
+    @EnvironmentObject private var applicationModel: ApplicationModel
+    @ObservedObject var directoryModel: DirectoryModel
 
-    @StateObject var model: FileTypesViewModel
-    @State var sheet: SheetType?
-
-    public init(settings: Settings) {
-        _model = StateObject(wrappedValue: FileTypesViewModel(settings: settings))
-    }
-
-    public var body: some View {
-        List {
-            ForEach(model.fileTypes) { fileType in
-                LabeledContent(fileType.localizedDisplayName, value: fileType.preferredFilenameExtension ?? "")
-            }
-            .onDelete { indexSet in
-                model.remove(indexSet)
+    var body: some View {
+        NavigationLink(value: directoryModel.url) {
+            Label(directoryModel.name, systemImage: directoryModel.systemImage)
+                .badge(directoryModel.type == .inbox ? directoryModel.files.count : 0)  // TODO: Move into the model?
+        }
+#if os(macOS)
+        .contextMenu {
+            LocationMenuCommands(url: directoryModel.url)
+        }
+#endif
+        .swipeActions(edge: .trailing) {
+            Button(role: .destructive) {
+                // TODO: Handle the error here!
+                try! applicationModel.removeLocation(url: directoryModel.url)
+            } label: {
+                Text("Remove")
             }
         }
-        .navigationTitle("File Types")
-        .toolbar {
 
-            ToolbarItem(placement: .confirmationAction) {
-                Button {
-                    sheet = .add
-                } label: {
-                    Label("Add File Type", systemImage: "plus")
-                }
-            }
-
-        }
-        .sheet(item: $sheet) { sheet in
-            switch sheet {
-            case .add:
-                PhoneAddFileTypeView(model: model)
-            }
-        }
-        .runs(model)
     }
 
 }

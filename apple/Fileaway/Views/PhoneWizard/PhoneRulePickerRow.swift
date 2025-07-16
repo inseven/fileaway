@@ -20,43 +20,32 @@
 
 import SwiftUI
 
-#if os(iOS)
+import FileawayCore
 
-struct CompactSelectionToolbar: ToolbarContent {
+public struct PhoneRulePickerRow: View {
 
-    @EnvironmentObject var sceneModel: SceneModel
+    @EnvironmentObject private var applicationModel: ApplicationModel
 
-    @ObservedObject var directoryViewModel: DirectoryViewModel
+    private let url: URL
+    private let ruleModel: RuleModel
 
-    var body: some ToolbarContent {
-        ToolbarItem(placement: .bottomBar) {
+    public init(url: URL, ruleModel: RuleModel) {
+        self.url = url
+        self.ruleModel = ruleModel
+    }
 
-            HStack {
-
-                Button("Move") {
-                    sceneModel.move(directoryViewModel.selection)
-                }
-                .disabled(!directoryViewModel.canMove)
-
-                Spacer()
-
-                Button("Preview") {
-                    directoryViewModel.showPreview()
-                }
-                .disabled(!directoryViewModel.canPreview)
-
-                Spacer()
-
-                Button("Delete") {
-                    directoryViewModel.trash(.selection)
-                }
-                .disabled(!directoryViewModel.canTrash)
+    public var body: some View {
+        NavigationLink {
+            PhoneRuleFormView(applicationModel: applicationModel, url: url, ruleModel: ruleModel)
+        } label: {
+            VStack {
+                Text(ruleModel.name)
+                    .horizontalSpace(.trailing)
+                Text(ruleModel.archiveURL.displayName)
+                    .foregroundColor(.secondary)
+                    .horizontalSpace(.trailing)
             }
-            
         }
-
     }
 
 }
-
-#endif

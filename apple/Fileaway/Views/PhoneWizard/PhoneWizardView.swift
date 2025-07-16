@@ -20,33 +20,31 @@
 
 import SwiftUI
 
-import Interact
+import FileawayCore
 
-public struct LocationMenuCommands: View {
+public struct PhoneWizardView: View {
+
+    @Environment(\.dismiss) var dismiss
 
     @EnvironmentObject private var applicationModel: ApplicationModel
-    @EnvironmentObject private var sceneModel: SceneModel
+    @StateObject var wizardModel = PhoneWizardModel()
 
-    private var url: URL
+    let file: FileInfo
 
-    public init(url: URL) {
-        self.url = url
+    public init(file: FileInfo) {
+        self.file = file
     }
 
     public var body: some View {
-        Button("Reveal in Finder") {
-            Application.reveal(url)
+        NavigationStack {
+            PhoneRulePicker(applicationModel: applicationModel, url: file.url)
         }
-        Divider()
-        Button(role: .destructive) {
-            do {
-                try applicationModel.removeLocation(url: url)
-            } catch {
-                print("Failed to remove location with error \(error).")
-                // TODO: Handle this error in the application model or scene model.
+        .environmentObject(wizardModel)
+        .onChange(of: wizardModel.isComplete) { _, isComplete in
+            guard isComplete else {
+                return
             }
-        } label: {
-            Label("Remove", systemImage: "trash")
+            dismiss()
         }
     }
 
