@@ -20,34 +20,49 @@
 
 import SwiftUI
 
-import Interact
+import FileawayCore
 
-public struct LocationMenuCommands: View {
+#if os(iOS)
 
-    @EnvironmentObject private var applicationModel: ApplicationModel
-    @EnvironmentObject private var sceneModel: SceneModel
+public struct CompactSelectionToolbar: ToolbarContent {
 
-    private var url: URL
+    @EnvironmentObject var sceneModel: SceneModel
 
-    public init(url: URL) {
-        self.url = url
+    @ObservedObject var directoryViewModel: DirectoryViewModel
+
+    public init(directoryViewModel: DirectoryViewModel) {
+        self.directoryViewModel = directoryViewModel
     }
 
-    public var body: some View {
-        Button("Reveal in Finder") {
-            Application.reveal(url)
-        }
-        Divider()
-        Button(role: .destructive) {
-            do {
-                try applicationModel.removeLocation(url: url)
-            } catch {
-                print("Failed to remove location with error \(error).")
-                // TODO: Handle this error in the application model or scene model.
+    public var body: some ToolbarContent {
+        ToolbarItem(placement: .bottomBar) {
+
+            HStack {
+
+                Button("Move") {
+                    sceneModel.move(directoryViewModel.selection)
+                }
+                .disabled(!directoryViewModel.canMove)
+
+                Spacer()
+
+                Button("Preview") {
+                    directoryViewModel.showPreview()
+                }
+                .disabled(!directoryViewModel.canPreview)
+
+                Spacer()
+
+                Button("Delete") {
+                    directoryViewModel.trash(.selection)
+                }
+                .disabled(!directoryViewModel.canTrash)
             }
-        } label: {
-            Label("Remove", systemImage: "trash")
+            
         }
+
     }
 
 }
+
+#endif

@@ -18,55 +18,55 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#if os(iOS)
+
+import Foundation
 import SwiftUI
 
-struct PhoneVariableView: View {
+import FileawayCore
 
-    @Environment(\.dismiss) private var dismiss
+public struct PhoneRulesView: View {
 
-    @ObservedObject var ruleModel: RuleModel
-    @ObservedObject var variable: VariableModel
+    @ObservedObject var rulesModel: RulesModel
 
-    var body: some View {
-        NavigationView {
+    public init(rulesModel: RulesModel) {
+        self.rulesModel = rulesModel
+    }
+
+    public var body: some View {
+        NavigationStack {
             VStack {
-                Form {
+                List {
                     Section {
-                        TextField("Name", text: $variable.name)
-                    } footer: {
-                        ErrorText(text: ruleModel.validate() ? nil : "Variable names must be unique.")
-                    }
-                    Section("Type") {
-                        ForEach(VariableType.allCases) { type in
-                            Selectable(isSelected: self.variable.type.id == type.id, action: {
-                                self.variable.type = type
-                            }) {
-                                Text(String(describing: type))
+                        ForEach(rulesModel.ruleModels) { ruleModel in
+                            NavigationLink(destination: PhoneRuleView(rulesModel: self.rulesModel,
+                                                                      editingRuleModel: RuleModel(ruleModel),
+                                                                      originalRuleModel: ruleModel)) {
+                                Text(ruleModel.name)
                             }
+                        }
+                        .onDelete {
+                            self.rulesModel.ruleModels.remove(atOffsets: $0)
                         }
                     }
                 }
             }
-            #if os(iOS)
-            .navigationBarTitle("Edit Variable", displayMode: .inline)
-            #endif
             .toolbar {
 
-                ToolbarItem(placement: .confirmationAction) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        dismiss()
+                        _ = try! self.rulesModel.new()
                     } label: {
-                        Text("Done")
-                            .bold()
-                            .disabled(!ruleModel.validate())
+                        Image(systemName: "plus")
                     }
                 }
 
             }
+            .navigationBarTitle("Rules")
+            .navigationBarTitleDisplayMode(.inline)
         }
-#if os(iOS)
-        .navigationViewStyle(StackNavigationViewStyle())
-#endif
     }
 
 }
+
+#endif

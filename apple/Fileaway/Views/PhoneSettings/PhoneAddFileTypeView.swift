@@ -23,6 +23,8 @@ import UniformTypeIdentifiers
 
 import Interact
 
+import FileawayCore
+
 public struct PhoneAddFileTypeView: View {
 
     public enum Focus: Hashable {

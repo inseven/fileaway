@@ -20,30 +20,31 @@
 
 import SwiftUI
 
-public struct PhoneWizardView: View {
+import FileawayCore
 
-    @Environment(\.dismiss) var dismiss
+public struct StringField: View {
 
-    @EnvironmentObject private var applicationModel: ApplicationModel
-    @StateObject var wizardModel = PhoneWizardModel()
+    @ObservedObject var stringFieldModel: StringFieldModel
+    @State var string: String = ""
 
-    let file: FileInfo
-
-    public init(file: FileInfo) {
-        self.file = file
+    public init(stringFieldModel: StringFieldModel) {
+        self.stringFieldModel = stringFieldModel
     }
 
     public var body: some View {
-        NavigationStack {
-            PhoneRulePicker(applicationModel: applicationModel, url: file.url)
-        }
-        .environmentObject(wizardModel)
-        .onChange(of: wizardModel.isComplete) { _, isComplete in
-            guard isComplete else {
-                return
+#if os(macOS)
+        TextField(text: $stringFieldModel.string) {
+            HStack {
+                VariableMarker(variable: stringFieldModel.variable)
+                Text(stringFieldModel.name)
             }
-            dismiss()
         }
+#else
+        HStack {
+            VariableMarker(variable: stringFieldModel.variable)
+            TextField(stringFieldModel.name, text: $stringFieldModel.string)
+        }
+#endif
     }
 
 }

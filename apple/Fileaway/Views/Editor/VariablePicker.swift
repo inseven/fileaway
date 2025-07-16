@@ -24,6 +24,8 @@ import SwiftUI
 
 import DIFlowLayout
 
+import FileawayCore
+
 public struct VariablePicker: View {
 
     private struct LayoutMetrics {

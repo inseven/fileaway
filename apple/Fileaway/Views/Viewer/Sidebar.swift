@@ -20,32 +20,34 @@
 
 import SwiftUI
 
-import FilePicker
+import FileawayCore
 
-struct LocationRow: View {
+public struct Sidebar: View {
 
     @EnvironmentObject private var applicationModel: ApplicationModel
-    @ObservedObject var directoryModel: DirectoryModel
+    @ObservedObject var sceneModel: SceneModel
 
-    var body: some View {
-        NavigationLink(value: directoryModel.url) {
-            Label(directoryModel.name, systemImage: directoryModel.systemImage)
-                .badge(directoryModel.type == .inbox ? directoryModel.files.count : 0)  // TODO: Move into the model?
-        }
-#if os(macOS)
-        .contextMenu {
-            LocationMenuCommands(url: directoryModel.url)
-        }
-#endif
-        .swipeActions(edge: .trailing) {
-            Button(role: .destructive) {
-                // TODO: Handle the error here!
-                try! applicationModel.removeLocation(url: directoryModel.url)
-            } label: {
-                Text("Remove")
-            }
-        }
-
+    public init(sceneModel: SceneModel) {
+        self.sceneModel = sceneModel
     }
 
+    public var body: some View {
+        List(selection: $sceneModel.section) {
+            LocationSection("Inboxes",
+                            type: .inbox,
+                            sceneModel: sceneModel,
+                            directoryModels: $applicationModel.inboxes)
+            LocationSection("Archives",
+                            type: .archive,
+                            sceneModel: sceneModel,
+                            directoryModels: $applicationModel.archives)
+        }
+        .headerProminence(.increased)
+#if os(iOS)
+        .toolbar {
+            EditButton()
+        }
+#endif
+    }
+    
 }

@@ -20,29 +20,41 @@
 
 import SwiftUI
 
-public struct PhoneRulePickerRow: View {
+import FileawayCore
 
-    @EnvironmentObject private var applicationModel: ApplicationModel
+public struct DateView: View {
 
-    private let url: URL
-    private let ruleModel: RuleModel
+    static var dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        return dateFormatter
+    }()
 
-    public init(url: URL, ruleModel: RuleModel) {
-        self.url = url
-        self.ruleModel = ruleModel
+    private let date: FileDate
+
+    public init(date: FileDate) {
+        self.date = date
+    }
+
+    private var description: String {
+        switch date.type {
+        case .creation:
+            return "File creation date"
+        case .filename:
+            return "Date found in filename"
+        case .unknown:
+            return "Unknown"
+        }
     }
 
     public var body: some View {
-        NavigationLink {
-            PhoneRuleFormView(applicationModel: applicationModel, url: url, ruleModel: ruleModel)
-        } label: {
-            VStack {
-                Text(ruleModel.name)
-                    .horizontalSpace(.trailing)
-                Text(ruleModel.archiveURL.displayName)
-                    .foregroundColor(.secondary)
-                    .horizontalSpace(.trailing)
-            }
+        switch date.type {
+        case .unknown:
+            EmptyView()
+        default:
+            Text(Self.dateFormatter.string(from: date.date))
+                .help(description)
+                .font(.callout)
         }
     }
 

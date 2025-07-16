@@ -20,32 +20,32 @@
 
 import SwiftUI
 
-public struct Sidebar: View {
+import FileawayCore
+
+public struct PhoneWizardView: View {
+
+    @Environment(\.dismiss) var dismiss
 
     @EnvironmentObject private var applicationModel: ApplicationModel
-    @ObservedObject var sceneModel: SceneModel
+    @StateObject var wizardModel = PhoneWizardModel()
 
-    public init(sceneModel: SceneModel) {
-        self.sceneModel = sceneModel
+    let file: FileInfo
+
+    public init(file: FileInfo) {
+        self.file = file
     }
 
     public var body: some View {
-        List(selection: $sceneModel.section) {
-            LocationSection("Inboxes",
-                            type: .inbox,
-                            sceneModel: sceneModel,
-                            directoryModels: $applicationModel.inboxes)
-            LocationSection("Archives",
-                            type: .archive,
-                            sceneModel: sceneModel,
-                            directoryModels: $applicationModel.archives)
+        NavigationStack {
+            PhoneRulePicker(applicationModel: applicationModel, url: file.url)
         }
-        .headerProminence(.increased)
-#if os(iOS)
-        .toolbar {
-            EditButton()
+        .environmentObject(wizardModel)
+        .onChange(of: wizardModel.isComplete) { _, isComplete in
+            guard isComplete else {
+                return
+            }
+            dismiss()
         }
-#endif
     }
-    
+
 }

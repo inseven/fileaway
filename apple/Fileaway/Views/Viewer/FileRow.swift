@@ -22,6 +22,8 @@ import SwiftUI
 
 import Interact
 
+import FileawayCore
+
 struct FileRow: View {
 
     @EnvironmentObject var sceneModel: SceneModel

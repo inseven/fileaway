@@ -24,6 +24,8 @@ import Combine
 import Foundation
 import SwiftUI
 
+import FileawayCore
+
 public struct PhoneRuleView: View {
 
     @State private var editMode = EditMode.inactive

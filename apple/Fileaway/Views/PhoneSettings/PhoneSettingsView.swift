@@ -24,6 +24,8 @@ import SwiftUI
 
 import Diligence
 
+import FileawayCore
+
 public struct PhoneSettingsView: View {
 
     enum SheetType: Identifiable {

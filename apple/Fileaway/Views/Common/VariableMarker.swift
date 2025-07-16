@@ -18,35 +18,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#if os(iOS)
-
 import SwiftUI
 
-public struct PhoneComponentItem: View {
+import FileawayCore
 
-    @Environment(\.editMode) var editMode
+public struct VariableMarker: View {
 
-    @ObservedObject var ruleModel: RuleModel
-    @State var component: ComponentModel
+    private let variable: VariableModel
 
-    public init(ruleModel: RuleModel, component: ComponentModel) {
-        self.ruleModel = ruleModel
-        self.component = component
+    public init(variable: VariableModel) {
+        self.variable = variable
     }
 
     public var body: some View {
-        HStack {
-            if component.type == .text {
-                EditText("Component", text: $component.value).environment(\.editMode, editMode)
-            } else {
-                Text(ruleModel.name(for: component))
-                    .tokenAppearance()
-                    .tint(component.variable?.color ?? .black)
-            }
-        }
-        .environment(\.editMode, editMode)
+        Image(systemName: "circle.fill")
+            .imageScale(.large)
+            .foregroundColor(variable.color.opacity(0.8))
     }
 
 }
-
-#endif

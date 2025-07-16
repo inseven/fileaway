@@ -20,25 +20,34 @@
 
 import SwiftUI
 
-public struct FilledButtonStyle: ButtonStyle {
+import FilePicker
 
-    private struct LayoutMetrics {
-        static let interItemSpcing = 2.0
-    }
+import FileawayCore
 
-    public func makeBody(configuration: Self.Configuration) -> some View {
-        configuration
-            .label
-            .font(.body)
-            .tokenAppearance()
-    }
-    
-}
+struct LocationRow: View {
 
-extension ButtonStyle where Self == FilledButtonStyle {
+    @EnvironmentObject private var applicationModel: ApplicationModel
+    @ObservedObject var directoryModel: DirectoryModel
 
-    public static var filled: Self {
-        return FilledButtonStyle()
+    var body: some View {
+        NavigationLink(value: directoryModel.url) {
+            Label(directoryModel.name, systemImage: directoryModel.systemImage)
+                .badge(directoryModel.type == .inbox ? directoryModel.files.count : 0)  // TODO: Move into the model?
+        }
+#if os(macOS)
+        .contextMenu {
+            LocationMenuCommands(url: directoryModel.url)
+        }
+#endif
+        .swipeActions(edge: .trailing) {
+            Button(role: .destructive) {
+                // TODO: Handle the error here!
+                try! applicationModel.removeLocation(url: directoryModel.url)
+            } label: {
+                Text("Remove")
+            }
+        }
+
     }
 
 }

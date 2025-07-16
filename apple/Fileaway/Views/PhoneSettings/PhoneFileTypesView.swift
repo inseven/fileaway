@@ -21,6 +21,8 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
+import FileawayCore
+
 public struct PhoneFileTypesView: View {
 
     enum SheetType: Identifiable {
@@ -33,7 +35,7 @@ public struct PhoneFileTypesView: View {
     @StateObject var model: FileTypesViewModel
     @State var sheet: SheetType?
 
-    public init(settings: Settings) {
+    public init(settings: FileawayCore.Settings) {
         _model = StateObject(wrappedValue: FileTypesViewModel(settings: settings))
     }
 

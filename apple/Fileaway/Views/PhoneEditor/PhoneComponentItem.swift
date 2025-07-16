@@ -18,31 +18,37 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#if os(iOS)
+
 import SwiftUI
 
-public struct StringField: View {
+import FileawayCore
 
-    @ObservedObject var stringFieldModel: StringFieldModel
-    @State var string: String = ""
+public struct PhoneComponentItem: View {
 
-    public init(stringFieldModel: StringFieldModel) {
-        self.stringFieldModel = stringFieldModel
+    @Environment(\.editMode) var editMode
+
+    @ObservedObject var ruleModel: RuleModel
+    @State var component: ComponentModel
+
+    public init(ruleModel: RuleModel, component: ComponentModel) {
+        self.ruleModel = ruleModel
+        self.component = component
     }
 
     public var body: some View {
-#if os(macOS)
-        TextField(text: $stringFieldModel.string) {
-            HStack {
-                VariableMarker(variable: stringFieldModel.variable)
-                Text(stringFieldModel.name)
+        HStack {
+            if component.type == .text {
+                EditText("Component", text: $component.value).environment(\.editMode, editMode)
+            } else {
+                Text(ruleModel.name(for: component))
+                    .tokenAppearance()
+                    .tint(component.variable?.color ?? .black)
             }
         }
-#else
-        HStack {
-            VariableMarker(variable: stringFieldModel.variable)
-            TextField(stringFieldModel.name, text: $stringFieldModel.string)
-        }
-#endif
+        .environment(\.editMode, editMode)
     }
 
 }
+
+#endif
