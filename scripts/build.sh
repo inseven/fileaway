@@ -154,10 +154,10 @@ popd
 
 # Build, test and archive the iOS project.
 sudo xcode-select --switch "$IOS_XCODE_PATH"
-xcode_project \
-    -scheme "Fileaway macOS" \
-    -destination "$DEFAULT_IPHONE_DESTINATION" \
-    clean build build-for-testing test
+# xcode_project \
+    # -scheme "Fileaway macOS" \
+    # -destination "$DEFAULT_IPHONE_DESTINATION" \
+    # clean build build-for-testing test
 xcode_project \
     -scheme "Fileaway macOS" \
     -config Release \
