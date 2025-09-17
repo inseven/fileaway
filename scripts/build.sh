@@ -157,8 +157,8 @@ xcodebuild \
     -project Fileaway.xcodeproj \
     -scheme "Fileaway" \
     -config Release \
+    -sdk iphoneos \
     -archivePath "$IOS_ARCHIVE_PATH" \
-    -destination "generic/platform=iOS" \
     OTHER_CODE_SIGN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\"" \
     CURRENT_PROJECT_VERSION=$BUILD_NUMBER \
     MARKETING_VERSION=$VERSION_NUMBER \
@@ -174,6 +174,7 @@ sudo xcode-select --switch "$MACOS_XCODE_PATH"
 xcodebuild \
     -project Fileaway.xcodeproj \
     -scheme "Fileaway" \
+    -sdk macosx \
     -config Release \
     -archivePath "$MACOS_ARCHIVE_PATH" \
     OTHER_CODE_SIGN_FLAGS="--keychain=\"${KEYCHAIN_PATH}\"" \
