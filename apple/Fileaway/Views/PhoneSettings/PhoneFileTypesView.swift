@@ -51,7 +51,7 @@ public struct PhoneFileTypesView: View {
         .navigationTitle("File Types")
         .toolbar {
 
-            ToolbarItem(placement: .confirmationAction) {
+            ToolbarItem(placement: .primaryAction) {
                 Button {
                     sheet = .add
                 } label: {

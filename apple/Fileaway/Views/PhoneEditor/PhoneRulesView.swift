@@ -53,7 +53,7 @@ public struct PhoneRulesView: View {
             }
             .toolbar {
 
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .primaryAction) {
                     Button {
                         _ = try! self.rulesModel.new()
                     } label: {
