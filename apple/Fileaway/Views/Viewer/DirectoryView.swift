@@ -141,9 +141,15 @@ public struct DirectoryView: View {
                                            systemImage: "party.popper",
                                            description: Text("New files will appear here automatically."))
                 } else {
-                    ContentUnavailableView("No Results",
-                                           systemImage: "magnifyingglass",
-                                           description: Text("No files match '\(directoryViewModel.filter)'"))
+                    ContentUnavailableView {
+                        Label("No Results", systemImage: "magnifyingglass")
+                    } description: {
+                        Text("No files match '\(directoryViewModel.filter)'")
+                    } actions: {
+                        Button("Clear Search") {
+                            directoryViewModel.filter = ""
+                        }
+                    }
                 }
             }
         }
