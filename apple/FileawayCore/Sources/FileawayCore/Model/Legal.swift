@@ -42,12 +42,14 @@ public struct Legal {
         Acknowledgements("Developers") {
             Credit("Jason Morley", url: URL(string: "https://jbmorley.co.uk/about"))
         }
+        Acknowledgements("Contributors") {
+            Credit("Pavlos Vinieratos", url: URL(string: "https://github.com/pvinis"))
+        }
         Acknowledgements("Thanks") {
             Credit("Joanne Wong")
             Credit("Lukas Fittl")
             Credit("Michael Dales")
             Credit("Pascal Pfiffner")
-            Credit("Pavlos Vinieratos")
             Credit("Sarah Barbour")
             Credit("Terrence Talbot")
         }
