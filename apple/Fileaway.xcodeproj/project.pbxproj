@@ -635,7 +635,7 @@
 			repositoryURL = "https://github.com/inseven/glitter.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.1;
+				minimumVersion = 0.1.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
