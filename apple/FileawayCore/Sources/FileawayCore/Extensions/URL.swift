@@ -24,6 +24,14 @@ import SwiftUI
 
 extension URL {
 
+    public static let donate = URL(string: "https://jbmorley.co.uk/support")!
+    public static let software = URL(string: "https://jbmorley.co.uk/software")!
+
+    static var support: URL = {
+        let subject = "Fileaway Support (\(Bundle.main.extendedVersion ?? "Unknown Version"))"
+        return URL(address: "support@jbmorley.co.uk", subject: subject)!
+    }()
+
     // Stable file URL that can be used to store the URL as bookmark data.
     public var bookmarkURL: URL {
         let identifier = Insecure.MD5.hash(data: self.absoluteString.data(using: .utf8) ?? Data()).map {
