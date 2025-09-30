@@ -1,0 +1,37 @@
+{
+  "configurations" : [
+    {
+      "id" : "CC180C66-5BAA-43D3-9A3B-B99A1408E910",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Fileaway.xcodeproj",
+      "identifier" : "D87DEF7A25774F6C006CFE85",
+      "name" : "Fileaway"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Fileaway.xcodeproj",
+        "identifier" : "D87DEF8C25774F6D006CFE85",
+        "name" : "FileawayTests"
+      }
+    },
+    {
+      "enabled" : false,
+      "target" : {
+        "containerPath" : "container:Fileaway.xcodeproj",
+        "identifier" : "D87DEF9725774F6D006CFE85",
+        "name" : "FileawayUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
