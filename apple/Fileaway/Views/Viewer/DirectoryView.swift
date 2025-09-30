@@ -136,9 +136,7 @@ public struct DirectoryView: View {
         .editable($isEditing)
         .overlay {
             if directoryViewModel.files.isEmpty {
-                ContentUnavailableView("No Files",
-                                       systemImage: "party.popper",
-                                       description: Text("New files will appear here automatically."))
+                EmptyDirectoryPlaceholderView()
             }
         }
         .progressOverlay(directoryViewModel.isLoading)
