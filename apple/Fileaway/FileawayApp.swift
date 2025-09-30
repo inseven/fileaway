@@ -71,6 +71,7 @@ struct FileawayApp: App {
             SidebarCommands()
             FileCommands(directoryViewModel: directoryViewModel)
             FolderCommands(applicationModel: applicationModel)
+            HelpCommands()
 #if canImport(Glitter)
             UpdateCommands(updater: updaterModel.updaterController.updater)
 #endif

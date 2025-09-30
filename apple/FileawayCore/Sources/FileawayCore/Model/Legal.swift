@@ -37,6 +37,7 @@ public struct Legal {
         Action("Website", url: URL(string: "https://fileaway.jbmorley.co.uk")!)
         Action("Privacy", url: URL(string: "https://fileaway.jbmorley.co.uk/privacy-policy")!)
         Action("GitHub", url: URL(string: "https://github.com/inseven/fileaway")!)
+        Action("Support", url: .support)
 
     } acknowledgements: {
         Acknowledgements("Developers") {
