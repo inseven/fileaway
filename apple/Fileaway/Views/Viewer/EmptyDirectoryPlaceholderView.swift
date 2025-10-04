@@ -30,9 +30,9 @@ struct EmptyDirectoryPlaceholderView: View {
             ContentUnavailableView {
                 Label("No Results", systemImage: "magnifyingglass")
             } description: {
-                Text("No files match your search")
+                Text("No files match your search.")
             } actions: {
-                Button("Clear Search") {
+                Button("Cancel Search") {
                     dismissSearch()
                 }
             }
