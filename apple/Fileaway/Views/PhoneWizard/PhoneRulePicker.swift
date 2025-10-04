@@ -65,8 +65,14 @@ public struct PhoneRulePicker: View {
         .toolbar {
 
             ToolbarItem(placement: .cancellationAction) {
-                Button("Cancel") {
+                Button {
                     dismiss()
+                } label: {
+                    if #available(iOS 26, *) {
+                        Image(systemName: "xmark")
+                    } else {
+                        Text("Cancel")
+                    }
                 }
             }
         }
