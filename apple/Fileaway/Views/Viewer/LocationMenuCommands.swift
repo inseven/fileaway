@@ -36,7 +36,7 @@ public struct LocationMenuCommands: View {
     }
 
     public var body: some View {
-        Button("Reveal in Finder") {
+        Button("Show in Finder", systemImage: "finder") {
             Application.reveal(url)
         }
         Divider()

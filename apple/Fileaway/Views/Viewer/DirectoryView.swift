@@ -95,7 +95,7 @@ public struct DirectoryView: View {
                 Button("Open") {
                     sceneModel.open(selection)
                 }
-                Button("Reveal in Finder") {
+                Button("Show in Finder", systemImage: "finder") {
                     sceneModel.reveal(selection)
                 }
                 Divider()

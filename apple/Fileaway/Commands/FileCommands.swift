@@ -51,7 +51,7 @@ public struct FileCommands: Commands {
             .disabled(!directoryViewModel.canOpen)
 
 #if os(macOS)
-            Button("Reveal in Finder") {
+            Button("Show in Finder", systemImage: "finder") {
                 sceneModel?.reveal(directoryViewModel.selection)
             }
             .disabled(!directoryViewModel.canReveal)
