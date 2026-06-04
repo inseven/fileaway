@@ -1,0 +1,33 @@
+{
+  "originHash" : "fe3000dd0f3a54c4e87f63efa166d594ca9f71f8947b98b4ca0126f0e2924d1e",
+  "pins" : [
+    {
+      "identity" : "eonilfsevents",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jbmorley/EonilFSEvents.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "a54369c44ab9caabf611d01080e64fe30608d83f"
+      }
+    },
+    {
+      "identity" : "licensable",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/inseven/licensable",
+      "state" : {
+        "revision" : "093c4b45d83e133d214530ea711cb8b91074606b",
+        "version" : "0.1.0"
+      }
+    },
+    {
+      "identity" : "swift-collections",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-collections",
+      "state" : {
+        "revision" : "fea17c02d767f46b23070fdfdacc28a03a39232a",
+        "version" : "1.5.1"
+      }
+    }
+  ],
+  "version" : 3
+}

@@ -20,7 +20,7 @@
 
 import UniformTypeIdentifiers
 
-extension UTType: Identifiable {
+extension UTType: @retroactive Identifiable {
     
     public static let rules = UTType(exportedAs: "app.fileaway.types.rules")
     public static var component = UTType(exportedAs: "app.fileaway.types.component")
