@@ -36,7 +36,7 @@ let package = Package(
                 .product(name: "HashRainbow", package: "hashrainbow"),
                 .product(name: "Interact", package: "interact"),
                 .product(name: "FilePicker", package: "FilePicker"),
-                .product(name: "EonilFSEvents", package: "FSEvents", condition: .when(platforms: [.macOS])),
+                .product(name: "EonilFSEvents", package: "EonilFSEvents", condition: .when(platforms: [.macOS])),
             ],
             resources: [
                 .process("Licenses"),
