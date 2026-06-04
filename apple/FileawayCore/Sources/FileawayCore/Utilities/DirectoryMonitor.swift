@@ -27,7 +27,7 @@ import EonilFSEvents
 import UIKit
 #endif
 
-public class DirectoryMonitor: ObservableObject {
+public class DirectoryMonitor: ObservableObject, @unchecked Sendable {
 
     let locations: [URL]
     let syncQueue = DispatchQueue(label: "DirectoryMonitor.syncQueue")

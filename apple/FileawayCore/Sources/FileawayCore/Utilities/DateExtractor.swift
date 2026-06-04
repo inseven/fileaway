@@ -23,7 +23,7 @@ import SwiftUI
 
 import Interact
 
-public class DateExtractor: ObservableObject, Runnable {
+@MainActor public class DateExtractor: ObservableObject, Runnable, Sendable {
 
     @Published public var dates: [Date] = []
 
