@@ -44,9 +44,9 @@ public struct PhoneRulePicker: View {
         List {
             PhoneDocumentPreviewHeader($isHeaderVisible, url: url)
 
-            if !rulePickerModel.recentRules.isEmpty {
+            if !rulePickerModel.filteredRecentRules.isEmpty {
                 Section("Recent") {
-                    ForEach(rulePickerModel.recentRules) { ruleModel in
+                    ForEach(rulePickerModel.filteredRecentRules) { ruleModel in
                         PhoneRulePickerRow(url: url, ruleModel: ruleModel)
                     }
                 }
