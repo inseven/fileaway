@@ -64,9 +64,9 @@ struct RulePicker: View {
                 Section() {
 
                 }
-                if !rulePickerModel.recentRules.isEmpty {
+                if !rulePickerModel.filteredRecentRules.isEmpty {
                     Section("Recent") {
-                        ForEach(rulePickerModel.recentRules) { ruleModel in
+                        ForEach(rulePickerModel.filteredRecentRules) { ruleModel in
                             RulePickerRow(ruleModel: ruleModel) {
                                 withAnimation {
                                     rulePickerModel.selection = ruleModel.id

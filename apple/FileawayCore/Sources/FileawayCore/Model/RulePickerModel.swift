@@ -28,6 +28,7 @@ public class RulePickerModel: ObservableObject, Runnable {
     @Published public var filter: String = ""
     @Published public var filteredRules: [RuleModel] = []
     @Published public var recentRules: [RuleModel] = []
+    @Published public var filteredRecentRules: [RuleModel] = []
     @Published public var selection: RuleModel.ID?
 
     private var applicationModel: ApplicationModel
@@ -42,23 +43,31 @@ public class RulePickerModel: ObservableObject, Runnable {
 
         applicationModel
             .$rules
-            .combineLatest($filter)
+            .combineLatest($recentRules, $filter)
             .receive(on: queue)
-            .map { rules, filter in
+            .map { rules, recentRules, filter in
                 guard !filter.isEmpty else {
-                    return (rules, filter)
+                    return (rules, recentRules, filter)
                 }
                 let filteredRules = rules.filter { item in
-                    [item.archiveURL.displayName, item.name].joined(separator: " ").localizedSearchMatches(string: filter)
+                    return [item.archiveURL.displayName, item.name].joined(separator: " ").localizedSearchMatches(string: filter)
                 }
-                return (filteredRules, filter)
+                let filteredRecentRules = recentRules.filter { item in
+                    return [item.archiveURL.displayName, item.name].joined(separator: " ").localizedSearchMatches(string: filter)
+                }
+                return (filteredRules, filteredRecentRules, filter)
             }
-            .map { (filteredRules, filter) in
-                (filteredRules.sorted { lhs, rhs in lhs.name.lexicographicallyPrecedes(rhs.name) }, filter)
+            .map { (filteredRules, filteredRecentRules, filter) in
+                (filteredRules
+                    .sorted { lhs, rhs in lhs.name.lexicographicallyPrecedes(rhs.name) },
+                 filteredRecentRules
+                     .sorted { lhs, rhs in lhs.name.lexicographicallyPrecedes(rhs.name) },
+                 filter)
             }
             .receive(on: DispatchQueue.main)
-            .sink { (rules, filter: String) in
+            .sink { (rules, filteredRecentRules, filter: String) in
                 self.filteredRules = rules
+                self.filteredRecentRules = filteredRecentRules
                 if !filter.isEmpty || self.selection == nil {
                     self.selection = rules.first?.id
                 }
