@@ -52,7 +52,7 @@ public struct PhoneRuleFormView: View {
         }
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
-                Button("Move") {
+                Button("Move", systemImage: "checkmark", role: .confirm) {
                     do {
                         try ruleFormModel.move()
                         wizardModel.complete()
