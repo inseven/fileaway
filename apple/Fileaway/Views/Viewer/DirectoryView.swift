@@ -58,14 +58,6 @@ public struct DirectoryView: View {
         List(selection: selection) {
             ForEach(directoryViewModel.files.values, id: \.self) { file in
                 FileRow(file: file)
-                    .swipeActions(edge: .leading) {
-                        Button {
-                            sceneModel.move([file])
-                        } label: {
-                            Label("Move", systemImage: "tray.and.arrow.down")
-                        }
-                        .tint(.purple)
-                    }
                     .swipeActions(edge: .trailing) {
                         Button(role: .destructive) {
                             directoryViewModel.trash(.file(file))
@@ -89,6 +81,14 @@ public struct DirectoryView: View {
                 } label: {
                     Label("Move", systemImage: "tray.and.arrow.down")
                 }
+
+                Button {
+                    directoryViewModel.showPreview(selecting: selection.first)
+                } label: {
+                    Label("Quick Look", systemImage: "eye")
+                }
+                .disabled(selection.count != 1)
+
                 Divider()
 
 #if os(macOS)
@@ -101,13 +101,8 @@ public struct DirectoryView: View {
                 Divider()
 #endif
 
-                Button {
-                    directoryViewModel.showPreview(selecting: selection.first)
-                } label: {
-                    Label("Quick Look", systemImage: "eye")
-                }
-                .disabled(selection.count != 1)
                 Divider()
+
                 Button {
                     Application.setClipboard(file.name)
                 } label: {
@@ -120,7 +115,15 @@ public struct DirectoryView: View {
 #if os(macOS)
             sceneModel.open(selection)
 #else
-            directoryViewModel.showPreview(selecting: selection.first)
+            guard let file = selection.first else {
+                return
+            }
+            switch directoryViewModel.type {
+            case .inbox:
+                sceneModel.move([file])
+            case .archive:
+                directoryViewModel.showPreview(selecting: file)
+            }
 #endif
         }
 #if os(iOS)
