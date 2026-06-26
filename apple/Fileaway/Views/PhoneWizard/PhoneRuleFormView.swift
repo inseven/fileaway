@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+import Interact
+
 import FileawayCore
 
 public struct PhoneRuleFormView: View {
@@ -30,6 +32,7 @@ public struct PhoneRuleFormView: View {
 
     @StateObject var ruleFormModel: RuleFormModel
     @State private var isHeaderVisible: Bool = true
+    @State private var error: Error?
 
     var url: URL
 
@@ -52,17 +55,17 @@ public struct PhoneRuleFormView: View {
         }
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
-                Button("Move") {
+                Button("Move", systemImage: "checkmark", role: .prefersConfirm) {
                     do {
                         try ruleFormModel.move()
                         wizardModel.complete()
                     } catch {
-                        // TODO: Present this error to the user.
-                        print("Failed to move file with error \(error).")
+                        self.error = error
                     }
                 }
             }
         }
+        .presents($error)
     }
 
 }
