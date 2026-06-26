@@ -20,8 +20,6 @@
 
 import SwiftUI
 
-#if os(iOS)
-
 import FileawayCore
 
 public struct PhoneRuleFormView: View {
@@ -54,7 +52,7 @@ public struct PhoneRuleFormView: View {
         }
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
-                Button("Move", systemImage: "checkmark", role: .confirm) {
+                Button("Move", systemImage: "checkmark", role: .preferConfirm) {
                     do {
                         try ruleFormModel.move()
                         wizardModel.complete()
@@ -69,4 +67,14 @@ public struct PhoneRuleFormView: View {
 
 }
 
-#endif
+extension ButtonRole {
+
+    static let preferConfirm: ButtonRole? = {
+        if #available(iOS 26, macOS 26, *) {
+            return .confirm
+        } else {
+            return nil
+        }
+    }()
+
+}
