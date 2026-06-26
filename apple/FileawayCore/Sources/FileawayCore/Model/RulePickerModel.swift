@@ -23,17 +23,32 @@ import SwiftUI
 
 import Interact
 
-public class RulePickerModel: ObservableObject, Runnable {
+@Observable
+public class RulePickerModel: Runnable {
 
-    @Published public var filter: String = ""
-    @Published public var filteredRules: [RuleModel] = []
-    @Published public var recentRules: [RuleModel] = []
-    @Published public var filteredRecentRules: [RuleModel] = []
-    @Published public var selection: RuleModel.ID?
+    public var filter: String = "" {
+        didSet {
+            filterSubject.send(filter)
+        }
+    }
 
-    private var applicationModel: ApplicationModel
-    private var cancellables: Set<AnyCancellable> = []
-    private var queue = DispatchQueue(label: "queue")
+    public var recentRules: [RuleModel] = [] {
+        didSet {
+            recentRulesSubject.send(recentRules)
+        }
+    }
+
+    public var filteredRules: [RuleModel] = []
+    public var filteredRecentRules: [RuleModel] = []
+
+    public var selection: RuleModel.ID?
+
+    @ObservationIgnored private var cancellables: Set<AnyCancellable> = []
+    @ObservationIgnored private var queue = DispatchQueue(label: "queue")
+
+    private let applicationModel: ApplicationModel
+    private let filterSubject = CurrentValueSubject<String, Never>("")
+    private let recentRulesSubject = CurrentValueSubject<[RuleModel], Never>([])
 
     public init(applicationModel: ApplicationModel) {
         self.applicationModel = applicationModel
@@ -43,17 +58,21 @@ public class RulePickerModel: ObservableObject, Runnable {
 
         applicationModel
             .$rules
-            .combineLatest($recentRules, $filter)
+            .combineLatest(recentRulesSubject, filterSubject)
             .receive(on: queue)
             .map { rules, recentRules, filter in
                 guard !filter.isEmpty else {
                     return (rules, recentRules, filter)
                 }
                 let filteredRules = rules.filter { item in
-                    return [item.archiveURL.displayName, item.name].joined(separator: " ").localizedSearchMatches(string: filter)
+                    return [item.archiveURL.displayName, item.name]
+                        .joined(separator: " ")
+                        .localizedSearchMatches(string: filter)
                 }
                 let filteredRecentRules = recentRules.filter { item in
-                    return [item.archiveURL.displayName, item.name].joined(separator: " ").localizedSearchMatches(string: filter)
+                    return [item.archiveURL.displayName, item.name]
+                        .joined(separator: " ")
+                        .localizedSearchMatches(string: filter)
                 }
                 return (filteredRules, filteredRecentRules, filter)
             }
@@ -64,12 +83,13 @@ public class RulePickerModel: ObservableObject, Runnable {
                      .sorted { lhs, rhs in lhs.name.lexicographicallyPrecedes(rhs.name) },
                  filter)
             }
-            .receive(on: DispatchQueue.main)
             .sink { (rules, filteredRecentRules, filter: String) in
-                self.filteredRules = rules
-                self.filteredRecentRules = filteredRecentRules
-                if !filter.isEmpty || self.selection == nil {
-                    self.selection = rules.first?.id
+                Task { @MainActor in
+                    self.filteredRules = rules
+                    self.filteredRecentRules = filteredRecentRules
+                    if !filter.isEmpty || self.selection == nil {
+                        self.selection = rules.first?.id
+                    }
                 }
             }
             .store(in: &cancellables)
@@ -89,9 +109,10 @@ public class RulePickerModel: ObservableObject, Runnable {
                 }
                 return recentRules
             }
-            .receive(on: DispatchQueue.main)
             .sink { recentRules in
-                self.recentRules = recentRules
+                Task { @MainActor in
+                    self.recentRules = recentRules
+                }
             }
             .store(in: &cancellables)
 

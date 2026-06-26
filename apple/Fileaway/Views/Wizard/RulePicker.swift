@@ -32,7 +32,7 @@ struct RulePicker: View {
 
     private let url: URL
 
-    @StateObject var rulePickerModel: RulePickerModel
+    @State var rulePickerModel: RulePickerModel
 
     @Binding var activeRuleModel: RuleModel?
 
@@ -41,7 +41,7 @@ struct RulePicker: View {
     init(applicationModel: ApplicationModel, activeRuleModel: Binding<RuleModel?>, url: URL) {
         _activeRuleModel = activeRuleModel
         self.url = url
-        _rulePickerModel = StateObject(wrappedValue: RulePickerModel(applicationModel: applicationModel))
+        _rulePickerModel = State(wrappedValue: RulePickerModel(applicationModel: applicationModel))
     }
 
     @MainActor func submit() {
@@ -49,6 +49,7 @@ struct RulePicker: View {
     }
 
     var body: some View {
+        @Bindable var rulePickerModel = rulePickerModel
         VStack(spacing: 0) {
             TextField("Search", text: $rulePickerModel.filter)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
