@@ -20,7 +20,7 @@
 
 import Foundation
 
-import Diligence
+@preconcurrency import Diligence
 import Interact
 
 #if canImport(Glitter)

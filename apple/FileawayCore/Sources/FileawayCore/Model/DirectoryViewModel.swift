@@ -31,7 +31,7 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
         case file(FileInfo)
     }
 
-    @MainActor public var id: URL { self.url }
+    public var id: URL { self.url }
 
     @Published public var files: OrderedDictionary<URL, FileInfo> = [:]
     @Published public var filter: String = ""
@@ -49,9 +49,7 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
         return directoryModel?.type ?? .inbox
     }
 
-    @MainActor public var url: URL {
-        return directoryModel?.url ?? URL(string: "foo:unknown")!
-    }
+    public let url: URL
 
     @MainActor public var name: String {
         return directoryModel?.name ?? "Nothing to see here"
@@ -63,6 +61,7 @@ public class DirectoryViewModel: ObservableObject, Identifiable, Runnable {
 
     public init(directoryModel: DirectoryModel? = nil) {
         self.directoryModel = directoryModel
+        self.url = directoryModel?.url ?? URL(string: "foo:unknown")!
     }
 
     @MainActor public func start() {

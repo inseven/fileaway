@@ -20,7 +20,7 @@
 
 import SwiftUI
 
-public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible, Hashable {
+public class RuleModel: ObservableObject, Identifiable, CustomStringConvertible, Hashable, @unchecked Sendable {
 
     public enum NameFormat {
         case long
