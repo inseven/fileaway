@@ -19,29 +19,16 @@
 // SOFTWARE.
 
 import SwiftUI
+import Interact
+import FileawayCore
 
-struct StackNavigationBar: View {
+@Observable
+class RulesWizardModel {
 
-    @Environment(RulesWizardModel.self) var rulesWizardModel
+    var activeRuleModel: RuleModel? = nil
 
-    var text: String
-
-    var body: some View {
-        HStack {
-            if (rulesWizardModel.activeRuleModel != nil) {
-                Button("Back") {
-                    withAnimation {
-                        rulesWizardModel.pop()
-                    }
-                }
-            }
-            Spacer()
-            Text(text)
-                .lineLimit(1)
-                .fontWeight(.bold)
-            Spacer()
-        }
-        .padding()
-
+    func pop() {
+        activeRuleModel = nil
     }
+
 }
