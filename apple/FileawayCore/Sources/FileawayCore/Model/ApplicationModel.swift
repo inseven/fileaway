@@ -34,7 +34,7 @@ extension Array where Element == DirectoryModel {
 
 }
 
-public class ApplicationModel: ObservableObject {
+public class ApplicationModel: ObservableObject, @unchecked Sendable {
 
     public let settings = Settings()
 
