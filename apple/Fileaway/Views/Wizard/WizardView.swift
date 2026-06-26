@@ -24,14 +24,11 @@ import Interact
 
 import FileawayCore
 
-
-
 struct WizardView: View {
 
     @EnvironmentObject private var applicationModel: ApplicationModel
 
     @State var rulesWizardModel = RulesWizardModel()
-
     @State var url: URL
     @State var firstResponder: Bool = true
 
