@@ -30,17 +30,18 @@ public struct PhoneRulePicker: View {
 
     @EnvironmentObject private var applicationModel: ApplicationModel
 
-    @StateObject var rulePickerModel: RulePickerModel
+    @State var rulePickerModel: RulePickerModel
     @State private var isHeaderVisible: Bool = true
 
     private let url: URL
 
     public init(applicationModel: ApplicationModel, url: URL) {
         self.url = url
-        _rulePickerModel = StateObject(wrappedValue: RulePickerModel(applicationModel: applicationModel))
+        _rulePickerModel = State(wrappedValue: RulePickerModel(applicationModel: applicationModel))
     }
 
     public var body: some View {
+        @Bindable var rulePickerModel = rulePickerModel
         List {
             PhoneDocumentPreviewHeader($isHeaderVisible, url: url)
 
