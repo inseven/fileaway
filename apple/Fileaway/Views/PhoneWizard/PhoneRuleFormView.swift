@@ -57,9 +57,8 @@ public struct PhoneRuleFormView: View {
             ToolbarItem(placement: .confirmationAction) {
                 Button("Move", systemImage: "checkmark", role: .prefersConfirm) {
                     do {
-                        throw FileawayError.accessError
-//                        try ruleFormModel.move()
-//                        wizardModel.complete()
+                        try ruleFormModel.move()
+                        wizardModel.complete()
                     } catch {
                         self.error = error
                     }
