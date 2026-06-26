@@ -40,11 +40,10 @@ public class RulePickerModel: Runnable {
 
     public var filteredRules: [RuleModel] = []
     public var filteredRecentRules: [RuleModel] = []
-
     public var selection: RuleModel.ID?
 
+    private let queue = DispatchQueue(label: "queue")
     @ObservationIgnored private var cancellables: Set<AnyCancellable> = []
-    @ObservationIgnored private var queue = DispatchQueue(label: "queue")
 
     private let applicationModel: ApplicationModel
     private let filterSubject = CurrentValueSubject<String, Never>("")
