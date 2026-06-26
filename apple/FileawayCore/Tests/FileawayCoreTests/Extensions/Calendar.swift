@@ -22,7 +22,7 @@ import Foundation
 
 extension Calendar {
 
-    static let gregorian: Calendar = {
+    static var gregorian: Calendar = {
         return Calendar.init(identifier: .gregorian)
     }()
 

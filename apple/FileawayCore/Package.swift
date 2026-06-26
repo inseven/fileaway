@@ -1,4 +1,4 @@
-// swift-tools-version: 6.2
+// swift-tools-version: 5.10
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "FileawayCore",
     platforms: [
-        .iOS(.v26),
+        .iOS(.v17),
         .macOS(.v14)
     ],
     products: [

@@ -22,7 +22,7 @@ import Foundation
 
 class TitleFinder {
 
-    static let dateFormatter: DateFormatter = {
+    static var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter

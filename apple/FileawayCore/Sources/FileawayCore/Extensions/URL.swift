@@ -27,7 +27,7 @@ extension URL {
     public static let donate = URL(string: "https://jbmorley.co.uk/support")!
     public static let software = URL(string: "https://jbmorley.co.uk/software")!
 
-    static let support: URL = {
+    static var support: URL = {
         let subject = "Fileaway Support (\(Bundle.main.extendedVersion ?? "Unknown Version"))"
         return URL(address: "support@jbmorley.co.uk", subject: subject)!
     }()

@@ -23,14 +23,14 @@ import UniformTypeIdentifiers
 extension UTType: @retroactive Identifiable {
     
     public static let rules = UTType(exportedAs: "app.fileaway.types.rules")
-    public static let component = UTType(exportedAs: "app.fileaway.types.component")
+    public static var component = UTType(exportedAs: "app.fileaway.types.component")
 
-    public static let doc = UTType(filenameExtension: "doc")!
-    public static let docx = UTType(filenameExtension: "docx")!
-    public static let numbers = UTType(filenameExtension: "numbers")!
-    public static let pages = UTType(filenameExtension: "pages")!
-    public static let xls = UTType(filenameExtension: "xls")!
-    public static let xlsx = UTType(filenameExtension: "xlsx")!
+    public static var doc = UTType(filenameExtension: "doc")!
+    public static var docx = UTType(filenameExtension: "docx")!
+    public static var numbers = UTType(filenameExtension: "numbers")!
+    public static var pages = UTType(filenameExtension: "pages")!
+    public static var xls = UTType(filenameExtension: "xls")!
+    public static var xlsx = UTType(filenameExtension: "xlsx")!
 
 
     public var id: String { self.identifier }
