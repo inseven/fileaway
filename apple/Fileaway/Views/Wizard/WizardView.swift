@@ -24,26 +24,16 @@ import Interact
 
 import FileawayCore
 
-class RulesWizardModel: ObservableObject {
-
-    @Published var activeRuleModel: RuleModel? = nil
-
-    func pop() {
-        activeRuleModel = nil
-    }
-
-}
-
 struct WizardView: View {
 
     @EnvironmentObject private var applicationModel: ApplicationModel
 
-    @StateObject var rulesWizardModel = RulesWizardModel()
-
+    @State var rulesWizardModel = RulesWizardModel()
     @State var url: URL
     @State var firstResponder: Bool = true
 
     var body: some View {
+        @Bindable var rulesWizardModel = rulesWizardModel
         HStack(spacing: 0) {
             QuickLookPreview(url: url)
                 .onTapGesture(count: 2) {
@@ -70,7 +60,7 @@ struct WizardView: View {
         }
         .navigationTitle(url.displayName)
         .frame(minWidth: 800, minHeight: 600, idealHeight: 600)
-        .environmentObject(rulesWizardModel)
+        .environment(rulesWizardModel)
     }
 
 }
