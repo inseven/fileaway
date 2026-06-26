@@ -20,6 +20,8 @@
 
 import SwiftUI
 
+#if os(iOS)
+
 import FileawayCore
 
 public struct PhoneRuleFormView: View {
@@ -66,3 +68,5 @@ public struct PhoneRuleFormView: View {
     }
 
 }
+
+#endif
