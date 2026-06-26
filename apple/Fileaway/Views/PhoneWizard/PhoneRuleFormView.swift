@@ -52,7 +52,7 @@ public struct PhoneRuleFormView: View {
         }
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
-                Button("Move", systemImage: "checkmark", role: .preferConfirm) {
+                Button("Move", systemImage: "checkmark", role: .prefersConfirm) {
                     do {
                         try ruleFormModel.move()
                         wizardModel.complete()
@@ -69,7 +69,7 @@ public struct PhoneRuleFormView: View {
 
 extension ButtonRole {
 
-    static let preferConfirm: ButtonRole? = {
+    static let prefersConfirm: ButtonRole? = {
         if #available(iOS 26, macOS 26, *) {
             return .confirm
         } else {
