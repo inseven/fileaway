@@ -19,7 +19,7 @@
 // SOFTWARE.
 
 import SwiftUI
-import Interact
+
 import FileawayCore
 
 @Observable
