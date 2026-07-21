@@ -1,21 +1,26 @@
 [submodule "interact"]
 	path = apple/dependencies/interact
 	url = https://github.com/jbmorley/interact.git
+	branch = main
 [submodule "scripts/changes"]
 	path = scripts/changes
 	url = https://github.com/jbmorley/changes.git
+	branch = main
 [submodule "scripts/build-tools"]
 	path = scripts/build-tools
 	url = https://github.com/jbmorley/build-tools.git
+	branch = main
 [submodule "diligence"]
 	path = apple/dependencies/diligence
 	url = https://github.com/inseven/diligence.git
+	branch = main
 [submodule "FilePicker"]
 	path = apple/dependencies/FilePicker
 	url = https://github.com/jbmorley/FilePicker.git
 [submodule "HashRainbow"]
 	path = apple/dependencies/HashRainbow
 	url = https://github.com/jbmorley/HashRainbow.git
+	branch = main
 [submodule "DIFlowLayout"]
 	path = apple/dependencies/DIFlowLayout
 	url = https://github.com/jbmorley/DIFlowLayout.git
