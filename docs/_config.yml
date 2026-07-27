@@ -23,6 +23,8 @@ navigation:
 footer:
   - title: Privacy Policy
     href: /privacy-policy
+  - title: Support
+    href: /support
   - title: License
     href: /license
 
