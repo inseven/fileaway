@@ -7,6 +7,7 @@
 /docs/.jekyll-cache
 /docs/_site
 /docs/releases
+/scripts/Pipfile.lock
 build
 temp
 xcuserdata/
