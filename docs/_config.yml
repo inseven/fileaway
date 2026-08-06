@@ -6,7 +6,7 @@ description: Rules-based File Management for macOS
 url: "https://fileaway.app"
 baseurl: ""
 repository: https://github.com/inseven/fileaway
-copyright: 2018-2025 <a href="https://jbmorley.co.uk/about">Jason Morley</a>
+copyright: 2018-2026 <a href="https://jbmorley.co.uk/about">Jason Morley</a>
 
 navigation:
   - title: Fileaway
