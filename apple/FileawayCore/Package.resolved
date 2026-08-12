@@ -1,6 +1,15 @@
 {
-  "originHash" : "fe3000dd0f3a54c4e87f63efa166d594ca9f71f8947b98b4ca0126f0e2924d1e",
+  "originHash" : "b2e5be9567df8b34822db8353d2507de5862620cff415266b0c71484ad74e9d0",
   "pins" : [
+    {
+      "identity" : "diligence",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/inseven/diligence.git",
+      "state" : {
+        "revision" : "5faa62e7f528faa6aa2d1b5d022b78fe3698c62a",
+        "version" : "2.0.1"
+      }
+    },
     {
       "identity" : "eonilfsevents",
       "kind" : "remoteSourceControl",
@@ -8,6 +17,15 @@
       "state" : {
         "branch" : "master",
         "revision" : "a54369c44ab9caabf611d01080e64fe30608d83f"
+      }
+    },
+    {
+      "identity" : "interact",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/inseven/interact.git",
+      "state" : {
+        "revision" : "1144be7db0f5ce867b3560bdc8902c792cfd3cc9",
+        "version" : "3.10.5"
       }
     },
     {

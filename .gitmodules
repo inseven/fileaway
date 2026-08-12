@@ -1,11 +1,3 @@
-[submodule "interact"]
-	path = apple/dependencies/interact
-	url = https://github.com/jbmorley/interact.git
-	branch = main
-[submodule "diligence"]
-	path = apple/dependencies/diligence
-	url = https://github.com/inseven/diligence.git
-	branch = main
 [submodule "FilePicker"]
 	path = apple/dependencies/FilePicker
 	url = https://github.com/jbmorley/FilePicker.git

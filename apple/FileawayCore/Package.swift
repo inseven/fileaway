@@ -16,13 +16,13 @@ let package = Package(
             targets: ["FileawayCore"]),
     ],
     dependencies: [
-        .package(path: "./../dependencies/diligence"),
         .package(path: "./../dependencies/HashRainbow"),
-        .package(path: "./../dependencies/interact"),
         .package(path: "./../dependencies/FilePicker"),
         .package(path: "./../dependencies/DIFlowLayout"),
+        .package(url: "https://github.com/apple/swift-collections", from: "1.2.0"),
+        .package(url: "https://github.com/inseven/diligence.git", from: "2.0.1"),
+        .package(url: "https://github.com/inseven/interact.git", from: "3.10.5"),
         .package(url: "https://github.com/jbmorley/EonilFSEvents.git", branch: "master"),
-        .package(url: "https://github.com/apple/swift-collections", .upToNextMajor(from: "1.2.0")),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
