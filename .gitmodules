@@ -16,9 +16,6 @@
 [submodule "DIFlowLayout"]
 	path = apple/dependencies/DIFlowLayout
 	url = https://github.com/jbmorley/DIFlowLayout.git
-[submodule "scripts/Sparkle"]
-	path = scripts/Sparkle
-	url = https://github.com/sparkle-project/Sparkle
 [submodule "docs/_theme"]
 	path = docs/_theme
 	url = https://github.com/jbmorley/showcase-theme.git
