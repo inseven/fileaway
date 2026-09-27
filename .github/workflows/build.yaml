@@ -72,7 +72,7 @@ jobs:
         scripts/build.sh
 
     - name: Archive the binary
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         path: build/build-*.zip
         if-no-files-found: error
