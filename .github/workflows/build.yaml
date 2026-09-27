@@ -22,6 +22,13 @@ jobs:
     outputs:
       released: ${{ steps.build.outputs.released }}
 
+    env:
+
+      MISE_CACHE_DIR: ${{ github.workspace }}/.mise/cache
+      MISE_CONFIG_DIR: ${{ github.workspace }}/.mise/config
+      MISE_DATA_DIR: ${{ github.workspace }}/.mise/data
+      MISE_STATE_DIR: ${{ github.workspace }}/.mise/state
+
     steps:
 
     - name: Checkout repository
@@ -30,8 +37,18 @@ jobs:
         submodules: recursive
         fetch-depth: 0
 
+    - name: Cache mise
+      id: cache-mise
+      uses: actions/cache@v6
+      with:
+        path: .mise
+        key: ${{ runner.os }}-${{ runner.arch }}-mise--${{ hashFiles('mise.toml') }}
+
     - name: Install mise
-      uses: jbmorley/latest-mise@v1
+      uses: jdx/mise-action@v4.3.0
+      with:
+        version: 2026.9.10
+        cache: false
 
     - name: Build and test
       id: build
@@ -66,6 +83,13 @@ jobs:
 
     runs-on: ubuntu-26.04
 
+    env:
+
+      MISE_CACHE_DIR: ${{ github.workspace }}/.mise/cache
+      MISE_CONFIG_DIR: ${{ github.workspace }}/.mise/config
+      MISE_DATA_DIR: ${{ github.workspace }}/.mise/data
+      MISE_STATE_DIR: ${{ github.workspace }}/.mise/state
+
     steps:
 
     - name: Checkout repository
@@ -77,8 +101,18 @@ jobs:
       run: |
         git submodule update --init --depth 1 docs/_theme
 
+    - name: Cache mise
+      id: cache-mise
+      uses: actions/cache@v6
+      with:
+        path: .mise
+        key: ${{ runner.os }}-${{ runner.arch }}-mise--${{ hashFiles('mise.toml') }}
+
     - name: Install mise
-      uses: jbmorley/latest-mise@v1
+      uses: jdx/mise-action@v4.3.0
+      with:
+        version: 2026.9.10
+        cache: false
 
     - name: Cache the Jekyll dependencies
       uses: actions/cache@v6
