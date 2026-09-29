@@ -45,7 +45,7 @@ jobs:
         key: ${{ runner.os }}-${{ runner.arch }}-mise--${{ hashFiles('mise.toml') }}
 
     - name: Install mise
-      uses: jdx/mise-action@v4.3.0
+      uses: jdx/mise-action@v5.0.0
       with:
         version: 2026.9.10
         cache: false
@@ -72,7 +72,7 @@ jobs:
         scripts/build.sh
 
     - name: Archive the binary
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         path: build/build-*.zip
         if-no-files-found: error
@@ -109,7 +109,7 @@ jobs:
         key: ${{ runner.os }}-${{ runner.arch }}-mise--${{ hashFiles('mise.toml') }}
 
     - name: Install mise
-      uses: jdx/mise-action@v4.3.0
+      uses: jdx/mise-action@v5.0.0
       with:
         version: 2026.9.10
         cache: false

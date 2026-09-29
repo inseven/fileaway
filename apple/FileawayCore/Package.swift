@@ -20,7 +20,7 @@ let package = Package(
         .package(path: "./../dependencies/FilePicker"),
         .package(path: "./../dependencies/DIFlowLayout"),
         .package(url: "https://github.com/jbmorley/EonilFSEvents.git", branch: "master"),
-        .package(url: "https://github.com/apple/swift-collections", .upToNextMajor(from: "1.2.0")),
+        .package(url: "https://github.com/apple/swift-collections", .upToNextMajor(from: "1.7.1")),
         .package(url: "https://github.com/inseven/diligence.git", from: "2.0.1"),
         .package(url: "https://github.com/jbmorley/interact.git", from: "3.10.5"),
     ],
