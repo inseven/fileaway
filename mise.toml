@@ -1,7 +1,7 @@
 [tools]
 
-python = "3.12.13"
-ruby = "3.4.8"
+python = "3.14.7"
+ruby = "4.0.7"
 uv = "latest"
 
 "github:sparkle-project/Sparkle" = { version = "2.10.0", asset_pattern = "Sparkle-*.tar.xz", bin_path = "bin" }
