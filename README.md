@@ -1,6 +1,6 @@
 # Fileaway
 
-[![Build](https://github.com/jbmorley/fileaway/actions/workflows/build.yaml/badge.svg?branch=main)](https://github.com/jbmorley/fileaway/actions/workflows/build.yaml)
+[![build](https://github.com/inseven/fileaway/actions/workflows/build.yaml/badge.svg)](https://github.com/inseven/fileaway/actions/workflows/build.yaml)
 
 Rules-based file management for macOS.
 
