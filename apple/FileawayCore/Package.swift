@@ -22,7 +22,7 @@ let package = Package(
         .package(url: "https://github.com/jbmorley/EonilFSEvents.git", branch: "master"),
         .package(url: "https://github.com/apple/swift-collections", .upToNextMajor(from: "1.7.1")),
         .package(url: "https://github.com/inseven/diligence.git", from: "2.0.1"),
-        .package(url: "https://github.com/jbmorley/interact.git", from: "3.10.5"),
+        .package(url: "https://github.com/jbmorley/interact.git", from: "3.10.7"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
