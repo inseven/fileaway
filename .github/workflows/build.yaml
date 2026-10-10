@@ -76,6 +76,7 @@ jobs:
       with:
         path: build/build-*.zip
         if-no-files-found: error
+        retention-days: 1
 
   website-build:
 
